@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+pandas
+numpy
+scikit-learn
+google-generativeai
+python-dotenv
+slowapi
+requests
