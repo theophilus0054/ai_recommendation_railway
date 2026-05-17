@@ -102,6 +102,33 @@ class ProfilKesehatanInput(BaseModel):
 def root():
     return {"status": "ok", "message": "NutriScale AI Engine is running", "models_loaded": df_dataset is not None}
 
+@app.post("/api/sync")
+@limiter.limit("10/minute")
+async def sync_dataset(request: Request, api_key: str = Security(verify_api_key)):
+    """
+    Endpoint untuk me-refresh dataset dari Next.js API secara manual (saat ada proses CRUD produk).
+    """
+    global df_dataset, scaler_dict
+    
+    api_url = os.environ.get("NEXT_PUBLIC_APP_URL", "http://localhost:3000") + "/api/products"
+    print(f"\n[API Sync] Memuat ulang Dataset Makanan dari {api_url}...")
+    
+    try:
+        new_df, new_scaler = load_and_preprocess_api_data(api_url)
+        if new_df is None or len(new_df) == 0:
+            raise ValueError("Dataset kosong atau gagal dimuat")
+            
+        df_dataset = new_df
+        scaler_dict = new_scaler
+        
+        return {
+            "success": True,
+            "message": f"Dataset berhasil disinkronisasi. Total: {len(df_dataset)} makanan."
+        }
+    except Exception as e:
+        print(f"[API Sync Error] {e}")
+        raise HTTPException(status_code=500, detail="Gagal melakukan sinkronisasi dataset.")
+
 @app.post("/api/recommend")
 @limiter.limit("20/minute")
 async def get_dietary_recommendation(

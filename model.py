@@ -283,8 +283,8 @@ def assess_nutritional_status(umur, jenisKelamin, beratBadan, tinggiBadan, kateg
     if kategori == 'IBU_HAMIL':
         return {'bmi': bmi, 'haz': 0.0, 'whz': 0.0, 'lila': None, 'statusNutrisi': 'Pregnant (Monitoring)'}
 
-    # Anak Balita atau Child/Teen (< 20 tahun)
-    if umur < 20 or kategori == 'ANAK_BALITA':
+    # Anak Balita atau Child/Teen (<= 18 tahun)
+    if umur <= 18 or kategori == 'ANAK_BALITA':
         # CDC Child/Teen percentiles approximated via Z-scores:
         # < 5th percentile (~ z < -1.645) -> Underweight
         # 5th to < 85th percentile -> Healthy Weight (Normal)
@@ -302,7 +302,7 @@ def assess_nutritional_status(umur, jenisKelamin, beratBadan, tinggiBadan, kateg
         return {'bmi': bmi, 'haz': z, 'whz': z, 'lila': None, 'statusNutrisi': status}
 
     else:
-        # CDC Adult BMI (>= 20 years old)
+        # CDC Adult BMI (> 18 years old)
         if bmi < 18.5:   status = "Underweight"
         elif bmi < 25.0: status = "Normal"
         elif bmi < 30.0: status = "Overweight"
