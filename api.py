@@ -12,7 +12,7 @@ from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
 from model import load_and_preprocess_api_data, jalankan_ai_rekomendasi
-from prometheus_fastapi_inst~umentator import Instrumentator
+from prometheus_fastapi_instrumentator import Instrumentator
 
 # ==========================================================
 # GLOABAL STATE: PRE-LOAD DATASET & SCALER KE MEMORY RAM
