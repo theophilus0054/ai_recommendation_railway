@@ -175,7 +175,7 @@ def load_and_preprocess_api_data(api_url: str) -> tuple[pd.DataFrame, dict]:
     """
     print(f"[Pipeline] Fetching data from {api_url}...")
     try:
-        response = requests.get(api_url)
+        response = requests.get(api_url, timeout=10)
         response.raise_for_status()
         res_json = response.json()
         
