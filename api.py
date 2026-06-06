@@ -12,6 +12,7 @@ from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
 from model import load_and_preprocess_api_data, jalankan_ai_rekomendasi
+from prometheus_fastapi_inst~umentator import Instrumentator
 
 # ==========================================================
 # GLOABAL STATE: PRE-LOAD DATASET & SCALER KE MEMORY RAM
@@ -64,6 +65,9 @@ app = FastAPI(
 )
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+# Menambahkan endpoint /metrics untuk sistem monitoring Railway
+Instrumentator().instrument(app).expose(app, include_in_schema=False, should_gzip=True)
 
 # ==========================================================
 # SCHEMAS (Strict dengan Prisma DB)
