@@ -3,9 +3,11 @@ import uvicorn
 from typing import Optional
 from fastapi import FastAPI, HTTPException, Security, Request
 from fastapi.security.api_key import APIKeyHeader
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from contextlib import asynccontextmanager
 from dotenv import load_dotenv
+
 
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
@@ -38,7 +40,7 @@ limiter = Limiter(key_func=get_remote_address)
 async def lifespan(app: FastAPI):
     global df_dataset, scaler_dict
     
-    api_url = os.environ.get("NEXT_PUBLIC_APP_URL", "http://localhost:3000") + "/api/products"
+    api_url = os.environ.get("NEXT_PUBLIC_APP_URL", "http://localhost:3000").rstrip("/") + "/api/products"
     print(f"\n[API Startup] Memuat Dataset Makanan dari {api_url}...")
     
     df_dataset, scaler_dict = load_and_preprocess_api_data(api_url)
@@ -65,6 +67,15 @@ app = FastAPI(
 )
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+# Mengizinkan request dari frontend (CORS)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Menambahkan endpoint /metrics untuk sistem monitoring Railway
 Instrumentator().instrument(app).expose(app, include_in_schema=False, should_gzip=True)
@@ -114,7 +125,7 @@ async def sync_dataset(request: Request, api_key: str = Security(verify_api_key)
     """
     global df_dataset, scaler_dict
     
-    api_url = os.environ.get("NEXT_PUBLIC_APP_URL", "http://localhost:3000") + "/api/products"
+    api_url = os.environ.get("NEXT_PUBLIC_APP_URL", "http://localhost:3000").rstrip("/") + "/api/products"
     print(f"\n[API Sync] Memuat ulang Dataset Makanan dari {api_url}...")
     
     try:
