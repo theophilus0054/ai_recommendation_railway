@@ -1,17 +1,15 @@
 ---
-title: AI Recommendation Engine NutriScale
+title: NutriScale AI Recommendation Engine
 emoji: 🥗
 colorFrom: green
-colorTo: green
+colorTo: blue
 sdk: gradio
+sdk_version: 4.44.0
 app_file: app.py
 pinned: false
+license: mit
 ---
 
-# 🥗 NutriScale AI Recommendation Engine
+# NutriScale AI Recommendation Engine
 
-FastAPI Microservice providing Machine Learning Nutrition Recommendations and Gemini LLM Analysis.
-
-## API Endpoints
-- `GET /health` : Service health check
-- `POST /recommend` : Main AI recommendation matrix & narrative response
+FastAPI Content-Based ML + Gemini LLM Microservice running on Hugging Face Spaces.
