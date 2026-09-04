@@ -1,9 +1,7 @@
-import os
-import uvicorn
 import gradio as gr
 from api import app as fastapi_app
 
-# Gradio Interface dashboard for Hugging Face Space
+# Gradio Interface dashboard for Hugging Face Space UI
 demo = gr.Interface(
     fn=lambda msg: "🥗 NutriScale AI Recommendation Engine is RUNNING! POST /recommend endpoint is ready.",
     inputs=gr.Textbox(label="System Check", value="Ping"),
@@ -13,8 +11,5 @@ demo = gr.Interface(
 )
 
 # Mount Gradio at /ui so FastAPI API endpoints (/recommend, /health) remain clean at root /
+# Hugging Face Space launcher automatically detects 'app' and serves it on port 7860.
 app = gr.mount_gradio_app(fastapi_app, demo, path="/ui")
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 7860))
-    uvicorn.run(app, host="0.0.0.0", port=port)
