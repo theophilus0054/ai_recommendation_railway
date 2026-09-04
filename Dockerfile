@@ -13,7 +13,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy source code
 COPY . .
 
-# Expose port (default 8000, controllable via PORT env)
+# Expose port (7860 for Hugging Face Spaces, 8000 default)
+EXPOSE 7860
 EXPOSE 8000
 
 # Start command
