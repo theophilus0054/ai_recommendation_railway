@@ -2,7 +2,7 @@
 title: AI Recommendation Engine NutriScale
 emoji: 🥗
 colorFrom: green
-colorTo: emerald
+colorTo: green
 sdk: gradio
 app_file: app.py
 pinned: false
