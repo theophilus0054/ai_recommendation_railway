@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: ai-recommendation-service
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python api.py
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: AI_ENGINE_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: NEXT_PUBLIC_APP_URL
+        sync: false
