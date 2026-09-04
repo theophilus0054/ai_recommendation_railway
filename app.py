@@ -1,3 +1,5 @@
+import os
+import uvicorn
 import gradio as gr
 from api import app as fastapi_app
 
@@ -14,9 +16,11 @@ except Exception:
 with gr.Blocks(title="NutriScale AI Recommendation Engine") as demo:
     gr.Markdown("# 🥗 NutriScale AI Recommendation Engine")
     gr.Markdown("FastAPI ML + Gemini LLM Microservice active on Hugging Face Spaces.")
+    gr.Markdown("API Endpoints active at `/api/recommend`, `/api/sync`, `/metrics`.")
 
-# Mount fastapi_app (routes & lifespan) into demo's underlying FastAPI app
-demo.app.mount("/", fastapi_app)
+# Mount Gradio UI cleanly onto the main FastAPI application at /ui
+app = gr.mount_gradio_app(fastapi_app, demo, path="/ui")
 
-# Launch via Gradio's native Hugging Face Space launcher
-demo.launch()
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 7860))
+    uvicorn.run(app, host="0.0.0.0", port=port)
