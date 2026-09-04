@@ -13,5 +13,5 @@ demo = gr.Interface(
 # Mount Gradio at /ui so FastAPI API endpoints (/api/recommend, /health) remain clean at root /
 app = gr.mount_gradio_app(fastapi_app, demo, path="/ui")
 
-# Launch via Gradio's HF Space native launcher (prevents port 7860 binding conflict)
-demo.launch()
+if __name__ == "__main__":
+    demo.launch()
