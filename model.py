@@ -7,7 +7,7 @@
 ARSITEKTUR:
   Layer 1 — ML Preprocessing  : TF-IDF + StandardScaler + cosine similarity
                                   content-based filtering per profil gizi
-  Layer 2 — Nutritional Expert : BMI/Z-score WHO, Mifflin-St Jeor TDEE
+  Layer 2 — Nutritional Expert : BMI/Z-score CDC/WHO, Harris-Benedict & DRI EER TEE
   Layer 3 — Gemini LLM         : Narasi rekomendasi personal berbahasa Indonesia
                                   (via google-generativeai SDK)
   Layer 4 — Output Mapper      : Strict mapping ke Prisma schema
@@ -29,6 +29,21 @@ from typing import Optional
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
+
+from tier1_nutrition_engine import (
+    calculate_tier1_nutrition,
+    assess_nutritional_status as tier1_assess_nutritional_status,
+    calculate_bmi as tier1_calculate_bmi,
+    calculate_adult_bmr_harris_benedict,
+    calculate_adult_tee,
+    calculate_pediatric_eer,
+    calculate_pregnancy_energy,
+    calculate_postoperative_energy,
+    calculate_macronutrients,
+    validate_tier1_input,
+    NutritionInputValidationError,
+    EnergyPathway,
+)
 
 warnings.filterwarnings('ignore')
 
@@ -186,9 +201,24 @@ def load_and_preprocess_api_data(api_url: str) -> tuple[pd.DataFrame, dict]:
             data = res_json
             
     except Exception as e:
-        print(f"[Pipeline Error] Gagal fetch API: {e}")
-        # Kembalikan dataframe kosong jika gagal
-        return pd.DataFrame(), {}
+        print(f"[Pipeline Error] Gagal fetch API ({e}). Memuat fallback dataset lokal data/nutrition.csv...")
+        csv_fallback = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'nutrition.csv')
+        if os.path.exists(csv_fallback):
+            df_csv = pd.read_csv(csv_fallback)
+            df_csv = df_csv.dropna(subset=['name'])
+            expected_csv_cols = ['calories', 'total_fat', 'protein', 'carbohydrate', 'sodium', 'cholesterol', 'sugars']
+            for col in expected_csv_cols:
+                if col in df_csv.columns:
+                    df_csv[col] = df_csv[col].apply(extract_numeric)
+                else:
+                    df_csv[col] = 0.0
+            if 'fat' in df_csv.columns:
+                df_csv = df_csv.drop(columns=['fat'])
+            df_csv = df_csv.rename(columns={'carbohydrate': 'carbs', 'total_fat': 'fat'})
+            data = df_csv.to_dict('records')
+        else:
+            # Kembalikan dataframe kosong jika gagal dan tidak ada CSV lokal
+            return pd.DataFrame(), {}
         
     if isinstance(data, dict) and 'products' in data:
         data = data['products']
@@ -253,113 +283,63 @@ def load_and_preprocess_api_data(api_url: str) -> tuple[pd.DataFrame, dict]:
     return df.reset_index(drop=True), scalers
 
 
-# ==========================================================================
-# [3.3.4] MODEL DAN ARSITEKTUR — LAYER 1: EXPERT SYSTEM (WHO Z-SCORE)
-# ==========================================================================
+# Backward compatibility alias
+load_and_preprocess_kaggle_data = load_and_preprocess_api_data
 
-# Referensi BMI-for-age median (CDC/WHO, disederhanakan)
-_CHILD_BMI_MEDIAN = {
-    2: 16.4, 3: 15.9, 4: 15.6, 5: 15.5, 6: 15.5, 7: 15.7,
-    8: 15.9, 9: 16.3, 10: 16.7, 11: 17.2, 12: 17.7, 13: 18.4,
-    14: 19.0, 15: 19.6, 16: 20.2, 17: 20.7, 18: 21.2,
-}
 
+# ==========================================================================
+# [3.3.4] MODEL DAN ARSITEKTUR — LAYER 1: EXPERT SYSTEM (BMI & Z-SCORE)
+# ==========================================================================
 
 def calculate_bmi(weight_kg: float, height_cm: float) -> float:
-    h = height_cm / 100.0
-    return round(weight_kg / (h ** 2), 2) if h > 0 else 0.0
+    return tier1_calculate_bmi(weight_kg, height_cm)
 
 
 def assess_nutritional_status(umur, jenisKelamin, beratBadan, tinggiBadan, kategori) -> dict:
     """
-    Asesmen status gizi sesuai standar CDC.
-    Adults: >= 20 years. Children/Teens: 2-19 years.
+    Asesmen status gizi sesuai standar CDC/WHO (independen dari kalkulasi kalori).
     Output strict mapping ke Prisma RiwayatAnalisis schema.
     """
-    umur = int(umur or 20)
-    bmi  = calculate_bmi(float(beratBadan), float(tinggiBadan))
-
-    # CDC: BMI is not accurate for pregnant women.
-    if kategori == 'IBU_HAMIL':
-        return {'bmi': bmi, 'haz': 0.0, 'whz': 0.0, 'lila': None, 'statusNutrisi': 'Pregnant (Monitoring)'}
-
-    # Anak Balita atau Child/Teen (<= 18 tahun)
-    if umur <= 18 or kategori == 'ANAK_BALITA':
-        # CDC Child/Teen percentiles approximated via Z-scores:
-        # < 5th percentile (~ z < -1.645) -> Underweight
-        # 5th to < 85th percentile -> Healthy Weight (Normal)
-        # 85th to < 95th percentile (~ z >= 1.036) -> Overweight
-        # >= 95th percentile (~ z >= 1.645) -> Obese
-        median = _CHILD_BMI_MEDIAN.get(umur, 16.5 + 0.5 * max(0, umur - 5))
-        sd     = median * 0.12
-        z      = round((bmi - median) / sd, 2) if sd > 0 else 0.0
-
-        if z < -1.645:   status = "Underweight"
-        elif z < 1.036:  status = "Normal"
-        elif z < 1.645:  status = "Overweight"
-        else:            status = "Obese"
-
-        return {'bmi': bmi, 'haz': z, 'whz': z, 'lila': None, 'statusNutrisi': status}
-
-    else:
-        # CDC Adult BMI (> 18 years old)
-        if bmi < 18.5:   status = "Underweight"
-        elif bmi < 25.0: status = "Normal"
-        elif bmi < 30.0: status = "Overweight"
-        else:            status = "Obese"
-
-        return {'bmi': bmi, 'haz': 0.0, 'whz': 0.0, 'lila': None, 'statusNutrisi': status}
+    return tier1_assess_nutritional_status(umur, jenisKelamin, beratBadan, tinggiBadan, kategori)
 
 
 # ==========================================================================
-# [3.3.4] MODEL DAN ARSITEKTUR — LAYER 2: CALORIC ENGINE
+# [3.3.4] MODEL DAN ARSITEKTUR — LAYER 2: AUTHORITATIVE TIER 1 CALORIC ENGINE
 # ==========================================================================
 
-def calculate_daily_calories(umur, jenisKelamin, beratBadan, tinggiBadan,
-                              kategori, status_nutrisi, usia_kehamilan, anjuran_dokter) -> dict:
-    umur = int(umur or 20)
-    bb = float(beratBadan)
-    tb = float(tinggiBadan)
-
-    if anjuran_dokter and float(anjuran_dokter) > 0:
-        tdee = float(anjuran_dokter)
-    else:
-        # Mifflin-St Jeor BMR
-        if jenisKelamin == 'LAKI_LAKI':
-            bmr = (10 * bb) + (6.25 * tb) - (5 * umur) + 5
-        else:
-            bmr = (10 * bb) + (6.25 * tb) - (5 * umur) - 161
-
-        # Activity factor: sedentary default
-        tdee = bmr * 1.375  # light activity
-
-        # Koreksi status gizi
-        adjustments = {
-            "Underweight":          +500,
-            "Overweight":           -300,
-            "Obese":                -500,
-        }
-        tdee += adjustments.get(status_nutrisi, 0)
-
-        # Koreksi kondisi khusus
-        if kategori == 'IBU_HAMIL' and usia_kehamilan:
-            weeks = int(usia_kehamilan)
-            tdee += 340 if 14 <= weeks <= 27 else (452 if weeks >= 28 else 180)
-        elif kategori == 'PASCA_OPERASI':
-            tdee += 400  # hypermetabolism pasca operasi
-
-        # Koreksi anak balita (kebutuhan lebih rendah secara absolut)
-        if kategori == 'ANAK_BALITA' and umur < 6:
-            tdee = min(tdee, 1600)
-
-    dist = MACRO_DISTRIBUTION.get(kategori, MACRO_DISTRIBUTION['UMUM'])
+def calculate_daily_calories(
+    umur, jenisKelamin, beratBadan, tinggiBadan,
+    kategori, status_nutrisi=None, usia_kehamilan=None, anjuran_dokter=None,
+    tingkat_aktivitas="SEDENTARY", kondisi_klinis=None, trimester=None, status_pasca_operasi=None
+) -> dict:
+    """
+    Authoritative Tier 1 Calorie & Macronutrient Engine wrapper.
+    Replaces legacy Mifflin-St Jeor and arbitrary BMI corrections with deterministic
+    clinical pathways:
+      - Path A: Adult Harris-Benedict (1918/1919) + Activity Factor + Stress Factor
+      - Path B: Pediatric DRI / NASEM EER Equations
+      - Path C: Pregnancy DRI Trimester Adjustments (+0, +340, +452 kcal)
+      - Path D: Postoperative ESPEN Surgery Clinical Guidelines (1.2-1.5 g/kg protein)
+      - Macronutrients: AMDR-compliant Atwater distribution (P*4 + C*4 + F*9 ≈ Total)
+    """
+    res = calculate_tier1_nutrition(
+        umur=umur,
+        jenisKelamin=jenisKelamin,
+        beratBadan=beratBadan,
+        tinggiBadan=tinggiBadan,
+        kategoriKondisi=kategori,
+        tingkatAktivitas=tingkat_aktivitas,
+        kondisiKlinis=kondisi_klinis,
+        usiaKehamilanMinggu=usia_kehamilan,
+        trimester=trimester,
+        statusPascaOperasi=status_pasca_operasi,
+        anjuranKaloriDokter=anjuran_dokter
+    )
     return {
-        'target_kalori_harian': round(tdee, 1),
-        'distribusi': {
-            'protein_g': round((dist['protein'] * tdee) / 4, 1),
-            'fat_g':     round((dist['fat']     * tdee) / 9, 1),
-            'carbs_g':   round((dist['carbs']   * tdee) / 4, 1),
-        }
+        'target_kalori_harian': res['target_kalori_harian'],
+        'distribusi': res['distribusi'],
+        'tier1_details': res['tier1_details'],
+        'riwayat_analisis': res['riwayat_analisis']
     }
 
 
@@ -720,22 +700,39 @@ def jalankan_ai_rekomendasi(
     kategori    = profil_kesehatan_dict.get('kategoriKondisi', 'UMUM')
     usia_hamil  = profil_kesehatan_dict.get('usiaKehamilanMinggu')
     anjuran_dr  = profil_kesehatan_dict.get('anjuranKaloriDokter')
-    
+
+    # [TIER 1 PARAMETERS] Ekstrak parameter klinis & aktivitas (dengan fallback default aman)
+    tingkat_akt = profil_kesehatan_dict.get('tingkatAktivitas') or profil_kesehatan_dict.get('activityLevel', 'SEDENTARY')
+    kondisi_kl  = profil_kesehatan_dict.get('kondisiKlinis') or profil_kesehatan_dict.get('healthCondition')
+    trimester   = profil_kesehatan_dict.get('trimester')
+    status_postop = profil_kesehatan_dict.get('statusPascaOperasi') or profil_kesehatan_dict.get('postoperativeStatus')
+
     # [GUARDRAIL] Sanitize input mencegah Prompt Injection NLP
     pantangan_raw = str(profil_kesehatan_dict.get('pantanganMedis', '') or '')
     pantangan   = re.sub(r'[^\w\s\,-]', '', pantangan_raw)[:100].strip()
 
-    # --- Layer 1: Asesmen Gizi ---
-    riwayat  = assess_nutritional_status(umur, jk, bb, tb, kategori)
+    # --- Layer 1 & 2: Asesmen Gizi + Kalori & Makronutrien Deterministik (Tier 1 Engine) ---
+    kalori   = calculate_daily_calories(
+        umur=umur,
+        jenisKelamin=jk,
+        beratBadan=bb,
+        tinggiBadan=tb,
+        kategori=kategori,
+        status_nutrisi=None,
+        usia_kehamilan=usia_hamil,
+        anjuran_dokter=anjuran_dr,
+        tingkat_aktivitas=tingkat_akt,
+        kondisi_klinis=kondisi_kl,
+        trimester=trimester,
+        status_pasca_operasi=status_postop
+    )
+    riwayat  = kalori.get('riwayat_analisis') or assess_nutritional_status(umur, jk, bb, tb, kategori)
 
-    # --- Layer 2: Kalori + Makro ---
-    kalori   = calculate_daily_calories(umur, jk, bb, tb, kategori, riwayat['statusNutrisi'], usia_hamil, anjuran_dr)
-
-    # --- Layer 3: ML Filtering + Content-Based Recommendation ---
+    # --- Layer 3: ML Filtering + Content-Based Recommendation (Tier 2) ---
     df_filtered    = filter_dataset(dataset_dataframe, pantangan, kategori)
     rencana_makan  = build_meal_plan(kalori, df_filtered, kategori, scaler_dict)
 
-    # --- Layer 4: LLM Narasi (Gemini) ---
+    # --- Layer 4: LLM Narasi (Gemini) (Tier 3) ---
     narasi_ai = ""
     if use_llm:
         narasi_ai = generate_llm_narasi(
@@ -753,10 +750,11 @@ def jalankan_ai_rekomendasi(
         'meal_plan': {
             'detailRencanaMakan': rencana_makan,
         },
-        # Debug info (bisa dihapus di produksi)
+        # Debug & Tier 1 Traceability Meta
         '_meta': {
             'total_kandidat_makanan': len(df_filtered),
             'kategori': kategori,
             'pantangan_terdeteksi': [p.strip() for p in pantangan.split(',') if p.strip()],
+            'tier1_details': kalori.get('tier1_details', {}),
         }
     }

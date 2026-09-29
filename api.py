@@ -59,6 +59,15 @@ async def lifespan(app: FastAPI):
 # ==========================================================
 # INSTANCE APP
 # ==========================================================
+# Compatibility shim for Starlette 1.x Router.__init__ where on_startup/shutdown were deprecated
+import starlette.routing
+_orig_router_init = starlette.routing.Router.__init__
+def _compat_router_init(self, *args, **kwargs):
+    kwargs.pop('on_startup', None)
+    kwargs.pop('on_shutdown', None)
+    return _orig_router_init(self, *args, **kwargs)
+starlette.routing.Router.__init__ = _compat_router_init
+
 app = FastAPI(
     title="NutriScale AI Engine API",
     description="Endpoint sistem rekomendasi Production-safe ML+LLM.",
@@ -95,6 +104,14 @@ class ProfilKesehatanInput(BaseModel):
     usiaKehamilanMinggu: Optional[int] = Field(default=None, ge=1, le=42)
     anjuranKaloriDokter: Optional[int] = Field(default=None, gt=0)
     pantanganMedis: Optional[str] = Field(default="")
+    # Ekstensi parameter Tier 1 (Opsional untuk backward compatibility)
+    tingkatAktivitas: Optional[str] = Field(
+        default="SEDENTARY",
+        pattern="^(SEDENTARY|LIGHT|MODERATE|ACTIVE|VERY_ACTIVE|RINGAN|SEDANG|BERAT|SANGAT_BERAT)?$"
+    )
+    trimester: Optional[int] = Field(default=None, ge=1, le=3)
+    kondisiKlinis: Optional[str] = Field(default=None)
+    statusPascaOperasi: Optional[str] = Field(default=None)
 
     class Config:
         json_schema_extra = {
@@ -106,7 +123,9 @@ class ProfilKesehatanInput(BaseModel):
                 "kategoriKondisi": "IBU_HAMIL",
                 "usiaKehamilanMinggu": 32,
                 "anjuranKaloriDokter": None,
-                "pantanganMedis": "Udang, Ikan"
+                "pantanganMedis": "Udang, Ikan",
+                "tingkatAktivitas": "SEDENTARY",
+                "trimester": 3
             }
         }
 

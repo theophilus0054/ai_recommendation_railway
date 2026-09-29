@@ -46,7 +46,8 @@ def evaluate_model():
             "beratBadan": 68.0, 
             "tinggiBadan": 165.0,
             "kategoriKondisi": sc['kategori'],
-            "pantanganMedis": sc['allergen']
+            "pantanganMedis": sc['allergen'],
+            "usiaKehamilanMinggu": 32 if sc['kategori'] == "IBU_HAMIL" else None,
         }
         
         start_inf = time.time()
