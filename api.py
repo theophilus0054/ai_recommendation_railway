@@ -13,7 +13,7 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
-from model import load_and_preprocess_api_data, jalankan_ai_rekomendasi
+from model import load_and_preprocess_api_data, jalankan_ai_rekomendasi, NutriScaleDataError
 from prometheus_fastapi_instrumentator import Instrumentator
 
 # ==========================================================
@@ -92,6 +92,37 @@ Instrumentator().instrument(app).expose(app, include_in_schema=False, should_gzi
 # ==========================================================
 # SCHEMAS (Strict dengan Prisma DB)
 # ==========================================================
+class MakroNutriScaleInput(BaseModel):
+    """Satu makronutrien dari MacroResult nutri-calc.ts."""
+    percent: float = Field(..., ge=0, le=100)
+    grams: float = Field(..., ge=0)
+
+
+class NutrisiNutriScaleInput(BaseModel):
+    """
+    Hasil perhitungan gizi NutriScale (output `calculateMacros` di nutri-calc.ts).
+    AI hanya MEMBACA data ini — tidak menghitung kalori/makro sendiri.
+    """
+    lifeStage: Optional[str] = None
+    calories: float = Field(..., gt=0, description="Target kalori harian (kkal)")
+    carbohydrates: MakroNutriScaleInput
+    protein: MakroNutriScaleInput
+    fat: MakroNutriScaleInput
+    warnings: list[str] = Field(default_factory=list)
+    energyMethod: Optional[str] = Field(default=None, description="EstimatedEnergy.method dari nutri-calc.ts")
+
+
+class AsesmenNutriScaleInput(BaseModel):
+    """
+    Hasil asesmen antropometri resmi dari NutriScale (nutritional-assessment.ts).
+    AI hanya membaca data ini (BMI, HAZ, WHZ, status gizi) tanpa menghitung ulang.
+    """
+    bmi: float = Field(..., ge=0, description="Indeks Massa Tubuh (BMI)")
+    haz: Optional[float] = Field(default=0.0, description="WHO Height-for-Age Z-Score")
+    whz: Optional[float] = Field(default=0.0, description="WHO Weight-for-Height Z-Score")
+    statusNutrisi: str = Field(default="Normal", description="Klasifikasi status gizi Kemenkes/WHO")
+
+
 class ProfilKesehatanInput(BaseModel):
     umur: int = Field(..., gt=0, description="Umur pasien dalam tahun")
     jenisKelamin: str = Field(..., pattern="^(LAKI_LAKI|PEREMPUAN)$")
@@ -102,16 +133,11 @@ class ProfilKesehatanInput(BaseModel):
         pattern="^(UMUM|ANAK_BALITA|IBU_HAMIL|PASCA_OPERASI)$"
     )
     usiaKehamilanMinggu: Optional[int] = Field(default=None, ge=1, le=42)
-    anjuranKaloriDokter: Optional[int] = Field(default=None, gt=0)
     pantanganMedis: Optional[str] = Field(default="")
-    # Ekstensi parameter Tier 1 (Opsional untuk backward compatibility)
-    tingkatAktivitas: Optional[str] = Field(
-        default="SEDENTARY",
-        pattern="^(SEDENTARY|LIGHT|MODERATE|ACTIVE|VERY_ACTIVE|RINGAN|SEDANG|BERAT|SANGAT_BERAT)?$"
-    )
-    trimester: Optional[int] = Field(default=None, ge=1, le=3)
-    kondisiKlinis: Optional[str] = Field(default=None)
-    statusPascaOperasi: Optional[str] = Field(default=None)
+    # Tier 1: target gizi WAJIB berasal dari perhitungan NutriScale
+    nutrisi: NutrisiNutriScaleInput
+    # Asesmen antropometri resmi NutriScale (BMI, HAZ, WHZ, status gizi)
+    asesmen: Optional[AsesmenNutriScaleInput] = None
 
     class Config:
         json_schema_extra = {
@@ -122,10 +148,16 @@ class ProfilKesehatanInput(BaseModel):
                 "tinggiBadan": 162.0,
                 "kategoriKondisi": "IBU_HAMIL",
                 "usiaKehamilanMinggu": 32,
-                "anjuranKaloriDokter": None,
                 "pantanganMedis": "Udang, Ikan",
-                "tingkatAktivitas": "SEDENTARY",
-                "trimester": 3
+                "nutrisi": {
+                    "lifeStage": "pregnantAdult",
+                    "calories": 2448,
+                    "carbohydrates": {"percent": 50, "grams": 306.0},
+                    "protein": {"percent": 20, "grams": 122.4},
+                    "fat": {"percent": 30, "grams": 81.6},
+                    "warnings": [],
+                    "energyMethod": "DRI 2023 EER kehamilan trimester 3"
+                }
             }
         }
 
@@ -196,6 +228,9 @@ async def get_dietary_recommendation(
     except HTTPException:
         # Re-raise explicit HTTP Exception
         raise
+    except NutriScaleDataError as e:
+        # Data gizi dari NutriScale tidak valid — aman ditampilkan (tidak ada traceback)
+        raise HTTPException(status_code=422, detail=str(e))
     except Exception as e:
         # Exception Hiding (mencegah leak traceback intern)
         print(f"[ERROR /api/recommend] Internal Exception Blocked: {e}")

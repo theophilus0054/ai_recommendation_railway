@@ -23,6 +23,7 @@ import sys
 import json
 import warnings
 import argparse
+from typing import Optional
 from model import load_and_preprocess_api_data, jalankan_ai_rekomendasi
 
 warnings.filterwarnings('ignore')
@@ -31,6 +32,30 @@ warnings.filterwarnings('ignore')
 # KONFIGURASI TEST
 # ==========================================================================
 
+def _nutrisi(life_stage: str, kcal: float, c: tuple, p: tuple, f: tuple, method: str) -> dict:
+    """Bentuk MacroResult nutri-calc.ts. Tuple = (percent, grams)."""
+    return {
+        "lifeStage": life_stage,
+        "calories": kcal,
+        "carbohydrates": {"percent": c[0], "grams": c[1]},
+        "protein":       {"percent": p[0], "grams": p[1]},
+        "fat":           {"percent": f[0], "grams": f[1]},
+        "warnings": [],
+        "energyMethod": method,
+    }
+
+
+def _asesmen(bmi: float, status: str, haz: float = 0.0, whz: float = 0.0) -> dict:
+    """Bentuk hasil evaluasi antropometri resmi NutriScale (nutritional-assessment.ts)."""
+    return {
+        "bmi": bmi,
+        "haz": haz,
+        "whz": whz,
+        "statusNutrisi": status,
+    }
+
+
+# Nilai `nutrisi` & `asesmen` = hasil perhitungan resmi NutriScale (AI hanya membaca).
 TEST_CASES = [
     {
         "name": "TEST 1 — Anak Balita Underweight (Pantangan Ikan)",
@@ -41,8 +66,11 @@ TEST_CASES = [
             "tinggiBadan":         102.0,
             "kategoriKondisi":     "ANAK_BALITA",
             "usiaKehamilanMinggu": None,
-            "anjuranKaloriDokter": None,
-            "pantanganMedis":      "ikan"
+            "pantanganMedis":      "ikan",
+            # calculateChildCalories3to18(lowActive) -> 1192 kkal, child4to18 55/15/30
+            "nutrisi": _nutrisi("child4to18", 1192, (55, 163.9), (15, 44.7), (30, 39.7),
+                                "DRI 2023 EER anak dan remaja"),
+            "asesmen": _asesmen(12.50, "Underweight", haz=-1.66, whz=-1.66),
         }
     },
     {
@@ -54,8 +82,11 @@ TEST_CASES = [
             "tinggiBadan":         160.0,
             "kategoriKondisi":     "PASCA_OPERASI",
             "usiaKehamilanMinggu": None,
-            "anjuranKaloriDokter": None,
-            "pantanganMedis":      "susu, telur"
+            "pantanganMedis":      "susu, telur",
+            # Pascaoperasi = clinical_review_required -> kalori dari dokter (1700), adult19Plus 50/20/30
+            "nutrisi": _nutrisi("adult19Plus", 1700, (50, 212.5), (20, 85.0), (30, 56.7),
+                                "Anjuran kalori dokter"),
+            "asesmen": _asesmen(21.48, "Normal"),
         }
     },
     {
@@ -67,8 +98,11 @@ TEST_CASES = [
             "tinggiBadan":         162.0,
             "kategoriKondisi":     "IBU_HAMIL",
             "usiaKehamilanMinggu": 32,
-            "anjuranKaloriDokter": None,
-            "pantanganMedis":      "kepiting, cumi, kerang, udang, lobster"
+            "pantanganMedis":      "kepiting, cumi, kerang, udang, lobster",
+            # calculatePregnancyCalories(inactive, pra-hamil 60 kg) -> 2448 kkal, pregnantAdult 50/20/30
+            "nutrisi": _nutrisi("pregnantAdult", 2448, (50, 306.0), (20, 122.4), (30, 81.6),
+                                "DRI 2023 EER kehamilan trimester 3"),
+            "asesmen": _asesmen(25.91, "Pregnant (Monitoring)"),
         }
     },
     {
@@ -80,8 +114,11 @@ TEST_CASES = [
             "tinggiBadan":         170.0,
             "kategoriKondisi":     "UMUM",
             "usiaKehamilanMinggu": None,
-            "anjuranKaloriDokter": 1800,  # Anjuran dokter override TDEE
-            "pantanganMedis":      "kacang, kedelai"
+            "pantanganMedis":      "kacang, kedelai",
+            # Anjuran dokter 1800 kkal -> calculateMacros adult19Plus 50/20/30
+            "nutrisi": _nutrisi("adult19Plus", 1800, (50, 225.0), (20, 90.0), (30, 60.0),
+                                "Anjuran kalori dokter"),
+            "asesmen": _asesmen(32.87, "Obese"),
         }
     },
 ]
@@ -90,12 +127,13 @@ TEST_CASES = [
 # VALIDATOR PRISMA SCHEMA
 # ==========================================================================
 
-def validate_output_schema(output: dict, test_name: str) -> tuple[bool, list[str]]:
+def validate_output_schema(output: dict, test_name: str, nutrisi: Optional[dict] = None) -> tuple[bool, list[str]]:
     """
     Validasi output sesuai Prisma schema:
     - RiwayatAnalisis: bmi, haz, whz, lila, statusNutrisi, narasiAI
     - MealPlan: detailRencanaMakan dengan sesi-sesi makan
     - Setiap item makanan: nama_makanan, calories, protein, fat, carbs, match_score
+    - Target gizi identik dengan data NutriScale (AI tidak menghitung ulang)
     """
     errors = []
 
@@ -128,6 +166,18 @@ def validate_output_schema(output: dict, test_name: str) -> tuple[bool, list[str
                 for field in ['nama_makanan', 'calories', 'protein', 'fat', 'carbs', 'match_score']:
                     if field not in item:
                         errors.append(f"[meal_plan.{sesi}[0]] Missing field: '{field}'")
+
+        if nutrisi:
+            dist = mp.get('distribusi', {})
+            expected = {
+                'target_kalori_harian': (mp.get('target_kalori_harian'), nutrisi['calories']),
+                'carbs_g':   (dist.get('carbs_g'),   nutrisi['carbohydrates']['grams']),
+                'protein_g': (dist.get('protein_g'), nutrisi['protein']['grams']),
+                'fat_g':     (dist.get('fat_g'),     nutrisi['fat']['grams']),
+            }
+            for key, (actual, want) in expected.items():
+                if actual is None or abs(float(actual) - float(want)) > 0.05:
+                    errors.append(f"[tier1] {key}={actual} tidak sama dengan data NutriScale ({want})")
 
     valid = len(errors) == 0
     status = "OK VALID" if valid else f"ERROR: {len(errors)} ERROR(S)"
@@ -245,7 +295,7 @@ def run_tests(use_llm: bool = False, verbose: bool = False, validate: bool = Tru
 
         # Validasi Schema
         if validate:
-            valid, errors = validate_output_schema(output, test['name'])
+            valid, errors = validate_output_schema(output, test['name'], profil.get('nutrisi'))
             if valid:
                 results['passed'] += 1
             else:

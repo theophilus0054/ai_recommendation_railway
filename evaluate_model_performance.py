@@ -26,11 +26,25 @@ def evaluate_model():
     print(f"[1/3] Dataset Loaded: {len(df_food)} samples in {end_load - start_load:.2f}s")
 
     # 2. Define Scenarios (Matching the Report)
+    # `nutrisi` = MacroResult hasil nutri-calc.ts NutriScale (AI tidak menghitung gizi).
+    def nutrisi(stage, kcal, c, p, f):
+        return {
+            "lifeStage": stage, "calories": kcal,
+            "carbohydrates": {"percent": c[0], "grams": c[1]},
+            "protein": {"percent": p[0], "grams": p[1]},
+            "fat": {"percent": f[0], "grams": f[1]},
+            "warnings": [],
+        }
+
     scenarios = [
-        {"name": "Anak Balita Underweight", "kategori": "ANAK_BALITA", "age": 4, "allergen": "ikan"},
-        {"name": "Pasca Operasi (Recovery)", "kategori": "PASCA_OPERASI", "age": 35, "allergen": "susu, telur"},
-        {"name": "Ibu Hamil T3", "kategori": "IBU_HAMIL", "age": 28, "allergen": "seafood, udang, kepiting"},
-        {"name": "Dewasa Umum Obesitas", "kategori": "UMUM", "age": 42, "allergen": "kacang, gula"}
+        {"name": "Anak Balita Underweight", "kategori": "ANAK_BALITA", "age": 4, "allergen": "ikan",
+         "nutrisi": nutrisi("child4to18", 1192, (55, 163.9), (15, 44.7), (30, 39.7))},
+        {"name": "Pasca Operasi (Recovery)", "kategori": "PASCA_OPERASI", "age": 35, "allergen": "susu, telur",
+         "nutrisi": nutrisi("adult19Plus", 1700, (50, 212.5), (20, 85.0), (30, 56.7))},
+        {"name": "Ibu Hamil T3", "kategori": "IBU_HAMIL", "age": 28, "allergen": "seafood, udang, kepiting",
+         "nutrisi": nutrisi("pregnantAdult", 2448, (50, 306.0), (20, 122.4), (30, 81.6))},
+        {"name": "Dewasa Umum Obesitas", "kategori": "UMUM", "age": 42, "allergen": "kacang, gula",
+         "nutrisi": nutrisi("adult19Plus", 1800, (50, 225.0), (20, 90.0), (30, 60.0))},
     ]
 
     print("[2/3] Running Inference on 4 Primary Scenarios...")
@@ -48,6 +62,7 @@ def evaluate_model():
             "kategoriKondisi": sc['kategori'],
             "pantanganMedis": sc['allergen'],
             "usiaKehamilanMinggu": 32 if sc['kategori'] == "IBU_HAMIL" else None,
+            "nutrisi": sc['nutrisi'],
         }
         
         start_inf = time.time()
