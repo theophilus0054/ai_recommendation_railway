@@ -1,0 +1,1534 @@
+[
+  {
+    "id": "4",
+    "name": "Salmon Fillet",
+    "category": "Seafood",
+    "image": "\ud83d\udc1f",
+    "price": 75000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Omega-3",
+      "High Protein"
+    ],
+    "calories": 208,
+    "protein": 22,
+    "fat": 13,
+    "carbs": 0,
+    "sugars": 0,
+    "sodium": 59,
+    "cholesterol": 55,
+    "foodType": "protein",
+    "allergens": [
+      "fish"
+    ],
+    "ingredients": [
+      "salmon"
+    ],
+    "cookingMethod": "grilled",
+    "spicyLevel": 0
+  },
+  {
+    "id": "5",
+    "name": "Sweet Potato",
+    "category": "Vegetables",
+    "image": "\ud83c\udf60",
+    "price": 15000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "High Fiber",
+      "Low Fat"
+    ],
+    "calories": 86,
+    "protein": 2,
+    "fat": 0,
+    "carbs": 20,
+    "sugars": 4,
+    "sodium": 55,
+    "cholesterol": 0,
+    "foodType": "vegetable",
+    "allergens": [],
+    "ingredients": [
+      "sweet potato"
+    ],
+    "cookingMethod": "boiled",
+    "spicyLevel": 0
+  },
+  {
+    "id": "6",
+    "name": "Honey",
+    "category": "Sweeteners",
+    "image": "\ud83c\udf6f",
+    "price": 30000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Natural Sugar",
+      "High Sugar"
+    ],
+    "calories": 64,
+    "protein": 0,
+    "fat": 0,
+    "carbs": 17,
+    "sugars": 17,
+    "sodium": 1,
+    "cholesterol": 0,
+    "foodType": "sweetener",
+    "allergens": [],
+    "ingredients": [
+      "honey"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "7",
+    "name": "Avocado",
+    "category": "Fruits",
+    "image": "\ud83e\udd51",
+    "price": 25000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Healthy Fats",
+      "High Fiber"
+    ],
+    "calories": 160,
+    "protein": 2,
+    "fat": 15,
+    "carbs": 9,
+    "sugars": 1,
+    "sodium": 7,
+    "cholesterol": 0,
+    "foodType": "fat",
+    "allergens": [],
+    "ingredients": [
+      "avocado"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "8",
+    "name": "Almonds",
+    "category": "Nuts",
+    "image": "\ud83e\udd5c",
+    "price": 65000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Vitamin E",
+      "Healthy Fats"
+    ],
+    "calories": 579,
+    "protein": 21,
+    "fat": 50,
+    "carbs": 22,
+    "sugars": 4,
+    "sodium": 1,
+    "cholesterol": 0,
+    "foodType": "fat",
+    "allergens": [
+      "tree nuts"
+    ],
+    "ingredients": [
+      "almonds"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "9",
+    "name": "Spinach",
+    "category": "Vegetables",
+    "image": "\ud83e\udd6c",
+    "price": 10000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Iron",
+      "Vitamins"
+    ],
+    "calories": 23,
+    "protein": 3,
+    "fat": 0,
+    "carbs": 4,
+    "sugars": 0,
+    "sodium": 79,
+    "cholesterol": 0,
+    "foodType": "vegetable",
+    "allergens": [],
+    "ingredients": [
+      "spinach"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "10",
+    "name": "Tofu",
+    "category": "Plant Protein",
+    "image": "\ud83e\uddca",
+    "price": 8000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Calcium",
+      "Vegan"
+    ],
+    "calories": 76,
+    "protein": 8,
+    "fat": 5,
+    "carbs": 2,
+    "sugars": 0,
+    "sodium": 7,
+    "cholesterol": 0,
+    "foodType": "protein",
+    "allergens": [
+      "soy"
+    ],
+    "ingredients": [
+      "tofu"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "11",
+    "name": "Tempeh",
+    "category": "Plant Protein",
+    "image": "\ud83e\uddc6",
+    "price": 10000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Fermented",
+      "High Protein"
+    ],
+    "calories": 193,
+    "protein": 19,
+    "fat": 11,
+    "carbs": 9,
+    "sugars": 0,
+    "sodium": 9,
+    "cholesterol": 0,
+    "foodType": "protein",
+    "allergens": [
+      "soy"
+    ],
+    "ingredients": [
+      "tempeh"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "12",
+    "name": "Eggs",
+    "category": "Dairy/Egg",
+    "image": "\ud83e\udd5a",
+    "price": 28000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Complete Protein",
+      "Choline"
+    ],
+    "calories": 70,
+    "protein": 6,
+    "fat": 5,
+    "carbs": 1,
+    "sugars": 1,
+    "sodium": 70,
+    "cholesterol": 186,
+    "foodType": "protein",
+    "allergens": [
+      "egg"
+    ],
+    "ingredients": [
+      "egg"
+    ],
+    "cookingMethod": "boiled",
+    "spicyLevel": 0
+  },
+  {
+    "id": "13",
+    "name": "Oatmeal",
+    "category": "Grains",
+    "image": "\ud83e\udd63",
+    "price": 32000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Beta Glucan",
+      "High Fiber"
+    ],
+    "calories": 150,
+    "protein": 5,
+    "fat": 3,
+    "carbs": 27,
+    "sugars": 1,
+    "sodium": 0,
+    "cholesterol": 0,
+    "foodType": "carb",
+    "allergens": [],
+    "ingredients": [
+      "oats"
+    ],
+    "cookingMethod": "boiled",
+    "spicyLevel": 0
+  },
+  {
+    "id": "14",
+    "name": "Extra Virgin Olive Oil",
+    "category": "Oils",
+    "image": "\ud83e\uded2",
+    "price": 95000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Heart Healthy",
+      "Antioxidants"
+    ],
+    "calories": 884,
+    "protein": 0,
+    "fat": 100,
+    "carbs": 0,
+    "sugars": 0,
+    "sodium": 2,
+    "cholesterol": 0,
+    "foodType": "fat",
+    "allergens": [],
+    "ingredients": [
+      "olive oil"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "15",
+    "name": "Dark Chocolate (70%)",
+    "category": "Snacks",
+    "image": "\ud83c\udf6b",
+    "price": 40000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Antioxidants",
+      "Low Sugar"
+    ],
+    "calories": 598,
+    "protein": 8,
+    "fat": 43,
+    "carbs": 46,
+    "sugars": 24,
+    "sodium": 20,
+    "cholesterol": 0,
+    "foodType": "snack",
+    "allergens": [],
+    "ingredients": [
+      "dark chocolate"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "16",
+    "name": "Banana",
+    "category": "Fruits",
+    "image": "\ud83c\udf4c",
+    "price": 15000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Potassium",
+      "Energy Boost"
+    ],
+    "calories": 89,
+    "protein": 1,
+    "fat": 0,
+    "carbs": 23,
+    "sugars": 12,
+    "sodium": 1,
+    "cholesterol": 0,
+    "foodType": "fruit",
+    "allergens": [],
+    "ingredients": [
+      "banana"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "17",
+    "name": "Broccoli",
+    "category": "Vegetables",
+    "image": "\ud83e\udd66",
+    "price": 18000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Vitamin C",
+      "Fiber"
+    ],
+    "calories": 34,
+    "protein": 3,
+    "fat": 0,
+    "carbs": 7,
+    "sugars": 2,
+    "sodium": 33,
+    "cholesterol": 0,
+    "foodType": "vegetable",
+    "allergens": [],
+    "ingredients": [
+      "broccoli"
+    ],
+    "cookingMethod": "boiled",
+    "spicyLevel": 0
+  },
+  {
+    "id": "1",
+    "name": "Organic Brown Rice",
+    "category": "Grains",
+    "image": "\ud83c\udf3e",
+    "price": 25000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Low Sodium",
+      "Whole Grain"
+    ],
+    "calories": 110,
+    "protein": 3,
+    "fat": 1,
+    "carbs": 23,
+    "sugars": 0,
+    "sodium": 5,
+    "cholesterol": 0,
+    "foodType": "carb",
+    "allergens": [],
+    "ingredients": [
+      "brown rice"
+    ],
+    "cookingMethod": "boiled",
+    "spicyLevel": 0
+  },
+  {
+    "id": "2",
+    "name": "Fresh Chicken Breast",
+    "category": "Meat",
+    "image": "\ud83c\udf57",
+    "price": 45000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "High Protein"
+    ],
+    "calories": 165,
+    "protein": 31,
+    "fat": 4,
+    "carbs": 0,
+    "sugars": 0,
+    "sodium": 74,
+    "cholesterol": 85,
+    "foodType": "protein",
+    "allergens": [],
+    "ingredients": [
+      "chicken"
+    ],
+    "cookingMethod": "grilled",
+    "spicyLevel": 0
+  },
+  {
+    "id": "3",
+    "name": "Greek Yogurt",
+    "category": "Dairy",
+    "image": "\ud83e\udd5b",
+    "price": 20000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Low Fat",
+      "Probiotic"
+    ],
+    "calories": 59,
+    "protein": 10,
+    "fat": 0,
+    "carbs": 4,
+    "sugars": 3,
+    "sodium": 36,
+    "cholesterol": 5,
+    "foodType": "dairy",
+    "allergens": [
+      "milk"
+    ],
+    "ingredients": [
+      "yogurt"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "18",
+    "name": "Quinoa",
+    "category": "Grains",
+    "image": "\ud83c\udf5a",
+    "price": 85000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Superfood",
+      "Complete Protein"
+    ],
+    "calories": 120,
+    "protein": 4,
+    "fat": 2,
+    "carbs": 21,
+    "sugars": 1,
+    "sodium": 7,
+    "cholesterol": 0,
+    "foodType": "carb",
+    "allergens": [],
+    "ingredients": [
+      "quinoa"
+    ],
+    "cookingMethod": "boiled",
+    "spicyLevel": 0
+  },
+  {
+    "id": "19",
+    "name": "Lentils",
+    "category": "Plant Protein",
+    "image": "\ud83c\udf72",
+    "price": 35000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Iron",
+      "High Fiber"
+    ],
+    "calories": 116,
+    "protein": 9,
+    "fat": 0,
+    "carbs": 20,
+    "sugars": 2,
+    "sodium": 2,
+    "cholesterol": 0,
+    "foodType": "protein",
+    "allergens": [],
+    "ingredients": [
+      "lentils"
+    ],
+    "cookingMethod": "boiled",
+    "spicyLevel": 0
+  },
+  {
+    "id": "20",
+    "name": "Chia Seeds",
+    "category": "Seeds",
+    "image": "\ud83c\udf30",
+    "price": 60000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Omega-3",
+      "Superfood"
+    ],
+    "calories": 486,
+    "protein": 17,
+    "fat": 31,
+    "carbs": 42,
+    "sugars": 0,
+    "sodium": 16,
+    "cholesterol": 0,
+    "foodType": "fat",
+    "allergens": [],
+    "ingredients": [
+      "chia seeds"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "21",
+    "name": "Fuji Apples",
+    "category": "Fruits",
+    "image": "\ud83c\udf4e",
+    "price": 35000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "High Fiber",
+      "Low Calorie"
+    ],
+    "calories": 52,
+    "protein": 0,
+    "fat": 0,
+    "carbs": 14,
+    "sugars": 10,
+    "sodium": 1,
+    "cholesterol": 0,
+    "foodType": "fruit",
+    "allergens": [],
+    "ingredients": [
+      "apple"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "22",
+    "name": "Carrots",
+    "category": "Vegetables",
+    "image": "\ud83e\udd55",
+    "price": 12000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Vitamin A",
+      "Beta Carotene"
+    ],
+    "calories": 41,
+    "protein": 1,
+    "fat": 0,
+    "carbs": 10,
+    "sugars": 5,
+    "sodium": 69,
+    "cholesterol": 0,
+    "foodType": "vegetable",
+    "allergens": [],
+    "ingredients": [
+      "carrot"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "23",
+    "name": "Whole Wheat Bread",
+    "category": "Grains",
+    "image": "\ud83c\udf5e",
+    "price": 20000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Whole Grain",
+      "Carbs"
+    ],
+    "calories": 80,
+    "protein": 4,
+    "fat": 1,
+    "carbs": 14,
+    "sugars": 1,
+    "sodium": 110,
+    "cholesterol": 0,
+    "foodType": "carb",
+    "allergens": [
+      "wheat"
+    ],
+    "ingredients": [
+      "whole wheat bread"
+    ],
+    "cookingMethod": "baked",
+    "spicyLevel": 0
+  },
+  {
+    "id": "24",
+    "name": "Lean Beef Mince",
+    "category": "Meat",
+    "image": "\ud83e\udd69",
+    "price": 95000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Iron",
+      "High Protein"
+    ],
+    "calories": 250,
+    "protein": 26,
+    "fat": 15,
+    "carbs": 0,
+    "sugars": 0,
+    "sodium": 66,
+    "cholesterol": 82,
+    "foodType": "protein",
+    "allergens": [],
+    "ingredients": [
+      "beef"
+    ],
+    "cookingMethod": "grilled",
+    "spicyLevel": 0
+  },
+  {
+    "id": "25",
+    "name": "Canned Tuna (Water)",
+    "category": "Seafood",
+    "image": "\ud83e\udd6b",
+    "price": 22000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Lean Protein",
+      "Low Calorie"
+    ],
+    "calories": 90,
+    "protein": 20,
+    "fat": 1,
+    "carbs": 0,
+    "sugars": 0,
+    "sodium": 210,
+    "cholesterol": 30,
+    "foodType": "protein",
+    "allergens": [
+      "fish"
+    ],
+    "ingredients": [
+      "tuna"
+    ],
+    "cookingMethod": "canned",
+    "spicyLevel": 0
+  },
+  {
+    "id": "26",
+    "name": "Garlic",
+    "category": "Vegetables",
+    "image": "\ud83e\uddc4",
+    "price": 40000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Immunity",
+      "Antioxidants"
+    ],
+    "calories": 149,
+    "protein": 6,
+    "fat": 0,
+    "carbs": 33,
+    "sugars": 1,
+    "sodium": 17,
+    "cholesterol": 0,
+    "foodType": "spice",
+    "allergens": [],
+    "ingredients": [
+      "garlic"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "27",
+    "name": "Edamame",
+    "category": "Plant Protein",
+    "image": "\ud83e\udedb",
+    "price": 20000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Plant Protein",
+      "Snack"
+    ],
+    "calories": 121,
+    "protein": 12,
+    "fat": 5,
+    "carbs": 11,
+    "sugars": 2,
+    "sodium": 6,
+    "cholesterol": 0,
+    "foodType": "protein",
+    "allergens": [
+      "soy"
+    ],
+    "ingredients": [
+      "edamame"
+    ],
+    "cookingMethod": "boiled",
+    "spicyLevel": 0
+  },
+  {
+    "id": "28",
+    "name": "Tomatoes",
+    "category": "Vegetables",
+    "image": "\ud83c\udf45",
+    "price": 14000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Lycopene",
+      "Vitamin C"
+    ],
+    "calories": 18,
+    "protein": 1,
+    "fat": 0,
+    "carbs": 4,
+    "sugars": 2,
+    "sodium": 5,
+    "cholesterol": 0,
+    "foodType": "vegetable",
+    "allergens": [],
+    "ingredients": [
+      "tomato"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "29",
+    "name": "Red Bell Pepper",
+    "category": "Vegetables",
+    "image": "\ud83e\uded1",
+    "price": 30000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "High Vitamin C",
+      "Low Calorie"
+    ],
+    "calories": 31,
+    "protein": 1,
+    "fat": 0,
+    "carbs": 6,
+    "sugars": 4,
+    "sodium": 4,
+    "cholesterol": 0,
+    "foodType": "vegetable",
+    "allergens": [],
+    "ingredients": [
+      "red bell pepper"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "30",
+    "name": "Low Fat Milk",
+    "category": "Dairy",
+    "image": "\ud83e\udd5b",
+    "price": 25000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Calcium",
+      "Vitamin D"
+    ],
+    "calories": 42,
+    "protein": 3,
+    "fat": 1,
+    "carbs": 5,
+    "sugars": 5,
+    "sodium": 44,
+    "cholesterol": 5,
+    "foodType": "dairy",
+    "allergens": [
+      "milk"
+    ],
+    "ingredients": [
+      "milk"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "31",
+    "name": "Cheddar Cheese",
+    "category": "Dairy",
+    "image": "\ud83e\uddc0",
+    "price": 35000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "High Fat",
+      "Calcium"
+    ],
+    "calories": 402,
+    "protein": 25,
+    "fat": 33,
+    "carbs": 1,
+    "sugars": 0,
+    "sodium": 621,
+    "cholesterol": 105,
+    "foodType": "dairy",
+    "allergens": [
+      "milk"
+    ],
+    "ingredients": [
+      "cheese"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "32",
+    "name": "Peanut Butter (Unsweetened)",
+    "category": "Nuts",
+    "image": "\ud83e\udd5c",
+    "price": 45000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Healthy Fats",
+      "Protein"
+    ],
+    "calories": 588,
+    "protein": 25,
+    "fat": 50,
+    "carbs": 20,
+    "sugars": 4,
+    "sodium": 17,
+    "cholesterol": 0,
+    "foodType": "fat",
+    "allergens": [
+      "peanuts"
+    ],
+    "ingredients": [
+      "peanuts"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "33",
+    "name": "Green Tea Bags",
+    "category": "Beverages",
+    "image": "\ud83c\udf75",
+    "price": 25000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Zero Calorie",
+      "Antioxidants"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "fat": 0,
+    "carbs": 0,
+    "sugars": 0,
+    "sodium": 0,
+    "cholesterol": 0,
+    "foodType": "beverage",
+    "allergens": [],
+    "ingredients": [
+      "green tea"
+    ],
+    "cookingMethod": "boiled",
+    "spicyLevel": 0
+  },
+  {
+    "id": "34",
+    "name": "Black Coffee",
+    "category": "Beverages",
+    "image": "\u2615",
+    "price": 35000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Zero Calorie",
+      "Caffeine"
+    ],
+    "calories": 2,
+    "protein": 0,
+    "fat": 0,
+    "carbs": 0,
+    "sugars": 0,
+    "sodium": 2,
+    "cholesterol": 0,
+    "foodType": "beverage",
+    "allergens": [],
+    "ingredients": [
+      "coffee beans"
+    ],
+    "cookingMethod": "boiled",
+    "spicyLevel": 0
+  },
+  {
+    "id": "35",
+    "name": "Oranges",
+    "category": "Fruits",
+    "image": "\ud83c\udf4a",
+    "price": 25000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Vitamin C",
+      "Immunity"
+    ],
+    "calories": 43,
+    "protein": 1,
+    "fat": 0,
+    "carbs": 12,
+    "sugars": 9,
+    "sodium": 0,
+    "cholesterol": 0,
+    "foodType": "fruit",
+    "allergens": [],
+    "ingredients": [
+      "orange"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "36",
+    "name": "Dragon Fruit",
+    "category": "Fruits",
+    "image": "\ud83c\udf49",
+    "price": 30000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Antioxidants",
+      "Hydration"
+    ],
+    "calories": 60,
+    "protein": 1,
+    "fat": 1,
+    "carbs": 13,
+    "sugars": 8,
+    "sodium": 0,
+    "cholesterol": 0,
+    "foodType": "fruit",
+    "allergens": [],
+    "ingredients": [
+      "dragon fruit"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "37",
+    "name": "Unsalted Butter",
+    "category": "Fats",
+    "image": "\ud83e\uddc8",
+    "price": 55000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "High Saturated Fat",
+      "Baking"
+    ],
+    "calories": 717,
+    "protein": 1,
+    "fat": 81,
+    "carbs": 0,
+    "sugars": 0,
+    "sodium": 11,
+    "cholesterol": 215,
+    "foodType": "fat",
+    "allergens": [
+      "milk"
+    ],
+    "ingredients": [
+      "butter"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "38",
+    "name": "Baked Potato Chips",
+    "category": "Snacks",
+    "image": "\ud83e\udd54",
+    "price": 15000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Carbs",
+      "Sodium"
+    ],
+    "calories": 400,
+    "protein": 4,
+    "fat": 14,
+    "carbs": 65,
+    "sugars": 1,
+    "sodium": 400,
+    "cholesterol": 0,
+    "foodType": "snack",
+    "allergens": [],
+    "ingredients": [
+      "potato",
+      "oil",
+      "salt"
+    ],
+    "cookingMethod": "baked",
+    "spicyLevel": 0
+  },
+  {
+    "id": "39",
+    "name": "Himalayan Pink Salt",
+    "category": "Spices",
+    "image": "\ud83e\uddc2",
+    "price": 50000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Minerals",
+      "Zero Calorie"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "fat": 0,
+    "carbs": 0,
+    "sugars": 0,
+    "sodium": 38000,
+    "cholesterol": 0,
+    "foodType": "spice",
+    "allergens": [],
+    "ingredients": [
+      "salt"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "40",
+    "name": "Red Onion",
+    "category": "Vegetables",
+    "image": "\ud83e\uddc5",
+    "price": 28000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Flavor",
+      "Antioxidants"
+    ],
+    "calories": 40,
+    "protein": 1,
+    "fat": 0,
+    "carbs": 9,
+    "sugars": 4,
+    "sodium": 4,
+    "cholesterol": 0,
+    "foodType": "vegetable",
+    "allergens": [],
+    "ingredients": [
+      "red onion"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "41",
+    "name": "Red Chili",
+    "category": "Vegetables",
+    "image": "\ud83c\udf36\ufe0f",
+    "price": 40000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Capsaicin",
+      "Spicy"
+    ],
+    "calories": 40,
+    "protein": 2,
+    "fat": 0,
+    "carbs": 9,
+    "sugars": 5,
+    "sodium": 9,
+    "cholesterol": 0,
+    "foodType": "vegetable",
+    "allergens": [],
+    "ingredients": [
+      "red chili"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 3
+  },
+  {
+    "id": "42",
+    "name": "Tilapia Fish",
+    "category": "Seafood",
+    "image": "\ud83d\udc20",
+    "price": 30000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Lean Protein",
+      "Mild Flavor"
+    ],
+    "calories": 96,
+    "protein": 20,
+    "fat": 2,
+    "carbs": 0,
+    "sugars": 0,
+    "sodium": 52,
+    "cholesterol": 50,
+    "foodType": "protein",
+    "allergens": [
+      "fish"
+    ],
+    "ingredients": [
+      "tilapia"
+    ],
+    "cookingMethod": "grilled",
+    "spicyLevel": 0
+  },
+  {
+    "id": "43",
+    "name": "Strawberry Yogurt",
+    "category": "Dairy",
+    "image": "\ud83c\udf53",
+    "price": 15000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Added Sugar",
+      "Probiotic"
+    ],
+    "calories": 95,
+    "protein": 4,
+    "fat": 1,
+    "carbs": 16,
+    "sugars": 15,
+    "sodium": 45,
+    "cholesterol": 5,
+    "foodType": "dairy",
+    "allergens": [
+      "milk"
+    ],
+    "ingredients": [
+      "yogurt",
+      "strawberry"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "44",
+    "name": "Mung Beans",
+    "category": "Plant Protein",
+    "image": "\ud83d\udfe2",
+    "price": 20000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Folate",
+      "Fiber"
+    ],
+    "calories": 347,
+    "protein": 24,
+    "fat": 1,
+    "carbs": 63,
+    "sugars": 7,
+    "sodium": 15,
+    "cholesterol": 0,
+    "foodType": "protein",
+    "allergens": [],
+    "ingredients": [
+      "mung beans"
+    ],
+    "cookingMethod": "boiled",
+    "spicyLevel": 0
+  },
+  {
+    "id": "45",
+    "name": "Ajwa Dates",
+    "category": "Fruits",
+    "image": "\ud83c\udf34",
+    "price": 120000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "High Sugar",
+      "Energy"
+    ],
+    "calories": 277,
+    "protein": 2,
+    "fat": 0,
+    "carbs": 75,
+    "sugars": 66,
+    "sodium": 1,
+    "cholesterol": 0,
+    "foodType": "fruit",
+    "allergens": [],
+    "ingredients": [
+      "dates"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "46",
+    "name": "Shirataki Noodles",
+    "category": "Grains",
+    "image": "\ud83c\udf5d",
+    "price": 12000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Zero Calorie",
+      "Keto"
+    ],
+    "calories": 9,
+    "protein": 0,
+    "fat": 0,
+    "carbs": 3,
+    "sugars": 0,
+    "sodium": 0,
+    "cholesterol": 0,
+    "foodType": "carb",
+    "allergens": [],
+    "ingredients": [
+      "konjac"
+    ],
+    "cookingMethod": "boiled",
+    "spicyLevel": 0
+  },
+  {
+    "id": "47",
+    "name": "Sunflower Seeds",
+    "category": "Seeds",
+    "image": "\ud83c\udf3b",
+    "price": 25000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Vitamin E",
+      "Snack"
+    ],
+    "calories": 584,
+    "protein": 21,
+    "fat": 51,
+    "carbs": 20,
+    "sugars": 3,
+    "sodium": 9,
+    "cholesterol": 0,
+    "foodType": "fat",
+    "allergens": [],
+    "ingredients": [
+      "sunflower seeds"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "48",
+    "name": "Kidney Beans",
+    "category": "Plant Protein",
+    "image": "\ud83e\uded8",
+    "price": 22000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Iron",
+      "High Protein"
+    ],
+    "calories": 333,
+    "protein": 24,
+    "fat": 1,
+    "carbs": 60,
+    "sugars": 2,
+    "sodium": 24,
+    "cholesterol": 0,
+    "foodType": "protein",
+    "allergens": [],
+    "ingredients": [
+      "kidney beans"
+    ],
+    "cookingMethod": "boiled",
+    "spicyLevel": 0
+  },
+  {
+    "id": "49",
+    "name": "Palm Sugar",
+    "category": "Sweeteners",
+    "image": "\ud83c\udf6f",
+    "price": 30000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "High Sugar",
+      "Low GI"
+    ],
+    "calories": 380,
+    "protein": 0,
+    "fat": 0,
+    "carbs": 98,
+    "sugars": 98,
+    "sodium": 2,
+    "cholesterol": 0,
+    "foodType": "sweetener",
+    "allergens": [],
+    "ingredients": [
+      "palm sugar"
+    ],
+    "cookingMethod": "none",
+    "spicyLevel": 0
+  },
+  {
+    "id": "50",
+    "name": "Mustard Greens",
+    "category": "Vegetables",
+    "image": "\ud83e\udd6c",
+    "price": 5000,
+    "stok": 100,
+    "label_risiko": "",
+    "badges": {
+      "aiRecommended": false
+    },
+    "tags": [
+      "Vitamin K",
+      "Low Calorie"
+    ],
+    "calories": 13,
+    "protein": 1,
+    "fat": 0,
+    "carbs": 3,
+    "sugars": 1,
+    "sodium": 10,
+    "cholesterol": 0,
+    "foodType": "vegetable",
+    "allergens": [],
+    "ingredients": [
+      "mustard greens"
+    ],
+    "cookingMethod": "boiled",
+    "spicyLevel": 0
+  }
+]

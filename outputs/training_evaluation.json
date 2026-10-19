@@ -1,0 +1,51 @@
+{
+  "learned_weights": {
+    "w1_nutrient_score": 0.672,
+    "w2_semantic_similarity": 0.0363,
+    "w3_condition_relevance": 0.2917,
+    "raw_coefs": [
+      10.1113,
+      -0.5464,
+      4.3888
+    ],
+    "intercept": -9.0275
+  },
+  "evaluation_results": {
+    "NutriScale_Linear_Ranker (Logistic Regression)": {
+      "accuracy": 0.7952,
+      "precision": 0.798,
+      "recall": 0.8344,
+      "f1_score": 0.8158,
+      "roc_auc": 0.877,
+      "confusion_matrix": [
+        [
+          718,
+          241
+        ],
+        [
+          189,
+          952
+        ]
+      ]
+    },
+    "NutriScale_Nonlinear_Ranker (Gradient Boosting)": {
+      "accuracy": 0.7933,
+      "precision": 0.8009,
+      "recall": 0.8247,
+      "f1_score": 0.8126,
+      "roc_auc": 0.8798,
+      "confusion_matrix": [
+        [
+          725,
+          234
+        ],
+        [
+          200,
+          941
+        ]
+      ]
+    }
+  },
+  "test_set_size": 2100,
+  "train_set_size": 8399
+}

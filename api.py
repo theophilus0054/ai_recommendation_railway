@@ -6,7 +6,7 @@ from fastapi.security.api_key import APIKeyHeader
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from contextlib import asynccontextmanager
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
 
 from slowapi import Limiter, _rate_limit_exceeded_handler
@@ -20,7 +20,7 @@ from prometheus_fastapi_instrumentator import Instrumentator
 # GLOABAL STATE: PRE-LOAD DATASET & SCALER KE MEMORY RAM
 # ==========================================
 # Load .env (Local fallback)
-load_dotenv()
+load_dotenv(find_dotenv(usecwd=True))
 
 df_dataset = None
 scaler_dict = None
