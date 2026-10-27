@@ -24,7 +24,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GroupKFold
-from sklearn.metrics import accuracy_score, f1_score, cohen_kappa_score, confusion_matrix
+from sklearn.metrics import accuracy_score, f1_score, cohen_kappa_score, confusion_matrix, precision_recall_fscore_support
 
 from model import FEATURE_COLS, score_from_proba
 
@@ -84,9 +84,14 @@ def ndcg_at_k(df: pd.DataFrame, score: np.ndarray, k: int) -> float:
 
 def classification_metrics(y: np.ndarray, proba: np.ndarray) -> dict:
     pred = proba.argmax(axis=1)
+    prec, rec, f1, sup = precision_recall_fscore_support(y, pred, labels=[0, 1, 2], zero_division=0)
     return {
         'accuracy': round(float(accuracy_score(y, pred)), 4),
         'macro_f1': round(float(f1_score(y, pred, average='macro')), 4),
+        'macro_precision': round(float(prec.mean()), 4),
+        'macro_recall': round(float(rec.mean()), 4),
+        'per_class': {str(c): {'precision': round(float(prec[i]), 4), 'recall': round(float(rec[i]), 4),
+                               'f1': round(float(f1[i]), 4), 'support': int(sup[i])} for i, c in enumerate([0, 1, 2])},
         'weighted_kappa': round(float(cohen_kappa_score(y, pred, weights='quadratic')), 4),
         'confusion_matrix': confusion_matrix(y, pred, labels=[0, 1, 2]).tolist(),
     }
@@ -146,6 +151,10 @@ def train_category(kategori: str, data_dir: str, models_dir: str) -> dict:
 
     print(f"  Test (profil baru): Acc {test_metrics['accuracy']:.4f} | macro-F1 {test_metrics['macro_f1']:.4f} | "
           f"kappa {test_metrics['weighted_kappa']:.4f}")
+    print(f"  Macro precision {test_metrics['macro_precision']:.4f} | macro recall {test_metrics['macro_recall']:.4f}")
+    for c, v in test_metrics['per_class'].items():
+        print(f"    Kelas {c}: precision {v['precision']:.4f} | recall {v['recall']:.4f} | F1 {v['f1']:.4f} | n={v['support']}")
+    print(f"  Confusion matrix (baris=asli, kolom=prediksi): {test_metrics['confusion_matrix']}")
     print(f"  NDCG@5  model {ranking['model_lr']['ndcg@5']:.4f} | formula lama {ranking['baseline_lama']['ndcg@5']:.4f} | "
           f"acak {ranking['baseline_acak']['ndcg@5']:.4f}")
     if new_food:

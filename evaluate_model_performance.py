@@ -46,7 +46,7 @@ def evaluate_model():
         rows.append({
             'kategori': kategori,
             'n_test': len(df_test),
-            **{k: cm[k] for k in ['accuracy', 'macro_f1', 'weighted_kappa']},
+            **{k: cm[k] for k in ['accuracy', 'macro_f1', 'macro_precision', 'macro_recall', 'weighted_kappa', 'per_class', 'confusion_matrix']},
             'ndcg5_model': ndcg_at_k(df_test, score_from_proba(proba), 5),
             'ndcg5_lama': ndcg_at_k(df_test, legacy_score(df_test), 5),
         })
@@ -133,20 +133,27 @@ def evaluate_model():
 
     # 3. Finalize Evaluation Table
     print("\n[3/3] Tabel Evaluasi Model (Section 3.3.6 Laporan):")
-    print("-" * 85)
-    print(f"{'Kategori':<15} | {'N test':<7} | {'Acc':<6} | {'F1-mac':<6} | {'Kappa':<6} | {'NDCG@5':<6} | {'Formula lama':<12}")
-    print("-" * 85)
+    print("-" * 100)
+    print(f"{'Kategori':<15} | {'N test':<7} | {'Acc':<6} | {'Prec':<6} | {'Recall':<6} | {'F1-mac':<6} | {'Kappa':<6} | {'NDCG@5':<6} | {'Formula lama':<12}")
+    print("-" * 100)
     for r in rows:
-        print(f"{r['kategori']:<15} | {r['n_test']:<7} | {r['accuracy']:<6.4f} | {r['macro_f1']:<6.4f} | "
+        print(f"{r['kategori']:<15} | {r['n_test']:<7} | {r['accuracy']:<6.4f} | {r['macro_precision']:<6.4f} | {r['macro_recall']:<6.4f} | {r['macro_f1']:<6.4f} | "
               f"{r['weighted_kappa']:<6.4f} | {r['ndcg5_model']:<6.4f} | {r['ndcg5_lama']:<12.4f}")
-    print("-" * 85)
+    print("-" * 100)
+    print("\nPer kelas (label 0=tidak cocok, 1=cukup, 2=sangat cocok):")
+    for r in rows:
+        print(f"  {r['kategori']}:")
+        for c, v in r['per_class'].items():
+            print(f"    Kelas {c}: precision {v['precision']:.4f} | recall {v['recall']:.4f} | F1 {v['f1']:.4f} | n={v['support']}")
+        print(f"    Confusion matrix (baris=asli, kolom=prediksi): {r['confusion_matrix']}")
+    print("-" * 100)
 
     print(f"\nInterpretasi Klinis & Performa:")
     print(f"- Latensi Rata-rata Inferensi   : {np.mean(inference_times)*1000:.2f} ms")
     print(f"- Pelanggaran Alergen           : {safety_violations} dari {total_items} item rekomendasi")
     print(f"- Pelanggaran BLOKIR Kategori   : {hazard_violations} dari {total_items} item rekomendasi")
     print(f"- Rata-rata Skor Kesesuaian     : {np.mean(match_scores):.1f}%")
-    print("-" * 85)
+    print("-" * 100)
     print("CATATAN: data sintetis & label rubrik; perlu validasi ahli gizi (gold set) sebelum klaim klinis.")
     print("=" * 85)
 
