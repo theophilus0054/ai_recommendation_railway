@@ -1,0 +1,701 @@
+profile_id,kategoriKondisi,jenisKelamin,usiaKehamilanMinggu,tahapDiet,jenisOperasi,haz,whz,umur,beratBadan,tinggiBadan,statusNutrisi,target_kalori_harian,target_protein_g,target_fat_g,target_carbs_g,alergi,pantanganMedis,split
+pasca_operasi_0001,PASCA_OPERASI,L,,biasa,caesar,,,38.0,78.0,169.8,Overweight,2527.7,133.7,73.2,333.4,alergi egg & kacang tanah,tidak suka makanan manis,train
+pasca_operasi_0002,PASCA_OPERASI,P,,biasa,saluran_cerna,,,49.0,53.9,151.9,Normal,1725.8,88.7,50.6,228.8,none,-,train
+pasca_operasi_0003,PASCA_OPERASI,P,,cair,ortopedi,,,31.0,65.1,156.0,Overweight,2173.0,122.3,67.3,269.6,,tidak ada,test
+pasca_operasi_0004,PASCA_OPERASI,L,,biasa,caesar,,,26.0,75.6,166.3,Overweight,2497.9,145.0,72.3,316.9,-,none,train
+pasca_operasi_0005,PASCA_OPERASI,L,,biasa,ortopedi,,,23.0,59.0,165.1,Normal,2263.6,126.8,58.9,306.4,,spicy,train
+pasca_operasi_0006,PASCA_OPERASI,P,,cair,ortopedi,,,47.0,60.1,168.1,Normal,2043.1,107.2,55.0,280.0,-,tidak suka jeroan,train
+pasca_operasi_0007,PASCA_OPERASI,P,,saring,ortopedi,,,51.0,69.4,144.8,Obese,1798.1,106.0,47.2,237.4,crab,-,test
+pasca_operasi_0008,PASCA_OPERASI,L,,cair,umum,,,61.0,56.2,160.5,Normal,1668.0,85.2,50.0,219.4,alergi suus,tidak suka gorengan,train
+pasca_operasi_0009,PASCA_OPERASI,P,,saring,caesar,,,61.0,56.2,157.7,Normal,1594.9,85.6,43.4,215.4,-,hindari spicy,train
+pasca_operasi_0010,PASCA_OPERASI,L,,biasa,umum,,,60.0,81.9,169.3,Overweight,2512.4,142.2,66.8,335.6,-,none,train
+pasca_operasi_0011,PASCA_OPERASI,L,,biasa,saluran_cerna,,,41.0,64.6,168.9,Normal,2348.0,141.3,71.5,284.8,"Alergi: susu sapi, crab",tidak ada,test
+pasca_operasi_0012,PASCA_OPERASI,P,,biasa,ortopedi,,,46.0,86.6,163.7,Obese,2196.2,132.8,61.5,277.9,"Alergi: sea food, soy",tidak suka manis,train
+pasca_operasi_0013,PASCA_OPERASI,P,,biasa,saluran_cerna,,,41.0,41.1,152.9,Underweight,1561.0,96.4,38.3,207.6,alergi cumi,,train
+pasca_operasi_0014,PASCA_OPERASI,P,,cair,caesar,,,41.0,47.8,159.5,Normal,1889.2,115.4,51.9,240.2,alergi tahu tempe,-,train
+pasca_operasi_0015,PASCA_OPERASI,L,,biasa,caesar,,,60.0,59.6,156.2,Normal,1862.4,116.3,57.8,219.3,makanan laut dan crab,"hindari daging merah, jeroan",train
+pasca_operasi_0016,PASCA_OPERASI,P,,saring,caesar,,,68.0,43.3,154.4,Underweight,1416.7,83.8,40.1,180.1,"Alergi: kedele, milk","tidak suka mie instan, jeroan",train
+pasca_operasi_0017,PASCA_OPERASI,P,,biasa,ortopedi,,,59.0,75.7,176.6,Normal,2028.5,101.9,51.0,290.4,tidak ada,hindari santan,train
+pasca_operasi_0018,PASCA_OPERASI,P,,lunak,ortopedi,,,39.0,69.8,155.9,Overweight,2212.6,118.6,66.8,284.3,-,tidak suka goreng-gorengan,train
+pasca_operasi_0019,PASCA_OPERASI,P,,lunak,umum,,,30.0,47.8,157.8,Normal,1880.0,102.4,51.0,252.9,alergi crab dan udang,jeroan,train
+pasca_operasi_0020,PASCA_OPERASI,L,,biasa,umum,,,42.0,47.8,157.4,Normal,1851.1,100.4,50.2,249.3,-,"tidak suka kopi, gorengan",train
+pasca_operasi_0021,PASCA_OPERASI,P,,saring,saluran_cerna,,,63.0,59.7,154.0,Overweight,1776.1,93.9,52.9,231.1,"kedele, cumi-cumi",none,train
+pasca_operasi_0022,PASCA_OPERASI,L,,biasa,saluran_cerna,,,22.0,75.7,165.3,Overweight,2597.9,141.2,67.4,356.6,alergi telurr,,train
+pasca_operasi_0023,PASCA_OPERASI,P,,cair,ortopedi,,,70.0,62.5,165.8,Normal,1851.5,109.5,48.4,244.6,tahu tempe,tidak ada,train
+pasca_operasi_0024,PASCA_OPERASI,P,,biasa,ortopedi,,,72.0,61.0,157.8,Normal,1755.5,106.5,46.6,227.6,alergi laktosa dan tahu tempe,none,train
+pasca_operasi_0025,PASCA_OPERASI,L,,cair,ortopedi,,,67.0,66.8,174.5,Normal,1917.8,96.6,55.5,257.8,no allergies,"tidak suka goreng-gorengan, mie instan",test
+pasca_operasi_0026,PASCA_OPERASI,L,,saring,saluran_cerna,,,37.0,64.9,163.6,Normal,2189.8,123.3,65.3,277.2,tidak ada,"tidak suka mie instan, daging merah",train
+pasca_operasi_0027,PASCA_OPERASI,L,,cair,caesar,,,19.0,47.0,171.3,Underweight,2026.7,112.0,60.9,257.5,seafood,,train
+pasca_operasi_0028,PASCA_OPERASI,P,,biasa,caesar,,,45.0,52.7,152.7,Normal,1713.9,97.0,52.8,212.7,fish dan milk,hindari kopi,train
+pasca_operasi_0029,PASCA_OPERASI,P,,biasa,umum,,,56.0,68.1,170.0,Normal,1963.1,113.0,48.8,267.9,"wheat, telor",none,train
+pasca_operasi_0030,PASCA_OPERASI,L,,saring,ortopedi,,,44.0,61.5,157.2,Normal,1909.4,115.0,48.1,254.1,Alergi: ikan dan suus,makanan manis,train
+pasca_operasi_0031,PASCA_OPERASI,L,,saring,umum,,,45.0,75.9,159.9,Overweight,2270.1,120.2,58.1,316.5,tidak ada,-,test
+pasca_operasi_0032,PASCA_OPERASI,L,,saring,caesar,,,75.0,51.4,169.2,Underweight,1490.1,88.9,45.6,181.1,tidak ada,no allergies,test
+pasca_operasi_0033,PASCA_OPERASI,L,,biasa,caesar,,,75.0,56.3,164.6,Normal,1707.2,87.8,44.5,238.9,no allergies,,train
+pasca_operasi_0034,PASCA_OPERASI,L,,lunak,ortopedi,,,35.0,74.2,157.7,Overweight,2268.9,126.5,69.2,284.9,Alergi: kepiting dan ikan,-,train
+pasca_operasi_0035,PASCA_OPERASI,L,,lunak,caesar,,,74.0,39.9,157.9,Underweight,1300.0,74.0,35.8,170.3,soy; peanut,no allergies,train
+pasca_operasi_0036,PASCA_OPERASI,L,,saring,umum,,,59.0,53.2,174.3,Underweight,1763.2,105.0,48.7,226.2,-,,train
+pasca_operasi_0037,PASCA_OPERASI,P,,saring,ortopedi,,,73.0,45.0,157.1,Underweight,1421.5,81.2,40.3,183.6,tidak ada,tidak ada,train
+pasca_operasi_0038,PASCA_OPERASI,P,,lunak,umum,,,73.0,37.4,152.9,Underweight,1334.6,80.3,35.6,173.4,Alergi: crab dan ikan,none,train
+pasca_operasi_0039,PASCA_OPERASI,L,,cair,saluran_cerna,,,51.0,57.8,163.2,Normal,1808.6,109.5,52.3,225.0,none,tidak ada,train
+pasca_operasi_0040,PASCA_OPERASI,L,,saring,caesar,,,47.0,47.7,172.7,Underweight,1970.6,116.8,60.8,238.9,allergic to tahu tempe,tidak suka kopi,test
+pasca_operasi_0041,PASCA_OPERASI,P,,lunak,caesar,,,65.0,55.1,167.9,Normal,1642.7,85.0,48.2,217.2,squid,-,train
+pasca_operasi_0042,PASCA_OPERASI,L,,biasa,ortopedi,,,36.0,66.2,166.0,Normal,2329.9,133.5,66.8,298.7,allergic to cumi dan susu,no allergies,test
+pasca_operasi_0043,PASCA_OPERASI,L,,biasa,saluran_cerna,,,38.0,76.7,174.4,Overweight,2672.9,153.8,79.5,335.7,Alergi: ebi & kacang tanah,pantangan makanan manis,train
+pasca_operasi_0044,PASCA_OPERASI,L,,lunak,ortopedi,,,33.0,47.5,172.3,Underweight,1992.6,116.1,53.1,262.5,kepiting,"pantangan pedas, manis",train
+pasca_operasi_0045,PASCA_OPERASI,L,,saring,umum,,,61.0,91.9,173.0,Obese,2440.7,125.6,64.8,338.8,cumi,"santan, kopi",test
+pasca_operasi_0046,PASCA_OPERASI,P,,saring,saluran_cerna,,,67.0,47.6,155.9,Normal,1453.5,72.8,37.2,206.9,no allergies,none,train
+pasca_operasi_0047,PASCA_OPERASI,L,,cair,caesar,,,68.0,74.8,180.0,Normal,2236.7,113.5,59.2,312.5,tidak ada,"jeroan, gorengan",train
+pasca_operasi_0048,PASCA_OPERASI,P,,lunak,saluran_cerna,,,71.0,51.3,154.4,Normal,1526.1,79.6,42.8,205.7,-,no allergies,train
+pasca_operasi_0049,PASCA_OPERASI,L,,lunak,caesar,,,20.0,47.8,166.9,Underweight,2074.8,125.8,59.6,258.8,no allergies,tidak ada,train
+pasca_operasi_0050,PASCA_OPERASI,L,,biasa,ortopedi,,,58.0,91.5,160.1,Obese,2570.8,156.6,63.6,343.1,,tidak suka daging merah,test
+pasca_operasi_0051,PASCA_OPERASI,L,,biasa,caesar,,,40.0,69.6,174.8,Normal,2439.8,132.2,63.3,335.3,-,none,train
+pasca_operasi_0052,PASCA_OPERASI,P,,biasa,ortopedi,,,74.0,54.0,160.3,Normal,1680.4,95.7,48.0,216.4,-,"hindari daging merah, gorengan",train
+pasca_operasi_0053,PASCA_OPERASI,P,,biasa,saluran_cerna,,,55.0,69.0,161.3,Overweight,1964.8,106.0,50.3,272.1,,-,train
+pasca_operasi_0054,PASCA_OPERASI,L,,biasa,umum,,,56.0,90.9,171.4,Obese,2572.0,135.8,72.8,343.3,no allergies,none,train
+pasca_operasi_0055,PASCA_OPERASI,L,,lunak,caesar,,,67.0,58.2,171.6,Normal,1960.4,114.1,53.5,255.7,-,none,test
+pasca_operasi_0056,PASCA_OPERASI,L,,biasa,ortopedi,,,19.0,45.9,169.3,Underweight,1901.2,96.3,56.9,251.1,,"hindari mie instan, makanan manis",test
+pasca_operasi_0057,PASCA_OPERASI,P,,cair,ortopedi,,,67.0,43.5,152.7,Normal,1559.8,84.0,39.1,218.0,,none,test
+pasca_operasi_0058,PASCA_OPERASI,P,,saring,umum,,,65.0,40.6,154.0,Underweight,1585.5,85.8,42.2,215.6,Alergi: squid,tidak ada,train
+pasca_operasi_0059,PASCA_OPERASI,P,,biasa,ortopedi,,,61.0,51.7,155.5,Normal,1734.7,88.0,50.4,232.3,no allergies,"hindari santan, pedas",train
+pasca_operasi_0060,PASCA_OPERASI,P,,saring,umum,,,56.0,54.9,160.2,Normal,1862.7,108.3,50.2,244.5,,jeroan,train
+pasca_operasi_0061,PASCA_OPERASI,P,,cair,umum,,,55.0,47.9,159.0,Normal,1634.2,97.9,43.7,212.2,no allergies,hindari pedas,test
+pasca_operasi_0062,PASCA_OPERASI,P,,cair,umum,,,37.0,48.5,161.7,Normal,1763.0,105.9,46.0,231.3,tidak ada,tidak suka goreng-gorengan,train
+pasca_operasi_0063,PASCA_OPERASI,L,,lunak,ortopedi,,,31.0,77.9,176.5,Overweight,2579.1,138.7,65.0,359.7,tidak ada,tidak ada,train
+pasca_operasi_0064,PASCA_OPERASI,P,,cair,umum,,,33.0,64.5,152.6,Overweight,1997.5,103.1,55.0,272.7,no allergies,"tidak suka goreng-gorengan, daging merah",test
+pasca_operasi_0065,PASCA_OPERASI,P,,lunak,saluran_cerna,,,70.0,37.4,145.9,Underweight,1449.4,80.4,41.5,188.7,alergi crab,"pantangan santan, daging merah",train
+pasca_operasi_0066,PASCA_OPERASI,L,,biasa,saluran_cerna,,,48.0,59.5,170.8,Normal,1884.8,113.7,57.9,227.3,alergi squid dan egg,tidak suka makanan manis,test
+pasca_operasi_0067,PASCA_OPERASI,L,,biasa,caesar,,,54.0,76.2,162.1,Overweight,2271.6,124.1,69.9,286.5,,kopi,train
+pasca_operasi_0068,PASCA_OPERASI,P,,saring,saluran_cerna,,,32.0,44.7,158.2,Underweight,1860.6,98.5,54.8,243.3,-,"goreng-gorengan, jeroan",train
+pasca_operasi_0069,PASCA_OPERASI,L,,biasa,umum,,,71.0,94.9,177.8,Obese,2742.0,157.8,69.2,372.0,-,none,train
+pasca_operasi_0070,PASCA_OPERASI,P,,cair,umum,,,29.0,55.4,162.6,Normal,1800.0,108.9,54.2,219.2,allergic to susu sapi dan makanan laut,tidak suka jeroan,test
+pasca_operasi_0071,PASCA_OPERASI,L,,cair,ortopedi,,,54.0,40.5,159.2,Underweight,1491.2,81.5,37.6,206.7,tidak ada,"daging merah, manis",test
+pasca_operasi_0072,PASCA_OPERASI,L,,biasa,saluran_cerna,,,69.0,74.2,165.2,Overweight,2134.5,132.2,63.0,259.7,-,no allergies,train
+pasca_operasi_0073,PASCA_OPERASI,L,,biasa,ortopedi,,,19.0,66.5,164.7,Normal,2338.0,143.3,66.5,291.6,,tidak suka mie instan,test
+pasca_operasi_0074,PASCA_OPERASI,L,,biasa,umum,,,54.0,44.1,166.0,Underweight,1749.5,90.5,47.5,240.0,no allergies,pantangan kopi,train
+pasca_operasi_0075,PASCA_OPERASI,P,,biasa,umum,,,44.0,48.2,159.7,Normal,1708.3,101.4,46.1,222.0,allergic to ikan; wheat,-,train
+pasca_operasi_0076,PASCA_OPERASI,L,,biasa,ortopedi,,,55.0,40.9,159.9,Underweight,1575.3,91.7,41.3,209.2,Alergi: cumi-cumi,,train
+pasca_operasi_0077,PASCA_OPERASI,P,,saring,umum,,,47.0,54.9,165.0,Normal,1847.3,112.1,51.1,234.7,no allergies,"tidak suka santan, goreng-gorengan",test
+pasca_operasi_0078,PASCA_OPERASI,P,,cair,saluran_cerna,,,44.0,64.5,157.5,Overweight,1929.1,111.2,52.9,252.1,"allergic to kacng, ebi",tidak ada,test
+pasca_operasi_0079,PASCA_OPERASI,L,,lunak,umum,,,31.0,94.7,175.2,Obese,3001.8,152.4,84.9,407.0,,hindari manis,test
+pasca_operasi_0080,PASCA_OPERASI,L,,saring,umum,,,52.0,49.9,171.3,Underweight,1760.4,109.1,49.6,219.4,none,no allergies,train
+pasca_operasi_0081,PASCA_OPERASI,L,,lunak,ortopedi,,,51.0,77.9,162.2,Overweight,2260.6,121.9,68.9,288.3,alergi cumi dan nuts,tidak suka santan,train
+pasca_operasi_0082,PASCA_OPERASI,L,,lunak,umum,,,53.0,64.9,167.9,Normal,2006.5,104.2,61.5,259.1,none,,test
+pasca_operasi_0083,PASCA_OPERASI,L,,cair,umum,,,36.0,74.2,165.9,Overweight,2557.0,131.2,75.4,338.5,telur,-,train
+pasca_operasi_0084,PASCA_OPERASI,P,,biasa,saluran_cerna,,,23.0,71.1,160.0,Overweight,2291.3,127.0,65.6,298.3,allergic to soy; laktosa,"pantangan spicy, daging merah",train
+pasca_operasi_0085,PASCA_OPERASI,L,,lunak,umum,,,61.0,71.2,174.3,Normal,2118.1,106.7,61.7,283.9,"Alergi: makanan laut, dairy","tidak suka jeroan, gorengan",train
+pasca_operasi_0086,PASCA_OPERASI,L,,saring,saluran_cerna,,,37.0,66.3,165.9,Normal,2201.3,115.0,54.8,311.9,Alergi: cumi & seafood,,train
+pasca_operasi_0087,PASCA_OPERASI,P,,biasa,caesar,,,47.0,66.5,159.3,Overweight,1957.8,110.6,56.2,252.5,no allergies,"pantangan daging merah, pedas",test
+pasca_operasi_0088,PASCA_OPERASI,L,,biasa,caesar,,,26.0,58.4,158.3,Normal,2232.5,120.8,60.3,301.8,tidak ada,no allergies,train
+pasca_operasi_0089,PASCA_OPERASI,P,,cair,caesar,,,43.0,49.2,148.9,Normal,1773.3,91.4,45.4,249.8,Alergi: ikan dan milk,tidak ada,train
+pasca_operasi_0090,PASCA_OPERASI,L,,biasa,saluran_cerna,,,20.0,80.7,176.2,Overweight,2541.0,144.0,78.6,314.5,alergi crab dan gandum,"pantangan manis, spicy",train
+pasca_operasi_0091,PASCA_OPERASI,P,,lunak,caesar,,,30.0,70.0,157.1,Overweight,2220.0,131.4,66.6,273.7,no allergies,none,test
+pasca_operasi_0092,PASCA_OPERASI,P,,biasa,umum,,,31.0,45.0,153.1,Normal,1902.7,113.8,51.5,246.1,"allergic to cumi, makanan laut","goreng-gorengan, makanan manis",train
+pasca_operasi_0093,PASCA_OPERASI,L,,lunak,caesar,,,66.0,64.6,154.2,Overweight,1854.4,110.4,46.8,247.8,no allergies,tidak suka pedas,train
+pasca_operasi_0094,PASCA_OPERASI,L,,biasa,umum,,,59.0,47.5,172.4,Underweight,1711.3,100.4,48.7,217.9,-,"pantangan spicy, daging merah",train
+pasca_operasi_0095,PASCA_OPERASI,L,,biasa,caesar,,,69.0,64.6,172.9,Normal,1998.7,122.7,59.8,242.5,Alergi: crab; milk,none,train
+pasca_operasi_0096,PASCA_OPERASI,P,,biasa,caesar,,,71.0,46.5,153.2,Normal,1446.6,87.8,36.8,191.1,-,-,train
+pasca_operasi_0097,PASCA_OPERASI,L,,saring,saluran_cerna,,,70.0,77.2,168.2,Overweight,1997.2,122.5,50.8,262.5,tidak ada,-,train
+pasca_operasi_0098,PASCA_OPERASI,L,,lunak,umum,,,53.0,58.5,162.9,Normal,1764.3,110.1,48.1,222.6,no allergies,none,train
+pasca_operasi_0099,PASCA_OPERASI,L,,lunak,ortopedi,,,62.0,75.8,157.2,Obese,2112.8,118.5,53.8,288.6,-,tidak suka gorengan,train
+pasca_operasi_0100,PASCA_OPERASI,P,,biasa,caesar,,,26.0,69.7,154.0,Overweight,2023.8,115.8,59.9,255.3,no allergies,tidak ada,train
+pasca_operasi_0101,PASCA_OPERASI,P,,biasa,caesar,,,69.0,60.5,158.8,Normal,1787.7,101.8,47.0,239.4,,"tidak suka goreng-gorengan, kopi",train
+pasca_operasi_0102,PASCA_OPERASI,P,,cair,umum,,,20.0,58.7,147.9,Overweight,1938.7,97.2,47.4,280.9,Alergi: laktosa dan udang,tidak suka daging merah,test
+pasca_operasi_0103,PASCA_OPERASI,L,,cair,umum,,,69.0,75.8,177.5,Normal,2108.2,115.3,51.8,295.3,Alergi: seafood,none,train
+pasca_operasi_0104,PASCA_OPERASI,L,,lunak,saluran_cerna,,,69.0,46.7,167.8,Underweight,1480.9,77.4,38.2,206.9,terigu & peanut,tidak ada,train
+pasca_operasi_0105,PASCA_OPERASI,L,,biasa,umum,,,40.0,56.4,176.4,Underweight,1949.8,112.4,58.7,242.9,-,,train
+pasca_operasi_0106,PASCA_OPERASI,P,,saring,umum,,,41.0,66.6,150.8,Overweight,1971.3,115.2,55.2,253.3,-,goreng-gorengan,train
+pasca_operasi_0107,PASCA_OPERASI,P,,biasa,saluran_cerna,,,75.0,55.5,147.6,Overweight,1532.1,93.6,39.0,201.8,,,train
+pasca_operasi_0108,PASCA_OPERASI,P,,biasa,caesar,,,21.0,58.3,153.7,Normal,2101.2,105.2,59.5,286.1,-,no allergies,train
+pasca_operasi_0109,PASCA_OPERASI,L,,biasa,caesar,,,20.0,59.4,167.1,Normal,2296.9,131.7,66.2,293.5,,"pantangan gorengan, jeroan",test
+pasca_operasi_0110,PASCA_OPERASI,P,,saring,umum,,,52.0,50.4,153.1,Normal,1704.2,92.8,43.6,235.2,,none,test
+pasca_operasi_0111,PASCA_OPERASI,L,,lunak,caesar,,,66.0,57.6,171.2,Normal,1973.1,103.5,53.3,269.9,no allergies,none,test
+pasca_operasi_0112,PASCA_OPERASI,P,,lunak,ortopedi,,,75.0,82.0,149.6,Obese,1858.3,100.6,49.3,253.1,udnag,"hindari pedas, santan",train
+pasca_operasi_0113,PASCA_OPERASI,L,,biasa,ortopedi,,,25.0,77.7,163.2,Overweight,2476.9,142.1,73.7,311.3,no allergies,tidak ada,train
+pasca_operasi_0114,PASCA_OPERASI,P,,biasa,ortopedi,,,48.0,39.9,157.8,Underweight,1718.2,100.6,45.0,227.7,tidak ada,tidak ada,train
+pasca_operasi_0115,PASCA_OPERASI,P,,lunak,umum,,,36.0,73.6,155.1,Obese,1992.6,119.8,55.8,252.8,crab,-,train
+pasca_operasi_0116,PASCA_OPERASI,P,,biasa,umum,,,37.0,53.4,153.9,Normal,1938.4,100.2,56.5,257.4,allergic to gandum,-,train
+pasca_operasi_0117,PASCA_OPERASI,P,,cair,umum,,,27.0,70.0,153.7,Overweight,2227.9,133.9,63.6,280.0,tidak ada,tidak ada,train
+pasca_operasi_0118,PASCA_OPERASI,L,,cair,ortopedi,,,23.0,75.2,168.4,Overweight,2452.5,139.3,61.5,335.5,Alergi: milk,none,train
+pasca_operasi_0119,PASCA_OPERASI,L,,cair,saluran_cerna,,,69.0,101.9,179.0,Obese,2948.2,156.6,85.9,387.1,no allergies,"hindari kopi, spicy",test
+pasca_operasi_0120,PASCA_OPERASI,L,,lunak,saluran_cerna,,,39.0,88.3,169.9,Obese,2610.6,134.1,77.0,345.3,Alergi: cumi-cumi; crab,none,train
+pasca_operasi_0121,PASCA_OPERASI,P,,saring,umum,,,61.0,49.9,155.8,Normal,1537.8,88.8,44.0,196.6,alergi wheat,"pantangan mie instan, kopi",test
+pasca_operasi_0122,PASCA_OPERASI,L,,saring,saluran_cerna,,,52.0,74.6,167.0,Overweight,2385.5,120.6,60.1,340.7,,jeroan,train
+pasca_operasi_0123,PASCA_OPERASI,L,,saring,caesar,,,22.0,59.4,165.4,Normal,2094.0,127.0,54.1,274.7,"Alergi: kepiting, suus","makanan manis, goreng-gorengan",train
+pasca_operasi_0124,PASCA_OPERASI,L,,cair,umum,,,21.0,56.4,165.4,Normal,2353.0,124.4,68.6,309.6,-,"pantangan santan, kopi",train
+pasca_operasi_0125,PASCA_OPERASI,P,,biasa,umum,,,51.0,56.5,160.3,Normal,1762.2,105.4,47.9,227.3,,"pantangan goreng-gorengan, mie instan",train
+pasca_operasi_0126,PASCA_OPERASI,P,,biasa,caesar,,,41.0,89.2,154.0,Obese,2222.4,124.8,68.8,276.0,tidak ada,"hindari makanan manis, santan",train
+pasca_operasi_0127,PASCA_OPERASI,P,,saring,ortopedi,,,24.0,50.7,143.3,Normal,1906.6,108.8,50.0,255.3,,none,train
+pasca_operasi_0128,PASCA_OPERASI,P,,lunak,saluran_cerna,,,38.0,56.3,160.1,Normal,1870.0,110.3,57.4,228.0,-,-,train
+pasca_operasi_0129,PASCA_OPERASI,L,,biasa,ortopedi,,,61.0,61.9,157.0,Overweight,1856.9,99.5,56.1,238.6,allergic to kacang tanah; sea food,no allergies,train
+pasca_operasi_0130,PASCA_OPERASI,L,,biasa,saluran_cerna,,,42.0,62.3,157.0,Overweight,2203.5,113.8,60.9,300.0,"alergi kedelai, kepiting","tidak suka santan, spicy",train
+pasca_operasi_0131,PASCA_OPERASI,P,,biasa,umum,,,36.0,79.5,164.1,Overweight,2366.8,135.7,58.1,325.2,Alergi: kedelai,"gorengan, manis",train
+pasca_operasi_0132,PASCA_OPERASI,P,,saring,saluran_cerna,,,69.0,61.2,161.2,Normal,1798.9,109.4,53.9,219.0,alergi cumi & wheat,"tidak suka manis, gorengan",test
+pasca_operasi_0133,PASCA_OPERASI,L,,cair,saluran_cerna,,,51.0,66.9,165.6,Normal,2007.8,123.1,57.5,249.5,tidak ada,no allergies,test
+pasca_operasi_0134,PASCA_OPERASI,L,,biasa,umum,,,58.0,59.5,175.0,Normal,1832.7,112.5,56.2,219.3,alergi sea food,"hindari daging merah, mie instan",test
+pasca_operasi_0135,PASCA_OPERASI,P,,cair,ortopedi,,,46.0,60.1,156.8,Normal,2003.8,121.5,51.3,264.1,tidak ada,tidak ada,train
+pasca_operasi_0136,PASCA_OPERASI,P,,biasa,caesar,,,74.0,35.6,149.2,Underweight,1385.7,79.5,40.3,176.4,-,"jeroan, daging merah",test
+pasca_operasi_0137,PASCA_OPERASI,P,,cair,ortopedi,,,73.0,73.7,157.3,Overweight,1944.3,107.2,58.8,246.5,allergic to kacang dan makanan laut,-,test
+pasca_operasi_0138,PASCA_OPERASI,L,,cair,umum,,,61.0,67.5,168.8,Normal,2096.5,113.0,62.1,271.4,tidak ada,"jeroan, pedas",train
+pasca_operasi_0139,PASCA_OPERASI,P,,lunak,umum,,,72.0,59.5,151.9,Overweight,1606.0,98.3,43.3,205.7,,no allergies,train
+pasca_operasi_0140,PASCA_OPERASI,L,,lunak,saluran_cerna,,,62.0,85.4,168.7,Overweight,2291.6,131.7,64.4,296.3,alergi gluten; egg,pantangan gorengan,train
+pasca_operasi_0141,PASCA_OPERASI,P,,saring,caesar,,,74.0,40.5,159.1,Underweight,1326.5,68.1,32.8,189.7,-,-,train
+pasca_operasi_0142,PASCA_OPERASI,L,,saring,umum,,,50.0,64.6,172.6,Normal,2301.8,129.7,66.9,295.3,no allergies,,train
+pasca_operasi_0143,PASCA_OPERASI,L,,biasa,ortopedi,,,68.0,47.6,169.6,Underweight,1664.6,90.0,45.1,224.6,Alergi: wheat,goreng-gorengan,train
+pasca_operasi_0144,PASCA_OPERASI,P,,cair,caesar,,,74.0,73.9,160.9,Overweight,1790.3,101.2,45.4,244.2,no allergies,no allergies,train
+pasca_operasi_0145,PASCA_OPERASI,P,,biasa,umum,,,20.0,55.4,153.5,Normal,1898.5,114.4,54.0,238.7,,hindari mie instan,train
+pasca_operasi_0146,PASCA_OPERASI,L,,lunak,caesar,,,68.0,39.4,154.3,Underweight,1390.9,82.7,34.0,188.5,-,tidak ada,test
+pasca_operasi_0147,PASCA_OPERASI,L,,lunak,umum,,,70.0,52.0,161.1,Normal,1669.9,93.6,45.9,220.6,kacng dan sea food,"pantangan goreng-gorengan, kopi",train
+pasca_operasi_0148,PASCA_OPERASI,L,,cair,saluran_cerna,,,53.0,89.5,165.4,Obese,2437.6,123.7,71.8,324.1,kacang tanah & ikan,tidak ada,train
+pasca_operasi_0149,PASCA_OPERASI,P,,saring,umum,,,72.0,61.6,159.6,Normal,1789.8,100.3,50.4,233.7,no allergies,no allergies,test
+pasca_operasi_0150,PASCA_OPERASI,L,,lunak,caesar,,,39.0,76.2,160.7,Overweight,2216.8,130.3,54.9,300.4,,none,train
+pasca_operasi_0151,PASCA_OPERASI,L,,biasa,ortopedi,,,42.0,68.6,174.3,Normal,2132.9,115.2,55.7,292.5,tidak ada,"manis, spicy",train
+pasca_operasi_0152,PASCA_OPERASI,L,,cair,umum,,,62.0,69.0,176.8,Normal,2287.2,127.9,57.2,315.3,tidak ada,none,train
+pasca_operasi_0153,PASCA_OPERASI,L,,lunak,caesar,,,30.0,73.3,160.8,Overweight,2334.0,123.6,65.3,313.0,none,tidak ada,train
+pasca_operasi_0154,PASCA_OPERASI,P,,biasa,caesar,,,71.0,71.3,144.4,Obese,1777.1,93.9,43.7,252.1,none,santan,train
+pasca_operasi_0155,PASCA_OPERASI,L,,saring,ortopedi,,,53.0,77.2,169.1,Overweight,2317.5,118.7,64.3,315.9,none,tidak suka santan,train
+pasca_operasi_0156,PASCA_OPERASI,L,,lunak,ortopedi,,,56.0,70.7,158.1,Overweight,2188.0,112.0,63.0,293.2,no allergies,hindari makanan manis,test
+pasca_operasi_0157,PASCA_OPERASI,L,,biasa,umum,,,60.0,79.1,170.3,Overweight,2169.1,110.2,66.1,283.3,no allergies,no allergies,train
+pasca_operasi_0158,PASCA_OPERASI,P,,lunak,caesar,,,20.0,72.2,166.2,Overweight,2165.5,135.3,63.3,263.6,Alergi: kacng,"hindari gorengan, goreng-gorengan",train
+pasca_operasi_0159,PASCA_OPERASI,L,,lunak,ortopedi,,,54.0,55.9,158.3,Normal,1871.1,99.4,52.4,250.6,kepiting,pantangan manis,test
+pasca_operasi_0160,PASCA_OPERASI,P,,biasa,ortopedi,,,35.0,59.8,149.0,Overweight,1925.5,116.2,51.3,249.8,alergi makanan laut,tidak suka makanan manis,train
+pasca_operasi_0161,PASCA_OPERASI,P,,cair,umum,,,46.0,78.4,157.8,Obese,2253.8,122.1,60.9,304.3,alergi terigu,-,train
+pasca_operasi_0162,PASCA_OPERASI,P,,biasa,saluran_cerna,,,23.0,42.3,157.3,Underweight,1928.8,109.6,51.5,256.8,Alergi: shrimp; eggs,-,train
+pasca_operasi_0163,PASCA_OPERASI,P,,cair,ortopedi,,,37.0,55.0,148.6,Normal,1935.6,119.4,47.8,257.0,"alergi gandum, telur","kopi, manis",train
+pasca_operasi_0164,PASCA_OPERASI,P,,biasa,umum,,,30.0,52.0,153.3,Normal,1899.3,98.4,46.9,270.9,-,no allergies,train
+pasca_operasi_0165,PASCA_OPERASI,P,,lunak,caesar,,,53.0,48.6,148.0,Normal,1631.3,98.1,40.6,218.3,allergic to makanan laut,tidak ada,test
+pasca_operasi_0166,PASCA_OPERASI,L,,saring,caesar,,,40.0,93.9,177.3,Overweight,3079.6,162.8,90.0,404.6,,-,test
+pasca_operasi_0167,PASCA_OPERASI,P,,biasa,ortopedi,,,34.0,46.1,145.6,Normal,1611.3,94.6,45.7,205.5,-,"hindari pedas, spicy",train
+pasca_operasi_0168,PASCA_OPERASI,L,,biasa,caesar,,,40.0,61.5,158.1,Normal,2170.8,125.2,66.2,268.7,alergi cumi,no allergies,train
+pasca_operasi_0169,PASCA_OPERASI,P,,biasa,umum,,,19.0,79.6,161.3,Obese,2417.1,128.0,63.0,334.6,,,train
+pasca_operasi_0170,PASCA_OPERASI,L,,saring,ortopedi,,,20.0,84.0,172.0,Overweight,2766.4,163.8,81.5,344.5,allergic to susu sapi,"gorengan, jeroan",train
+pasca_operasi_0171,PASCA_OPERASI,P,,lunak,ortopedi,,,45.0,58.4,156.0,Normal,1759.4,94.2,54.7,222.6,"allergic to wheat, ikan",-,train
+pasca_operasi_0172,PASCA_OPERASI,L,,biasa,ortopedi,,,68.0,51.8,154.6,Normal,1507.3,86.0,38.3,204.6,allergic to udnag dan eggs,"tidak suka pedas, santan",train
+pasca_operasi_0173,PASCA_OPERASI,L,,biasa,saluran_cerna,,,32.0,61.1,164.2,Normal,2067.6,127.2,54.4,267.3,none,tidak suka kopi,train
+pasca_operasi_0174,PASCA_OPERASI,P,,lunak,saluran_cerna,,,28.0,55.4,152.8,Normal,1778.7,100.0,48.0,236.8,-,gorengan,train
+pasca_operasi_0175,PASCA_OPERASI,L,,biasa,caesar,,,19.0,76.2,169.0,Overweight,2673.3,162.4,68.3,352.3,Alergi: udang,"hindari daging merah, jeroan",test
+pasca_operasi_0176,PASCA_OPERASI,L,,cair,saluran_cerna,,,21.0,53.6,163.9,Normal,2122.6,122.2,65.4,261.4,none,,train
+pasca_operasi_0177,PASCA_OPERASI,P,,cair,ortopedi,,,39.0,42.7,154.3,Underweight,1626.7,82.2,49.6,212.9,gluten dan tahu tempe,daging merah,test
+pasca_operasi_0178,PASCA_OPERASI,P,,cair,umum,,,30.0,90.6,158.1,Obese,2279.2,126.6,56.0,317.1,-,"tidak suka spicy, kopi",train
+pasca_operasi_0179,PASCA_OPERASI,L,,biasa,ortopedi,,,64.0,65.7,162.0,Overweight,1952.4,111.5,52.3,258.9,,-,train
+pasca_operasi_0180,PASCA_OPERASI,P,,lunak,caesar,,,43.0,62.5,169.6,Normal,2070.7,121.1,63.2,254.3,no allergies,-,train
+pasca_operasi_0181,PASCA_OPERASI,L,,biasa,umum,,,20.0,54.8,163.2,Normal,2291.7,117.3,62.3,315.5,tidak ada,none,train
+pasca_operasi_0182,PASCA_OPERASI,L,,cair,caesar,,,74.0,84.8,172.5,Overweight,2170.5,122.8,55.2,295.5,no allergies,,test
+pasca_operasi_0183,PASCA_OPERASI,L,,lunak,caesar,,,73.0,71.1,171.5,Normal,1925.8,114.5,55.0,243.3,none,no allergies,train
+pasca_operasi_0184,PASCA_OPERASI,P,,saring,caesar,,,57.0,59.8,150.7,Overweight,1769.2,108.7,44.8,232.8,alergi crab dan seafood,-,train
+pasca_operasi_0185,PASCA_OPERASI,P,,lunak,saluran_cerna,,,57.0,40.5,159.0,Underweight,1587.6,98.3,46.9,193.2,alergi gluten,none,train
+pasca_operasi_0186,PASCA_OPERASI,P,,cair,ortopedi,,,38.0,59.5,160.5,Normal,1799.0,103.3,45.0,245.1,Alergi: eggs,"pantangan mie instan, santan",train
+pasca_operasi_0187,PASCA_OPERASI,P,,lunak,saluran_cerna,,,62.0,64.3,153.3,Overweight,1967.4,100.3,57.0,263.3,none,tidak ada,train
+pasca_operasi_0188,PASCA_OPERASI,P,,biasa,umum,,,55.0,74.0,155.4,Obese,1998.9,124.9,52.5,256.7,Alergi: tahu tempe dan ebi,-,train
+pasca_operasi_0189,PASCA_OPERASI,L,,cair,ortopedi,,,20.0,83.7,171.9,Overweight,2779.4,139.5,81.8,371.3,alergi cumi,hindari daging merah,train
+pasca_operasi_0190,PASCA_OPERASI,L,,biasa,ortopedi,,,68.0,66.0,169.2,Normal,2012.9,101.9,60.4,265.5,none,no allergies,train
+pasca_operasi_0191,PASCA_OPERASI,L,,biasa,caesar,,,20.0,68.7,166.3,Normal,2573.8,152.5,77.1,317.5,none,"pantangan goreng-gorengan, kopi",train
+pasca_operasi_0192,PASCA_OPERASI,P,,biasa,caesar,,,38.0,50.4,155.7,Normal,1676.7,94.1,42.8,228.8,no allergies,no allergies,train
+pasca_operasi_0193,PASCA_OPERASI,P,,saring,umum,,,36.0,48.8,161.8,Normal,1827.9,105.1,52.2,234.4,tidak ada,,test
+pasca_operasi_0194,PASCA_OPERASI,P,,saring,ortopedi,,,56.0,56.8,161.1,Normal,1796.7,93.3,50.9,241.2,cumi dan dairy,pantangan makanan manis,train
+pasca_operasi_0195,PASCA_OPERASI,P,,biasa,umum,,,62.0,70.6,157.5,Overweight,1942.7,119.7,50.8,251.6,no allergies,-,train
+pasca_operasi_0196,PASCA_OPERASI,P,,lunak,ortopedi,,,64.0,59.5,153.0,Overweight,1619.8,91.4,43.2,216.3,allergic to sea food; udnag,none,train
+pasca_operasi_0197,PASCA_OPERASI,L,,biasa,caesar,,,19.0,72.7,160.3,Overweight,2350.0,138.6,64.3,304.2,no allergies,"tidak suka spicy, manis",train
+pasca_operasi_0198,PASCA_OPERASI,L,,biasa,umum,,,66.0,53.4,165.2,Normal,1563.6,81.1,41.5,216.4,-,"gorengan, santan",train
+pasca_operasi_0199,PASCA_OPERASI,L,,lunak,umum,,,39.0,82.0,167.6,Overweight,2736.6,139.6,76.5,372.3,,no allergies,train
+pasca_operasi_0200,PASCA_OPERASI,L,,lunak,ortopedi,,,19.0,70.6,163.5,Overweight,2341.2,136.9,69.7,291.7,no allergies,no allergies,test
+pasca_operasi_0201,PASCA_OPERASI,P,,cair,caesar,,,63.0,48.1,149.8,Normal,1454.0,79.0,38.8,197.1,allergic to soy,"pantangan kopi, makanan manis",train
+pasca_operasi_0202,PASCA_OPERASI,L,,saring,ortopedi,,,64.0,56.2,171.8,Normal,1714.4,101.7,42.6,231.1,Alergi: laktosa,no allergies,train
+pasca_operasi_0203,PASCA_OPERASI,P,,biasa,caesar,,,21.0,39.9,141.9,Normal,1784.4,98.0,54.3,225.9,gluten; telor,,train
+pasca_operasi_0204,PASCA_OPERASI,P,,lunak,caesar,,,60.0,66.4,160.9,Overweight,1912.5,108.8,55.9,243.7,Alergi: fish,"tidak suka makanan manis, kopi",train
+pasca_operasi_0205,PASCA_OPERASI,P,,cair,ortopedi,,,43.0,44.4,148.1,Normal,1611.6,100.1,39.8,213.1,no allergies,none,test
+pasca_operasi_0206,PASCA_OPERASI,P,,biasa,umum,,,37.0,50.5,156.3,Normal,1707.8,102.1,49.5,213.5,"allergic to ebi, milk",makanan manis,train
+pasca_operasi_0207,PASCA_OPERASI,L,,lunak,umum,,,55.0,59.6,175.9,Normal,2023.0,108.6,61.2,259.5,tidak ada,no allergies,train
+pasca_operasi_0208,PASCA_OPERASI,L,,lunak,caesar,,,27.0,56.1,167.4,Normal,2077.5,105.5,60.5,277.7,tidak ada,none,train
+pasca_operasi_0209,PASCA_OPERASI,L,,biasa,ortopedi,,,62.0,53.7,153.1,Normal,1587.9,85.0,39.7,222.7,alergi crab dan sea food,hindari kopi,test
+pasca_operasi_0210,PASCA_OPERASI,P,,saring,saluran_cerna,,,28.0,70.3,155.6,Overweight,2138.8,126.3,52.8,289.6,-,"hindari santan, pedas",test
+pasca_operasi_0211,PASCA_OPERASI,L,,cair,saluran_cerna,,,70.0,77.8,171.4,Overweight,2269.3,132.4,57.9,304.7,Alergi: kedele,-,train
+pasca_operasi_0212,PASCA_OPERASI,P,,biasa,umum,,,23.0,66.5,158.0,Overweight,2172.5,124.1,54.4,296.6,alergi kepiting,-,test
+pasca_operasi_0213,PASCA_OPERASI,L,,cair,saluran_cerna,,,53.0,75.8,168.9,Overweight,2213.0,117.6,67.3,284.2,"makanan laut, wheat","manis, santan",test
+pasca_operasi_0214,PASCA_OPERASI,L,,cair,saluran_cerna,,,63.0,68.8,171.0,Normal,2162.6,126.7,66.4,264.5,kacang dan fish,pantangan kopi,train
+pasca_operasi_0215,PASCA_OPERASI,L,,lunak,saluran_cerna,,,52.0,62.6,165.6,Normal,2165.2,123.7,62.8,276.3,none,-,train
+pasca_operasi_0216,PASCA_OPERASI,L,,cair,ortopedi,,,26.0,49.0,165.2,Underweight,1981.3,99.6,51.6,279.7,alergi kepiting dan eggs,none,train
+pasca_operasi_0217,PASCA_OPERASI,L,,cair,saluran_cerna,,,46.0,91.1,163.6,Obese,2611.6,153.8,74.5,331.4,none,tidak ada,train
+pasca_operasi_0218,PASCA_OPERASI,L,,biasa,ortopedi,,,19.0,59.1,167.8,Normal,2224.6,137.2,67.0,268.2,no allergies,tidak ada,train
+pasca_operasi_0219,PASCA_OPERASI,P,,biasa,caesar,,,28.0,60.5,152.2,Overweight,2000.2,117.8,52.6,263.9,nuts,"spicy, makanan manis",test
+pasca_operasi_0220,PASCA_OPERASI,P,,lunak,ortopedi,,,73.0,46.9,154.9,Normal,1428.9,85.4,43.1,174.8,ebi,,train
+pasca_operasi_0221,PASCA_OPERASI,L,,lunak,umum,,,63.0,98.3,172.6,Obese,2649.1,147.2,67.0,364.2,tidak ada,hindari goreng-gorengan,train
+pasca_operasi_0222,PASCA_OPERASI,P,,saring,umum,,,21.0,64.5,150.9,Overweight,2049.7,112.8,60.3,264.1,"allergic to crab, kacng",pedas,train
+pasca_operasi_0223,PASCA_OPERASI,L,,biasa,umum,,,65.0,70.4,176.0,Normal,2066.6,113.9,62.3,262.6,,manis,train
+pasca_operasi_0224,PASCA_OPERASI,P,,cair,saluran_cerna,,,59.0,45.0,155.8,Normal,1526.6,80.4,38.9,213.7,alergi gluten; kedelai,-,test
+pasca_operasi_0225,PASCA_OPERASI,P,,biasa,saluran_cerna,,,47.0,51.2,150.8,Normal,1863.7,97.6,50.5,254.6,susu sapi; ebi,tidak ada,train
+pasca_operasi_0226,PASCA_OPERASI,L,,biasa,caesar,,,51.0,80.3,173.2,Overweight,2422.1,127.4,74.2,311.3,none,hindari spicy,train
+pasca_operasi_0227,PASCA_OPERASI,P,,biasa,saluran_cerna,,,57.0,52.8,149.4,Normal,1618.9,98.7,48.0,198.0,no allergies,,train
+pasca_operasi_0228,PASCA_OPERASI,P,,biasa,ortopedi,,,54.0,47.5,149.2,Normal,1573.8,91.7,48.7,192.1,"alergi shrimp, susu sapi",tidak suka gorengan,test
+pasca_operasi_0229,PASCA_OPERASI,L,,lunak,ortopedi,,,70.0,55.5,170.6,Normal,1736.4,106.3,50.4,214.5,Alergi: telur,pantangan spicy,train
+pasca_operasi_0230,PASCA_OPERASI,L,,lunak,saluran_cerna,,,36.0,73.8,171.3,Overweight,2246.4,139.8,57.1,293.3,"Alergi: wheat, cumi",-,train
+pasca_operasi_0231,PASCA_OPERASI,P,,biasa,ortopedi,,,25.0,48.7,156.2,Normal,1973.6,109.3,50.1,271.4,tidak ada,-,train
+pasca_operasi_0232,PASCA_OPERASI,P,,saring,saluran_cerna,,,54.0,54.5,154.7,Normal,1667.5,96.8,41.8,226.1,Alergi: telur,tidak ada,train
+pasca_operasi_0233,PASCA_OPERASI,L,,cair,ortopedi,,,70.0,59.1,158.9,Normal,1606.8,87.3,46.1,210.7,"ikan, terigu",-,train
+pasca_operasi_0234,PASCA_OPERASI,P,,lunak,saluran_cerna,,,39.0,44.2,166.3,Underweight,1804.8,107.0,46.0,240.7,allergic to fish,-,train
+pasca_operasi_0235,PASCA_OPERASI,P,,biasa,ortopedi,,,40.0,65.7,155.8,Overweight,2048.3,123.3,51.9,272.1,allergic to ikan; peanut,tidak ada,test
+pasca_operasi_0236,PASCA_OPERASI,L,,lunak,saluran_cerna,,,47.0,77.2,175.6,Overweight,2360.2,120.9,58.1,338.5,tidak ada,tidak suka goreng-gorengan,train
+pasca_operasi_0237,PASCA_OPERASI,L,,lunak,umum,,,69.0,82.4,170.7,Overweight,2454.4,152.4,61.9,321.8,allergic to udang,tidak ada,train
+pasca_operasi_0238,PASCA_OPERASI,P,,cair,ortopedi,,,25.0,65.2,166.9,Normal,2148.5,111.9,64.3,280.6,allergic to udang,"pedas, manis",train
+pasca_operasi_0239,PASCA_OPERASI,P,,saring,saluran_cerna,,,59.0,42.9,158.6,Underweight,1540.7,80.9,39.5,215.4,alergi cumi-cumi; terigu,daging merah,train
+pasca_operasi_0240,PASCA_OPERASI,L,,lunak,ortopedi,,,42.0,63.0,169.9,Normal,1997.8,124.5,49.9,262.8,Alergi: kacang & squid,manis,train
+pasca_operasi_0241,PASCA_OPERASI,L,,biasa,ortopedi,,,24.0,56.9,172.8,Normal,2212.3,118.2,63.1,292.8,-,pantangan pedas,train
+pasca_operasi_0242,PASCA_OPERASI,P,,biasa,saluran_cerna,,,37.0,37.6,153.2,Underweight,1496.1,80.4,38.1,207.9,-,"tidak suka spicy, manis",train
+pasca_operasi_0243,PASCA_OPERASI,L,,saring,ortopedi,,,46.0,76.8,163.2,Overweight,2398.7,140.8,67.0,308.0,kacng; eggs,tidak ada,train
+pasca_operasi_0244,PASCA_OPERASI,P,,lunak,umum,,,24.0,67.6,158.3,Overweight,2159.8,108.3,61.7,292.8,,-,train
+pasca_operasi_0245,PASCA_OPERASI,P,,biasa,caesar,,,75.0,68.7,150.6,Obese,1684.7,97.1,44.2,224.5,,tidak ada,test
+pasca_operasi_0246,PASCA_OPERASI,P,,lunak,caesar,,,63.0,56.6,149.4,Overweight,1804.7,91.3,49.5,248.4,,hindari spicy,train
+pasca_operasi_0247,PASCA_OPERASI,P,,biasa,saluran_cerna,,,33.0,48.4,151.7,Normal,1907.1,99.9,55.1,252.9,allergic to terigu; ikan,tidak suka goreng-gorengan,train
+pasca_operasi_0248,PASCA_OPERASI,L,,saring,umum,,,42.0,50.4,153.0,Normal,1836.6,113.3,52.9,226.8,no allergies,"pantangan pedas, gorengan",train
+pasca_operasi_0249,PASCA_OPERASI,L,,biasa,saluran_cerna,,,45.0,88.4,170.2,Obese,2739.4,142.1,70.6,383.8,ebi,pedas,test
+pasca_operasi_0250,PASCA_OPERASI,P,,biasa,caesar,,,50.0,85.1,171.9,Overweight,2188.8,122.3,54.8,301.5,Alergi: shrimp; telur,none,test
+pasca_operasi_0251,PASCA_OPERASI,L,,biasa,saluran_cerna,,,45.0,69.0,166.9,Normal,2364.5,140.2,62.3,310.7,no allergies,hindari jeroan,train
+pasca_operasi_0252,PASCA_OPERASI,L,,biasa,caesar,,,21.0,63.4,168.6,Normal,2508.3,154.5,62.0,333.0,,-,train
+pasca_operasi_0253,PASCA_OPERASI,P,,biasa,caesar,,,27.0,37.7,150.5,Underweight,1627.0,84.6,41.7,228.3,allergic to fish & nuts,-,train
+pasca_operasi_0254,PASCA_OPERASI,L,,saring,caesar,,,50.0,67.8,171.0,Normal,2287.2,131.4,65.5,293.1,-,,train
+pasca_operasi_0255,PASCA_OPERASI,L,,biasa,ortopedi,,,62.0,111.0,171.4,Obese,2949.3,174.4,82.5,377.4,-,no allergies,test
+pasca_operasi_0256,PASCA_OPERASI,L,,lunak,caesar,,,48.0,64.9,162.8,Normal,1970.8,105.1,53.1,268.2,,tidak ada,train
+pasca_operasi_0257,PASCA_OPERASI,L,,lunak,saluran_cerna,,,63.0,64.7,171.8,Normal,1986.3,110.2,59.2,253.1,crab dan shrimp,pedas,test
+pasca_operasi_0258,PASCA_OPERASI,L,,biasa,ortopedi,,,64.0,65.2,171.7,Normal,2120.8,126.7,54.7,280.3,Alergi: gluten,"hindari kopi, jeroan",train
+pasca_operasi_0259,PASCA_OPERASI,P,,biasa,saluran_cerna,,,24.0,60.3,150.8,Overweight,1925.4,120.0,55.2,237.1,Alergi: crab,none,train
+pasca_operasi_0260,PASCA_OPERASI,P,,lunak,caesar,,,21.0,49.5,160.6,Normal,1868.6,99.7,54.0,246.0,-,hindari spicy,test
+pasca_operasi_0261,PASCA_OPERASI,L,,lunak,saluran_cerna,,,46.0,68.6,164.8,Overweight,2222.7,138.9,63.0,275.0,tidak ada,tidak ada,train
+pasca_operasi_0262,PASCA_OPERASI,L,,lunak,umum,,,41.0,57.6,164.6,Normal,2114.2,129.0,62.5,258.8,Alergi: squid; udang,hindari daging merah,train
+pasca_operasi_0263,PASCA_OPERASI,L,,biasa,caesar,,,64.0,75.5,172.3,Overweight,2267.5,121.7,66.9,294.8,Alergi: soy & makanan laut,no allergies,train
+pasca_operasi_0264,PASCA_OPERASI,L,,lunak,ortopedi,,,41.0,62.8,172.7,Normal,2229.5,114.1,61.2,305.6,,none,train
+pasca_operasi_0265,PASCA_OPERASI,L,,cair,ortopedi,,,37.0,61.0,164.8,Normal,2014.8,110.1,49.3,282.7,,hindari kopi,train
+pasca_operasi_0266,PASCA_OPERASI,L,,lunak,umum,,,61.0,76.3,163.4,Overweight,2053.5,108.6,63.0,263.0,none,"hindari mie instan, pedas",train
+pasca_operasi_0267,PASCA_OPERASI,L,,saring,saluran_cerna,,,44.0,92.5,174.9,Obese,2757.1,150.8,74.4,371.0,shrimp & kedelai,tidak suka santan,train
+pasca_operasi_0268,PASCA_OPERASI,P,,biasa,ortopedi,,,64.0,59.4,160.1,Normal,1694.4,96.9,52.2,209.2,,"mie instan, kopi",train
+pasca_operasi_0269,PASCA_OPERASI,L,,biasa,saluran_cerna,,,32.0,80.2,168.7,Overweight,2746.7,145.1,72.9,377.6,alergi makanan laut; telur,none,train
+pasca_operasi_0270,PASCA_OPERASI,P,,saring,umum,,,54.0,63.0,155.4,Overweight,1724.8,91.1,44.9,238.9,allergic to telor,tidak ada,train
+pasca_operasi_0271,PASCA_OPERASI,L,,biasa,ortopedi,,,39.0,63.5,167.9,Normal,2293.3,117.3,69.9,298.8,alergi tahu tempe dan susu,tidak ada,train
+pasca_operasi_0272,PASCA_OPERASI,L,,biasa,umum,,,74.0,103.8,169.2,Obese,2745.6,150.1,71.2,376.2,"Alergi: fish, kepiting",gorengan,test
+pasca_operasi_0273,PASCA_OPERASI,P,,biasa,saluran_cerna,,,28.0,42.6,163.2,Underweight,1636.4,89.2,47.5,213.1,no allergies,tidak ada,train
+pasca_operasi_0274,PASCA_OPERASI,L,,biasa,umum,,,69.0,68.6,166.5,Normal,1960.9,119.4,52.9,251.9,"alergi seafood, laktosa",tidak ada,train
+pasca_operasi_0275,PASCA_OPERASI,P,,lunak,ortopedi,,,39.0,48.2,152.3,Normal,1872.4,98.1,54.3,247.9,-,santan,train
+pasca_operasi_0276,PASCA_OPERASI,L,,biasa,caesar,,,56.0,68.5,165.2,Overweight,2053.3,124.2,56.9,261.0,none,tidak ada,train
+pasca_operasi_0277,PASCA_OPERASI,P,,cair,caesar,,,32.0,67.6,151.5,Overweight,2000.6,124.4,49.3,264.8,alergi udnag,no allergies,train
+pasca_operasi_0278,PASCA_OPERASI,P,,biasa,umum,,,44.0,44.6,141.9,Normal,1551.9,89.5,46.0,195.0,allergic to susu sapi dan crab,none,train
+pasca_operasi_0279,PASCA_OPERASI,P,,biasa,saluran_cerna,,,27.0,59.5,151.4,Overweight,1940.7,107.9,53.6,256.6,tidak ada,"makanan manis, manis",train
+pasca_operasi_0280,PASCA_OPERASI,P,,saring,caesar,,,63.0,58.4,160.1,Normal,1621.2,89.9,48.0,207.5,Alergi: ikn; cumi-cumi,makanan manis,train
+pasca_operasi_0281,PASCA_OPERASI,P,,biasa,caesar,,,29.0,69.5,158.3,Overweight,2002.1,102.4,59.1,265.0,alergi fish,-,train
+pasca_operasi_0282,PASCA_OPERASI,L,,biasa,umum,,,35.0,54.1,160.8,Normal,1819.8,105.3,48.4,240.8,sea food,,test
+pasca_operasi_0283,PASCA_OPERASI,L,,lunak,saluran_cerna,,,26.0,47.4,168.2,Underweight,1898.1,103.3,58.4,239.9,-,jeroan,train
+pasca_operasi_0284,PASCA_OPERASI,L,,biasa,ortopedi,,,51.0,75.7,169.8,Overweight,2477.1,151.3,68.0,315.0,allergic to udnag,-,train
+pasca_operasi_0285,PASCA_OPERASI,L,,biasa,caesar,,,63.0,70.8,161.5,Overweight,2132.3,132.9,53.2,280.4,alergi udang,"hindari pedas, makanan manis",test
+pasca_operasi_0286,PASCA_OPERASI,L,,biasa,saluran_cerna,,,24.0,94.4,173.0,Obese,2856.5,156.8,77.7,382.5,Alergi: udang dan squid,tidak suka makanan manis,train
+pasca_operasi_0287,PASCA_OPERASI,P,,saring,saluran_cerna,,,57.0,65.1,151.1,Overweight,1804.4,98.1,50.7,239.0,-,-,train
+pasca_operasi_0288,PASCA_OPERASI,L,,lunak,saluran_cerna,,,68.0,62.5,172.5,Normal,1758.4,109.3,51.7,214.0,,hindari makanan manis,train
+pasca_operasi_0289,PASCA_OPERASI,L,,biasa,caesar,,,74.0,59.7,164.8,Normal,1686.4,86.3,41.5,241.9,alergi nuts,pantangan mie instan,train
+pasca_operasi_0290,PASCA_OPERASI,L,,biasa,saluran_cerna,,,58.0,74.9,169.6,Overweight,2347.8,145.4,69.7,284.8,allergic to soy,hindari kopi,test
+pasca_operasi_0291,PASCA_OPERASI,P,,cair,caesar,,,31.0,55.5,155.7,Normal,2048.8,113.5,57.1,270.3,udnag; gluten,-,test
+pasca_operasi_0292,PASCA_OPERASI,P,,lunak,umum,,,53.0,48.1,154.2,Normal,1563.9,93.6,45.3,195.6,none,tidak suka manis,train
+pasca_operasi_0293,PASCA_OPERASI,L,,biasa,saluran_cerna,,,21.0,63.3,168.4,Normal,2259.3,120.9,62.8,302.7,laktosa; ikan,tidak suka spicy,train
+pasca_operasi_0294,PASCA_OPERASI,P,,biasa,ortopedi,,,73.0,76.0,169.6,Overweight,1881.9,108.5,58.2,231.1,allergic to kedelai; udang,"pantangan kopi, gorengan",train
+pasca_operasi_0295,PASCA_OPERASI,P,,saring,ortopedi,,,22.0,61.7,151.3,Overweight,2053.7,127.5,51.0,271.2,allergic to suus,none,train
+pasca_operasi_0296,PASCA_OPERASI,L,,lunak,caesar,,,64.0,80.8,154.8,Obese,2028.8,105.0,51.5,286.3,allergic to crab,none,train
+pasca_operasi_0297,PASCA_OPERASI,L,,lunak,ortopedi,,,26.0,56.3,165.1,Normal,2137.4,120.4,55.9,288.2,no allergies,"pantangan gorengan, daging merah",train
+pasca_operasi_0298,PASCA_OPERASI,P,,lunak,saluran_cerna,,,44.0,37.6,153.3,Underweight,1480.5,81.3,42.2,193.9,alergi nuts,tidak ada,train
+pasca_operasi_0299,PASCA_OPERASI,L,,cair,umum,,,56.0,46.8,166.1,Underweight,1681.5,96.8,42.5,227.9,tidak ada,no allergies,train
+pasca_operasi_0300,PASCA_OPERASI,L,,saring,umum,,,26.0,72.9,165.5,Overweight,2673.0,134.0,70.7,375.1,no allergies,tidak ada,test
+pasca_operasi_0301,PASCA_OPERASI,L,,lunak,caesar,,,27.0,41.2,159.9,Underweight,1902.4,111.3,48.2,255.9,tidak ada,pantangan santan,test
+pasca_operasi_0302,PASCA_OPERASI,P,,biasa,caesar,,,41.0,63.5,146.4,Overweight,2054.6,112.5,61.5,262.9,allergic to gluten & kepiting,"manis, goreng-gorengan",train
+pasca_operasi_0303,PASCA_OPERASI,P,,cair,ortopedi,,,19.0,76.7,148.1,Obese,2281.9,140.4,59.3,296.6,alergi squid dan sea food,tidak ada,train
+pasca_operasi_0304,PASCA_OPERASI,P,,biasa,ortopedi,,,70.0,51.4,159.6,Normal,1491.1,83.6,40.4,198.3,allergic to crab; squid,"hindari santan, makanan manis",train
+pasca_operasi_0305,PASCA_OPERASI,P,,cair,umum,,,44.0,40.0,149.7,Underweight,1692.0,100.0,51.7,206.7,Alergi: kedelai,-,train
+pasca_operasi_0306,PASCA_OPERASI,L,,cair,ortopedi,,,66.0,77.4,171.3,Overweight,2299.1,117.2,69.1,302.1,-,"jeroan, gorengan",train
+pasca_operasi_0307,PASCA_OPERASI,P,,saring,umum,,,23.0,65.9,160.1,Overweight,2214.2,133.4,64.2,275.6,allergic to gandum,"pantangan pedas, spicy",train
+pasca_operasi_0308,PASCA_OPERASI,P,,lunak,ortopedi,,,20.0,50.8,153.5,Normal,2063.9,113.3,54.0,281.1,fish & kacang tanah,-,train
+pasca_operasi_0309,PASCA_OPERASI,L,,biasa,ortopedi,,,75.0,61.4,168.6,Normal,1936.8,111.4,56.6,245.4,allergic to laktosa,tidak ada,train
+pasca_operasi_0310,PASCA_OPERASI,L,,lunak,caesar,,,55.0,72.1,165.1,Overweight,2251.1,139.3,60.5,287.2,allergic to cumi-cumi; wheat,tidak ada,train
+pasca_operasi_0311,PASCA_OPERASI,P,,biasa,saluran_cerna,,,45.0,82.4,168.2,Overweight,2109.4,124.2,54.1,281.5,nuts dan egg,,test
+pasca_operasi_0312,PASCA_OPERASI,P,,biasa,saluran_cerna,,,51.0,52.0,152.7,Normal,1641.0,87.3,43.4,225.2,terigu & seafood,"hindari manis, makanan manis",test
+pasca_operasi_0313,PASCA_OPERASI,L,,biasa,saluran_cerna,,,30.0,70.4,160.3,Overweight,2300.2,143.4,66.1,283.0,tidak ada,"tidak suka manis, pedas",train
+pasca_operasi_0314,PASCA_OPERASI,L,,lunak,ortopedi,,,32.0,72.8,165.4,Overweight,2299.6,123.9,59.2,317.9,tidak ada,no allergies,train
+pasca_operasi_0315,PASCA_OPERASI,L,,lunak,caesar,,,24.0,73.7,166.3,Overweight,2564.3,142.9,67.3,346.7,,makanan manis,train
+pasca_operasi_0316,PASCA_OPERASI,L,,saring,umum,,,26.0,75.4,172.0,Overweight,2497.9,136.1,72.9,324.5,-,tidak suka mie instan,train
+pasca_operasi_0317,PASCA_OPERASI,L,,lunak,saluran_cerna,,,39.0,104.1,180.5,Obese,2893.7,154.6,84.8,378.1,kedelai,"makanan manis, kopi",train
+pasca_operasi_0318,PASCA_OPERASI,L,,biasa,saluran_cerna,,,25.0,62.8,170.8,Normal,2309.1,133.7,63.6,300.4,,tidak suka gorengan,train
+pasca_operasi_0319,PASCA_OPERASI,L,,biasa,umum,,,42.0,86.3,174.0,Overweight,2604.9,136.6,79.7,335.3,-,,test
+pasca_operasi_0320,PASCA_OPERASI,P,,biasa,umum,,,52.0,69.1,153.1,Overweight,1951.9,121.1,49.8,254.8,,tidak ada,train
+pasca_operasi_0321,PASCA_OPERASI,L,,biasa,umum,,,55.0,78.3,168.8,Overweight,2231.5,117.3,58.7,308.6,none,no allergies,train
+pasca_operasi_0322,PASCA_OPERASI,L,,biasa,saluran_cerna,,,58.0,95.6,164.2,Obese,2714.0,159.2,76.2,348.0,Alergi: dairy dan cumi,"mie instan, makanan manis",test
+pasca_operasi_0323,PASCA_OPERASI,L,,lunak,umum,,,50.0,55.9,156.3,Normal,1721.3,95.7,48.9,224.6,Alergi: seafood,none,train
+pasca_operasi_0324,PASCA_OPERASI,P,,saring,saluran_cerna,,,42.0,72.9,151.9,Obese,1926.4,97.7,56.9,255.8,allergic to squid,"pantangan santan, makanan manis",test
+pasca_operasi_0325,PASCA_OPERASI,P,,lunak,umum,,,69.0,41.6,152.3,Underweight,1516.0,88.9,40.1,199.8,-,hindari manis,train
+pasca_operasi_0326,PASCA_OPERASI,P,,cair,saluran_cerna,,,70.0,58.3,154.0,Normal,1592.9,94.8,42.6,207.7,no allergies,"daging merah, jeroan",train
+pasca_operasi_0327,PASCA_OPERASI,P,,biasa,saluran_cerna,,,43.0,70.2,154.9,Overweight,1956.2,112.4,58.0,246.2,none,"pantangan daging merah, kopi",train
+pasca_operasi_0328,PASCA_OPERASI,P,,biasa,ortopedi,,,31.0,67.8,165.6,Normal,2194.8,132.0,63.1,274.7,udang,spicy,train
+pasca_operasi_0329,PASCA_OPERASI,P,,cair,umum,,,53.0,31.4,139.8,Underweight,1366.5,84.2,39.3,169.0,,tidak ada,test
+pasca_operasi_0330,PASCA_OPERASI,P,,biasa,ortopedi,,,26.0,75.8,160.7,Overweight,2395.2,127.8,65.3,324.2,,no allergies,train
+pasca_operasi_0331,PASCA_OPERASI,L,,lunak,ortopedi,,,71.0,88.4,163.7,Obese,2237.7,119.3,65.6,292.5,allergic to ikan,-,train
+pasca_operasi_0332,PASCA_OPERASI,P,,cair,ortopedi,,,28.0,69.3,151.0,Obese,2031.6,117.1,59.3,257.4,no allergies,"makanan manis, spicy",test
+pasca_operasi_0333,PASCA_OPERASI,P,,lunak,umum,,,50.0,40.4,147.5,Normal,1483.6,87.7,36.3,201.5,,,train
+pasca_operasi_0334,PASCA_OPERASI,P,,biasa,umum,,,54.0,58.8,153.1,Overweight,1885.6,104.7,46.3,262.6,alergi kacang; squid,none,train
+pasca_operasi_0335,PASCA_OPERASI,L,,biasa,umum,,,26.0,77.4,170.5,Overweight,2462.5,138.1,65.0,331.2,none,tidak ada,train
+pasca_operasi_0336,PASCA_OPERASI,P,,biasa,ortopedi,,,66.0,76.2,149.8,Obese,2012.8,100.7,53.5,282.1,egg,none,train
+pasca_operasi_0337,PASCA_OPERASI,L,,biasa,caesar,,,74.0,69.9,162.3,Overweight,1822.8,92.4,50.6,249.5,none,no allergies,train
+pasca_operasi_0338,PASCA_OPERASI,L,,biasa,saluran_cerna,,,71.0,69.4,166.6,Overweight,2093.0,106.4,57.8,286.7,allergic to ikan,,train
+pasca_operasi_0339,PASCA_OPERASI,P,,biasa,ortopedi,,,60.0,43.7,161.2,Underweight,1692.9,102.5,48.3,211.9,-,-,test
+pasca_operasi_0340,PASCA_OPERASI,L,,biasa,ortopedi,,,24.0,67.7,162.3,Overweight,2267.5,130.9,66.8,285.7,alergi kedele & gandum,tidak ada,train
+pasca_operasi_0341,PASCA_OPERASI,L,,cair,caesar,,,70.0,63.6,162.4,Normal,1832.9,103.0,51.7,238.8,no allergies,hindari spicy,test
+pasca_operasi_0342,PASCA_OPERASI,L,,biasa,saluran_cerna,,,63.0,46.7,160.7,Underweight,1620.6,82.7,46.7,217.4,none,tidak suka goreng-gorengan,train
+pasca_operasi_0343,PASCA_OPERASI,P,,saring,umum,,,49.0,76.4,155.7,Obese,2112.9,124.9,65.7,255.5,no allergies,"gorengan, daging merah",train
+pasca_operasi_0344,PASCA_OPERASI,L,,biasa,ortopedi,,,67.0,78.7,167.1,Overweight,2273.2,135.7,64.7,287.0,,no allergies,train
+pasca_operasi_0345,PASCA_OPERASI,P,,cair,umum,,,31.0,49.2,169.1,Underweight,1986.2,104.4,49.4,280.9,"allergic to susu, kepiting",goreng-gorengan,train
+pasca_operasi_0346,PASCA_OPERASI,P,,lunak,caesar,,,46.0,65.2,156.4,Overweight,2104.4,119.5,57.7,276.8,alergi cumi-cumi,tidak ada,train
+pasca_operasi_0347,PASCA_OPERASI,L,,saring,caesar,,,68.0,74.2,173.2,Normal,2073.1,125.4,62.3,252.6,allergic to kepiting & seafood,tidak ada,test
+pasca_operasi_0348,PASCA_OPERASI,L,,cair,ortopedi,,,44.0,50.6,171.6,Underweight,1899.5,103.7,55.2,247.1,"allergic to shrimp, suus",,train
+pasca_operasi_0349,PASCA_OPERASI,P,,biasa,saluran_cerna,,,40.0,66.6,154.8,Overweight,1977.2,113.6,59.3,247.3,tidak ada,tidak ada,train
+pasca_operasi_0350,PASCA_OPERASI,P,,cair,umum,,,58.0,73.5,168.5,Overweight,2156.5,133.5,59.2,272.5,"Alergi: peanut, ikn","tidak suka makanan manis, kopi",train
+pasca_operasi_0351,PASCA_OPERASI,P,,cair,ortopedi,,,70.0,78.6,154.4,Obese,1871.4,102.3,54.2,243.6,alergi telurr,daging merah,train
+pasca_operasi_0352,PASCA_OPERASI,L,,biasa,caesar,,,21.0,51.4,161.8,Normal,2122.4,116.3,52.6,295.9,no allergies,tidak ada,train
+pasca_operasi_0353,PASCA_OPERASI,L,,biasa,umum,,,60.0,70.1,161.1,Overweight,1972.6,104.2,49.4,277.8,,none,test
+pasca_operasi_0354,PASCA_OPERASI,P,,lunak,ortopedi,,,58.0,67.8,160.1,Overweight,1968.2,114.2,60.0,242.9,,no allergies,test
+pasca_operasi_0355,PASCA_OPERASI,P,,biasa,ortopedi,,,29.0,44.4,155.4,Underweight,1878.9,96.3,48.0,265.4,,tidak suka santan,train
+pasca_operasi_0356,PASCA_OPERASI,L,,lunak,umum,,,41.0,59.6,173.0,Normal,2148.8,123.7,58.4,282.1,-,tidak suka gorengan,train
+pasca_operasi_0357,PASCA_OPERASI,L,,cair,caesar,,,75.0,71.9,177.4,Normal,1978.9,115.1,55.8,254.1,allergic to makanan laut; udang,"hindari makanan manis, gorengan",test
+pasca_operasi_0358,PASCA_OPERASI,L,,biasa,saluran_cerna,,,46.0,72.3,168.8,Overweight,2122.6,116.3,65.0,268.2,-,none,train
+pasca_operasi_0359,PASCA_OPERASI,L,,biasa,saluran_cerna,,,72.0,101.8,179.5,Obese,2808.4,167.7,79.4,355.9,-,,train
+pasca_operasi_0360,PASCA_OPERASI,L,,biasa,saluran_cerna,,,60.0,90.6,171.0,Obese,2624.4,145.9,75.2,340.9,Alergi: terigu,tidak ada,train
+pasca_operasi_0361,PASCA_OPERASI,L,,biasa,saluran_cerna,,,72.0,63.0,170.0,Normal,1743.0,100.1,54.0,214.1,makanan laut,none,test
+pasca_operasi_0362,PASCA_OPERASI,P,,saring,ortopedi,,,41.0,56.3,158.7,Normal,1863.4,112.4,52.8,234.6,tidak ada,,test
+pasca_operasi_0363,PASCA_OPERASI,P,,cair,ortopedi,,,37.0,45.3,158.2,Underweight,1847.6,98.5,53.6,242.7,"allergic to crab, ikn","tidak suka gorengan, spicy",train
+pasca_operasi_0364,PASCA_OPERASI,L,,lunak,caesar,,,22.0,68.2,156.8,Overweight,2218.2,126.8,66.1,279.0,,pedas,train
+pasca_operasi_0365,PASCA_OPERASI,L,,biasa,ortopedi,,,51.0,58.1,160.1,Normal,1747.8,100.6,45.8,233.3,no allergies,,train
+pasca_operasi_0366,PASCA_OPERASI,P,,biasa,ortopedi,,,58.0,41.5,161.1,Underweight,1511.9,85.5,40.8,200.7,,,train
+pasca_operasi_0367,PASCA_OPERASI,P,,cair,umum,,,49.0,71.5,154.9,Overweight,1941.0,100.6,58.0,254.2,no allergies,-,train
+pasca_operasi_0368,PASCA_OPERASI,L,,lunak,ortopedi,,,46.0,50.1,170.1,Underweight,1790.4,99.2,50.0,235.9,ikn,none,train
+pasca_operasi_0369,PASCA_OPERASI,L,,lunak,ortopedi,,,47.0,49.5,162.6,Normal,1773.5,105.8,47.9,229.8,tidak ada,tidak ada,train
+pasca_operasi_0370,PASCA_OPERASI,L,,cair,saluran_cerna,,,34.0,66.1,169.0,Normal,2234.1,137.8,54.8,297.4,allergic to udnag,none,test
+pasca_operasi_0371,PASCA_OPERASI,L,,cair,ortopedi,,,57.0,78.7,172.2,Overweight,2201.1,115.0,63.4,292.6,kacang tanah dan kedelai,,train
+pasca_operasi_0372,PASCA_OPERASI,P,,biasa,saluran_cerna,,,21.0,50.9,152.3,Normal,1758.7,93.7,50.8,231.7,allergic to tahu tempe; fish,tidak ada,train
+pasca_operasi_0373,PASCA_OPERASI,P,,cair,caesar,,,39.0,50.0,150.8,Normal,1734.7,88.1,49.7,233.8,alergi eggs; gandum,"tidak suka daging merah, goreng-gorengan",train
+pasca_operasi_0374,PASCA_OPERASI,P,,biasa,ortopedi,,,54.0,63.8,153.7,Overweight,1960.2,112.3,60.4,241.8,none,,train
+pasca_operasi_0375,PASCA_OPERASI,L,,lunak,ortopedi,,,33.0,71.3,164.6,Overweight,2250.1,123.0,56.5,312.4,"Alergi: laktosa, cumi-cumi",tidak ada,train
+pasca_operasi_0376,PASCA_OPERASI,L,,biasa,caesar,,,37.0,82.4,159.4,Obese,2319.0,143.1,61.1,299.2,alergi ikan & shrimp,-,train
+pasca_operasi_0377,PASCA_OPERASI,L,,saring,umum,,,37.0,73.5,173.5,Normal,2363.5,118.2,72.3,309.9,alergi wheat & sea food,tidak suka santan,train
+pasca_operasi_0378,PASCA_OPERASI,L,,saring,ortopedi,,,34.0,63.7,166.8,Normal,2259.6,125.6,68.6,284.9,,tidak suka pedas,train
+pasca_operasi_0379,PASCA_OPERASI,L,,biasa,ortopedi,,,21.0,63.8,168.1,Normal,2293.5,142.7,68.8,276.0,,spicy,train
+pasca_operasi_0380,PASCA_OPERASI,L,,saring,saluran_cerna,,,46.0,56.7,166.2,Normal,2121.3,107.7,60.1,287.4,allergic to makanan laut & laktosa,pedas,train
+pasca_operasi_0381,PASCA_OPERASI,L,,biasa,caesar,,,24.0,41.2,160.4,Underweight,1922.3,104.6,57.8,245.9,no allergies,tidak suka pedas,train
+pasca_operasi_0382,PASCA_OPERASI,P,,biasa,saluran_cerna,,,22.0,72.3,162.2,Overweight,2280.0,124.8,57.4,316.0,"cumi-cumi, peanut","tidak suka santan, pedas",train
+pasca_operasi_0383,PASCA_OPERASI,L,,biasa,ortopedi,,,42.0,61.7,163.6,Normal,2231.1,122.2,65.9,287.4,"Alergi: kepiting, udnag",none,train
+pasca_operasi_0384,PASCA_OPERASI,L,,biasa,umum,,,42.0,78.9,159.9,Obese,2279.9,138.9,65.6,283.5,alergi tahu tempe,,train
+pasca_operasi_0385,PASCA_OPERASI,P,,lunak,saluran_cerna,,,22.0,73.7,166.1,Overweight,2140.4,111.4,58.9,291.2,Alergi: cumi-cumi dan udang,"manis, daging merah",train
+pasca_operasi_0386,PASCA_OPERASI,P,,cair,caesar,,,71.0,59.0,153.6,Normal,1603.6,85.3,40.7,224.1,no allergies,-,train
+pasca_operasi_0387,PASCA_OPERASI,L,,biasa,umum,,,73.0,56.6,165.5,Normal,1724.9,103.1,43.8,229.7,-,"goreng-gorengan, jeroan",train
+pasca_operasi_0388,PASCA_OPERASI,P,,biasa,ortopedi,,,68.0,67.8,146.7,Obese,1946.8,117.4,50.6,255.4,,tidak suka makanan manis,train
+pasca_operasi_0389,PASCA_OPERASI,P,,lunak,saluran_cerna,,,34.0,34.5,145.0,Underweight,1675.9,89.1,42.0,235.4,-,,train
+pasca_operasi_0390,PASCA_OPERASI,P,,biasa,saluran_cerna,,,43.0,57.5,157.9,Normal,1859.0,99.5,46.7,260.2,tidak ada,-,train
+pasca_operasi_0391,PASCA_OPERASI,P,,biasa,caesar,,,30.0,37.0,152.1,Underweight,1546.0,90.5,45.5,193.5,,tidak suka goreng-gorengan,test
+pasca_operasi_0392,PASCA_OPERASI,L,,biasa,saluran_cerna,,,50.0,49.7,153.7,Normal,1582.3,92.9,47.9,194.9,,none,train
+pasca_operasi_0393,PASCA_OPERASI,P,,lunak,caesar,,,59.0,41.9,159.2,Underweight,1544.5,91.3,42.6,199.0,allergic to telurr; kacang tanah,-,train
+pasca_operasi_0394,PASCA_OPERASI,L,,biasa,umum,,,45.0,70.4,173.8,Normal,2288.1,132.2,71.2,279.7,Alergi: kepiting dan seafood,"pantangan santan, gorengan",train
+pasca_operasi_0395,PASCA_OPERASI,P,,biasa,caesar,,,46.0,91.5,167.5,Obese,2308.0,137.4,70.7,280.5,no allergies,-,train
+pasca_operasi_0396,PASCA_OPERASI,P,,cair,ortopedi,,,73.0,70.1,154.2,Overweight,1942.8,105.7,48.9,270.0,cumi-cumi; shrimp,none,test
+pasca_operasi_0397,PASCA_OPERASI,P,,lunak,ortopedi,,,48.0,63.5,157.2,Overweight,1952.7,100.1,56.1,262.0,Alergi: tahu tempe,pantangan santan,test
+pasca_operasi_0398,PASCA_OPERASI,L,,saring,ortopedi,,,61.0,41.9,161.8,Underweight,1617.4,82.4,43.2,224.8,tidak ada,-,train
+pasca_operasi_0399,PASCA_OPERASI,P,,lunak,saluran_cerna,,,67.0,69.0,145.6,Obese,1897.3,103.5,47.7,263.5,alergi cumi,tidak suka manis,train
+pasca_operasi_0400,PASCA_OPERASI,L,,biasa,caesar,,,69.0,78.2,168.5,Overweight,2350.4,134.6,60.7,316.3,tidak ada,"hindari pedas, daging merah",train
+pasca_operasi_0401,PASCA_OPERASI,P,,saring,saluran_cerna,,,53.0,65.9,152.3,Overweight,1781.3,89.8,54.5,232.9,Alergi: makanan laut,no allergies,train
+pasca_operasi_0402,PASCA_OPERASI,P,,lunak,saluran_cerna,,,40.0,44.9,157.3,Underweight,1819.9,103.0,56.5,224.9,"Alergi: seafood, fish","pantangan pedas, makanan manis",train
+pasca_operasi_0403,PASCA_OPERASI,P,,biasa,ortopedi,,,53.0,41.6,161.2,Underweight,1649.8,92.4,46.0,216.6,Alergi: udang dan gluten,,train
+pasca_operasi_0404,PASCA_OPERASI,L,,cair,saluran_cerna,,,43.0,64.6,160.3,Overweight,1984.8,122.4,51.6,257.7,no allergies,none,train
+pasca_operasi_0405,PASCA_OPERASI,L,,saring,umum,,,38.0,56.3,167.2,Normal,1994.7,117.6,58.9,248.5,allergic to ikn,hindari goreng-gorengan,train
+pasca_operasi_0406,PASCA_OPERASI,P,,saring,ortopedi,,,43.0,76.5,156.9,Obese,2057.6,128.5,55.1,261.9,alergi ikan,"pantangan jeroan, spicy",train
+pasca_operasi_0407,PASCA_OPERASI,L,,lunak,ortopedi,,,45.0,69.2,171.5,Normal,2180.4,134.4,57.9,280.4,none,"pantangan mie instan, manis",train
+pasca_operasi_0408,PASCA_OPERASI,P,,biasa,saluran_cerna,,,44.0,49.8,150.1,Normal,1818.8,92.4,47.5,255.3,susu sapi & shrimp,"pantangan jeroan, spicy",train
+pasca_operasi_0409,PASCA_OPERASI,L,,biasa,umum,,,46.0,77.8,163.1,Overweight,2259.8,120.2,67.8,292.2,,none,train
+pasca_operasi_0410,PASCA_OPERASI,L,,cair,saluran_cerna,,,40.0,44.7,164.7,Underweight,1736.3,105.6,44.4,228.7,alergi eggs,pedas,test
+pasca_operasi_0411,PASCA_OPERASI,P,,biasa,caesar,,,32.0,61.4,159.5,Normal,1985.0,119.0,51.8,260.8,none,"tidak suka gorengan, spicy",train
+pasca_operasi_0412,PASCA_OPERASI,L,,biasa,umum,,,40.0,52.7,170.7,Underweight,2008.2,116.9,52.9,266.2,none,no allergies,train
+pasca_operasi_0413,PASCA_OPERASI,P,,saring,saluran_cerna,,,46.0,53.0,158.8,Normal,1707.3,105.6,50.8,207.0,"Alergi: laktosa, ebi",no allergies,train
+pasca_operasi_0414,PASCA_OPERASI,L,,biasa,umum,,,28.0,58.9,158.3,Normal,2036.6,113.1,59.9,261.3,-,"pantangan mie instan, spicy",train
+pasca_operasi_0415,PASCA_OPERASI,L,,lunak,ortopedi,,,38.0,69.4,173.4,Normal,2165.8,133.2,63.0,266.4,alergi eggs,no allergies,train
+pasca_operasi_0416,PASCA_OPERASI,P,,lunak,umum,,,62.0,39.4,152.0,Underweight,1495.5,79.6,42.0,199.9,none,none,train
+pasca_operasi_0417,PASCA_OPERASI,P,,saring,saluran_cerna,,,52.0,60.6,160.1,Normal,1790.7,97.0,43.9,252.0,alergi egg,none,train
+pasca_operasi_0418,PASCA_OPERASI,P,,saring,saluran_cerna,,,54.0,57.8,153.3,Normal,1755.7,107.6,49.9,219.1,"Alergi: fish, squid",tidak ada,train
+pasca_operasi_0419,PASCA_OPERASI,L,,lunak,umum,,,25.0,89.1,172.9,Overweight,2796.3,142.4,81.5,373.2,"alergi kepiting, fish",tidak ada,train
+pasca_operasi_0420,PASCA_OPERASI,P,,biasa,umum,,,75.0,67.3,160.3,Overweight,1933.2,120.8,59.2,229.3,,"hindari manis, jeroan",train
+pasca_operasi_0421,PASCA_OPERASI,P,,biasa,caesar,,,38.0,67.8,158.8,Overweight,2065.6,104.1,51.7,296.0,none,tidak ada,train
+pasca_operasi_0422,PASCA_OPERASI,P,,lunak,ortopedi,,,42.0,67.1,163.2,Overweight,2008.7,123.1,56.3,252.3,Alergi: crab & kedele,none,train
+pasca_operasi_0423,PASCA_OPERASI,L,,cair,umum,,,71.0,79.0,164.3,Overweight,1973.6,104.4,57.7,259.3,alergi gluten,-,test
+pasca_operasi_0424,PASCA_OPERASI,P,,biasa,ortopedi,,,35.0,76.6,156.4,Obese,2177.8,116.8,58.7,295.6,tidak ada,no allergies,train
+pasca_operasi_0425,PASCA_OPERASI,P,,biasa,saluran_cerna,,,34.0,52.9,153.5,Normal,1841.3,93.5,48.1,258.6,tidak ada,,test
+pasca_operasi_0426,PASCA_OPERASI,P,,cair,ortopedi,,,23.0,63.2,156.8,Overweight,2021.6,114.4,60.7,254.4,Alergi: telor; makanan laut,"pantangan manis, spicy",train
+pasca_operasi_0427,PASCA_OPERASI,P,,cair,saluran_cerna,,,42.0,49.5,149.5,Normal,1813.8,105.2,51.9,231.4,kedelai,spicy,train
+pasca_operasi_0428,PASCA_OPERASI,P,,saring,ortopedi,,,45.0,35.5,149.1,Underweight,1520.8,92.0,44.4,188.4,makanan laut,,train
+pasca_operasi_0429,PASCA_OPERASI,P,,biasa,saluran_cerna,,,71.0,58.4,153.2,Normal,1695.8,97.4,46.5,221.9,allergic to squid dan kacang,,train
+pasca_operasi_0430,PASCA_OPERASI,P,,cair,caesar,,,38.0,53.4,155.4,Normal,1830.8,108.5,48.7,239.6,alergi crab,"makanan manis, santan",train
+pasca_operasi_0431,PASCA_OPERASI,P,,cair,saluran_cerna,,,39.0,47.5,144.3,Normal,1595.1,86.9,40.5,220.8,no allergies,none,train
+pasca_operasi_0432,PASCA_OPERASI,P,,lunak,ortopedi,,,40.0,85.4,162.7,Obese,2174.6,118.8,53.9,303.7,no allergies,-,test
+pasca_operasi_0433,PASCA_OPERASI,P,,biasa,saluran_cerna,,,53.0,65.3,159.7,Overweight,1915.2,110.0,51.0,254.2,,none,test
+pasca_operasi_0434,PASCA_OPERASI,L,,biasa,saluran_cerna,,,22.0,66.8,175.6,Normal,2431.9,139.6,61.8,329.4,,none,train
+pasca_operasi_0435,PASCA_OPERASI,P,,lunak,ortopedi,,,57.0,65.5,147.2,Obese,1883.2,117.6,58.0,222.7,makanan laut dan gandum,tidak ada,train
+pasca_operasi_0436,PASCA_OPERASI,L,,lunak,saluran_cerna,,,60.0,77.8,164.7,Overweight,2181.6,121.9,54.5,300.8,no allergies,no allergies,train
+pasca_operasi_0437,PASCA_OPERASI,P,,lunak,saluran_cerna,,,45.0,69.1,162.5,Overweight,1922.1,114.6,54.5,243.2,Alergi: sea food,hindari spicy,train
+pasca_operasi_0438,PASCA_OPERASI,L,,saring,caesar,,,50.0,63.2,174.1,Normal,2261.4,122.5,60.5,306.9,none,pantangan kopi,train
+pasca_operasi_0439,PASCA_OPERASI,L,,cair,ortopedi,,,41.0,55.7,167.0,Normal,2098.2,118.6,56.4,279.2,no allergies,"tidak suka kopi, jeroan",train
+pasca_operasi_0440,PASCA_OPERASI,L,,biasa,umum,,,44.0,65.6,169.1,Normal,2144.9,116.5,58.3,288.6,none,no allergies,train
+pasca_operasi_0441,PASCA_OPERASI,L,,saring,ortopedi,,,46.0,56.6,166.1,Normal,2118.0,120.8,54.4,286.3,allergic to cumi,hindari daging merah,train
+pasca_operasi_0442,PASCA_OPERASI,L,,lunak,ortopedi,,,69.0,79.3,162.6,Overweight,2066.0,123.2,60.3,257.7,-,tidak ada,train
+pasca_operasi_0443,PASCA_OPERASI,L,,lunak,caesar,,,64.0,60.7,166.5,Normal,1796.6,96.1,52.0,236.0,no allergies,tidak suka makanan manis,train
+pasca_operasi_0444,PASCA_OPERASI,P,,lunak,umum,,,26.0,45.7,157.5,Underweight,1894.8,96.2,55.2,253.2,"allergic to gluten, kacng",-,train
+pasca_operasi_0445,PASCA_OPERASI,P,,saring,ortopedi,,,39.0,38.3,154.8,Underweight,1552.9,83.8,42.9,207.9,-,-,train
+pasca_operasi_0446,PASCA_OPERASI,P,,lunak,caesar,,,46.0,71.1,160.0,Overweight,2180.8,125.5,65.5,272.4,"Alergi: seafood, cumi-cumi",tidak ada,train
+pasca_operasi_0447,PASCA_OPERASI,P,,lunak,ortopedi,,,44.0,41.7,152.6,Underweight,1648.1,92.0,44.5,219.8,,"kopi, spicy",test
+pasca_operasi_0448,PASCA_OPERASI,P,,lunak,saluran_cerna,,,24.0,67.7,143.8,Obese,1964.5,103.9,55.3,262.9,allergic to soy; gluten,goreng-gorengan,train
+pasca_operasi_0449,PASCA_OPERASI,L,,cair,saluran_cerna,,,39.0,61.8,165.5,Normal,2310.1,129.8,68.4,293.8,none,"jeroan, goreng-gorengan",train
+pasca_operasi_0450,PASCA_OPERASI,L,,cair,ortopedi,,,27.0,89.5,169.1,Obese,2711.1,136.4,69.9,384.2,alergi terigu; dairy,none,train
+pasca_operasi_0451,PASCA_OPERASI,P,,saring,saluran_cerna,,,50.0,58.0,143.6,Overweight,1701.8,88.8,49.5,225.3,,"hindari gorengan, goreng-gorengan",train
+pasca_operasi_0452,PASCA_OPERASI,P,,lunak,caesar,,,44.0,53.4,148.2,Normal,1911.6,118.6,52.6,241.0,Alergi: kepiting; makanan laut,"tidak suka spicy, goreng-gorengan",train
+pasca_operasi_0453,PASCA_OPERASI,P,,lunak,saluran_cerna,,,29.0,49.0,164.8,Underweight,1841.7,104.0,48.4,247.5,,tidak ada,train
+pasca_operasi_0454,PASCA_OPERASI,P,,saring,saluran_cerna,,,58.0,70.1,152.2,Obese,1812.0,92.1,49.5,249.5,Alergi: udnag,"daging merah, mie instan",train
+pasca_operasi_0455,PASCA_OPERASI,L,,lunak,saluran_cerna,,,41.0,73.7,166.4,Overweight,2201.9,114.4,56.1,309.8,,tidak ada,train
+pasca_operasi_0456,PASCA_OPERASI,L,,lunak,ortopedi,,,69.0,59.1,164.1,Normal,1713.3,104.5,52.8,205.1,none,makanan manis,train
+pasca_operasi_0457,PASCA_OPERASI,L,,lunak,ortopedi,,,49.0,84.5,168.1,Overweight,2628.1,138.5,68.1,365.4,alergi ebi,tidak suka gorengan,train
+pasca_operasi_0458,PASCA_OPERASI,P,,biasa,saluran_cerna,,,38.0,49.2,157.6,Normal,1846.7,96.8,53.1,245.4,none,no allergies,train
+pasca_operasi_0459,PASCA_OPERASI,L,,lunak,caesar,,,50.0,56.7,161.3,Normal,1944.1,112.2,53.6,253.2,,"manis, spicy",train
+pasca_operasi_0460,PASCA_OPERASI,P,,saring,umum,,,67.0,40.8,159.7,Underweight,1407.3,74.7,42.1,182.4,,no allergies,train
+pasca_operasi_0461,PASCA_OPERASI,L,,cair,umum,,,42.0,65.3,171.8,Normal,2197.4,113.0,56.0,310.3,none,pantangan makanan manis,train
+pasca_operasi_0462,PASCA_OPERASI,L,,cair,saluran_cerna,,,69.0,76.0,171.2,Overweight,2131.1,113.8,61.0,281.8,tidak ada,no allergies,train
+pasca_operasi_0463,PASCA_OPERASI,L,,biasa,caesar,,,52.0,63.5,161.2,Normal,2016.6,107.8,50.0,283.9,Alergi: udnag,hindari daging merah,train
+pasca_operasi_0464,PASCA_OPERASI,L,,cair,ortopedi,,,72.0,67.0,162.6,Overweight,1753.7,106.7,47.8,224.2,Alergi: kedele,"mie instan, pedas",train
+pasca_operasi_0465,PASCA_OPERASI,L,,biasa,saluran_cerna,,,51.0,90.9,177.5,Overweight,2512.1,150.1,69.6,321.4,"fish, kepiting",none,train
+pasca_operasi_0466,PASCA_OPERASI,P,,biasa,saluran_cerna,,,30.0,52.9,156.0,Normal,1965.6,111.6,54.2,258.0,allergic to ikan,none,train
+pasca_operasi_0467,PASCA_OPERASI,P,,cair,saluran_cerna,,,27.0,46.0,149.1,Normal,1729.0,94.0,51.9,221.5,-,tidak ada,train
+pasca_operasi_0468,PASCA_OPERASI,P,,biasa,umum,,,56.0,46.7,158.8,Normal,1573.5,92.5,40.7,209.4,-,"pantangan jeroan, spicy",train
+pasca_operasi_0469,PASCA_OPERASI,P,,biasa,caesar,,,40.0,84.3,157.4,Obese,2253.8,113.9,68.3,295.8,Alergi: ebi,none,train
+pasca_operasi_0470,PASCA_OPERASI,L,,cair,ortopedi,,,39.0,53.6,160.9,Normal,1990.2,104.5,58.9,260.5,allergic to makanan laut; laktosa,"pantangan manis, pedas",train
+pasca_operasi_0471,PASCA_OPERASI,P,,biasa,saluran_cerna,,,64.0,80.9,158.2,Obese,2183.1,129.4,54.6,293.5,no allergies,,test
+pasca_operasi_0472,PASCA_OPERASI,P,,biasa,saluran_cerna,,,51.0,78.5,156.6,Obese,1979.1,99.3,56.5,268.5,Alergi: seafood & suus,jeroan,train
+pasca_operasi_0473,PASCA_OPERASI,L,,biasa,saluran_cerna,,,46.0,69.2,174.0,Normal,2120.7,132.4,60.5,261.6,no allergies,none,train
+pasca_operasi_0474,PASCA_OPERASI,L,,lunak,saluran_cerna,,,51.0,48.3,173.8,Underweight,1869.1,107.6,48.0,251.7,"sea food, dairy","pantangan daging merah, makanan manis",test
+pasca_operasi_0475,PASCA_OPERASI,P,,biasa,caesar,,,37.0,49.1,150.5,Normal,1896.4,111.1,56.8,235.3,tidak ada,no allergies,train
+pasca_operasi_0476,PASCA_OPERASI,L,,biasa,saluran_cerna,,,60.0,86.1,168.0,Obese,2575.2,159.9,66.1,335.2,Alergi: seafood,"gorengan, pedas",train
+pasca_operasi_0477,PASCA_OPERASI,L,,saring,caesar,,,72.0,50.5,174.3,Underweight,1582.9,93.8,47.2,195.6,-,"makanan manis, pedas",train
+pasca_operasi_0478,PASCA_OPERASI,P,,lunak,saluran_cerna,,,38.0,50.1,149.4,Normal,1730.3,94.5,53.2,218.3,-,"goreng-gorengan, santan",train
+pasca_operasi_0479,PASCA_OPERASI,P,,lunak,caesar,,,54.0,47.0,155.4,Normal,1673.1,86.0,48.9,222.3,,"tidak suka jeroan, spicy",test
+pasca_operasi_0480,PASCA_OPERASI,P,,biasa,caesar,,,28.0,57.2,152.8,Normal,2058.0,122.3,55.0,268.4,no allergies,no allergies,train
+pasca_operasi_0481,PASCA_OPERASI,L,,biasa,saluran_cerna,,,72.0,87.6,175.0,Overweight,2447.0,134.5,64.6,331.9,tidak ada,tidak ada,train
+pasca_operasi_0482,PASCA_OPERASI,P,,biasa,umum,,,69.0,62.6,153.2,Overweight,1624.2,90.6,48.3,206.9,tidak ada,,train
+pasca_operasi_0483,PASCA_OPERASI,P,,biasa,caesar,,,41.0,55.5,153.8,Normal,1750.8,92.7,50.3,231.9,alergi cumi-cumi; susu sapi,tidak ada,test
+pasca_operasi_0484,PASCA_OPERASI,L,,cair,saluran_cerna,,,66.0,52.6,166.7,Normal,1557.2,83.1,41.5,212.7,none,santan,test
+pasca_operasi_0485,PASCA_OPERASI,L,,lunak,caesar,,,25.0,78.2,168.5,Overweight,2503.1,127.8,72.1,335.7,-,no allergies,train
+pasca_operasi_0486,PASCA_OPERASI,P,,lunak,ortopedi,,,31.0,79.3,159.3,Obese,2426.5,139.2,71.8,305.8,-,pantangan mie instan,test
+pasca_operasi_0487,PASCA_OPERASI,P,,lunak,ortopedi,,,31.0,47.5,145.2,Normal,1640.4,96.9,44.8,212.3,no allergies,"makanan manis, mie instan",train
+pasca_operasi_0488,PASCA_OPERASI,P,,cair,caesar,,,59.0,62.4,148.6,Overweight,1925.5,100.2,50.8,266.9,tidak ada,hindari makanan manis,test
+pasca_operasi_0489,PASCA_OPERASI,L,,cair,caesar,,,20.0,74.5,168.7,Overweight,2661.7,155.8,66.5,360.1,Alergi: laktosa; cumi,"tidak suka manis, mie instan",train
+pasca_operasi_0490,PASCA_OPERASI,L,,lunak,umum,,,64.0,52.6,161.9,Normal,1662.5,98.1,45.2,215.8,-,-,train
+pasca_operasi_0491,PASCA_OPERASI,L,,lunak,saluran_cerna,,,42.0,63.0,164.2,Normal,2039.6,105.1,55.0,281.1,,pantangan manis,train
+pasca_operasi_0492,PASCA_OPERASI,L,,biasa,saluran_cerna,,,34.0,62.1,159.2,Normal,2110.6,108.8,57.8,288.7,no allergies,"hindari santan, makanan manis",train
+pasca_operasi_0493,PASCA_OPERASI,L,,biasa,saluran_cerna,,,34.0,73.4,166.5,Overweight,2492.3,129.5,76.7,321.0,tidak ada,"pantangan manis, spicy",train
+pasca_operasi_0494,PASCA_OPERASI,P,,lunak,caesar,,,46.0,71.4,155.6,Overweight,1986.8,117.1,53.8,258.5,none,"hindari santan, spicy",train
+pasca_operasi_0495,PASCA_OPERASI,P,,saring,umum,,,48.0,64.3,150.0,Overweight,1838.3,100.9,54.4,236.2,no allergies,"hindari gorengan, santan",train
+pasca_operasi_0496,PASCA_OPERASI,P,,saring,saluran_cerna,,,44.0,57.4,158.4,Normal,1998.5,123.4,55.0,252.4,alergi makanan laut,pantangan pedas,train
+pasca_operasi_0497,PASCA_OPERASI,L,,cair,umum,,,28.0,70.2,169.1,Normal,2338.4,134.7,72.6,286.6,telor,-,train
+pasca_operasi_0498,PASCA_OPERASI,P,,saring,umum,,,75.0,51.2,158.7,Normal,1562.1,87.5,46.3,198.9,Alergi: cumi-cumi,pantangan spicy,train
+pasca_operasi_0499,PASCA_OPERASI,L,,biasa,umum,,,32.0,47.3,165.4,Underweight,1828.1,92.7,49.7,252.5,crab,"pantangan kopi, mie instan",train
+pasca_operasi_0500,PASCA_OPERASI,L,,cair,ortopedi,,,24.0,92.0,177.1,Overweight,2742.1,143.6,76.9,369.0,no allergies,tidak ada,test
+pasca_operasi_0501,PASCA_OPERASI,P,,lunak,ortopedi,,,52.0,39.4,153.9,Underweight,1528.6,95.1,45.9,183.8,none,,test
+pasca_operasi_0502,PASCA_OPERASI,P,,biasa,saluran_cerna,,,71.0,45.4,161.2,Underweight,1450.7,77.6,43.2,187.9,no allergies,,train
+pasca_operasi_0503,PASCA_OPERASI,P,,cair,saluran_cerna,,,46.0,55.4,150.6,Normal,1798.4,94.1,45.3,253.5,Alergi: udang dan kacng,makanan manis,train
+pasca_operasi_0504,PASCA_OPERASI,L,,cair,umum,,,73.0,78.5,168.3,Overweight,2224.2,118.9,66.0,288.7,,"kopi, daging merah",train
+pasca_operasi_0505,PASCA_OPERASI,P,,biasa,umum,,,34.0,70.8,165.7,Overweight,2245.2,133.9,64.7,281.8,allergic to milk,pantangan goreng-gorengan,train
+pasca_operasi_0506,PASCA_OPERASI,L,,saring,saluran_cerna,,,71.0,76.9,163.6,Overweight,1940.2,110.5,49.9,262.3,-,no allergies,train
+pasca_operasi_0507,PASCA_OPERASI,P,,lunak,ortopedi,,,69.0,54.4,157.5,Normal,1661.6,102.8,41.9,218.2,allergic to cumi-cumi,-,train
+pasca_operasi_0508,PASCA_OPERASI,P,,lunak,caesar,,,35.0,74.4,153.5,Obese,2209.5,118.1,55.8,308.7,alergi kepiting,"pantangan manis, spicy",test
+pasca_operasi_0509,PASCA_OPERASI,P,,saring,umum,,,33.0,40.8,152.9,Underweight,1588.0,83.1,42.6,218.1,,pantangan spicy,train
+pasca_operasi_0510,PASCA_OPERASI,P,,biasa,umum,,,51.0,51.4,167.3,Underweight,1831.5,101.5,48.8,246.6,tidak ada,makanan manis,train
+pasca_operasi_0511,PASCA_OPERASI,L,,lunak,ortopedi,,,38.0,65.4,165.9,Normal,2343.7,134.8,61.3,313.3,tidak ada,"pantangan goreng-gorengan, makanan manis",train
+pasca_operasi_0512,PASCA_OPERASI,P,,saring,saluran_cerna,,,35.0,48.7,152.2,Normal,1667.6,97.2,44.3,220.0,tidak ada,"makanan manis, manis",test
+pasca_operasi_0513,PASCA_OPERASI,L,,biasa,saluran_cerna,,,72.0,87.9,168.6,Obese,2402.9,140.2,61.4,322.3,no allergies,tidak ada,train
+pasca_operasi_0514,PASCA_OPERASI,L,,lunak,caesar,,,19.0,64.8,165.0,Normal,2547.9,145.0,64.2,347.5,tidak ada,tidak ada,train
+pasca_operasi_0515,PASCA_OPERASI,L,,lunak,saluran_cerna,,,75.0,44.5,166.8,Underweight,1508.3,77.3,44.9,198.7,none,pantangan goreng-gorengan,train
+pasca_operasi_0516,PASCA_OPERASI,L,,saring,ortopedi,,,28.0,79.3,178.9,Normal,2697.9,159.9,67.8,362.0,none,,test
+pasca_operasi_0517,PASCA_OPERASI,L,,biasa,ortopedi,,,32.0,62.4,170.1,Normal,2344.2,139.1,59.6,312.8,no allergies,"pantangan pedas, spicy",test
+pasca_operasi_0518,PASCA_OPERASI,P,,cair,saluran_cerna,,,73.0,47.4,152.4,Normal,1577.6,88.0,44.9,205.3,gandum,spicy,test
+pasca_operasi_0519,PASCA_OPERASI,L,,lunak,ortopedi,,,39.0,66.4,158.2,Overweight,2281.7,140.4,69.0,274.9,none,"tidak suka spicy, pedas",train
+pasca_operasi_0520,PASCA_OPERASI,L,,biasa,umum,,,49.0,84.0,170.5,Overweight,2409.1,127.0,60.4,339.4,"allergic to sea food, suus","hindari makanan manis, spicy",train
+pasca_operasi_0521,PASCA_OPERASI,P,,biasa,saluran_cerna,,,21.0,46.9,154.9,Normal,1985.4,107.6,53.6,268.2,tidak ada,no allergies,train
+pasca_operasi_0522,PASCA_OPERASI,L,,biasa,saluran_cerna,,,52.0,70.3,161.8,Overweight,2310.5,137.3,65.1,293.8,tidak ada,pantangan gorengan,train
+pasca_operasi_0523,PASCA_OPERASI,P,,biasa,caesar,,,50.0,62.7,167.0,Normal,1969.8,109.9,52.1,265.3,tidak ada,no allergies,train
+pasca_operasi_0524,PASCA_OPERASI,P,,biasa,ortopedi,,,66.0,50.3,150.4,Normal,1710.7,95.8,49.6,220.2,"Alergi: telurr, udang",tidak suka santan,train
+pasca_operasi_0525,PASCA_OPERASI,L,,biasa,umum,,,64.0,46.3,165.0,Underweight,1708.4,101.9,51.6,209.0,tidak ada,makanan manis,train
+pasca_operasi_0526,PASCA_OPERASI,P,,biasa,ortopedi,,,61.0,57.2,163.3,Normal,1734.4,92.1,49.7,229.8,,tidak suka manis,test
+pasca_operasi_0527,PASCA_OPERASI,L,,saring,umum,,,70.0,68.4,161.8,Overweight,1930.5,105.6,50.2,264.1,soy & squid,no allergies,train
+pasca_operasi_0528,PASCA_OPERASI,P,,biasa,saluran_cerna,,,55.0,47.9,158.4,Normal,1662.9,90.4,51.5,209.4,Alergi: susu,tidak ada,train
+pasca_operasi_0529,PASCA_OPERASI,P,,saring,umum,,,28.0,92.2,166.8,Obese,2392.5,147.2,72.8,287.1,allergic to crab; soy,tidak ada,train
+pasca_operasi_0530,PASCA_OPERASI,P,,saring,ortopedi,,,31.0,80.9,164.3,Overweight,2353.2,145.5,58.5,311.3,tidak ada,,train
+pasca_operasi_0531,PASCA_OPERASI,P,,saring,saluran_cerna,,,36.0,59.2,147.8,Overweight,1919.4,100.6,56.5,252.1,none,tidak suka kopi,train
+pasca_operasi_0532,PASCA_OPERASI,L,,lunak,caesar,,,61.0,74.2,163.2,Overweight,2009.5,100.6,58.6,269.9,tidak ada,tidak suka mie instan,train
+pasca_operasi_0533,PASCA_OPERASI,P,,lunak,saluran_cerna,,,69.0,51.0,142.5,Overweight,1566.4,97.6,48.0,186.0,,-,train
+pasca_operasi_0534,PASCA_OPERASI,P,,lunak,caesar,,,66.0,55.6,155.8,Normal,1765.5,105.0,54.6,213.6,-,"tidak suka daging merah, mie instan",test
+pasca_operasi_0535,PASCA_OPERASI,L,,cair,saluran_cerna,,,26.0,64.9,168.8,Normal,2345.2,137.5,71.2,288.5,allergic to egg,none,train
+pasca_operasi_0536,PASCA_OPERASI,P,,lunak,ortopedi,,,69.0,77.7,161.8,Overweight,1890.8,114.2,56.7,230.9,tidak ada,"tidak suka goreng-gorengan, spicy",train
+pasca_operasi_0537,PASCA_OPERASI,L,,saring,ortopedi,,,40.0,61.4,167.5,Normal,2050.4,105.8,53.9,285.6,tidak ada,"hindari kopi, santan",train
+pasca_operasi_0538,PASCA_OPERASI,L,,cair,saluran_cerna,,,41.0,55.6,169.0,Normal,2012.9,118.1,60.6,248.7,no allergies,tidak ada,train
+pasca_operasi_0539,PASCA_OPERASI,L,,saring,umum,,,33.0,72.9,162.4,Overweight,2559.7,146.9,79.3,314.6,tidak ada,,train
+pasca_operasi_0540,PASCA_OPERASI,P,,biasa,saluran_cerna,,,66.0,58.4,156.3,Normal,1734.5,107.7,49.2,215.3,allergic to kacang tanah; sea food,-,train
+pasca_operasi_0541,PASCA_OPERASI,L,,biasa,umum,,,23.0,79.7,167.0,Overweight,2727.5,137.8,74.4,376.7,none,"manis, gorengan",train
+pasca_operasi_0542,PASCA_OPERASI,L,,saring,saluran_cerna,,,59.0,68.4,163.9,Overweight,2205.5,117.5,54.3,311.7,none,-,test
+pasca_operasi_0543,PASCA_OPERASI,L,,biasa,umum,,,73.0,68.8,168.5,Normal,1931.8,110.4,51.7,256.1,alergi nuts,tidak suka gorengan,train
+pasca_operasi_0544,PASCA_OPERASI,P,,biasa,saluran_cerna,,,20.0,61.6,157.7,Normal,2054.0,124.1,58.6,257.5,fish & susu sapi,"pantangan pedas, jeroan",test
+pasca_operasi_0545,PASCA_OPERASI,P,,lunak,saluran_cerna,,,22.0,62.8,146.9,Overweight,1981.7,106.0,60.6,253.1,crab dan susu,pantangan spicy,train
+pasca_operasi_0546,PASCA_OPERASI,P,,cair,umum,,,50.0,49.8,154.2,Normal,1659.0,86.7,49.0,217.8,allergic to ebi & fish,,train
+pasca_operasi_0547,PASCA_OPERASI,L,,lunak,umum,,,57.0,66.6,164.4,Normal,1970.3,120.5,58.6,240.2,kedelai,"hindari spicy, daging merah",train
+pasca_operasi_0548,PASCA_OPERASI,L,,biasa,ortopedi,,,75.0,55.6,169.8,Normal,1641.5,101.2,40.7,217.6,Alergi: udnag dan milk,tidak ada,train
+pasca_operasi_0549,PASCA_OPERASI,P,,biasa,ortopedi,,,55.0,77.6,163.9,Overweight,2097.8,110.2,62.3,274.1,allergic to sea food dan telur,no allergies,train
+pasca_operasi_0550,PASCA_OPERASI,L,,saring,saluran_cerna,,,20.0,60.1,163.3,Normal,2443.0,126.6,69.5,327.7,"alergi sea food, cumi-cumi",hindari makanan manis,test
+pasca_operasi_0551,PASCA_OPERASI,P,,lunak,caesar,,,32.0,48.8,155.1,Normal,1935.0,118.5,57.0,237.0,telor,"pantangan spicy, pedas",train
+pasca_operasi_0552,PASCA_OPERASI,P,,biasa,ortopedi,,,66.0,45.5,140.6,Normal,1461.9,76.4,43.3,191.6,none,hindari pedas,train
+pasca_operasi_0553,PASCA_OPERASI,P,,biasa,umum,,,57.0,71.5,157.8,Overweight,2119.1,119.8,59.6,275.9,-,,train
+pasca_operasi_0554,PASCA_OPERASI,P,,cair,ortopedi,,,26.0,69.6,157.9,Overweight,2270.2,116.5,61.7,312.1,no allergies,-,train
+pasca_operasi_0555,PASCA_OPERASI,L,,biasa,umum,,,71.0,59.1,162.5,Normal,1671.3,104.2,49.9,201.3,no allergies,none,train
+pasca_operasi_0556,PASCA_OPERASI,P,,biasa,ortopedi,,,50.0,74.2,161.9,Overweight,1935.4,115.4,47.9,260.5,none,pantangan goreng-gorengan,train
+pasca_operasi_0557,PASCA_OPERASI,P,,saring,umum,,,74.0,64.3,164.4,Normal,1796.2,97.0,46.7,247.0,none,-,train
+pasca_operasi_0558,PASCA_OPERASI,L,,saring,ortopedi,,,73.0,72.1,161.1,Overweight,1992.5,113.4,59.5,250.7,allergic to crab,"santan, manis",test
+pasca_operasi_0559,PASCA_OPERASI,P,,lunak,caesar,,,36.0,68.1,159.0,Overweight,1980.3,110.4,58.9,252.1,"alergi udnag, soy",pantangan manis,train
+pasca_operasi_0560,PASCA_OPERASI,P,,biasa,caesar,,,29.0,40.5,135.6,Normal,1652.0,99.3,49.3,202.8,-,hindari gorengan,test
+pasca_operasi_0561,PASCA_OPERASI,P,,lunak,saluran_cerna,,,53.0,45.0,155.5,Normal,1657.8,92.7,46.0,218.2,alergi cumi; telor,"pantangan manis, daging merah",train
+pasca_operasi_0562,PASCA_OPERASI,P,,cair,saluran_cerna,,,56.0,65.0,154.3,Overweight,1756.3,98.9,52.0,223.1,Alergi: susu & kacang tanah,tidak ada,train
+pasca_operasi_0563,PASCA_OPERASI,L,,biasa,saluran_cerna,,,74.0,83.9,165.7,Obese,2416.3,126.5,74.9,309.1,makanan laut dan ikan,-,train
+pasca_operasi_0564,PASCA_OPERASI,L,,biasa,umum,,,28.0,85.6,166.7,Obese,2798.3,168.8,77.2,357.1,-,tidak ada,train
+pasca_operasi_0565,PASCA_OPERASI,L,,cair,caesar,,,56.0,78.9,176.9,Overweight,2214.3,134.0,59.9,284.8,Alergi: kepiting; kacang tanah,"pantangan mie instan, gorengan",train
+pasca_operasi_0566,PASCA_OPERASI,L,,biasa,saluran_cerna,,,23.0,66.5,158.2,Overweight,2426.9,144.5,63.1,320.4,seafood,"pantangan daging merah, jeroan",train
+pasca_operasi_0567,PASCA_OPERASI,P,,lunak,saluran_cerna,,,30.0,64.6,163.5,Normal,2096.3,113.0,62.4,270.7,tidak ada,pantangan gorengan,train
+pasca_operasi_0568,PASCA_OPERASI,P,,biasa,caesar,,,45.0,48.8,149.5,Normal,1774.6,102.6,50.2,228.1,no allergies,"gorengan, goreng-gorengan",train
+pasca_operasi_0569,PASCA_OPERASI,P,,lunak,umum,,,53.0,69.7,157.6,Overweight,2040.7,122.4,50.1,275.1,,none,train
+pasca_operasi_0570,PASCA_OPERASI,L,,biasa,saluran_cerna,,,30.0,68.6,163.2,Overweight,2260.8,121.8,61.9,304.2,,-,train
+pasca_operasi_0571,PASCA_OPERASI,P,,cair,ortopedi,,,73.0,67.5,162.8,Overweight,1751.3,108.6,52.3,211.5,no allergies,tidak suka daging merah,test
+pasca_operasi_0572,PASCA_OPERASI,P,,biasa,ortopedi,,,57.0,39.9,154.4,Underweight,1587.5,97.2,44.1,200.6,no allergies,none,train
+pasca_operasi_0573,PASCA_OPERASI,L,,cair,umum,,,57.0,76.1,163.3,Overweight,2308.3,125.5,57.9,321.3,none,pantangan pedas,train
+pasca_operasi_0574,PASCA_OPERASI,L,,lunak,saluran_cerna,,,23.0,74.1,165.9,Overweight,2359.8,125.4,69.5,308.2,ebi,no allergies,train
+pasca_operasi_0575,PASCA_OPERASI,L,,biasa,caesar,,,72.0,51.9,155.5,Normal,1551.1,90.1,41.8,203.5,none,tidak suka pedas,train
+pasca_operasi_0576,PASCA_OPERASI,P,,lunak,umum,,,38.0,96.1,163.7,Obese,2282.1,136.7,64.2,289.3,tidak ada,no allergies,train
+pasca_operasi_0577,PASCA_OPERASI,P,,lunak,caesar,,,30.0,54.7,158.7,Normal,2000.0,111.7,55.5,263.5,Alergi: squid,no allergies,train
+pasca_operasi_0578,PASCA_OPERASI,L,,lunak,umum,,,46.0,40.8,159.8,Underweight,1568.7,86.2,39.0,218.1,allergic to wheat,"tidak suka mie instan, manis",train
+pasca_operasi_0579,PASCA_OPERASI,P,,biasa,caesar,,,56.0,58.5,152.8,Overweight,1797.5,96.5,48.6,243.6,allergic to kacng,"pantangan makanan manis, daging merah",test
+pasca_operasi_0580,PASCA_OPERASI,L,,biasa,saluran_cerna,,,30.0,87.9,169.1,Obese,2977.6,164.1,76.1,409.1,no allergies,,train
+pasca_operasi_0581,PASCA_OPERASI,P,,lunak,umum,,,55.0,59.0,152.2,Overweight,1774.7,96.3,44.4,247.5,Alergi: cumi-cumi & ikan,"daging merah, gorengan",train
+pasca_operasi_0582,PASCA_OPERASI,P,,biasa,ortopedi,,,61.0,57.0,153.2,Normal,1815.0,102.9,44.8,250.1,,pantangan pedas,train
+pasca_operasi_0583,PASCA_OPERASI,P,,lunak,caesar,,,40.0,72.4,159.8,Overweight,1976.3,116.1,57.4,248.8,Alergi: nuts,pantangan spicy,test
+pasca_operasi_0584,PASCA_OPERASI,L,,biasa,saluran_cerna,,,52.0,88.5,160.2,Obese,2677.6,145.8,71.5,362.7,Alergi: crab,tidak ada,train
+pasca_operasi_0585,PASCA_OPERASI,L,,biasa,umum,,,74.0,71.5,157.7,Overweight,1933.6,101.4,52.8,263.3,"allergic to crab, telurr",tidak ada,train
+pasca_operasi_0586,PASCA_OPERASI,P,,saring,umum,,,56.0,58.6,162.9,Normal,1800.3,91.9,50.9,243.6,Alergi: soy,none,train
+pasca_operasi_0587,PASCA_OPERASI,L,,saring,saluran_cerna,,,22.0,44.0,165.8,Underweight,2086.9,112.5,59.0,276.5,none,manis,train
+pasca_operasi_0588,PASCA_OPERASI,L,,saring,saluran_cerna,,,43.0,71.4,172.0,Normal,2432.8,132.9,72.4,312.3,allergic to ikan & egg,hindari santan,train
+pasca_operasi_0589,PASCA_OPERASI,P,,lunak,ortopedi,,,61.0,43.5,152.5,Normal,1618.6,89.1,49.6,203.9,no allergies,none,train
+pasca_operasi_0590,PASCA_OPERASI,P,,biasa,umum,,,42.0,62.6,160.2,Normal,2060.8,128.7,51.3,271.2,,"spicy, pedas",train
+pasca_operasi_0591,PASCA_OPERASI,P,,lunak,caesar,,,54.0,50.9,153.4,Normal,1608.6,85.1,40.0,227.1,-,makanan manis,train
+pasca_operasi_0592,PASCA_OPERASI,P,,lunak,caesar,,,43.0,47.3,152.4,Normal,1590.8,87.6,42.2,215.3,allergic to wheat,makanan manis,train
+pasca_operasi_0593,PASCA_OPERASI,P,,biasa,ortopedi,,,30.0,65.5,155.7,Overweight,2147.7,118.2,62.6,277.9,tidak ada,"hindari gorengan, goreng-gorengan",train
+pasca_operasi_0594,PASCA_OPERASI,L,,biasa,caesar,,,55.0,63.3,170.3,Normal,2143.9,114.8,66.1,272.6,tidak ada,"tidak suka pedas, goreng-gorengan",train
+pasca_operasi_0595,PASCA_OPERASI,P,,biasa,ortopedi,,,26.0,71.8,163.9,Overweight,2304.5,115.4,60.5,324.6,Alergi: seafood,pedas,train
+pasca_operasi_0596,PASCA_OPERASI,L,,lunak,umum,,,35.0,65.3,172.7,Normal,2388.5,142.1,73.8,288.9,,-,train
+pasca_operasi_0597,PASCA_OPERASI,L,,biasa,saluran_cerna,,,36.0,67.1,173.7,Normal,2494.4,146.4,66.4,327.7,"tahu tempe, terigu",tidak ada,test
+pasca_operasi_0598,PASCA_OPERASI,L,,lunak,umum,,,20.0,81.0,162.8,Obese,2727.3,141.0,80.3,360.2,,,train
+pasca_operasi_0599,PASCA_OPERASI,P,,biasa,caesar,,,69.0,51.8,148.1,Normal,1661.0,83.4,40.9,239.7,"alergi udang, cumi-cumi",manis,train
+pasca_operasi_0600,PASCA_OPERASI,L,,lunak,caesar,,,62.0,57.1,165.0,Normal,1748.2,100.0,43.7,238.7,kepiting dan makanan laut,tidak ada,test
+pasca_operasi_0601,PASCA_OPERASI,L,,biasa,umum,,,50.0,66.7,169.7,Normal,2215.5,137.3,62.4,276.3,Alergi: cumi-cumi,"spicy, gorengan",train
+pasca_operasi_0602,PASCA_OPERASI,P,,biasa,saluran_cerna,,,27.0,58.0,159.5,Normal,1982.0,108.7,61.0,249.5,Alergi: sea food,none,test
+pasca_operasi_0603,PASCA_OPERASI,P,,biasa,ortopedi,,,36.0,50.6,153.2,Normal,1866.9,107.8,46.8,253.5,alergi kedelai,"hindari jeroan, spicy",train
+pasca_operasi_0604,PASCA_OPERASI,L,,biasa,caesar,,,31.0,75.2,175.7,Normal,2535.3,129.1,68.9,349.7,no allergies,"tidak suka kopi, jeroan",train
+pasca_operasi_0605,PASCA_OPERASI,P,,biasa,ortopedi,,,30.0,56.3,157.9,Normal,1854.4,99.6,53.2,244.2,,none,train
+pasca_operasi_0606,PASCA_OPERASI,L,,lunak,caesar,,,29.0,68.4,167.0,Normal,2249.1,130.1,59.1,299.1,-,,test
+pasca_operasi_0607,PASCA_OPERASI,L,,cair,ortopedi,,,55.0,58.9,172.0,Normal,1983.1,117.3,60.9,241.4,,"tidak suka goreng-gorengan, jeroan",train
+pasca_operasi_0608,PASCA_OPERASI,L,,cair,saluran_cerna,,,55.0,60.1,170.7,Normal,1925.2,100.3,58.6,249.2,allergic to soy,-,train
+pasca_operasi_0609,PASCA_OPERASI,P,,biasa,caesar,,,30.0,74.9,157.1,Obese,2237.0,116.8,58.4,311.0,kacang dan kepiting,no allergies,train
+pasca_operasi_0610,PASCA_OPERASI,L,,biasa,saluran_cerna,,,33.0,100.8,180.2,Obese,3226.9,177.8,87.1,432.9,Alergi: kedelai dan kepiting,"kopi, manis",train
+pasca_operasi_0611,PASCA_OPERASI,P,,saring,umum,,,71.0,55.4,157.3,Normal,1664.4,98.7,50.0,205.0,none,tidak ada,train
+pasca_operasi_0612,PASCA_OPERASI,P,,cair,umum,,,65.0,61.3,146.5,Overweight,1649.2,102.7,43.0,212.8,-,,train
+pasca_operasi_0613,PASCA_OPERASI,P,,lunak,umum,,,47.0,53.3,159.5,Normal,1755.5,95.7,49.2,232.4,allergic to dairy,-,train
+pasca_operasi_0614,PASCA_OPERASI,L,,lunak,caesar,,,63.0,86.5,170.7,Overweight,2354.6,131.0,68.2,304.2,"allergic to udnag, nuts",no allergies,train
+pasca_operasi_0615,PASCA_OPERASI,P,,saring,ortopedi,,,68.0,52.2,152.7,Normal,1643.4,97.4,44.2,214.0,telor dan shrimp,"daging merah, jeroan",train
+pasca_operasi_0616,PASCA_OPERASI,L,,biasa,saluran_cerna,,,38.0,69.2,167.6,Normal,2261.0,117.0,65.9,299.9,none,hindari pedas,train
+pasca_operasi_0617,PASCA_OPERASI,P,,biasa,saluran_cerna,,,50.0,46.1,153.5,Normal,1531.9,94.1,46.2,184.9,none,"hindari pedas, goreng-gorengan",train
+pasca_operasi_0618,PASCA_OPERASI,L,,saring,ortopedi,,,26.0,62.9,154.3,Overweight,2194.8,136.1,65.3,265.8,-,no allergies,train
+pasca_operasi_0619,PASCA_OPERASI,L,,saring,saluran_cerna,,,36.0,59.5,171.0,Normal,2206.7,115.9,60.5,299.7,"Alergi: gluten, cumi","jeroan, santan",train
+pasca_operasi_0620,PASCA_OPERASI,P,,biasa,saluran_cerna,,,27.0,74.3,162.9,Overweight,2075.8,121.2,51.0,283.1,no allergies,none,train
+pasca_operasi_0621,PASCA_OPERASI,L,,lunak,saluran_cerna,,,32.0,64.3,165.2,Normal,2371.5,139.1,72.1,291.6,-,pantangan kopi,train
+pasca_operasi_0622,PASCA_OPERASI,L,,saring,saluran_cerna,,,36.0,101.5,173.5,Obese,2880.7,154.4,85.9,372.6,,"hindari manis, makanan manis",train
+pasca_operasi_0623,PASCA_OPERASI,L,,lunak,saluran_cerna,,,46.0,86.6,170.7,Overweight,2634.9,137.0,72.4,358.8,no allergies,tidak suka mie instan,train
+pasca_operasi_0624,PASCA_OPERASI,P,,biasa,ortopedi,,,63.0,52.0,159.0,Normal,1793.1,100.3,46.9,242.5,none,pantangan manis,train
+pasca_operasi_0625,PASCA_OPERASI,P,,saring,saluran_cerna,,,58.0,67.7,148.1,Obese,1913.3,109.8,53.7,247.7,allergic to telor,"mie instan, santan",train
+pasca_operasi_0626,PASCA_OPERASI,P,,biasa,ortopedi,,,57.0,63.3,151.0,Overweight,1760.8,96.1,43.8,245.5,tidak ada,tidak suka daging merah,train
+pasca_operasi_0627,PASCA_OPERASI,P,,lunak,caesar,,,35.0,65.6,163.8,Normal,2148.2,118.2,61.8,279.8,no allergies,none,test
+pasca_operasi_0628,PASCA_OPERASI,P,,saring,umum,,,73.0,61.8,163.3,Normal,1603.0,83.4,49.3,206.5,alergi cumi-cumi dan crab,makanan manis,test
+pasca_operasi_0629,PASCA_OPERASI,P,,saring,umum,,,20.0,54.1,161.6,Normal,2064.8,110.1,56.8,278.2,"allergic to milk, ebi",none,train
+pasca_operasi_0630,PASCA_OPERASI,L,,saring,saluran_cerna,,,66.0,78.6,167.2,Overweight,2105.3,111.6,53.0,295.6,Alergi: ikan,tidak ada,train
+pasca_operasi_0631,PASCA_OPERASI,L,,biasa,umum,,,53.0,80.9,163.4,Obese,2538.0,146.6,64.8,342.1,tidak ada,tidak suka santan,train
+pasca_operasi_0632,PASCA_OPERASI,L,,lunak,ortopedi,,,69.0,66.1,160.1,Overweight,1958.4,99.5,48.5,281.0,-,"tidak suka mie instan, pedas",test
+pasca_operasi_0633,PASCA_OPERASI,P,,saring,umum,,,46.0,69.1,154.7,Overweight,2082.7,121.3,61.0,262.1,allergic to wheat; kedelai,no allergies,train
+pasca_operasi_0634,PASCA_OPERASI,L,,saring,umum,,,25.0,74.2,168.5,Overweight,2649.4,134.8,67.9,374.9,-,"tidak suka santan, kopi",train
+pasca_operasi_0635,PASCA_OPERASI,P,,biasa,umum,,,30.0,55.5,153.7,Normal,1786.1,104.9,50.6,227.8,allergic to fish,"pantangan makanan manis, goreng-gorengan",test
+pasca_operasi_0636,PASCA_OPERASI,P,,lunak,umum,,,48.0,66.2,147.3,Obese,1991.9,121.4,52.0,259.7,soy,pantangan mie instan,train
+pasca_operasi_0637,PASCA_OPERASI,L,,lunak,ortopedi,,,41.0,83.4,158.6,Obese,2640.0,157.7,80.7,320.8,makanan laut,hindari pedas,test
+pasca_operasi_0638,PASCA_OPERASI,P,,biasa,saluran_cerna,,,42.0,54.5,150.4,Normal,1729.4,101.5,43.4,233.3,Alergi: seafood & shrimp,"spicy, goreng-gorengan",train
+pasca_operasi_0639,PASCA_OPERASI,L,,saring,ortopedi,,,49.0,62.6,170.3,Normal,2023.8,106.5,62.5,258.8,Alergi: terigu,no allergies,train
+pasca_operasi_0640,PASCA_OPERASI,P,,cair,umum,,,24.0,54.6,156.5,Normal,1927.2,112.7,53.3,249.2,"alergi udang, tahu tempe",,train
+pasca_operasi_0641,PASCA_OPERASI,P,,saring,saluran_cerna,,,63.0,44.2,154.0,Normal,1515.7,87.8,38.4,204.8,allergic to kedelai & shrimp,tidak ada,train
+pasca_operasi_0642,PASCA_OPERASI,P,,lunak,umum,,,75.0,87.7,165.2,Obese,2238.9,125.3,69.6,277.9,none,"tidak suka gorengan, kopi",test
+pasca_operasi_0643,PASCA_OPERASI,P,,cair,ortopedi,,,46.0,41.6,161.2,Underweight,1691.2,103.1,43.8,221.1,allergic to ebi,,train
+pasca_operasi_0644,PASCA_OPERASI,L,,cair,saluran_cerna,,,53.0,53.3,163.6,Normal,1796.3,91.9,49.5,245.7,alergi ikn dan ebi,mie instan,train
+pasca_operasi_0645,PASCA_OPERASI,P,,saring,ortopedi,,,47.0,65.0,162.3,Normal,2006.1,103.8,50.7,283.7,shrimp & cumi,hindari jeroan,train
+pasca_operasi_0646,PASCA_OPERASI,P,,biasa,umum,,,19.0,49.2,151.9,Normal,1983.4,102.6,48.6,283.9,-,no allergies,train
+pasca_operasi_0647,PASCA_OPERASI,L,,biasa,umum,,,30.0,66.4,159.0,Overweight,2246.7,113.0,60.2,313.2,no allergies,no allergies,train
+pasca_operasi_0648,PASCA_OPERASI,L,,saring,ortopedi,,,49.0,62.5,162.9,Normal,2159.7,118.7,54.5,298.7,susu,"hindari gorengan, jeroan",train
+pasca_operasi_0649,PASCA_OPERASI,L,,lunak,caesar,,,38.0,70.2,167.7,Normal,2434.9,124.6,69.9,326.9,tidak ada,,train
+pasca_operasi_0650,PASCA_OPERASI,P,,lunak,umum,,,63.0,48.6,157.7,Normal,1560.5,78.4,40.2,221.3,tidak ada,gorengan,train
+pasca_operasi_0651,PASCA_OPERASI,P,,cair,saluran_cerna,,,61.0,53.9,152.6,Normal,1582.3,90.5,46.3,200.8,allergic to kedele; makanan laut,none,test
+pasca_operasi_0652,PASCA_OPERASI,L,,lunak,saluran_cerna,,,32.0,60.8,165.6,Normal,2075.5,111.8,53.7,286.3,-,"hindari spicy, santan",train
+pasca_operasi_0653,PASCA_OPERASI,L,,cair,caesar,,,29.0,71.1,156.4,Overweight,2538.5,157.0,69.3,321.8,kacang & seafood,tidak suka kopi,train
+pasca_operasi_0654,PASCA_OPERASI,P,,biasa,saluran_cerna,,,65.0,85.9,161.8,Obese,1991.7,118.6,58.6,247.5,"alergi makanan laut, udang","hindari pedas, kopi",train
+pasca_operasi_0655,PASCA_OPERASI,P,,cair,ortopedi,,,64.0,68.1,160.7,Overweight,1867.0,98.9,48.9,257.9,none,none,train
+pasca_operasi_0656,PASCA_OPERASI,P,,saring,umum,,,49.0,70.2,163.6,Overweight,2183.0,130.6,61.1,277.6,telur; seafood,-,test
+pasca_operasi_0657,PASCA_OPERASI,L,,saring,ortopedi,,,56.0,67.1,165.6,Normal,2036.1,117.8,62.4,250.8,-,-,train
+pasca_operasi_0658,PASCA_OPERASI,L,,saring,ortopedi,,,68.0,87.4,161.4,Obese,2219.1,122.9,59.9,297.2,alergi kacang tanah,-,train
+pasca_operasi_0659,PASCA_OPERASI,P,,cair,saluran_cerna,,,45.0,77.7,163.7,Overweight,2042.0,113.9,55.2,272.4,Alergi: wheat,"tidak suka goreng-gorengan, daging merah",train
+pasca_operasi_0660,PASCA_OPERASI,L,,cair,ortopedi,,,67.0,54.3,165.2,Normal,1567.2,94.6,46.6,192.4,-,no allergies,train
+pasca_operasi_0661,PASCA_OPERASI,L,,saring,saluran_cerna,,,44.0,85.5,168.4,Obese,2677.4,147.2,77.4,347.9,alergi fish,hindari jeroan,train
+pasca_operasi_0662,PASCA_OPERASI,P,,saring,ortopedi,,,25.0,46.1,153.9,Normal,1824.2,93.6,47.7,255.2,kacang dan suus,gorengan,train
+pasca_operasi_0663,PASCA_OPERASI,L,,saring,umum,,,20.0,56.3,158.6,Normal,2316.6,138.7,60.3,304.8,-,none,train
+pasca_operasi_0664,PASCA_OPERASI,L,,biasa,caesar,,,52.0,78.6,168.4,Overweight,2287.5,141.4,67.3,279.1,Alergi: ikan dan udnag,-,train
+pasca_operasi_0665,PASCA_OPERASI,P,,biasa,caesar,,,52.0,59.9,155.2,Normal,1965.7,121.4,53.6,249.4,-,-,train
+pasca_operasi_0666,PASCA_OPERASI,L,,lunak,ortopedi,,,51.0,95.7,172.4,Obese,2616.8,149.8,72.2,341.9,alergi laktosa,none,train
+pasca_operasi_0667,PASCA_OPERASI,P,,lunak,ortopedi,,,29.0,42.3,148.9,Normal,1838.9,100.1,56.2,233.2,none,-,test
+pasca_operasi_0668,PASCA_OPERASI,L,,lunak,ortopedi,,,75.0,63.1,165.6,Normal,1796.8,91.6,50.6,243.6,,daging merah,test
+pasca_operasi_0669,PASCA_OPERASI,L,,saring,caesar,,,22.0,62.1,153.3,Overweight,2112.3,106.9,64.9,275.2,no allergies,-,test
+pasca_operasi_0670,PASCA_OPERASI,P,,biasa,umum,,,34.0,63.6,154.7,Overweight,2079.9,121.0,63.6,256.0,,-,train
+pasca_operasi_0671,PASCA_OPERASI,L,,lunak,ortopedi,,,59.0,79.8,164.4,Overweight,2392.7,121.3,71.5,316.1,,-,train
+pasca_operasi_0672,PASCA_OPERASI,L,,biasa,umum,,,27.0,37.0,152.1,Underweight,1590.0,79.6,47.5,211.0,allergic to dairy,tidak ada,train
+pasca_operasi_0673,PASCA_OPERASI,L,,biasa,saluran_cerna,,,72.0,99.7,167.2,Obese,2638.6,143.7,70.5,357.2,none,none,test
+pasca_operasi_0674,PASCA_OPERASI,P,,cair,umum,,,29.0,57.0,155.7,Normal,1921.0,111.2,50.7,255.0,terigu & shrimp,no allergies,test
+pasca_operasi_0675,PASCA_OPERASI,L,,biasa,saluran_cerna,,,66.0,72.4,172.8,Normal,2187.1,124.0,67.1,271.8,,,train
+pasca_operasi_0676,PASCA_OPERASI,L,,cair,caesar,,,47.0,57.4,163.9,Normal,1930.2,108.7,50.0,261.3,"allergic to gluten, ikan",none,train
+pasca_operasi_0677,PASCA_OPERASI,L,,lunak,umum,,,75.0,68.2,170.1,Normal,1971.5,121.0,56.5,244.7,none,no allergies,train
+pasca_operasi_0678,PASCA_OPERASI,L,,lunak,caesar,,,32.0,65.7,157.6,Overweight,2297.9,135.1,62.4,299.0,-,,train
+pasca_operasi_0679,PASCA_OPERASI,L,,saring,umum,,,52.0,56.8,160.7,Normal,1754.5,107.7,46.5,226.3,no allergies,,train
+pasca_operasi_0680,PASCA_OPERASI,P,,biasa,umum,,,43.0,84.7,164.4,Obese,2267.6,137.6,55.6,304.1,,no allergies,train
+pasca_operasi_0681,PASCA_OPERASI,P,,lunak,umum,,,73.0,64.7,145.5,Obese,1795.4,104.3,49.6,232.8,"alergi kepiting, soy",-,train
+pasca_operasi_0682,PASCA_OPERASI,P,,biasa,caesar,,,66.0,66.8,155.7,Overweight,1902.8,102.6,57.4,244.0,,"hindari manis, santan",test
+pasca_operasi_0683,PASCA_OPERASI,P,,lunak,umum,,,31.0,51.6,150.5,Normal,1694.0,103.3,45.8,217.1,ikn; sea food,-,train
+pasca_operasi_0684,PASCA_OPERASI,L,,cair,saluran_cerna,,,59.0,64.9,172.9,Normal,2074.7,118.7,63.6,256.8,alergi ebi,,train
+pasca_operasi_0685,PASCA_OPERASI,P,,biasa,caesar,,,42.0,73.0,171.6,Normal,2220.8,112.4,54.9,319.3,none,,train
+pasca_operasi_0686,PASCA_OPERASI,L,,lunak,caesar,,,43.0,69.2,164.9,Overweight,2333.1,130.0,61.1,315.7,Alergi: seafood,hindari pedas,train
+pasca_operasi_0687,PASCA_OPERASI,P,,biasa,saluran_cerna,,,62.0,92.7,173.4,Obese,2344.5,145.8,62.7,299.2,alergi cumi-cumi dan tahu tempe,"pantangan gorengan, mie instan",train
+pasca_operasi_0688,PASCA_OPERASI,P,,lunak,umum,,,47.0,49.5,151.6,Normal,1814.7,91.9,50.3,248.7,"crab, soy",hindari goreng-gorengan,test
+pasca_operasi_0689,PASCA_OPERASI,P,,lunak,umum,,,44.0,67.4,152.3,Overweight,1958.8,105.2,54.1,262.8,,"tidak suka gorengan, spicy",train
+pasca_operasi_0690,PASCA_OPERASI,P,,biasa,umum,,,53.0,71.7,152.3,Obese,2071.5,123.6,53.2,274.6,-,hindari mie instan,train
+pasca_operasi_0691,PASCA_OPERASI,L,,cair,caesar,,,69.0,60.6,157.0,Normal,1762.0,103.1,45.2,235.7,,none,train
+pasca_operasi_0692,PASCA_OPERASI,L,,biasa,saluran_cerna,,,61.0,86.1,163.1,Obese,2389.1,123.6,62.1,333.9,none,none,test
+pasca_operasi_0693,PASCA_OPERASI,L,,cair,ortopedi,,,47.0,64.4,160.2,Overweight,2169.0,120.9,53.3,301.5,no allergies,tidak suka gorengan,train
+pasca_operasi_0694,PASCA_OPERASI,P,,biasa,saluran_cerna,,,36.0,61.5,158.9,Normal,1920.1,104.6,51.0,260.7,crab,no allergies,train
+pasca_operasi_0695,PASCA_OPERASI,L,,biasa,saluran_cerna,,,46.0,81.7,167.2,Overweight,2323.9,137.3,71.2,283.5,allergic to telor dan wheat,-,train
+pasca_operasi_0696,PASCA_OPERASI,L,,lunak,saluran_cerna,,,72.0,79.5,174.9,Overweight,2090.3,122.7,55.0,276.2,none,no allergies,test
+pasca_operasi_0697,PASCA_OPERASI,P,,biasa,saluran_cerna,,,53.0,90.0,162.7,Obese,2381.6,126.2,59.3,335.9,-,no allergies,test
+pasca_operasi_0698,PASCA_OPERASI,P,,biasa,ortopedi,,,40.0,61.5,158.7,Normal,1898.7,95.7,52.8,260.1,no allergies,no allergies,train
+pasca_operasi_0699,PASCA_OPERASI,P,,saring,umum,,,49.0,44.4,160.5,Underweight,1723.1,92.5,46.3,234.2,allergic to kacng,"goreng-gorengan, santan",train
+pasca_operasi_0700,PASCA_OPERASI,L,,saring,caesar,,,73.0,72.0,171.8,Normal,2158.5,118.1,63.3,279.0,udnag & telor,"kopi, gorengan",train

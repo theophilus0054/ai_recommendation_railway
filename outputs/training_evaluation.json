@@ -1,51 +1,611 @@
 {
-  "learned_weights": {
-    "w1_nutrient_score": 0.672,
-    "w2_semantic_similarity": 0.0363,
-    "w3_condition_relevance": 0.2917,
-    "raw_coefs": [
-      10.1113,
-      -0.5464,
-      4.3888
-    ],
-    "intercept": -9.0275
-  },
-  "evaluation_results": {
-    "NutriScale_Linear_Ranker (Logistic Regression)": {
-      "accuracy": 0.7952,
-      "precision": 0.798,
-      "recall": 0.8344,
-      "f1_score": 0.8158,
-      "roc_auc": 0.877,
-      "confusion_matrix": [
+  "model_version": "lr-v1",
+  "algoritma": "LogisticRegression (multinomial) + StandardScaler",
+  "catatan": "Data sintetis; label dari rubrik per kategori (generate_dataset.py). Bukan uji klinis.",
+  "feature_names": [
+    "log_kcal_ratio",
+    "abs_log_kcal_ratio",
+    "portion_clipped",
+    "protein_pct",
+    "abs_protein_pct_diff",
+    "abs_fat_pct_diff",
+    "abs_carbs_pct_diff",
+    "sodium_share",
+    "sugar_share",
+    "fat_share",
+    "cholesterol_100",
+    "energy_density",
+    "protein_density",
+    "status_kurang",
+    "status_lebih",
+    "status_obes",
+    "stunting",
+    "ed_x_kurang",
+    "ed_x_lebih",
+    "ed_x_obes",
+    "protein_x_kurang",
+    "sugar_x_lebih",
+    "fried_x_lebih",
+    "umur_balita_1_3",
+    "trimester",
+    "protein_x_trimester",
+    "tekstur_ord",
+    "tahap_diet_ord",
+    "tekstur_violation",
+    "operasi_saluran_cerna",
+    "fat_x_saluran_cerna",
+    "n_conflict_allergen",
+    "n_conflict_pantangan",
+    "n_conflict_free",
+    "n_block_kategori",
+    "n_limit_kategori",
+    "n_user_restrictions",
+    "any_conflict",
+    "flag_fried",
+    "flag_processed",
+    "flag_sweet",
+    "flag_spicy",
+    "ft_protein__pagi",
+    "ft_protein__snack",
+    "ft_protein__siang",
+    "ft_protein__malam",
+    "ft_carb__pagi",
+    "ft_carb__snack",
+    "ft_carb__siang",
+    "ft_carb__malam",
+    "ft_vegetable__pagi",
+    "ft_vegetable__snack",
+    "ft_vegetable__siang",
+    "ft_vegetable__malam",
+    "ft_fruit__pagi",
+    "ft_fruit__snack",
+    "ft_fruit__siang",
+    "ft_fruit__malam",
+    "ft_dairy__pagi",
+    "ft_dairy__snack",
+    "ft_dairy__siang",
+    "ft_dairy__malam",
+    "ft_snack__pagi",
+    "ft_snack__snack",
+    "ft_snack__siang",
+    "ft_snack__malam",
+    "ft_beverage__pagi",
+    "ft_beverage__snack",
+    "ft_beverage__siang",
+    "ft_beverage__malam",
+    "ft_fat__pagi",
+    "ft_fat__snack",
+    "ft_fat__siang",
+    "ft_fat__malam",
+    "ft_sweetener__pagi",
+    "ft_sweetener__snack",
+    "ft_sweetener__siang",
+    "ft_sweetener__malam",
+    "ft_spice__pagi",
+    "ft_spice__snack",
+    "ft_spice__siang",
+    "ft_spice__malam"
+  ],
+  "kategori": {
+    "UMUM": {
+      "train_rows": 33582,
+      "test_rows": 8397,
+      "train_profiles": 560,
+      "test_profiles": 140,
+      "label_distribution_train": {
+        "0": 0.6598,
+        "1": 0.2487,
+        "2": 0.0914
+      },
+      "cv_groupkfold": {
+        "accuracy": {
+          "mean": 0.8217,
+          "std": 0.0051
+        },
+        "macro_f1": {
+          "mean": 0.7224,
+          "std": 0.0105
+        },
+        "weighted_kappa": {
+          "mean": 0.7661,
+          "std": 0.0069
+        },
+        "ndcg@5": {
+          "mean": 0.9141,
+          "std": 0.0035
+        }
+      },
+      "test": {
+        "accuracy": 0.8152,
+        "macro_f1": 0.7088,
+        "weighted_kappa": 0.7624,
+        "confusion_matrix": [
+          [
+            5095,
+            475,
+            0
+          ],
+          [
+            508,
+            1364,
+            155
+          ],
+          [
+            18,
+            396,
+            386
+          ]
+        ]
+      },
+      "test_ranking_ndcg": {
+        "model_lr": {
+          "ndcg@5": 0.9114,
+          "ndcg@10": 0.9412
+        },
+        "baseline_lama": {
+          "ndcg@5": 0.6781,
+          "ndcg@10": 0.7757
+        },
+        "baseline_acak": {
+          "ndcg@5": 0.5209,
+          "ndcg@10": 0.6868
+        }
+      },
+      "test_new_food": {
+        "accuracy": 0.7921,
+        "macro_f1": 0.6635,
+        "weighted_kappa": 0.7388,
+        "confusion_matrix": [
+          [
+            744,
+            74,
+            0
+          ],
+          [
+            75,
+            224,
+            27
+          ],
+          [
+            4,
+            87,
+            49
+          ]
+        ]
+      },
+      "conflict_pairs_predicted_nonzero": 0.0,
+      "top_coefficients_p2_vs_p0": [
         [
-          718,
-          241
+          "abs_log_kcal_ratio",
+          -5.3793
         ],
         [
-          189,
-          952
+          "portion_clipped",
+          -5.1731
+        ],
+        [
+          "sodium_share",
+          -3.4365
+        ],
+        [
+          "any_conflict",
+          -2.9841
+        ],
+        [
+          "sugar_share",
+          -2.6571
+        ],
+        [
+          "fat_share",
+          -2.2057
+        ],
+        [
+          "n_block_kategori",
+          -2.0084
+        ],
+        [
+          "abs_protein_pct_diff",
+          -1.9396
+        ],
+        [
+          "ft_protein__snack",
+          -1.436
+        ],
+        [
+          "protein_density",
+          1.2184
         ]
       ]
     },
-    "NutriScale_Nonlinear_Ranker (Gradient Boosting)": {
-      "accuracy": 0.7933,
-      "precision": 0.8009,
-      "recall": 0.8247,
-      "f1_score": 0.8126,
-      "roc_auc": 0.8798,
-      "confusion_matrix": [
+    "IBU_HAMIL": {
+      "train_rows": 33585,
+      "test_rows": 8398,
+      "train_profiles": 560,
+      "test_profiles": 140,
+      "label_distribution_train": {
+        "0": 0.6488,
+        "1": 0.2278,
+        "2": 0.1234
+      },
+      "cv_groupkfold": {
+        "accuracy": {
+          "mean": 0.8014,
+          "std": 0.005
+        },
+        "macro_f1": {
+          "mean": 0.7074,
+          "std": 0.0069
+        },
+        "weighted_kappa": {
+          "mean": 0.7782,
+          "std": 0.0049
+        },
+        "ndcg@5": {
+          "mean": 0.9031,
+          "std": 0.0041
+        }
+      },
+      "test": {
+        "accuracy": 0.7959,
+        "macro_f1": 0.7032,
+        "weighted_kappa": 0.774,
+        "confusion_matrix": [
+          [
+            4909,
+            426,
+            16
+          ],
+          [
+            534,
+            1154,
+            331
+          ],
+          [
+            29,
+            378,
+            621
+          ]
+        ]
+      },
+      "test_ranking_ndcg": {
+        "model_lr": {
+          "ndcg@5": 0.8983,
+          "ndcg@10": 0.9298
+        },
+        "baseline_lama": {
+          "ndcg@5": 0.6606,
+          "ndcg@10": 0.771
+        },
+        "baseline_acak": {
+          "ndcg@5": 0.535,
+          "ndcg@10": 0.7021
+        }
+      },
+      "test_new_food": {
+        "accuracy": 0.7834,
+        "macro_f1": 0.6976,
+        "weighted_kappa": 0.7662,
+        "confusion_matrix": [
+          [
+            705,
+            79,
+            1
+          ],
+          [
+            79,
+            175,
+            43
+          ],
+          [
+            4,
+            63,
+            93
+          ]
+        ]
+      },
+      "conflict_pairs_predicted_nonzero": 0.0,
+      "top_coefficients_p2_vs_p0": [
         [
-          725,
-          234
+          "any_conflict",
+          -3.1149
         ],
         [
-          200,
-          941
+          "sodium_share",
+          -2.7165
+        ],
+        [
+          "abs_log_kcal_ratio",
+          -2.7068
+        ],
+        [
+          "abs_protein_pct_diff",
+          -2.3154
+        ],
+        [
+          "n_block_kategori",
+          -2.2067
+        ],
+        [
+          "fat_share",
+          -2.191
+        ],
+        [
+          "portion_clipped",
+          -1.9632
+        ],
+        [
+          "sugar_share",
+          -1.9598
+        ],
+        [
+          "protein_density",
+          1.4359
+        ],
+        [
+          "protein_pct",
+          1.4355
+        ]
+      ]
+    },
+    "ANAK_BALITA": {
+      "train_rows": 33585,
+      "test_rows": 8396,
+      "train_profiles": 560,
+      "test_profiles": 140,
+      "label_distribution_train": {
+        "0": 0.7088,
+        "1": 0.2009,
+        "2": 0.0903
+      },
+      "cv_groupkfold": {
+        "accuracy": {
+          "mean": 0.8418,
+          "std": 0.0044
+        },
+        "macro_f1": {
+          "mean": 0.7502,
+          "std": 0.0081
+        },
+        "weighted_kappa": {
+          "mean": 0.8067,
+          "std": 0.0061
+        },
+        "ndcg@5": {
+          "mean": 0.9287,
+          "std": 0.0048
+        }
+      },
+      "test": {
+        "accuracy": 0.8411,
+        "macro_f1": 0.751,
+        "weighted_kappa": 0.8036,
+        "confusion_matrix": [
+          [
+            5532,
+            447,
+            6
+          ],
+          [
+            485,
+            961,
+            233
+          ],
+          [
+            9,
+            154,
+            569
+          ]
+        ]
+      },
+      "test_ranking_ndcg": {
+        "model_lr": {
+          "ndcg@5": 0.9302,
+          "ndcg@10": 0.9467
+        },
+        "baseline_lama": {
+          "ndcg@5": 0.6593,
+          "ndcg@10": 0.7474
+        },
+        "baseline_acak": {
+          "ndcg@5": 0.5061,
+          "ndcg@10": 0.6632
+        }
+      },
+      "test_new_food": {
+        "accuracy": 0.8321,
+        "macro_f1": 0.7498,
+        "weighted_kappa": 0.79,
+        "confusion_matrix": [
+          [
+            852,
+            75,
+            1
+          ],
+          [
+            91,
+            147,
+            33
+          ],
+          [
+            0,
+            19,
+            86
+          ]
+        ]
+      },
+      "conflict_pairs_predicted_nonzero": 0.0,
+      "top_coefficients_p2_vs_p0": [
+        [
+          "sugar_share",
+          -5.6808
+        ],
+        [
+          "portion_clipped",
+          -4.7424
+        ],
+        [
+          "sodium_share",
+          -4.7419
+        ],
+        [
+          "abs_log_kcal_ratio",
+          -4.318
+        ],
+        [
+          "fat_share",
+          -3.2761
+        ],
+        [
+          "any_conflict",
+          -3.0773
+        ],
+        [
+          "abs_protein_pct_diff",
+          -2.6675
+        ],
+        [
+          "n_block_kategori",
+          -2.072
+        ],
+        [
+          "ft_protein__snack",
+          -1.8375
+        ],
+        [
+          "protein_density",
+          1.4367
+        ]
+      ]
+    },
+    "PASCA_OPERASI": {
+      "train_rows": 33580,
+      "test_rows": 8399,
+      "train_profiles": 560,
+      "test_profiles": 140,
+      "label_distribution_train": {
+        "0": 0.6683,
+        "1": 0.1887,
+        "2": 0.143
+      },
+      "cv_groupkfold": {
+        "accuracy": {
+          "mean": 0.8496,
+          "std": 0.0065
+        },
+        "macro_f1": {
+          "mean": 0.7753,
+          "std": 0.0068
+        },
+        "weighted_kappa": {
+          "mean": 0.8472,
+          "std": 0.0073
+        },
+        "ndcg@5": {
+          "mean": 0.9282,
+          "std": 0.0081
+        }
+      },
+      "test": {
+        "accuracy": 0.8538,
+        "macro_f1": 0.7744,
+        "weighted_kappa": 0.8458,
+        "confusion_matrix": [
+          [
+            5382,
+            344,
+            10
+          ],
+          [
+            406,
+            938,
+            182
+          ],
+          [
+            18,
+            268,
+            851
+          ]
+        ]
+      },
+      "test_ranking_ndcg": {
+        "model_lr": {
+          "ndcg@5": 0.934,
+          "ndcg@10": 0.9501
+        },
+        "baseline_lama": {
+          "ndcg@5": 0.7411,
+          "ndcg@10": 0.8125
+        },
+        "baseline_acak": {
+          "ndcg@5": 0.625,
+          "ndcg@10": 0.7349
+        }
+      },
+      "test_new_food": {
+        "accuracy": 0.842,
+        "macro_f1": 0.7562,
+        "weighted_kappa": 0.8203,
+        "confusion_matrix": [
+          [
+            812,
+            49,
+            2
+          ],
+          [
+            76,
+            143,
+            31
+          ],
+          [
+            4,
+            38,
+            111
+          ]
+        ]
+      },
+      "conflict_pairs_predicted_nonzero": 0.0,
+      "top_coefficients_p2_vs_p0": [
+        [
+          "any_conflict",
+          -4.9016
+        ],
+        [
+          "n_block_kategori",
+          -3.5569
+        ],
+        [
+          "abs_protein_pct_diff",
+          -2.5797
+        ],
+        [
+          "sugar_share",
+          -2.4813
+        ],
+        [
+          "abs_log_kcal_ratio",
+          -2.3365
+        ],
+        [
+          "fat_x_saluran_cerna",
+          -2.2883
+        ],
+        [
+          "sodium_share",
+          -2.0779
+        ],
+        [
+          "portion_clipped",
+          -2.0775
+        ],
+        [
+          "log_kcal_ratio",
+          -2.0001
+        ],
+        [
+          "protein_pct",
+          1.9476
         ]
       ]
     }
-  },
-  "test_set_size": 2100,
-  "train_set_size": 8399
+  }
 }

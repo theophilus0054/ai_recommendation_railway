@@ -1,5 +1,5 @@
 """
-Demo Script: Menjalankan 2 Skenario Nyata Rekomendasi NutriScale AI
+Demo Script: Menjalankan 4 Skenario Nyata (1 per model kategori) Rekomendasi NutriScale AI
 Menampilkan 5 kartu sesi makan, kalori, protein, skor kecocokan, dan alasan rekomendasi.
 """
 
@@ -11,14 +11,14 @@ from model import load_and_preprocess_api_data, jalankan_ai_rekomendasi
 
 def run_demo():
     print("=" * 80)
-    print("  NUTRISCALE AI — DEMO 2 TEST CASE LANGSUNG")
+    print("  NUTRISCALE AI — DEMO 4 TEST CASE LANGSUNG (UMUM, IBU_HAMIL, ANAK_BALITA, PASCA_OPERASI)")
     print("=" * 80)
 
     # 1. Load Dataset
     api_url = os.environ.get("NEXT_PUBLIC_APP_URL", "http://localhost:3000") + "/api/products"
     df_food, scaler_dict = load_and_preprocess_api_data(api_url)
 
-    # 2. Definisikan 2 Skenario Nyata
+    # 2. Definisikan 4 Skenario Nyata
     test_cases = [
         {
             "kasus": "KASUS 1: Ibu Hamil Trimester 2 (Pantangan Udang & Kepiting)",
@@ -30,7 +30,8 @@ def run_demo():
                 "tinggiBadan": 160.0,
                 "kategoriKondisi": "IBU_HAMIL",
                 "usiaKehamilanMinggu": 24,
-                "pantanganMedis": "udang, kepiting",
+                "pantanganMedis": "",
+                "alergi": "udang, kepiting",
                 "nutrisi": {
                     "lifeStage": "pregnantAdult",
                     "calories": 2250,
@@ -49,7 +50,7 @@ def run_demo():
             }
         },
         {
-            "kasus": "KASUS 2: Dewasa Pasca Operasi (Pantangan Susu & Telur)",
+            "kasus": "KASUS 2: Dewasa Pasca Operasi Saluran Cerna, Diet Lunak (Alergi Susu & Telur)",
             "deskripsi": "Fokus nutrisi: Tinggi protein (25%) untuk perbaikan & regenerasi jaringan luka, rendah lemak jenuh & natrium, 100% bebas susu dan telur.",
             "profil": {
                 "umur": 45,
@@ -58,7 +59,10 @@ def run_demo():
                 "tinggiBadan": 172.0,
                 "kategoriKondisi": "PASCA_OPERASI",
                 "usiaKehamilanMinggu": None,
-                "pantanganMedis": "susu, telur",
+                "pantanganMedis": "",
+                "alergi": "susu, telur",
+                "tahapDiet": "lunak",
+                "jenisOperasi": "saluran_cerna",
                 "nutrisi": {
                     "lifeStage": "adult19Plus",
                     "calories": 1850,
@@ -73,6 +77,64 @@ def run_demo():
                     "haz": 0.0,
                     "whz": 0.0,
                     "statusNutrisi": "Normal"
+                }
+            }
+        },
+        {
+            "kasus": "KASUS 3: Anak Balita 3 Tahun Gizi Kurang (Alergi Kacang)",
+            "deskripsi": "Fokus nutrisi: Padat energi & protein untuk tumbuh kejar, rendah garam/gula, tanpa kafein & makanan berisiko tersedak.",
+            "profil": {
+                "umur": 3,
+                "jenisKelamin": "LAKI_LAKI",
+                "beratBadan": 11.5,
+                "tinggiBadan": 92.0,
+                "kategoriKondisi": "ANAK_BALITA",
+                "usiaKehamilanMinggu": None,
+                "pantanganMedis": "",
+                "alergi": "kacang",
+                "nutrisi": {
+                    "lifeStage": "child1to3",
+                    "calories": 1125,
+                    "carbohydrates": {"percent": 52, "grams": 146.3},
+                    "protein": {"percent": 14, "grams": 39.4},
+                    "fat": {"percent": 34, "grams": 42.5},
+                    "warnings": [],
+                    "energyMethod": "IOM EER anak 1-3 tahun"
+                },
+                "asesmen": {
+                    "bmi": 13.6,
+                    "haz": -1.2,
+                    "whz": -2.3,
+                    "statusNutrisi": "Gizi Kurang"
+                }
+            }
+        },
+        {
+            "kasus": "KASUS 4: Dewasa Umum Overweight (Tidak Suka Pedas & Gorengan)",
+            "deskripsi": "Fokus nutrisi: Defisit kalori moderat, rendah gula & lemak, porsi realistis tiap sesi.",
+            "profil": {
+                "umur": 38,
+                "jenisKelamin": "LAKI_LAKI",
+                "beratBadan": 84.0,
+                "tinggiBadan": 172.0,
+                "kategoriKondisi": "UMUM",
+                "usiaKehamilanMinggu": None,
+                "pantanganMedis": "tidak suka pedas dan gorengan",
+                "alergi": "",
+                "nutrisi": {
+                    "lifeStage": "adult19Plus",
+                    "calories": 2100,
+                    "carbohydrates": {"percent": 55, "grams": 288.8},
+                    "protein": {"percent": 18, "grams": 94.5},
+                    "fat": {"percent": 27, "grams": 63.0},
+                    "warnings": [],
+                    "energyMethod": "Harris-Benedict x aktivitas - defisit"
+                },
+                "asesmen": {
+                    "bmi": 28.4,
+                    "haz": 0.0,
+                    "whz": 0.0,
+                    "statusNutrisi": "Overweight"
                 }
             }
         }
@@ -94,6 +156,9 @@ def run_demo():
 
         output = jalankan_ai_rekomendasi(tc['profil'], df_food, scaler_dict, use_llm=False)
         detail = output['meal_plan']['detailRencanaMakan']
+        meta = output['_meta']
+        print(f"🤖 Model: {meta['model']['algoritma']} [{meta['model']['kategori_model']}] | "
+              f"Kandidat aman: {meta['total_kandidat_makanan']} | Alergi terdeteksi: {meta['alergi_terdeteksi']}")
 
         print(f"🎯 TARGET GIZI TIER 1: {detail['target_kalori_harian']:.0f} kkal | "
               f"Protein: {detail['distribusi']['protein_g']:.1f}g | "

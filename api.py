@@ -13,7 +13,7 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
-from model import load_and_preprocess_api_data, jalankan_ai_rekomendasi, NutriScaleDataError
+from model import load_and_preprocess_api_data, jalankan_ai_rekomendasi, get_recommender_model, NutriScaleDataError
 from prometheus_fastapi_instrumentator import Instrumentator
 
 # ==========================================================
@@ -25,8 +25,10 @@ load_dotenv(find_dotenv(usecwd=True))
 df_dataset = None
 scaler_dict = None
 
-# Gunakan AI_ENGINE_API_KEY agar sinkron dengan .env di root
-API_KEY = os.environ.get("AI_ENGINE_API_KEY", "nutriscale-secret-key-2026")
+# Gunakan AI_ENGINE_API_KEY agar sinkron dengan .env di root (wajib, tanpa nilai default)
+API_KEY = os.environ.get("AI_ENGINE_API_KEY")
+if not API_KEY:
+    raise RuntimeError("AI_ENGINE_API_KEY belum diset di environment. Set dulu sebelum menjalankan API.")
 api_key_header = APIKeyHeader(name="X-API-Key", auto_error=True)
 
 async def verify_api_key(api_key: str = Security(api_key_header)):
@@ -134,6 +136,11 @@ class ProfilKesehatanInput(BaseModel):
     )
     usiaKehamilanMinggu: Optional[int] = Field(default=None, ge=1, le=42)
     pantanganMedis: Optional[str] = Field(default="")
+    # Isian alergi dari form web (dipisah dari pantangan agar tidak hilang)
+    alergi: Optional[str] = Field(default="")
+    # Khusus PASCA_OPERASI: tahap diet dari dokter/ahli gizi & jenis operasi
+    tahapDiet: Optional[str] = Field(default=None, pattern="^(cair|saring|lunak|biasa)$")
+    jenisOperasi: Optional[str] = Field(default=None, pattern="^(saluran_cerna|ortopedi|caesar|umum)$")
     # Tier 1: target gizi WAJIB berasal dari perhitungan NutriScale
     nutrisi: NutrisiNutriScaleInput
     # Asesmen antropometri resmi NutriScale (BMI, HAZ, WHZ, status gizi)
@@ -148,7 +155,8 @@ class ProfilKesehatanInput(BaseModel):
                 "tinggiBadan": 162.0,
                 "kategoriKondisi": "IBU_HAMIL",
                 "usiaKehamilanMinggu": 32,
-                "pantanganMedis": "Udang, Ikan",
+                "pantanganMedis": "tidak suka pedas",
+                "alergi": "Udang, Ikan",
                 "nutrisi": {
                     "lifeStage": "pregnantAdult",
                     "calories": 2448,
@@ -167,6 +175,20 @@ class ProfilKesehatanInput(BaseModel):
 @app.get("/")
 def root():
     return {"status": "ok", "message": "NutriScale AI Engine is running", "models_loaded": df_dataset is not None}
+
+@app.get("/api/models")
+def list_models():
+    """Model Logistic Regression yang aktif per kategori kondisi."""
+    out = {}
+    for kategori in ["UMUM", "IBU_HAMIL", "ANAK_BALITA", "PASCA_OPERASI"]:
+        info = get_recommender_model(kategori)
+        out[kategori] = {
+            "loaded": info.get("pipeline") is not None,
+            "model_kategori": info.get("kategori_dipakai"),
+            "version": info.get("version"),
+            "test_weighted_kappa": (info.get("metrics") or {}).get("test", {}).get("weighted_kappa"),
+        }
+    return {"success": True, "models": out}
 
 @app.post("/api/sync")
 @limiter.limit("10/minute")

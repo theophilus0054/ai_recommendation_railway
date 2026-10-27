@@ -25,11 +25,9 @@ Sesuai dengan spesifikasi arsitektur **Histori Chat AI NutriScale (20 Oktober 20
    - AI Engine **HANYA MEMBACA** data ini — tidak menghitung ulang target gizi.
 
 2. **Tier 2 — Recommendation Engine (Supervised ML + Hard Safety Filter)**:
-   - **Hard Safety Filtering**: Mengeliminasi seluruh produk yang mengandung alergen pengguna, pantangan medis, alkohol, makanan ultra-processed, dan makanan mentah (untuk ibu hamil) **SEBELUM** proses ranking dilakukan.
-   - **Machine Learning Ranking**:
-     Memeringkat kandidat yang telah lolos filter menggunakan model yang telah dilatih:
-     $$\text{Final Score} = w_1 \cdot \text{Nutrient Score} + w_2 \cdot \text{Semantic Similarity} + w_3 \cdot \text{Condition Relevance}$$
-     Bobot $(w_1, w_2, w_3)$ dipelajari secara otomatis melalui data training dan testing mandiri (*Supervised Learning*), bukan *hardcoded soft computing*.
+   - **Hard Safety Filtering**: Mengeliminasi produk yang mengandung alergen (`alergi`), pantangan (`pantanganMedis`), alkohol, dan aturan **BLOKIR** per kategori (mis. makanan mentah hewani & ikan tinggi merkuri untuk ibu hamil, kafein & risiko tersedak untuk balita, tekstur di atas `tahapDiet` untuk pasca operasi) **SEBELUM** ranking. Pencocokan memakai regex batas kata (`kale` tidak dianggap `ale`, `eggplant` tidak dianggap telur), koreksi salah ketik (`udnag` → udang), kata payung (`seafood`), dan field `allergens` Supabase (`peanuts`, `wheat`, ...). Aturan **BATASI** tidak membuang makanan, tetapi menurunkan skor.
+   - **Machine Learning Ranking**: 4 model **Logistic Regression multinomial** terpisah (`models/recommender_<KATEGORI>.joblib`) untuk `UMUM`, `IBU_HAMIL`, `ANAK_BALITA`, `PASCA_OPERASI`. Label ordinal 0 (tidak sesuai), 1 (cukup sesuai), 2 (sangat sesuai). Fitur dihitung oleh `compute_ml_features` (fungsi yang sama untuk training & inferensi):
+     $$\text{Skor} = \frac{P(1) + 2 \cdot P(2)}{2}$$
 
 3. **Tier 3 — Gemini LLM Explanation**:
    - Menjelaskan hasil rekomendasi secara naratif, personal, dan empatik dalam Bahasa Indonesia.
@@ -37,34 +35,33 @@ Sesuai dengan spesifikasi arsitektur **Histori Chat AI NutriScale (20 Oktober 20
 
 ---
 
-## 📊 Hasil Evaluasi Model (Held-Out Test Set)
+## 📊 Hasil Evaluasi Model (Test Set Profil Baru, Data Sintetis)
 
-Evaluasi jujur dan obyektif dilakukan pada held-out test set independen (`data/test_data.csv`, 2.100 sampel):
+Setiap kategori: 700 profil sintetis × 5 sesi × 12 kandidat (≈42.000 pasangan). Split berdasarkan profil (profil test tidak pernah ada di train) dan 15% makanan hanya muncul di test. Label berasal dari rubrik per kategori di `generate_dataset.py` (memakai kolom yang tidak masuk fitur model, mis. serat, folat, zat besi, kalsium, kafein), tanpa noise acak.
 
-| Model / Komponen | Accuracy | Precision | Recall | F1-Score | ROC-AUC |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **K-Nearest Neighbors (KNN Classifier, k=7)** | **0.7443** | **0.7635** | **0.7669** | **0.7652** | **0.7963** |
-| **NutriScale ML Ranker (Learned Weights)** | **0.7952** | **0.7980** | **0.8344** | **0.8158** | **0.8770** |
-| **NutriScale Hard Safety Filter** | **1.0000** | **1.0000** | **1.0000** | **1.0000** | **1.0000** |
+| Kategori | Accuracy | Macro-F1 | Weighted Kappa | CV Kappa (GroupKFold) | NDCG@5 Model | NDCG@5 Formula Lama |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| UMUM | 0.8152 | 0.7088 | 0.7624 | 0.7661 ± 0.0069 | 0.9114 | 0.6781 |
+| IBU_HAMIL | 0.7959 | 0.7032 | 0.7740 | 0.7782 ± 0.0049 | 0.8983 | 0.6606 |
+| ANAK_BALITA | 0.8411 | 0.7510 | 0.8036 | 0.8067 ± 0.0061 | 0.9302 | 0.6593 |
+| PASCA_OPERASI | 0.8538 | 0.7744 | 0.8458 | 0.8472 ± 0.0073 | 0.9340 | 0.7411 |
 
-- **Learned Ranking Weights**:
-  - $w_1$ (Nutrient Score): `0.6720`
-  - $w_2$ (Semantic Similarity): `0.0363`
-  - $w_3$ (Condition Relevance): `0.2917`
-- **Safety Recall**: `100.0%` (0 pelanggaran alergen pada seluruh skenario uji).
-- **Mean Inference Latency**: `~340 ms` (vektorisasi numpy $O(1)$).
+- Uji end-to-end (`evaluate_model_performance.py`): 0 pelanggaran alergen dan 0 pelanggaran BLOKIR kategori pada 4 skenario.
+- **Catatan jujur**: angka di atas mengukur seberapa baik model meniru rubrik pada data sintetis, bukan uji klinis. Rubrik & tabel bahaya perlu ditinjau ahli gizi (gold set) sebelum klaim klinis.
 
 ---
 
 ## 🚀 Perintah Operasional
 
-1. **Generate Data Training & Testing**:
+1. **Generate Data Training & Testing** (`data/<kategori>/train_data.csv`, `test_data.csv`, `profiles.csv`):
    ```bash
-   python generate_dataset.py
+   python generate_dataset.py                     # 4 kategori
+   python generate_dataset.py --category UMUM     # satu kategori saja
    ```
-2. **Train & Evaluasi Model ML**:
+2. **Train & Evaluasi 4 Model Logistic Regression** (`models/recommender_<KATEGORI>.joblib`):
    ```bash
    python train_model.py
+   python train_model.py --category IBU_HAMIL
    ```
 3. **Uji Validasi Akademik (Section 3.3.6)**:
    ```bash
@@ -72,10 +69,11 @@ Evaluasi jujur dan obyektif dilakukan pada held-out test set independen (`data/t
    ```
 4. **Jalankan Unit & Pipeline Test**:
    ```bash
-   python -m unittest test_nutriscale_data.py
+   python -m unittest test_nutriscale_data.py test_safety_filter.py
    python test_pipeline.py
    ```
-5. **Jalankan API Server**:
+5. **Jalankan API Server** (wajib set `AI_ENGINE_API_KEY`, tidak ada nilai default):
    ```bash
-   python api.py
+   AI_ENGINE_API_KEY=<kunci-rahasia> python api.py
    ```
+   Field baru di `/api/recommend`: `alergi`, `tahapDiet` (`cair|saring|lunak|biasa`), `jenisOperasi` (`saluran_cerna|ortopedi|caesar|umum`). `GET /api/models` menampilkan model aktif per kategori.
