@@ -1,0 +1,601 @@
+profile_id,kategoriKondisi,umur,jenisKelamin,beratBadan,tinggiBadan,bmi,statusNutrisi,activity_factor,target_kkal,target_karbo_pct,target_protein_pct,target_lemak_pct,target_karbo_g,target_protein_g,target_lemak_g,haz,whz,tahapDiet,alergi,pantanganMedis,alergi_keys_generator,pantangan_keys_generator
+UMUM_0001,UMUM,58,LAKI_LAKI,52.3,170.3,18.03,Underweight,1.2,1532,50,20,30,191.5,76.6,51.1,,,biasa,tidak ada alergi,tidak ada pantangan,,
+UMUM_0002,UMUM,30,LAKI_LAKI,89.7,175.4,29.17,Overweight,1.2,2354,50,20,30,294.2,117.7,78.5,,,biasa,laktosa dan kerang-kerangan,tidak ada pantangan,susu|kerang,
+UMUM_0003,UMUM,68,LAKI_LAKI,82.8,168.4,29.21,Overweight,1.9,3077,50,20,30,384.6,153.8,102.6,,,biasa,shrimp dan kacang tanah,Tidak ada,udang|kacang,
+UMUM_0004,UMUM,54,LAKI_LAKI,68.4,159.9,26.74,Overweight,1.2,1759,50,20,30,219.9,88.0,58.6,,,biasa,gandum,santan,gluten,santan
+UMUM_0005,UMUM,44,PEREMPUAN,67.0,152.4,28.85,Overweight,1.9,2563,50,20,30,320.4,128.2,85.4,,,biasa,tidak ada alergi,Tidak ada,,
+UMUM_0006,UMUM,72,LAKI_LAKI,56.8,173.8,18.8,Normal,1.725,2199,50,20,30,274.9,110.0,73.3,,,biasa,tidak ada alergi,manis,,tinggi_gula
+UMUM_0007,UMUM,58,PEREMPUAN,102.8,160.7,39.82,Obese,1.55,2549,50,20,30,318.6,127.5,85.0,,,biasa,tidak ada alergi,"makanan berminyak, garam",,berminyak|tinggi_natrium
+UMUM_0008,UMUM,47,PEREMPUAN,43.6,152.2,18.82,Normal,1.55,1734,50,20,30,216.8,86.7,57.8,,,biasa,none,tidak ada pantangan,,
+UMUM_0009,UMUM,73,PEREMPUAN,50.8,155.6,20.98,Normal,1.375,1490,50,20,30,186.2,74.5,49.7,,,biasa,-,"kopi, makanan asin",,kafein|tinggi_natrium
+UMUM_0010,UMUM,47,LAKI_LAKI,51.2,162.8,19.31,Normal,1.375,1772,50,20,30,221.5,88.6,59.1,,,biasa,Telor,-,telur,
+UMUM_0011,UMUM,43,LAKI_LAKI,59.4,164.6,21.92,Normal,1.2,1716,50,20,30,214.5,85.8,57.2,,,biasa,Tidak ada,Tidak ada,,
+UMUM_0012,UMUM,31,PEREMPUAN,40.3,159.4,15.86,Underweight,1.2,1416,50,20,30,177.0,70.8,47.2,,,biasa,no allergies,terong,,free
+UMUM_0013,UMUM,61,PEREMPUAN,62.8,158.6,24.97,Normal,1.375,1726,50,20,30,215.8,86.3,57.5,,,biasa,kedelai,gula,kedelai,tinggi_gula
+UMUM_0014,UMUM,49,LAKI_LAKI,54.5,175.9,17.62,Underweight,1.9,2630,50,25,25,328.8,164.4,73.1,,,biasa,,Tidak ada,,
+UMUM_0015,UMUM,64,PEREMPUAN,85.5,174.9,27.95,Overweight,1.2,1803,50,20,30,225.4,90.2,60.1,,,biasa,squid / ikan,,cumi|ikan,
+UMUM_0016,UMUM,34,PEREMPUAN,47.5,149.6,21.23,Normal,1.375,1654,50,20,30,206.8,82.7,55.1,,,biasa,udang; kacang,tidak ada pantangan,udang|kacang,
+UMUM_0017,UMUM,59,LAKI_LAKI,82.1,162.7,31.02,Obese,1.375,2247,50,20,30,280.9,112.3,74.9,,,biasa,Tidak ada,-,,
+UMUM_0018,UMUM,72,PEREMPUAN,42.4,152.3,18.27,Underweight,1.375,1375,50,20,30,171.9,68.8,45.8,,,biasa,susu / Kacang Tanah,-,susu|kacang,
+UMUM_0019,UMUM,80,PEREMPUAN,50.6,160.9,19.54,Normal,1.375,1468,50,20,30,183.5,73.4,48.9,,,biasa,telur ayam,tidak ada pantangan,telur,
+UMUM_0020,UMUM,69,LAKI_LAKI,79.3,173.9,26.23,Overweight,1.55,2470,50,25,25,308.8,154.4,68.6,,,biasa,Udang,mie instan,udang,olahan
+UMUM_0021,UMUM,59,PEREMPUAN,43.6,162.6,16.49,Underweight,1.2,1319,50,20,30,164.9,66.0,44.0,,,biasa,telur,-,telur,
+UMUM_0022,UMUM,34,PEREMPUAN,40.1,157.0,16.27,Underweight,1.2,1389,50,20,30,173.6,69.5,46.3,,,biasa,Udang dan makanan laut,,udang|seafood,
+UMUM_0023,UMUM,57,PEREMPUAN,48.5,146.3,22.67,Normal,1.725,1902,50,20,30,237.8,95.1,63.4,,,biasa,Susu Sapi,diabetes,susu,tinggi_gula
+UMUM_0024,UMUM,55,LAKI_LAKI,71.0,171.2,24.23,Normal,1.375,2130,50,20,30,266.2,106.5,71.0,,,biasa,-,,,
+UMUM_0025,UMUM,46,LAKI_LAKI,86.3,171.5,29.35,Overweight,1.725,3116,50,20,30,389.5,155.8,103.9,,,biasa,no allergies,gorengan,,berminyak
+UMUM_0026,UMUM,45,PEREMPUAN,55.9,161.4,21.45,Normal,1.375,1746,50,20,30,218.2,87.3,58.2,,,biasa,"kacng, gluten, kerang",Tidak ada,kacang|gluten|kerang,
+UMUM_0027,UMUM,66,LAKI_LAKI,73.6,161.5,28.21,Overweight,1.55,2286,50,20,30,285.8,114.3,76.2,,,biasa,gluten,-,gluten,
+UMUM_0028,UMUM,50,PEREMPUAN,54.4,154.2,22.87,Normal,1.2,1454,50,20,30,181.8,72.7,48.5,,,biasa,tdk ada,-,,
+UMUM_0029,UMUM,72,LAKI_LAKI,45.6,161.1,17.56,Underweight,1.725,1835,50,20,30,229.4,91.8,61.2,,,biasa,Udang,"pedas, santan",udang,pedas|santan
+UMUM_0030,UMUM,80,LAKI_LAKI,85.4,172.6,28.67,Overweight,1.55,2490,50,20,30,311.2,124.5,83.0,,,biasa,Tidak ada,,,
+UMUM_0031,UMUM,73,LAKI_LAKI,40.0,159.8,15.67,Underweight,1.725,1685,50,20,30,210.6,84.2,56.2,,,biasa,"udnag, susu, egg",,udang|susu|telur,
+UMUM_0032,UMUM,36,LAKI_LAKI,79.2,162.7,29.91,Overweight,1.55,2675,55,15,30,367.8,100.3,89.2,,,biasa,none,,,
+UMUM_0033,UMUM,54,PEREMPUAN,35.3,149.7,15.75,Underweight,1.55,1556,50,20,30,194.5,77.8,51.9,,,biasa,Tidak ada.,-,,
+UMUM_0034,UMUM,39,LAKI_LAKI,63.3,169.2,22.12,Normal,1.2,1832,50,20,30,229.0,91.6,61.1,,,biasa,kedelai / egg,,kedelai|telur,
+UMUM_0035,UMUM,43,LAKI_LAKI,88.9,175.2,28.95,Overweight,1.375,2580,55,15,30,354.8,96.8,86.0,,,biasa,udang rebon,tidak ada pantangan,udang,
+UMUM_0036,UMUM,50,PEREMPUAN,90.1,156.6,36.76,Obese,1.2,1859,50,20,30,232.4,93.0,62.0,,,biasa,Tidak ada,,,
+UMUM_0037,UMUM,32,PEREMPUAN,78.6,154.7,32.86,Obese,1.375,2083,50,20,30,260.4,104.2,69.4,,,biasa,kedelai,-,kedelai,
+UMUM_0038,UMUM,65,PEREMPUAN,59.8,155.3,24.81,Normal,1.375,1650,50,20,30,206.2,82.5,55.0,,,biasa,no allergies,gorengan,,berminyak
+UMUM_0039,UMUM,33,LAKI_LAKI,54.5,162.3,20.69,Normal,1.2,1692,50,20,30,211.5,84.6,56.4,,,biasa,udnag dan gluten dan egg,"makanan asin, manis",udang|gluten|telur,tinggi_natrium|tinggi_gula
+UMUM_0040,UMUM,46,LAKI_LAKI,45.9,169.1,16.06,Underweight,1.375,1724,50,20,30,215.5,86.2,57.5,,,biasa,,,,
+UMUM_0041,UMUM,34,LAKI_LAKI,81.6,181.5,24.76,Normal,1.55,2882,50,20,30,360.2,144.1,96.1,,,biasa,-,gorengan,,berminyak
+UMUM_0042,UMUM,63,PEREMPUAN,58.6,152.1,25.34,Overweight,1.725,2049,50,20,30,256.1,102.5,68.3,,,biasa,tdk ada,pedas,,pedas
+UMUM_0043,UMUM,39,LAKI_LAKI,65.7,168.7,23.09,Normal,1.55,2413,50,20,30,301.6,120.7,80.4,,,biasa,kacng,,kacang,
+UMUM_0044,UMUM,58,LAKI_LAKI,69.2,177.7,21.92,Normal,1.725,2655,50,20,30,331.9,132.8,88.5,,,biasa,tdk ada,Tidak ada,,
+UMUM_0045,UMUM,23,LAKI_LAKI,76.0,165.0,27.93,Overweight,1.55,2740,50,20,30,342.5,137.0,91.3,,,biasa,none,tidak ada pantangan,,
+UMUM_0046,UMUM,27,LAKI_LAKI,61.9,164.4,22.9,Normal,1.55,2408,50,20,30,301.0,120.4,80.3,,,biasa,,makanan berminyak,,berminyak
+UMUM_0047,UMUM,48,PEREMPUAN,70.0,151.8,30.38,Obese,1.55,2104,50,20,30,263.0,105.2,70.1,,,biasa,no allergies,-,,
+UMUM_0048,UMUM,80,PEREMPUAN,102.1,161.3,39.22,Obese,1.375,2125,50,20,30,265.6,106.2,70.8,,,biasa,gandum,tidak ada pantangan,gluten,
+UMUM_0049,UMUM,69,PEREMPUAN,69.8,150.6,30.76,Obese,1.2,1513,50,20,30,189.1,75.7,50.4,,,biasa,kacang,"daging sapi, tinggi gula",kacang,daging_merah|tinggi_gula
+UMUM_0050,UMUM,29,PEREMPUAN,45.5,155.4,18.85,Normal,1.2,1469,50,20,30,183.6,73.5,49.0,,,biasa,Udang; kacng,Pedas,udang|kacang,pedas
+UMUM_0051,UMUM,53,LAKI_LAKI,82.5,172.4,27.77,Overweight,1.9,3268,50,20,30,408.5,163.4,108.9,,,biasa,Tidak ada.,berminyak,,berminyak
+UMUM_0052,UMUM,55,PEREMPUAN,60.5,158.2,24.19,Normal,1.375,1731,50,20,30,216.4,86.5,57.7,,,biasa,kacang,pedas,kacang,pedas
+UMUM_0053,UMUM,38,PEREMPUAN,66.7,156.5,27.24,Overweight,1.55,2146,45,25,30,241.4,134.1,71.5,,,biasa,"Telor, Ikan laut",darah tinggi,telur|ikan,tinggi_natrium
+UMUM_0054,UMUM,38,LAKI_LAKI,94.4,154.9,39.33,Obese,1.375,2586,50,20,30,323.2,129.3,86.2,,,biasa,"telur, dairy",makanan asin,telur|susu,tinggi_natrium
+UMUM_0055,UMUM,26,LAKI_LAKI,104.7,167.8,37.17,Obese,1.55,3331,50,20,30,416.4,166.6,111.0,,,biasa,egg,manis / garam,telur,tinggi_gula|tinggi_natrium
+UMUM_0056,UMUM,61,PEREMPUAN,101.9,160.2,39.73,Obese,1.725,2798,50,20,30,349.8,139.9,93.3,,,biasa,none,,,
+UMUM_0057,UMUM,47,PEREMPUAN,61.4,167.9,21.78,Normal,1.375,1831,60,15,25,274.6,68.7,50.9,,,biasa,udang,,udang,
+UMUM_0058,UMUM,80,LAKI_LAKI,80.3,176.5,25.78,Overweight,1.375,2141,50,20,30,267.6,107.0,71.4,,,biasa,Tidak ada.,tidak ada pantangan,,
+UMUM_0059,UMUM,33,LAKI_LAKI,58.7,180.4,18.03,Underweight,1.55,2408,50,20,30,301.0,120.4,80.3,,,biasa,-,Tidak ada,,
+UMUM_0060,UMUM,34,PEREMPUAN,46.0,141.1,23.1,Normal,1.375,1599,50,20,30,199.9,80.0,53.3,,,biasa,Tidak ada,"darah tinggi, daging merah",,tinggi_natrium|daging_merah
+UMUM_0061,UMUM,48,PEREMPUAN,46.5,148.8,21.0,Normal,1.55,1753,50,20,30,219.1,87.7,58.4,,,biasa,Kacang Tanah,Tidak ada,kacang,
+UMUM_0062,UMUM,35,PEREMPUAN,72.7,165.7,26.47,Overweight,1.55,2297,50,20,30,287.1,114.8,76.6,,,biasa,shrimp,"nangka, makanan asin",udang,free|tinggi_natrium
+UMUM_0063,UMUM,52,LAKI_LAKI,41.9,162.3,15.91,Underweight,1.2,1360,50,20,30,170.0,68.0,45.3,,,biasa,Tidak ada,Tidak ada,,
+UMUM_0064,UMUM,50,PEREMPUAN,46.2,153.8,19.53,Normal,1.375,1560,50,20,30,195.0,78.0,52.0,,,biasa,kerang,makanan olahan,kerang,olahan
+UMUM_0065,UMUM,42,PEREMPUAN,70.9,161.8,27.08,Overweight,1.375,1956,50,25,25,244.5,122.2,54.3,,,biasa,none,makanan berminyak,,berminyak
+UMUM_0066,UMUM,39,PEREMPUAN,51.0,155.7,21.03,Normal,1.2,1479,50,20,30,184.9,74.0,49.3,,,biasa,tdk ada,,,
+UMUM_0067,UMUM,66,LAKI_LAKI,69.4,169.4,24.2,Normal,1.2,1747,50,20,30,218.4,87.3,58.2,,,biasa,"susu sapi, Seafood",,susu|seafood,
+UMUM_0068,UMUM,57,LAKI_LAKI,53.3,160.3,20.73,Normal,1.55,1935,50,20,30,241.9,96.8,64.5,,,biasa,tdk ada,Tidak ada,,
+UMUM_0069,UMUM,80,LAKI_LAKI,52.5,163.3,19.69,Normal,1.2,1345,50,20,30,168.1,67.2,44.8,,,biasa,kepiting dan shrimp,,kepiting|udang,
+UMUM_0070,UMUM,64,PEREMPUAN,38.4,151.2,16.79,Underweight,1.725,1715,50,20,30,214.4,85.8,57.2,,,biasa,tdk ada,Tidak ada,,
+UMUM_0071,UMUM,47,LAKI_LAKI,77.8,162.9,29.31,Overweight,1.55,2551,50,20,30,318.9,127.5,85.0,,,biasa,peanut / Susu Sapi,tidak ada pantangan,kacang|susu,
+UMUM_0072,UMUM,49,PEREMPUAN,89.3,153.3,38.01,Obese,1.725,2650,50,20,30,331.2,132.5,88.3,,,biasa,gandum dan soy,Tidak ada,gluten|kedelai,
+UMUM_0073,UMUM,52,PEREMPUAN,48.8,156.7,19.88,Normal,1.2,1391,50,20,30,173.9,69.5,46.4,,,biasa,,makanan olahan,,olahan
+UMUM_0074,UMUM,57,LAKI_LAKI,67.1,156.7,27.32,Overweight,1.375,1947,50,20,30,243.4,97.3,64.9,,,biasa,Tidak ada,petai,,free
+UMUM_0075,UMUM,37,LAKI_LAKI,54.7,162.5,20.71,Normal,1.55,2156,50,20,30,269.5,107.8,71.9,,,biasa,"laktosa, Kacang Tanah, Ikan laut",Pedas; kambing,susu|kacang|ikan,pedas|daging_merah
+UMUM_0076,UMUM,36,PEREMPUAN,55.1,154.7,23.03,Normal,1.2,1536,50,20,30,192.0,76.8,51.2,,,biasa,-,,,
+UMUM_0077,UMUM,47,PEREMPUAN,47.2,159.3,18.59,Normal,1.2,1409,50,20,30,176.1,70.5,47.0,,,biasa,Tidak ada.,,,
+UMUM_0078,UMUM,52,PEREMPUAN,66.6,161.1,25.67,Overweight,1.375,1839,55,15,30,252.9,69.0,61.3,,,biasa,Tidak ada,-,,
+UMUM_0079,UMUM,65,LAKI_LAKI,75.0,164.6,27.69,Overweight,1.2,1817,50,20,30,227.1,90.8,60.6,,,biasa,Tidak ada,-,,
+UMUM_0080,UMUM,30,PEREMPUAN,64.6,173.2,21.54,Normal,1.2,1742,50,20,30,217.8,87.1,58.1,,,biasa,peanut,kopi,kacang,kafein
+UMUM_0081,UMUM,48,PEREMPUAN,50.5,157.6,20.34,Normal,1.375,1643,50,20,30,205.4,82.2,54.8,,,biasa,none,daging sapi,,daging_merah
+UMUM_0082,UMUM,44,PEREMPUAN,66.5,157.7,26.73,Overweight,1.725,2347,50,20,30,293.4,117.3,78.2,,,biasa,tidak ada alergi,,,
+UMUM_0083,UMUM,29,LAKI_LAKI,57.1,175.8,18.48,Underweight,1.375,2107,50,25,25,263.4,131.7,58.5,,,biasa,kepiting,Tinggi Natrium; durian,kepiting,tinggi_natrium|free
+UMUM_0084,UMUM,68,PEREMPUAN,64.5,152.9,27.58,Overweight,1.375,1682,50,20,30,210.2,84.1,56.1,,,biasa,crab,,kepiting,
+UMUM_0085,UMUM,47,LAKI_LAKI,62.5,165.4,22.84,Normal,1.55,2252,50,20,30,281.5,112.6,75.1,,,biasa,no allergies,tidak ada pantangan,,
+UMUM_0086,UMUM,78,LAKI_LAKI,60.0,165.6,21.87,Normal,1.375,1711,50,20,30,213.9,85.5,57.0,,,biasa,tidak ada alergi,jengkol,,free
+UMUM_0087,UMUM,57,PEREMPUAN,83.9,154.1,35.33,Obese,1.375,1999,50,20,30,249.9,100.0,66.6,,,biasa,-,,,
+UMUM_0088,UMUM,50,LAKI_LAKI,47.8,172.6,16.04,Underweight,1.2,1528,50,20,30,191.0,76.4,50.9,,,biasa,Tidak ada,spicy,,pedas
+UMUM_0089,UMUM,59,LAKI_LAKI,74.7,171.6,25.36,Overweight,1.375,2170,50,20,30,271.2,108.5,72.3,,,biasa,kepiting,,kepiting,
+UMUM_0090,UMUM,35,LAKI_LAKI,55.9,169.6,19.43,Normal,1.725,2506,50,25,25,313.2,156.6,69.6,,,biasa,no allergies,,,
+UMUM_0091,UMUM,40,LAKI_LAKI,65.6,160.6,25.43,Overweight,1.375,2078,50,20,30,259.8,103.9,69.3,,,biasa,,-,,
+UMUM_0092,UMUM,57,LAKI_LAKI,54.6,171.3,18.61,Normal,1.2,1582,50,20,30,197.8,79.1,52.7,,,biasa,-,makanan olahan,,olahan
+UMUM_0093,UMUM,34,PEREMPUAN,52.9,153.4,22.48,Normal,1.2,1518,50,20,30,189.8,75.9,50.6,,,biasa,telur,Tidak ada,telur,
+UMUM_0094,UMUM,67,LAKI_LAKI,51.1,157.7,20.55,Normal,1.725,1983,50,20,30,247.9,99.2,66.1,,,biasa,"dairy, squid",Tidak ada,susu|cumi,
+UMUM_0095,UMUM,47,PEREMPUAN,58.6,156.3,23.99,Normal,1.375,1746,50,20,30,218.2,87.3,58.2,,,biasa,Tidak ada.,tidak ada pantangan,,
+UMUM_0096,UMUM,80,PEREMPUAN,48.5,152.3,20.9,Normal,1.55,1584,50,20,30,198.0,79.2,52.8,,,biasa,kerang-kerangan,durian,kerang,free
+UMUM_0097,UMUM,37,PEREMPUAN,58.3,151.0,25.57,Overweight,1.55,2006,50,20,30,250.8,100.3,66.9,,,biasa,"makanan laut, kepiting, Susu Sapi",tidak ada pantangan,seafood|kepiting|susu,
+UMUM_0098,UMUM,33,PEREMPUAN,46.2,151.0,20.27,Normal,1.55,1859,50,20,30,232.4,93.0,62.0,,,biasa,tidak ada alergi,manis,,tinggi_gula
+UMUM_0099,UMUM,72,LAKI_LAKI,52.8,162.8,19.93,Normal,1.375,1606,50,20,30,200.8,80.3,53.5,,,biasa,soy; makanan laut,Tidak ada,kedelai|seafood,
+UMUM_0100,UMUM,56,PEREMPUAN,97.2,166.2,35.19,Obese,1.375,2226,50,20,30,278.2,111.3,74.2,,,biasa,kacang tanah,makanan berminyak; darah tinggi,kacang,berminyak|tinggi_natrium
+UMUM_0101,UMUM,55,PEREMPUAN,49.9,152.0,21.6,Normal,1.55,1770,50,20,30,221.2,88.5,59.0,,,biasa,crab; telur,,kepiting|telur,
+UMUM_0102,UMUM,38,PEREMPUAN,44.3,153.9,18.7,Normal,1.375,1608,50,20,30,201.0,80.4,53.6,,,biasa,Tidak ada.,,,
+UMUM_0103,UMUM,58,LAKI_LAKI,58.4,164.5,21.59,Normal,1.375,1830,50,25,25,228.8,114.4,50.8,,,biasa,kerang,Tidak ada,kerang,
+UMUM_0104,UMUM,50,PEREMPUAN,33.0,140.6,16.69,Underweight,1.375,1336,50,20,30,167.0,66.8,44.5,,,biasa,wijen dan makanan laut,nangka,wijen|seafood,free
+UMUM_0105,UMUM,73,PEREMPUAN,54.8,149.7,24.46,Normal,1.55,1708,60,15,25,256.2,64.0,47.4,,,biasa,-,,,
+UMUM_0106,UMUM,62,PEREMPUAN,48.0,157.8,19.27,Normal,1.725,1918,50,20,30,239.8,95.9,63.9,,,biasa,,,,
+UMUM_0107,UMUM,79,LAKI_LAKI,52.8,167.2,18.89,Normal,1.375,1581,50,20,30,197.6,79.0,52.7,,,biasa,kerang-kerangan,kopi,kerang,kafein
+UMUM_0108,UMUM,58,PEREMPUAN,46.5,154.4,19.5,Normal,1.2,1326,50,20,30,165.8,66.3,44.2,,,biasa,,tidak ada pantangan,,
+UMUM_0109,UMUM,36,LAKI_LAKI,78.5,176.0,25.35,Overweight,1.2,2136,50,20,30,267.0,106.8,71.2,,,biasa,laktosa,diabetes,susu,tinggi_gula
+UMUM_0110,UMUM,30,LAKI_LAKI,104.0,176.5,33.4,Obese,1.2,2590,50,20,30,323.8,129.5,86.3,,,biasa,no allergies,makanan pedas,,pedas
+UMUM_0111,UMUM,62,PEREMPUAN,56.1,153.5,23.8,Normal,1.55,1819,50,20,30,227.4,91.0,60.6,,,biasa,tidak ada alergi,nangka / Tinggi Natrium,,free|tinggi_natrium
+UMUM_0112,UMUM,43,PEREMPUAN,81.3,157.2,32.9,Obese,1.55,2325,60,15,25,348.8,87.2,64.6,,,biasa,Tidak ada,,,
+UMUM_0113,UMUM,46,LAKI_LAKI,83.1,180.8,25.42,Overweight,1.2,2170,60,15,25,325.5,81.4,60.3,,,biasa,Tidak ada.,tidak ada pantangan,,
+UMUM_0114,UMUM,27,LAKI_LAKI,60.5,161.7,23.13,Normal,1.9,2891,50,20,30,361.4,144.6,96.4,,,biasa,-,durian,,free
+UMUM_0115,UMUM,62,PEREMPUAN,70.6,154.2,29.68,Overweight,1.55,2030,50,20,30,253.8,101.5,67.7,,,biasa,no allergies,gula,,tinggi_gula
+UMUM_0116,UMUM,59,LAKI_LAKI,126.6,179.7,39.22,Obese,1.2,2774,50,20,30,346.8,138.7,92.5,,,biasa,tdk ada,Pedas,,pedas
+UMUM_0117,UMUM,64,PEREMPUAN,66.5,149.5,29.76,Overweight,1.55,1935,50,20,30,241.9,96.8,64.5,,,biasa,,makanan pedas,,pedas
+UMUM_0118,UMUM,61,LAKI_LAKI,56.7,161.9,21.64,Normal,1.55,1982,50,20,30,247.8,99.1,66.1,,,biasa,tdk ada,makanan pedas; darah tinggi,,pedas|tinggi_natrium
+UMUM_0119,UMUM,40,LAKI_LAKI,59.6,174.5,19.57,Normal,1.375,2059,50,20,30,257.4,103.0,68.6,,,biasa,kedelai,tidak ada pantangan,kedelai,
+UMUM_0120,UMUM,80,LAKI_LAKI,57.8,172.2,19.5,Normal,1.55,1914,50,20,30,239.2,95.7,63.8,,,biasa,Tidak ada,kopi,,kafein
+UMUM_0121,UMUM,79,LAKI_LAKI,83.7,169.9,28.99,Overweight,1.55,2444,50,25,25,305.5,152.8,67.9,,,biasa,Tidak ada,darah tinggi; makanan olahan,,tinggi_natrium|olahan
+UMUM_0122,UMUM,25,LAKI_LAKI,77.4,167.2,27.67,Overweight,1.2,2143,45,25,30,241.1,133.9,71.4,,,biasa,Tidak ada,-,,
+UMUM_0123,UMUM,80,PEREMPUAN,47.0,155.7,19.4,Normal,1.2,1222,60,15,25,183.3,45.8,33.9,,,biasa,ikan; telur,berminyak,ikan|telur,berminyak
+UMUM_0124,UMUM,44,LAKI_LAKI,46.1,165.4,16.86,Underweight,1.375,1718,50,20,30,214.8,85.9,57.3,,,biasa,no allergies,"kopi, Tinggi Natrium",,kafein|tinggi_natrium
+UMUM_0125,UMUM,32,LAKI_LAKI,55.7,162.1,21.19,Normal,1.375,1968,50,20,30,246.0,98.4,65.6,,,biasa,none,,,
+UMUM_0126,UMUM,26,PEREMPUAN,56.6,157.9,22.7,Normal,1.2,1617,50,20,30,202.1,80.8,53.9,,,biasa,makanan laut,coffee,seafood,kafein
+UMUM_0127,UMUM,80,LAKI_LAKI,47.3,170.1,16.35,Underweight,1.375,1491,50,20,30,186.4,74.5,49.7,,,biasa,udang rebon; Seafood; ikan,spicy dan makanan asin,udang|seafood|ikan,pedas|tinggi_natrium
+UMUM_0128,UMUM,44,LAKI_LAKI,83.4,177.1,26.6,Overweight,1.375,2483,50,20,30,310.4,124.2,82.8,,,biasa,udnag,-,udang,
+UMUM_0129,UMUM,49,LAKI_LAKI,72.1,175.0,23.53,Normal,1.55,2505,50,20,30,313.1,125.2,83.5,,,biasa,,gula,,tinggi_gula
+UMUM_0130,UMUM,48,LAKI_LAKI,48.6,166.7,17.5,Underweight,1.55,1963,60,15,25,294.4,73.6,54.5,,,biasa,tdk ada,,,
+UMUM_0131,UMUM,33,PEREMPUAN,80.3,157.2,32.51,Obese,1.55,2378,50,20,30,297.2,118.9,79.3,,,biasa,tidak ada alergi,Tidak ada,,
+UMUM_0132,UMUM,52,PEREMPUAN,59.1,153.4,25.12,Overweight,1.55,1928,50,20,30,241.0,96.4,64.3,,,biasa,,kopi,,kafein
+UMUM_0133,UMUM,42,LAKI_LAKI,91.9,170.5,31.61,Obese,1.375,2612,50,20,30,326.5,130.6,87.1,,,biasa,none,makanan asin,,tinggi_natrium
+UMUM_0134,UMUM,56,PEREMPUAN,73.8,159.9,28.85,Overweight,1.375,1902,50,20,30,237.8,95.1,63.4,,,biasa,"sea food, squid",,seafood|cumi,
+UMUM_0135,UMUM,38,PEREMPUAN,49.8,148.7,22.52,Normal,1.725,2077,50,20,30,259.6,103.8,69.2,,,biasa,fish dan kacang tanah,gorengan; coffee,ikan|kacang,berminyak|kafein
+UMUM_0136,UMUM,47,LAKI_LAKI,67.0,175.3,21.81,Normal,1.2,1872,50,20,30,234.0,93.6,62.4,,,biasa,Udang / telur ayam,-,udang|telur,
+UMUM_0137,UMUM,53,LAKI_LAKI,57.6,159.3,22.7,Normal,1.2,1588,50,20,30,198.5,79.4,52.9,,,biasa,makanan laut,,seafood,
+UMUM_0138,UMUM,57,LAKI_LAKI,60.3,171.5,20.5,Normal,1.375,1919,50,20,30,239.9,96.0,64.0,,,biasa,udnag,"Pedas, tinggi gula",udang,pedas|tinggi_gula
+UMUM_0139,UMUM,58,PEREMPUAN,74.1,165.6,27.04,Overweight,1.55,2162,50,20,30,270.2,108.1,72.1,,,biasa,udnag,tidak ada pantangan,udang,
+UMUM_0140,UMUM,54,PEREMPUAN,44.2,156.2,18.12,Underweight,1.725,1908,45,25,30,214.7,119.2,63.6,,,biasa,"wijen, ikan",garam dan berminyak,wijen|ikan,tinggi_natrium|berminyak
+UMUM_0141,UMUM,46,PEREMPUAN,53.3,156.0,21.91,Normal,1.55,1898,50,20,30,237.2,94.9,63.3,,,biasa,none,-,,
+UMUM_0142,UMUM,68,LAKI_LAKI,59.0,168.6,20.77,Normal,1.55,2018,50,20,30,252.2,100.9,67.3,,,biasa,tidak ada alergi,fried food,,berminyak
+UMUM_0143,UMUM,51,PEREMPUAN,53.5,154.2,22.49,Normal,1.2,1439,50,20,30,179.9,72.0,48.0,,,biasa,egg,-,telur,
+UMUM_0144,UMUM,80,PEREMPUAN,62.6,148.5,28.39,Overweight,1.2,1368,45,25,30,153.9,85.5,45.6,,,biasa,no allergies,-,,
+UMUM_0145,UMUM,67,LAKI_LAKI,75.4,160.3,29.35,Overweight,1.2,1785,50,20,30,223.1,89.2,59.5,,,biasa,none,,,
+UMUM_0146,UMUM,44,PEREMPUAN,49.7,164.9,18.28,Underweight,1.375,1688,50,20,30,211.0,84.4,56.3,,,biasa,kerang,berminyak,kerang,berminyak
+UMUM_0147,UMUM,54,PEREMPUAN,35.1,149.4,15.73,Underweight,1.375,1376,50,25,25,172.0,86.0,38.2,,,biasa,none,Tidak ada,,
+UMUM_0148,UMUM,69,PEREMPUAN,85.1,160.2,33.17,Obese,1.55,2220,55,15,30,305.2,83.2,74.0,,,biasa,no allergies,tidak ada pantangan,,
+UMUM_0149,UMUM,59,PEREMPUAN,53.1,148.9,23.95,Normal,1.55,1774,50,20,30,221.8,88.7,59.1,,,biasa,Tidak ada,-,,
+UMUM_0150,UMUM,32,PEREMPUAN,50.8,151.1,22.24,Normal,1.375,1715,50,20,30,214.4,85.8,57.2,,,biasa,tidak ada alergi,pedas,,pedas
+UMUM_0151,UMUM,67,PEREMPUAN,46.8,143.2,22.82,Normal,1.55,1603,50,20,30,200.4,80.2,53.4,,,biasa,none,,,
+UMUM_0152,UMUM,43,PEREMPUAN,63.9,149.3,28.68,Overweight,1.375,1808,50,20,30,226.0,90.4,60.3,,,biasa,tidak ada alergi,,,
+UMUM_0153,UMUM,51,LAKI_LAKI,59.9,168.6,21.07,Normal,1.375,1939,55,15,30,266.6,72.7,64.6,,,biasa,no allergies,santan,,santan
+UMUM_0154,UMUM,40,LAKI_LAKI,74.6,172.3,25.13,Overweight,1.2,2025,50,20,30,253.1,101.2,67.5,,,biasa,kacng,Tidak ada,kacang,
+UMUM_0155,UMUM,69,LAKI_LAKI,66.7,170.3,23.0,Normal,1.375,1935,50,20,30,241.9,96.8,64.5,,,biasa,Tidak ada,Tidak ada,,
+UMUM_0156,UMUM,80,LAKI_LAKI,84.1,177.4,26.71,Overweight,1.55,2499,50,20,30,312.4,125.0,83.3,,,biasa,no allergies,jengkol,,free
+UMUM_0157,UMUM,64,LAKI_LAKI,58.7,171.6,19.92,Normal,1.375,1836,50,20,30,229.5,91.8,61.2,,,biasa,sea food,"gula, makanan olahan",seafood,tinggi_gula|olahan
+UMUM_0158,UMUM,22,LAKI_LAKI,92.0,166.4,33.24,Obese,1.55,3091,50,20,30,386.4,154.6,103.0,,,biasa,crab dan udnag dan kerang-kerangan,-,kepiting|udang|kerang,
+UMUM_0159,UMUM,80,LAKI_LAKI,75.1,163.3,28.16,Overweight,1.55,2207,50,20,30,275.9,110.3,73.6,,,biasa,fish,mie instan,ikan,olahan
+UMUM_0160,UMUM,80,PEREMPUAN,73.9,159.9,28.89,Overweight,1.55,1984,50,20,30,248.0,99.2,66.1,,,biasa,Tidak ada,Tidak ada,,
+UMUM_0161,UMUM,39,PEREMPUAN,47.0,150.2,20.83,Normal,1.55,1827,50,20,30,228.4,91.3,60.9,,,biasa,,-,,
+UMUM_0162,UMUM,51,LAKI_LAKI,51.9,172.9,17.37,Underweight,1.375,1820,55,15,30,250.2,68.2,60.7,,,biasa,kepiting,-,kepiting,
+UMUM_0163,UMUM,43,PEREMPUAN,40.9,144.6,19.55,Normal,1.375,1496,50,20,30,187.0,74.8,49.9,,,biasa,kedelai,-,kedelai,
+UMUM_0164,UMUM,33,PEREMPUAN,47.4,148.2,21.57,Normal,1.375,1653,50,20,30,206.6,82.7,55.1,,,biasa,none,makanan pedas dan diabetes,,pedas|tinggi_gula
+UMUM_0165,UMUM,49,PEREMPUAN,58.4,158.6,23.21,Normal,1.2,1520,50,20,30,190.0,76.0,50.7,,,biasa,no allergies,-,,
+UMUM_0166,UMUM,44,LAKI_LAKI,79.0,167.5,28.17,Overweight,1.375,2338,50,20,30,292.2,116.9,77.9,,,biasa,Tidak ada.,spicy,,pedas
+UMUM_0167,UMUM,58,LAKI_LAKI,97.5,174.8,31.92,Obese,1.725,3285,50,20,30,410.6,164.2,109.5,,,biasa,-,,,
+UMUM_0168,UMUM,75,LAKI_LAKI,92.2,169.1,32.24,Obese,1.375,2350,50,20,30,293.8,117.5,78.3,,,biasa,Tidak ada.,tidak ada pantangan,,
+UMUM_0169,UMUM,56,PEREMPUAN,49.8,159.5,19.56,Normal,1.375,1595,55,15,30,219.3,59.8,53.2,,,biasa,tdk ada,gorengan,,berminyak
+UMUM_0170,UMUM,75,LAKI_LAKI,89.4,166.5,32.25,Obese,1.375,2282,55,15,30,313.8,85.6,76.1,,,biasa,Telor,-,telur,
+UMUM_0171,UMUM,42,PEREMPUAN,76.4,152.3,32.92,Obese,1.375,1986,50,20,30,248.2,99.3,66.2,,,biasa,tidak ada alergi,kafein,,kafein
+UMUM_0172,UMUM,75,PEREMPUAN,43.7,158.8,17.33,Underweight,1.55,1579,50,20,30,197.4,79.0,52.6,,,biasa,no allergies,Tidak ada,,
+UMUM_0173,UMUM,68,PEREMPUAN,74.5,154.6,31.18,Obese,1.725,2279,50,20,30,284.9,114.0,76.0,,,biasa,cumi-cumi,Tidak ada,cumi,
+UMUM_0174,UMUM,41,LAKI_LAKI,56.5,168.5,19.89,Normal,1.725,2452,50,20,30,306.5,122.6,81.7,,,biasa,tdk ada,,,
+UMUM_0175,UMUM,80,LAKI_LAKI,64.7,164.3,23.98,Normal,1.375,1773,50,20,30,221.6,88.7,59.1,,,biasa,no allergies,tidak ada pantangan,,
+UMUM_0176,UMUM,45,PEREMPUAN,54.2,154.2,22.79,Normal,1.2,1478,50,20,30,184.8,73.9,49.3,,,biasa,,,,
+UMUM_0177,UMUM,32,LAKI_LAKI,103.4,162.0,39.41,Obese,1.2,2483,50,20,30,310.4,124.2,82.8,,,biasa,ikan / susu,daging merah,ikan|susu,daging_merah
+UMUM_0178,UMUM,74,LAKI_LAKI,61.3,167.2,21.93,Normal,1.55,2002,50,20,30,250.2,100.1,66.7,,,biasa,,makanan olahan,,olahan
+UMUM_0179,UMUM,58,PEREMPUAN,66.2,160.8,25.61,Overweight,1.55,2025,50,20,30,253.1,101.2,67.5,,,biasa,fish,tidak ada pantangan,ikan,
+UMUM_0180,UMUM,41,LAKI_LAKI,41.5,162.8,15.65,Underweight,1.725,2058,45,25,30,231.5,128.6,68.6,,,biasa,tdk ada,-,,
+UMUM_0181,UMUM,57,PEREMPUAN,40.1,146.3,18.74,Normal,1.2,1230,45,25,30,138.4,76.9,41.0,,,biasa,,-,,
+UMUM_0182,UMUM,73,LAKI_LAKI,56.0,167.2,20.02,Normal,1.55,1901,50,20,30,237.6,95.0,63.4,,,biasa,,tidak ada pantangan,,
+UMUM_0183,UMUM,67,PEREMPUAN,64.8,158.8,25.69,Overweight,1.2,1498,50,20,30,187.2,74.9,49.9,,,biasa,no allergies,tidak ada pantangan,,
+UMUM_0184,UMUM,43,PEREMPUAN,47.3,158.1,18.92,Normal,1.2,1426,50,20,30,178.2,71.3,47.5,,,biasa,egg; crab,tidak ada pantangan,telur|kepiting,
+UMUM_0185,UMUM,60,PEREMPUAN,32.3,140.0,16.48,Underweight,1.55,1426,50,20,30,178.2,71.3,47.5,,,biasa,no allergies,daging sapi / mie instan,,daging_merah|olahan
+UMUM_0186,UMUM,64,PEREMPUAN,75.1,150.8,33.03,Obese,1.9,2531,50,20,30,316.4,126.5,84.4,,,biasa,none,,,
+UMUM_0187,UMUM,41,PEREMPUAN,52.7,147.9,24.11,Normal,1.55,1884,50,20,30,235.5,94.2,62.8,,,biasa,none,fried food,,berminyak
+UMUM_0188,UMUM,30,PEREMPUAN,39.5,150.7,17.4,Underweight,1.9,2184,50,20,30,273.0,109.2,72.8,,,biasa,tdk ada,-,,
+UMUM_0189,UMUM,66,LAKI_LAKI,48.2,160.2,18.78,Normal,1.725,1946,50,20,30,243.2,97.3,64.9,,,biasa,tidak ada alergi,pedas dan fried food,,pedas|berminyak
+UMUM_0190,UMUM,35,PEREMPUAN,61.8,153.5,26.24,Overweight,1.2,1612,50,20,30,201.5,80.6,53.7,,,biasa,susu sapi / kacang tanah,-,susu|kacang,
+UMUM_0191,UMUM,69,PEREMPUAN,74.5,161.0,28.74,Overweight,1.55,2072,50,20,30,259.0,103.6,69.1,,,biasa,susu sapi dan kedele,Tidak ada,susu|kedelai,
+UMUM_0192,UMUM,42,LAKI_LAKI,63.3,161.3,24.34,Normal,1.725,2539,50,20,30,317.4,127.0,84.6,,,biasa,tidak ada alergi,spicy,,pedas
+UMUM_0193,UMUM,73,LAKI_LAKI,60.3,161.3,23.17,Normal,1.2,1507,50,20,30,188.4,75.3,50.2,,,biasa,tdk ada,pedas dan fried food,,pedas|berminyak
+UMUM_0194,UMUM,61,LAKI_LAKI,64.1,160.6,24.85,Normal,1.375,1886,50,20,30,235.8,94.3,62.9,,,biasa,,-,,
+UMUM_0195,UMUM,63,PEREMPUAN,39.8,143.0,19.46,Normal,1.375,1356,50,20,30,169.5,67.8,45.2,,,biasa,Tidak ada,tidak ada pantangan,,
+UMUM_0196,UMUM,57,PEREMPUAN,51.5,148.9,23.24,Normal,1.375,1565,55,15,30,215.2,58.7,52.2,,,biasa,fish,tidak ada pantangan,ikan,
+UMUM_0197,UMUM,63,LAKI_LAKI,103.1,162.0,39.28,Obese,1.375,2598,50,20,30,324.8,129.9,86.6,,,biasa,none,santan,,santan
+UMUM_0198,UMUM,37,PEREMPUAN,42.4,153.8,17.91,Underweight,1.55,1792,50,20,30,224.0,89.6,59.7,,,biasa,peanut,Tidak ada,kacang,
+UMUM_0199,UMUM,80,LAKI_LAKI,92.3,161.7,35.3,Obese,1.2,1976,50,20,30,247.0,98.8,65.9,,,biasa,tidak ada alergi,Tidak ada,,
+UMUM_0200,UMUM,67,LAKI_LAKI,108.5,169.0,37.97,Obese,1.2,2367,50,20,30,295.9,118.3,78.9,,,biasa,no allergies,terong,,free
+UMUM_0201,UMUM,51,PEREMPUAN,73.8,156.9,29.97,Overweight,1.2,1674,45,25,30,188.3,104.6,55.8,,,biasa,Tidak ada,mie instan dan Pedas,,olahan|pedas
+UMUM_0202,UMUM,57,LAKI_LAKI,86.8,163.4,32.5,Obese,1.725,2953,50,20,30,369.1,147.7,98.4,,,biasa,no allergies,tidak ada pantangan,,
+UMUM_0203,UMUM,70,PEREMPUAN,55.2,152.9,23.6,Normal,1.375,1552,55,15,30,213.4,58.2,51.7,,,biasa,,-,,
+UMUM_0204,UMUM,34,LAKI_LAKI,57.5,161.0,22.2,Normal,1.375,1977,50,20,30,247.1,98.8,65.9,,,biasa,tidak ada alergi,Tidak ada,,
+UMUM_0205,UMUM,60,PEREMPUAN,84.3,158.8,33.43,Obese,1.55,2262,50,20,30,282.8,113.1,75.4,,,biasa,tidak ada alergi,diabetes,,tinggi_gula
+UMUM_0206,UMUM,36,LAKI_LAKI,82.1,172.1,27.73,Overweight,1.2,2171,50,20,30,271.4,108.5,72.4,,,biasa,"kerang, sea food",Tidak ada,kerang|seafood,
+UMUM_0207,UMUM,51,PEREMPUAN,58.6,150.9,25.73,Overweight,1.725,2132,50,20,30,266.5,106.6,71.1,,,biasa,-,tidak ada pantangan,,
+UMUM_0208,UMUM,38,LAKI_LAKI,83.8,163.2,31.47,Obese,1.2,2134,50,20,30,266.8,106.7,71.1,,,biasa,udang rebon,"bersantan, kafein",udang,santan|kafein
+UMUM_0209,UMUM,39,LAKI_LAKI,68.0,160.3,26.46,Overweight,1.375,2127,50,20,30,265.9,106.3,70.9,,,biasa,Tidak ada.,diabetes,,tinggi_gula
+UMUM_0210,UMUM,61,PEREMPUAN,51.3,164.6,18.93,Normal,1.725,2014,50,20,30,251.8,100.7,67.1,,,biasa,no allergies,gula,,tinggi_gula
+UMUM_0211,UMUM,69,PEREMPUAN,71.4,159.4,28.12,Overweight,1.2,1563,50,20,30,195.4,78.2,52.1,,,biasa,Udang; kerang,gula,udang|kerang,tinggi_gula
+UMUM_0212,UMUM,42,PEREMPUAN,54.1,159.7,21.21,Normal,1.2,1513,50,25,25,189.1,94.6,42.0,,,biasa,laktosa,daging sapi,susu,daging_merah
+UMUM_0213,UMUM,31,LAKI_LAKI,65.5,164.4,24.25,Normal,1.375,2171,50,20,30,271.4,108.5,72.4,,,biasa,Tidak ada,-,,
+UMUM_0214,UMUM,68,PEREMPUAN,39.6,145.8,18.62,Normal,1.375,1335,55,15,30,183.6,50.1,44.5,,,biasa,kedelai,mie instan,kedelai,olahan
+UMUM_0215,UMUM,54,PEREMPUAN,72.6,158.9,28.75,Overweight,1.375,1894,50,20,30,236.8,94.7,63.1,,,biasa,Tidak ada,Tidak ada,,
+UMUM_0216,UMUM,49,LAKI_LAKI,78.1,162.9,29.44,Overweight,1.375,2253,50,25,25,281.6,140.8,62.6,,,biasa,Tidak ada.,spicy,,pedas
+UMUM_0217,UMUM,40,PEREMPUAN,47.6,163.7,17.76,Underweight,1.375,1680,50,20,30,210.0,84.0,56.0,,,biasa,udang rebon dan egg,kafein; pedas,udang|telur,kafein|pedas
+UMUM_0218,UMUM,36,PEREMPUAN,38.2,156.0,15.69,Underweight,1.725,1946,50,20,30,243.2,97.3,64.9,,,biasa,"fish, kedelai",Tidak ada,ikan|kedelai,
+UMUM_0219,UMUM,57,PEREMPUAN,78.1,166.0,28.35,Overweight,1.725,2479,50,20,30,309.9,124.0,82.6,,,biasa,kacng dan soy,,kacang|kedelai,
+UMUM_0220,UMUM,80,PEREMPUAN,54.5,152.5,23.45,Normal,1.55,1670,55,15,30,229.6,62.6,55.7,,,biasa,-,,,
+UMUM_0221,UMUM,44,LAKI_LAKI,85.3,169.6,29.65,Overweight,1.375,2469,50,20,30,308.6,123.5,82.3,,,biasa,none,Tidak ada,,
+UMUM_0222,UMUM,70,PEREMPUAN,39.1,140.0,19.95,Normal,1.2,1128,50,20,30,141.0,56.4,37.6,,,biasa,Tidak ada,Tidak ada,,
+UMUM_0223,UMUM,75,PEREMPUAN,49.1,145.2,23.3,Normal,1.725,1771,50,20,30,221.4,88.5,59.0,,,biasa,kacang,,kacang,
+UMUM_0224,UMUM,52,PEREMPUAN,66.9,157.5,26.98,Overweight,1.375,1827,50,20,30,228.4,91.3,60.9,,,biasa,cumi,makanan pedas; bersantan,cumi,pedas|santan
+UMUM_0225,UMUM,43,LAKI_LAKI,76.1,169.5,26.49,Overweight,1.2,2013,50,20,30,251.6,100.7,67.1,,,biasa,Tidak ada.,"makanan pedas, berminyak",,pedas|berminyak
+UMUM_0226,UMUM,80,PEREMPUAN,62.2,153.3,26.48,Overweight,1.375,1583,50,20,30,197.9,79.2,52.8,,,biasa,-,Tinggi Natrium,,tinggi_natrium
+UMUM_0227,UMUM,37,LAKI_LAKI,73.1,173.6,24.26,Normal,1.725,2916,50,20,30,364.5,145.8,97.2,,,biasa,-,sosis; Pedas,,olahan|pedas
+UMUM_0228,UMUM,60,PEREMPUAN,57.5,160.2,22.41,Normal,1.2,1459,50,20,30,182.4,73.0,48.6,,,biasa,ikan dan peanut,,ikan|kacang,
+UMUM_0229,UMUM,46,PEREMPUAN,53.9,157.9,21.61,Normal,1.375,1700,50,20,30,212.5,85.0,56.7,,,biasa,ikan,"Tinggi Natrium, Pedas",ikan,tinggi_natrium|pedas
+UMUM_0230,UMUM,57,LAKI_LAKI,84.0,174.5,27.6,Overweight,1.55,2677,50,25,25,334.6,167.3,74.4,,,biasa,none,pedas,,pedas
+UMUM_0231,UMUM,54,LAKI_LAKI,114.8,177.7,36.34,Obese,1.375,2988,50,20,30,373.5,149.4,99.6,,,biasa,no allergies,tidak ada pantangan,,
+UMUM_0232,UMUM,54,PEREMPUAN,77.2,163.5,28.87,Overweight,1.55,2223,50,20,30,277.9,111.2,74.1,,,biasa,no allergies,manis,,tinggi_gula
+UMUM_0233,UMUM,75,PEREMPUAN,75.2,152.1,32.5,Obese,1.375,1773,50,20,30,221.6,88.7,59.1,,,biasa,-,makanan asin,,tinggi_natrium
+UMUM_0234,UMUM,65,PEREMPUAN,71.1,153.0,30.38,Obese,1.2,1557,50,25,25,194.6,97.3,43.2,,,biasa,no allergies,makanan asin,,tinggi_natrium
+UMUM_0235,UMUM,56,LAKI_LAKI,50.5,169.9,17.5,Underweight,1.375,1735,55,15,30,238.6,65.1,57.8,,,biasa,-,tidak ada pantangan,,
+UMUM_0236,UMUM,45,LAKI_LAKI,68.7,159.8,26.91,Overweight,1.2,1824,50,20,30,228.0,91.2,60.8,,,biasa,"makanan laut, kacng, ikan",Tidak ada,seafood|kacang|ikan,
+UMUM_0237,UMUM,80,PEREMPUAN,48.8,161.3,18.77,Normal,1.375,1447,50,20,30,180.9,72.3,48.2,,,biasa,no allergies,"vegetarian, manis",,vegetarian|tinggi_gula
+UMUM_0238,UMUM,80,PEREMPUAN,51.1,162.8,19.27,Normal,1.375,1482,50,20,30,185.2,74.1,49.4,,,biasa,-,daging sapi dan mie instan,,daging_merah|olahan
+UMUM_0239,UMUM,55,PEREMPUAN,34.4,146.7,15.99,Underweight,1.55,1522,50,20,30,190.2,76.1,50.7,,,biasa,kedelai / udang rebon / kacang,Tidak ada,kedelai|udang|kacang,
+UMUM_0240,UMUM,48,PEREMPUAN,42.9,166.1,15.55,Underweight,1.9,2187,50,20,30,273.4,109.3,72.9,,,biasa,seafood,-,seafood,
+UMUM_0241,UMUM,46,LAKI_LAKI,56.2,163.4,21.05,Normal,1.2,1637,50,20,30,204.6,81.8,54.6,,,biasa,no allergies,-,,
+UMUM_0242,UMUM,80,PEREMPUAN,43.4,158.7,17.22,Underweight,1.55,1541,50,20,30,192.6,77.0,51.4,,,biasa,udang rebon,tidak ada pantangan,udang,
+UMUM_0243,UMUM,34,LAKI_LAKI,84.4,166.3,30.51,Obese,1.2,2189,50,20,30,273.6,109.5,73.0,,,biasa,telur ayam,-,telur,
+UMUM_0244,UMUM,66,PEREMPUAN,39.9,159.0,15.79,Underweight,1.55,1586,50,20,30,198.2,79.3,52.9,,,biasa,none,Pedas,,pedas
+UMUM_0245,UMUM,65,PEREMPUAN,51.6,151.0,22.63,Normal,1.2,1333,50,20,30,166.6,66.7,44.4,,,biasa,Tidak ada.,"Tinggi Natrium, nangka",,tinggi_natrium|free
+UMUM_0246,UMUM,77,LAKI_LAKI,68.4,166.4,24.69,Normal,1.375,1879,50,20,30,234.9,94.0,62.6,,,biasa,-,Tidak ada,,
+UMUM_0247,UMUM,45,LAKI_LAKI,50.5,163.4,18.91,Normal,1.375,1779,50,20,30,222.4,89.0,59.3,,,biasa,none,,,
+UMUM_0248,UMUM,49,LAKI_LAKI,56.9,168.2,20.12,Normal,1.725,2380,50,20,30,297.5,119.0,79.3,,,biasa,,Tidak ada,,
+UMUM_0249,UMUM,80,LAKI_LAKI,72.1,158.0,28.88,Overweight,1.375,1868,50,20,30,233.5,93.4,62.3,,,biasa,"susu, fish",,susu|ikan,
+UMUM_0250,UMUM,66,LAKI_LAKI,72.4,161.4,27.81,Overweight,1.375,2005,50,20,30,250.6,100.2,66.8,,,biasa,"telur, kerang-kerangan","darah tinggi, tinggi gula",telur|kerang,tinggi_natrium|tinggi_gula
+UMUM_0251,UMUM,80,PEREMPUAN,42.4,157.5,17.09,Underweight,1.55,1521,50,20,30,190.1,76.0,50.7,,,biasa,tdk ada,"fried food, kafein",,berminyak|kafein
+UMUM_0252,UMUM,69,LAKI_LAKI,70.2,172.4,23.62,Normal,1.2,1757,50,20,30,219.6,87.8,58.6,,,biasa,squid,Tidak ada,cumi,
+UMUM_0253,UMUM,36,LAKI_LAKI,54.7,174.2,18.03,Underweight,1.2,1743,50,20,30,217.9,87.2,58.1,,,biasa,no allergies,Tidak ada,,
+UMUM_0254,UMUM,64,LAKI_LAKI,54.4,159.5,21.38,Normal,1.2,1463,50,20,30,182.9,73.2,48.8,,,biasa,Tidak ada.,Tidak ada,,
+UMUM_0255,UMUM,38,LAKI_LAKI,86.7,157.6,34.92,Obese,1.55,2775,50,20,30,346.9,138.8,92.5,,,biasa,,,,
+UMUM_0256,UMUM,80,PEREMPUAN,45.9,156.4,18.76,Normal,1.55,1566,50,20,30,195.8,78.3,52.2,,,biasa,Tidak ada,darah tinggi,,tinggi_natrium
+UMUM_0257,UMUM,43,LAKI_LAKI,104.3,169.0,36.52,Obese,1.2,2463,50,20,30,307.9,123.2,82.1,,,biasa,none,Pedas,,pedas
+UMUM_0258,UMUM,80,LAKI_LAKI,39.7,159.7,15.57,Underweight,1.375,1282,50,20,30,160.2,64.1,42.7,,,biasa,none,,,
+UMUM_0259,UMUM,67,PEREMPUAN,70.3,163.4,26.34,Overweight,1.375,1806,60,15,25,270.9,67.7,50.2,,,biasa,none,,,
+UMUM_0260,UMUM,49,LAKI_LAKI,126.3,177.9,39.91,Obese,1.2,2827,50,20,30,353.4,141.3,94.2,,,biasa,"sea food, terigu",tidak ada pantangan,seafood|gluten,
+UMUM_0261,UMUM,40,LAKI_LAKI,91.9,165.7,33.48,Obese,1.55,2926,50,20,30,365.8,146.3,97.5,,,biasa,"udnag, susu, cumi-cumi",Tidak ada,udang|susu|cumi,
+UMUM_0262,UMUM,24,PEREMPUAN,49.1,168.5,17.29,Underweight,1.2,1584,50,20,30,198.0,79.2,52.8,,,biasa,Tidak ada,-,,
+UMUM_0263,UMUM,40,LAKI_LAKI,60.5,150.1,26.87,Overweight,1.375,1914,50,20,30,239.2,95.7,63.8,,,biasa,Tidak ada.,"sosis, garam",,olahan|tinggi_natrium
+UMUM_0264,UMUM,69,PEREMPUAN,88.7,153.6,37.61,Obese,1.375,1987,50,20,30,248.4,99.3,66.2,,,biasa,Tidak ada,garam,,tinggi_natrium
+UMUM_0265,UMUM,48,PEREMPUAN,44.4,144.4,21.29,Normal,1.2,1317,50,20,30,164.6,65.8,43.9,,,biasa,Udang dan wijen,Tidak ada,udang|wijen,
+UMUM_0266,UMUM,51,LAKI_LAKI,87.7,172.9,29.34,Overweight,1.55,2795,50,20,30,349.4,139.8,93.2,,,biasa,-,spicy,,pedas
+UMUM_0267,UMUM,49,LAKI_LAKI,51.5,172.6,17.28,Underweight,1.55,2059,50,20,30,257.4,103.0,68.6,,,biasa,,makanan berminyak,,berminyak
+UMUM_0268,UMUM,77,PEREMPUAN,60.5,163.2,22.73,Normal,1.2,1415,55,15,30,194.6,53.1,47.2,,,biasa,gandum,,gluten,
+UMUM_0269,UMUM,52,LAKI_LAKI,58.9,160.6,22.83,Normal,1.55,2097,45,25,30,235.9,131.1,69.9,,,biasa,Tidak ada,,,
+UMUM_0270,UMUM,50,LAKI_LAKI,52.4,169.4,18.25,Underweight,1.375,1814,50,20,30,226.8,90.7,60.5,,,biasa,none,garam,,tinggi_natrium
+UMUM_0271,UMUM,63,PEREMPUAN,67.2,156.8,27.32,Overweight,1.55,1987,50,20,30,248.4,99.3,66.2,,,biasa,tdk ada,tidak ada pantangan,,
+UMUM_0272,UMUM,43,LAKI_LAKI,66.0,154.8,27.53,Overweight,1.55,2281,50,20,30,285.1,114.0,76.0,,,biasa,Seafood / Telor,tidak ada pantangan,seafood|telur,
+UMUM_0273,UMUM,29,PEREMPUAN,95.1,163.2,35.7,Obese,1.2,2048,50,25,25,256.0,128.0,56.9,,,biasa,Seafood,sosis,seafood,olahan
+UMUM_0274,UMUM,47,PEREMPUAN,42.5,151.7,18.46,Underweight,1.2,1329,50,20,30,166.1,66.5,44.3,,,biasa,kacang,-,kacang,
+UMUM_0275,UMUM,29,LAKI_LAKI,73.5,158.1,29.39,Overweight,1.55,2584,45,25,30,290.7,161.5,86.1,,,biasa,telur ayam,pedas,telur,pedas
+UMUM_0276,UMUM,39,LAKI_LAKI,54.5,163.2,20.45,Normal,1.725,2381,50,20,30,297.6,119.0,79.4,,,biasa,tdk ada,,,
+UMUM_0277,UMUM,58,PEREMPUAN,39.3,155.2,16.31,Underweight,1.9,1977,50,20,30,247.1,98.8,65.9,,,biasa,Tidak ada.,-,,
+UMUM_0278,UMUM,44,LAKI_LAKI,85.9,162.7,32.45,Obese,1.725,3054,50,20,30,381.8,152.7,101.8,,,biasa,,tidak ada pantangan,,
+UMUM_0279,UMUM,35,PEREMPUAN,68.0,168.5,23.95,Normal,1.2,1736,50,20,30,217.0,86.8,57.9,,,biasa,tidak ada alergi,tidak ada pantangan,,
+UMUM_0280,UMUM,80,PEREMPUAN,48.4,162.6,18.31,Underweight,1.375,1447,50,20,30,180.9,72.3,48.2,,,biasa,none,kafein dan diabetes,,kafein|tinggi_gula
+UMUM_0281,UMUM,42,PEREMPUAN,77.2,160.9,29.83,Overweight,1.725,2549,50,20,30,318.6,127.5,85.0,,,biasa,Tidak ada.,Tidak ada,,
+UMUM_0282,UMUM,50,LAKI_LAKI,102.9,171.2,35.12,Obese,1.2,2405,50,20,30,300.6,120.2,80.2,,,biasa,Tidak ada,fried food,,berminyak
+UMUM_0283,UMUM,55,LAKI_LAKI,61.2,177.0,19.53,Normal,1.55,2240,45,25,30,252.0,140.0,74.7,,,biasa,Udang,manis,udang,tinggi_gula
+UMUM_0284,UMUM,51,PEREMPUAN,54.8,164.5,20.25,Normal,1.55,1927,50,20,30,240.9,96.3,64.2,,,biasa,,-,,
+UMUM_0285,UMUM,45,PEREMPUAN,75.8,163.4,28.4,Overweight,1.2,1752,50,20,30,219.0,87.6,58.4,,,biasa,-,tidak ada pantangan,,
+UMUM_0286,UMUM,80,LAKI_LAKI,51.0,168.6,17.94,Underweight,1.2,1352,50,20,30,169.0,67.6,45.1,,,biasa,Udang,kafein,udang,kafein
+UMUM_0287,UMUM,43,PEREMPUAN,71.4,154.8,29.79,Overweight,1.55,2172,50,20,30,271.5,108.6,72.4,,,biasa,no allergies,tidak ada pantangan,,
+UMUM_0288,UMUM,51,PEREMPUAN,49.3,157.9,19.77,Normal,1.55,1816,50,20,30,227.0,90.8,60.5,,,biasa,no allergies,Tidak ada,,
+UMUM_0289,UMUM,53,PEREMPUAN,41.9,157.6,16.87,Underweight,1.55,1695,50,20,30,211.9,84.8,56.5,,,biasa,,tidak ada pantangan,,
+UMUM_0290,UMUM,59,LAKI_LAKI,64.8,173.9,21.42,Normal,1.2,1747,50,20,30,218.4,87.3,58.2,,,biasa,makanan laut,-,seafood,
+UMUM_0291,UMUM,76,PEREMPUAN,35.8,145.6,16.89,Underweight,1.375,1238,50,20,30,154.8,61.9,41.3,,,biasa,no allergies,makanan pedas,,pedas
+UMUM_0292,UMUM,51,LAKI_LAKI,92.5,178.0,29.2,Overweight,1.375,2602,50,20,30,325.2,130.1,86.7,,,biasa,,-,,
+UMUM_0293,UMUM,64,LAKI_LAKI,62.9,164.1,23.37,Normal,1.375,1863,50,20,30,232.9,93.2,62.1,,,biasa,none,nangka,,free
+UMUM_0294,UMUM,41,PEREMPUAN,51.2,164.7,18.88,Normal,1.2,1504,55,15,30,206.8,56.4,50.1,,,biasa,Tidak ada,Tidak ada,,
+UMUM_0295,UMUM,44,LAKI_LAKI,85.1,169.7,29.55,Overweight,1.375,2465,45,25,30,277.3,154.1,82.2,,,biasa,sea food,kopi dan fried food,seafood,kafein|berminyak
+UMUM_0296,UMUM,78,PEREMPUAN,52.2,153.0,22.3,Normal,1.375,1467,50,20,30,183.4,73.3,48.9,,,biasa,Tidak ada.,-,,
+UMUM_0297,UMUM,24,PEREMPUAN,53.8,154.6,22.51,Normal,1.2,1584,50,20,30,198.0,79.2,52.8,,,biasa,,"mie instan, darah tinggi",,olahan|tinggi_natrium
+UMUM_0298,UMUM,41,PEREMPUAN,65.0,158.3,25.93,Overweight,1.375,1872,50,20,30,234.0,93.6,62.4,,,biasa,Tidak ada,Tidak ada,,
+UMUM_0299,UMUM,48,LAKI_LAKI,97.0,168.3,34.25,Obese,1.55,2981,50,20,30,372.6,149.1,99.4,,,biasa,,-,,
+UMUM_0300,UMUM,40,PEREMPUAN,40.7,148.7,18.4,Underweight,1.55,1723,50,20,30,215.4,86.2,57.4,,,biasa,tidak ada alergi,pedas,,pedas
+UMUM_0301,UMUM,80,PEREMPUAN,48.6,140.0,24.8,Normal,1.375,1353,50,20,30,169.1,67.7,45.1,,,biasa,none,"tidak makan daging, bersantan",,vegetarian|santan
+UMUM_0302,UMUM,42,LAKI_LAKI,66.2,182.8,19.81,Normal,1.725,2784,50,20,30,348.0,139.2,92.8,,,biasa,no allergies,pedas,,pedas
+UMUM_0303,UMUM,36,LAKI_LAKI,78.0,178.8,24.39,Normal,1.2,2145,50,20,30,268.1,107.2,71.5,,,biasa,Tidak ada,-,,
+UMUM_0304,UMUM,46,LAKI_LAKI,71.3,161.9,27.2,Overweight,1.375,2144,50,20,30,268.0,107.2,71.5,,,biasa,tdk ada,,,
+UMUM_0305,UMUM,80,PEREMPUAN,55.0,152.4,23.69,Normal,1.725,1866,50,20,30,233.2,93.3,62.2,,,biasa,no allergies,kopi,,kafein
+UMUM_0306,UMUM,33,LAKI_LAKI,69.6,151.9,30.15,Obese,1.375,2149,50,20,30,268.6,107.5,71.6,,,biasa,Tidak ada,Tidak ada,,
+UMUM_0307,UMUM,63,LAKI_LAKI,127.2,178.6,39.88,Obese,1.375,3151,50,20,30,393.9,157.6,105.0,,,biasa,no allergies,"bersantan, mie instan",,santan|olahan
+UMUM_0308,UMUM,64,LAKI_LAKI,59.1,164.6,21.81,Normal,1.375,1797,50,20,30,224.6,89.8,59.9,,,biasa,no allergies,terong,,free
+UMUM_0309,UMUM,69,PEREMPUAN,69.1,153.0,29.5,Overweight,1.375,1735,60,15,25,260.2,65.1,48.2,,,biasa,Telor,Tidak ada,telur,
+UMUM_0310,UMUM,35,PEREMPUAN,80.9,150.0,35.96,Obese,1.725,2603,60,15,25,390.4,97.6,72.3,,,biasa,makanan laut,Tidak ada,seafood,
+UMUM_0311,UMUM,32,PEREMPUAN,48.9,159.8,19.14,Normal,1.375,1728,50,20,30,216.0,86.4,57.6,,,biasa,Tidak ada.,makanan berminyak; jengkol,,berminyak|free
+UMUM_0312,UMUM,63,LAKI_LAKI,80.3,164.1,29.83,Overweight,1.725,2749,50,20,30,343.6,137.4,91.6,,,biasa,telur,,telur,
+UMUM_0313,UMUM,51,LAKI_LAKI,62.9,163.0,23.68,Normal,1.55,2207,50,20,30,275.9,110.3,73.6,,,biasa,,"bersantan, tidak makan daging",,santan|vegetarian
+UMUM_0314,UMUM,70,PEREMPUAN,42.4,157.6,17.07,Underweight,1.2,1230,50,20,30,153.8,61.5,41.0,,,biasa,Tidak ada.,petai,,free
+UMUM_0315,UMUM,64,LAKI_LAKI,74.8,149.7,33.38,Obese,1.375,1988,55,15,30,273.4,74.5,66.3,,,biasa,Tidak ada.,Tidak ada,,
+UMUM_0316,UMUM,52,PEREMPUAN,43.9,165.7,15.99,Underweight,1.375,1570,50,25,25,196.2,98.1,43.6,,,biasa,kedelai; susu,,kedelai|susu,
+UMUM_0317,UMUM,74,PEREMPUAN,53.9,162.5,20.4,Normal,1.9,2145,50,20,30,268.1,107.2,71.5,,,biasa,tdk ada,-,,
+UMUM_0318,UMUM,30,LAKI_LAKI,58.1,172.2,19.6,Normal,1.2,1827,50,20,30,228.4,91.3,60.9,,,biasa,tidak ada alergi,jengkol dan Tinggi Natrium,,free|tinggi_natrium
+UMUM_0319,UMUM,39,PEREMPUAN,63.5,152.5,27.29,Overweight,1.2,1606,50,20,30,200.8,80.3,53.5,,,biasa,Tidak ada,kambing dan fried food,,daging_merah|berminyak
+UMUM_0320,UMUM,80,PEREMPUAN,49.4,151.1,21.62,Normal,1.375,1411,50,20,30,176.4,70.5,47.0,,,biasa,"Seafood, cumi-cumi",,seafood|cumi,
+UMUM_0321,UMUM,51,LAKI_LAKI,47.0,158.2,18.77,Normal,1.375,1633,50,20,30,204.1,81.7,54.4,,,biasa,tidak ada alergi,kopi,,kafein
+UMUM_0322,UMUM,48,PEREMPUAN,50.9,149.6,22.74,Normal,1.375,1614,50,25,25,201.8,100.9,44.8,,,biasa,sea food / wijen,garam,seafood|wijen,tinggi_natrium
+UMUM_0323,UMUM,46,LAKI_LAKI,42.7,162.3,16.21,Underweight,1.55,1826,50,20,30,228.2,91.3,60.9,,,biasa,no allergies,"makanan pedas, sosis",,pedas|olahan
+UMUM_0324,UMUM,80,PEREMPUAN,70.3,153.1,29.98,Overweight,1.375,1685,50,20,30,210.6,84.2,56.2,,,biasa,"gandum, seafood",tinggi gula,gluten|seafood,tinggi_gula
+UMUM_0325,UMUM,41,PEREMPUAN,42.8,151.6,18.63,Normal,1.375,1561,50,20,30,195.1,78.0,52.0,,,biasa,Ikan laut / udang,fried food,ikan|udang,berminyak
+UMUM_0326,UMUM,31,PEREMPUAN,48.1,152.8,20.59,Normal,1.2,1478,50,20,30,184.8,73.9,49.3,,,biasa,tidak ada alergi,Tidak ada,,
+UMUM_0327,UMUM,61,LAKI_LAKI,104.1,167.6,37.05,Obese,1.55,3009,50,20,30,376.1,150.4,100.3,,,biasa,Tidak ada.,Tidak ada,,
+UMUM_0328,UMUM,55,PEREMPUAN,56.5,158.3,22.55,Normal,1.375,1681,50,20,30,210.1,84.0,56.0,,,biasa,kacng dan udang rebon,Pedas,kacang|udang,pedas
+UMUM_0329,UMUM,45,LAKI_LAKI,45.4,170.7,15.58,Underweight,1.375,1733,50,20,30,216.6,86.7,57.8,,,biasa,sea food,tidak ada pantangan,seafood,
+UMUM_0330,UMUM,80,PEREMPUAN,93.5,161.9,35.67,Obese,1.2,1761,50,20,30,220.1,88.0,58.7,,,biasa,sesame,tidak ada pantangan,wijen,
+UMUM_0331,UMUM,71,PEREMPUAN,87.1,155.3,36.11,Obese,1.375,1962,45,25,30,220.7,122.6,65.4,,,biasa,udnag / soy,,udang|kedelai,
+UMUM_0332,UMUM,42,PEREMPUAN,80.4,154.7,33.58,Obese,1.55,2307,50,20,30,288.4,115.3,76.9,,,biasa,,tidak ada pantangan,,
+UMUM_0333,UMUM,49,PEREMPUAN,76.0,163.1,28.59,Overweight,1.2,1732,50,20,30,216.5,86.6,57.7,,,biasa,no allergies,daging merah / makanan pedas,,daging_merah|pedas
+UMUM_0334,UMUM,55,LAKI_LAKI,82.7,166.3,29.92,Overweight,1.55,2607,55,15,30,358.5,97.8,86.9,,,biasa,kerang / Susu Sapi,-,kerang|susu,
+UMUM_0335,UMUM,40,LAKI_LAKI,58.7,167.1,21.02,Normal,1.2,1740,50,20,30,217.5,87.0,58.0,,,biasa,Tidak ada,-,,
+UMUM_0336,UMUM,59,PEREMPUAN,40.2,160.5,15.61,Underweight,1.375,1459,50,20,30,182.4,73.0,48.6,,,biasa,gandum,Tidak ada,gluten,
+UMUM_0337,UMUM,54,LAKI_LAKI,72.5,172.5,24.36,Normal,1.375,2174,50,20,30,271.8,108.7,72.5,,,biasa,tidak ada alergi,makanan berminyak,,berminyak
+UMUM_0338,UMUM,64,LAKI_LAKI,50.5,158.1,20.2,Normal,1.2,1392,50,25,25,174.0,87.0,38.7,,,biasa,cumi,berminyak,cumi,berminyak
+UMUM_0339,UMUM,56,LAKI_LAKI,55.8,170.9,19.1,Normal,1.2,1606,50,20,30,200.8,80.3,53.5,,,biasa,"makanan laut, kacang, telur ayam",Tidak ada,seafood|kacang|telur,
+UMUM_0340,UMUM,68,LAKI_LAKI,61.9,171.8,20.97,Normal,1.725,2339,50,25,25,292.4,146.2,65.0,,,biasa,udang,,udang,
+UMUM_0341,UMUM,45,LAKI_LAKI,96.6,157.4,39.0,Obese,1.375,2588,50,20,30,323.5,129.4,86.3,,,biasa,telur dan Seafood,Tidak ada,telur|seafood,
+UMUM_0342,UMUM,34,LAKI_LAKI,60.8,160.9,23.48,Normal,1.55,2297,55,15,30,315.8,86.1,76.6,,,biasa,makanan laut; Kacang Tanah,,seafood|kacang,
+UMUM_0343,UMUM,59,LAKI_LAKI,63.6,159.7,24.93,Normal,1.2,1646,50,20,30,205.8,82.3,54.9,,,biasa,"susu, udang rebon",tidak ada pantangan,susu|udang,
+UMUM_0344,UMUM,80,LAKI_LAKI,104.2,167.5,37.15,Obese,1.2,2201,55,15,30,302.6,82.5,73.4,,,biasa,Ikan laut; cumi-cumi,,ikan|cumi,
+UMUM_0345,UMUM,64,LAKI_LAKI,83.9,170.0,29.03,Overweight,1.2,1998,50,20,30,249.8,99.9,66.6,,,biasa,-,Tidak ada,,
+UMUM_0346,UMUM,78,PEREMPUAN,49.5,144.8,23.59,Normal,1.375,1397,50,20,30,174.6,69.8,46.6,,,biasa,kerang,,kerang,
+UMUM_0347,UMUM,48,LAKI_LAKI,99.4,167.3,35.51,Obese,1.55,3023,50,20,30,377.9,151.2,100.8,,,biasa,udnag,,udang,
+UMUM_0348,UMUM,40,PEREMPUAN,48.6,149.4,21.76,Normal,1.55,1839,55,15,30,252.9,69.0,61.3,,,biasa,kerang-kerangan,mie instan; kopi,kerang,olahan|kafein
+UMUM_0349,UMUM,65,PEREMPUAN,60.6,148.3,27.57,Overweight,1.725,2046,50,20,30,255.8,102.3,68.2,,,biasa,Tidak ada.,,,
+UMUM_0350,UMUM,37,LAKI_LAKI,60.5,160.3,23.55,Normal,1.55,2260,50,20,30,282.5,113.0,75.3,,,biasa,no allergies,,,
+UMUM_0351,UMUM,62,LAKI_LAKI,73.8,175.9,23.85,Normal,1.2,1883,50,20,30,235.4,94.2,62.8,,,biasa,susu sapi,tinggi gula,susu,tinggi_gula
+UMUM_0352,UMUM,51,LAKI_LAKI,53.7,164.1,19.93,Normal,1.55,2024,50,20,30,253.0,101.2,67.5,,,biasa,Tidak ada.,"vegetarian, gorengan",,vegetarian|berminyak
+UMUM_0353,UMUM,47,LAKI_LAKI,77.3,161.8,29.51,Overweight,1.9,3104,50,20,30,388.0,155.2,103.5,,,biasa,ikan,pedas dan garam,ikan,pedas|tinggi_natrium
+UMUM_0354,UMUM,70,LAKI_LAKI,69.7,167.1,24.96,Normal,1.375,1962,50,20,30,245.2,98.1,65.4,,,biasa,none,kambing dan diabetes,,daging_merah|tinggi_gula
+UMUM_0355,UMUM,44,PEREMPUAN,72.5,143.6,35.15,Obese,1.375,1887,50,20,30,235.9,94.3,62.9,,,biasa,Udang / fish,kopi / garam,udang|ikan,kafein|tinggi_natrium
+UMUM_0356,UMUM,80,LAKI_LAKI,68.9,171.9,23.32,Normal,1.2,1659,60,15,25,248.8,62.2,46.1,,,biasa,Tidak ada,pedas; daging sapi,,pedas|daging_merah
+UMUM_0357,UMUM,55,PEREMPUAN,44.8,162.4,16.99,Underweight,1.725,1944,50,20,30,243.0,97.2,64.8,,,biasa,,santan,,santan
+UMUM_0358,UMUM,58,LAKI_LAKI,87.9,173.8,29.09,Overweight,1.2,2125,50,20,30,265.6,106.2,70.8,,,biasa,no allergies,,,
+UMUM_0359,UMUM,55,PEREMPUAN,56.8,150.9,24.95,Normal,1.55,1863,50,20,30,232.9,93.2,62.1,,,biasa,none,tidak ada pantangan,,
+UMUM_0360,UMUM,49,LAKI_LAKI,53.4,147.4,24.58,Normal,1.375,1695,50,20,30,211.9,84.8,56.5,,,biasa,none,Tidak ada,,
+UMUM_0361,UMUM,36,PEREMPUAN,42.3,153.2,18.01,Underweight,1.375,1592,50,20,30,199.0,79.6,53.1,,,biasa,tdk ada,,,
+UMUM_0362,UMUM,56,LAKI_LAKI,63.9,155.1,26.58,Overweight,1.55,2124,55,15,30,292.1,79.7,70.8,,,biasa,tdk ada,,,
+UMUM_0363,UMUM,49,PEREMPUAN,50.9,153.9,21.5,Normal,1.375,1626,50,20,30,203.2,81.3,54.2,,,biasa,Tidak ada,tidak ada pantangan,,
+UMUM_0364,UMUM,44,LAKI_LAKI,110.0,170.9,37.68,Obese,1.375,2932,50,20,30,366.5,146.6,97.7,,,biasa,crab,tidak ada pantangan,kepiting,
+UMUM_0365,UMUM,37,LAKI_LAKI,55.9,164.4,20.69,Normal,1.2,1699,50,20,30,212.4,85.0,56.6,,,biasa,,pedas,,pedas
+UMUM_0366,UMUM,64,PEREMPUAN,68.0,156.1,27.92,Overweight,1.375,1764,50,20,30,220.5,88.2,58.8,,,biasa,Tidak ada.,tidak makan daging,,vegetarian
+UMUM_0367,UMUM,56,LAKI_LAKI,64.5,170.6,22.16,Normal,1.375,1998,50,20,30,249.8,99.9,66.6,,,biasa,none,-,,
+UMUM_0368,UMUM,80,LAKI_LAKI,76.5,174.1,25.25,Overweight,1.2,1793,50,25,25,224.1,112.1,49.8,,,biasa,kepiting dan sea food,"gorengan, diabetes",kepiting|seafood,berminyak|tinggi_gula
+UMUM_0369,UMUM,36,LAKI_LAKI,60.0,173.0,20.04,Normal,1.55,2353,50,20,30,294.1,117.7,78.4,,,biasa,none,"berminyak, makanan olahan",,berminyak|olahan
+UMUM_0370,UMUM,76,LAKI_LAKI,49.1,157.0,19.93,Normal,1.55,1655,50,20,30,206.9,82.8,55.2,,,biasa,Tidak ada,tidak ada pantangan,,
+UMUM_0371,UMUM,58,LAKI_LAKI,57.4,167.0,20.57,Normal,1.375,1828,50,20,30,228.5,91.4,60.9,,,biasa,dairy,-,susu,
+UMUM_0372,UMUM,64,PEREMPUAN,78.1,156.6,31.86,Obese,1.725,2376,50,20,30,297.0,118.8,79.2,,,biasa,Tidak ada,berminyak,,berminyak
+UMUM_0373,UMUM,22,PEREMPUAN,45.5,154.9,18.97,Normal,1.375,1723,55,15,30,236.9,64.6,57.4,,,biasa,Tidak ada,-,,
+UMUM_0374,UMUM,42,PEREMPUAN,46.3,151.5,20.18,Normal,1.55,1803,50,20,30,225.4,90.2,60.1,,,biasa,-,gula / pedas,,tinggi_gula|pedas
+UMUM_0375,UMUM,34,PEREMPUAN,64.8,150.9,28.45,Overweight,1.2,1641,45,25,30,184.6,102.6,54.7,,,biasa,none,,,
+UMUM_0376,UMUM,56,LAKI_LAKI,93.1,168.7,32.73,Obese,1.2,2193,50,20,30,274.1,109.7,73.1,,,biasa,fish,-,ikan,
+UMUM_0377,UMUM,43,PEREMPUAN,41.1,140.0,20.97,Normal,1.55,1667,50,20,30,208.4,83.3,55.6,,,biasa,no allergies,makanan berminyak,,berminyak
+UMUM_0378,UMUM,41,PEREMPUAN,63.4,147.5,29.15,Overweight,1.375,1806,50,20,30,225.8,90.3,60.2,,,biasa,kepiting,"sosis, spicy",kepiting,olahan|pedas
+UMUM_0379,UMUM,49,PEREMPUAN,70.6,148.7,31.93,Obese,1.2,1619,50,20,30,202.4,81.0,54.0,,,biasa,tidak ada alergi,diabetes,,tinggi_gula
+UMUM_0380,UMUM,25,LAKI_LAKI,59.2,172.6,19.88,Normal,1.375,2155,50,20,30,269.4,107.8,71.8,,,biasa,,Tidak ada,,
+UMUM_0381,UMUM,51,PEREMPUAN,57.2,153.2,24.38,Normal,1.55,1907,50,20,30,238.4,95.3,63.6,,,biasa,kacng,-,kacang,
+UMUM_0382,UMUM,32,LAKI_LAKI,79.2,166.6,28.53,Overweight,1.2,2121,50,20,30,265.1,106.0,70.7,,,biasa,Tidak ada,Pedas,,pedas
+UMUM_0383,UMUM,56,LAKI_LAKI,105.5,165.8,38.38,Obese,1.725,3415,50,20,30,426.9,170.8,113.8,,,biasa,no allergies,"jengkol, bersantan",,free|santan
+UMUM_0384,UMUM,35,PEREMPUAN,40.2,149.2,18.07,Underweight,1.2,1356,50,20,30,169.5,67.8,45.2,,,biasa,tidak ada alergi,-,,
+UMUM_0385,UMUM,34,PEREMPUAN,43.2,155.7,17.81,Underweight,1.55,1833,50,20,30,229.1,91.7,61.1,,,biasa,"egg, terigu",Tidak ada,telur|gluten,
+UMUM_0386,UMUM,72,LAKI_LAKI,70.9,177.3,22.55,Normal,1.2,1776,50,20,30,222.0,88.8,59.2,,,biasa,sea food,tidak ada pantangan,seafood,
+UMUM_0387,UMUM,35,PEREMPUAN,70.8,163.2,26.59,Overweight,1.2,1747,50,20,30,218.4,87.3,58.2,,,biasa,no allergies,tidak ada pantangan,,
+UMUM_0388,UMUM,62,PEREMPUAN,51.8,145.3,24.55,Normal,1.2,1330,50,20,30,166.2,66.5,44.3,,,biasa,susu,santan; durian,susu,santan|free
+UMUM_0389,UMUM,46,PEREMPUAN,62.6,154.7,26.16,Overweight,1.375,1796,50,20,30,224.5,89.8,59.9,,,biasa,udnag,-,udang,
+UMUM_0390,UMUM,61,LAKI_LAKI,103.1,171.9,34.88,Obese,1.2,2338,50,20,30,292.2,116.9,77.9,,,biasa,sea food dan egg dan udnag,"pedas, Tinggi Natrium",seafood|telur|udang,pedas|tinggi_natrium
+UMUM_0391,UMUM,67,LAKI_LAKI,58.7,180.3,18.07,Underweight,1.2,1631,50,20,30,203.9,81.5,54.4,,,biasa,-,tidak ada pantangan,,
+UMUM_0392,UMUM,36,LAKI_LAKI,47.5,170.9,16.27,Underweight,1.55,2078,50,20,30,259.8,103.9,69.3,,,biasa,Tidak ada.,-,,
+UMUM_0393,UMUM,80,PEREMPUAN,70.2,162.3,26.67,Overweight,1.375,1723,50,20,30,215.4,86.2,57.4,,,biasa,tdk ada,petai,,free
+UMUM_0394,UMUM,40,LAKI_LAKI,77.7,162.2,29.52,Overweight,1.55,2605,50,20,30,325.6,130.2,86.8,,,biasa,Tidak ada,-,,
+UMUM_0395,UMUM,49,LAKI_LAKI,59.4,170.9,20.34,Normal,1.375,1961,50,20,30,245.1,98.0,65.4,,,biasa,Tidak ada.,tidak ada pantangan,,
+UMUM_0396,UMUM,30,PEREMPUAN,72.7,157.2,29.43,Overweight,1.375,2031,50,20,30,253.9,101.5,67.7,,,biasa,seafood,-,seafood,
+UMUM_0397,UMUM,39,PEREMPUAN,68.7,155.5,28.41,Overweight,1.9,2652,50,20,30,331.5,132.6,88.4,,,biasa,none,diabetes,,tinggi_gula
+UMUM_0398,UMUM,52,PEREMPUAN,49.9,157.3,20.16,Normal,1.55,1815,50,20,30,226.9,90.8,60.5,,,biasa,,,,
+UMUM_0399,UMUM,57,LAKI_LAKI,77.9,163.2,29.25,Overweight,1.2,1910,50,20,30,238.8,95.5,63.7,,,biasa,telur ayam,,telur,
+UMUM_0400,UMUM,55,LAKI_LAKI,74.5,167.6,26.51,Overweight,1.375,2171,50,20,30,271.4,108.5,72.4,,,biasa,none,terong,,free
+UMUM_0401,UMUM,80,PEREMPUAN,73.5,164.7,27.08,Overweight,1.55,2001,50,20,30,250.1,100.0,66.7,,,biasa,kedele,-,kedelai,
+UMUM_0402,UMUM,57,PEREMPUAN,48.5,156.3,19.85,Normal,1.725,1955,50,20,30,244.4,97.8,65.2,,,biasa,kedelai,pedas,kedelai,pedas
+UMUM_0403,UMUM,37,PEREMPUAN,49.5,161.5,18.97,Normal,1.375,1713,50,25,25,214.1,107.1,47.6,,,biasa,tidak ada alergi,kafein dan fried food,,kafein|berminyak
+UMUM_0404,UMUM,38,PEREMPUAN,99.0,158.5,39.39,Obese,1.55,2619,50,20,30,327.4,130.9,87.3,,,biasa,susu sapi,-,susu,
+UMUM_0405,UMUM,80,LAKI_LAKI,59.0,166.6,21.25,Normal,1.55,1898,50,20,30,237.2,94.9,63.3,,,biasa,Tidak ada.,tinggi gula,,tinggi_gula
+UMUM_0406,UMUM,60,LAKI_LAKI,71.3,174.9,23.31,Normal,1.725,2660,50,20,30,332.5,133.0,88.7,,,biasa,,kopi,,kafein
+UMUM_0407,UMUM,80,LAKI_LAKI,59.3,166.0,21.53,Normal,1.55,1899,45,25,30,213.6,118.7,63.3,,,biasa,sesame,tidak ada pantangan,wijen,
+UMUM_0408,UMUM,39,LAKI_LAKI,104.0,164.0,38.69,Obese,1.375,2815,50,20,30,351.9,140.8,93.8,,,biasa,,Tidak ada,,
+UMUM_0409,UMUM,80,PEREMPUAN,77.2,163.1,29.01,Overweight,1.375,1816,50,20,30,227.0,90.8,60.5,,,biasa,telur,Pedas; makanan asin,telur,pedas|tinggi_natrium
+UMUM_0410,UMUM,60,PEREMPUAN,48.5,146.6,22.56,Normal,1.2,1309,55,15,30,180.0,49.1,43.6,,,biasa,no allergies,spicy dan gula,,pedas|tinggi_gula
+UMUM_0411,UMUM,30,PEREMPUAN,61.0,158.3,24.34,Normal,1.375,1887,50,20,30,235.9,94.3,62.9,,,biasa,tdk ada,tidak ada pantangan,,
+UMUM_0412,UMUM,36,PEREMPUAN,46.0,152.3,19.83,Normal,1.375,1635,50,20,30,204.4,81.8,54.5,,,biasa,-,makanan asin,,tinggi_natrium
+UMUM_0413,UMUM,31,PEREMPUAN,62.4,158.5,24.82,Normal,1.375,1900,50,20,30,237.5,95.0,63.3,,,biasa,tidak ada alergi,Tinggi Natrium,,tinggi_natrium
+UMUM_0414,UMUM,74,LAKI_LAKI,107.2,168.1,37.95,Obese,1.375,2628,50,20,30,328.5,131.4,87.6,,,biasa,Tidak ada.,spicy / bersantan,,pedas|santan
+UMUM_0415,UMUM,79,PEREMPUAN,45.2,154.0,19.06,Normal,1.55,1551,50,20,30,193.9,77.5,51.7,,,biasa,Udang,durian,udang,free
+UMUM_0416,UMUM,45,PEREMPUAN,53.5,146.2,25.04,Overweight,1.2,1440,50,20,30,180.0,72.0,48.0,,,biasa,kacang tanah; crab,tidak ada pantangan,kacang|kepiting,
+UMUM_0417,UMUM,35,PEREMPUAN,75.1,157.6,30.24,Obese,1.375,2033,50,20,30,254.1,101.7,67.8,,,biasa,Tidak ada,spicy,,pedas
+UMUM_0418,UMUM,43,LAKI_LAKI,76.2,165.7,27.76,Overweight,1.725,2864,50,20,30,358.0,143.2,95.5,,,biasa,"Susu Sapi, cumi",Tidak ada,susu|cumi,
+UMUM_0419,UMUM,35,LAKI_LAKI,48.0,171.3,16.35,Underweight,1.2,1626,50,20,30,203.2,81.3,54.2,,,biasa,Tidak ada.,tidak ada pantangan,,
+UMUM_0420,UMUM,65,LAKI_LAKI,84.0,169.6,29.2,Overweight,1.725,2861,60,15,25,429.1,107.3,79.5,,,biasa,"sea food, gandum",spicy,seafood|gluten,pedas
+UMUM_0421,UMUM,50,PEREMPUAN,51.5,151.7,22.39,Normal,1.55,1825,50,20,30,228.1,91.2,60.8,,,biasa,tdk ada,,,
+UMUM_0422,UMUM,64,PEREMPUAN,81.6,155.1,33.94,Obese,1.375,1932,50,20,30,241.5,96.6,64.4,,,biasa,tdk ada,manis,,tinggi_gula
+UMUM_0423,UMUM,65,PEREMPUAN,75.5,142.9,36.95,Obese,1.55,2026,50,20,30,253.2,101.3,67.5,,,biasa,sea food,pedas,seafood,pedas
+UMUM_0424,UMUM,50,LAKI_LAKI,68.7,166.4,24.82,Normal,1.375,2095,50,20,30,261.9,104.8,69.8,,,biasa,dairy,daging sapi,susu,daging_merah
+UMUM_0425,UMUM,46,PEREMPUAN,52.1,146.8,24.19,Normal,1.375,1629,50,20,30,203.6,81.5,54.3,,,biasa,kepiting,kopi,kepiting,kafein
+UMUM_0426,UMUM,43,PEREMPUAN,86.8,156.9,35.26,Obese,1.2,1860,50,20,30,232.5,93.0,62.0,,,biasa,telur,-,telur,
+UMUM_0427,UMUM,28,PEREMPUAN,61.2,164.5,22.62,Normal,1.375,1927,55,15,30,265.0,72.3,64.2,,,biasa,Udang,Tinggi Natrium,udang,tinggi_natrium
+UMUM_0428,UMUM,41,PEREMPUAN,59.0,147.6,27.09,Overweight,1.2,1527,50,20,30,190.9,76.3,50.9,,,biasa,none,,,
+UMUM_0429,UMUM,53,PEREMPUAN,72.7,161.6,27.85,Overweight,1.55,2156,50,20,30,269.5,107.8,71.9,,,biasa,"egg, Seafood, Susu Sapi",Tidak ada,telur|seafood|susu,
+UMUM_0430,UMUM,77,LAKI_LAKI,50.6,170.5,17.42,Underweight,1.2,1377,50,20,30,172.1,68.8,45.9,,,biasa,tdk ada,,,
+UMUM_0431,UMUM,57,LAKI_LAKI,60.8,171.9,20.58,Normal,1.375,1931,50,20,30,241.4,96.5,64.4,,,biasa,Tidak ada.,,,
+UMUM_0432,UMUM,67,LAKI_LAKI,58.5,171.7,19.84,Normal,1.2,1579,50,20,30,197.4,79.0,52.6,,,biasa,no allergies,-,,
+UMUM_0433,UMUM,66,LAKI_LAKI,69.6,159.7,27.27,Overweight,1.55,2190,50,20,30,273.8,109.5,73.0,,,biasa,ikan,tidak ada pantangan,ikan,
+UMUM_0434,UMUM,62,LAKI_LAKI,76.2,163.7,28.45,Overweight,1.2,1851,50,20,30,231.4,92.5,61.7,,,biasa,Seafood dan shrimp,-,seafood|udang,
+UMUM_0435,UMUM,53,PEREMPUAN,42.5,154.2,17.87,Underweight,1.375,1497,45,25,30,168.4,93.6,49.9,,,biasa,Tidak ada,-,,
+UMUM_0436,UMUM,72,PEREMPUAN,52.4,164.7,19.32,Normal,1.2,1357,45,25,30,152.7,84.8,45.2,,,biasa,Tidak ada.,Tidak ada,,
+UMUM_0437,UMUM,32,PEREMPUAN,44.1,152.9,18.86,Normal,1.375,1637,45,25,30,184.2,102.3,54.6,,,biasa,none,diabetes dan nangka,,tinggi_gula|free
+UMUM_0438,UMUM,44,LAKI_LAKI,58.8,164.9,21.63,Normal,1.55,2197,50,20,30,274.6,109.8,73.2,,,biasa,Tidak ada,,,
+UMUM_0439,UMUM,53,PEREMPUAN,68.7,157.1,27.83,Overweight,1.375,1843,50,20,30,230.4,92.2,61.4,,,biasa,telur ayam; laktosa,pedas; berminyak,telur|susu,pedas|berminyak
+UMUM_0440,UMUM,71,LAKI_LAKI,58.6,160.3,22.81,Normal,1.375,1704,50,20,30,213.0,85.2,56.8,,,biasa,telur; udnag; sesame,darah tinggi,telur|udang|wijen,tinggi_natrium
+UMUM_0441,UMUM,37,PEREMPUAN,80.9,157.7,32.52,Obese,1.55,2362,50,20,30,295.2,118.1,78.7,,,biasa,none,kambing,,daging_merah
+UMUM_0442,UMUM,63,PEREMPUAN,69.7,159.6,27.37,Overweight,1.375,1806,45,25,30,203.2,112.9,60.2,,,biasa,tidak ada alergi,Tidak ada,,
+UMUM_0443,UMUM,54,LAKI_LAKI,85.0,169.6,29.55,Overweight,1.725,2992,50,20,30,374.0,149.6,99.7,,,biasa,gluten,tidak ada pantangan,gluten,
+UMUM_0444,UMUM,44,PEREMPUAN,49.1,152.6,21.09,Normal,1.375,1628,50,20,30,203.5,81.4,54.3,,,biasa,laktosa dan gluten,tidak ada pantangan,susu|gluten,
+UMUM_0445,UMUM,43,PEREMPUAN,41.2,153.8,17.42,Underweight,1.55,1734,50,20,30,216.8,86.7,57.8,,,biasa,Udang,manis dan daging sapi,udang,tinggi_gula|daging_merah
+UMUM_0446,UMUM,61,PEREMPUAN,65.9,154.1,27.73,Overweight,1.2,1524,50,20,30,190.5,76.2,50.8,,,biasa,sea food,,seafood,
+UMUM_0447,UMUM,31,PEREMPUAN,42.5,159.4,16.72,Underweight,1.375,1650,50,20,30,206.2,82.5,55.0,,,biasa,-,tidak ada pantangan,,
+UMUM_0448,UMUM,61,PEREMPUAN,62.3,155.2,25.85,Overweight,1.375,1706,50,20,30,213.2,85.3,56.9,,,biasa,shrimp dan cumi,pedas dan daging merah,udang|cumi,pedas|daging_merah
+UMUM_0449,UMUM,80,PEREMPUAN,43.9,146.5,20.46,Normal,1.375,1321,50,20,30,165.1,66.0,44.0,,,biasa,tidak ada alergi,nangka,,free
+UMUM_0450,UMUM,77,LAKI_LAKI,54.3,158.0,21.76,Normal,1.375,1563,50,20,30,195.4,78.2,52.1,,,biasa,-,Tidak ada,,
+UMUM_0451,UMUM,43,LAKI_LAKI,66.7,163.3,25.02,Overweight,1.375,2092,50,20,30,261.5,104.6,69.7,,,biasa,Tidak ada.,darah tinggi / makanan berminyak,,tinggi_natrium|berminyak
+UMUM_0452,UMUM,71,LAKI_LAKI,57.4,175.5,18.63,Normal,1.375,1783,50,20,30,222.9,89.2,59.4,,,biasa,Tidak ada,-,,
+UMUM_0453,UMUM,47,PEREMPUAN,69.9,160.1,27.26,Overweight,1.2,1664,50,20,30,208.0,83.2,55.5,,,biasa,,,,
+UMUM_0454,UMUM,27,LAKI_LAKI,49.8,169.4,17.36,Underweight,1.2,1698,50,20,30,212.2,84.9,56.6,,,biasa,fish,,ikan,
+UMUM_0455,UMUM,46,LAKI_LAKI,74.1,176.2,23.86,Normal,1.2,1999,50,20,30,249.9,100.0,66.6,,,biasa,,kopi; diabetes,,kafein|tinggi_gula
+UMUM_0456,UMUM,32,PEREMPUAN,51.3,143.8,24.82,Normal,1.2,1475,50,20,30,184.4,73.8,49.2,,,biasa,shrimp,tidak ada pantangan,udang,
+UMUM_0457,UMUM,80,PEREMPUAN,75.7,152.7,32.45,Obese,1.375,1752,60,15,25,262.8,65.7,48.7,,,biasa,none,Tidak ada,,
+UMUM_0458,UMUM,60,PEREMPUAN,75.4,160.0,29.46,Overweight,1.2,1657,50,20,30,207.1,82.8,55.2,,,biasa,crab; Susu Sapi,garam; santan,kepiting|susu,tinggi_natrium|santan
+UMUM_0459,UMUM,34,PEREMPUAN,51.6,145.3,24.43,Normal,1.375,1688,50,20,30,211.0,84.4,56.3,,,biasa,,berminyak,,berminyak
+UMUM_0460,UMUM,50,LAKI_LAKI,58.8,176.3,18.92,Normal,1.2,1726,50,20,30,215.8,86.3,57.5,,,biasa,udang,daging sapi dan petai,udang,daging_merah|free
+UMUM_0461,UMUM,59,PEREMPUAN,92.4,163.0,34.77,Obese,1.55,2405,50,20,30,300.6,120.2,80.2,,,biasa,Tidak ada,berminyak dan makanan asin,,berminyak|tinggi_natrium
+UMUM_0462,UMUM,80,PEREMPUAN,67.7,164.1,25.15,Overweight,1.375,1699,50,20,30,212.4,85.0,56.6,,,biasa,none,,,
+UMUM_0463,UMUM,37,LAKI_LAKI,53.2,158.2,21.25,Normal,1.55,2093,50,20,30,261.6,104.7,69.8,,,biasa,tdk ada,,,
+UMUM_0464,UMUM,80,PEREMPUAN,76.0,151.4,33.14,Obese,1.375,1751,50,20,30,218.9,87.5,58.4,,,biasa,"laktosa, Seafood",tidak ada pantangan,susu|seafood,
+UMUM_0465,UMUM,80,PEREMPUAN,50.9,145.7,23.97,Normal,1.2,1228,50,20,30,153.5,61.4,40.9,,,biasa,none,sosis / gorengan,,olahan|berminyak
+UMUM_0466,UMUM,49,PEREMPUAN,64.0,158.5,25.48,Overweight,1.55,2043,50,20,30,255.4,102.2,68.1,,,biasa,,kopi,,kafein
+UMUM_0467,UMUM,41,LAKI_LAKI,62.9,157.8,25.27,Overweight,1.55,2256,50,20,30,282.0,112.8,75.2,,,biasa,Tidak ada,,,
+UMUM_0468,UMUM,24,LAKI_LAKI,74.2,174.3,24.42,Normal,1.375,2451,55,15,30,337.0,91.9,81.7,,,biasa,-,-,,
+UMUM_0469,UMUM,71,PEREMPUAN,58.0,160.6,22.49,Normal,1.2,1409,50,20,30,176.1,70.5,47.0,,,biasa,Tidak ada,pedas,,pedas
+UMUM_0470,UMUM,80,PEREMPUAN,39.2,152.8,16.79,Underweight,1.2,1125,50,20,30,140.6,56.2,37.5,,,biasa,sesame dan dairy,Tinggi Natrium,wijen|susu,tinggi_natrium
+UMUM_0471,UMUM,55,PEREMPUAN,64.1,156.3,26.22,Overweight,1.2,1544,50,20,30,193.0,77.2,51.5,,,biasa,Tidak ada.,tidak ada pantangan,,
+UMUM_0472,UMUM,44,LAKI_LAKI,56.1,167.0,20.1,Normal,1.55,2157,50,20,30,269.6,107.8,71.9,,,biasa,no allergies,,,
+UMUM_0473,UMUM,35,LAKI_LAKI,88.1,184.7,25.82,Overweight,1.9,3717,50,20,30,464.6,185.8,123.9,,,biasa,,Tidak ada,,
+UMUM_0474,UMUM,80,PEREMPUAN,43.9,152.4,18.91,Normal,1.55,1518,50,20,30,189.8,75.9,50.6,,,biasa,Ikan laut,nangka; berminyak,ikan,free|berminyak
+UMUM_0475,UMUM,80,LAKI_LAKI,68.8,174.7,22.55,Normal,1.55,2161,50,20,30,270.1,108.0,72.0,,,biasa,,"daging sapi, makanan berminyak",,daging_merah|berminyak
+UMUM_0476,UMUM,69,LAKI_LAKI,84.2,169.7,29.23,Overweight,1.2,1967,50,20,30,245.9,98.3,65.6,,,biasa,tdk ada,sosis / spicy,,olahan|pedas
+UMUM_0477,UMUM,79,PEREMPUAN,43.0,161.8,16.42,Underweight,1.725,1733,50,20,30,216.6,86.7,57.8,,,biasa,udang rebon,-,udang,
+UMUM_0478,UMUM,43,PEREMPUAN,52.8,148.0,24.1,Normal,1.55,1873,55,15,30,257.5,70.2,62.4,,,biasa,-,Tidak ada,,
+UMUM_0479,UMUM,43,PEREMPUAN,46.0,143.9,22.21,Normal,1.2,1359,50,20,30,169.9,68.0,45.3,,,biasa,"fish, dairy, makanan laut",jengkol,ikan|susu|seafood,free
+UMUM_0480,UMUM,59,LAKI_LAKI,48.5,158.1,19.4,Normal,1.55,1801,50,20,30,225.1,90.0,60.0,,,biasa,tdk ada,tidak ada pantangan,,
+UMUM_0481,UMUM,34,LAKI_LAKI,64.7,169.7,22.47,Normal,1.55,2444,50,20,30,305.5,122.2,81.5,,,biasa,,,,
+UMUM_0482,UMUM,43,LAKI_LAKI,66.0,170.9,22.61,Normal,1.375,2129,50,20,30,266.1,106.5,71.0,,,biasa,udnag; peanut,Tidak ada,udang|kacang,
+UMUM_0483,UMUM,71,PEREMPUAN,62.8,157.4,25.35,Overweight,1.2,1450,50,20,30,181.2,72.5,48.3,,,biasa,Kacang Tanah,"santan, tidak makan daging",kacang,santan|vegetarian
+UMUM_0484,UMUM,79,PEREMPUAN,83.5,162.2,31.74,Obese,1.375,1898,50,20,30,237.2,94.9,63.3,,,biasa,Tidak ada,-,,
+UMUM_0485,UMUM,36,PEREMPUAN,79.2,156.3,32.41,Obese,1.2,1810,50,20,30,226.2,90.5,60.3,,,biasa,seafood,makanan olahan,seafood,olahan
+UMUM_0486,UMUM,62,PEREMPUAN,54.3,153.3,23.12,Normal,1.375,1590,50,20,30,198.8,79.5,53.0,,,biasa,tidak ada alergi,makanan berminyak,,berminyak
+UMUM_0487,UMUM,36,PEREMPUAN,67.8,156.7,27.62,Overweight,1.9,2668,55,15,30,366.9,100.0,88.9,,,biasa,Tidak ada,Tidak ada,,
+UMUM_0488,UMUM,44,PEREMPUAN,66.2,150.7,29.15,Overweight,1.375,1837,50,20,30,229.6,91.8,61.2,,,biasa,no allergies,berminyak,,berminyak
+UMUM_0489,UMUM,38,PEREMPUAN,59.6,150.0,26.49,Overweight,1.55,2013,50,20,30,251.6,100.7,67.1,,,biasa,none,-,,
+UMUM_0490,UMUM,60,LAKI_LAKI,82.1,172.3,27.65,Overweight,1.2,2009,50,20,30,251.1,100.5,67.0,,,biasa,-,"makanan olahan, Pedas",,olahan|pedas
+UMUM_0491,UMUM,80,PEREMPUAN,45.7,151.3,19.96,Normal,1.55,1539,55,15,30,211.6,57.7,51.3,,,biasa,none,,,
+UMUM_0492,UMUM,62,PEREMPUAN,80.4,164.2,29.82,Overweight,1.375,1968,50,20,30,246.0,98.4,65.6,,,biasa,"seafood, laktosa",nangka,seafood|susu,free
+UMUM_0493,UMUM,30,PEREMPUAN,39.7,146.8,18.43,Underweight,1.2,1367,50,20,30,170.9,68.3,45.6,,,biasa,sea food dan telur ayam,santan,seafood|telur,santan
+UMUM_0494,UMUM,58,PEREMPUAN,64.3,161.8,24.56,Normal,1.725,2229,50,20,30,278.6,111.5,74.3,,,biasa,tdk ada,pedas,,pedas
+UMUM_0495,UMUM,34,LAKI_LAKI,85.4,161.8,32.63,Obese,1.375,2497,50,20,30,312.1,124.8,83.2,,,biasa,soy,santan,kedelai,santan
+UMUM_0496,UMUM,80,PEREMPUAN,65.3,157.3,26.39,Overweight,1.55,1848,50,20,30,231.0,92.4,61.6,,,biasa,,tidak ada pantangan,,
+UMUM_0497,UMUM,53,LAKI_LAKI,44.8,164.3,16.59,Underweight,1.375,1617,50,20,30,202.1,80.8,53.9,,,biasa,udang rebon dan Susu Sapi,daging merah,udang|susu,daging_merah
+UMUM_0498,UMUM,37,PEREMPUAN,59.1,152.9,25.27,Overweight,1.375,1798,55,15,30,247.2,67.4,59.9,,,biasa,no allergies,,,
+UMUM_0499,UMUM,66,LAKI_LAKI,87.9,162.6,33.26,Obese,1.375,2298,50,20,30,287.2,114.9,76.6,,,biasa,no allergies,vegetarian,,vegetarian
+UMUM_0500,UMUM,56,LAKI_LAKI,63.8,170.5,21.94,Normal,1.2,1732,50,20,30,216.5,86.6,57.7,,,biasa,none,manis,,tinggi_gula
+UMUM_0501,UMUM,71,LAKI_LAKI,53.1,167.9,18.85,Normal,1.375,1653,60,15,25,247.9,62.0,45.9,,,biasa,-,bersantan,,santan
+UMUM_0502,UMUM,48,PEREMPUAN,67.0,164.9,24.65,Normal,1.55,2124,50,20,30,265.5,106.2,70.8,,,biasa,fish,Tidak ada,ikan,
+UMUM_0503,UMUM,73,PEREMPUAN,64.2,158.0,25.72,Overweight,1.725,2095,60,15,25,314.2,78.6,58.2,,,biasa,none,,,
+UMUM_0504,UMUM,34,LAKI_LAKI,59.1,160.7,22.89,Normal,1.55,2260,50,20,30,282.5,113.0,75.3,,,biasa,Tidak ada.,Tidak ada,,
+UMUM_0505,UMUM,72,LAKI_LAKI,85.1,166.4,30.75,Obese,1.55,2508,50,20,30,313.5,125.4,83.6,,,biasa,kacng; makanan laut; terigu,Tidak ada,kacang|seafood|gluten,
+UMUM_0506,UMUM,78,LAKI_LAKI,65.3,171.4,22.24,Normal,1.2,1611,50,20,30,201.4,80.5,53.7,,,biasa,Tidak ada.,,,
+UMUM_0507,UMUM,32,PEREMPUAN,46.6,153.8,19.7,Normal,1.55,1885,60,15,25,282.8,70.7,52.4,,,biasa,Tidak ada.,,,
+UMUM_0508,UMUM,34,LAKI_LAKI,110.7,183.7,32.79,Obese,1.375,3108,45,25,30,349.6,194.2,103.6,,,biasa,kacang dan telur ayam dan Ikan laut,Tidak ada,kacang|telur|ikan,
+UMUM_0509,UMUM,30,LAKI_LAKI,81.9,165.4,29.94,Overweight,1.375,2487,50,20,30,310.9,124.3,82.9,,,biasa,tidak ada alergi,berminyak,,berminyak
+UMUM_0510,UMUM,48,PEREMPUAN,50.0,162.2,19.01,Normal,1.375,1656,45,25,30,186.3,103.5,55.2,,,biasa,telur; kepiting,kambing; coffee,telur|kepiting,daging_merah|kafein
+UMUM_0511,UMUM,44,LAKI_LAKI,43.3,158.2,17.31,Underweight,1.375,1619,50,20,30,202.4,81.0,54.0,,,biasa,none,Tidak ada,,
+UMUM_0512,UMUM,64,PEREMPUAN,54.5,157.6,21.94,Normal,1.2,1395,50,20,30,174.4,69.8,46.5,,,biasa,ikan,bersantan,ikan,santan
+UMUM_0513,UMUM,44,LAKI_LAKI,63.8,170.8,21.86,Normal,1.55,2345,50,20,30,293.1,117.2,78.2,,,biasa,,garam,,tinggi_natrium
+UMUM_0514,UMUM,27,PEREMPUAN,40.7,159.1,16.07,Underweight,1.375,1650,55,15,30,226.9,61.9,55.0,,,biasa,Tidak ada,-,,
+UMUM_0515,UMUM,46,PEREMPUAN,81.1,148.2,36.92,Obese,1.2,1749,50,20,30,218.6,87.5,58.3,,,biasa,kepiting,Tidak ada,kepiting,
+UMUM_0516,UMUM,41,PEREMPUAN,58.1,154.8,24.24,Normal,1.55,1995,50,20,30,249.4,99.8,66.5,,,biasa,no allergies,-,,
+UMUM_0517,UMUM,68,LAKI_LAKI,74.1,177.0,23.64,Normal,1.2,1854,50,20,30,231.8,92.7,61.8,,,biasa,udang; telur ayam,spicy,udang|telur,pedas
+UMUM_0518,UMUM,57,LAKI_LAKI,53.1,168.4,18.73,Normal,1.2,1541,50,20,30,192.6,77.0,51.4,,,biasa,no allergies,-,,
+UMUM_0519,UMUM,66,LAKI_LAKI,55.1,168.1,19.5,Normal,1.375,1731,55,15,30,238.0,64.9,57.7,,,biasa,crab,nangka,kepiting,free
+UMUM_0520,UMUM,67,PEREMPUAN,50.4,145.2,23.9,Normal,1.55,1664,50,20,30,208.0,83.2,55.5,,,biasa,tdk ada,,,
+UMUM_0521,UMUM,66,PEREMPUAN,83.1,169.6,28.88,Overweight,1.2,1747,50,20,30,218.4,87.3,58.2,,,biasa,none,Tidak ada,,
+UMUM_0522,UMUM,43,PEREMPUAN,69.9,156.8,28.44,Overweight,1.725,2404,50,20,30,300.5,120.2,80.1,,,biasa,Tidak ada.,Tidak ada,,
+UMUM_0523,UMUM,78,PEREMPUAN,59.9,157.8,24.07,Normal,1.2,1383,50,20,30,172.9,69.2,46.1,,,biasa,Ikan laut,spicy,ikan,pedas
+UMUM_0524,UMUM,63,LAKI_LAKI,53.8,171.0,18.39,Underweight,1.55,1972,55,15,30,271.1,74.0,65.7,,,biasa,none,tidak ada pantangan,,
+UMUM_0525,UMUM,63,LAKI_LAKI,58.9,170.5,20.26,Normal,1.55,2074,50,20,30,259.2,103.7,69.1,,,biasa,Kacang Tanah,Tidak ada,kacang,
+UMUM_0526,UMUM,68,LAKI_LAKI,51.3,166.4,18.53,Normal,1.9,2258,50,20,30,282.2,112.9,75.3,,,biasa,Tidak ada,Tidak ada,,
+UMUM_0527,UMUM,49,PEREMPUAN,46.2,146.8,21.44,Normal,1.2,1341,50,20,30,167.6,67.0,44.7,,,biasa,Tidak ada.,,,
+UMUM_0528,UMUM,44,PEREMPUAN,48.0,161.3,18.45,Underweight,1.375,1651,50,20,30,206.4,82.5,55.0,,,biasa,Tidak ada.,makanan pedas,,pedas
+UMUM_0529,UMUM,80,LAKI_LAKI,112.3,171.2,38.32,Obese,1.55,3038,50,20,30,379.8,151.9,101.3,,,biasa,Tidak ada,-,,
+UMUM_0530,UMUM,48,LAKI_LAKI,58.6,173.0,19.58,Normal,1.375,1968,50,20,30,246.0,98.4,65.6,,,biasa,"Seafood, shrimp",-,seafood|udang,
+UMUM_0531,UMUM,63,PEREMPUAN,38.5,143.1,18.8,Normal,1.2,1169,50,20,30,146.1,58.5,39.0,,,biasa,tidak ada alergi,makanan berminyak / santan,,berminyak|santan
+UMUM_0532,UMUM,29,LAKI_LAKI,87.7,166.5,31.63,Obese,1.725,3274,50,20,30,409.2,163.7,109.1,,,biasa,Tidak ada,"makanan pedas, nangka",,pedas|free
+UMUM_0533,UMUM,45,PEREMPUAN,55.2,156.5,22.54,Normal,1.55,1934,50,20,30,241.8,96.7,64.5,,,biasa,tdk ada,durian,,free
+UMUM_0534,UMUM,47,LAKI_LAKI,85.5,164.1,31.74,Obese,1.2,2106,50,20,30,263.2,105.3,70.2,,,biasa,soy; cumi; kacang tanah,durian,kedelai|cumi|kacang,free
+UMUM_0535,UMUM,45,LAKI_LAKI,92.3,170.6,31.7,Obese,1.55,2927,50,20,30,365.9,146.3,97.6,,,biasa,,makanan berminyak,,berminyak
+UMUM_0536,UMUM,46,PEREMPUAN,79.6,158.7,31.62,Obese,1.375,2030,50,20,30,253.8,101.5,67.7,,,biasa,-,Tidak ada,,
+UMUM_0537,UMUM,53,PEREMPUAN,41.0,159.1,16.19,Underweight,1.9,2071,50,20,30,258.9,103.5,69.0,,,biasa,"dairy, sea food",berminyak / garam,susu|seafood,berminyak|tinggi_natrium
+UMUM_0538,UMUM,56,PEREMPUAN,50.5,153.6,21.42,Normal,1.375,1578,45,25,30,177.5,98.6,52.6,,,biasa,Tidak ada,,,
+UMUM_0539,UMUM,42,LAKI_LAKI,48.6,171.0,16.63,Underweight,1.725,2279,45,25,30,256.4,142.4,76.0,,,biasa,Seafood,makanan pedas,seafood,pedas
+UMUM_0540,UMUM,34,PEREMPUAN,69.9,152.5,30.06,Obese,1.2,1703,50,20,30,212.9,85.2,56.8,,,biasa,kedelai,,kedelai,
+UMUM_0541,UMUM,80,LAKI_LAKI,68.0,170.7,23.34,Normal,1.2,1637,50,20,30,204.6,81.8,54.6,,,biasa,Tidak ada.,Tidak ada,,
+UMUM_0542,UMUM,47,PEREMPUAN,53.3,156.5,21.75,Normal,1.375,1680,50,20,30,210.0,84.0,56.0,,,biasa,-,santan,,santan
+UMUM_0543,UMUM,27,PEREMPUAN,41.3,162.6,15.62,Underweight,1.2,1460,50,20,30,182.5,73.0,48.7,,,biasa,Tidak ada,Tidak ada,,
+UMUM_0544,UMUM,80,PEREMPUAN,37.6,143.5,18.25,Underweight,1.2,1072,50,20,30,134.0,53.6,35.7,,,biasa,susu sapi; kacang tanah,Tidak ada,susu|kacang,
+UMUM_0545,UMUM,49,PEREMPUAN,44.0,154.0,18.54,Normal,1.375,1539,50,25,25,192.4,96.2,42.8,,,biasa,-,makanan pedas / santan,,pedas|santan
+UMUM_0546,UMUM,66,PEREMPUAN,71.4,157.8,28.69,Overweight,1.2,1573,55,15,30,216.3,59.0,52.4,,,biasa,Tidak ada,fried food,,berminyak
+UMUM_0547,UMUM,37,LAKI_LAKI,50.7,157.4,20.46,Normal,1.2,1576,50,20,30,197.0,78.8,52.5,,,biasa,-,garam,,tinggi_natrium
+UMUM_0548,UMUM,39,PEREMPUAN,56.1,156.2,22.98,Normal,1.375,1762,50,20,30,220.2,88.1,58.7,,,biasa,,tidak ada pantangan,,
+UMUM_0549,UMUM,43,PEREMPUAN,44.5,144.7,21.27,Normal,1.375,1541,50,20,30,192.6,77.0,51.4,,,biasa,Susu Sapi,spicy,susu,pedas
+UMUM_0550,UMUM,80,PEREMPUAN,83.4,168.9,29.23,Overweight,1.375,1919,50,20,30,239.9,96.0,64.0,,,biasa,-,-,,
+UMUM_0551,UMUM,35,PEREMPUAN,76.2,161.5,29.21,Overweight,1.375,2064,60,15,25,309.6,77.4,57.3,,,biasa,crab / telur ayam,manis,kepiting|telur,tinggi_gula
+UMUM_0552,UMUM,54,PEREMPUAN,39.8,159.9,15.57,Underweight,1.375,1481,50,20,30,185.1,74.0,49.4,,,biasa,kacng; ikan,kambing,kacang|ikan,daging_merah
+UMUM_0553,UMUM,30,LAKI_LAKI,54.8,166.5,19.76,Normal,1.375,1996,50,20,30,249.5,99.8,66.5,,,biasa,,spicy,,pedas
+UMUM_0554,UMUM,43,PEREMPUAN,65.7,148.3,29.86,Overweight,1.2,1594,50,20,30,199.2,79.7,53.1,,,biasa,tdk ada,gula,,tinggi_gula
+UMUM_0555,UMUM,49,PEREMPUAN,61.0,149.3,27.35,Overweight,1.55,1956,50,20,30,244.5,97.8,65.2,,,biasa,laktosa / peanut,gorengan,susu|kacang,berminyak
+UMUM_0556,UMUM,78,LAKI_LAKI,46.0,170.4,15.83,Underweight,1.2,1296,50,20,30,162.0,64.8,43.2,,,biasa,sea food,Tidak ada,seafood,
+UMUM_0557,UMUM,68,PEREMPUAN,61.4,152.1,26.53,Overweight,1.375,1639,50,20,30,204.9,82.0,54.6,,,biasa,tdk ada,manis; kafein,,tinggi_gula|kafein
+UMUM_0558,UMUM,57,LAKI_LAKI,94.2,172.8,31.54,Obese,1.375,2552,50,20,30,319.0,127.6,85.1,,,biasa,-,kopi; fried food,,kafein|berminyak
+UMUM_0559,UMUM,50,LAKI_LAKI,93.5,164.1,34.72,Obese,1.2,2214,45,25,30,249.1,138.4,73.8,,,biasa,no allergies,,,
+UMUM_0560,UMUM,74,LAKI_LAKI,68.8,159.3,27.11,Overweight,1.375,1862,45,25,30,209.5,116.4,62.1,,,biasa,squid,tidak makan daging,cumi,vegetarian
+UMUM_0561,UMUM,42,LAKI_LAKI,72.0,161.2,27.71,Overweight,1.2,1906,50,20,30,238.2,95.3,63.5,,,biasa,-,,,
+UMUM_0562,UMUM,49,LAKI_LAKI,59.6,159.0,23.57,Normal,1.375,1886,50,20,30,235.8,94.3,62.9,,,biasa,none,makanan pedas,,pedas
+UMUM_0563,UMUM,38,LAKI_LAKI,54.8,164.9,20.16,Normal,1.2,1678,50,20,30,209.8,83.9,55.9,,,biasa,crab; udnag,Tidak ada,kepiting|udang,
+UMUM_0564,UMUM,77,PEREMPUAN,67.2,159.9,26.29,Overweight,1.375,1692,55,15,30,232.7,63.5,56.4,,,biasa,Tidak ada,darah tinggi,,tinggi_natrium
+UMUM_0565,UMUM,46,LAKI_LAKI,85.2,173.6,28.28,Overweight,1.55,2792,50,20,30,349.0,139.6,93.1,,,biasa,tdk ada,tidak ada pantangan,,
+UMUM_0566,UMUM,51,PEREMPUAN,44.4,157.8,17.83,Underweight,1.375,1548,50,20,30,193.5,77.4,51.6,,,biasa,Tidak ada.,-,,
+UMUM_0567,UMUM,75,LAKI_LAKI,120.9,175.9,39.07,Obese,1.55,3296,60,15,25,494.4,123.6,91.6,,,biasa,Tidak ada,tidak ada pantangan,,
+UMUM_0568,UMUM,45,PEREMPUAN,61.7,156.0,25.34,Overweight,1.375,1797,50,20,30,224.6,89.8,59.9,,,biasa,tdk ada,tinggi gula / petai,,tinggi_gula|free
+UMUM_0569,UMUM,39,LAKI_LAKI,105.3,171.3,35.88,Obese,1.375,2887,50,20,30,360.9,144.3,96.2,,,biasa,no allergies,tidak ada pantangan,,
+UMUM_0570,UMUM,61,PEREMPUAN,43.1,150.7,18.97,Normal,1.55,1626,50,20,30,203.2,81.3,54.2,,,biasa,tdk ada,kafein,,kafein
+UMUM_0571,UMUM,76,LAKI_LAKI,70.0,159.3,27.59,Overweight,1.375,1869,50,20,30,233.6,93.5,62.3,,,biasa,"peanut, kepiting",,kacang|kepiting,
+UMUM_0572,UMUM,50,LAKI_LAKI,83.4,172.5,28.03,Overweight,1.9,3324,60,15,25,498.6,124.7,92.3,,,biasa,Tidak ada.,Tinggi Natrium,,tinggi_natrium
+UMUM_0573,UMUM,30,LAKI_LAKI,99.0,162.9,37.32,Obese,1.55,3140,50,20,30,392.5,157.0,104.7,,,biasa,udang rebon,"santan, fried food",udang,santan|berminyak
+UMUM_0574,UMUM,49,PEREMPUAN,54.9,154.9,22.88,Normal,1.725,2110,50,20,30,263.8,105.5,70.3,,,biasa,no allergies,garam,,tinggi_natrium
+UMUM_0575,UMUM,43,LAKI_LAKI,65.7,179.3,20.43,Normal,1.9,3012,50,20,30,376.5,150.6,100.4,,,biasa,terigu,tidak ada pantangan,gluten,
+UMUM_0576,UMUM,62,LAKI_LAKI,105.1,170.0,36.37,Obese,1.375,2695,50,20,30,336.9,134.8,89.8,,,biasa,makanan laut,,seafood,
+UMUM_0577,UMUM,73,LAKI_LAKI,72.9,163.5,27.26,Overweight,1.375,1974,60,15,25,296.1,74.0,54.8,,,biasa,"peanut, Seafood, telur ayam",Tidak ada,kacang|seafood|telur,
+UMUM_0578,UMUM,37,LAKI_LAKI,100.6,167.7,35.75,Obese,1.375,2793,50,20,30,349.1,139.7,93.1,,,biasa,,Tidak ada,,
+UMUM_0579,UMUM,39,PEREMPUAN,52.8,148.8,23.86,Normal,1.725,2118,50,20,30,264.8,105.9,70.6,,,biasa,"Telor, shrimp",Tinggi Natrium,telur|udang,tinggi_natrium
+UMUM_0580,UMUM,39,PEREMPUAN,53.8,153.5,22.84,Normal,1.2,1502,50,20,30,187.8,75.1,50.1,,,biasa,laktosa,darah tinggi,susu,tinggi_natrium
+UMUM_0581,UMUM,57,PEREMPUAN,40.4,153.3,17.19,Underweight,1.2,1259,50,20,30,157.4,63.0,42.0,,,biasa,tdk ada,santan dan tinggi gula,,santan|tinggi_gula
+UMUM_0582,UMUM,50,PEREMPUAN,72.0,148.7,32.56,Obese,1.375,1867,50,20,30,233.4,93.3,62.2,,,biasa,,Tidak ada,,
+UMUM_0583,UMUM,48,PEREMPUAN,63.5,151.8,27.57,Overweight,1.375,1783,50,20,30,222.9,89.2,59.4,,,biasa,tidak ada alergi,,,
+UMUM_0584,UMUM,64,LAKI_LAKI,67.8,168.2,23.96,Normal,1.375,1981,50,20,30,247.6,99.0,66.0,,,biasa,susu sapi,makanan berminyak,susu,berminyak
+UMUM_0585,UMUM,54,LAKI_LAKI,61.0,169.4,21.25,Normal,1.375,1942,55,15,30,267.0,72.8,64.7,,,biasa,susu sapi,-,susu,
+UMUM_0586,UMUM,54,PEREMPUAN,98.7,162.5,37.38,Obese,1.2,1956,60,15,25,293.4,73.3,54.3,,,biasa,"telur, gluten",berminyak,telur|gluten,berminyak
+UMUM_0587,UMUM,38,PEREMPUAN,36.7,146.4,17.13,Underweight,1.375,1479,50,20,30,184.9,74.0,49.3,,,biasa,Tidak ada.,manis,,tinggi_gula
+UMUM_0588,UMUM,41,PEREMPUAN,51.6,140.0,26.33,Overweight,1.375,1624,50,20,30,203.0,81.2,54.1,,,biasa,Tidak ada,Tidak ada,,
+UMUM_0589,UMUM,54,LAKI_LAKI,73.1,164.0,27.16,Overweight,1.55,2400,45,25,30,270.0,150.0,80.0,,,biasa,-,Tidak ada,,
+UMUM_0590,UMUM,80,LAKI_LAKI,75.3,161.5,28.86,Overweight,1.375,1950,50,20,30,243.8,97.5,65.0,,,biasa,kedele,tidak ada pantangan,kedelai,
+UMUM_0591,UMUM,60,PEREMPUAN,77.4,162.1,29.46,Overweight,1.2,1687,50,20,30,210.9,84.3,56.2,,,biasa,squid dan kepiting,-,cumi|kepiting,
+UMUM_0592,UMUM,46,PEREMPUAN,75.9,159.4,29.87,Overweight,1.375,1986,55,15,30,273.1,74.5,66.2,,,biasa,wijen,tidak ada pantangan,wijen,
+UMUM_0593,UMUM,49,LAKI_LAKI,97.6,173.9,32.29,Obese,1.375,2684,50,20,30,335.5,134.2,89.5,,,biasa,tidak ada alergi,Tidak ada,,
+UMUM_0594,UMUM,68,LAKI_LAKI,93.8,168.6,32.99,Obese,1.55,2741,45,25,30,308.4,171.3,91.4,,,biasa,tdk ada,,,
+UMUM_0595,UMUM,30,LAKI_LAKI,74.7,172.4,25.13,Overweight,1.55,2707,50,20,30,338.4,135.3,90.2,,,biasa,Susu Sapi,"darah tinggi, diabetes",susu,tinggi_natrium|tinggi_gula
+UMUM_0596,UMUM,44,PEREMPUAN,51.8,162.2,19.69,Normal,1.375,1703,50,20,30,212.9,85.2,56.8,,,biasa,seafood,darah tinggi,seafood,tinggi_natrium
+UMUM_0597,UMUM,80,PEREMPUAN,75.6,159.7,29.65,Overweight,1.375,1781,50,20,30,222.6,89.0,59.4,,,biasa,"gluten, kacang tanah, kerang",santan,gluten|kacang|kerang,santan
+UMUM_0598,UMUM,42,PEREMPUAN,70.9,148.4,32.2,Obese,1.2,1657,50,20,30,207.1,82.8,55.2,,,biasa,udang rebon,makanan asin,udang,tinggi_natrium
+UMUM_0599,UMUM,61,PEREMPUAN,47.6,149.0,21.45,Normal,1.2,1302,50,20,30,162.8,65.1,43.4,,,biasa,Tidak ada.,tidak ada pantangan,,
+UMUM_0600,UMUM,49,LAKI_LAKI,47.1,159.7,18.48,Underweight,1.2,1449,50,20,30,181.1,72.5,48.3,,,biasa,Tidak ada,Pedas,,pedas

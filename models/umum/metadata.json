@@ -1,0 +1,21 @@
+{
+ "category": "umum",
+ "algorithm": "LogisticRegression",
+ "config_version": "1.0.0",
+ "config_hash": "6bdc32d5f92073ea",
+ "rubric_version": "umum-rubric-1.0",
+ "hazards_version": "umum-hazards-1.0",
+ "trained_at": "2026-10-27T03:30:46+00:00",
+ "n_train_rows": 32545,
+ "n_train_profiles": 480,
+ "classes": [
+  0,
+  1,
+  2
+ ],
+ "sklearn_version": "1.7.2",
+ "pandas_version": "2.3.3",
+ "numpy_version": "2.5.3",
+ "python_version": "3.13.17",
+ "synthetic_data": true
+}

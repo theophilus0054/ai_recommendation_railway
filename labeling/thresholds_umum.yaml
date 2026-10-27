@@ -1,0 +1,62 @@
+# Ambang rubrik label kategori UMUM. Setiap perubahan WAJIB menaikkan versi.
+version: "umum-rubric-1.0"
+tanggal: "2026-10-27"
+penyusun: "draft generator sintetis (belum divalidasi ahli gizi)"
+
+# Porsi energi per peran piring (Isi Piringku). Terpisah dari config fitur.
+porsi_energi_utama: {karbo: 0.40, lauk_hewani: 0.25, lauk_nabati: 0.15, sayur: 0.10, buah: 0.10, snack: 0.15, minuman: 0.05}
+porsi_energi_selingan: {karbo: 0.60, lauk_hewani: 0.50, lauk_nabati: 0.50, sayur: 0.40, buah: 0.60, snack: 0.80, minuman: 0.40}
+# Porsi rumah tangga yang boleh disarankan (kelipatan porsi standar)
+porsi_rt: [0.5, 1.0, 1.5, 2.0]
+
+poin:
+  sesi_cocok: 2           # sesi ada di cocok_untuk_sesi
+  sesi_tidak_cocok: -2
+  energi_tepat: 2         # deviasi energi setelah porsi RT <= energi_tepat_dev
+  energi_tepat_dev: 0.20
+  energi_cukup: 1         # deviasi <= energi_cukup_dev
+  energi_cukup_dev: 0.40
+  energi_jauh: -2         # deviasi > energi_jauh_dev
+  energi_jauh_dev: 0.70
+  natrium_tinggi_mg: 600  # per porsi standar
+  natrium_tinggi: -2
+  natrium_sedang_mg: 400
+  natrium_sedang: -1
+  gula_tinggi_g: 15
+  gula_tinggi: -2
+  gula_sedang_g: 10
+  gula_sedang: -1
+  lemak_jenuh_pct_energi: 0.10
+  lemak_jenuh_tinggi: -1
+  serat_baik_g: 3.0
+  serat_baik: 1
+  goreng: -1
+  olahan: -2
+  batasi_kategori: -1
+  vitamin_c_baik_mg: 20
+  folat_baik_mcg: 60
+  mikro_baik: 1
+  omega3_baik_g: 0.3
+  omega3_baik: 1
+  protein_lauk_pct: 0.25  # lauk dengan protein >= 25% energi
+  protein_lauk: 1
+  dipakai_hari_ini: -2
+  kelompok_sama: -1
+
+status:
+  underweight_padat_energi_kkal100g: 150
+  underweight_protein_pct: 0.15
+  underweight_bonus: 1
+  underweight_encer_kkal100g: 60
+  underweight_encer_utama: -1
+  overweight_padat_energi_kkal100g: 250
+  overweight_padat: -1
+  obese_padat: -2
+  lebih_goreng: -1
+  lebih_serat_bonus: 1
+  lebih_gula_g: 10
+  lebih_gula: -1
+
+grade:
+  sangat_sesuai_min: 4   # poin >= 4 -> grade 2
+  cukup_sesuai_min: 1    # poin >= 1 -> grade 1, selain itu 0

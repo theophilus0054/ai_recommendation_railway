@@ -1,0 +1,672 @@
+{
+ "category": "umum",
+ "config_hash": "6bdc32d5f92073ea",
+ "rubric_version": "umum-rubric-1.0",
+ "trained_at": "2026-10-27T03:30:46+00:00",
+ "n_train_rows": 32545,
+ "n_heldout_base": 26,
+ "test_all": {
+  "n_rows": 9600,
+  "n_profiles": 120,
+  "classification": {
+   "accuracy": 0.8184375,
+   "macro_f1": 0.8025149308164261,
+   "weighted_kappa": 0.8194659009131868,
+   "brier": 0.26012225256490223,
+   "confusion_matrix": [
+    [
+     3718,
+     332,
+     87
+    ],
+    [
+     269,
+     2515,
+     498
+    ],
+    [
+     43,
+     514,
+     1624
+    ]
+   ]
+  },
+  "ranking": {
+   "model": {
+    "ndcg@5": 0.8953035976302451,
+    "ndcg@10": 0.9393264050801429,
+    "precision@5": 0.9606666666666668,
+    "precision@5_grade2": 0.583,
+    "map": 0.9685173215238899
+   },
+   "legacy": {
+    "ndcg@5": 0.4119172651522071,
+    "ndcg@10": 0.5879844415448942,
+    "precision@5": 0.645,
+    "precision@5_grade2": 0.203,
+    "map": 0.7257036478970856
+   },
+   "random": {
+    "ndcg@5": 0.4903726536204696,
+    "ndcg@10": 0.635780265875289,
+    "precision@5": 0.6906666666666667,
+    "precision@5_grade2": 0.27466666666666667,
+    "map": 0.7446846550238159
+   }
+  },
+  "bootstrap_ndcg5_model_minus_legacy": {
+   "mean": 0.483386332478038,
+   "ci95": [
+    0.46322982991824224,
+    0.5008921113589198
+   ]
+  },
+  "conflict_pairs_predicted_nonzero": 0.0012515644555694619
+ },
+ "test_seen": {
+  "n_rows": 8134,
+  "n_profiles": 120,
+  "classification": {
+   "accuracy": 0.8209982788296041,
+   "macro_f1": 0.8041195182463073,
+   "weighted_kappa": 0.8226329496882365,
+   "brier": 0.2568601279862292,
+   "confusion_matrix": [
+    [
+     3194,
+     287,
+     64
+    ],
+    [
+     236,
+     2149,
+     399
+    ],
+    [
+     36,
+     434,
+     1335
+    ]
+   ]
+  },
+  "ranking": {
+   "model": {
+    "ndcg@5": 0.9109964620536966,
+    "ndcg@10": 0.9460382456430732,
+    "precision@5": 0.9468333333333334,
+    "precision@5_grade2": 0.5190833333333333,
+    "map": 0.9705509679525303
+   },
+   "legacy": {
+    "ndcg@5": 0.45000631907776484,
+    "ndcg@10": 0.6431429798312998,
+    "precision@5": 0.6401666666666667,
+    "precision@5_grade2": 0.21275000000000002,
+    "map": 0.7275708619745048
+   },
+   "random": {
+    "ndcg@5": 0.5182781598783515,
+    "ndcg@10": 0.6758698042914314,
+    "precision@5": 0.6735,
+    "precision@5_grade2": 0.27208333333333334,
+    "map": 0.7359997177856727
+   }
+  },
+  "bootstrap_ndcg5_model_minus_legacy": {
+   "mean": 0.4609901429759316,
+   "ci95": [
+    0.4396744026062195,
+    0.4804896021339048
+   ]
+  },
+  "conflict_pairs_predicted_nonzero": 0.0
+ },
+ "test_unseen": {
+  "n_rows": 1466,
+  "n_profiles": 120,
+  "classification": {
+   "accuracy": 0.8042291950886766,
+   "macro_f1": 0.7937168377395033,
+   "weighted_kappa": 0.8013608679306857,
+   "brier": 0.27822192604575235,
+   "confusion_matrix": [
+    [
+     524,
+     45,
+     23
+    ],
+    [
+     33,
+     366,
+     99
+    ],
+    [
+     7,
+     80,
+     289
+    ]
+   ]
+  },
+  "ranking": {
+   "model": {
+    "ndcg@5": 0.9734422441166128,
+    "ndcg@10": 0.9735003010572211,
+    "precision@5": 0.715962441314554,
+    "precision@5_grade2": 0.31394366197183093,
+    "map": 0.9775637797918765
+   },
+   "legacy": {
+    "ndcg@5": 0.8519789017413494,
+    "ndcg@10": 0.8552643402693267,
+    "precision@5": 0.7120187793427231,
+    "precision@5_grade2": 0.31,
+    "map": 0.8651358317748045
+   },
+   "random": {
+    "ndcg@5": 0.870743765963291,
+    "ndcg@10": 0.8730512385588349,
+    "precision@5": 0.7131455399061033,
+    "precision@5_grade2": 0.3111267605633803,
+    "map": 0.8754553301683211
+   }
+  },
+  "bootstrap_ndcg5_model_minus_legacy": {
+   "mean": 0.08103118048489985,
+   "ci95": [
+    0.06907699305915019,
+    0.09303203472454642
+   ]
+  },
+  "conflict_pairs_predicted_nonzero": 0.007722007722007722
+ },
+ "cv": {
+  "weighted_kappa": {
+   "mean": 0.8308496793442973,
+   "std": 0.007110706574184045
+  },
+  "macro_f1": {
+   "mean": 0.8063804201678352,
+   "std": 0.0061574929526633316
+  },
+  "accuracy": {
+   "mean": 0.8233211326020309,
+   "std": 0.0075732230002361865
+  },
+  "ndcg@5": {
+   "mean": 0.9182714437531662,
+   "std": 0.0030479416048521187
+  },
+  "ndcg@10": {
+   "mean": 0.9512427796536546,
+   "std": 0.0019641265623516783
+  },
+  "precision@5": {
+   "mean": 0.9515297494780794,
+   "std": 0.003349313666539642
+  }
+ },
+ "subgroups": {
+  "statusNutrisi": {
+   "Normal": {
+    "n_profiles": 51,
+    "weighted_kappa": 0.8161977039911645,
+    "ndcg@5": 0.8895199468095777
+   },
+   "Obese": {
+    "n_profiles": 16,
+    "weighted_kappa": 0.8325187560315039,
+    "ndcg@5": 0.8995636023785462
+   },
+   "Overweight": {
+    "n_profiles": 35,
+    "weighted_kappa": 0.8151051269738714,
+    "ndcg@5": 0.9022427905941075
+   },
+   "Underweight": {
+    "n_profiles": 18,
+    "weighted_kappa": 0.8236831859391512,
+    "ndcg@5": 0.8944110621939143
+   }
+  },
+  "jenisKelamin": {
+   "LAKI_LAKI": {
+    "n_profiles": 60,
+    "weighted_kappa": 0.8193481933404454,
+    "ndcg@5": 0.889246799633025
+   },
+   "PEREMPUAN": {
+    "n_profiles": 60,
+    "weighted_kappa": 0.8195654464172812,
+    "ndcg@5": 0.9013603956274653
+   }
+  },
+  "umur_band": {
+   "19-29": {
+    "n_profiles": 3,
+    "weighted_kappa": 0.83576336517513,
+    "ndcg@5": 0.892839488633194
+   },
+   "30-44": {
+    "n_profiles": 32,
+    "weighted_kappa": 0.7967925092140651,
+    "ndcg@5": 0.8829381344849431
+   },
+   "45-59": {
+    "n_profiles": 42,
+    "weighted_kappa": 0.8293200165145087,
+    "ndcg@5": 0.8997992352375699
+   },
+   "60+": {
+    "n_profiles": 43,
+    "weighted_kappa": 0.8241684167425773,
+    "ndcg@5": 0.900286629447296
+   }
+  },
+  "session": {
+   "malam": {
+    "n_profiles": 120,
+    "weighted_kappa": 0.8739559862435834,
+    "ndcg@5": 0.9315707080393169
+   },
+   "pagi": {
+    "n_profiles": 120,
+    "weighted_kappa": 0.8339636374872752,
+    "ndcg@5": 0.9169012439874947
+   },
+   "siang": {
+    "n_profiles": 120,
+    "weighted_kappa": 0.8444619640017639,
+    "ndcg@5": 0.9282882566314662
+   },
+   "snack_pagi": {
+    "n_profiles": 120,
+    "weighted_kappa": 0.7525928204076751,
+    "ndcg@5": 0.8495566723050739
+   },
+   "snack_sore": {
+    "n_profiles": 120,
+    "weighted_kappa": 0.7769160583941606,
+    "ndcg@5": 0.850201107187874
+   }
+  }
+ },
+ "ablation": {
+  "(semua fitur)": {
+   "weighted_kappa": 0.8194659009131868,
+   "ndcg@5": 0.8953035976302451
+  },
+  "A_target": {
+   "weighted_kappa": 0.7710266479288869,
+   "ndcg@5": 0.8764417006515043
+  },
+  "B_batas": {
+   "weighted_kappa": 0.8086557513018668,
+   "ndcg@5": 0.8845929339056449
+  },
+  "C_status": {
+   "weighted_kappa": 0.8119970146685558,
+   "ndcg@5": 0.8939366649490186
+  },
+  "D_mikro": {
+   "weighted_kappa": 0.8189852322331388,
+   "ndcg@5": 0.8943493488107715
+  },
+  "E_sesi": {
+   "weighted_kappa": 0.7536653568156454,
+   "ndcg@5": 0.8713551763312046
+  },
+  "F_tekstur": {
+   "weighted_kappa": 0.8172278213763523,
+   "ndcg@5": 0.894714066547906
+  },
+  "G_keragaman": {
+   "weighted_kappa": 0.8031621549578375,
+   "ndcg@5": 0.8703845960397839
+  },
+  "H_alergi": {
+   "weighted_kappa": 0.7199073513796794,
+   "ndcg@5": 0.8932611393413405
+  },
+  "I_masak": {
+   "weighted_kappa": 0.8121750400372612,
+   "ndcg@5": 0.8924752230478449
+  }
+ },
+ "coefficients": {
+  "top": [
+   [
+    "any_conflict",
+    -2.506284191151781
+   ],
+   [
+    "portion_clipped",
+    -2.4067396285945475
+   ],
+   [
+    "natrium_share",
+    -2.2018216712171643
+   ],
+   [
+    "n_conflict_allergen",
+    -1.6129420945800037
+   ],
+   [
+    "sudah_dipakai_hari_ini",
+    -1.514626450846622
+   ],
+   [
+    "n_conflict_pantangan",
+    -1.4652971607166692
+   ],
+   [
+    "abs_log_kcal_ratio",
+    -1.3492082493330746
+   ],
+   [
+    "n_limit_category",
+    -1.329202547205044
+   ],
+   [
+    "ft_buah__siang",
+    -1.3085372864695368
+   ],
+   [
+    "goreng_x_overweight_obese",
+    -1.2224996297036737
+   ],
+   [
+    "serat_per_100kkal",
+    1.1716441031701441
+   ],
+   [
+    "ft_buah__malam",
+    -1.1641170854624043
+   ]
+  ],
+  "max_share": 0.047065688193072566
+ },
+ "worst": [
+  {
+   "profile_id": "UMUM_0362",
+   "session": "snack_pagi",
+   "statusNutrisi": "Overweight",
+   "nama": "Kentang Rebus (Porsi Kecil)",
+   "foodType": "karbo",
+   "kalori": 77.6,
+   "grade": 0,
+   "pred": 2,
+   "score": 0.9759793725319019,
+   "err": 1.9519587450638038,
+   "rubric": "SESI_TIDAK_COCOK|ENERGI_TEPAT"
+  },
+  {
+   "profile_id": "UMUM_0317",
+   "session": "snack_sore",
+   "statusNutrisi": "Normal",
+   "nama": "Kentang Rebus (Porsi Kecil)",
+   "foodType": "karbo",
+   "kalori": 77.6,
+   "grade": 0,
+   "pred": 2,
+   "score": 0.9630618289185896,
+   "err": 1.9261236578371792,
+   "rubric": "SESI_TIDAK_COCOK|ENERGI_TEPAT"
+  },
+  {
+   "profile_id": "UMUM_0091",
+   "session": "snack_pagi",
+   "statusNutrisi": "Overweight",
+   "nama": "Singkong Rebus (Porsi Besar)",
+   "foodType": "karbo",
+   "kalori": 291.5,
+   "grade": 2,
+   "pred": 0,
+   "score": 0.03703920843207788,
+   "err": 1.9259215831358443,
+   "rubric": "SESI_COCOK|ENERGI_TEPAT|SERAT_BAIK|BERAT_LEBIH_SERAT|SUDAH_DIPAKAI"
+  },
+  {
+   "profile_id": "UMUM_0313",
+   "session": "snack_sore",
+   "statusNutrisi": "Normal",
+   "nama": "Lontong (Porsi Kecil)",
+   "foodType": "karbo",
+   "kalori": 125.8,
+   "grade": 0,
+   "pred": 2,
+   "score": 0.9621537363832366,
+   "err": 1.9243074727664733,
+   "rubric": "SESI_TIDAK_COCOK|ENERGI_TEPAT"
+  },
+  {
+   "profile_id": "UMUM_0249",
+   "session": "snack_sore",
+   "statusNutrisi": "Overweight",
+   "nama": "Kentang Rebus (Porsi Kecil)",
+   "foodType": "karbo",
+   "kalori": 77.6,
+   "grade": 0,
+   "pred": 2,
+   "score": 0.9584853559485199,
+   "err": 1.9169707118970398,
+   "rubric": "SESI_TIDAK_COCOK|ENERGI_TEPAT"
+  },
+  {
+   "profile_id": "UMUM_0413",
+   "session": "snack_sore",
+   "statusNutrisi": "Normal",
+   "nama": "Kentang Rebus (Porsi Kecil)",
+   "foodType": "karbo",
+   "kalori": 77.6,
+   "grade": 0,
+   "pred": 2,
+   "score": 0.9578438960550406,
+   "err": 1.9156877921100812,
+   "rubric": "SESI_TIDAK_COCOK|ENERGI_TEPAT"
+  },
+  {
+   "profile_id": "UMUM_0156",
+   "session": "snack_sore",
+   "statusNutrisi": "Overweight",
+   "nama": "Ketupat (Porsi Kecil)",
+   "foodType": "karbo",
+   "kalori": 121.1,
+   "grade": 0,
+   "pred": 2,
+   "score": 0.956437081649696,
+   "err": 1.912874163299392,
+   "rubric": "SESI_TIDAK_COCOK|ENERGI_CUKUP"
+  },
+  {
+   "profile_id": "UMUM_0537",
+   "session": "snack_pagi",
+   "statusNutrisi": "Underweight",
+   "nama": "Lontong (Porsi Kecil)",
+   "foodType": "karbo",
+   "kalori": 125.8,
+   "grade": 0,
+   "pred": 2,
+   "score": 0.9561985212195823,
+   "err": 1.9123970424391645,
+   "rubric": "SESI_TIDAK_COCOK|ENERGI_TEPAT"
+  },
+  {
+   "profile_id": "UMUM_0246",
+   "session": "snack_pagi",
+   "statusNutrisi": "Normal",
+   "nama": "Lontong (Porsi Kecil)",
+   "foodType": "karbo",
+   "kalori": 125.8,
+   "grade": 0,
+   "pred": 2,
+   "score": 0.9494062953468351,
+   "err": 1.8988125906936701,
+   "rubric": "SESI_TIDAK_COCOK|ENERGI_TEPAT"
+  },
+  {
+   "profile_id": "UMUM_0082",
+   "session": "pagi",
+   "statusNutrisi": "Overweight",
+   "nama": "Roti Gandum Selai Kacang",
+   "foodType": "snack",
+   "kalori": 205.8,
+   "grade": 2,
+   "pred": 0,
+   "score": 0.05212799434723732,
+   "err": 1.8957440113055253,
+   "rubric": "SESI_COCOK|ENERGI_TEPAT|LEMAK_JENUH_TINGGI|SERAT_BAIK|OVERWEIGHT_PADAT_ENERGI|BERAT_LEBIH_SERAT"
+  },
+  {
+   "profile_id": "UMUM_0183",
+   "session": "snack_pagi",
+   "statusNutrisi": "Overweight",
+   "nama": "Kentang Rebus (Porsi Kecil)",
+   "foodType": "karbo",
+   "kalori": 77.6,
+   "grade": 0,
+   "pred": 2,
+   "score": 0.9456224485336537,
+   "err": 1.8912448970673075,
+   "rubric": "SESI_TIDAK_COCOK|ENERGI_TEPAT"
+  },
+  {
+   "profile_id": "UMUM_0040",
+   "session": "snack_pagi",
+   "statusNutrisi": "Underweight",
+   "nama": "Lontong (Porsi Kecil)",
+   "foodType": "karbo",
+   "kalori": 125.8,
+   "grade": 0,
+   "pred": 2,
+   "score": 0.9450597049137502,
+   "err": 1.8901194098275005,
+   "rubric": "SESI_TIDAK_COCOK|ENERGI_CUKUP"
+  },
+  {
+   "profile_id": "UMUM_0011",
+   "session": "snack_sore",
+   "statusNutrisi": "Normal",
+   "nama": "Kentang Rebus (Porsi Kecil)",
+   "foodType": "karbo",
+   "kalori": 77.6,
+   "grade": 0,
+   "pred": 2,
+   "score": 0.9439388903811744,
+   "err": 1.8878777807623488,
+   "rubric": "SESI_TIDAK_COCOK|ENERGI_TEPAT"
+  },
+  {
+   "profile_id": "UMUM_0433",
+   "session": "snack_sore",
+   "statusNutrisi": "Overweight",
+   "nama": "Ketupat (Porsi Kecil)",
+   "foodType": "karbo",
+   "kalori": 121.1,
+   "grade": 0,
+   "pred": 2,
+   "score": 0.9413944282761937,
+   "err": 1.8827888565523874,
+   "rubric": "SESI_TIDAK_COCOK|ENERGI_TEPAT"
+  },
+  {
+   "profile_id": "UMUM_0440",
+   "session": "snack_pagi",
+   "statusNutrisi": "Normal",
+   "nama": "Lontong (Porsi Kecil)",
+   "foodType": "karbo",
+   "kalori": 125.8,
+   "grade": 0,
+   "pred": 2,
+   "score": 0.9384805892223385,
+   "err": 1.876961178444677,
+   "rubric": "SESI_TIDAK_COCOK|ENERGI_CUKUP"
+  },
+  {
+   "profile_id": "UMUM_0547",
+   "session": "snack_pagi",
+   "statusNutrisi": "Normal",
+   "nama": "Lontong (Porsi Kecil)",
+   "foodType": "karbo",
+   "kalori": 125.8,
+   "grade": 0,
+   "pred": 2,
+   "score": 0.9351563481689966,
+   "err": 1.8703126963379932,
+   "rubric": "SESI_TIDAK_COCOK|ENERGI_CUKUP"
+  },
+  {
+   "profile_id": "UMUM_0166",
+   "session": "snack_pagi",
+   "statusNutrisi": "Overweight",
+   "nama": "Jagung Rebus (Porsi Besar)",
+   "foodType": "karbo",
+   "kalori": 248.6,
+   "grade": 2,
+   "pred": 0,
+   "score": 0.07091513160612914,
+   "err": 1.8581697367877417,
+   "rubric": "SESI_COCOK|ENERGI_TEPAT|SERAT_BAIK|BERAT_LEBIH_SERAT|SUDAH_DIPAKAI"
+  },
+  {
+   "profile_id": "UMUM_0317",
+   "session": "snack_sore",
+   "statusNutrisi": "Normal",
+   "nama": "Ketupat (Porsi Kecil)",
+   "foodType": "karbo",
+   "kalori": 121.1,
+   "grade": 0,
+   "pred": 2,
+   "score": 0.9248377251120782,
+   "err": 1.8496754502241564,
+   "rubric": "SESI_TIDAK_COCOK|ENERGI_TEPAT"
+  },
+  {
+   "profile_id": "UMUM_0430",
+   "session": "snack_sore",
+   "statusNutrisi": "Underweight",
+   "nama": "Lontong (Porsi Kecil)",
+   "foodType": "karbo",
+   "kalori": 125.8,
+   "grade": 0,
+   "pred": 2,
+   "score": 0.9246736793957817,
+   "err": 1.8493473587915634,
+   "rubric": "SESI_TIDAK_COCOK|ENERGI_CUKUP"
+  },
+  {
+   "profile_id": "UMUM_0281",
+   "session": "snack_sore",
+   "statusNutrisi": "Overweight",
+   "nama": "Oatmeal Air (Porsi Kecil)",
+   "foodType": "karbo",
+   "kalori": 107.7,
+   "grade": 0,
+   "pred": 2,
+   "score": 0.9175599998721848,
+   "err": 1.8351199997443697,
+   "rubric": "SESI_TIDAK_COCOK|ENERGI_TEPAT"
+  }
+ ],
+ "pipeline": {
+  "n_profiles": 120,
+  "safety_violations_top10_and_menu": 0,
+  "top10_items_checked": 6000,
+  "allergen_overblock_rate": 0.0,
+  "coverage_ge8_candidates": 1.0,
+  "latency_ms_p50": 45.856992499921034,
+  "latency_ms_p95": 48.98155060009229,
+  "menu": {
+   "kcal_dev_mean_abs": 0.15130249442500568,
+   "kcal_within_10pct": 0.23333333333333334,
+   "kcal_within_20pct": 0.7833333333333333,
+   "natrium_le_limit": 0.8916666666666667,
+   "gula_le_limit": 0.9916666666666667,
+   "lemak_le_limit": 1.0,
+   "natrium_mean_mg": 1694.5674166666665,
+   "gula_mean_g": 33.99966666666666,
+   "lemak_mean_g": 27.308854166666666,
+   "unique_foods_recommended": 58,
+   "items_per_day_mean": 11.975
+  }
+ }
+}

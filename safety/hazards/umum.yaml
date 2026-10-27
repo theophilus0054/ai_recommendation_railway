@@ -1,0 +1,23 @@
+# Tabel bahaya kategori UMUM (dewasa >= 19 tahun tanpa kondisi klinis khusus)
+# BLOKIR  : makanan dibuang sebelum ranking (safety layer deterministik).
+# BATASI  : makanan boleh, tetapi skor diturunkan dan frekuensi per minggu dibatasi.
+# Grup mengacu ke keluaran safety.allergy_parser.food_groups().
+# Versi tabel dicatat di metadata model. Perubahan wajib ditinjau ahli gizi.
+version: "umum-hazards-1.0"
+blokir:
+  - code: ALKOHOL
+    groups: ["FLAG:beralkohol"]
+    alasan: "Aplikasi kesehatan tidak merekomendasikan minuman beralkohol."
+batasi:
+  - code: KAFEIN
+    groups: ["FLAG:berkafein"]
+    max_per_minggu: 14
+    alasan: "Kafein dibatasi; rujukan populer sekitar 400 mg/hari untuk dewasa (verifikasi ahli gizi)."
+  - code: OLAHAN
+    groups: ["FLAG:olahan"]
+    max_per_minggu: 3
+    alasan: "Makanan olahan/ultra-proses tinggi garam dan aditif."
+  - code: MENTAH
+    groups: ["FLAG:mentah"]
+    max_per_minggu: 2
+    alasan: "Makanan mentah/setengah matang berisiko keamanan pangan."
