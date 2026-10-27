@@ -611,9 +611,44 @@ def compute_condition_relevance_row(row: pd.Series, kategori: str) -> float:
             
     return float(np.clip(score, 0.0, 1.0))
 
+def _produk_supabase_ke_record(pid, nama, harga, gizi, risiko, kat, img, stok=None) -> dict:
+    """Satu baris tabel produk_makanan (Supabase) -> record makanan. nilai_gizi (JSON) diratakan."""
+    if isinstance(gizi, str):
+        try:
+            gizi = json.loads(gizi)
+        except Exception:
+            gizi = {}
+    elif not isinstance(gizi, dict):
+        gizi = {}
+    return {
+        'id': str(pid) if pid is not None else '',
+        'name': nama,
+        'price': float(harga) if harga is not None else 0.0,
+        'stok': stok,
+        'calories': float(gizi.get('calories', 0) or 0),
+        'protein': float(gizi.get('protein', 0) or 0),
+        'fat': float(gizi.get('fat', 0) or 0),
+        'carbs': float(gizi.get('carbs', 0) or 0),
+        'sodium': float(gizi.get('sodium', 0) or 0),
+        'cholesterol': float(gizi.get('cholesterol', 0) or 0),
+        'sugars': float(gizi.get('sugars', 0) or 0),
+        'image': img or '',
+        'label_risiko': risiko or '',
+        'allergens': gizi.get('allergens', []),
+        'foodType': gizi.get('foodType'),
+        'cookingMethod': gizi.get('cookingMethod'),
+        'category': kat or ''
+    }
+
 def load_and_preprocess_api_data(api_url: str) -> tuple[pd.DataFrame, dict]:
+    """
+    Memuat katalog produk marketplace NutriScale (tabel produk_makanan di Supabase) untuk rekomendasi real-time.
+    Hanya produk Supabase yang boleh direkomendasikan: CSV (nutrition.csv, data/<kategori>/) khusus training & testing.
+    Snapshot lokal data/supabase_products.json hanya dipakai bila AI_ALLOW_SNAPSHOT_FALLBACK=1 (dev & test offline).
+    """
     print(f"[Pipeline] Memuat data makanan dari {api_url}...")
     data = None
+    sumber_produk = None
     # 1. Coba fetch dari Next.js Web API (/api/products)
     try:
         response = requests.get(api_url, timeout=3)
@@ -623,6 +658,8 @@ def load_and_preprocess_api_data(api_url: str) -> tuple[pd.DataFrame, dict]:
             data = res_json['products']
         elif isinstance(res_json, list):
             data = res_json
+        if data:
+            sumber_produk = 'NEXTJS_API_PRODUCTS'
         print(f"[Pipeline] Sukses memuat data makanan dari Next.js API ({len(data)} item).")
     except Exception as e:
         print(f"[Pipeline] Fetch Next.js API offline ({e}).")
@@ -636,39 +673,13 @@ def load_and_preprocess_api_data(api_url: str) -> tuple[pd.DataFrame, dict]:
                 print("[Pipeline] Mencoba koneksi langsung ke database Supabase PostgreSQL (produk_makanan)...")
                 conn = psycopg2.connect(db_url, connect_timeout=5)
                 cur = conn.cursor()
-                cur.execute('SELECT produk_id, nama_produk, harga, nilai_gizi, label_risiko, kategori, gambar FROM produk_makanan;')
+                cur.execute('SELECT produk_id, nama_produk, harga, nilai_gizi, label_risiko, kategori, gambar, stok FROM produk_makanan;')
                 rows = cur.fetchall()
                 conn.close()
-                sb_foods = []
-                for r in rows:
-                    pid, nama, harga, gizi, risiko, kat, img = r
-                    if isinstance(gizi, str):
-                        try:
-                            gizi = json.loads(gizi)
-                        except Exception:
-                            gizi = {}
-                    elif not isinstance(gizi, dict):
-                        gizi = {}
-                    sb_foods.append({
-                        'id': str(pid),
-                        'name': nama,
-                        'price': float(harga) if harga is not None else 0.0,
-                        'calories': float(gizi.get('calories', 0)),
-                        'protein': float(gizi.get('protein', 0)),
-                        'fat': float(gizi.get('fat', 0)),
-                        'carbs': float(gizi.get('carbs', 0)),
-                        'sodium': float(gizi.get('sodium', 0)),
-                        'cholesterol': float(gizi.get('cholesterol', 0)),
-                        'sugars': float(gizi.get('sugars', 0)),
-                        'image': img or '',
-                        'label_risiko': risiko or '',
-                        'allergens': gizi.get('allergens', []),
-                        'foodType': gizi.get('foodType'),
-                        'cookingMethod': gizi.get('cookingMethod'),
-                        'category': kat or ''
-                    })
+                sb_foods = [_produk_supabase_ke_record(*r) for r in rows]
                 if sb_foods:
                     data = sb_foods
+                    sumber_produk = 'SUPABASE_POSTGRESQL'
                     print(f"[Pipeline] Sukses memuat {len(data)} produk langsung dari Supabase PostgreSQL!")
             except Exception as pg_err:
                 print(f"[Pipeline] Supabase direct PostgreSQL offline/error: {pg_err}")
@@ -695,14 +706,24 @@ def load_and_preprocess_api_data(api_url: str) -> tuple[pd.DataFrame, dict]:
                     timeout=4
                 )
                 if sb_resp.status_code == 200:
-                    data = sb_resp.json()
+                    data = [
+                        _produk_supabase_ke_record(r.get('produk_id', r.get('id')), r.get('nama_produk'), r.get('harga'),
+                                                   r.get('nilai_gizi'), r.get('label_risiko'), r.get('kategori'),
+                                                   r.get('gambar'), r.get('stok'))
+                        for r in sb_resp.json()
+                    ]
+                    sumber_produk = 'SUPABASE_REST'
                     print(f"[Pipeline] Sukses memuat {len(data)} produk langsung dari Supabase REST ({table_name})!")
                 else:
                     print(f"[Pipeline] Supabase direct REST status {sb_resp.status_code}: {sb_resp.text[:100]}")
             except Exception as sb_err:
                 print(f"[Pipeline] Supabase direct REST error: {sb_err}")
 
-    # 4. Fallback ke snapshot lokal Supabase jika semua koneksi remote offline
+    # 4. Snapshot lokal Supabase HANYA untuk dev/test offline (bisa berbeda dari isi marketplace saat ini)
+    if not data and os.environ.get("AI_ALLOW_SNAPSHOT_FALLBACK", "").lower() not in ("1", "true", "yes"):
+        print("[Pipeline ERROR] Supabase/Next.js offline. Snapshot lokal tidak dipakai di produksi "
+              "(set AI_ALLOW_SNAPSHOT_FALLBACK=1 hanya untuk dev/test).")
+        return pd.DataFrame(), {}
     if not data:
         print("[Pipeline] Mencoba snapshot lokal produk Supabase (data/supabase_products.json)...")
         sb_cache = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'supabase_products.json')
@@ -710,6 +731,7 @@ def load_and_preprocess_api_data(api_url: str) -> tuple[pd.DataFrame, dict]:
             try:
                 with open(sb_cache, 'r', encoding='utf-8') as f:
                     data = json.load(f)
+                sumber_produk = 'SNAPSHOT_LOKAL_DEV'
                 print(f"[Pipeline] Sukses memuat {len(data)} produk dari snapshot Supabase NutriScale!")
             except Exception as e:
                 print(f"[Pipeline ERROR] Gagal membaca snapshot Supabase: {e}")
@@ -758,6 +780,22 @@ def load_and_preprocess_api_data(api_url: str) -> tuple[pd.DataFrame, dict]:
         return pd.DataFrame(), {}
 
     df = df.dropna(subset=['name']).copy()
+
+    # Hanya produk marketplace yang punya produk_id (dipakai web untuk keranjang & badge rekomendasi)
+    if 'id' not in df.columns and 'produk_id' in df.columns:
+        df = df.rename(columns={'produk_id': 'id'})
+    if 'id' not in df.columns:
+        print("[Pipeline WARNING] Kolom produk_id/id tidak ditemukan. Produk tanpa ID tidak bisa direkomendasikan!")
+        return pd.DataFrame(), {}
+    df['id'] = df['id'].astype(str).str.strip()
+    df = df[~df['id'].isin(['', 'None', 'nan'])].copy()
+    # Produk dengan stok habis tidak direkomendasikan
+    if 'stok' in df.columns:
+        stok = pd.to_numeric(df['stok'], errors='coerce')
+        n_habis = int((stok <= 0).sum())
+        df = df[~(stok <= 0)].copy()
+        if n_habis:
+            print(f"[Pipeline] {n_habis} produk stok habis dikeluarkan dari kandidat rekomendasi.")
 
     expected_cols = ['calories', 'protein', 'fat', 'carbs', 'sodium', 'cholesterol', 'sugars']
     for col in expected_cols:
@@ -819,6 +857,7 @@ def load_and_preprocess_api_data(api_url: str) -> tuple[pd.DataFrame, dict]:
 
     scaler_dict = {
         'feature_cols': FEATURE_COLS,
+        'sumber_produk': sumber_produk,
     }
 
     print(f"[Pipeline] OK: {len(df)} makanan siap dengan deteksi alergen & fitur ML.")
@@ -1399,6 +1438,7 @@ def jalankan_ai_rekomendasi(
         },
         '_meta': {
             'total_kandidat_makanan': len(df_filtered),
+            'sumber_produk': (scaler_dict or {}).get('sumber_produk'),
             'kategori': kategori,
             'pantangan_terdeteksi': sorted(list(detected_cats)),
             'alergi_terdeteksi': sorted(list(detected_alergi)),

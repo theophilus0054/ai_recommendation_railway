@@ -28,6 +28,9 @@ from model import load_and_preprocess_api_data, jalankan_ai_rekomendasi
 
 warnings.filterwarnings('ignore')
 
+# Offline dev/test: izinkan snapshot lokal produk Supabase bila Next.js/Supabase tidak bisa diakses
+os.environ.setdefault("AI_ALLOW_SNAPSHOT_FALLBACK", "1")
+
 # ==========================================================================
 # KONFIGURASI TEST
 # ==========================================================================

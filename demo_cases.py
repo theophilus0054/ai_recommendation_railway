@@ -9,6 +9,9 @@ import numpy as np
 import pandas as pd
 from model import load_and_preprocess_api_data, jalankan_ai_rekomendasi
 
+# Offline dev/test: izinkan snapshot lokal produk Supabase bila Next.js/Supabase tidak bisa diakses
+os.environ.setdefault("AI_ALLOW_SNAPSHOT_FALLBACK", "1")
+
 def run_demo():
     print("=" * 80)
     print("  NUTRISCALE AI — DEMO 4 TEST CASE LANGSUNG (UMUM, IBU_HAMIL, ANAK_BALITA, PASCA_OPERASI)")

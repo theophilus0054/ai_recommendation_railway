@@ -11,6 +11,9 @@ from model import (
 )
 from train_model import KATEGORI_LIST, classification_metrics, ndcg_at_k, legacy_score
 
+# Offline dev/test: izinkan snapshot lokal produk Supabase bila Next.js/Supabase tidak bisa diakses
+os.environ.setdefault("AI_ALLOW_SNAPSHOT_FALLBACK", "1")
+
 # ==========================================================================
 # NUTRISCALE AI — MODEL EVALUATION RUNNER (UPDATED FOR ACADEMIC REPORTING)
 # Menghasilkan tabel evaluasi formal untuk Laporan (Section 3.3.6)

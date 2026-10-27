@@ -76,4 +76,5 @@ Setiap kategori: 700 profil sintetis × 5 sesi × 12 kandidat (≈42.000 pasanga
    ```bash
    AI_ENGINE_API_KEY=<kunci-rahasia> python api.py
    ```
+   Rekomendasi real-time **hanya** memakai produk marketplace dari Supabase (`produk_makanan`, lewat Next.js `/api/products`, `DIRECT_URL`/`DATABASE_URL`, atau Supabase REST). Produk tanpa `produk_id` atau dengan stok habis tidak direkomendasikan. CSV hanya untuk training & testing. Snapshot `data/supabase_products.json` hanya dipakai bila `AI_ALLOW_SNAPSHOT_FALLBACK=1` (dev/test offline); di produksi, kalau Supabase offline, API melapor offline, bukan memakai data lama.
    Field baru di `/api/recommend`: `alergi`, `tahapDiet` (`cair|saring|lunak|biasa`), `jenisOperasi` (`saluran_cerna|ortopedi|caesar|umum`). `GET /api/models` menampilkan model aktif per kategori.

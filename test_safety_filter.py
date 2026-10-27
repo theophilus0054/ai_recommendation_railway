@@ -7,9 +7,13 @@
 Usage: python -m unittest test_safety_filter.py
 """
 
+import os
 import unittest
+from unittest import mock
 
 import pandas as pd
+
+import model
 
 from model import (
     FEATURE_COLS,
@@ -104,6 +108,46 @@ class TestFeatures(unittest.TestCase):
         feats = compute_ml_features(df, 300.0, {'protein_g': 20, 'fat_g': 10, 'carbs_g': 35}, 'siang', 'UMUM')
         self.assertEqual(list(feats.columns), FEATURE_COLS)
         self.assertFalse(feats.isna().any().any())
+
+
+class TestSumberProdukSupabase(unittest.TestCase):
+
+    def _offline(self, *args, **kwargs):
+        raise ConnectionError('offline')
+
+    def test_snapshot_not_used_in_production(self):
+        with mock.patch.dict(os.environ, {}, clear=True), mock.patch.object(model.requests, 'get', self._offline):
+            df, scaler = model.load_and_preprocess_api_data('http://localhost:3000/api/products')
+        self.assertEqual(len(df), 0)
+
+    def test_only_products_with_id_and_stock_are_candidates(self):
+        products = [
+            {'id': 'p1', 'name': 'Chicken Breast', 'calories': 165, 'protein': 31, 'fat': 3.6, 'carbs': 0, 'stok': 10},
+            {'id': '', 'name': 'Nasi Goreng CSV', 'calories': 250, 'protein': 6, 'fat': 9, 'carbs': 35, 'stok': 5},
+            {'id': 'p3', 'name': 'Brown Rice', 'calories': 216, 'protein': 5, 'fat': 1.8, 'carbs': 45, 'stok': 0},
+        ]
+        resp = mock.Mock(status_code=200)
+        resp.json.return_value = products
+        resp.raise_for_status.return_value = None
+        with mock.patch.object(model.requests, 'get', return_value=resp):
+            df, scaler = model.load_and_preprocess_api_data('http://localhost:3000/api/products')
+        self.assertEqual(list(df['id']), ['p1'])
+        self.assertEqual(scaler['sumber_produk'], 'NEXTJS_API_PRODUCTS')
+
+    def test_supabase_rest_rows_are_flattened(self):
+        rows = [{'produk_id': 'abc', 'nama_produk': 'Salmon Fillet', 'harga': 75000, 'stok': 3, 'kategori': 'Seafood',
+                 'gambar': '', 'label_risiko': '', 'nilai_gizi': {'calories': 208, 'protein': 22, 'fat': 13,
+                                                                  'carbs': 0, 'allergens': ['fish']}}]
+        offline = mock.Mock(side_effect=ConnectionError('offline'))
+        rest = mock.Mock(status_code=200)
+        rest.json.return_value = rows
+        env = {'SUPABASE_URL': 'https://x.supabase.co', 'SUPABASE_KEY': 'k'}
+        with mock.patch.dict(os.environ, env, clear=True), \
+                mock.patch.object(model.requests, 'get', side_effect=[ConnectionError('offline'), rest]):
+            df, scaler = model.load_and_preprocess_api_data('http://localhost:3000/api/products')
+        self.assertEqual(list(df['id']), ['abc'])
+        self.assertEqual(float(df['calories'].iloc[0]), 208.0)
+        self.assertIn('ikan', df['label_risiko'].iloc[0])
 
 
 if __name__ == '__main__':
