@@ -1,6 +1,6 @@
-"""Kasus input user PASCA_OPERASI (pemilik: Raymond). Dikirim ke /api/recommend oleh kategori/uji_input.py."""
+"""Kasus input user PASCA_OPERASI (pemilik: Raymond). Dikirim ke /api/recommend oleh shared/uji_input.py."""
 
-from kategori.bersama import buat_nutrisi
+from shared.bersama import buat_nutrisi
 
 def _b(umur, jk, bb, tb, kcal, bmi, status, tahap, operasi, **extra):
     nutrisi = buat_nutrisi("adult19Plus", kcal, (50, kcal * 0.50 / 4), (25, kcal * 0.25 / 4), (25, kcal * 0.25 / 9))

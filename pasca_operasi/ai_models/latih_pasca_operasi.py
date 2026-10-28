@@ -1,6 +1,6 @@
 """
 Latih model PASCA_OPERASI (pemilik: Raymond).
-Usage: python kategori/pasca_operasi/latih_pasca_operasi.py [--buat-data] [--profiles 700]
+Usage: python pasca_operasi/ai_models/latih_pasca_operasi.py [--buat-data] [--profiles 700]
   --buat-data : buat ulang dataset sintetis data/pasca_operasi/ dari profil.py & rubrik.py kategori ini
 """
 
@@ -10,7 +10,7 @@ import argparse
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from kategori.pipeline import latih_kategori
+from shared.pipeline import latih_kategori
 
 KATEGORI = 'PASCA_OPERASI'
 

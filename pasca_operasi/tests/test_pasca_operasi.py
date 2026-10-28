@@ -1,10 +1,10 @@
-"""Uji unit kategori PASCA_OPERASI (pemilik: Raymond). Usage: python -m unittest kategori.pasca_operasi.test_pasca_operasi"""
+"""Uji unit kategori PASCA_OPERASI (pemilik: Raymond). Usage: python -m unittest pasca_operasi.tests.test_pasca_operasi"""
 
 import unittest
 
 import numpy as np
 
-from kategori.pasca_operasi import profil, rubrik
+from pasca_operasi.ai_models import profil, rubrik
 from model import filter_dataset
 from test_safety_filter import make_foods
 

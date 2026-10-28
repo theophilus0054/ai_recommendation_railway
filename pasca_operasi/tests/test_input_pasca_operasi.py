@@ -1,10 +1,10 @@
 """Uji input user PASCA_OPERASI lewat /api/recommend (pemilik: Raymond).
-Usage: python -m unittest kategori.pasca_operasi.test_input_pasca_operasi
+Usage: python -m unittest pasca_operasi.tests.test_input_pasca_operasi
 """
 
 import unittest
 
-from kategori.uji_input import UjiInputKategori
+from shared.uji_input import UjiInputKategori
 
 
 class TestInputPascaOperasi(UjiInputKategori, unittest.TestCase):

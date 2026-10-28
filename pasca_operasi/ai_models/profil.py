@@ -1,6 +1,6 @@
 """Generator profil sintetis PASCA_OPERASI: faktor stres, protein tinggi, tahap diet & jenis operasi."""
 
-from kategori.bersama import harris_benedict, profil_dewasa
+from shared.bersama import harris_benedict, profil_dewasa
 
 KCAL_MIN = 1300
 
