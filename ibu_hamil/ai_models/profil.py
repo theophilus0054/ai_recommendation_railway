@@ -1,6 +1,6 @@
 """Generator profil sintetis IBU_HAMIL: perempuan 19-42 tahun, tambahan energi per trimester (AKG 2019)."""
 
-from kategori.bersama import profil_dewasa
+from shared.bersama import profil_dewasa
 
 KCAL_MIN = 1300
 

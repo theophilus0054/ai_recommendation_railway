@@ -76,4 +76,4 @@ Confusion matrix (baris = label asli 0/1/2, kolom = prediksi 0/1/2):
 
 ## 7. Catatan
 
-Data sintetis dan label dari rubrik kategori (kategori/ibu_hamil/rubrik.py). Angka di atas mengukur seberapa baik model meniru rubrik, bukan hasil uji klinis. Diperlukan gold set ahli gizi (minimal 300 pasangan) sebelum klaim klinis.
+Data sintetis dan label dari rubrik kategori (ibu_hamil/ai_models/rubrik.py). Angka di atas mengukur seberapa baik model meniru rubrik, bukan hasil uji klinis. Diperlukan gold set ahli gizi (minimal 300 pasangan) sebelum klaim klinis.

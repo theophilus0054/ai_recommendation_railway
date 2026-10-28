@@ -1,10 +1,10 @@
 """Uji input user IBU_HAMIL lewat /api/recommend (pemilik: Muz).
-Usage: python -m unittest kategori.ibu_hamil.test_input_ibu_hamil
+Usage: python -m unittest ibu_hamil.tests.test_input_ibu_hamil
 """
 
 import unittest
 
-from kategori.uji_input import UjiInputKategori
+from shared.uji_input import UjiInputKategori
 
 
 class TestInputIbuHamil(UjiInputKategori, unittest.TestCase):

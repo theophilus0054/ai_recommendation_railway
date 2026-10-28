@@ -1,6 +1,6 @@
-"""Kasus input user IBU_HAMIL (pemilik: Muz). Dikirim ke /api/recommend oleh kategori/uji_input.py."""
+"""Kasus input user IBU_HAMIL (pemilik: Muz). Dikirim ke /api/recommend oleh shared/uji_input.py."""
 
-from kategori.bersama import buat_nutrisi
+from shared.bersama import buat_nutrisi
 
 def _b(minggu, umur, bb, tb, kcal, bmi, status, **extra):
     nutrisi = buat_nutrisi("pregnantAdult", kcal, (50, kcal * 0.50 / 4), (20, kcal * 0.20 / 4), (30, kcal * 0.30 / 9))

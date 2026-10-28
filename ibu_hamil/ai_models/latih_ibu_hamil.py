@@ -1,6 +1,6 @@
 """
 Latih model IBU_HAMIL (pemilik: Muz).
-Usage: python kategori/ibu_hamil/latih_ibu_hamil.py [--buat-data] [--profiles 700]
+Usage: python ibu_hamil/ai_models/latih_ibu_hamil.py [--buat-data] [--profiles 700]
   --buat-data : buat ulang dataset sintetis data/ibu_hamil/ dari profil.py & rubrik.py kategori ini
 """
 
@@ -10,7 +10,7 @@ import argparse
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from kategori.pipeline import latih_kategori
+from shared.pipeline import latih_kategori
 
 KATEGORI = 'IBU_HAMIL'
 

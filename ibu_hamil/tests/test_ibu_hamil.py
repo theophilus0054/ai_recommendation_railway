@@ -1,10 +1,10 @@
-"""Uji unit kategori IBU_HAMIL (pemilik: Muz). Usage: python -m unittest kategori.ibu_hamil.test_ibu_hamil"""
+"""Uji unit kategori IBU_HAMIL (pemilik: Muz). Usage: python -m unittest ibu_hamil.tests.test_ibu_hamil"""
 
 import unittest
 
 import numpy as np
 
-from kategori.ibu_hamil import profil, rubrik
+from ibu_hamil.ai_models import profil, rubrik
 from model import detect_hazards
 
 
