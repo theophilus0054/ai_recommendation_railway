@@ -1,7 +1,7 @@
 """
 ==========================================================================
  NutriScale AI — Training & Evaluation Script (4 Model per Kategori)
- Melatih SATU model Logistic Regression multinomial per kategori kondisi:
+ Melatih SATU model gradient boosting (HistGradientBoosting) per kategori kondisi, dengan Logistic Regression sebagai baseline:
    UMUM, IBU_HAMIL, ANAK_BALITA, PASCA_OPERASI.
  - Label ordinal 0 (tidak sesuai), 1 (cukup sesuai), 2 (sangat sesuai).
  - Fitur = model.FEATURE_COLS (fungsi compute_ml_features yang sama dipakai saat inferensi).
@@ -23,13 +23,15 @@ import sklearn
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import HistGradientBoostingClassifier
+from sklearn.inspection import permutation_importance
 from sklearn.model_selection import GroupKFold
 from sklearn.metrics import accuracy_score, f1_score, cohen_kappa_score, confusion_matrix, precision_recall_fscore_support
 
 from model import FEATURE_COLS, score_from_proba
 
 KATEGORI_LIST = ['UMUM', 'IBU_HAMIL', 'ANAK_BALITA', 'PASCA_OPERASI']
-MODEL_VERSION = 'lr-v1'
+MODEL_VERSION = 'hgb-v1'
 CONFLICT_COLS = ['n_conflict_allergen', 'n_conflict_pantangan', 'n_conflict_free', 'n_block_kategori']
 
 def load_data(data_dir: str, kategori: str):
@@ -47,6 +49,13 @@ def load_data(data_dir: str, kategori: str):
     return df_train, df_test
 
 def make_model() -> Pipeline:
+    """Model utama: gradient boosting berbasis histogram (menangkap ambang & interaksi rubrik)."""
+    return Pipeline([
+        ('clf', HistGradientBoostingClassifier(max_depth=6, learning_rate=0.08, max_iter=300, random_state=42)),
+    ])
+
+def make_baseline_lr() -> Pipeline:
+    """Baseline pembanding: Logistic Regression multinomial."""
     return Pipeline([
         ('scaler', StandardScaler()),
         ('clf', LogisticRegression(C=1.0, max_iter=3000, random_state=42)),
@@ -143,11 +152,17 @@ def train_category(kategori: str, data_dir: str, models_dir: str) -> dict:
     conflict = (df_test[CONFLICT_COLS].sum(axis=1) > 0).to_numpy()
     conflict_nonzero = float(np.mean(proba[conflict].argmax(axis=1) > 0)) if conflict.any() else 0.0
 
-    # Koefisien: arah "sangat sesuai" vs "tidak sesuai" (fitur terstandardisasi)
-    coef = model.named_steps['clf'].coef_
-    w = coef[2] - coef[0]
-    order = np.argsort(-np.abs(w))
-    top_coefs = [(FEATURE_COLS[i], round(float(w[i]), 4)) for i in order[:10]]
+    # Baseline Logistic Regression pada split yang sama
+    lr = make_baseline_lr().fit(X_train, y_train)
+    lr_proba = lr.predict_proba(X_test)
+    baseline_lr = classification_metrics(y_test, lr_proba)
+    baseline_lr['ndcg@5'] = ndcg_at_k(df_test, score_from_proba(lr_proba), 5)
+
+    # Pentingnya fitur: permutasi pada subsampel test (penurunan akurasi bila fitur diacak)
+    idx = np.random.default_rng(0).choice(len(X_test), size=min(3000, len(X_test)), replace=False)
+    pi = permutation_importance(model, X_test[idx], y_test[idx], n_repeats=3, random_state=0, scoring='accuracy')
+    order = np.argsort(-pi.importances_mean)
+    top_coefs = [(FEATURE_COLS[i], round(float(pi.importances_mean[i]), 4)) for i in order[:10]]
 
     print(f"  Test (profil baru): Acc {test_metrics['accuracy']:.4f} | macro-F1 {test_metrics['macro_f1']:.4f} | "
           f"kappa {test_metrics['weighted_kappa']:.4f}")
@@ -162,7 +177,9 @@ def train_category(kategori: str, data_dir: str, models_dir: str) -> dict:
               f"kappa {new_food['weighted_kappa']:.4f}")
     print(f"  Pasangan konflik yang tetap diberi label > 0 oleh model saja: {conflict_nonzero:.2%} "
           f"(di produksi dibuang dulu oleh safety filter)")
-    print(f"  Koefisien teratas (P2 vs P0): {top_coefs[:5]}")
+    print(f"  Baseline Logistic Regression: Acc {baseline_lr['accuracy']:.4f} | macro-F1 {baseline_lr['macro_f1']:.4f} | "
+          f"kappa {baseline_lr['weighted_kappa']:.4f} | NDCG@5 {baseline_lr['ndcg@5']:.4f}")
+    print(f"  Fitur terpenting (permutasi): {top_coefs[:5]}")
 
     results = {
         'train_rows': len(df_train), 'test_rows': len(df_test),
@@ -173,7 +190,8 @@ def train_category(kategori: str, data_dir: str, models_dir: str) -> dict:
         'test_ranking_ndcg': {k: {m: round(v, 4) for m, v in d.items()} for k, d in ranking.items()},
         'test_new_food': new_food,
         'conflict_pairs_predicted_nonzero': round(conflict_nonzero, 4),
-        'top_coefficients_p2_vs_p0': top_coefs,
+        'baseline_logistic_regression': baseline_lr,
+        'top_features_permutation': top_coefs,
     }
 
     model_artifact = {
@@ -197,7 +215,7 @@ def train_and_evaluate(data_dir: str = 'data', models_dir: str = 'models', outpu
 
     print("=" * 80)
     print("  NUTRISCALE AI — MACHINE LEARNING MODEL TRAINING & EVALUATION")
-    print("  Arsitektur: 4 model Logistic Regression multinomial (satu per kategori)")
+    print("  Arsitektur: 4 model HistGradientBoosting (satu per kategori) + baseline Logistic Regression")
     print("  Skor Ranking: (P(cukup sesuai) + 2 * P(sangat sesuai)) / 2")
     print("=" * 80)
 
@@ -224,7 +242,7 @@ def train_and_evaluate(data_dir: str = 'data', models_dir: str = 'models', outpu
     with open(metrics_path, 'w', encoding='utf-8') as f:
         json.dump({
             'model_version': MODEL_VERSION,
-            'algoritma': 'LogisticRegression (multinomial) + StandardScaler',
+            'algoritma': 'HistGradientBoostingClassifier (multikelas 0/1/2); baseline LogisticRegression',
             'catatan': 'Data sintetis; label dari rubrik per kategori (generate_dataset.py). Bukan uji klinis.',
             'feature_names': FEATURE_COLS,
             'kategori': {**existing, **all_results},

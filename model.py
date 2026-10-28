@@ -5,7 +5,7 @@
    - Tier 1: Nutrition Engine (NutriScale Web) sebagai Source of Truth target gizi.
    - Tier 2: Recommendation Engine:
        * Hard Safety Filtering (eliminasi alergen/pantangan & batasan medis)
-       * Machine Learning Ranking: 4 model Logistic Regression (UMUM, IBU_HAMIL, ANAK_BALITA,
+       * Machine Learning Ranking: 4 model gradient boosting (UMUM, IBU_HAMIL, ANAK_BALITA,
          PASCA_OPERASI), skor = (P(1) + 2*P(2)) / 2 dari predict_proba label 0/1/2
    - Tier 3: Gemini LLM Narasi (penjelasan natural tanpa mengubah angka)
    - Prisma DB Schema Compliance: ProfilKesehatan, RiwayatAnalisis, MealPlan
@@ -241,7 +241,7 @@ FEATURE_COLS: list[str] = (
      'energy_density', 'protein_density',
      'status_kurang', 'status_lebih', 'status_obes', 'stunting',
      'ed_x_kurang', 'ed_x_lebih', 'ed_x_obes', 'protein_x_kurang', 'sugar_x_lebih', 'fried_x_lebih',
-     'umur_balita_1_3', 'trimester', 'protein_x_trimester',
+     'balita_bawah_12bln', 'balita_bawah_36bln', 'umur_bulan_norm', 'trimester', 'protein_x_trimester',
      'tekstur_ord', 'tahap_diet_ord', 'tekstur_violation', 'operasi_saluran_cerna', 'fat_x_saluran_cerna',
      'n_conflict_allergen', 'n_conflict_pantangan', 'n_conflict_free', 'n_block_kategori', 'n_limit_kategori',
      'n_user_restrictions', 'any_conflict',
@@ -428,8 +428,12 @@ def compute_ml_features(df: pd.DataFrame, target_kalori: float, target_macros: d
     F['fried_x_lebih'] = fried * (flags['status_lebih'] + flags['status_obes'])
 
     # D. Konteks kategori (umur balita, trimester, tahap diet & jenis operasi)
-    umur = float(ctx.get('umur') or 30)
-    F['umur_balita_1_3'] = np.full(n, float(kategori == 'ANAK_BALITA' and umur < 4))
+    # ANAK_BALITA: 'umur' dalam BULAN (0-60); kategori lain dalam tahun
+    umur_raw = ctx.get('umur')
+    umur_bln = float(umur_raw) if (kategori == 'ANAK_BALITA' and umur_raw is not None) else 30.0
+    F['balita_bawah_12bln'] = np.full(n, float(kategori == 'ANAK_BALITA' and umur_bln < 12))
+    F['balita_bawah_36bln'] = np.full(n, float(kategori == 'ANAK_BALITA' and umur_bln < 36))
+    F['umur_bulan_norm'] = np.full(n, umur_bln / 60.0 if kategori == 'ANAK_BALITA' else 0.0)
     minggu = ctx.get('usiaKehamilanMinggu')
     trimester = 0.0
     if kategori == 'IBU_HAMIL' and minggu:
@@ -1173,7 +1177,7 @@ def recommend_meal(
     profil_ctx: Optional[dict] = None
 ) -> list[dict]:
     """
-    Rekomendasi makanan dengan model Logistic Regression multinomial per kategori.
+    Rekomendasi makanan dengan model gradient boosting per kategori.
     Fitur dihitung oleh compute_ml_features (fungsi yang sama dipakai saat training),
     lalu skor = (P(cukup sesuai) + 2 * P(sangat sesuai)) / 2 dari predict_proba.
     """
@@ -1322,7 +1326,7 @@ Kamu adalah ahli gizi klinis NutriScale. Jelaskan rekomendasi makanan berikut se
 5. Bila terdapat makanan Barat/impor pada daftar, berikan padanan bahan makanan Nusantara lokal yang setara (misal: sosis/daging asap diganti tempe bacem atau telur rebus).
 
 DATA PENGGUNA (SUMBER RESMI TIER 1):
-- Usia: {profil.get('umur')} tahun | Jenis Kelamin: {profil.get('jenisKelamin')}
+- Usia: {str(profil.get('umur')) + ' bulan' if kategori == 'ANAK_BALITA' else str(profil.get('umur')) + ' tahun'} | Jenis Kelamin: {profil.get('jenisKelamin')}
 - Status Gizi: {status} (BMI: {bmi})
 - Kategori Kondisi: {kategori}
 {"- Usia Kehamilan: " + str(profil.get('usiaKehamilanMinggu')) + " minggu" if profil.get('usiaKehamilanMinggu') else ""}
@@ -1445,7 +1449,7 @@ def jalankan_ai_rekomendasi(
             'sumber_target_gizi': NUTRISCALE_SOURCE,
             'sumber_asesmen_antropometri': riwayat.get('_source', 'LOCAL_FALLBACK'),
             'model': {
-                'algoritma': 'LogisticRegression (multinomial, label 0/1/2)' if model_info.get('pipeline') is not None else 'HEURISTIK (model belum dilatih)',
+                'algoritma': 'HistGradientBoosting (multikelas, label 0/1/2)' if model_info.get('pipeline') is not None else 'HEURISTIK (model belum dilatih)',
                 'kategori_model': model_info.get('kategori_dipakai'),
                 'versi': model_info.get('version'),
             },

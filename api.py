@@ -4,7 +4,7 @@ from typing import Optional
 from fastapi import FastAPI, HTTPException, Security, Request
 from fastapi.security.api_key import APIKeyHeader
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 from contextlib import asynccontextmanager
 from dotenv import load_dotenv, find_dotenv
 
@@ -126,7 +126,7 @@ class AsesmenNutriScaleInput(BaseModel):
 
 
 class ProfilKesehatanInput(BaseModel):
-    umur: int = Field(..., gt=0, description="Umur pasien dalam tahun")
+    umur: int = Field(..., ge=0, description="Umur pasien: dalam BULAN (0-60) untuk kategori ANAK_BALITA, dalam TAHUN untuk kategori lain")
     jenisKelamin: str = Field(..., pattern="^(LAKI_LAKI|PEREMPUAN)$")
     beratBadan: float = Field(..., gt=0)
     tinggiBadan: float = Field(..., gt=0)
@@ -145,6 +145,12 @@ class ProfilKesehatanInput(BaseModel):
     nutrisi: NutrisiNutriScaleInput
     # Asesmen antropometri resmi NutriScale (BMI, HAZ, WHZ, status gizi)
     asesmen: Optional[AsesmenNutriScaleInput] = None
+
+    @model_validator(mode='after')
+    def _cek_umur_balita(self):
+        if self.kategoriKondisi == 'ANAK_BALITA' and self.umur > 60:
+            raise ValueError('Untuk ANAK_BALITA, umur dalam BULAN dan maksimal 60')
+        return self
 
     class Config:
         json_schema_extra = {
@@ -178,7 +184,7 @@ def root():
 
 @app.get("/api/models")
 def list_models():
-    """Model Logistic Regression yang aktif per kategori kondisi."""
+    """Model gradient boosting yang aktif per kategori kondisi."""
     out = {}
     for kategori in ["UMUM", "IBU_HAMIL", "ANAK_BALITA", "PASCA_OPERASI"]:
         info = get_recommender_model(kategori)

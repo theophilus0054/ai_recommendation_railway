@@ -63,7 +63,7 @@ TEST_CASES = [
     {
         "name": "TEST 1 — Anak Balita Underweight (Pantangan Ikan)",
         "profil_kesehatan": {
-            "umur":                4,
+            "umur":                48,
             "jenisKelamin":        "LAKI_LAKI",
             "beratBadan":          13.0,
             "tinggiBadan":         102.0,

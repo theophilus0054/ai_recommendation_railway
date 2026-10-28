@@ -87,7 +87,7 @@ def run_demo():
             "kasus": "KASUS 3: Anak Balita 3 Tahun Gizi Kurang (Alergi Kacang)",
             "deskripsi": "Fokus nutrisi: Padat energi & protein untuk tumbuh kejar, rendah garam/gula, tanpa kafein & makanan berisiko tersedak.",
             "profil": {
-                "umur": 3,
+                "umur": 36,
                 "jenisKelamin": "LAKI_LAKI",
                 "beratBadan": 11.5,
                 "tinggiBadan": 92.0,

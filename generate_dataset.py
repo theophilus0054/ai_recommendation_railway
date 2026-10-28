@@ -1,6 +1,6 @@
 """
 ==========================================================================
- NutriScale AI — Dataset Generator per Kategori (4 Model Logistic Regression)
+ NutriScale AI — Dataset Generator per Kategori (4 Model gradient boosting)
  Menghasilkan data training dan testing SINTETIS untuk 4 kategori kondisi:
    UMUM, IBU_HAMIL, ANAK_BALITA, PASCA_OPERASI (satu dataset per kategori).
  - Profil Tier 1 realistis per kategori (Harris-Benedict x aktivitas, IOM EER balita,
@@ -160,12 +160,15 @@ def generate_profile(rng, kategori: str, idx: int) -> dict:
             'usiaKehamilanMinggu': None, 'tahapDiet': None, 'jenisOperasi': None, 'haz': None, 'whz': None}
 
     if kategori == 'ANAK_BALITA':
-        umur = float(rng.uniform(1.0, 5.0))
+        umur_bulan = int(rng.integers(0, 61))
+        umur = umur_bulan / 12.0
         haz = float(np.clip(rng.normal(-0.6, 1.2), -4, 3))
         whz = float(np.clip(rng.normal(0.0, 1.3), -4, 4))
-        cm = 74.0 + (umur - 1.0) * 8.8 + haz * 3.3
-        kg = (9.6 + (umur - 1.0) * 2.0) * (1 + 0.09 * whz)
-        if umur < 3:
+        cm = float(np.interp(umur, [0, 1, 2, 3, 5], [50.0, 75.0, 87.0, 96.0, 109.0])) + haz * 3.3
+        kg = float(np.interp(umur, [0, 1, 2, 3, 5], [3.3, 9.6, 12.2, 14.3, 18.3])) * (1 + 0.09 * whz)
+        if umur < 1:
+            kcal = 82 * kg + 20
+        elif umur < 3:
             kcal = 89 * kg - 100 + 20
         else:
             pa = float(rng.choice([1.0, 1.13, 1.26]))
@@ -203,10 +206,10 @@ def generate_profile(rng, kategori: str, idx: int) -> dict:
             elif status == 'Underweight':
                 kcal += 300
 
-    kcal = float(np.clip(kcal, 800 if kategori == 'ANAK_BALITA' else 1300, 3600))
+    kcal = float(np.clip(kcal, 300 if kategori == 'ANAK_BALITA' else 1300, 3600))
     c_pct = 1.0 - p_pct - f_pct
     prof.update({
-        'umur': round(umur, 1), 'beratBadan': round(kg, 1), 'tinggiBadan': round(cm, 1), 'statusNutrisi': status,
+        'umur': umur_bulan if kategori == 'ANAK_BALITA' else round(umur, 1), 'beratBadan': round(kg, 1), 'tinggiBadan': round(cm, 1), 'statusNutrisi': status,
         'target_kalori_harian': round(kcal, 1),
         'target_protein_g': round(kcal * p_pct / 4, 1),
         'target_fat_g': round(kcal * f_pct / 9, 1),

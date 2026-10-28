@@ -26,7 +26,7 @@ Sesuai dengan spesifikasi arsitektur **Histori Chat AI NutriScale (20 Oktober 20
 
 2. **Tier 2 — Recommendation Engine (Supervised ML + Hard Safety Filter)**:
    - **Hard Safety Filtering**: Mengeliminasi produk yang mengandung alergen (`alergi`), pantangan (`pantanganMedis`), alkohol, dan aturan **BLOKIR** per kategori (mis. makanan mentah hewani & ikan tinggi merkuri untuk ibu hamil, kafein & risiko tersedak untuk balita, tekstur di atas `tahapDiet` untuk pasca operasi) **SEBELUM** ranking. Pencocokan memakai regex batas kata (`kale` tidak dianggap `ale`, `eggplant` tidak dianggap telur), koreksi salah ketik (`udnag` → udang), kata payung (`seafood`), dan field `allergens` Supabase (`peanuts`, `wheat`, ...). Aturan **BATASI** tidak membuang makanan, tetapi menurunkan skor.
-   - **Machine Learning Ranking**: 4 model **Logistic Regression multinomial** terpisah (`models/recommender_<KATEGORI>.joblib`) untuk `UMUM`, `IBU_HAMIL`, `ANAK_BALITA`, `PASCA_OPERASI`. Label ordinal 0 (tidak sesuai), 1 (cukup sesuai), 2 (sangat sesuai). Fitur dihitung oleh `compute_ml_features` (fungsi yang sama untuk training & inferensi):
+   - **Machine Learning Ranking**: 4 model **gradient boosting (HistGradientBoosting)** terpisah (Logistic Regression dipakai sebagai baseline pembanding) (`models/recommender_<KATEGORI>.joblib`) untuk `UMUM`, `IBU_HAMIL`, `ANAK_BALITA`, `PASCA_OPERASI`. Label ordinal 0 (tidak sesuai), 1 (cukup sesuai), 2 (sangat sesuai). Fitur dihitung oleh `compute_ml_features` (fungsi yang sama untuk training & inferensi):
      $$\text{Skor} = \frac{P(1) + 2 \cdot P(2)}{2}$$
 
 3. **Tier 3 — Gemini LLM Explanation**:
@@ -39,13 +39,14 @@ Sesuai dengan spesifikasi arsitektur **Histori Chat AI NutriScale (20 Oktober 20
 
 Setiap kategori: 700 profil sintetis × 5 sesi × 12 kandidat (≈42.000 pasangan). Split berdasarkan profil (profil test tidak pernah ada di train) dan 15% makanan hanya muncul di test. Label berasal dari rubrik per kategori di `generate_dataset.py` (memakai kolom yang tidak masuk fitur model, mis. serat, folat, zat besi, kalsium, kafein), tanpa noise acak.
 
-| Kategori | Accuracy | Macro-F1 | Weighted Kappa | CV Kappa (GroupKFold) | NDCG@5 Model | NDCG@5 Formula Lama |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| UMUM | 0.8152 | 0.7088 | 0.7624 | 0.7661 ± 0.0069 | 0.9114 | 0.6781 |
-| IBU_HAMIL | 0.7959 | 0.7032 | 0.7740 | 0.7782 ± 0.0049 | 0.8983 | 0.6606 |
-| ANAK_BALITA | 0.8411 | 0.7510 | 0.8036 | 0.8067 ± 0.0061 | 0.9302 | 0.6593 |
-| PASCA_OPERASI | 0.8538 | 0.7744 | 0.8458 | 0.8472 ± 0.0073 | 0.9340 | 0.7411 |
+| Kategori | Accuracy | Precision (macro) | Recall (macro) | Macro-F1 | Weighted Kappa | CV Kappa (GroupKFold) | NDCG@5 | Baseline LR (Acc / F1) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| UMUM | 0.9153 | 0.8703 | 0.8665 | 0.8684 | 0.9015 | 0.9005 ± 0.0027 | 0.9804 | 0.8152 / 0.7088 |
+| IBU_HAMIL | 0.8821 | 0.8256 | 0.8186 | 0.8219 | 0.8763 | 0.8838 ± 0.0018 | 0.9607 | 0.7959 / 0.7032 |
+| ANAK_BALITA | 0.9207 | 0.8612 | 0.8598 | 0.8605 | 0.9054 | 0.8983 ± 0.0046 | 0.9809 | 0.8334 / 0.7375 |
+| PASCA_OPERASI | 0.9350 | 0.9000 | 0.8963 | 0.8977 | 0.9360 | 0.9391 ± 0.0023 | 0.9890 | 0.8538 / 0.7744 |
 
+- Umur kategori `ANAK_BALITA` dalam **bulan** (0 sampai 60); kategori lain dalam tahun.
 - Uji end-to-end (`evaluate_model_performance.py`): 0 pelanggaran alergen dan 0 pelanggaran BLOKIR kategori pada 4 skenario.
 - **Catatan jujur**: angka di atas mengukur seberapa baik model meniru rubrik pada data sintetis, bukan uji klinis. Rubrik & tabel bahaya perlu ditinjau ahli gizi (gold set) sebelum klaim klinis.
 
@@ -58,7 +59,7 @@ Setiap kategori: 700 profil sintetis × 5 sesi × 12 kandidat (≈42.000 pasanga
    python generate_dataset.py                     # 4 kategori
    python generate_dataset.py --category UMUM     # satu kategori saja
    ```
-2. **Train & Evaluasi 4 Model Logistic Regression** (`models/recommender_<KATEGORI>.joblib`):
+2. **Train & Evaluasi 4 Model (HistGradientBoosting + baseline Logistic Regression)** (`models/recommender_<KATEGORI>.joblib`):
    ```bash
    python train_model.py
    python train_model.py --category IBU_HAMIL

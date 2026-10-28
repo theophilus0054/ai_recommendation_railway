@@ -1,701 +1,701 @@
 profile_id,kategoriKondisi,jenisKelamin,usiaKehamilanMinggu,tahapDiet,jenisOperasi,haz,whz,umur,beratBadan,tinggiBadan,statusNutrisi,target_kalori_harian,target_protein_g,target_fat_g,target_carbs_g,alergi,pantanganMedis,split
-anak_balita_0001,ANAK_BALITA,P,,,,-0.51,-0.24,2.1,11.6,82.3,Gizi Baik,953.7,30.5,37.8,122.8,-,"tidak suka gorengan, mie instan",train
-anak_balita_0002,ANAK_BALITA,P,,,,-0.22,-0.04,1.7,11.0,79.4,Gizi Baik,894.7,28.7,35.9,114.2,"Alergi: fish, tahu tempe",no allergies,train
-anak_balita_0003,ANAK_BALITA,L,,,,0.18,-2.56,4.2,12.3,102.8,Gizi Kurang,1269.0,42.6,44.8,173.8,-,no allergies,test
-anak_balita_0004,ANAK_BALITA,P,,,,0.46,-0.48,1.4,10.0,79.2,Gizi Baik,808.0,30.8,33.7,95.5,allergic to ikn; squid,none,train
-anak_balita_0005,ANAK_BALITA,L,,,,-0.6,-1.28,3.9,13.6,97.5,Gizi Baik,1435.4,48.2,58.0,180.2,none,"tidak suka santan, pedas",train
-anak_balita_0006,ANAK_BALITA,L,,,,-1.85,1.06,2.5,13.7,80.7,Berisiko Gizi Lebih,1139.7,41.0,41.1,151.5,none,"pantangan spicy, manis",train
-anak_balita_0007,ANAK_BALITA,L,,,,0.74,2.16,2.9,16.0,93.1,Gizi Lebih,1342.3,50.8,50.6,170.9,no allergies,"pantangan pedas, daging merah",test
-anak_balita_0008,ANAK_BALITA,L,,,,1.1,-0.04,4.6,16.8,109.6,Gizi Baik,1634.7,50.9,61.5,219.4,cumi,no allergies,train
-anak_balita_0009,ANAK_BALITA,L,,,,-0.84,-0.33,3.7,14.6,95.0,Gizi Baik,1449.7,51.8,56.1,184.5,-,"tidak suka spicy, goreng-gorengan",train
-anak_balita_0010,ANAK_BALITA,L,,,,-0.87,1.16,5.0,19.4,106.1,Berisiko Gizi Lebih,1659.8,53.1,65.3,215.0,allergic to wheat,no allergies,train
-anak_balita_0011,ANAK_BALITA,L,,,,-0.41,0.14,3.8,15.4,97.4,Gizi Baik,1163.9,36.8,43.2,157.0,"Alergi: fish, udang",tidak suka santan,test
-anak_balita_0012,ANAK_BALITA,L,,,,0.59,1.06,4.4,18.0,105.9,Berisiko Gizi Lebih,1272.4,41.8,45.1,174.9,allergic to squid,tidak ada,train
-anak_balita_0013,ANAK_BALITA,L,,,,-0.41,-0.48,2.7,12.5,87.7,Gizi Baik,1029.6,38.1,42.4,123.8,tidak ada,no allergies,train
-anak_balita_0014,ANAK_BALITA,L,,,,0.46,1.53,3.5,16.6,97.6,Berisiko Gizi Lebih,1217.0,44.1,45.2,158.5,no allergies,"tidak suka spicy, santan",train
-anak_balita_0015,ANAK_BALITA,L,,,,-2.01,-1.78,3.0,11.4,84.9,Gizi Baik,935.9,34.8,35.2,120.0,none,-,train
-anak_balita_0016,ANAK_BALITA,P,,,,0.72,-0.48,3.2,13.4,95.6,Gizi Baik,1350.8,53.5,54.3,162.0,peanut; fish,"tidak suka mie instan, gorengan",train
-anak_balita_0017,ANAK_BALITA,L,,,,-1.28,-1.49,4.5,14.3,100.3,Gizi Baik,1455.0,58.1,55.3,181.2,no allergies,none,train
-anak_balita_0018,ANAK_BALITA,L,,,,-2.17,-0.93,1.9,10.4,74.7,Gizi Baik,849.6,28.7,29.7,116.9,alergi gluten,pantangan gorengan,train
-anak_balita_0019,ANAK_BALITA,L,,,,-1.65,1.69,4.8,19.9,102.3,Berisiko Gizi Lebih,1642.2,60.0,67.2,199.4,,tidak suka mie instan,train
-anak_balita_0020,ANAK_BALITA,P,,,,0.07,0.87,1.5,11.3,78.3,Gizi Baik,928.8,31.8,32.8,126.4,-,"pantangan daging merah, santan",train
-anak_balita_0021,ANAK_BALITA,L,,,,-1.2,-1.21,2.1,10.6,80.1,Gizi Baik,861.5,28.9,31.8,114.9,no allergies,"tidak suka gorengan, kopi",train
-anak_balita_0022,ANAK_BALITA,P,,,,0.03,1.55,4.0,17.9,100.8,Berisiko Gizi Lebih,1442.3,55.6,51.1,190.1,allergic to nuts & telur,"tidak suka goreng-gorengan, mie instan",train
-anak_balita_0023,ANAK_BALITA,L,,,,-1.51,0.95,3.7,16.4,93.2,Gizi Baik,1321.7,45.2,45.9,182.0,Alergi: squid,,train
-anak_balita_0024,ANAK_BALITA,L,,,,1.44,0.33,2.5,12.9,91.8,Gizi Baik,1071.6,41.2,41.3,133.8,tidak ada,"gorengan, goreng-gorengan",train
-anak_balita_0025,ANAK_BALITA,L,,,,0.26,1.6,4.7,19.4,107.3,Berisiko Gizi Lebih,1306.0,48.6,50.4,164.4,tidak ada,"kopi, santan",test
-anak_balita_0026,ANAK_BALITA,P,,,,0.81,0.78,1.8,12.0,83.8,Gizi Baik,987.8,35.4,33.4,136.5,no allergies,tidak ada,train
-anak_balita_0027,ANAK_BALITA,L,,,,-0.69,0.27,2.3,12.4,82.9,Gizi Baik,1026.3,32.5,43.0,127.4,Alergi: seafood,,train
-anak_balita_0028,ANAK_BALITA,L,,,,1.02,-0.14,2.6,12.7,91.7,Gizi Baik,1050.0,32.2,41.2,137.6,no allergies,no allergies,train
-anak_balita_0029,ANAK_BALITA,L,,,,0.1,0.82,2.8,14.2,90.1,Gizi Baik,1180.1,45.7,43.7,151.0,none,no allergies,train
-anak_balita_0030,ANAK_BALITA,P,,,,-1.25,-0.2,3.9,15.2,95.6,Gizi Baik,1214.7,44.6,41.1,166.6,tidak ada,pantangan daging merah,train
-anak_balita_0031,ANAK_BALITA,L,,,,-1.43,1.12,5.0,19.3,104.3,Berisiko Gizi Lebih,1257.8,47.0,49.7,155.7,allergic to kacang tanah dan ikan,"pantangan gorengan, goreng-gorengan",test
-anak_balita_0032,ANAK_BALITA,L,,,,0.54,1.06,2.2,13.2,86.6,Berisiko Gizi Lebih,1095.7,33.2,44.1,141.4,no allergies,"jeroan, kopi",test
-anak_balita_0033,ANAK_BALITA,P,,,,0.23,-2.14,3.4,11.6,95.7,Gizi Kurang,1061.1,41.4,35.5,143.9,allergic to gluten dan telurr,,train
-anak_balita_0034,ANAK_BALITA,L,,,,-0.73,2.68,4.6,20.8,103.1,Gizi Lebih,1311.6,45.9,50.6,168.1,cumi,"hindari santan, makanan manis",train
-anak_balita_0035,ANAK_BALITA,L,,,,-0.42,-0.2,4.2,15.7,100.8,Gizi Baik,1177.9,43.9,47.9,142.8,,pantangan jeroan,train
-anak_balita_0036,ANAK_BALITA,L,,,,-0.62,1.54,2.9,15.3,88.8,Berisiko Gizi Lebih,1280.7,42.7,44.8,176.7,none,,train
-anak_balita_0037,ANAK_BALITA,P,,,,-1.14,-0.55,3.2,13.4,89.9,Gizi Baik,1028.8,31.1,38.8,138.7,tidak ada,"pantangan goreng-gorengan, gorengan",train
-anak_balita_0038,ANAK_BALITA,P,,,,-3.11,0.96,1.8,12.1,70.4,Gizi Baik,994.0,34.4,39.8,124.6,no allergies,,train
-anak_balita_0039,ANAK_BALITA,L,,,,0.33,-3.08,2.3,8.8,86.5,Gizi Buruk,800.0,24.7,32.9,101.3,"allergic to wheat, ikn",tidak ada,train
-anak_balita_0040,ANAK_BALITA,P,,,,-2.71,0.46,4.4,17.1,95.0,Gizi Baik,1077.5,41.3,36.9,144.9,tidak ada,spicy,test
-anak_balita_0041,ANAK_BALITA,P,,,,-0.18,-1.62,4.5,14.1,103.8,Gizi Baik,1417.4,51.7,57.4,173.5,soy,none,train
-anak_balita_0042,ANAK_BALITA,P,,,,1.42,-2.04,2.0,9.4,87.3,Gizi Kurang,800.0,26.4,27.6,111.4,no allergies,tidak suka manis,test
-anak_balita_0043,ANAK_BALITA,L,,,,-0.88,1.66,1.8,12.9,78.1,Berisiko Gizi Lebih,1064.3,35.5,38.8,143.2,tidak ada,none,train
-anak_balita_0044,ANAK_BALITA,L,,,,-0.08,0.11,1.2,10.2,75.9,Gizi Baik,826.6,28.5,31.1,108.1,none,pantangan gorengan,train
-anak_balita_0045,ANAK_BALITA,L,,,,-1.44,-0.72,1.4,9.7,72.7,Gizi Baik,800.0,31.7,28.5,104.2,allergic to soy,tidak suka gorengan,test
-anak_balita_0046,ANAK_BALITA,P,,,,-1.01,0.96,4.1,17.3,98.3,Gizi Baik,1260.1,45.2,48.0,161.8,telor,none,train
-anak_balita_0047,ANAK_BALITA,L,,,,-0.92,0.95,4.7,18.5,103.5,Gizi Baik,1245.1,39.4,42.1,177.1,none,"tidak suka gorengan, spicy",train
-anak_balita_0048,ANAK_BALITA,L,,,,-0.12,2.43,4.4,20.0,103.4,Gizi Lebih,1303.5,48.3,52.8,158.8,alergi ikn,makanan manis,train
-anak_balita_0049,ANAK_BALITA,L,,,,-0.01,-3.07,3.8,11.0,98.8,Gizi Buruk,1058.7,35.7,36.6,146.6,alergi telur; laktosa,-,train
-anak_balita_0050,ANAK_BALITA,P,,,,-1.63,-1.1,2.2,10.8,79.1,Gizi Baik,880.9,30.6,32.1,117.3,"kacang tanah, ebi",-,test
-anak_balita_0051,ANAK_BALITA,P,,,,-3.65,0.84,2.5,13.5,74.8,Gizi Baik,1119.6,38.6,44.6,141.0,laktosa,tidak ada,train
-anak_balita_0052,ANAK_BALITA,L,,,,-1.31,0.76,4.8,18.4,103.3,Gizi Baik,1605.3,61.1,66.5,190.7,tidak ada,no allergies,train
-anak_balita_0053,ANAK_BALITA,P,,,,-0.26,-0.97,3.4,13.2,94.4,Gizi Baik,1063.9,33.2,36.4,150.8,Alergi: cumi-cumi; makanan laut,,train
-anak_balita_0054,ANAK_BALITA,P,,,,0.72,-0.05,3.5,14.6,98.6,Gizi Baik,1391.1,44.7,57.4,174.0,no allergies,,train
-anak_balita_0055,ANAK_BALITA,P,,,,-0.56,3.67,2.4,16.6,84.7,Obesitas,1393.6,43.7,53.7,184.0,crab,pantangan pedas,test
-anak_balita_0056,ANAK_BALITA,P,,,,-0.73,-0.31,3.7,14.6,95.6,Gizi Baik,1080.0,33.6,38.0,151.0,-,none,test
-anak_balita_0057,ANAK_BALITA,L,,,,-1.9,-1.4,1.9,9.9,75.4,Gizi Baik,802.9,30.2,29.1,105.1,tidak ada,tidak suka santan,test
-anak_balita_0058,ANAK_BALITA,L,,,,0.69,1.1,1.6,11.9,81.6,Berisiko Gizi Lebih,977.2,35.4,33.5,133.5,none,no allergies,train
-anak_balita_0059,ANAK_BALITA,L,,,,-0.26,0.34,2.6,13.2,87.3,Gizi Baik,1095.5,41.7,44.0,133.1,,,train
-anak_balita_0060,ANAK_BALITA,L,,,,-0.37,-1.99,1.9,9.3,80.3,Gizi Baik,800.0,29.9,30.6,101.4,tidak ada,hindari mie instan,train
-anak_balita_0061,ANAK_BALITA,L,,,,-0.25,-1.06,4.3,14.7,102.4,Gizi Baik,1500.0,49.2,52.3,208.1,,"spicy, jeroan",test
-anak_balita_0062,ANAK_BALITA,L,,,,-1.99,-0.57,1.4,9.9,71.2,Gizi Baik,802.0,28.2,30.2,104.4,"Alergi: fish, susu","hindari daging merah, gorengan",train
-anak_balita_0063,ANAK_BALITA,L,,,,-1.53,-1.1,1.2,9.0,70.6,Gizi Baik,800.0,28.9,27.7,108.9,alergi nuts,goreng-gorengan,train
-anak_balita_0064,ANAK_BALITA,P,,,,-1.56,-0.18,4.1,15.5,95.8,Gizi Baik,1216.2,46.7,43.2,160.2,Alergi: cumi & soy,"pantangan pedas, spicy",test
-anak_balita_0065,ANAK_BALITA,L,,,,0.48,-1.65,3.0,11.6,93.5,Gizi Baik,1075.8,39.6,37.3,145.4,tidak ada,"jeroan, daging merah",train
-anak_balita_0066,ANAK_BALITA,L,,,,-0.11,-0.0,3.0,13.6,91.1,Gizi Baik,1127.9,44.6,42.7,141.3,kepiting,-,test
-anak_balita_0067,ANAK_BALITA,L,,,,-0.78,2.05,3.1,16.3,89.7,Gizi Lebih,1486.6,52.8,55.7,193.5,"telor, ikan",,train
-anak_balita_0068,ANAK_BALITA,L,,,,0.04,-0.38,3.8,14.7,98.9,Gizi Baik,1492.7,58.6,52.6,196.1,Alergi: wheat; tahu tempe,-,train
-anak_balita_0069,ANAK_BALITA,P,,,,0.12,-0.08,1.3,10.1,76.9,Gizi Baik,818.6,27.2,28.9,112.5,,tidak ada,train
-anak_balita_0070,ANAK_BALITA,L,,,,-2.0,-0.68,2.8,12.5,83.6,Gizi Baik,1030.6,35.9,42.3,126.5,tidak ada,pedas,test
-anak_balita_0071,ANAK_BALITA,L,,,,0.39,-1.32,4.0,13.8,101.8,Gizi Baik,1147.3,45.2,43.1,144.7,fish & crab,,test
-anak_balita_0072,ANAK_BALITA,P,,,,-2.28,-0.55,3.2,13.3,85.6,Gizi Baik,989.4,39.6,37.7,123.0,no allergies,tidak ada,train
-anak_balita_0073,ANAK_BALITA,P,,,,-0.07,1.3,4.6,18.7,105.1,Berisiko Gizi Lebih,1487.6,49.7,50.4,208.8,makanan laut & kacang tanah,no allergies,test
-anak_balita_0074,ANAK_BALITA,L,,,,-3.8,3.56,4.2,21.1,89.6,Obesitas,1399.7,53.2,58.5,165.0,,"santan, kopi",train
-anak_balita_0075,ANAK_BALITA,P,,,,0.33,-0.85,3.8,14.0,99.7,Gizi Baik,1110.0,43.6,42.6,138.0,allergic to ikan; suus,-,train
-anak_balita_0076,ANAK_BALITA,L,,,,1.39,-1.45,2.4,10.7,90.6,Gizi Baik,874.6,28.8,36.1,108.7,,,train
-anak_balita_0077,ANAK_BALITA,P,,,,-0.54,-0.94,4.4,15.0,101.9,Gizi Baik,1265.2,43.8,49.5,161.1,none,hindari manis,test
-anak_balita_0078,ANAK_BALITA,L,,,,-1.01,2.04,2.3,14.6,82.5,Gizi Lebih,1215.4,45.7,51.1,143.2,no allergies,pantangan pedas,test
-anak_balita_0079,ANAK_BALITA,P,,,,-0.91,-1.05,1.3,9.3,74.0,Gizi Baik,800.0,25.2,33.5,99.5,eggs dan soy,tidak ada,test
-anak_balita_0080,ANAK_BALITA,L,,,,-0.23,-0.46,2.2,11.6,84.1,Gizi Baik,948.8,32.2,35.1,126.1,no allergies,pantangan pedas,train
-anak_balita_0081,ANAK_BALITA,P,,,,-0.11,-0.37,3.6,14.2,96.2,Gizi Baik,1086.0,32.8,37.3,154.9,alergi ikan; kepiting,hindari mie instan,train
-anak_balita_0082,ANAK_BALITA,L,,,,-1.14,-0.37,1.7,10.7,76.7,Gizi Baik,871.7,28.7,34.0,112.7,none,"pantangan mie instan, jeroan",test
-anak_balita_0083,ANAK_BALITA,L,,,,-1.73,1.56,1.0,11.0,68.6,Berisiko Gizi Lebih,901.5,32.3,35.5,113.2,makanan laut; susu,pedas,train
-anak_balita_0084,ANAK_BALITA,P,,,,-1.52,-0.27,2.6,12.4,82.9,Gizi Baik,1027.5,38.0,34.7,140.8,-,-,train
-anak_balita_0085,ANAK_BALITA,P,,,,-1.43,0.28,1.5,10.9,73.7,Gizi Baik,887.9,28.6,34.1,116.7,alergi seafood,none,train
-anak_balita_0086,ANAK_BALITA,P,,,,0.27,-0.93,1.4,9.5,78.2,Gizi Baik,800.0,29.4,29.7,103.8,no allergies,no allergies,train
-anak_balita_0087,ANAK_BALITA,P,,,,-0.86,-1.92,3.2,11.6,90.7,Gizi Baik,1144.7,41.2,40.3,154.3,none,hindari goreng-gorengan,test
-anak_balita_0088,ANAK_BALITA,L,,,,-1.3,-0.63,4.3,15.2,98.6,Gizi Baik,1309.3,42.0,50.0,172.7,none,tidak suka gorengan,train
-anak_balita_0089,ANAK_BALITA,P,,,,-3.1,-1.15,1.3,9.2,66.7,Gizi Baik,800.0,31.1,30.5,100.4,none,no allergies,train
-anak_balita_0090,ANAK_BALITA,P,,,,-0.4,-1.15,3.2,12.5,91.9,Gizi Baik,1040.4,36.3,40.7,132.2,none,none,train
-anak_balita_0091,ANAK_BALITA,L,,,,-1.92,-1.07,2.1,10.7,77.6,Gizi Baik,873.2,30.6,34.8,109.3,-,,test
-anak_balita_0092,ANAK_BALITA,L,,,,-3.85,-0.44,2.6,12.4,75.7,Gizi Baik,1020.4,40.7,40.1,124.0,tidak ada,-,train
-anak_balita_0093,ANAK_BALITA,L,,,,1.41,0.78,1.5,11.3,82.9,Gizi Baik,926.5,34.8,36.3,115.1,alergi ikan; crab,"hindari spicy, jeroan",train
-anak_balita_0094,ANAK_BALITA,L,,,,0.63,-0.24,3.1,13.5,94.7,Gizi Baik,1132.4,37.2,41.4,152.8,tidak ada,-,train
-anak_balita_0095,ANAK_BALITA,L,,,,0.16,-0.27,4.2,15.7,103.0,Gizi Baik,1546.1,50.1,64.9,190.5,,no allergies,train
-anak_balita_0096,ANAK_BALITA,P,,,,-1.0,0.38,1.8,11.6,77.7,Gizi Baik,949.8,31.0,32.9,132.4,-,goreng-gorengan,train
-anak_balita_0097,ANAK_BALITA,P,,,,0.62,-1.05,4.9,15.7,110.1,Gizi Baik,1498.9,55.7,58.3,187.9,alergi crab,tidak suka mie instan,train
-anak_balita_0098,ANAK_BALITA,P,,,,-0.02,-0.9,5.0,16.2,109.1,Gizi Baik,1335.5,48.1,56.0,159.8,kepiting; telor,"tidak suka spicy, gorengan",train
-anak_balita_0099,ANAK_BALITA,P,,,,-0.71,-1.88,1.4,8.7,75.6,Gizi Baik,800.0,29.5,32.3,97.8,tidak ada,"hindari santan, spicy",train
-anak_balita_0100,ANAK_BALITA,L,,,,-0.55,0.3,4.7,17.5,105.0,Gizi Baik,1231.9,47.9,51.9,143.3,allergic to cumi-cumi,no allergies,train
-anak_balita_0101,ANAK_BALITA,P,,,,-1.48,0.49,2.9,14.0,85.9,Gizi Baik,1167.1,37.8,42.3,158.7,"alergi udnag, milk","hindari gorengan, manis",train
-anak_balita_0102,ANAK_BALITA,L,,,,-0.41,-2.23,1.1,7.9,73.6,Gizi Kurang,800.0,27.0,31.2,102.7,none,-,test
-anak_balita_0103,ANAK_BALITA,L,,,,1.17,3.31,1.4,13.4,81.0,Obesitas,1111.6,33.9,46.6,139.1,"alergi cumi-cumi, laktosa",-,train
-anak_balita_0104,ANAK_BALITA,L,,,,0.53,0.29,4.6,17.2,107.2,Gizi Baik,1622.8,59.9,61.2,208.1,tidak ada,"pantangan santan, jeroan",train
-anak_balita_0105,ANAK_BALITA,P,,,,0.02,1.73,4.8,19.8,107.3,Berisiko Gizi Lebih,1521.1,57.9,59.4,188.8,none,-,train
-anak_balita_0106,ANAK_BALITA,P,,,,-0.37,1.05,4.6,18.3,104.2,Berisiko Gizi Lebih,1471.9,53.6,49.2,203.8,"allergic to kedele, wheat",pantangan gorengan,train
-anak_balita_0107,ANAK_BALITA,L,,,,-0.09,0.13,3.1,13.9,91.8,Gizi Baik,1118.9,34.5,41.3,152.3,,none,train
-anak_balita_0108,ANAK_BALITA,L,,,,-0.77,-1.9,5.0,14.6,106.6,Gizi Baik,1151.6,44.7,44.5,143.1,Alergi: kacang tanah,no allergies,train
-anak_balita_0109,ANAK_BALITA,P,,,,-1.05,-0.69,3.3,13.4,91.0,Gizi Baik,1036.7,33.2,42.2,131.1,tidak ada,tidak ada,test
-anak_balita_0110,ANAK_BALITA,L,,,,-1.85,-2.22,2.3,9.8,79.6,Gizi Kurang,800.0,24.4,33.0,101.4,no allergies,pantangan goreng-gorengan,test
-anak_balita_0111,ANAK_BALITA,L,,,,-1.61,-2.85,2.9,9.9,85.3,Gizi Kurang,804.7,25.6,33.4,100.5,"cumi, fish",tidak suka pedas,test
-anak_balita_0112,ANAK_BALITA,P,,,,-1.48,1.33,1.2,11.1,70.6,Berisiko Gizi Lebih,909.2,31.8,35.4,116.0,"alergi telor, ebi",tidak suka mie instan,train
-anak_balita_0113,ANAK_BALITA,L,,,,-1.05,-0.94,2.8,12.1,86.5,Gizi Baik,997.2,32.1,39.5,128.3,,no allergies,train
-anak_balita_0114,ANAK_BALITA,P,,,,0.35,0.9,3.5,15.9,97.5,Gizi Baik,1115.5,34.2,43.2,147.5,tidak ada,"mie instan, santan",train
-anak_balita_0115,ANAK_BALITA,P,,,,0.44,-0.45,4.3,15.5,104.5,Gizi Baik,1301.3,45.8,45.3,177.6,,"tidak suka mie instan, kopi",train
-anak_balita_0116,ANAK_BALITA,P,,,,0.13,0.91,1.7,11.9,80.6,Gizi Baik,980.1,34.0,35.4,131.5,allergic to udnag; crab,no allergies,train
-anak_balita_0117,ANAK_BALITA,P,,,,-0.33,1.84,3.0,15.9,90.7,Berisiko Gizi Lebih,1199.3,44.3,50.4,142.1,none,"tidak suka kopi, makanan manis",train
-anak_balita_0118,ANAK_BALITA,P,,,,-1.35,-2.07,2.0,9.5,78.6,Gizi Kurang,800.0,25.6,32.5,101.2,alergi crab,,train
-anak_balita_0119,ANAK_BALITA,L,,,,-0.27,-1.68,1.4,8.8,76.6,Gizi Baik,800.0,28.3,27.0,111.0,tidak ada,,test
-anak_balita_0120,ANAK_BALITA,P,,,,-0.69,0.57,3.0,14.4,89.7,Gizi Baik,1170.7,38.3,45.9,151.2,-,,train
-anak_balita_0121,ANAK_BALITA,P,,,,-0.83,-0.02,2.3,12.2,83.0,Gizi Baik,1008.6,33.0,35.6,139.1,none,,test
-anak_balita_0122,ANAK_BALITA,P,,,,-0.89,-0.11,3.3,14.1,91.6,Gizi Baik,1049.0,33.9,39.8,138.8,Alergi: terigu & kepiting,hindari jeroan,train
-anak_balita_0123,ANAK_BALITA,P,,,,-0.11,-0.72,2.2,11.1,83.8,Gizi Baik,911.0,32.9,34.6,117.0,no allergies,none,train
-anak_balita_0124,ANAK_BALITA,L,,,,0.84,0.51,2.3,12.8,88.4,Gizi Baik,1059.7,38.5,38.3,140.2,,,train
-anak_balita_0125,ANAK_BALITA,P,,,,-0.26,1.26,4.4,18.2,102.9,Berisiko Gizi Lebih,1312.6,39.8,47.9,180.5,ikn; makanan laut,makanan manis,train
-anak_balita_0126,ANAK_BALITA,P,,,,0.68,1.18,3.0,15.1,94.2,Berisiko Gizi Lebih,1361.5,52.6,53.3,167.7,Alergi: cumi dan susu,tidak suka spicy,train
-anak_balita_0127,ANAK_BALITA,P,,,,-0.71,2.59,3.5,18.1,93.9,Gizi Lebih,1241.8,41.0,42.3,174.3,,no allergies,train
-anak_balita_0128,ANAK_BALITA,P,,,,-1.98,-1.69,3.9,13.1,93.0,Gizi Baik,1034.6,34.4,40.6,133.0,allergic to nuts,"tidak suka gorengan, spicy",train
-anak_balita_0129,ANAK_BALITA,P,,,,-0.58,0.08,1.7,11.0,77.9,Gizi Baik,898.7,35.1,32.7,116.1,-,tidak ada,train
-anak_balita_0130,ANAK_BALITA,P,,,,-0.06,-1.42,3.2,12.2,92.9,Gizi Baik,1175.1,46.9,39.7,157.7,tidak ada,none,train
-anak_balita_0131,ANAK_BALITA,L,,,,-1.05,0.46,4.5,17.2,100.9,Gizi Baik,1381.2,54.6,49.6,179.1,no allergies,none,train
-anak_balita_0132,ANAK_BALITA,L,,,,-1.43,-1.71,3.4,12.1,90.0,Gizi Baik,1184.5,43.1,46.3,148.8,tidak ada,tidak ada,test
-anak_balita_0133,ANAK_BALITA,P,,,,-1.36,0.57,2.5,13.2,82.4,Gizi Baik,1090.9,41.1,39.3,143.2,none,pantangan gorengan,test
-anak_balita_0134,ANAK_BALITA,L,,,,-0.34,-0.36,3.0,13.2,90.5,Gizi Baik,1395.0,46.5,48.3,193.5,-,hindari pedas,test
-anak_balita_0135,ANAK_BALITA,L,,,,0.08,-1.44,4.5,14.4,104.7,Gizi Baik,1507.7,48.5,52.3,210.7,alergi kacng dan ikan,"daging merah, jeroan",train
-anak_balita_0136,ANAK_BALITA,L,,,,-1.29,-0.15,1.3,10.1,72.6,Gizi Baik,819.9,30.6,28.2,110.8,,"hindari mie instan, santan",test
-anak_balita_0137,ANAK_BALITA,L,,,,-2.61,-0.55,2.2,11.4,75.9,Gizi Baik,933.8,31.1,38.6,115.6,alergi susu sapi,pantangan manis,test
-anak_balita_0138,ANAK_BALITA,P,,,,-0.21,-0.28,3.4,14.1,94.6,Gizi Baik,1074.4,32.5,43.7,137.8,Alergi: ikan,no allergies,train
-anak_balita_0139,ANAK_BALITA,L,,,,-0.32,1.82,1.5,12.2,77.0,Berisiko Gizi Lebih,1008.7,31.2,34.9,142.4,tahu tempe,jeroan,train
-anak_balita_0140,ANAK_BALITA,L,,,,0.95,-2.61,1.5,8.1,81.5,Gizi Kurang,800.0,31.5,32.1,96.3,none,"pantangan mie instan, makanan manis",train
-anak_balita_0141,ANAK_BALITA,L,,,,-1.1,0.28,1.3,10.5,73.0,Gizi Baik,850.4,27.7,31.8,113.4,none,"gorengan, kopi",train
-anak_balita_0142,ANAK_BALITA,L,,,,0.08,1.38,2.5,14.2,87.7,Berisiko Gizi Lebih,1187.3,39.7,48.5,147.9,-,hindari gorengan,train
-anak_balita_0143,ANAK_BALITA,P,,,,-1.54,-2.09,3.7,12.3,93.1,Gizi Kurang,1161.1,35.8,39.2,166.3,allergic to udang,no allergies,train
-anak_balita_0144,ANAK_BALITA,L,,,,-0.25,-0.23,2.0,11.4,81.9,Gizi Baik,930.2,35.3,31.9,125.5,no allergies,"hindari spicy, santan",train
-anak_balita_0145,ANAK_BALITA,L,,,,-3.19,1.42,2.9,15.0,79.8,Berisiko Gizi Lebih,1255.9,41.4,42.5,177.0,tidak ada,"hindari pedas, makanan manis",train
-anak_balita_0146,ANAK_BALITA,P,,,,0.53,0.2,3.9,15.6,101.1,Gizi Baik,1279.3,44.6,47.3,168.8,no allergies,hindari makanan manis,test
-anak_balita_0147,ANAK_BALITA,L,,,,0.94,1.51,1.5,12.0,81.5,Berisiko Gizi Lebih,992.0,30.4,39.2,129.4,no allergies,none,train
-anak_balita_0148,ANAK_BALITA,L,,,,-1.78,-0.17,3.3,14.0,88.4,Gizi Baik,1228.3,46.1,51.2,145.7,,tidak ada,train
-anak_balita_0149,ANAK_BALITA,P,,,,-2.78,2.44,1.0,11.8,65.0,Gizi Lebih,967.3,29.7,37.3,128.1,alergi seafood & kacang,pantangan mie instan,test
-anak_balita_0150,ANAK_BALITA,P,,,,0.28,-1.05,3.7,13.6,98.7,Gizi Baik,1098.7,40.9,45.0,132.6,no allergies,no allergies,train
-anak_balita_0151,ANAK_BALITA,P,,,,-0.98,0.3,2.3,12.5,82.0,Gizi Baik,1031.9,31.9,37.3,142.2,,tidak ada,train
-anak_balita_0152,ANAK_BALITA,L,,,,0.72,-1.06,4.4,14.9,106.7,Gizi Baik,1195.2,46.1,40.5,161.5,tidak ada,"santan, makanan manis",train
-anak_balita_0153,ANAK_BALITA,L,,,,-0.55,1.77,3.1,16.0,90.6,Berisiko Gizi Lebih,1324.1,46.3,48.4,175.8,,"tidak suka makanan manis, jeroan",train
-anak_balita_0154,ANAK_BALITA,L,,,,-1.33,-0.5,3.6,14.2,92.8,Gizi Baik,1258.5,44.3,44.8,169.5,tidak ada,manis,train
-anak_balita_0155,ANAK_BALITA,P,,,,-0.47,1.1,1.2,11.1,74.5,Berisiko Gizi Lebih,904.5,35.9,31.2,120.1,-,no allergies,train
-anak_balita_0156,ANAK_BALITA,P,,,,-0.45,0.42,1.7,11.4,78.7,Gizi Baik,937.2,32.4,31.7,130.6,Alergi: udnag; terigu,tidak suka manis,test
-anak_balita_0157,ANAK_BALITA,L,,,,1.89,-1.73,2.9,11.3,97.0,Gizi Baik,928.5,29.5,38.1,116.8,"crab, kacang",tidak suka spicy,train
-anak_balita_0158,ANAK_BALITA,L,,,,-1.6,-0.04,3.7,14.9,92.2,Gizi Baik,1111.9,39.9,45.4,136.0,alergi shrimp,tidak suka mie instan,train
-anak_balita_0159,ANAK_BALITA,P,,,,0.93,1.44,4.2,18.1,105.3,Berisiko Gizi Lebih,1341.8,43.1,46.3,188.3,Alergi: soy,-,test
-anak_balita_0160,ANAK_BALITA,P,,,,-0.14,0.3,1.0,10.0,74.0,Gizi Baik,805.8,28.7,30.6,103.9,gandum; udang,tidak suka goreng-gorengan,train
-anak_balita_0161,ANAK_BALITA,P,,,,-0.38,1.41,4.5,18.7,103.6,Berisiko Gizi Lebih,1171.2,41.6,41.8,157.3,alergi ikan dan udang,,train
-anak_balita_0162,ANAK_BALITA,L,,,,-0.56,0.43,1.3,10.6,74.8,Gizi Baik,863.3,34.5,32.5,108.2,alergi egg,"santan, daging merah",train
-anak_balita_0163,ANAK_BALITA,L,,,,-2.66,2.06,4.6,19.9,96.8,Gizi Lebih,1229.5,43.2,46.3,160.1,alergi telurr,pedas,train
-anak_balita_0164,ANAK_BALITA,L,,,,0.37,-0.64,3.5,13.8,97.2,Gizi Baik,1137.0,39.7,43.8,145.9,tidak ada,none,train
-anak_balita_0165,ANAK_BALITA,P,,,,-1.32,0.8,1.1,10.4,70.2,Gizi Baik,848.7,26.7,28.3,121.8,alergi cumi-cumi,"pantangan kopi, makanan manis",test
-anak_balita_0166,ANAK_BALITA,L,,,,-1.65,-1.34,2.0,10.1,77.0,Gizi Baik,822.5,30.0,29.6,109.1,tidak ada,-,test
-anak_balita_0167,ANAK_BALITA,L,,,,2.14,-0.17,1.7,10.8,87.2,Gizi Baik,884.9,32.2,36.9,106.0,terigu; ikn,no allergies,train
-anak_balita_0168,ANAK_BALITA,P,,,,0.85,-0.32,1.9,11.2,85.2,Gizi Baik,913.7,35.4,34.3,115.9,allergic to ikn dan nuts,none,train
-anak_balita_0169,ANAK_BALITA,P,,,,1.13,-0.13,3.1,13.7,96.5,Gizi Baik,1096.9,36.0,41.0,145.9,Alergi: udnag; gluten,tidak ada,train
-anak_balita_0170,ANAK_BALITA,L,,,,-1.73,1.17,3.9,17.1,94.2,Berisiko Gizi Lebih,1342.2,41.8,52.0,176.7,no allergies,tidak ada,train
-anak_balita_0171,ANAK_BALITA,L,,,,0.03,-0.96,1.4,9.5,77.5,Gizi Baik,800.0,26.0,27.9,111.3,tidak ada,,train
-anak_balita_0172,ANAK_BALITA,P,,,,0.03,1.61,3.5,16.7,96.2,Berisiko Gizi Lebih,1112.8,40.9,40.6,146.1,no allergies,tidak suka mie instan,train
-anak_balita_0173,ANAK_BALITA,L,,,,1.92,-0.99,3.6,13.5,103.5,Gizi Baik,1516.7,51.9,62.1,187.6,allergic to makanan laut,none,train
-anak_balita_0174,ANAK_BALITA,L,,,,0.67,-0.6,3.1,13.1,94.7,Gizi Baik,1433.0,49.9,53.4,188.2,"squid, seafood",-,train
-anak_balita_0175,ANAK_BALITA,P,,,,-1.12,0.52,3.9,16.2,96.1,Gizi Baik,1231.2,48.2,45.7,156.9,no allergies,-,test
-anak_balita_0176,ANAK_BALITA,P,,,,1.17,1.76,3.5,16.8,99.5,Berisiko Gizi Lebih,1431.2,53.1,53.6,184.1,,,train
-anak_balita_0177,ANAK_BALITA,P,,,,0.27,1.48,1.4,11.8,78.4,Berisiko Gizi Lebih,968.7,35.1,33.1,132.6,no allergies,-,test
-anak_balita_0178,ANAK_BALITA,P,,,,-0.53,-0.79,3.3,13.3,92.9,Gizi Baik,1052.8,39.0,35.4,144.6,"Alergi: telurr, ikan","pantangan jeroan, santan",train
-anak_balita_0179,ANAK_BALITA,P,,,,-1.88,-0.18,1.4,10.1,70.9,Gizi Baik,823.3,28.8,28.6,112.6,"Alergi: terigu, kedelai",no allergies,train
-anak_balita_0180,ANAK_BALITA,L,,,,0.01,-2.96,1.1,7.1,74.6,Gizi Kurang,800.0,31.2,28.5,104.7,suus & makanan laut,none,train
-anak_balita_0181,ANAK_BALITA,P,,,,-1.44,-1.89,3.8,12.7,94.1,Gizi Baik,1043.0,36.0,40.3,134.2,alergi seafood & laktosa,,train
-anak_balita_0182,ANAK_BALITA,L,,,,-0.3,-0.24,2.8,12.8,88.5,Gizi Baik,1062.9,38.4,37.6,142.8,tidak ada,jeroan,test
-anak_balita_0183,ANAK_BALITA,P,,,,-1.67,-1.37,3.9,13.5,93.8,Gizi Baik,1046.3,34.4,38.7,140.2,tidak ada,no allergies,train
-anak_balita_0184,ANAK_BALITA,L,,,,-1.23,0.58,3.2,14.8,89.6,Gizi Baik,1269.0,40.2,47.9,169.3,no allergies,"kopi, jeroan",train
-anak_balita_0185,ANAK_BALITA,L,,,,2.77,0.15,4.9,17.6,117.2,Gizi Baik,1731.6,53.9,68.0,226.0,allergic to kacang,tidak ada,train
-anak_balita_0186,ANAK_BALITA,L,,,,-2.0,2.25,1.0,11.6,67.4,Gizi Lebih,948.5,29.8,36.9,124.4,,,train
-anak_balita_0187,ANAK_BALITA,L,,,,0.32,-0.62,3.7,14.1,98.6,Gizi Baik,1478.2,51.3,56.9,190.3,allergic to nuts,,train
-anak_balita_0188,ANAK_BALITA,P,,,,-1.79,0.54,1.6,11.2,73.0,Gizi Baik,920.4,29.9,35.5,120.3,alergi crab dan gluten,,train
-anak_balita_0189,ANAK_BALITA,P,,,,-0.75,1.26,1.3,11.3,73.9,Berisiko Gizi Lebih,925.2,34.1,37.2,113.6,dairy,"jeroan, santan",train
-anak_balita_0190,ANAK_BALITA,P,,,,-0.55,0.6,3.8,16.1,97.0,Gizi Baik,1381.4,48.0,52.2,179.9,alergi cumi,none,train
-anak_balita_0191,ANAK_BALITA,L,,,,0.09,0.95,3.7,16.3,98.2,Gizi Baik,1545.0,56.9,52.8,210.5,alergi gluten dan squid,hindari jeroan,train
-anak_balita_0192,ANAK_BALITA,P,,,,-1.72,-0.25,1.1,9.5,68.9,Gizi Baik,800.0,31.6,29.9,101.0,tahu tempe; telor,-,train
-anak_balita_0193,ANAK_BALITA,L,,,,-0.22,-1.34,4.4,14.4,103.3,Gizi Baik,1153.7,38.5,47.3,143.4,Alergi: eggs,no allergies,test
-anak_balita_0194,ANAK_BALITA,P,,,,-0.1,-1.7,1.2,8.5,75.7,Gizi Baik,800.0,30.3,28.6,105.3,-,none,train
-anak_balita_0195,ANAK_BALITA,L,,,,-0.08,-1.12,2.0,10.4,82.6,Gizi Baik,849.4,28.5,33.3,108.9,Alergi: fish,"tidak suka pedas, goreng-gorengan",train
-anak_balita_0196,ANAK_BALITA,L,,,,-0.41,-0.67,3.1,12.9,90.8,Gizi Baik,1083.3,37.8,45.4,130.9,alergi gandum; sea food,no allergies,train
-anak_balita_0197,ANAK_BALITA,P,,,,-0.61,-1.46,3.0,11.8,89.6,Gizi Baik,970.7,35.0,33.8,131.7,alergi cumi dan kepiting,"santan, goreng-gorengan",train
-anak_balita_0198,ANAK_BALITA,L,,,,-0.81,0.49,1.1,10.2,72.1,Gizi Baik,829.8,26.4,30.0,113.5,-,pedas,train
-anak_balita_0199,ANAK_BALITA,P,,,,1.43,-0.93,4.0,14.4,105.5,Gizi Baik,1160.1,36.9,45.9,149.9,allergic to crab dan terigu,"pantangan mie instan, makanan manis",train
-anak_balita_0200,ANAK_BALITA,P,,,,-1.59,-0.53,3.8,14.5,93.4,Gizi Baik,1055.1,33.5,42.3,135.1,telurr,none,test
-anak_balita_0201,ANAK_BALITA,L,,,,-0.94,-2.48,1.6,8.4,76.0,Gizi Kurang,800.0,28.3,33.3,96.9,none,-,train
-anak_balita_0202,ANAK_BALITA,P,,,,-0.72,0.98,4.4,17.9,101.7,Gizi Baik,1295.0,39.8,46.5,179.5,peanut dan kepiting,"hindari kopi, goreng-gorengan",train
-anak_balita_0203,ANAK_BALITA,L,,,,-1.78,-0.62,5.0,16.6,103.1,Gizi Baik,1174.1,45.8,43.2,150.5,-,tidak ada,train
-anak_balita_0204,ANAK_BALITA,L,,,,-1.49,1.11,4.1,17.4,96.4,Berisiko Gizi Lebih,1536.0,50.5,57.5,204.1,none,makanan manis,train
-anak_balita_0205,ANAK_BALITA,L,,,,-1.31,0.45,3.2,14.5,88.9,Gizi Baik,1102.4,43.2,46.3,128.3,alergi udang,"pantangan manis, gorengan",test
-anak_balita_0206,ANAK_BALITA,L,,,,0.94,-3.94,1.8,7.2,84.3,Gizi Buruk,800.0,28.5,33.4,96.4,no allergies,tidak ada,train
-anak_balita_0207,ANAK_BALITA,L,,,,3.0,-1.44,1.4,9.1,87.8,Gizi Baik,800.0,28.3,33.3,96.7,-,tidak suka jeroan,train
-anak_balita_0208,ANAK_BALITA,P,,,,-0.15,-1.01,1.8,10.2,80.8,Gizi Baik,831.5,27.9,32.4,107.1,ikn,"pantangan gorengan, mie instan",train
-anak_balita_0209,ANAK_BALITA,P,,,,0.35,-1.54,3.2,12.1,94.5,Gizi Baik,1059.8,32.0,39.2,144.8,tidak ada,spicy,test
-anak_balita_0210,ANAK_BALITA,P,,,,-2.24,-0.66,1.4,9.9,70.5,Gizi Baik,800.0,31.5,27.9,105.8,Alergi: makanan laut,"pantangan goreng-gorengan, jeroan",test
-anak_balita_0211,ANAK_BALITA,L,,,,0.29,-1.51,3.3,12.2,95.1,Gizi Baik,1090.6,42.7,39.7,140.6,Alergi: terigu,makanan manis,train
-anak_balita_0212,ANAK_BALITA,P,,,,0.96,-0.04,1.4,10.3,80.6,Gizi Baik,840.7,29.2,28.6,116.6,tidak ada,tidak ada,test
-anak_balita_0213,ANAK_BALITA,P,,,,0.12,0.51,2.2,12.7,85.4,Gizi Baik,1046.5,39.7,36.2,140.5,,-,test
-anak_balita_0214,ANAK_BALITA,P,,,,0.77,1.6,4.3,18.6,105.6,Berisiko Gizi Lebih,1347.3,51.1,50.0,173.3,makanan laut,tidak ada,train
-anak_balita_0215,ANAK_BALITA,L,,,,1.2,0.43,2.7,13.6,93.3,Gizi Baik,1130.6,41.2,44.0,142.6,no allergies,hindari makanan manis,train
-anak_balita_0216,ANAK_BALITA,P,,,,1.29,-0.31,4.4,15.9,108.1,Gizi Baik,1492.4,46.6,56.2,200.1,tidak ada,,train
-anak_balita_0217,ANAK_BALITA,L,,,,-0.08,-0.47,3.9,14.8,99.6,Gizi Baik,1496.0,47.0,52.2,209.6,alergi makanan laut dan squid,"hindari manis, santan",train
-anak_balita_0218,ANAK_BALITA,P,,,,-0.5,-1.89,2.4,10.2,84.2,Gizi Baik,828.4,28.1,30.4,110.6,-,santan,train
-anak_balita_0219,ANAK_BALITA,L,,,,0.06,0.7,4.1,16.8,101.6,Gizi Baik,1220.4,39.6,47.3,159.1,no allergies,tidak ada,test
-anak_balita_0220,ANAK_BALITA,P,,,,-1.63,0.39,1.2,10.3,70.4,Gizi Baik,841.1,30.9,29.8,112.3,shrimp,hindari santan,train
-anak_balita_0221,ANAK_BALITA,L,,,,-0.35,0.72,1.5,11.3,77.1,Gizi Baik,922.7,34.1,36.3,114.9,no allergies,-,train
-anak_balita_0222,ANAK_BALITA,L,,,,-0.19,0.46,1.3,10.6,75.8,Gizi Baik,861.3,26.7,31.9,117.0,Alergi: susu,no allergies,train
-anak_balita_0223,ANAK_BALITA,P,,,,0.74,0.73,4.9,18.5,110.5,Gizi Baik,1538.8,56.4,63.8,184.8,Alergi: squid,"daging merah, goreng-gorengan",train
-anak_balita_0224,ANAK_BALITA,L,,,,0.86,2.45,2.9,16.2,93.1,Gizi Lebih,1365.4,41.2,54.8,176.8,,"mie instan, makanan manis",test
-anak_balita_0225,ANAK_BALITA,P,,,,-1.44,0.07,3.1,13.9,87.7,Gizi Baik,1017.9,34.3,42.9,123.7,Alergi: dairy,-,train
-anak_balita_0226,ANAK_BALITA,P,,,,-0.83,1.28,4.2,17.8,99.2,Berisiko Gizi Lebih,1130.9,43.5,38.2,153.3,tidak ada,-,train
-anak_balita_0227,ANAK_BALITA,P,,,,-0.26,-0.55,2.9,12.7,89.8,Gizi Baik,1052.4,35.2,41.3,135.0,,no allergies,train
-anak_balita_0228,ANAK_BALITA,L,,,,-0.13,-0.62,4.6,15.9,105.5,Gizi Baik,1378.7,44.8,50.1,187.2,,"pantangan gorengan, makanan manis",test
-anak_balita_0229,ANAK_BALITA,L,,,,-1.85,1.64,3.7,17.2,91.7,Berisiko Gizi Lebih,1502.3,51.0,58.5,193.0,-,no allergies,train
-anak_balita_0230,ANAK_BALITA,P,,,,-0.29,-0.59,3.8,14.4,97.6,Gizi Baik,1231.1,46.2,42.3,166.4,alergi shrimp & telur,tidak ada,train
-anak_balita_0231,ANAK_BALITA,L,,,,0.1,-0.66,1.6,10.1,79.5,Gizi Baik,822.4,28.1,28.7,112.9,-,tidak suka makanan manis,train
-anak_balita_0232,ANAK_BALITA,L,,,,0.28,0.77,4.7,18.1,107.4,Gizi Baik,1272.3,41.6,46.1,172.8,none,pantangan manis,train
-anak_balita_0233,ANAK_BALITA,P,,,,-2.06,1.85,3.1,16.1,85.6,Berisiko Gizi Lebih,1020.2,34.6,36.6,138.2,ebi,no allergies,train
-anak_balita_0234,ANAK_BALITA,L,,,,-1.64,0.73,1.5,11.4,73.3,Gizi Baik,931.7,28.0,39.2,116.7,,no allergies,train
-anak_balita_0235,ANAK_BALITA,P,,,,-2.29,-0.23,1.8,10.9,73.2,Gizi Baik,889.7,34.0,34.5,110.8,no allergies,no allergies,test
-anak_balita_0236,ANAK_BALITA,L,,,,-2.09,2.53,2.6,15.7,81.0,Gizi Lebih,1314.9,46.9,51.3,166.5,udnag,tidak ada,train
-anak_balita_0237,ANAK_BALITA,P,,,,1.41,0.64,1.8,11.8,85.4,Gizi Baik,968.7,36.1,33.6,130.6,,tidak ada,train
-anak_balita_0238,ANAK_BALITA,P,,,,0.32,0.64,2.0,12.3,84.1,Gizi Baik,1016.4,35.9,34.7,140.2,telurr dan soy,tidak ada,train
-anak_balita_0239,ANAK_BALITA,L,,,,-0.27,1.48,2.6,14.4,86.8,Berisiko Gizi Lebih,1201.7,40.7,42.0,165.1,alergi terigu,-,train
-anak_balita_0240,ANAK_BALITA,P,,,,-1.1,-1.26,2.7,11.5,85.0,Gizi Baik,940.9,31.9,35.8,122.8,allergic to susu,-,train
-anak_balita_0241,ANAK_BALITA,L,,,,-1.97,2.82,4.3,20.3,96.7,Gizi Lebih,1257.4,48.4,48.2,157.4,ebi,tidak ada,train
-anak_balita_0242,ANAK_BALITA,P,,,,0.14,0.02,5.0,17.5,109.2,Gizi Baik,1353.9,43.7,45.6,192.3,,"pantangan gorengan, manis",train
-anak_balita_0243,ANAK_BALITA,P,,,,-1.04,-2.05,3.5,11.9,92.3,Gizi Kurang,1284.5,39.9,51.1,166.3,tidak ada,jeroan,train
-anak_balita_0244,ANAK_BALITA,L,,,,0.03,1.96,1.2,11.7,75.6,Berisiko Gizi Lebih,961.2,31.5,38.9,121.2,no allergies,,train
-anak_balita_0245,ANAK_BALITA,L,,,,-0.59,-0.66,2.5,11.8,84.8,Gizi Baik,966.6,34.6,32.5,133.9,kepiting; fish,no allergies,test
-anak_balita_0246,ANAK_BALITA,P,,,,-1.28,0.28,3.1,14.2,88.6,Gizi Baik,1154.4,41.3,44.4,147.5,none,"tidak suka manis, jeroan",train
-anak_balita_0247,ANAK_BALITA,L,,,,-3.55,-2.47,4.5,12.9,93.1,Gizi Kurang,1169.3,37.7,49.2,143.8,tidak ada,tidak ada,train
-anak_balita_0248,ANAK_BALITA,P,,,,-0.34,-2.58,1.3,7.8,75.4,Gizi Kurang,800.0,31.5,32.8,94.8,alergi kacang,pantangan makanan manis,train
-anak_balita_0249,ANAK_BALITA,P,,,,-0.81,2.05,4.7,20.2,104.0,Gizi Lebih,1335.7,46.9,51.0,172.4,allergic to udang; kedele,"hindari makanan manis, daging merah",test
-anak_balita_0250,ANAK_BALITA,P,,,,-0.2,-0.49,3.8,14.5,98.1,Gizi Baik,1099.5,33.5,41.5,148.1,Alergi: fish; crab,no allergies,test
-anak_balita_0251,ANAK_BALITA,P,,,,-0.5,2.35,4.6,20.4,104.1,Gizi Lebih,1189.1,44.1,46.2,149.2,no allergies,tidak suka daging merah,train
-anak_balita_0252,ANAK_BALITA,P,,,,0.41,-0.26,3.7,14.6,98.8,Gizi Baik,1388.4,44.5,52.8,183.7,tidak ada,pedas,train
-anak_balita_0253,ANAK_BALITA,P,,,,-2.8,-0.01,1.1,9.8,65.5,Gizi Baik,800.0,30.7,32.2,97.0,none,"hindari pedas, makanan manis",train
-anak_balita_0254,ANAK_BALITA,P,,,,-0.72,-0.85,2.8,12.2,87.7,Gizi Baik,1010.0,40.3,34.6,134.3,allergic to makanan laut dan kepiting,-,train
-anak_balita_0255,ANAK_BALITA,P,,,,-0.69,0.41,1.5,11.0,76.3,Gizi Baik,902.9,31.9,36.0,112.7,no allergies,no allergies,test
-anak_balita_0256,ANAK_BALITA,P,,,,-3.12,0.17,4.0,15.9,90.4,Gizi Baik,1165.2,35.6,47.8,148.2,alergi fish dan susu,-,train
-anak_balita_0257,ANAK_BALITA,L,,,,-1.13,-0.94,4.1,14.5,98.0,Gizi Baik,1455.7,55.2,54.8,185.3,no allergies,no allergies,test
-anak_balita_0258,ANAK_BALITA,L,,,,0.59,0.27,1.7,11.3,82.4,Gizi Baik,928.3,32.4,31.1,129.8,udnag & nuts,pantangan daging merah,train
-anak_balita_0259,ANAK_BALITA,L,,,,-0.78,0.64,2.0,12.2,80.0,Gizi Baik,1007.5,31.3,39.6,131.5,none,tidak ada,train
-anak_balita_0260,ANAK_BALITA,P,,,,-0.84,1.55,1.9,13.0,79.1,Berisiko Gizi Lebih,1074.7,39.7,43.3,131.6,,tidak suka kopi,test
-anak_balita_0261,ANAK_BALITA,P,,,,-0.03,-0.77,3.5,13.7,96.2,Gizi Baik,1081.5,41.5,42.4,133.4,tidak ada,"hindari kopi, santan",train
-anak_balita_0262,ANAK_BALITA,L,,,,1.68,0.07,2.7,13.0,94.1,Gizi Baik,1076.4,37.5,44.3,132.0,allergic to makanan laut dan gluten,no allergies,train
-anak_balita_0263,ANAK_BALITA,L,,,,-3.04,-0.29,3.3,13.8,83.8,Gizi Baik,1031.1,39.5,37.6,133.6,-,-,train
-anak_balita_0264,ANAK_BALITA,L,,,,-0.99,-0.91,4.5,15.2,101.3,Gizi Baik,1323.8,41.6,46.2,185.3,-,tidak ada,train
-anak_balita_0265,ANAK_BALITA,P,,,,0.59,0.7,2.1,12.5,85.3,Gizi Baik,1029.8,32.0,40.8,133.8,Alergi: telur,,train
-anak_balita_0266,ANAK_BALITA,P,,,,-0.56,-1.09,4.2,14.4,100.4,Gizi Baik,1248.2,43.1,42.4,173.6,-,"pantangan jeroan, santan",train
-anak_balita_0267,ANAK_BALITA,L,,,,0.32,0.76,1.6,11.6,80.7,Gizi Baik,953.8,31.2,39.6,118.1,crab,tidak suka manis,train
-anak_balita_0268,ANAK_BALITA,P,,,,-1.32,0.31,2.4,12.8,82.4,Gizi Baik,1062.0,36.3,35.6,149.1,-,no allergies,train
-anak_balita_0269,ANAK_BALITA,L,,,,-0.91,-1.25,4.3,14.4,100.1,Gizi Baik,1297.3,40.0,44.2,185.0,Alergi: kacng,"tidak suka santan, manis",train
-anak_balita_0270,ANAK_BALITA,P,,,,0.65,0.32,2.5,12.9,89.0,Gizi Baik,1066.4,35.6,41.2,138.2,alergi squid,pantangan kopi,train
-anak_balita_0271,ANAK_BALITA,P,,,,-0.03,-1.79,1.3,8.6,76.9,Gizi Baik,800.0,24.7,33.4,100.2,no allergies,pantangan goreng-gorengan,train
-anak_balita_0272,ANAK_BALITA,P,,,,-0.23,0.3,2.7,13.3,88.0,Gizi Baik,1105.1,40.1,41.7,142.4,allergic to nuts dan sea food,tidak suka kopi,test
-anak_balita_0273,ANAK_BALITA,L,,,,-1.29,-0.45,4.7,16.3,102.4,Gizi Baik,1354.6,48.1,50.9,175.9,Alergi: shrimp,"tidak suka jeroan, makanan manis",train
-anak_balita_0274,ANAK_BALITA,P,,,,0.99,0.82,2.8,14.1,92.8,Gizi Baik,1175.0,38.6,47.4,148.6,none,"manis, pedas",train
-anak_balita_0275,ANAK_BALITA,P,,,,-2.56,2.3,1.1,11.7,66.1,Gizi Lebih,964.3,37.0,39.9,114.4,alergi ikan,no allergies,train
-anak_balita_0276,ANAK_BALITA,L,,,,-1.46,-0.3,4.8,16.7,102.6,Gizi Baik,1541.6,55.5,60.9,193.0,tidak ada,"tidak suka kopi, pedas",train
-anak_balita_0277,ANAK_BALITA,L,,,,-0.77,-1.09,4.8,15.6,105.2,Gizi Baik,1175.0,44.5,48.9,139.2,no allergies,"tidak suka spicy, santan",train
-anak_balita_0278,ANAK_BALITA,P,,,,2.63,-1.0,3.0,12.4,100.5,Gizi Baik,1125.1,35.5,37.8,160.7,"Alergi: sea food, cumi",,train
-anak_balita_0279,ANAK_BALITA,L,,,,-1.59,0.32,1.7,11.2,74.5,Gizi Baik,918.4,33.2,35.4,116.9,wheat & telur,-,train
-anak_balita_0280,ANAK_BALITA,L,,,,1.04,-0.59,4.0,14.7,103.7,Gizi Baik,1537.4,57.2,63.2,185.0,-,-,train
-anak_balita_0281,ANAK_BALITA,P,,,,-0.7,0.24,3.1,14.1,90.3,Gizi Baik,1171.7,45.9,48.7,137.4,Alergi: tahu tempe dan egg,"pantangan spicy, santan",train
-anak_balita_0282,ANAK_BALITA,P,,,,-2.0,0.73,3.5,15.6,89.5,Gizi Baik,1167.9,39.1,46.5,148.2,,tidak ada,test
-anak_balita_0283,ANAK_BALITA,L,,,,-1.77,-0.49,2.9,12.8,84.6,Gizi Baik,1054.9,40.1,37.2,139.8,,,train
-anak_balita_0284,ANAK_BALITA,L,,,,-0.05,1.81,3.3,16.5,94.0,Berisiko Gizi Lebih,1361.5,45.0,51.2,180.1,"kedele, ikn",pantangan spicy,train
-anak_balita_0285,ANAK_BALITA,L,,,,-0.78,-0.57,2.2,11.4,82.2,Gizi Baik,937.4,30.5,37.2,120.0,-,daging merah,test
-anak_balita_0286,ANAK_BALITA,P,,,,-2.98,-1.6,4.9,14.9,98.6,Gizi Baik,1352.0,48.7,56.5,162.2,Alergi: eggs & kacng,pedas,train
-anak_balita_0287,ANAK_BALITA,P,,,,0.11,-0.75,2.6,11.9,88.1,Gizi Baik,977.1,32.8,38.7,124.5,no allergies,tidak ada,train
-anak_balita_0288,ANAK_BALITA,P,,,,1.04,-1.16,4.3,14.5,106.3,Gizi Baik,1308.7,40.4,47.7,179.4,none,no allergies,train
-anak_balita_0289,ANAK_BALITA,L,,,,-2.54,-0.95,4.7,15.6,98.5,Gizi Baik,1291.7,44.0,43.8,180.4,none,,train
-anak_balita_0290,ANAK_BALITA,P,,,,-0.38,-0.94,2.4,11.4,85.3,Gizi Baik,933.6,35.6,38.0,112.2,,tidak ada,test
-anak_balita_0291,ANAK_BALITA,L,,,,-1.8,-0.61,2.1,11.1,77.5,Gizi Baik,908.4,33.7,36.5,111.2,Alergi: kepiting,pantangan santan,test
-anak_balita_0292,ANAK_BALITA,P,,,,-0.09,-1.41,4.5,14.4,104.1,Gizi Baik,1280.0,44.6,49.5,163.9,,pantangan santan,train
-anak_balita_0293,ANAK_BALITA,L,,,,-1.31,-0.02,2.6,12.7,83.6,Gizi Baik,1054.7,32.2,35.5,151.6,Alergi: telur,no allergies,train
-anak_balita_0294,ANAK_BALITA,P,,,,-1.24,-0.72,3.7,14.0,93.4,Gizi Baik,1317.6,42.1,44.2,187.9,,-,train
-anak_balita_0295,ANAK_BALITA,P,,,,-1.71,-0.5,1.6,10.4,73.8,Gizi Baik,841.8,28.8,30.4,113.2,Alergi: udnag,no allergies,train
-anak_balita_0296,ANAK_BALITA,L,,,,-0.97,2.78,4.8,21.6,104.5,Gizi Lebih,1329.9,42.0,48.6,181.1,-,tidak ada,train
-anak_balita_0297,ANAK_BALITA,L,,,,0.52,-1.72,4.5,14.0,106.2,Gizi Baik,1163.7,43.0,39.7,158.6,alergi ikn,hindari jeroan,train
-anak_balita_0298,ANAK_BALITA,P,,,,-1.06,-1.76,4.9,14.6,104.6,Gizi Baik,1128.1,42.9,43.9,140.3,tidak ada,,train
-anak_balita_0299,ANAK_BALITA,P,,,,-2.22,-1.25,3.1,12.2,85.0,Gizi Baik,976.5,36.8,34.2,130.4,none,pantangan santan,train
-anak_balita_0300,ANAK_BALITA,P,,,,-2.14,2.26,2.8,15.9,82.8,Gizi Lebih,1333.0,51.2,51.2,166.8,none,,test
-anak_balita_0301,ANAK_BALITA,L,,,,-2.56,1.27,1.8,12.5,72.8,Berisiko Gizi Lebih,1035.5,40.1,37.4,134.5,no allergies,,test
-anak_balita_0302,ANAK_BALITA,P,,,,-2.66,1.88,2.8,15.4,80.8,Berisiko Gizi Lebih,1286.4,41.9,43.8,181.2,no allergies,-,train
-anak_balita_0303,ANAK_BALITA,P,,,,-1.02,1.68,2.2,13.8,81.1,Berisiko Gizi Lebih,1146.4,35.7,43.9,152.1,Alergi: tahu tempe,no allergies,train
-anak_balita_0304,ANAK_BALITA,L,,,,1.05,-1.26,1.2,8.9,79.3,Gizi Baik,800.0,27.1,28.5,108.8,allergic to eggs,hindari makanan manis,train
-anak_balita_0305,ANAK_BALITA,L,,,,-1.71,-1.29,2.3,10.8,79.8,Gizi Baik,880.2,35.2,34.0,108.4,no allergies,none,train
-anak_balita_0306,ANAK_BALITA,P,,,,-0.75,2.17,1.4,12.3,74.7,Gizi Lebih,1018.1,37.9,36.1,135.4,crab; milk,tidak suka mie instan,train
-anak_balita_0307,ANAK_BALITA,P,,,,-2.07,1.54,1.2,11.5,69.4,Berisiko Gizi Lebih,942.9,34.8,39.4,112.2,tidak ada,"pantangan makanan manis, mie instan",train
-anak_balita_0308,ANAK_BALITA,L,,,,-1.89,0.99,3.9,16.7,93.1,Gizi Baik,1155.5,39.9,40.6,157.6,,none,train
-anak_balita_0309,ANAK_BALITA,P,,,,0.12,-1.8,3.4,12.1,95.6,Gizi Baik,1063.8,39.7,43.1,129.3,none,tidak suka mie instan,train
-anak_balita_0310,ANAK_BALITA,L,,,,-1.46,-0.5,2.1,11.2,78.7,Gizi Baik,920.4,31.5,31.2,128.4,-,hindari manis,train
-anak_balita_0311,ANAK_BALITA,P,,,,-1.03,1.17,2.8,14.6,86.4,Berisiko Gizi Lebih,1217.7,40.1,41.6,170.7,soy,tidak ada,test
-anak_balita_0312,ANAK_BALITA,P,,,,-0.99,0.34,4.1,16.2,97.8,Gizi Baik,1245.8,39.3,43.8,173.6,no allergies,,test
-anak_balita_0313,ANAK_BALITA,P,,,,0.28,-0.58,3.8,14.5,99.9,Gizi Baik,1255.4,37.7,50.3,162.9,no allergies,no allergies,train
-anak_balita_0314,ANAK_BALITA,P,,,,1.02,0.33,4.3,16.7,106.7,Gizi Baik,1336.9,43.2,52.7,172.6,alergi eggs & kepiting,none,train
-anak_balita_0315,ANAK_BALITA,P,,,,0.32,-0.12,2.2,12.0,86.0,Gizi Baik,984.8,34.7,34.0,134.9,tidak ada,"pantangan daging merah, pedas",train
-anak_balita_0316,ANAK_BALITA,P,,,,-1.46,-1.3,2.1,10.4,78.8,Gizi Baik,845.9,26.4,29.4,118.8,tidak ada,tidak ada,train
-anak_balita_0317,ANAK_BALITA,P,,,,3.0,-1.87,1.9,9.6,92.3,Gizi Baik,800.0,27.8,32.0,100.3,none,manis,train
-anak_balita_0318,ANAK_BALITA,L,,,,-1.09,-2.36,2.6,10.1,84.6,Gizi Kurang,818.3,32.2,34.1,95.6,-,tidak suka spicy,train
-anak_balita_0319,ANAK_BALITA,P,,,,-0.99,0.72,1.7,11.7,77.0,Gizi Baik,965.6,37.5,36.6,121.5,no allergies,"daging merah, kopi",test
-anak_balita_0320,ANAK_BALITA,P,,,,-0.36,1.14,3.0,15.1,90.7,Berisiko Gizi Lebih,1059.5,32.1,38.4,146.4,no allergies,"tidak suka kopi, manis",train
-anak_balita_0321,ANAK_BALITA,L,,,,-1.58,-4.0,4.0,10.0,95.3,Gizi Buruk,1134.0,42.0,38.8,154.2,allergic to kacng dan squid,"hindari spicy, kopi",train
-anak_balita_0322,ANAK_BALITA,L,,,,-1.35,1.9,3.1,16.1,87.8,Berisiko Gizi Lebih,1459.2,45.4,49.1,208.8,,none,test
-anak_balita_0323,ANAK_BALITA,P,,,,0.9,-0.67,4.1,14.8,103.8,Gizi Baik,1147.9,37.1,38.4,163.4,,hindari jeroan,train
-anak_balita_0324,ANAK_BALITA,L,,,,-2.83,-0.63,3.8,14.4,89.4,Gizi Baik,1218.5,40.0,43.0,167.8,no allergies,-,test
-anak_balita_0325,ANAK_BALITA,L,,,,0.75,-1.44,2.6,11.1,90.5,Gizi Baik,911.5,33.9,31.0,124.2,alergi telor; kepiting,"tidak suka pedas, santan",train
-anak_balita_0326,ANAK_BALITA,L,,,,0.24,-0.21,3.0,13.3,92.1,Gizi Baik,1101.5,39.8,42.4,140.2,none,hindari spicy,train
-anak_balita_0327,ANAK_BALITA,P,,,,-1.33,-1.32,3.5,12.9,91.9,Gizi Baik,1290.4,45.1,50.9,163.0,allergic to shrimp,tidak ada,train
-anak_balita_0328,ANAK_BALITA,P,,,,-0.01,1.96,4.0,18.3,100.0,Berisiko Gizi Lebih,1440.7,55.1,59.9,170.4,tidak ada,tidak suka manis,train
-anak_balita_0329,ANAK_BALITA,P,,,,-3.08,-1.08,3.1,12.5,82.6,Gizi Baik,1188.4,46.5,46.7,145.5,,none,test
-anak_balita_0330,ANAK_BALITA,L,,,,-1.87,-0.57,1.0,9.2,68.1,Gizi Baik,800.0,27.2,29.4,106.6,-,,train
-anak_balita_0331,ANAK_BALITA,L,,,,-0.75,0.63,1.7,11.7,78.1,Gizi Baik,963.3,37.7,36.9,120.1,,no allergies,train
-anak_balita_0332,ANAK_BALITA,P,,,,-1.22,-0.54,1.8,10.6,76.9,Gizi Baik,866.1,28.9,34.8,109.4,none,"daging merah, manis",test
-anak_balita_0333,ANAK_BALITA,P,,,,-1.22,0.51,2.5,13.2,83.2,Gizi Baik,1093.1,35.6,44.7,137.1,none,tidak suka gorengan,train
-anak_balita_0334,ANAK_BALITA,L,,,,-0.34,1.09,3.2,15.4,92.2,Berisiko Gizi Lebih,1476.8,56.9,52.9,193.2,none,"pantangan pedas, jeroan",train
-anak_balita_0335,ANAK_BALITA,P,,,,-1.83,-2.62,2.4,9.5,80.3,Gizi Kurang,800.0,28.0,27.0,111.4,gluten,"tidak suka gorengan, kopi",train
-anak_balita_0336,ANAK_BALITA,L,,,,0.29,1.81,4.2,18.6,103.2,Berisiko Gizi Lebih,1649.2,56.7,60.3,220.0,squid,no allergies,train
-anak_balita_0337,ANAK_BALITA,P,,,,1.17,-0.78,4.1,14.6,104.9,Gizi Baik,1302.5,46.4,52.2,161.8,no allergies,-,train
-anak_balita_0338,ANAK_BALITA,L,,,,-0.04,2.43,2.3,14.9,85.5,Gizi Lebih,1248.3,38.4,41.7,179.8,none,,train
-anak_balita_0339,ANAK_BALITA,P,,,,0.37,0.76,2.0,12.4,84.1,Gizi Baik,1024.5,32.2,37.7,139.1,none,tidak ada,test
-anak_balita_0340,ANAK_BALITA,L,,,,-2.43,1.61,4.8,19.7,99.3,Berisiko Gizi Lebih,1419.0,49.0,52.9,186.8,Alergi: dairy dan kepiting,tidak ada,train
-anak_balita_0341,ANAK_BALITA,L,,,,0.07,-1.76,1.9,9.5,81.7,Gizi Baik,800.0,24.3,29.0,110.4,tidak ada,pantangan kopi,test
-anak_balita_0342,ANAK_BALITA,P,,,,-1.52,-0.38,2.1,11.4,78.8,Gizi Baik,936.7,29.9,31.5,133.4,alergi telor,tidak ada,train
-anak_balita_0343,ANAK_BALITA,P,,,,1.14,0.43,4.6,17.5,109.5,Gizi Baik,1210.9,43.7,43.8,160.5,none,"hindari pedas, manis",train
-anak_balita_0344,ANAK_BALITA,L,,,,-2.1,0.29,2.9,13.8,84.0,Gizi Baik,1148.7,43.3,39.1,155.9,seafood & nuts,hindari spicy,train
-anak_balita_0345,ANAK_BALITA,P,,,,-1.4,0.84,3.2,15.1,88.7,Gizi Baik,1290.8,40.0,51.2,167.5,Alergi: milk dan udang,"pantangan manis, mie instan",train
-anak_balita_0346,ANAK_BALITA,P,,,,-0.26,-0.44,4.4,15.7,102.7,Gizi Baik,1137.1,40.0,39.1,156.3,no allergies,"mie instan, santan",train
-anak_balita_0347,ANAK_BALITA,P,,,,-0.45,-0.38,4.2,15.4,100.6,Gizi Baik,1405.2,48.4,50.4,189.4,none,pantangan pedas,test
-anak_balita_0348,ANAK_BALITA,L,,,,-0.67,0.46,2.5,13.2,85.2,Gizi Baik,1092.6,40.3,45.1,131.5,kacang,tidak suka gorengan,train
-anak_balita_0349,ANAK_BALITA,P,,,,-1.05,0.48,2.8,13.8,86.4,Gizi Baik,1145.7,40.2,44.4,146.3,allergic to susu sapi; shrimp,-,train
-anak_balita_0350,ANAK_BALITA,P,,,,-0.85,-0.13,2.2,11.9,82.0,Gizi Baik,980.9,37.5,38.4,121.4,none,hindari makanan manis,train
-anak_balita_0351,ANAK_BALITA,L,,,,-2.07,-1.36,2.3,10.8,78.9,Gizi Baik,877.2,34.0,34.4,107.9,allergic to sea food dan telor,-,train
-anak_balita_0352,ANAK_BALITA,P,,,,-1.71,0.33,2.7,13.5,83.6,Gizi Baik,1118.5,35.5,40.1,153.9,allergic to egg,jeroan,train
-anak_balita_0353,ANAK_BALITA,L,,,,-0.28,-1.39,1.0,8.4,73.2,Gizi Baik,800.0,24.6,33.2,100.6,,tidak suka jeroan,test
-anak_balita_0354,ANAK_BALITA,L,,,,-0.52,-0.93,4.6,15.4,104.0,Gizi Baik,1173.7,43.9,43.9,150.8,dairy,,test
-anak_balita_0355,ANAK_BALITA,L,,,,0.65,3.08,3.8,19.4,100.8,Obesitas,1488.0,58.7,61.5,174.8,tidak ada,none,train
-anak_balita_0356,ANAK_BALITA,P,,,,-0.01,-1.91,1.2,8.3,75.9,Gizi Baik,800.0,26.9,31.0,103.2,tidak ada,"tidak suka mie instan, kopi",train
-anak_balita_0357,ANAK_BALITA,L,,,,-3.19,0.02,1.3,10.1,65.8,Gizi Baik,821.8,32.1,31.5,102.4,none,hindari pedas,test
-anak_balita_0358,ANAK_BALITA,L,,,,0.6,1.73,2.2,13.8,86.3,Berisiko Gizi Lebih,1149.9,42.7,41.0,152.6,tidak ada,,train
-anak_balita_0359,ANAK_BALITA,P,,,,-0.58,-1.48,3.0,11.9,90.0,Gizi Baik,1145.8,44.1,47.8,134.7,alergi tahu tempe,-,train
-anak_balita_0360,ANAK_BALITA,L,,,,-2.17,-0.79,2.6,12.0,81.3,Gizi Baik,986.2,36.5,37.0,126.7,none,tidak ada,train
-anak_balita_0361,ANAK_BALITA,P,,,,-1.28,-0.63,2.4,11.8,82.5,Gizi Baik,968.3,35.8,35.7,126.1,none,no allergies,test
-anak_balita_0362,ANAK_BALITA,L,,,,0.93,0.44,1.5,11.0,81.3,Gizi Baik,897.2,29.4,32.5,121.8,Alergi: telur & ikn,"daging merah, pedas",test
-anak_balita_0363,ANAK_BALITA,L,,,,-0.48,1.1,1.2,11.1,74.5,Berisiko Gizi Lebih,905.7,35.3,31.6,120.0,no allergies,-,train
-anak_balita_0364,ANAK_BALITA,P,,,,-1.39,0.2,3.9,15.6,94.7,Gizi Baik,1347.8,53.0,56.7,156.5,tidak ada,tidak ada,train
-anak_balita_0365,ANAK_BALITA,P,,,,-1.57,2.34,1.2,12.0,70.3,Gizi Lebih,990.4,32.3,35.9,134.4,"Alergi: dairy, ikn",no allergies,train
-anak_balita_0366,ANAK_BALITA,L,,,,-1.2,1.01,1.5,11.7,74.8,Berisiko Gizi Lebih,957.9,32.9,38.8,119.4,-,none,train
-anak_balita_0367,ANAK_BALITA,L,,,,0.3,-2.03,3.4,11.8,96.3,Gizi Kurang,1081.3,41.1,44.3,129.7,gandum,"tidak suka kopi, gorengan",train
-anak_balita_0368,ANAK_BALITA,L,,,,-2.94,-1.09,4.6,15.2,96.1,Gizi Baik,1261.2,47.6,52.2,150.4,alergi crab; susu,hindari santan,train
-anak_balita_0369,ANAK_BALITA,P,,,,0.02,0.66,4.1,16.7,101.4,Gizi Baik,1143.3,41.5,38.5,157.7,alergi tahu tempe dan suus,mie instan,train
-anak_balita_0370,ANAK_BALITA,L,,,,0.18,-3.7,1.8,7.4,81.2,Gizi Buruk,800.0,25.7,27.4,112.5,Alergi: udang,"tidak suka makanan manis, spicy",test
-anak_balita_0371,ANAK_BALITA,L,,,,-2.09,0.08,4.7,17.2,100.0,Gizi Baik,1177.6,37.1,48.9,147.3,-,none,train
-anak_balita_0372,ANAK_BALITA,P,,,,-0.5,-2.73,3.6,11.1,95.1,Gizi Kurang,1304.4,45.9,47.7,173.0,none,hindari goreng-gorengan,train
-anak_balita_0373,ANAK_BALITA,P,,,,0.39,1.9,4.2,18.8,103.6,Berisiko Gizi Lebih,1481.4,58.5,50.5,198.3,,tidak ada,train
-anak_balita_0374,ANAK_BALITA,L,,,,-0.82,-0.67,3.0,12.8,88.8,Gizi Baik,1055.3,38.9,40.0,134.9,allergic to cumi-cumi,,train
-anak_balita_0375,ANAK_BALITA,P,,,,1.17,-0.92,3.1,12.7,96.8,Gizi Baik,1089.5,43.4,44.0,130.1,no allergies,,train
-anak_balita_0376,ANAK_BALITA,P,,,,-1.02,-1.34,3.5,12.8,92.6,Gizi Baik,1298.8,41.7,43.8,184.6,-,tidak suka pedas,train
-anak_balita_0377,ANAK_BALITA,L,,,,-0.02,-0.12,3.7,14.9,97.9,Gizi Baik,1159.5,40.0,42.2,154.8,no allergies,"tidak suka santan, jeroan",train
-anak_balita_0378,ANAK_BALITA,L,,,,-3.07,-1.58,3.5,12.5,85.8,Gizi Baik,1001.1,36.0,36.4,132.4,milk,"tidak suka goreng-gorengan, jeroan",train
-anak_balita_0379,ANAK_BALITA,L,,,,-1.47,-0.41,3.1,13.3,87.7,Gizi Baik,1361.5,52.3,48.4,179.2,"allergic to terigu, ikan","kopi, manis",train
-anak_balita_0380,ANAK_BALITA,P,,,,0.26,-0.24,4.9,17.1,109.4,Gizi Baik,1351.1,52.4,47.3,178.9,alergi fish,"tidak suka pedas, mie instan",train
-anak_balita_0381,ANAK_BALITA,P,,,,-0.46,0.75,3.2,14.9,91.6,Gizi Baik,1323.4,52.6,51.9,161.5,Alergi: egg,hindari santan,train
-anak_balita_0382,ANAK_BALITA,P,,,,0.48,1.05,1.5,11.6,79.8,Berisiko Gizi Lebih,948.1,35.8,36.5,119.1,tidak ada,tidak ada,train
-anak_balita_0383,ANAK_BALITA,L,,,,-0.18,-3.01,4.7,12.4,105.9,Gizi Buruk,1105.0,37.7,41.2,146.0,alergi kedelai,none,train
-anak_balita_0384,ANAK_BALITA,P,,,,-1.56,1.22,3.9,17.0,94.1,Berisiko Gizi Lebih,1221.3,39.4,43.7,167.6,"egg, cumi",none,train
-anak_balita_0385,ANAK_BALITA,P,,,,-0.34,-0.43,1.0,9.3,73.2,Gizi Baik,800.0,31.8,31.1,98.3,,"tidak suka kopi, spicy",train
-anak_balita_0386,ANAK_BALITA,P,,,,-1.88,-3.44,1.6,7.4,72.9,Gizi Buruk,800.0,27.9,30.2,104.1,no allergies,-,train
-anak_balita_0387,ANAK_BALITA,L,,,,-1.73,1.6,2.8,15.1,84.2,Berisiko Gizi Lebih,1265.3,40.6,51.5,159.9,no allergies,-,train
-anak_balita_0388,ANAK_BALITA,L,,,,1.88,-0.81,3.8,14.0,104.5,Gizi Baik,1536.8,56.5,51.4,212.0,Alergi: eggs,tidak suka mie instan,train
-anak_balita_0389,ANAK_BALITA,P,,,,-1.22,-1.29,4.3,14.4,99.3,Gizi Baik,1232.4,39.5,49.0,158.4,Alergi: seafood,tidak ada,train
-anak_balita_0390,ANAK_BALITA,P,,,,0.9,-0.29,2.3,11.9,88.6,Gizi Baik,981.8,29.6,40.3,125.3,,tidak ada,train
-anak_balita_0391,ANAK_BALITA,L,,,,-2.14,0.71,3.4,15.4,88.4,Gizi Baik,1104.9,36.2,43.1,143.1,tidak ada,none,test
-anak_balita_0392,ANAK_BALITA,P,,,,-1.38,-0.96,2.2,10.9,79.9,Gizi Baik,892.9,32.4,35.1,111.8,Alergi: nuts,tidak suka manis,train
-anak_balita_0393,ANAK_BALITA,P,,,,-1.35,0.99,3.1,15.0,88.0,Gizi Baik,1158.9,41.4,46.6,143.5,dairy & seafood,pantangan makanan manis,train
-anak_balita_0394,ANAK_BALITA,L,,,,-0.52,0.86,2.4,13.4,84.9,Gizi Baik,1114.7,34.0,43.4,147.0,susu,hindari pedas,train
-anak_balita_0395,ANAK_BALITA,L,,,,0.18,1.56,2.5,14.4,87.8,Berisiko Gizi Lebih,1198.8,43.8,45.7,153.0,alergi squid,tidak suka manis,train
-anak_balita_0396,ANAK_BALITA,P,,,,-2.0,1.52,4.5,19.0,98.6,Berisiko Gizi Lebih,1415.1,54.7,55.2,174.9,ikn,-,test
-anak_balita_0397,ANAK_BALITA,L,,,,0.24,-2.08,2.8,10.7,90.2,Gizi Kurang,868.5,34.5,36.4,100.8,none,no allergies,test
-anak_balita_0398,ANAK_BALITA,L,,,,-0.52,-1.86,3.8,12.7,96.9,Gizi Baik,1401.5,52.2,54.4,175.8,,-,train
-anak_balita_0399,ANAK_BALITA,P,,,,-0.9,0.38,1.6,11.3,76.7,Gizi Baik,923.1,34.5,33.7,120.4,Alergi: fish,hindari santan,train
-anak_balita_0400,ANAK_BALITA,L,,,,-1.42,-0.24,2.8,12.9,85.2,Gizi Baik,1069.0,37.7,44.2,130.1,Alergi: udang dan sea food,tidak ada,train
-anak_balita_0401,ANAK_BALITA,L,,,,-1.46,0.51,1.4,10.9,72.7,Gizi Baik,889.2,31.3,30.9,121.4,allergic to kedele,tidak suka manis,train
-anak_balita_0402,ANAK_BALITA,L,,,,0.79,0.97,1.1,10.7,77.7,Gizi Baik,873.6,31.9,31.3,116.0,cumi-cumi,,train
-anak_balita_0403,ANAK_BALITA,P,,,,-0.88,2.96,1.8,14.1,77.8,Gizi Lebih,1172.9,40.8,46.2,148.6,Alergi: susu,"pantangan gorengan, manis",train
-anak_balita_0404,ANAK_BALITA,L,,,,0.39,0.55,3.9,16.2,100.8,Gizi Baik,1208.9,46.4,47.7,148.4,,none,train
-anak_balita_0405,ANAK_BALITA,L,,,,-0.34,0.1,1.0,9.7,72.9,Gizi Baik,800.0,30.5,28.2,106.0,tidak ada,tidak ada,train
-anak_balita_0406,ANAK_BALITA,P,,,,-0.46,0.18,3.3,14.4,92.7,Gizi Baik,1063.8,40.8,42.0,130.6,allergic to kacang tanah,none,train
-anak_balita_0407,ANAK_BALITA,P,,,,-0.21,-1.37,2.2,10.4,83.5,Gizi Baik,849.8,29.8,33.0,108.3,allergic to telur,makanan manis,train
-anak_balita_0408,ANAK_BALITA,P,,,,1.74,1.48,4.9,19.7,114.2,Berisiko Gizi Lebih,1267.9,40.6,48.7,166.8,tidak ada,pantangan jeroan,train
-anak_balita_0409,ANAK_BALITA,P,,,,-0.16,2.25,3.1,16.6,91.9,Gizi Lebih,1349.9,46.0,47.6,184.3,tidak ada,pantangan jeroan,train
-anak_balita_0410,ANAK_BALITA,L,,,,0.1,0.98,4.6,18.3,106.2,Gizi Baik,1458.8,44.9,50.5,206.2,"Alergi: udnag, nuts","hindari manis, makanan manis",test
-anak_balita_0411,ANAK_BALITA,P,,,,-1.33,0.37,1.1,10.1,70.3,Gizi Baik,818.0,24.6,28.7,115.3,none,"tidak suka santan, mie instan",train
-anak_balita_0412,ANAK_BALITA,L,,,,-0.31,1.16,1.3,11.3,75.9,Berisiko Gizi Lebih,929.9,29.6,31.4,132.2,alergi cumi-cumi,no allergies,train
-anak_balita_0413,ANAK_BALITA,P,,,,-0.84,1.0,1.3,11.1,73.8,Berisiko Gizi Lebih,908.0,35.4,37.0,108.3,allergic to squid,"pantangan goreng-gorengan, daging merah",train
-anak_balita_0414,ANAK_BALITA,P,,,,0.04,-0.2,3.8,15.0,99.2,Gizi Baik,1113.4,40.6,45.9,134.4,alergi sea food; kacng,tidak ada,train
-anak_balita_0415,ANAK_BALITA,P,,,,0.6,-0.74,1.6,10.0,80.9,Gizi Baik,809.8,26.4,27.1,115.0,no allergies,"hindari pedas, mie instan",train
-anak_balita_0416,ANAK_BALITA,L,,,,-0.83,-0.68,3.4,13.4,92.0,Gizi Baik,1090.6,36.5,41.3,143.1,Alergi: telor dan shrimp,"kopi, mie instan",train
-anak_balita_0417,ANAK_BALITA,P,,,,-0.81,1.45,2.8,14.8,86.9,Berisiko Gizi Lebih,1241.4,39.8,49.7,158.7,no allergies,tidak suka daging merah,train
-anak_balita_0418,ANAK_BALITA,L,,,,-2.03,-0.45,4.9,16.7,101.6,Gizi Baik,1345.3,45.4,56.4,164.0,no allergies,no allergies,train
-anak_balita_0419,ANAK_BALITA,L,,,,-2.04,-0.67,1.7,10.4,73.7,Gizi Baik,844.8,30.4,35.5,100.9,Alergi: egg dan soy,pantangan makanan manis,train
-anak_balita_0420,ANAK_BALITA,P,,,,-0.1,1.5,4.6,19.1,105.6,Berisiko Gizi Lebih,1343.9,46.5,46.5,184.8,none,-,train
-anak_balita_0421,ANAK_BALITA,P,,,,-0.93,-1.53,2.7,11.2,86.0,Gizi Baik,919.5,35.9,31.7,122.6,-,,train
-anak_balita_0422,ANAK_BALITA,P,,,,0.03,0.72,4.8,18.2,107.1,Gizi Baik,1345.4,52.8,48.9,173.6,none,"tidak suka mie instan, goreng-gorengan",train
-anak_balita_0423,ANAK_BALITA,P,,,,-1.39,-0.44,3.4,13.8,90.3,Gizi Baik,1159.9,44.3,40.4,154.8,no allergies,"mie instan, makanan manis",test
-anak_balita_0424,ANAK_BALITA,P,,,,-1.57,-1.64,4.6,14.4,100.9,Gizi Baik,1381.4,47.4,51.6,181.7,-,no allergies,train
-anak_balita_0425,ANAK_BALITA,P,,,,-0.69,-1.65,2.8,11.2,87.3,Gizi Baik,916.2,34.1,36.1,113.7,tidak ada,none,test
-anak_balita_0426,ANAK_BALITA,L,,,,0.48,2.91,4.5,21.0,106.6,Gizi Lebih,1549.5,54.9,54.6,209.6,-,tidak suka makanan manis,train
-anak_balita_0427,ANAK_BALITA,P,,,,-0.43,0.33,2.7,13.4,87.5,Gizi Baik,1110.1,34.1,45.1,141.9,allergic to susu sapi,tidak suka pedas,train
-anak_balita_0428,ANAK_BALITA,L,,,,0.49,0.11,2.2,12.1,85.9,Gizi Baik,992.7,38.6,36.8,126.6,,hindari jeroan,train
-anak_balita_0429,ANAK_BALITA,L,,,,-0.67,0.68,1.9,12.0,79.5,Gizi Baik,992.1,36.9,41.5,117.7,alergi milk,tidak suka daging merah,train
-anak_balita_0430,ANAK_BALITA,L,,,,-1.41,1.84,4.8,19.9,102.4,Berisiko Gizi Lebih,1271.2,42.4,45.4,173.1,none,"hindari kopi, goreng-gorengan",train
-anak_balita_0431,ANAK_BALITA,L,,,,-0.16,-1.85,3.8,12.7,98.4,Gizi Baik,1259.4,50.0,49.1,154.2,kepiting,"hindari gorengan, manis",train
-anak_balita_0432,ANAK_BALITA,P,,,,-0.94,-1.23,3.7,13.3,94.6,Gizi Baik,1058.0,40.7,42.6,128.0,tidak ada,no allergies,test
-anak_balita_0433,ANAK_BALITA,L,,,,1.44,1.1,1.3,11.1,81.1,Berisiko Gizi Lebih,911.9,30.8,32.8,123.3,no allergies,"pantangan mie instan, kopi",test
-anak_balita_0434,ANAK_BALITA,P,,,,-0.5,1.85,3.5,16.9,93.9,Berisiko Gizi Lebih,1095.4,40.5,42.0,138.9,tidak ada,tidak ada,train
-anak_balita_0435,ANAK_BALITA,P,,,,1.23,0.61,1.6,11.3,83.0,Gizi Baik,926.3,35.1,37.0,113.3,Alergi: telurr,tidak ada,train
-anak_balita_0436,ANAK_BALITA,L,,,,0.5,-3.3,4.8,12.1,109.3,Gizi Buruk,1291.6,45.7,50.5,163.6,tidak ada,"spicy, kopi",train
-anak_balita_0437,ANAK_BALITA,P,,,,-1.31,-1.41,4.1,13.7,96.5,Gizi Baik,1204.1,44.5,44.4,156.6,-,tidak suka daging merah,train
-anak_balita_0438,ANAK_BALITA,L,,,,-0.54,2.64,4.6,20.9,104.2,Gizi Lebih,1709.4,63.5,66.2,214.9,,none,train
-anak_balita_0439,ANAK_BALITA,L,,,,-0.11,0.5,1.1,10.2,74.2,Gizi Baik,825.5,31.5,28.7,110.2,,-,train
-anak_balita_0440,ANAK_BALITA,L,,,,-2.35,0.53,1.7,11.6,72.8,Gizi Baik,953.5,28.8,34.0,133.1,-,"kopi, mie instan",train
-anak_balita_0441,ANAK_BALITA,P,,,,-0.97,1.91,3.7,17.6,94.7,Berisiko Gizi Lebih,1376.8,43.1,46.9,195.6,"alergi laktosa, gandum",mie instan,train
-anak_balita_0442,ANAK_BALITA,P,,,,-1.48,0.01,4.2,15.9,97.0,Gizi Baik,1230.7,45.4,41.3,169.5,tidak ada,hindari mie instan,train
-anak_balita_0443,ANAK_BALITA,L,,,,-0.79,2.49,3.1,16.8,89.7,Gizi Lebih,1504.5,52.9,60.4,187.2,,mie instan,train
-anak_balita_0444,ANAK_BALITA,L,,,,-0.19,-1.51,2.6,11.1,87.6,Gizi Baik,905.9,32.0,33.3,119.5,gandum dan tahu tempe,-,train
-anak_balita_0445,ANAK_BALITA,L,,,,-2.89,-1.06,2.5,11.4,77.8,Gizi Baik,937.1,29.0,37.0,121.9,,pantangan jeroan,train
-anak_balita_0446,ANAK_BALITA,P,,,,-0.45,0.17,1.7,11.2,78.7,Gizi Baik,915.1,31.5,33.1,122.7,alergi shrimp,,train
-anak_balita_0447,ANAK_BALITA,P,,,,1.04,1.16,4.0,17.2,103.8,Berisiko Gizi Lebih,1470.7,58.3,53.5,189.1,tidak ada,,test
-anak_balita_0448,ANAK_BALITA,L,,,,-2.03,-1.26,2.1,10.5,77.0,Gizi Baik,851.4,32.3,33.3,105.6,none,-,train
-anak_balita_0449,ANAK_BALITA,P,,,,-1.64,-0.53,4.1,15.0,95.6,Gizi Baik,1208.0,37.8,42.1,169.4,seafood; squid,none,train
-anak_balita_0450,ANAK_BALITA,P,,,,-0.78,0.34,4.7,17.6,104.2,Gizi Baik,1308.2,48.9,51.0,163.3,gandum,"pantangan mie instan, gorengan",train
-anak_balita_0451,ANAK_BALITA,L,,,,-1.83,-0.77,4.6,15.7,99.9,Gizi Baik,1486.1,46.7,54.7,201.8,none,tidak ada,train
-anak_balita_0452,ANAK_BALITA,P,,,,-1.45,1.73,1.9,13.1,76.9,Berisiko Gizi Lebih,1087.5,41.7,44.2,130.8,tidak ada,"pantangan gorengan, mie instan",train
-anak_balita_0453,ANAK_BALITA,L,,,,-2.27,-0.42,4.7,16.3,98.6,Gizi Baik,1317.8,44.4,52.9,166.1,tidak ada,pantangan mie instan,train
-anak_balita_0454,ANAK_BALITA,P,,,,-1.11,-0.72,4.3,15.2,99.8,Gizi Baik,1387.5,44.8,58.2,171.0,none,"gorengan, santan",train
-anak_balita_0455,ANAK_BALITA,L,,,,0.25,-0.17,1.7,10.7,80.5,Gizi Baik,875.3,33.6,33.7,109.3,"alergi ikn, shrimp","manis, santan",train
-anak_balita_0456,ANAK_BALITA,P,,,,-0.16,-0.04,1.1,9.7,74.2,Gizi Baik,800.0,26.9,30.1,105.5,no allergies,"tidak suka goreng-gorengan, makanan manis",train
-anak_balita_0457,ANAK_BALITA,P,,,,-0.79,0.35,2.5,12.9,84.2,Gizi Baik,1068.2,39.5,39.8,137.9,crab & peanut,,train
-anak_balita_0458,ANAK_BALITA,L,,,,-1.77,-0.59,2.4,11.7,80.5,Gizi Baik,965.4,37.6,39.2,115.6,,santan,train
-anak_balita_0459,ANAK_BALITA,L,,,,-1.06,-1.04,3.0,12.4,88.4,Gizi Baik,1342.9,53.1,54.8,159.4,no allergies,"hindari santan, manis",train
-anak_balita_0460,ANAK_BALITA,L,,,,-1.29,1.4,2.3,13.7,81.0,Berisiko Gizi Lebih,1139.3,40.9,46.4,139.6,no allergies,"hindari spicy, kopi",train
-anak_balita_0461,ANAK_BALITA,L,,,,0.26,-0.99,2.8,11.9,90.3,Gizi Baik,983.3,31.4,35.1,135.5,Alergi: terigu; sea food,"tidak suka jeroan, makanan manis",train
-anak_balita_0462,ANAK_BALITA,L,,,,0.36,-0.05,3.4,14.3,96.2,Gizi Baik,1312.2,44.0,53.0,164.7,-,-,train
-anak_balita_0463,ANAK_BALITA,P,,,,-0.37,-1.12,1.8,10.1,79.9,Gizi Baik,816.9,30.8,31.1,103.6,allergic to cumi-cumi dan makanan laut,"tidak suka makanan manis, gorengan",train
-anak_balita_0464,ANAK_BALITA,P,,,,-2.25,-2.84,1.3,7.6,69.2,Gizi Kurang,800.0,31.7,28.7,103.7,tidak ada,,train
-anak_balita_0465,ANAK_BALITA,L,,,,-2.0,1.47,2.7,14.8,82.7,Berisiko Gizi Lebih,1237.2,48.3,41.3,168.1,ebi,tidak suka makanan manis,train
-anak_balita_0466,ANAK_BALITA,L,,,,-0.83,0.17,3.2,14.2,90.6,Gizi Baik,1108.4,42.8,46.1,130.7,crab & squid,tidak ada,train
-anak_balita_0467,ANAK_BALITA,L,,,,0.01,2.07,3.4,17.0,94.8,Gizi Lebih,1380.1,51.1,49.4,182.9,allergic to telur,"pantangan jeroan, santan",train
-anak_balita_0468,ANAK_BALITA,L,,,,1.7,2.48,2.3,14.9,91.0,Gizi Lebih,1245.9,41.1,49.9,158.1,allergic to ebi,tidak suka kopi,train
-anak_balita_0469,ANAK_BALITA,P,,,,-0.87,1.25,2.0,12.8,79.6,Berisiko Gizi Lebih,1060.2,36.6,43.4,130.8,none,,train
-anak_balita_0470,ANAK_BALITA,L,,,,-1.42,0.79,3.1,14.7,87.5,Gizi Baik,1255.2,48.0,45.0,164.6,soy,"manis, pedas",train
-anak_balita_0471,ANAK_BALITA,P,,,,-0.02,-1.06,1.2,9.1,75.8,Gizi Baik,800.0,31.6,33.0,94.1,suus,hindari makanan manis,test
-anak_balita_0472,ANAK_BALITA,L,,,,-0.6,2.07,3.6,17.5,94.5,Gizi Lebih,1379.7,49.2,51.1,180.7,alergi makanan laut,-,train
-anak_balita_0473,ANAK_BALITA,P,,,,-1.03,-2.5,1.3,8.0,73.6,Gizi Kurang,800.0,29.6,26.7,110.3,-,hindari mie instan,train
-anak_balita_0474,ANAK_BALITA,P,,,,-0.75,1.1,2.2,13.3,82.5,Berisiko Gizi Lebih,1102.5,39.2,39.6,147.4,no allergies,,test
-anak_balita_0475,ANAK_BALITA,L,,,,-3.17,-0.14,5.0,17.4,98.7,Gizi Baik,1154.7,38.8,39.4,161.1,tidak ada,"manis, kopi",train
-anak_balita_0476,ANAK_BALITA,P,,,,-0.99,-0.87,4.3,14.9,99.5,Gizi Baik,1382.1,42.9,52.7,184.1,tidak ada,tidak ada,train
-anak_balita_0477,ANAK_BALITA,L,,,,-2.89,-0.26,3.1,13.5,83.2,Gizi Baik,1316.4,49.7,51.7,163.0,none,tidak suka santan,train
-anak_balita_0478,ANAK_BALITA,L,,,,-0.79,0.36,1.0,10.0,71.7,Gizi Baik,808.1,26.7,31.4,104.7,"wheat, kepiting",tidak ada,train
-anak_balita_0479,ANAK_BALITA,L,,,,0.14,-0.65,2.9,12.6,91.0,Gizi Baik,1040.7,32.6,43.4,130.0,milk dan udnag,tidak suka goreng-gorengan,test
-anak_balita_0480,ANAK_BALITA,L,,,,0.35,0.77,2.7,13.9,90.1,Gizi Baik,1156.2,42.1,45.8,143.9,,,train
-anak_balita_0481,ANAK_BALITA,P,,,,-0.6,-0.59,2.3,11.5,83.3,Gizi Baik,945.7,32.8,39.1,115.7,allergic to shrimp & cumi-cumi,,train
-anak_balita_0482,ANAK_BALITA,L,,,,-2.48,-0.84,2.0,10.7,74.4,Gizi Baik,869.6,33.7,35.3,104.2,tidak ada,"hindari pedas, spicy",train
-anak_balita_0483,ANAK_BALITA,P,,,,-1.87,0.01,3.0,13.5,85.2,Gizi Baik,1125.6,41.5,46.6,135.1,none,tidak ada,test
-anak_balita_0484,ANAK_BALITA,L,,,,-0.49,-0.35,1.2,9.7,74.0,Gizi Baik,800.0,27.1,28.8,108.1,Alergi: fish,"tidak suka spicy, jeroan",test
-anak_balita_0485,ANAK_BALITA,L,,,,0.6,1.4,2.9,15.2,93.0,Berisiko Gizi Lebih,1269.6,40.4,50.7,162.9,alergi kedelai,"hindari makanan manis, manis",train
-anak_balita_0486,ANAK_BALITA,L,,,,-3.89,0.52,4.1,16.6,88.6,Gizi Baik,1096.4,37.6,41.0,144.1,Alergi: ikan & cumi-cumi,,test
-anak_balita_0487,ANAK_BALITA,L,,,,-0.08,1.54,1.3,11.7,76.6,Berisiko Gizi Lebih,959.7,35.2,36.4,122.8,alergi eggs dan sea food,none,train
-anak_balita_0488,ANAK_BALITA,L,,,,-0.27,1.64,1.9,13.2,81.4,Berisiko Gizi Lebih,1094.0,35.0,37.0,155.1,Alergi: crab,,test
-anak_balita_0489,ANAK_BALITA,L,,,,-0.64,-1.23,1.8,9.9,78.6,Gizi Baik,801.2,29.8,31.6,99.4,tidak ada,,train
-anak_balita_0490,ANAK_BALITA,P,,,,1.28,1.97,4.9,20.5,112.7,Berisiko Gizi Lebih,1425.4,45.4,59.9,176.2,Alergi: ikan,tidak ada,train
-anak_balita_0491,ANAK_BALITA,L,,,,-0.1,0.28,1.3,10.6,76.7,Gizi Baik,859.5,33.6,34.3,104.0,,"pantangan mie instan, kopi",train
-anak_balita_0492,ANAK_BALITA,P,,,,-1.46,1.37,3.8,17.0,93.7,Berisiko Gizi Lebih,1219.8,42.5,43.9,163.7,none,,train
-anak_balita_0493,ANAK_BALITA,L,,,,-0.66,0.05,4.4,16.5,101.9,Gizi Baik,1549.9,58.5,54.2,207.1,alergi ikan,"hindari goreng-gorengan, daging merah",train
-anak_balita_0494,ANAK_BALITA,L,,,,0.46,0.54,4.2,16.8,104.0,Gizi Baik,1596.1,63.8,55.1,211.3,-,hindari daging merah,train
-anak_balita_0495,ANAK_BALITA,P,,,,-3.01,2.35,4.5,20.2,95.0,Gizi Lebih,1105.3,36.5,46.1,136.0,,,train
-anak_balita_0496,ANAK_BALITA,P,,,,-1.77,1.29,3.7,16.7,91.9,Berisiko Gizi Lebih,1333.4,43.6,47.9,182.0,no allergies,goreng-gorengan,train
-anak_balita_0497,ANAK_BALITA,L,,,,-0.61,-1.06,4.4,14.8,101.6,Gizi Baik,1492.0,59.0,49.8,202.0,tidak ada,"tidak suka kopi, manis",train
-anak_balita_0498,ANAK_BALITA,P,,,,-1.65,-2.46,2.9,10.5,85.4,Gizi Kurang,850.5,28.6,30.6,115.3,cumi-cumi,hindari makanan manis,train
-anak_balita_0499,ANAK_BALITA,P,,,,-1.45,1.33,3.4,16.0,89.9,Berisiko Gizi Lebih,1182.1,38.3,47.3,150.8,-,hindari santan,train
-anak_balita_0500,ANAK_BALITA,P,,,,0.36,1.09,3.8,16.6,99.5,Berisiko Gizi Lebih,1135.1,43.6,45.5,137.9,none,mie instan,test
-anak_balita_0501,ANAK_BALITA,L,,,,-0.08,-1.85,3.3,11.9,94.4,Gizi Baik,1071.7,36.9,38.5,144.5,tidak ada,"hindari pedas, kopi",test
-anak_balita_0502,ANAK_BALITA,L,,,,-1.75,-0.42,3.2,13.5,87.7,Gizi Baik,1360.8,51.8,49.1,177.8,no allergies,,train
-anak_balita_0503,ANAK_BALITA,P,,,,0.14,-1.02,1.5,9.6,78.5,Gizi Baik,800.0,24.6,27.6,113.2,allergic to kedelai; gandum,pantangan makanan manis,train
-anak_balita_0504,ANAK_BALITA,L,,,,-0.48,1.07,5.0,19.2,107.4,Berisiko Gizi Lebih,1669.1,65.6,55.8,226.0,allergic to fish; susu,none,train
-anak_balita_0505,ANAK_BALITA,P,,,,0.13,-0.74,3.9,14.4,100.1,Gizi Baik,1253.7,38.4,42.5,179.3,no allergies,hindari santan,train
-anak_balita_0506,ANAK_BALITA,P,,,,-2.22,-0.46,4.8,16.5,100.4,Gizi Baik,1396.7,50.5,51.3,183.1,tidak ada,"tidak suka pedas, gorengan",train
-anak_balita_0507,ANAK_BALITA,P,,,,0.02,0.79,3.9,16.5,99.7,Gizi Baik,1416.2,53.6,58.1,169.7,no allergies,tidak ada,train
-anak_balita_0508,ANAK_BALITA,L,,,,0.27,-1.27,1.5,9.3,78.9,Gizi Baik,800.0,31.7,30.8,99.1,no allergies,"tidak suka pedas, makanan manis",test
-anak_balita_0509,ANAK_BALITA,P,,,,0.05,-1.49,2.7,11.2,88.8,Gizi Baik,916.2,27.6,35.6,121.3,kepiting; telurr,-,train
-anak_balita_0510,ANAK_BALITA,L,,,,0.61,0.5,4.0,16.3,102.4,Gizi Baik,1221.1,46.2,48.1,150.9,no allergies,tidak ada,train
-anak_balita_0511,ANAK_BALITA,L,,,,-0.58,-0.12,4.1,15.7,99.6,Gizi Baik,1342.4,49.7,52.5,167.8,"alergi dairy, crab",none,train
-anak_balita_0512,ANAK_BALITA,P,,,,-0.55,0.01,2.1,11.9,82.3,Gizi Baik,979.6,37.6,33.0,133.0,no allergies,"tidak suka pedas, makanan manis",test
-anak_balita_0513,ANAK_BALITA,P,,,,-1.59,-0.63,4.5,15.6,99.4,Gizi Baik,1383.5,42.3,57.0,175.4,Alergi: telurr & udnag,makanan manis,train
-anak_balita_0514,ANAK_BALITA,L,,,,0.58,1.05,3.3,15.6,96.3,Berisiko Gizi Lebih,1522.7,52.5,59.8,193.6,,,train
-anak_balita_0515,ANAK_BALITA,P,,,,2.68,-0.79,3.4,13.3,103.5,Gizi Baik,1151.8,36.2,42.7,155.8,tidak ada,tidak ada,train
-anak_balita_0516,ANAK_BALITA,P,,,,0.32,-0.02,3.0,13.5,92.4,Gizi Baik,1123.8,35.3,38.9,158.2,no allergies,tidak ada,test
-anak_balita_0517,ANAK_BALITA,L,,,,-2.15,-1.57,4.9,15.0,101.6,Gizi Baik,1463.4,50.4,52.4,197.6,none,"pantangan daging merah, makanan manis",test
-anak_balita_0518,ANAK_BALITA,L,,,,-1.16,0.78,4.8,18.3,103.2,Gizi Baik,1604.1,55.8,66.1,196.6,none,"pantangan gorengan, daging merah",test
-anak_balita_0519,ANAK_BALITA,L,,,,0.26,-1.6,1.0,8.3,75.1,Gizi Baik,800.0,25.3,32.7,101.1,none,-,train
-anak_balita_0520,ANAK_BALITA,P,,,,-1.16,0.33,4.6,17.4,102.1,Gizi Baik,1286.8,50.6,51.3,155.7,none,"hindari jeroan, pedas",train
-anak_balita_0521,ANAK_BALITA,L,,,,0.8,-2.39,3.8,12.0,101.6,Gizi Kurang,1429.7,56.6,56.1,174.5,none,pantangan kopi,train
-anak_balita_0522,ANAK_BALITA,P,,,,-0.97,-1.41,1.7,9.5,76.6,Gizi Baik,800.0,25.1,27.3,113.4,Alergi: udang,no allergies,train
-anak_balita_0523,ANAK_BALITA,L,,,,0.49,-1.16,1.6,9.6,80.7,Gizi Baik,800.0,26.9,30.3,104.9,tidak ada,no allergies,train
-anak_balita_0524,ANAK_BALITA,P,,,,-1.08,-0.24,2.7,12.7,85.5,Gizi Baik,1054.0,41.3,42.3,127.1,,"hindari daging merah, manis",train
-anak_balita_0525,ANAK_BALITA,L,,,,-0.95,-0.88,2.2,11.0,81.4,Gizi Baik,902.0,27.2,31.1,128.3,none,,train
-anak_balita_0526,ANAK_BALITA,L,,,,-0.22,0.38,4.0,16.1,99.6,Gizi Baik,1191.1,37.7,48.9,150.1,tidak ada,kopi,test
-anak_balita_0527,ANAK_BALITA,P,,,,-1.41,-2.69,3.1,10.4,87.5,Gizi Kurang,1101.8,36.3,45.2,137.3,no allergies,,train
-anak_balita_0528,ANAK_BALITA,L,,,,1.84,0.09,5.0,17.7,115.1,Gizi Baik,1705.3,66.8,68.3,205.7,cumi,,train
-anak_balita_0529,ANAK_BALITA,L,,,,0.09,1.24,3.2,15.5,93.6,Berisiko Gizi Lebih,1498.3,52.3,62.2,182.3,"Alergi: tahu tempe, kepiting",,train
-anak_balita_0530,ANAK_BALITA,P,,,,0.46,2.13,2.3,14.5,86.8,Gizi Lebih,1211.1,39.4,44.5,163.3,alergi nuts,tidak ada,train
-anak_balita_0531,ANAK_BALITA,L,,,,-3.13,-1.24,3.8,13.6,88.7,Gizi Baik,1336.6,42.2,47.8,184.5,Alergi: udnag,-,train
-anak_balita_0532,ANAK_BALITA,L,,,,0.13,-0.45,4.2,15.4,102.7,Gizi Baik,1359.1,53.7,49.5,174.7,-,hindari jeroan,train
-anak_balita_0533,ANAK_BALITA,L,,,,-0.91,0.48,1.3,10.7,74.0,Gizi Baik,873.5,27.2,29.8,124.2,allergic to gluten dan kacang tanah,"hindari kopi, gorengan",train
-anak_balita_0534,ANAK_BALITA,P,,,,-1.19,0.39,2.7,13.4,84.7,Gizi Baik,1111.5,36.6,43.9,142.6,alergi kedele; ikn,no allergies,test
-anak_balita_0535,ANAK_BALITA,L,,,,-2.15,-0.68,3.8,14.3,91.9,Gizi Baik,1083.5,42.1,39.1,140.9,tidak ada,tidak ada,train
-anak_balita_0536,ANAK_BALITA,L,,,,-0.18,0.95,2.0,12.7,82.4,Gizi Baik,1046.2,35.7,42.6,130.0,Alergi: susu; crab,,train
-anak_balita_0537,ANAK_BALITA,L,,,,-1.54,0.2,3.5,14.8,90.6,Gizi Baik,1421.7,53.4,48.5,192.9,no allergies,"manis, jeroan",train
-anak_balita_0538,ANAK_BALITA,P,,,,-1.14,-1.09,3.8,13.7,94.7,Gizi Baik,1325.4,40.5,45.4,188.6,Alergi: kacng,"pantangan santan, kopi",train
-anak_balita_0539,ANAK_BALITA,P,,,,-2.39,-0.27,2.2,11.7,76.5,Gizi Baik,958.7,37.4,39.9,112.4,alergi sea food,"hindari mie instan, makanan manis",train
-anak_balita_0540,ANAK_BALITA,P,,,,-0.85,0.73,4.6,17.8,102.6,Gizi Baik,1447.0,48.5,60.9,176.2,alergi suus,"hindari spicy, daging merah",train
-anak_balita_0541,ANAK_BALITA,L,,,,-0.29,-1.38,3.3,12.4,93.2,Gizi Baik,1383.1,51.3,55.0,170.7,,-,train
-anak_balita_0542,ANAK_BALITA,P,,,,-0.5,-3.24,3.0,9.6,89.6,Gizi Buruk,800.0,25.4,31.8,103.1,none,none,test
-anak_balita_0543,ANAK_BALITA,L,,,,-0.14,-0.57,4.5,15.7,104.2,Gizi Baik,1367.8,41.3,48.0,192.6,no allergies,-,train
-anak_balita_0544,ANAK_BALITA,L,,,,-0.78,0.72,3.2,15.0,91.0,Gizi Baik,1447.2,52.2,58.6,177.8,nuts,none,test
-anak_balita_0545,ANAK_BALITA,L,,,,-0.24,1.52,2.4,14.0,85.3,Berisiko Gizi Lebih,1168.9,35.8,45.0,155.3,Alergi: ikan & kepiting,"hindari gorengan, jeroan",train
-anak_balita_0546,ANAK_BALITA,P,,,,1.22,1.08,3.3,15.6,98.5,Berisiko Gizi Lebih,1269.0,49.3,48.9,158.0,tidak ada,tidak ada,train
-anak_balita_0547,ANAK_BALITA,P,,,,-0.66,0.06,3.2,14.1,91.5,Gizi Baik,1310.4,52.2,46.5,170.9,gandum & kepiting,hindari daging merah,train
-anak_balita_0548,ANAK_BALITA,L,,,,-2.6,-1.88,3.9,12.8,91.1,Gizi Baik,1334.2,48.0,50.4,172.1,Alergi: shrimp & eggs,,train
-anak_balita_0549,ANAK_BALITA,L,,,,1.87,-1.91,4.3,13.4,108.9,Gizi Baik,1359.0,42.7,48.3,188.5,eggs,,train
-anak_balita_0550,ANAK_BALITA,P,,,,0.66,1.57,1.5,12.2,81.0,Berisiko Gizi Lebih,1006.7,38.4,40.7,121.8,alergi squid & telor,pedas,test
-anak_balita_0551,ANAK_BALITA,P,,,,-3.5,-1.94,2.7,10.7,77.0,Gizi Baik,868.1,31.9,30.7,116.1,no allergies,,train
-anak_balita_0552,ANAK_BALITA,P,,,,0.2,0.66,3.1,14.6,93.0,Gizi Baik,1075.1,33.5,42.1,140.5,no allergies,"hindari pedas, daging merah",train
-anak_balita_0553,ANAK_BALITA,L,,,,1.18,0.28,2.1,12.1,87.7,Gizi Baik,999.5,35.2,35.2,135.5,,none,train
-anak_balita_0554,ANAK_BALITA,L,,,,0.44,-1.65,3.5,12.4,97.4,Gizi Baik,1261.1,38.8,47.6,169.3,none,pantangan pedas,train
-anak_balita_0555,ANAK_BALITA,P,,,,-1.37,0.6,4.5,17.5,100.4,Gizi Baik,1274.0,48.4,50.6,156.3,sea food; tahu tempe,"pantangan daging merah, jeroan",train
-anak_balita_0556,ANAK_BALITA,P,,,,0.09,0.99,2.9,14.5,90.8,Gizi Baik,1213.8,48.3,50.3,142.0,alergi fish,tidak ada,train
-anak_balita_0557,ANAK_BALITA,L,,,,-0.41,0.23,2.1,12.1,82.6,Gizi Baik,997.1,35.8,35.0,134.8,"kacang, telur",hindari pedas,train
-anak_balita_0558,ANAK_BALITA,P,,,,-2.01,-1.55,1.4,8.9,70.7,Gizi Baik,800.0,27.2,32.5,99.7,Alergi: peanut dan cumi,hindari daging merah,test
-anak_balita_0559,ANAK_BALITA,L,,,,-1.32,-1.78,2.0,9.7,78.4,Gizi Baik,800.0,25.4,32.8,100.7,-,daging merah,train
-anak_balita_0560,ANAK_BALITA,L,,,,0.02,0.57,3.0,14.2,91.4,Gizi Baik,1185.8,39.7,49.8,144.7,tidak ada,tidak suka goreng-gorengan,test
-anak_balita_0561,ANAK_BALITA,P,,,,-1.52,-1.71,3.4,12.2,90.4,Gizi Baik,1267.8,43.8,42.8,176.9,"alergi fish, kedelai",tidak ada,train
-anak_balita_0562,ANAK_BALITA,P,,,,-0.5,-2.14,3.1,11.1,90.9,Gizi Kurang,1269.4,40.1,42.3,182.0,none,pantangan manis,train
-anak_balita_0563,ANAK_BALITA,L,,,,-1.37,-0.96,2.2,11.0,80.1,Gizi Baik,896.8,35.6,32.6,115.3,no allergies,"gorengan, santan",train
-anak_balita_0564,ANAK_BALITA,L,,,,0.32,0.13,3.2,14.1,94.1,Gizi Baik,1138.7,38.4,47.6,139.2,no allergies,hindari manis,train
-anak_balita_0565,ANAK_BALITA,P,,,,-1.96,-1.05,1.5,9.6,72.2,Gizi Baik,800.0,27.9,29.4,105.9,no allergies,none,train
-anak_balita_0566,ANAK_BALITA,P,,,,-0.53,0.05,4.0,15.6,98.4,Gizi Baik,1387.9,47.1,54.3,177.8,alergi gandum,none,train
-anak_balita_0567,ANAK_BALITA,L,,,,0.9,-0.12,2.6,12.7,91.0,Gizi Baik,1046.5,34.5,38.0,141.5,crab & egg,,train
-anak_balita_0568,ANAK_BALITA,P,,,,-0.54,-0.08,2.2,11.9,82.6,Gizi Baik,977.0,29.8,38.4,128.0,allergic to soy,-,train
-anak_balita_0569,ANAK_BALITA,L,,,,-1.33,2.13,1.4,12.4,73.3,Gizi Lebih,1026.1,38.9,36.9,134.5,alergi tahu tempe,,train
-anak_balita_0570,ANAK_BALITA,P,,,,-1.23,-0.43,2.6,12.4,84.3,Gizi Baik,1020.3,31.4,41.0,131.4,-,pantangan mie instan,train
-anak_balita_0571,ANAK_BALITA,P,,,,-1.62,-1.18,1.1,8.8,69.9,Gizi Baik,800.0,27.9,33.1,97.7,alergi kacng,tidak ada,test
-anak_balita_0572,ANAK_BALITA,P,,,,0.67,-0.79,2.4,11.6,88.7,Gizi Baik,949.1,35.9,36.0,120.4,-,tidak suka pedas,train
-anak_balita_0573,ANAK_BALITA,P,,,,-1.02,-1.67,2.8,11.1,86.1,Gizi Baik,912.0,27.4,33.8,124.4,"alergi dairy, terigu","pantangan manis, pedas",train
-anak_balita_0574,ANAK_BALITA,P,,,,-1.42,-1.64,3.0,11.6,87.0,Gizi Baik,1232.9,38.7,43.9,170.7,,hindari daging merah,train
-anak_balita_0575,ANAK_BALITA,L,,,,-1.46,-0.2,4.6,16.4,100.5,Gizi Baik,1522.0,50.6,55.1,206.1,-,"makanan manis, jeroan",train
-anak_balita_0576,ANAK_BALITA,P,,,,-3.24,-1.13,1.9,10.2,71.0,Gizi Baik,826.8,32.9,34.3,96.6,,-,train
-anak_balita_0577,ANAK_BALITA,P,,,,-0.06,-0.51,2.8,12.6,89.8,Gizi Baik,1043.7,37.1,37.6,139.3,milk,tidak suka spicy,train
-anak_balita_0578,ANAK_BALITA,P,,,,0.29,-1.58,1.9,9.7,82.5,Gizi Baik,800.0,28.7,33.1,96.9,allergic to shrimp dan crab,none,train
-anak_balita_0579,ANAK_BALITA,L,,,,1.64,-0.87,1.6,9.9,84.2,Gizi Baik,800.0,30.2,32.1,97.5,tidak ada,"hindari jeroan, goreng-gorengan",test
-anak_balita_0580,ANAK_BALITA,P,,,,-1.03,3.34,1.5,13.8,75.2,Obesitas,1152.2,43.0,44.6,144.8,tidak ada,-,train
-anak_balita_0581,ANAK_BALITA,L,,,,-0.03,0.58,1.9,12.0,82.0,Gizi Baik,990.6,30.9,38.6,129.8,kepiting & ikan,tidak ada,train
-anak_balita_0582,ANAK_BALITA,L,,,,-0.52,0.47,3.8,15.9,97.3,Gizi Baik,1344.3,52.6,50.8,169.1,kedele,no allergies,train
-anak_balita_0583,ANAK_BALITA,P,,,,-1.05,-1.33,2.5,11.1,83.9,Gizi Baik,910.4,34.5,36.8,110.2,none,tidak ada,test
-anak_balita_0584,ANAK_BALITA,P,,,,-1.03,-2.33,4.5,13.2,101.6,Gizi Kurang,1237.1,43.4,43.3,168.4,,"hindari daging merah, spicy",train
-anak_balita_0585,ANAK_BALITA,P,,,,0.06,-1.64,2.7,11.1,89.2,Gizi Baik,906.7,30.2,37.1,113.0,-,hindari pedas,train
-anak_balita_0586,ANAK_BALITA,P,,,,1.11,1.06,4.4,18.1,108.0,Berisiko Gizi Lebih,1517.0,48.4,54.8,207.5,-,,train
-anak_balita_0587,ANAK_BALITA,L,,,,-1.58,-1.58,3.2,11.9,87.8,Gizi Baik,1313.2,52.3,48.9,166.0,no allergies,tidak ada,train
-anak_balita_0588,ANAK_BALITA,P,,,,1.33,-2.83,1.0,7.2,78.6,Gizi Kurang,800.0,31.3,29.7,102.0,alergi gluten,tidak suka makanan manis,train
-anak_balita_0589,ANAK_BALITA,L,,,,-2.08,0.84,4.3,17.5,96.5,Gizi Baik,1352.6,43.0,53.2,175.4,sea food,"pedas, manis",train
-anak_balita_0590,ANAK_BALITA,L,,,,-2.28,1.39,2.5,14.2,80.0,Berisiko Gizi Lebih,1187.9,43.9,44.1,153.9,none,no allergies,train
-anak_balita_0591,ANAK_BALITA,L,,,,1.65,-0.45,4.8,16.5,112.9,Gizi Baik,1650.7,56.8,61.3,217.9,alergi dairy,pantangan kopi,train
-anak_balita_0592,ANAK_BALITA,L,,,,0.15,-0.82,1.4,9.7,78.2,Gizi Baik,800.0,25.8,32.3,101.4,none,tidak ada,train
-anak_balita_0593,ANAK_BALITA,P,,,,-0.65,-0.05,1.1,9.8,72.8,Gizi Baik,800.0,29.1,28.2,107.6,,pantangan jeroan,train
-anak_balita_0594,ANAK_BALITA,P,,,,-2.23,1.7,1.8,12.9,73.5,Berisiko Gizi Lebih,1065.7,32.6,40.6,142.6,shrimp,"hindari makanan manis, spicy",train
-anak_balita_0595,ANAK_BALITA,L,,,,-1.72,-2.61,2.1,9.0,77.9,Gizi Kurang,800.0,27.5,28.2,109.1,no allergies,,train
-anak_balita_0596,ANAK_BALITA,P,,,,0.77,0.61,5.0,18.5,111.4,Gizi Baik,1546.2,56.6,63.1,187.9,tidak ada,-,train
-anak_balita_0597,ANAK_BALITA,L,,,,0.62,-1.43,4.5,14.5,106.8,Gizi Baik,1181.0,35.6,46.9,154.2,none,none,test
-anak_balita_0598,ANAK_BALITA,L,,,,1.06,0.55,3.7,15.7,101.1,Gizi Baik,1386.2,53.7,46.4,188.6,Alergi: gandum; udang,tidak ada,train
-anak_balita_0599,ANAK_BALITA,P,,,,-0.67,-0.55,4.2,15.2,99.7,Gizi Baik,1250.5,41.6,47.0,165.2,-,tidak suka kopi,train
-anak_balita_0600,ANAK_BALITA,L,,,,0.34,1.76,3.1,16.1,94.0,Berisiko Gizi Lebih,1192.2,42.2,45.9,152.5,none,,test
-anak_balita_0601,ANAK_BALITA,P,,,,-1.81,0.77,2.7,13.9,83.1,Gizi Baik,1160.0,43.5,46.6,141.7,Alergi: cumi & udang,"mie instan, kopi",train
-anak_balita_0602,ANAK_BALITA,L,,,,-1.6,-0.65,1.2,9.4,70.3,Gizi Baik,800.0,27.2,28.3,109.1,Alergi: gluten dan fish,hindari spicy,test
-anak_balita_0603,ANAK_BALITA,L,,,,-0.43,0.26,1.6,11.0,77.6,Gizi Baik,898.5,31.2,37.0,110.2,no allergies,"pantangan kopi, makanan manis",train
-anak_balita_0604,ANAK_BALITA,L,,,,0.09,0.98,3.0,14.8,92.1,Gizi Baik,1468.5,49.4,59.6,183.7,alergi ebi,"hindari kopi, makanan manis",train
-anak_balita_0605,ANAK_BALITA,L,,,,-0.25,0.74,1.7,11.8,79.7,Gizi Baik,972.3,34.9,39.5,119.2,none,"pantangan santan, daging merah",train
-anak_balita_0606,ANAK_BALITA,P,,,,-0.69,0.71,4.8,18.2,104.8,Gizi Baik,1471.5,58.7,51.2,193.9,,"tidak suka jeroan, manis",test
-anak_balita_0607,ANAK_BALITA,P,,,,0.73,0.61,2.4,13.1,89.0,Gizi Baik,1089.2,33.9,37.6,153.9,-,"gorengan, goreng-gorengan",train
-anak_balita_0608,ANAK_BALITA,L,,,,-1.26,-3.24,1.1,7.0,71.1,Gizi Buruk,800.0,31.1,30.9,99.4,-,,train
-anak_balita_0609,ANAK_BALITA,L,,,,-0.81,-0.26,2.8,13.0,87.6,Gizi Baik,1074.9,40.1,38.2,142.7,alergi eggs,no allergies,train
-anak_balita_0610,ANAK_BALITA,P,,,,0.67,0.78,3.8,16.3,101.1,Gizi Baik,1433.4,45.3,57.6,183.5,fish; kedelai,"hindari mie instan, gorengan",train
-anak_balita_0611,ANAK_BALITA,L,,,,-3.74,-0.73,3.8,14.2,86.4,Gizi Baik,1183.9,44.0,42.9,155.5,kedele,,train
-anak_balita_0612,ANAK_BALITA,P,,,,-0.97,0.7,3.0,14.5,88.6,Gizi Baik,1034.5,31.7,38.6,140.0,Alergi: kacng,-,train
-anak_balita_0613,ANAK_BALITA,P,,,,0.02,1.47,2.0,13.1,82.9,Berisiko Gizi Lebih,1088.8,38.2,41.7,140.2,suus,,train
-anak_balita_0614,ANAK_BALITA,P,,,,0.65,-1.89,2.0,9.7,85.2,Gizi Baik,800.0,27.3,29.2,106.9,tidak ada,"pantangan spicy, gorengan",train
-anak_balita_0615,ANAK_BALITA,P,,,,-1.73,-0.05,1.4,10.4,71.9,Gizi Baik,844.0,33.6,32.3,104.7,alergi makanan laut dan egg,-,train
-anak_balita_0616,ANAK_BALITA,L,,,,0.71,-0.58,4.9,16.6,110.9,Gizi Baik,1434.6,44.5,57.8,184.2,alergi peanut,no allergies,train
-anak_balita_0617,ANAK_BALITA,P,,,,0.44,-1.77,3.0,11.4,93.0,Gizi Baik,936.4,37.4,34.1,119.9,ikn & wheat,hindari spicy,train
-anak_balita_0618,ANAK_BALITA,P,,,,-0.04,-1.18,2.3,10.9,85.3,Gizi Baik,891.6,35.3,36.0,106.7,allergic to kacng,tidak ada,train
-anak_balita_0619,ANAK_BALITA,L,,,,-1.01,0.4,2.5,13.1,84.2,Gizi Baik,1089.4,35.3,41.6,143.5,alergi kedelai,-,train
-anak_balita_0620,ANAK_BALITA,P,,,,0.06,0.71,4.0,16.7,100.9,Gizi Baik,1428.2,45.7,52.3,193.6,-,"gorengan, makanan manis",train
-anak_balita_0621,ANAK_BALITA,L,,,,-3.01,-2.28,2.2,9.6,74.9,Gizi Kurang,800.0,30.2,30.2,101.8,none,"pantangan gorengan, manis",train
-anak_balita_0622,ANAK_BALITA,L,,,,-0.21,0.13,3.9,15.6,98.9,Gizi Baik,1176.2,39.2,42.6,158.9,,hindari makanan manis,train
-anak_balita_0623,ANAK_BALITA,P,,,,-2.12,-1.68,2.0,9.8,75.4,Gizi Baik,800.0,30.4,33.3,94.7,-,"pantangan pedas, spicy",train
-anak_balita_0624,ANAK_BALITA,P,,,,0.77,-0.19,5.0,17.3,111.7,Gizi Baik,1533.9,61.2,59.3,188.9,allergic to sea food & kacng,"manis, jeroan",train
-anak_balita_0625,ANAK_BALITA,L,,,,-1.33,-1.99,2.7,10.7,84.9,Gizi Baik,874.2,29.9,36.7,106.1,Alergi: cumi,none,train
-anak_balita_0626,ANAK_BALITA,L,,,,0.57,-0.41,4.5,16.1,107.1,Gizi Baik,1405.2,48.5,58.4,171.3,Alergi: ikan,"hindari mie instan, pedas",train
-anak_balita_0627,ANAK_BALITA,L,,,,-0.38,1.31,4.9,19.3,106.7,Berisiko Gizi Lebih,1480.2,58.0,57.6,182.5,alergi kepiting; ikan,-,test
-anak_balita_0628,ANAK_BALITA,L,,,,-0.32,1.64,3.2,16.0,92.0,Berisiko Gizi Lebih,1334.0,45.5,47.5,181.1,Alergi: kedele,"pantangan pedas, manis",test
-anak_balita_0629,ANAK_BALITA,L,,,,-1.24,-0.35,4.9,16.9,104.6,Gizi Baik,1561.7,51.6,56.7,211.3,no allergies,,train
-anak_balita_0630,ANAK_BALITA,P,,,,-2.26,0.81,1.1,10.5,67.5,Gizi Baik,856.9,31.6,33.6,107.0,Alergi: cumi,"hindari jeroan, daging merah",train
-anak_balita_0631,ANAK_BALITA,P,,,,0.66,0.55,1.9,11.9,83.9,Gizi Baik,982.0,34.8,36.5,128.7,no allergies,tidak ada,train
-anak_balita_0632,ANAK_BALITA,L,,,,0.76,-0.9,4.2,14.6,104.4,Gizi Baik,1357.1,46.5,53.5,172.5,"alergi kedele, telurr",-,test
-anak_balita_0633,ANAK_BALITA,L,,,,0.05,-0.97,4.7,15.4,106.4,Gizi Baik,1371.5,48.7,53.3,174.3,none,no allergies,train
-anak_balita_0634,ANAK_BALITA,L,,,,-0.45,0.65,1.9,12.1,80.6,Gizi Baik,998.5,36.7,38.7,125.9,alergi soy dan crab,pantangan pedas,train
-anak_balita_0635,ANAK_BALITA,L,,,,-2.61,-1.2,1.3,9.2,68.4,Gizi Baik,800.0,30.2,28.6,105.5,no allergies,tidak suka kopi,test
-anak_balita_0636,ANAK_BALITA,P,,,,0.79,-1.47,3.3,12.3,96.5,Gizi Baik,1344.7,46.2,51.8,173.3,tidak ada,hindari gorengan,train
-anak_balita_0637,ANAK_BALITA,L,,,,0.7,-0.11,2.0,11.5,85.1,Gizi Baik,942.4,36.6,34.8,120.8,,tidak suka makanan manis,test
-anak_balita_0638,ANAK_BALITA,P,,,,0.16,-0.26,3.4,14.0,95.3,Gizi Baik,1349.1,41.2,53.5,175.7,-,-,train
-anak_balita_0639,ANAK_BALITA,L,,,,-0.71,2.09,4.4,19.4,101.3,Gizi Lebih,1643.1,57.2,60.0,218.6,kedele,mie instan,train
-anak_balita_0640,ANAK_BALITA,P,,,,-2.23,-1.93,3.8,12.5,91.0,Gizi Baik,1267.8,39.8,49.8,165.1,,pantangan mie instan,train
-anak_balita_0641,ANAK_BALITA,P,,,,-1.39,0.29,3.5,15.0,91.7,Gizi Baik,1184.2,42.2,41.7,159.9,none,hindari gorengan,train
-anak_balita_0642,ANAK_BALITA,L,,,,0.78,0.88,4.1,17.1,103.9,Gizi Baik,1248.6,43.8,52.6,150.0,tidak ada,none,test
-anak_balita_0643,ANAK_BALITA,P,,,,-1.75,1.99,1.1,11.5,68.9,Berisiko Gizi Lebih,943.2,34.8,32.2,128.5,Alergi: udnag & susu sapi,none,train
-anak_balita_0644,ANAK_BALITA,L,,,,0.95,-1.49,1.0,8.4,77.4,Gizi Baik,800.0,26.0,30.3,105.9,none,"pantangan santan, goreng-gorengan",train
-anak_balita_0645,ANAK_BALITA,L,,,,-1.52,0.51,1.3,10.7,71.8,Gizi Baik,873.1,26.8,33.4,116.4,no allergies,pantangan pedas,train
-anak_balita_0646,ANAK_BALITA,L,,,,-0.26,-0.51,2.2,11.4,83.7,Gizi Baik,938.9,37.3,34.3,120.3,alergi sea food,manis,train
-anak_balita_0647,ANAK_BALITA,P,,,,0.65,-1.98,3.9,12.6,101.6,Gizi Baik,1390.0,47.0,50.4,187.0,allergic to telor,"hindari manis, kopi",train
-anak_balita_0648,ANAK_BALITA,P,,,,0.13,-2.27,1.3,8.1,77.2,Gizi Kurang,800.0,26.7,33.6,97.7,makanan laut; squid,tidak suka mie instan,train
-anak_balita_0649,ANAK_BALITA,L,,,,0.37,0.25,4.1,16.3,102.9,Gizi Baik,1569.7,48.0,64.3,199.8,-,-,train
-anak_balita_0650,ANAK_BALITA,P,,,,0.8,0.44,2.6,13.4,91.1,Gizi Baik,1111.6,39.2,38.3,152.4,none,spicy,train
-anak_balita_0651,ANAK_BALITA,L,,,,0.39,0.86,2.6,13.8,89.4,Gizi Baik,1148.2,37.5,42.1,154.7,-,,test
-anak_balita_0652,ANAK_BALITA,L,,,,1.31,-0.56,3.0,12.9,95.7,Gizi Baik,1064.8,32.6,39.5,144.7,tidak ada,pantangan daging merah,train
-anak_balita_0653,ANAK_BALITA,L,,,,-1.08,0.01,3.8,15.1,94.7,Gizi Baik,1462.2,50.5,51.4,199.5,no allergies,none,train
-anak_balita_0654,ANAK_BALITA,P,,,,-0.24,-1.95,2.7,10.7,88.2,Gizi Baik,874.0,31.0,36.1,106.2,no allergies,,train
-anak_balita_0655,ANAK_BALITA,P,,,,-0.4,0.12,2.8,13.4,88.6,Gizi Baik,1109.0,35.7,39.5,152.7,alergi gandum dan crab,none,train
-anak_balita_0656,ANAK_BALITA,L,,,,-0.47,0.23,1.8,11.5,79.9,Gizi Baik,945.2,32.4,32.0,131.8,tidak ada,no allergies,test
-anak_balita_0657,ANAK_BALITA,L,,,,-0.18,-0.87,1.3,9.4,76.1,Gizi Baik,800.0,26.1,31.9,102.0,no allergies,none,train
-anak_balita_0658,ANAK_BALITA,P,,,,-1.74,-0.84,3.9,14.2,93.8,Gizi Baik,1318.0,43.8,44.8,184.8,alergi seafood,"tidak suka jeroan, goreng-gorengan",train
-anak_balita_0659,ANAK_BALITA,L,,,,0.26,0.42,1.3,10.6,77.7,Gizi Baik,866.5,28.2,31.8,116.8,no allergies,no allergies,train
-anak_balita_0660,ANAK_BALITA,L,,,,-0.57,0.06,4.4,16.4,101.7,Gizi Baik,1195.1,42.6,44.4,156.3,"allergic to ebi, peanut",,train
-anak_balita_0661,ANAK_BALITA,P,,,,-0.02,0.62,3.8,16.0,98.5,Gizi Baik,1399.2,54.1,58.9,163.2,-,-,train
-anak_balita_0662,ANAK_BALITA,L,,,,-1.86,-0.65,2.9,12.6,84.5,Gizi Baik,1040.5,40.3,43.1,122.9,"Alergi: squid, terigu",pantangan makanan manis,train
-anak_balita_0663,ANAK_BALITA,P,,,,-0.4,-0.15,4.8,16.9,106.1,Gizi Baik,1167.8,43.6,40.4,157.5,,makanan manis,train
-anak_balita_0664,ANAK_BALITA,P,,,,-0.77,-0.07,3.0,13.4,88.6,Gizi Baik,1114.2,42.6,46.1,132.3,,no allergies,train
-anak_balita_0665,ANAK_BALITA,L,,,,1.86,0.28,2.3,12.6,91.8,Gizi Baik,1037.8,41.1,36.9,135.4,allergic to kacang,tidak suka manis,train
-anak_balita_0666,ANAK_BALITA,P,,,,-3.18,0.15,5.0,17.8,98.5,Gizi Baik,1100.2,40.4,44.4,134.6,alergi crab,no allergies,train
-anak_balita_0667,ANAK_BALITA,L,,,,0.3,0.25,1.6,11.0,80.0,Gizi Baik,897.8,35.2,33.2,114.6,no allergies,pantangan goreng-gorengan,test
-anak_balita_0668,ANAK_BALITA,L,,,,-0.75,-0.87,1.0,8.9,71.6,Gizi Baik,800.0,30.2,27.7,107.5,alergi ikn; udang,tidak ada,test
-anak_balita_0669,ANAK_BALITA,L,,,,-0.79,1.16,1.4,11.5,74.8,Berisiko Gizi Lebih,939.1,32.1,34.4,125.2,none,-,test
-anak_balita_0670,ANAK_BALITA,L,,,,-0.25,-1.34,1.1,8.6,74.0,Gizi Baik,800.0,24.3,31.1,105.7,,,train
-anak_balita_0671,ANAK_BALITA,P,,,,-0.54,-0.93,4.5,15.2,103.2,Gizi Baik,1422.7,46.7,59.6,174.8,Alergi: kacang & susu sapi,,train
-anak_balita_0672,ANAK_BALITA,P,,,,-2.85,-0.92,2.3,11.2,76.3,Gizi Baik,920.4,31.3,37.9,113.5,allergic to ikan; susu,-,train
-anak_balita_0673,ANAK_BALITA,L,,,,-1.52,-1.79,4.4,13.8,99.0,Gizi Baik,1097.5,38.5,40.7,144.1,-,,test
-anak_balita_0674,ANAK_BALITA,L,,,,-0.81,-1.75,2.9,11.3,87.9,Gizi Baik,923.1,35.9,33.4,119.6,Alergi: telur dan dairy,tidak suka santan,test
-anak_balita_0675,ANAK_BALITA,P,,,,0.11,0.39,1.5,10.9,78.5,Gizi Baik,890.8,27.2,32.2,123.1,,pantangan manis,train
-anak_balita_0676,ANAK_BALITA,P,,,,-0.18,1.43,2.4,14.0,85.7,Berisiko Gizi Lebih,1163.8,44.8,42.7,150.1,Alergi: cumi,tidak suka manis,train
-anak_balita_0677,ANAK_BALITA,L,,,,-0.02,0.44,4.5,17.3,104.8,Gizi Baik,1237.4,41.4,50.0,155.6,alergi susu sapi,no allergies,train
-anak_balita_0678,ANAK_BALITA,P,,,,-0.7,-0.63,1.9,10.7,79.5,Gizi Baik,875.5,30.5,31.1,118.3,tidak ada,pantangan spicy,train
-anak_balita_0679,ANAK_BALITA,P,,,,-2.67,0.12,2.5,12.8,78.7,Gizi Baik,1060.5,35.9,43.6,131.2,allergic to egg,tidak ada,train
-anak_balita_0680,ANAK_BALITA,P,,,,-1.17,-0.84,4.5,15.3,100.9,Gizi Baik,1397.2,46.0,58.8,170.9,no allergies,,train
-anak_balita_0681,ANAK_BALITA,L,,,,-1.07,-0.72,4.3,15.2,99.7,Gizi Baik,1146.8,42.1,40.6,153.1,no allergies,none,train
-anak_balita_0682,ANAK_BALITA,P,,,,-2.86,-0.14,4.2,15.7,92.5,Gizi Baik,1180.9,40.5,39.7,165.3,Alergi: udang & ikan,none,test
-anak_balita_0683,ANAK_BALITA,L,,,,-2.9,0.66,3.4,15.3,85.6,Gizi Baik,1232.0,37.4,51.3,155.2,tidak ada,none,train
-anak_balita_0684,ANAK_BALITA,L,,,,-2.64,0.37,4.9,17.9,99.2,Gizi Baik,1538.4,49.4,57.2,206.6,-,hindari mie instan,train
-anak_balita_0685,ANAK_BALITA,P,,,,0.96,-2.36,1.2,7.8,78.7,Gizi Kurang,800.0,30.3,28.9,104.7,"alergi kacang tanah, eggs",,train
-anak_balita_0686,ANAK_BALITA,L,,,,0.36,2.54,3.4,17.6,95.9,Gizi Lebih,1236.8,43.2,51.0,151.2,none,,train
-anak_balita_0687,ANAK_BALITA,P,,,,0.86,2.02,2.5,14.8,89.8,Gizi Lebih,1239.4,43.0,50.9,152.3,no allergies,"mie instan, gorengan",train
-anak_balita_0688,ANAK_BALITA,P,,,,0.36,-0.2,4.0,15.3,101.3,Gizi Baik,1274.4,41.0,50.2,164.7,alergi soy,-,test
-anak_balita_0689,ANAK_BALITA,P,,,,1.89,1.25,1.3,11.3,82.8,Berisiko Gizi Lebih,927.2,28.3,39.1,115.4,alergi ikn,tidak ada,train
-anak_balita_0690,ANAK_BALITA,L,,,,0.04,-1.9,2.5,10.5,87.4,Gizi Baik,850.4,31.0,29.0,116.5,dairy,-,train
-anak_balita_0691,ANAK_BALITA,L,,,,-0.88,2.23,2.6,15.3,84.9,Gizi Lebih,1280.6,39.3,43.9,182.1,kacng; ebi,-,train
-anak_balita_0692,ANAK_BALITA,P,,,,0.32,0.66,2.5,13.4,88.5,Gizi Baik,1113.1,43.7,42.3,139.3,alergi fish,tidak suka jeroan,test
-anak_balita_0693,ANAK_BALITA,L,,,,0.84,-2.15,3.2,11.3,96.1,Gizi Kurang,1231.9,44.0,51.7,147.8,none,tidak ada,train
-anak_balita_0694,ANAK_BALITA,L,,,,0.59,0.55,2.5,13.1,88.7,Gizi Baik,1087.5,38.9,42.6,137.1,,no allergies,train
-anak_balita_0695,ANAK_BALITA,L,,,,-1.44,-2.08,4.4,13.3,98.8,Gizi Kurang,1246.8,44.6,46.8,161.7,-,no allergies,train
-anak_balita_0696,ANAK_BALITA,L,,,,0.49,-0.52,3.3,13.6,96.2,Gizi Baik,1133.5,35.7,44.9,146.8,,tidak suka santan,test
-anak_balita_0697,ANAK_BALITA,L,,,,-1.53,2.68,2.9,16.7,85.9,Gizi Lebih,1406.7,45.4,50.3,193.2,allergic to kacang tanah dan ikn,mie instan,test
-anak_balita_0698,ANAK_BALITA,P,,,,-1.69,-0.73,2.8,12.4,84.6,Gizi Baik,1024.1,31.4,42.8,128.4,-,none,train
-anak_balita_0699,ANAK_BALITA,L,,,,-0.59,0.71,3.1,14.6,90.2,Gizi Baik,1123.2,39.6,43.3,143.8,tidak ada,"pantangan gorengan, manis",train
-anak_balita_0700,ANAK_BALITA,P,,,,-0.38,0.89,3.8,16.4,97.3,Gizi Baik,1390.8,46.7,50.6,187.2,alergi eggs; wheat,tidak ada,train
+anak_balita_0001,ANAK_BALITA,P,,,,-0.51,-0.24,40,14.6,96.5,Gizi Baik,1100.1,35.1,43.6,141.7,-,"tidak suka gorengan, mie instan",train
+anak_balita_0002,ANAK_BALITA,P,,,,-1.05,0.41,38,15.2,93.6,Gizi Baik,1217.3,39.0,48.9,155.3,"Alergi: fish, tahu tempe",no allergies,train
+anak_balita_0003,ANAK_BALITA,L,,,,-1.6,0.85,30,14.3,86.2,Gizi Baik,1189.2,38.1,43.4,161.4,,daging merah,test
+anak_balita_0004,ANAK_BALITA,P,,,,-1.29,1.14,50,18.3,99.3,Berisiko Gizi Lebih,1282.7,48.9,53.4,151.6,allergic to ikn; squid,none,train
+anak_balita_0005,ANAK_BALITA,L,,,,-2.62,-0.0,59,18.1,99.8,Gizi Baik,1549.8,52.0,62.6,194.6,no allergies,hindari goreng-gorengan,train
+anak_balita_0006,ANAK_BALITA,L,,,,0.8,-2.09,45,12.8,103.5,Gizi Kurang,1319.6,52.0,51.2,162.8,allergic to sea food; peanut,"spicy, gorengan",train
+anak_balita_0007,ANAK_BALITA,P,,,,-1.3,-0.49,40,14.3,93.9,Gizi Baik,1337.7,47.0,54.3,165.3,no allergies,"tidak suka jeroan, goreng-gorengan",test
+anak_balita_0008,ANAK_BALITA,P,,,,-3.74,-3.43,7,4.8,52.2,Gizi Buruk,415.4,16.1,17.5,48.4,cumi,"pantangan mie instan, daging merah",train
+anak_balita_0009,ANAK_BALITA,L,,,,1.08,0.17,34,14.2,98.1,Gizi Baik,1180.1,44.9,49.4,139.0,kacang dan ebi,,train
+anak_balita_0010,ANAK_BALITA,L,,,,-0.04,2.55,26,15.4,88.4,Gizi Lebih,1293.5,43.6,52.6,161.4,none,tidak ada,train
+anak_balita_0011,ANAK_BALITA,P,,,,-0.47,0.27,22,12.1,83.5,Gizi Baik,992.8,34.0,39.4,125.5,,tidak ada,test
+anak_balita_0012,ANAK_BALITA,L,,,,-0.48,1.64,15,11.8,76.4,Berisiko Gizi Lebih,967.3,31.2,39.6,121.6,Alergi: seafood dan ikn,pantangan goreng-gorengan,train
+anak_balita_0013,ANAK_BALITA,P,,,,-1.52,0.86,51,18.1,99.1,Gizi Baik,1131.0,41.1,41.8,147.7,Alergi: terigu,jeroan,train
+anak_balita_0014,ANAK_BALITA,L,,,,0.46,1.53,14,11.4,78.5,Berisiko Gizi Lebih,936.0,33.9,34.7,121.9,none,"tidak suka kopi, santan",train
+anak_balita_0015,ANAK_BALITA,L,,,,-2.24,-1.53,29,11.3,83.4,Gizi Baik,923.8,35.5,36.7,112.9,none,none,train
+anak_balita_0016,ANAK_BALITA,L,,,,0.09,1.43,34,15.7,94.8,Berisiko Gizi Lebih,1321.6,43.3,51.8,170.6,Alergi: terigu dan kepiting,pantangan pedas,train
+anak_balita_0017,ANAK_BALITA,P,,,,-2.09,-0.43,53,16.5,98.3,Gizi Baik,1102.2,42.6,40.9,141.0,"allergic to cumi-cumi, ikn",none,train
+anak_balita_0018,ANAK_BALITA,L,,,,0.45,-1.71,17,9.0,81.5,Gizi Baik,724.9,25.1,26.6,96.3,none,no allergies,train
+anak_balita_0019,ANAK_BALITA,L,,,,-1.42,-2.53,26,9.7,83.8,Gizi Kurang,782.7,27.0,32.7,95.0,no allergies,-,train
+anak_balita_0020,ANAK_BALITA,P,,,,0.83,1.79,39,17.2,100.4,Berisiko Gizi Lebih,1308.6,46.1,52.2,163.5,no allergies,no allergies,train
+anak_balita_0021,ANAK_BALITA,L,,,,0.2,0.93,4,5.9,59.0,Gizi Baik,499.8,16.1,16.8,70.9,seafood; kedelai,no allergies,train
+anak_balita_0022,ANAK_BALITA,L,,,,-1.72,1.75,9,9.3,63.1,Berisiko Gizi Lebih,781.5,26.6,28.2,105.3,allergic to kacang tanah & kedele,-,train
+anak_balita_0023,ANAK_BALITA,P,,,,-2.1,1.31,41,16.9,91.8,Berisiko Gizi Lebih,1343.4,51.0,46.0,181.2,sea food,"hindari goreng-gorengan, jeroan",train
+anak_balita_0024,ANAK_BALITA,P,,,,-1.51,0.95,41,16.4,93.7,Gizi Baik,1089.8,34.4,45.1,136.6,gandum,,train
+anak_balita_0025,ANAK_BALITA,L,,,,1.44,0.33,40,15.4,102.9,Gizi Baik,1417.3,54.5,54.6,177.0,no allergies,none,test
+anak_balita_0026,ANAK_BALITA,L,,,,-1.16,0.56,31,14.1,88.4,Gizi Baik,1175.3,45.0,45.1,147.3,tidak ada,"pantangan pedas, daging merah",train
+anak_balita_0027,ANAK_BALITA,P,,,,-0.08,1.28,42,17.1,99.0,Berisiko Gizi Lebih,1142.6,36.4,41.0,157.0,kacang,,train
+anak_balita_0028,ANAK_BALITA,L,,,,-1.37,-0.09,10,8.5,66.3,Gizi Baik,715.2,24.6,24.9,98.2,laktosa,gorengan,train
+anak_balita_0029,ANAK_BALITA,L,,,,1.02,-0.14,29,12.9,94.1,Gizi Baik,1069.1,32.8,42.0,140.1,-,"tidak suka jeroan, daging merah",train
+anak_balita_0030,ANAK_BALITA,L,,,,0.15,-0.25,53,16.8,105.7,Gizi Baik,1601.5,51.6,66.8,198.6,Alergi: peanut dan gluten,none,train
+anak_balita_0031,ANAK_BALITA,L,,,,0.44,1.42,42,17.3,100.7,Berisiko Gizi Lebih,1618.3,64.6,58.2,208.9,,"pantangan kopi, spicy",test
+anak_balita_0032,ANAK_BALITA,L,,,,-1.19,-0.48,28,12.3,86.1,Gizi Baik,1018.6,40.0,41.5,121.3,-,"tidak suka mie instan, daging merah",test
+anak_balita_0033,ANAK_BALITA,L,,,,-0.1,0.3,36,14.7,95.7,Gizi Baik,1342.0,52.5,54.0,161.5,tidak ada,hindari santan,train
+anak_balita_0034,ANAK_BALITA,P,,,,-0.71,-0.38,54,16.7,103.4,Gizi Baik,1444.3,43.6,56.4,190.6,-,,train
+anak_balita_0035,ANAK_BALITA,P,,,,-0.32,0.49,11,9.5,71.9,Gizi Baik,797.1,31.1,27.7,106.0,no allergies,"pantangan makanan manis, daging merah",train
+anak_balita_0036,ANAK_BALITA,L,,,,0.07,1.66,11,10.4,73.1,Berisiko Gizi Lebih,875.5,33.9,33.4,109.9,tidak ada,"hindari goreng-gorengan, kopi",train
+anak_balita_0037,ANAK_BALITA,L,,,,-1.2,-0.69,50,15.6,99.6,Gizi Baik,1166.8,44.8,46.2,143.1,none,"goreng-gorengan, jeroan",train
+anak_balita_0038,ANAK_BALITA,L,,,,1.76,0.54,5,6.2,66.2,Gizi Baik,529.6,18.8,22.1,63.8,tidak ada,"pantangan gorengan, kopi",train
+anak_balita_0039,ANAK_BALITA,L,,,,-0.43,-0.07,56,17.5,105.4,Gizi Baik,1423.9,46.4,47.5,202.7,alergi telurr,-,train
+anak_balita_0040,ANAK_BALITA,P,,,,0.35,-1.62,45,13.5,102.0,Gizi Baik,1269.2,47.5,46.0,166.4,-,,test
+anak_balita_0041,ANAK_BALITA,L,,,,-1.73,2.46,43,18.9,94.1,Gizi Lebih,1592.6,53.3,53.2,225.1,,no allergies,train
+anak_balita_0042,ANAK_BALITA,L,,,,0.6,1.33,31,15.0,94.2,Berisiko Gizi Lebih,1257.3,37.9,44.8,175.7,allergic to telur; squid,"tidak suka santan, goreng-gorengan",test
+anak_balita_0043,ANAK_BALITA,P,,,,0.3,-2.87,18,8.1,82.0,Gizi Kurang,639.3,19.5,26.3,81.3,none,-,train
+anak_balita_0044,ANAK_BALITA,L,,,,-0.33,-0.93,44,14.3,99.2,Gizi Baik,1160.1,44.5,40.4,154.7,,manis,train
+anak_balita_0045,ANAK_BALITA,P,,,,0.9,-0.3,20,11.0,86.0,Gizi Baik,901.2,33.1,32.5,119.0,suus,,test
+anak_balita_0046,ANAK_BALITA,P,,,,1.0,0.58,29,13.8,94.0,Gizi Baik,1144.6,37.4,41.4,155.6,-,no allergies,train
+anak_balita_0047,ANAK_BALITA,L,,,,-0.58,-0.78,59,16.9,106.6,Gizi Baik,1216.5,42.9,41.1,168.8,alergi eggs; ikan,,train
+anak_balita_0048,ANAK_BALITA,L,,,,-0.83,0.26,35,14.5,92.5,Gizi Baik,1206.6,37.8,49.8,151.7,alergi udnag & suus,manis,train
+anak_balita_0049,ANAK_BALITA,L,,,,-1.14,-0.22,50,16.3,99.8,Gizi Baik,1187.1,37.8,43.4,161.4,,"hindari spicy, gorengan",train
+anak_balita_0050,ANAK_BALITA,L,,,,-0.17,0.78,49,17.6,102.5,Gizi Baik,1614.4,56.4,67.1,196.3,-,-,test
+anak_balita_0051,ANAK_BALITA,P,,,,-3.43,2.02,59,21.4,97.1,Gizi Lebih,1271.2,39.9,51.0,163.0,,"jeroan, makanan manis",train
+anak_balita_0052,ANAK_BALITA,L,,,,-1.68,-1.12,37,13.0,91.0,Gizi Baik,1390.6,48.4,50.7,185.1,gandum,pantangan pedas,train
+anak_balita_0053,ANAK_BALITA,L,,,,-1.9,-3.3,32,9.6,86.7,Gizi Buruk,770.7,30.5,28.8,97.4,kedelai; eggs,tidak ada,train
+anak_balita_0054,ANAK_BALITA,L,,,,-0.01,-0.77,54,16.1,105.7,Gizi Baik,1214.2,46.2,50.3,144.3,none,hindari gorengan,train
+anak_balita_0055,ANAK_BALITA,L,,,,-0.26,-0.97,40,13.7,97.3,Gizi Baik,1307.4,40.9,44.7,185.4,Alergi: cumi-cumi; makanan laut,,test
+anak_balita_0056,ANAK_BALITA,P,,,,0.72,-0.05,46,15.9,103.8,Gizi Baik,1312.3,50.0,46.2,174.1,kacang,no allergies,test
+anak_balita_0057,ANAK_BALITA,L,,,,2.79,0.14,38,14.8,106.3,Gizi Baik,1267.8,48.7,51.4,152.6,Alergi: suus; telur,tidak suka daging merah,test
+anak_balita_0058,ANAK_BALITA,L,,,,0.89,1.0,2,4.7,57.1,Gizi Baik,408.8,13.3,16.2,52.6,,tidak ada,train
+anak_balita_0059,ANAK_BALITA,L,,,,-1.89,-0.05,11,9.0,66.7,Gizi Baik,760.5,25.3,27.3,103.5,alergi soy,,train
+anak_balita_0060,ANAK_BALITA,L,,,,-0.61,0.81,4,5.8,56.3,Gizi Baik,494.9,15.8,20.9,60.9,tidak ada,,train
+anak_balita_0061,ANAK_BALITA,L,,,,-0.28,-0.43,36,13.7,95.1,Gizi Baik,1466.8,51.3,54.7,192.3,none,none,test
+anak_balita_0062,ANAK_BALITA,L,,,,2.07,1.55,51,19.1,111.0,Berisiko Gizi Lebih,1751.9,57.7,63.4,237.5,allergic to kedelai,"tidak suka pedas, jeroan",train
+anak_balita_0063,ANAK_BALITA,L,,,,-0.92,-0.21,10,8.4,67.8,Gizi Baik,708.0,26.4,26.3,91.5,,-,train
+anak_balita_0064,ANAK_BALITA,L,,,,-1.13,-0.25,37,14.1,92.8,Gizi Baik,1133.3,44.7,41.9,144.3,-,-,test
+anak_balita_0065,ANAK_BALITA,P,,,,-1.82,1.12,18,12.0,75.0,Berisiko Gizi Lebih,988.0,33.3,33.4,138.6,Alergi: kacng & gluten,none,train
+anak_balita_0066,ANAK_BALITA,P,,,,1.67,1.39,43,17.4,105.3,Berisiko Gizi Lebih,1353.0,53.4,52.3,167.2,Alergi: milk & makanan laut,no allergies,test
+anak_balita_0067,ANAK_BALITA,L,,,,0.3,0.97,59,19.7,109.4,Gizi Baik,1515.8,55.7,57.8,193.3,none,pantangan pedas,train
+anak_balita_0068,ANAK_BALITA,P,,,,-2.13,-1.09,40,13.5,91.2,Gizi Baik,1039.0,32.7,38.1,141.2,ikn dan kepiting,no allergies,train
+anak_balita_0069,ANAK_BALITA,L,,,,0.39,0.08,30,13.3,92.8,Gizi Baik,1107.3,41.9,41.2,142.2,tidak ada,-,train
+anak_balita_0070,ANAK_BALITA,L,,,,-0.78,2.05,43,18.3,97.2,Gizi Lebih,1431.5,51.6,54.7,183.1,tidak ada,no allergies,test
+anak_balita_0071,ANAK_BALITA,P,,,,-1.04,-0.95,19,10.2,78.6,Gizi Baik,824.4,26.7,34.0,102.9,telor & sea food,"hindari spicy, kopi",test
+anak_balita_0072,ANAK_BALITA,P,,,,-0.92,0.18,57,18.1,104.3,Gizi Baik,1314.6,40.4,53.4,168.2,none,tidak ada,train
+anak_balita_0073,ANAK_BALITA,P,,,,-0.72,0.3,9,8.2,66.4,Gizi Baik,695.9,23.2,26.0,92.2,none,,test
+anak_balita_0074,ANAK_BALITA,P,,,,-1.39,1.18,53,19.0,100.6,Berisiko Gizi Lebih,1295.5,44.3,51.9,162.9,,pantangan kopi,train
+anak_balita_0075,ANAK_BALITA,P,,,,-1.45,-0.2,18,10.7,76.2,Gizi Baik,872.2,30.1,33.5,112.6,-,none,train
+anak_balita_0076,ANAK_BALITA,L,,,,-2.28,-0.55,48,15.5,95.0,Gizi Baik,1297.6,51.9,49.4,161.3,no allergies,tidak ada,train
+anak_balita_0077,ANAK_BALITA,P,,,,-0.3,0.58,50,17.5,102.6,Gizi Baik,1307.4,43.7,44.3,183.5,Alergi: kedele dan fish,,test
+anak_balita_0078,ANAK_BALITA,P,,,,-0.25,-3.47,3,3.4,55.4,Gizi Buruk,300.0,9.3,10.1,42.9,allergic to cumi & crab,,test
+anak_balita_0079,ANAK_BALITA,P,,,,0.33,-0.85,36,13.2,97.1,Gizi Baik,1371.8,49.7,57.0,164.9,allergic to susu; gluten,manis,test
+anak_balita_0080,ANAK_BALITA,L,,,,1.39,-1.45,51,14.6,108.7,Gizi Baik,1395.5,46.0,57.5,173.4,none,pantangan spicy,train
+anak_balita_0081,ANAK_BALITA,P,,,,-1.46,-0.33,7,6.8,59.8,Gizi Baik,574.7,19.9,22.5,73.2,tidak ada,no allergies,train
+anak_balita_0082,ANAK_BALITA,P,,,,1.29,-0.44,21,11.1,88.3,Gizi Baik,907.0,34.7,36.4,110.2,"allergic to crab, eggs","tidak suka pedas, spicy",test
+anak_balita_0083,ANAK_BALITA,L,,,,1.52,1.48,28,14.6,95.0,Berisiko Gizi Lebih,1221.4,44.7,47.6,153.4,,-,train
+anak_balita_0084,ANAK_BALITA,L,,,,-0.85,0.41,11,9.4,70.1,Gizi Baik,791.3,26.1,29.1,106.2,no allergies,-,train
+anak_balita_0085,ANAK_BALITA,P,,,,0.13,-0.42,27,12.2,89.7,Gizi Baik,1009.6,35.7,34.9,138.2,susu,"santan, spicy",train
+anak_balita_0086,ANAK_BALITA,P,,,,0.58,1.88,20,13.2,84.9,Berisiko Gizi Lebih,1099.2,40.5,38.4,147.8,alergi wheat,pantangan manis,train
+anak_balita_0087,ANAK_BALITA,P,,,,0.5,-0.53,34,13.3,96.1,Gizi Baik,1102.0,33.2,45.8,139.3,-,tidak suka kopi,test
+anak_balita_0088,ANAK_BALITA,P,,,,-1.39,-1.11,51,15.1,99.5,Gizi Baik,1245.8,38.3,48.9,163.2,,none,train
+anak_balita_0089,ANAK_BALITA,P,,,,-0.85,1.37,27,14.3,86.4,Berisiko Gizi Lebih,1191.8,36.3,41.8,167.7,-,tidak ada,train
+anak_balita_0090,ANAK_BALITA,L,,,,-1.43,0.28,7,7.1,59.9,Gizi Baik,606.1,19.5,23.3,79.7,Alergi: cumi & kacang tanah,no allergies,train
+anak_balita_0091,ANAK_BALITA,L,,,,-1.87,1.07,57,19.5,101.2,Berisiko Gizi Lebih,1436.0,45.8,60.1,177.9,no allergies,"pantangan goreng-gorengan, spicy",test
+anak_balita_0092,ANAK_BALITA,P,,,,-2.84,-0.61,36,13.5,86.6,Gizi Baik,1252.8,50.0,47.6,156.1,,"mie instan, makanan manis",train
+anak_balita_0093,ANAK_BALITA,L,,,,0.78,0.04,36,14.3,98.6,Gizi Baik,1361.5,53.9,51.2,171.2,allergic to susu sapi,hindari santan,train
+anak_balita_0094,ANAK_BALITA,P,,,,0.74,0.81,2,4.7,56.6,Gizi Baik,402.8,14.3,15.7,51.1,Alergi: kedelai,none,train
+anak_balita_0095,ANAK_BALITA,P,,,,-0.69,0.33,21,11.9,81.7,Gizi Baik,978.2,37.6,39.5,118.0,no allergies,"tidak suka manis, mie instan",train
+anak_balita_0096,ANAK_BALITA,L,,,,0.02,-3.52,21,7.9,84.1,Gizi Buruk,622.0,22.7,26.2,73.8,cumi-cumi & susu,tidak suka daging merah,train
+anak_balita_0097,ANAK_BALITA,P,,,,-0.8,0.14,42,15.5,96.6,Gizi Baik,1242.3,48.7,47.4,155.4,none,no allergies,train
+anak_balita_0098,ANAK_BALITA,P,,,,-0.83,0.75,23,12.8,83.3,Gizi Baik,1058.7,35.1,42.9,133.0,no allergies,tidak ada,train
+anak_balita_0099,ANAK_BALITA,L,,,,-0.41,-0.41,32,13.1,91.7,Gizi Baik,1086.2,41.4,40.4,139.3,"alergi soy, suus",no allergies,train
+anak_balita_0100,ANAK_BALITA,P,,,,-1.0,0.38,43,16.0,96.5,Gizi Baik,1106.0,36.1,38.3,154.2,-,goreng-gorengan,train
+anak_balita_0101,ANAK_BALITA,P,,,,0.91,1.32,52,19.0,107.7,Berisiko Gizi Lebih,1217.4,45.3,47.3,152.6,alergi ebi,tidak ada,train
+anak_balita_0102,ANAK_BALITA,P,,,,0.4,-2.83,29,9.7,92.1,Gizi Kurang,787.5,30.0,27.9,104.0,allergic to kacng,no allergies,test
+anak_balita_0103,ANAK_BALITA,L,,,,-1.99,-0.6,26,11.9,81.9,Gizi Baik,976.7,31.3,36.3,131.2,alergi udang,tidak suka kopi,train
+anak_balita_0104,ANAK_BALITA,P,,,,-1.3,-0.49,3,4.7,52.0,Gizi Baik,402.3,14.6,15.9,50.1,,tidak suka mie instan,train
+anak_balita_0105,ANAK_BALITA,P,,,,-2.65,1.04,49,18.0,94.3,Berisiko Gizi Lebih,1366.1,54.4,57.4,157.9,suus & cumi-cumi,no allergies,train
+anak_balita_0106,ANAK_BALITA,L,,,,0.88,0.51,55,18.3,109.2,Gizi Baik,1298.7,47.0,45.9,174.5,,none,train
+anak_balita_0107,ANAK_BALITA,L,,,,-1.01,0.32,33,14.2,90.4,Gizi Baik,1181.5,44.6,41.9,156.4,,none,train
+anak_balita_0108,ANAK_BALITA,P,,,,-0.78,-0.89,11,8.3,70.3,Gizi Baik,704.3,22.6,24.2,99.0,none,"tidak suka mie instan, pedas",train
+anak_balita_0109,ANAK_BALITA,P,,,,0.72,-1.27,44,13.8,102.7,Gizi Baik,1282.9,49.9,43.5,172.9,tidak ada,no allergies,test
+anak_balita_0110,ANAK_BALITA,P,,,,-1.63,3.37,2,5.7,48.8,Obesitas,484.8,17.8,19.5,59.6,-,"pantangan kopi, goreng-gorengan",test
+anak_balita_0111,ANAK_BALITA,P,,,,-0.73,-1.53,1,3.3,49.7,Gizi Baik,300.0,9.3,12.4,37.9,alergi eggs; sea food,none,test
+anak_balita_0112,ANAK_BALITA,P,,,,-0.66,-1.2,45,14.1,98.7,Gizi Baik,1240.8,43.2,52.3,149.3,Alergi: telor,"tidak suka goreng-gorengan, santan",train
+anak_balita_0113,ANAK_BALITA,L,,,,-2.55,0.98,47,17.6,93.5,Gizi Baik,1179.4,36.0,49.8,146.8,"allergic to soy, egg",tidak ada,train
+anak_balita_0114,ANAK_BALITA,L,,,,-2.62,-1.92,39,12.2,89.0,Gizi Baik,1331.6,47.7,48.3,176.6,,makanan manis,train
+anak_balita_0115,ANAK_BALITA,L,,,,-0.7,-1.82,18,9.1,78.7,Gizi Baik,730.8,24.4,24.8,102.4,allergic to suus; wheat,"manis, jeroan",train
+anak_balita_0116,ANAK_BALITA,P,,,,-0.17,0.25,37,14.8,96.0,Gizi Baik,1240.7,46.6,46.3,159.4,,-,train
+anak_balita_0117,ANAK_BALITA,L,,,,0.17,-2.06,33,11.2,94.3,Gizi Kurang,919.0,27.9,36.2,120.5,none,hindari manis,train
+anak_balita_0118,ANAK_BALITA,P,,,,-0.47,0.73,11,9.7,71.3,Gizi Baik,812.8,26.6,31.0,106.9,-,tidak ada,train
+anak_balita_0119,ANAK_BALITA,L,,,,-1.47,-1.09,28,11.6,85.2,Gizi Baik,955.1,35.4,34.9,124.8,nuts,"spicy, makanan manis",test
+anak_balita_0120,ANAK_BALITA,P,,,,-0.96,-1.05,37,13.1,93.4,Gizi Baik,1324.3,46.0,45.3,183.3,none,"manis, mie instan",train
+anak_balita_0121,ANAK_BALITA,P,,,,-0.23,2.68,1,4.7,51.3,Gizi Lebih,409.3,15.5,15.4,52.1,,tidak suka manis,test
+anak_balita_0122,ANAK_BALITA,P,,,,-1.5,1.45,57,20.1,102.4,Berisiko Gizi Lebih,1166.9,42.0,42.7,153.7,-,"hindari jeroan, gorengan",train
+anak_balita_0123,ANAK_BALITA,L,,,,-0.33,1.84,30,15.4,90.4,Berisiko Gizi Lebih,1294.2,47.8,54.4,153.3,none,"tidak suka kopi, makanan manis",train
+anak_balita_0124,ANAK_BALITA,P,,,,-0.68,-0.81,3,4.5,54.0,Gizi Baik,390.5,14.5,13.7,52.3,crab,tidak ada,train
+anak_balita_0125,ANAK_BALITA,L,,,,0.4,0.36,15,10.6,79.3,Gizi Baik,861.4,28.0,32.8,113.6,no allergies,,train
+anak_balita_0126,ANAK_BALITA,P,,,,0.14,0.31,3,5.0,56.7,Gizi Baik,430.9,15.1,17.9,52.4,none,none,train
+anak_balita_0127,ANAK_BALITA,L,,,,-0.48,-0.6,3,4.6,54.7,Gizi Baik,398.2,13.3,14.2,54.3,-,tidak ada,train
+anak_balita_0128,ANAK_BALITA,P,,,,-0.74,1.11,28,14.2,87.5,Berisiko Gizi Lebih,1182.6,42.4,39.6,164.2,tidak ada,none,train
+anak_balita_0129,ANAK_BALITA,L,,,,0.07,1.74,31,15.5,92.5,Berisiko Gizi Lebih,1301.5,50.4,51.9,158.2,none,"tidak suka makanan manis, spicy",train
+anak_balita_0130,ANAK_BALITA,L,,,,-1.26,2.06,1,4.5,47.9,Gizi Lebih,391.9,13.8,14.0,52.7,none,tidak ada,train
+anak_balita_0131,ANAK_BALITA,L,,,,-0.12,0.16,58,18.2,107.5,Gizi Baik,1266.6,42.5,42.8,177.9,tidak ada,"tidak suka spicy, goreng-gorengan",train
+anak_balita_0132,ANAK_BALITA,P,,,,-2.1,1.05,25,13.5,80.8,Berisiko Gizi Lebih,1125.1,39.1,45.6,139.5,,tidak ada,test
+anak_balita_0133,ANAK_BALITA,P,,,,0.88,0.23,4,5.5,61.2,Gizi Baik,472.1,15.0,19.7,58.8,no allergies,kopi,test
+anak_balita_0134,ANAK_BALITA,P,,,,-1.43,-1.77,3,4.1,51.5,Gizi Baik,356.0,11.0,14.5,45.4,no allergies,none,test
+anak_balita_0135,ANAK_BALITA,P,,,,1.79,0.91,10,9.3,76.7,Gizi Baik,778.7,24.0,26.3,111.4,soy,"tidak suka mie instan, spicy",train
+anak_balita_0136,ANAK_BALITA,L,,,,-0.3,0.5,2,4.5,53.2,Gizi Baik,392.6,14.4,15.9,48.0,allergic to peanut & wheat,,test
+anak_balita_0137,ANAK_BALITA,P,,,,-1.05,1.14,0,3.6,46.5,Berisiko Gizi Lebih,318.3,9.9,11.0,44.8,alergi ikn dan cumi,"pantangan manis, pedas",test
+anak_balita_0138,ANAK_BALITA,L,,,,2.02,-0.49,37,13.8,103.2,Gizi Baik,1387.9,52.8,57.8,164.2,allergic to peanut,-,train
+anak_balita_0139,ANAK_BALITA,L,,,,-1.43,-1.71,35,11.9,90.5,Gizi Baik,983.5,33.0,38.4,126.5,alergi gandum & peanut,"tidak suka kopi, jeroan",train
+anak_balita_0140,ANAK_BALITA,L,,,,0.02,-0.78,11,8.4,73.0,Gizi Baik,711.8,27.2,28.8,85.9,tidak ada,none,train
+anak_balita_0141,ANAK_BALITA,L,,,,-0.89,1.43,7,7.9,61.6,Berisiko Gizi Lebih,665.3,22.1,26.9,83.8,allergic to telurr,none,train
+anak_balita_0142,ANAK_BALITA,L,,,,-1.17,1.33,9,9.0,64.9,Berisiko Gizi Lebih,756.6,25.0,30.7,95.0,tidak ada,tidak ada,train
+anak_balita_0143,ANAK_BALITA,P,,,,0.1,-2.5,40,11.6,98.5,Gizi Kurang,1223.1,37.7,51.0,153.4,,none,train
+anak_balita_0144,ANAK_BALITA,L,,,,-0.64,1.56,20,12.9,80.9,Berisiko Gizi Lebih,1070.1,37.2,42.7,134.2,,pantangan kopi,train
+anak_balita_0145,ANAK_BALITA,P,,,,-0.98,1.77,20,13.1,79.8,Berisiko Gizi Lebih,1089.5,34.6,39.0,150.0,telurr,none,train
+anak_balita_0146,ANAK_BALITA,P,,,,-1.03,0.53,0,3.5,46.6,Gizi Baik,303.5,11.6,11.7,37.9,tidak ada,none,test
+anak_balita_0147,ANAK_BALITA,P,,,,-2.32,0.31,26,12.9,80.8,Gizi Baik,1067.8,38.3,36.5,146.6,tidak ada,"tidak suka goreng-gorengan, spicy",train
+anak_balita_0148,ANAK_BALITA,L,,,,-0.7,0.96,37,15.7,94.2,Gizi Baik,1353.4,51.9,46.2,182.4,alergi ebi,"pantangan mie instan, makanan manis",train
+anak_balita_0149,ANAK_BALITA,L,,,,-1.1,0.28,28,13.2,86.4,Gizi Baik,1096.8,35.7,41.0,146.2,,"hindari santan, gorengan",test
+anak_balita_0150,ANAK_BALITA,L,,,,-0.48,0.73,9,8.6,67.2,Gizi Baik,721.4,25.7,26.3,95.5,"Alergi: udnag, kepiting","tidak suka gorengan, santan",train
+anak_balita_0151,ANAK_BALITA,P,,,,0.4,-0.32,27,12.4,90.6,Gizi Baik,1020.3,39.4,35.8,135.1,alergi ikn,kopi,train
+anak_balita_0152,ANAK_BALITA,P,,,,-1.47,-0.76,56,16.4,102.0,Gizi Baik,1128.5,44.3,42.9,141.3,Alergi: cumi dan seafood,"daging merah, mie instan",train
+anak_balita_0153,ANAK_BALITA,L,,,,-1.81,1.1,0,3.6,44.0,Berisiko Gizi Lebih,317.5,11.6,12.0,40.8,allergic to kedelai & gluten,none,train
+anak_balita_0154,ANAK_BALITA,L,,,,-0.15,3.1,54,22.1,105.3,Obesitas,1371.2,43.9,47.2,192.6,none,tidak ada,train
+anak_balita_0155,ANAK_BALITA,L,,,,-1.25,-0.09,42,15.2,95.1,Gizi Baik,1156.1,40.4,44.5,148.6,,"hindari kopi, mie instan",train
+anak_balita_0156,ANAK_BALITA,L,,,,-1.12,-0.51,1,3.7,48.4,Gizi Baik,319.4,9.6,13.0,41.0,tidak ada,,test
+anak_balita_0157,ANAK_BALITA,P,,,,-1.91,1.9,59,21.2,102.1,Berisiko Gizi Lebih,1473.5,55.0,52.7,194.8,allergic to kepiting dan wheat,tidak ada,train
+anak_balita_0158,ANAK_BALITA,P,,,,1.25,-1.12,34,12.5,98.6,Gizi Baik,1036.5,33.1,34.7,148.0,no allergies,kopi,train
+anak_balita_0159,ANAK_BALITA,L,,,,-1.77,1.61,14,11.5,71.2,Berisiko Gizi Lebih,942.4,28.8,38.6,119.8,tidak ada,pantangan jeroan,test
+anak_balita_0160,ANAK_BALITA,P,,,,-2.57,-1.75,34,11.7,86.0,Gizi Baik,965.6,38.3,35.4,123.4,,pantangan makanan manis,train
+anak_balita_0161,ANAK_BALITA,L,,,,-2.57,-0.48,26,12.0,80.0,Gizi Baik,988.5,30.5,37.5,132.3,,tidak ada,train
+anak_balita_0162,ANAK_BALITA,L,,,,-1.33,-0.5,11,8.7,68.5,Gizi Baik,730.5,23.7,27.7,96.6,none,,train
+anak_balita_0163,ANAK_BALITA,P,,,,0.63,-2.07,19,9.0,84.1,Gizi Kurang,724.9,22.8,27.9,95.7,gluten,"hindari daging merah, santan",train
+anak_balita_0164,ANAK_BALITA,L,,,,-0.21,2.84,4,6.8,57.6,Gizi Lebih,576.1,17.6,23.7,73.0,allergic to tahu tempe dan wheat,no allergies,train
+anak_balita_0165,ANAK_BALITA,L,,,,-1.47,2.69,40,18.6,93.3,Gizi Lebih,1241.4,39.4,51.0,156.2,Alergi: cumi,tidak ada,test
+anak_balita_0166,ANAK_BALITA,L,,,,-0.31,0.51,40,15.6,97.2,Gizi Baik,1534.1,56.3,52.5,209.2,none,"tidak suka kopi, spicy",test
+anak_balita_0167,ANAK_BALITA,L,,,,2.22,1.03,60,20.0,116.3,Berisiko Gizi Lebih,1589.5,55.6,64.3,197.1,tahu tempe,none,train
+anak_balita_0168,ANAK_BALITA,P,,,,-1.2,-1.86,29,10.9,86.8,Gizi Baik,888.7,29.4,36.7,110.2,none,no allergies,train
+anak_balita_0169,ANAK_BALITA,P,,,,-0.22,0.85,36,15.4,95.3,Gizi Baik,1242.4,46.7,44.8,163.2,allergic to kacang,-,train
+anak_balita_0170,ANAK_BALITA,L,,,,-0.38,1.41,53,19.3,104.0,Berisiko Gizi Lebih,1667.7,54.4,66.0,214.1,-,,train
+anak_balita_0171,ANAK_BALITA,L,,,,0.29,-0.26,27,12.4,90.2,Gizi Baik,1025.7,31.5,39.9,135.1,tidak ada,"jeroan, gorengan",train
+anak_balita_0172,ANAK_BALITA,L,,,,0.89,0.76,36,15.3,98.9,Gizi Baik,1223.9,44.0,42.7,165.9,none,"hindari daging merah, manis",train
+anak_balita_0173,ANAK_BALITA,L,,,,-0.72,-1.37,29,11.5,88.4,Gizi Baik,940.2,36.7,34.6,120.5,telur,"tidak suka manis, daging merah",train
+anak_balita_0174,ANAK_BALITA,P,,,,-0.76,1.84,35,16.5,92.7,Berisiko Gizi Lebih,1385.1,44.5,48.5,192.6,no allergies,"manis, spicy",train
+anak_balita_0175,ANAK_BALITA,L,,,,-0.39,-1.19,59,16.2,107.2,Gizi Baik,1386.2,52.6,53.3,174.1,no allergies,no allergies,test
+anak_balita_0176,ANAK_BALITA,L,,,,-0.31,1.16,51,18.6,103.1,Berisiko Gizi Lebih,1271.9,38.2,48.7,170.1,tidak ada,-,train
+anak_balita_0177,ANAK_BALITA,L,,,,-0.75,-0.33,14,9.7,74.5,Gizi Baik,786.8,31.0,30.8,96.4,crab,no allergies,test
+anak_balita_0178,ANAK_BALITA,P,,,,-1.99,1.57,32,15.5,86.4,Berisiko Gizi Lebih,1301.5,49.0,53.4,156.1,none,no allergies,train
+anak_balita_0179,ANAK_BALITA,P,,,,0.05,-0.74,48,15.2,102.7,Gizi Baik,1432.0,51.0,47.8,199.4,-,none,train
+anak_balita_0180,ANAK_BALITA,P,,,,0.63,0.05,42,15.4,101.3,Gizi Baik,1290.5,47.3,43.1,178.5,,none,train
+anak_balita_0181,ANAK_BALITA,L,,,,-1.81,1.17,53,18.9,99.2,Berisiko Gizi Lebih,1419.1,44.2,55.0,186.9,no allergies,tidak ada,train
+anak_balita_0182,ANAK_BALITA,L,,,,0.03,-0.96,25,11.3,87.9,Gizi Baik,926.4,30.1,32.3,128.9,,none,test
+anak_balita_0183,ANAK_BALITA,L,,,,-0.57,0.68,39,15.7,95.7,Gizi Baik,1191.1,45.5,46.8,146.9,-,-,train
+anak_balita_0184,ANAK_BALITA,P,,,,-0.84,2.73,42,19.1,96.5,Gizi Lebih,1423.0,48.7,58.2,176.0,allergic to peanut,"tidak suka daging merah, manis",train
+anak_balita_0185,ANAK_BALITA,P,,,,-1.15,-1.44,0,2.9,46.2,Gizi Baik,300.0,10.3,12.6,36.2,"allergic to seafood, susu",hindari mie instan,train
+anak_balita_0186,ANAK_BALITA,L,,,,-0.12,0.34,55,18.0,105.9,Gizi Baik,1635.2,55.9,58.0,222.4,no allergies,"hindari santan, pedas",train
+anak_balita_0187,ANAK_BALITA,P,,,,-1.14,1.14,51,18.5,100.4,Berisiko Gizi Lebih,1146.9,37.0,41.6,156.0,alergi susu,manis,train
+anak_balita_0188,ANAK_BALITA,P,,,,-3.0,0.04,23,12.0,76.1,Gizi Baik,990.3,35.5,36.4,130.1,-,none,train
+anak_balita_0189,ANAK_BALITA,L,,,,-1.59,-1.27,52,15.0,99.4,Gizi Baik,1477.1,53.6,58.3,184.4,tidak ada,"makanan manis, spicy",train
+anak_balita_0190,ANAK_BALITA,L,,,,-0.61,0.57,31,14.1,90.2,Gizi Baik,1176.5,45.1,47.4,142.4,Alergi: kepiting,no allergies,train
+anak_balita_0191,ANAK_BALITA,L,,,,0.01,-2.96,29,9.6,90.8,Gizi Kurang,773.2,30.2,27.5,101.2,allergic to cumi,"hindari daging merah, manis",train
+anak_balita_0192,ANAK_BALITA,P,,,,-1.44,-1.89,50,13.8,98.8,Gizi Baik,1364.0,48.5,50.9,178.0,cumi,mie instan,train
+anak_balita_0193,ANAK_BALITA,P,,,,-2.28,-0.95,29,12.0,83.2,Gizi Baik,984.4,29.8,36.4,134.4,"alergi kacang, crab","hindari jeroan, kopi",test
+anak_balita_0194,ANAK_BALITA,P,,,,-1.15,-0.56,14,9.5,73.2,Gizi Baik,768.2,23.8,27.3,106.8,tidak ada,"tidak suka pedas, spicy",train
+anak_balita_0195,ANAK_BALITA,P,,,,1.56,-0.05,54,17.2,110.9,Gizi Baik,1224.8,44.5,49.4,150.5,Alergi: kacang tanah,tidak suka makanan manis,train
+anak_balita_0196,ANAK_BALITA,L,,,,-1.38,-2.29,6,5.1,58.0,Gizi Kurang,439.7,13.9,18.4,54.6,tidak ada,tidak ada,train
+anak_balita_0197,ANAK_BALITA,P,,,,1.48,0.39,9,8.3,73.6,Gizi Baik,700.9,25.4,23.4,97.2,tidak ada,hindari manis,train
+anak_balita_0198,ANAK_BALITA,P,,,,-1.46,1.0,7,7.6,59.8,Berisiko Gizi Lebih,643.5,22.8,24.1,83.8,laktosa; soy,none,train
+anak_balita_0199,ANAK_BALITA,P,,,,-1.79,0.54,0,3.5,44.1,Gizi Baik,303.7,9.9,11.7,39.7,Alergi: crab,-,train
+anak_balita_0200,ANAK_BALITA,L,,,,-1.3,1.11,55,19.2,102.0,Berisiko Gizi Lebih,1445.0,54.3,50.5,193.3,kedelai & fish,"jeroan, santan",test
+anak_balita_0201,ANAK_BALITA,P,,,,-0.55,0.6,41,16.0,96.9,Gizi Baik,1391.3,44.3,52.2,185.9,tidak ada,none,train
+anak_balita_0202,ANAK_BALITA,L,,,,-1.1,-1.57,16,9.0,75.4,Gizi Baik,719.6,26.5,28.5,89.3,Alergi: seafood & kepiting,"tidak suka goreng-gorengan, manis",train
+anak_balita_0203,ANAK_BALITA,L,,,,1.68,2.68,46,19.8,107.0,Gizi Lebih,1560.8,47.1,56.3,216.4,-,no allergies,train
+anak_balita_0204,ANAK_BALITA,P,,,,2.51,-0.05,46,15.9,109.7,Gizi Baik,1374.5,48.5,46.7,189.9,no allergies,"tidak suka goreng-gorengan, mie instan",train
+anak_balita_0205,ANAK_BALITA,L,,,,-1.94,-1.12,57,16.0,101.0,Gizi Baik,1502.2,57.2,51.8,201.7,crab; gandum,,test
+anak_balita_0206,ANAK_BALITA,L,,,,-0.22,-2.41,37,11.3,95.8,Gizi Kurang,1388.9,47.0,48.8,190.4,no allergies,none,train
+anak_balita_0207,ANAK_BALITA,P,,,,0.03,1.79,21,13.4,84.1,Berisiko Gizi Lebih,1113.2,38.6,41.4,146.4,none,none,train
+anak_balita_0208,ANAK_BALITA,P,,,,-0.39,0.23,16,10.7,77.7,Gizi Baik,870.4,30.7,31.3,116.5,no allergies,"mie instan, kopi",train
+anak_balita_0209,ANAK_BALITA,L,,,,0.29,-2.0,48,13.4,103.4,Gizi Baik,1487.7,52.1,52.9,200.8,none,manis,test
+anak_balita_0210,ANAK_BALITA,P,,,,-0.22,0.95,52,18.4,103.9,Gizi Baik,1477.0,48.9,59.2,187.1,Alergi: milk; gluten,hindari gorengan,test
+anak_balita_0211,ANAK_BALITA,L,,,,-1.42,1.84,36,16.7,91.3,Berisiko Gizi Lebih,1192.4,37.5,41.6,167.0,Alergi: makanan laut,hindari daging merah,train
+anak_balita_0212,ANAK_BALITA,P,,,,1.71,0.92,54,18.7,111.4,Gizi Baik,1244.6,45.0,51.5,150.3,no allergies,"tidak suka manis, santan",test
+anak_balita_0213,ANAK_BALITA,P,,,,0.04,-0.35,1,3.7,52.2,Gizi Baik,323.8,12.6,13.4,38.2,,none,test
+anak_balita_0214,ANAK_BALITA,L,,,,-0.94,-2.48,52,13.2,101.6,Gizi Kurang,1109.3,39.2,46.1,134.4,none,-,train
+anak_balita_0215,ANAK_BALITA,P,,,,0.15,-0.13,37,14.3,97.0,Gizi Baik,1109.6,34.1,39.8,153.8,allergic to soy,tidak ada,train
+anak_balita_0216,ANAK_BALITA,L,,,,1.89,-2.15,21,9.3,90.2,Gizi Kurang,749.0,22.5,31.6,93.7,alergi makanan laut; telurr,tidak ada,train
+anak_balita_0217,ANAK_BALITA,L,,,,-1.45,0.53,16,11.0,74.2,Gizi Baik,895.6,32.1,36.4,110.0,Alergi: kacang,pantangan pedas,train
+anak_balita_0218,ANAK_BALITA,L,,,,-1.15,-0.76,22,11.0,81.2,Gizi Baik,895.1,33.9,31.7,118.6,"alergi kepiting, cumi","pantangan manis, gorengan",train
+anak_balita_0219,ANAK_BALITA,L,,,,0.94,-3.94,8,4.8,69.8,Gizi Buruk,417.0,14.9,17.4,50.2,tidak ada,,test
+anak_balita_0220,ANAK_BALITA,L,,,,-1.75,4.0,4,7.3,52.5,Obesitas,622.2,19.3,23.7,82.9,Alergi: egg,-,train
+anak_balita_0221,ANAK_BALITA,P,,,,-0.15,-1.01,2,4.0,53.7,Gizi Baik,344.4,11.6,13.4,44.4,Alergi: egg,"santan, makanan manis",train
+anak_balita_0222,ANAK_BALITA,P,,,,0.17,1.03,58,19.6,108.5,Berisiko Gizi Lebih,1215.8,44.7,40.7,167.6,,,train
+anak_balita_0223,ANAK_BALITA,P,,,,2.22,0.55,51,17.6,111.5,Gizi Baik,1400.0,50.4,58.0,169.2,Alergi: telur,,train
+anak_balita_0224,ANAK_BALITA,P,,,,-0.73,-0.7,12,9.0,72.6,Gizi Baik,720.3,23.2,27.7,94.6,-,,test
+anak_balita_0225,ANAK_BALITA,L,,,,-2.02,1.08,37,15.9,89.9,Berisiko Gizi Lebih,1474.1,57.4,55.8,185.5,alergi cumi,,train
+anak_balita_0226,ANAK_BALITA,L,,,,-1.55,-0.97,22,10.7,79.9,Gizi Baik,876.0,30.6,32.2,116.0,-,,train
+anak_balita_0227,ANAK_BALITA,P,,,,-0.13,0.94,33,14.9,93.3,Gizi Baik,1250.0,39.2,46.2,169.3,-,"mie instan, kopi",train
+anak_balita_0228,ANAK_BALITA,P,,,,-1.23,1.16,22,13.0,81.0,Berisiko Gizi Lebih,1076.5,42.1,41.0,134.8,no allergies,,test
+anak_balita_0229,ANAK_BALITA,P,,,,1.2,0.43,26,13.0,92.5,Gizi Baik,1080.3,39.4,42.0,136.2,no allergies,hindari makanan manis,train
+anak_balita_0230,ANAK_BALITA,P,,,,0.47,2.05,59,21.5,110.0,Gizi Lebih,1407.8,43.9,53.0,188.7,-,,train
+anak_balita_0231,ANAK_BALITA,L,,,,1.53,0.57,17,11.2,85.0,Gizi Baik,919.2,28.9,31.8,129.3,no allergies,"tidak suka mie instan, goreng-gorengan",train
+anak_balita_0232,ANAK_BALITA,P,,,,-1.71,0.02,24,12.2,81.4,Gizi Baik,1007.3,34.4,39.4,128.9,-,tidak suka gorengan,train
+anak_balita_0233,ANAK_BALITA,L,,,,0.67,-4.0,43,9.9,102.0,Gizi Buruk,1226.3,47.9,42.9,162.1,,"pedas, daging merah",train
+anak_balita_0234,ANAK_BALITA,P,,,,0.21,1.28,37,16.1,97.2,Berisiko Gizi Lebih,1407.8,45.1,47.6,199.9,Alergi: wheat,-,train
+anak_balita_0235,ANAK_BALITA,P,,,,-1.35,-2.17,23,9.6,81.5,Gizi Kurang,778.1,28.2,28.0,103.3,tidak ada,hindari gorengan,test
+anak_balita_0236,ANAK_BALITA,P,,,,-1.58,0.39,45,16.4,95.7,Gizi Baik,1371.7,47.5,47.3,189.0,,-,train
+anak_balita_0237,ANAK_BALITA,L,,,,-0.18,0.94,5,6.4,59.8,Gizi Baik,546.9,17.3,20.8,72.6,no allergies,"tidak suka goreng-gorengan, kopi",train
+anak_balita_0238,ANAK_BALITA,P,,,,0.53,0.48,17,11.1,81.8,Gizi Baik,912.0,33.5,37.2,110.7,"terigu, fish",,train
+anak_balita_0239,ANAK_BALITA,P,,,,-0.9,0.14,41,15.3,95.8,Gizi Baik,1233.8,40.6,48.8,158.0,Alergi: suus & ikan,,train
+anak_balita_0240,ANAK_BALITA,P,,,,-2.84,0.75,56,18.8,97.4,Gizi Baik,1252.7,38.2,45.1,173.4,udnag,none,train
+anak_balita_0241,ANAK_BALITA,P,,,,0.24,-0.73,57,16.6,108.2,Gizi Baik,1185.5,42.4,42.5,158.3,tidak ada,,train
+anak_balita_0242,ANAK_BALITA,L,,,,-0.99,1.19,4,6.0,55.1,Berisiko Gizi Lebih,510.0,18.7,19.2,65.7,no allergies,tidak ada,train
+anak_balita_0243,ANAK_BALITA,P,,,,-1.17,2.87,46,20.1,97.6,Gizi Lebih,1293.8,42.1,47.0,175.6,none,"tidak suka manis, jeroan",train
+anak_balita_0244,ANAK_BALITA,P,,,,-1.85,1.64,41,17.4,92.6,Berisiko Gizi Lebih,1358.5,46.1,52.9,174.5,-,no allergies,train
+anak_balita_0245,ANAK_BALITA,P,,,,-0.29,-0.59,30,12.6,90.5,Gizi Baik,1037.1,40.4,41.5,125.5,none,pantangan manis,test
+anak_balita_0246,ANAK_BALITA,L,,,,-1.7,1.45,5,6.7,54.8,Berisiko Gizi Lebih,569.4,20.3,19.7,77.7,"allergic to peanut, crab",pantangan manis,train
+anak_balita_0247,ANAK_BALITA,L,,,,-1.24,0.95,14,10.9,72.9,Gizi Baik,889.7,32.5,35.4,110.3,none,hindari gorengan,train
+anak_balita_0248,ANAK_BALITA,L,,,,-1.35,-0.14,9,7.9,64.3,Gizi Baik,669.9,20.6,25.6,89.1,none,tidak ada,train
+anak_balita_0249,ANAK_BALITA,P,,,,-0.75,1.07,58,19.7,105.4,Berisiko Gizi Lebih,1341.8,41.3,46.3,189.9,,none,test
+anak_balita_0250,ANAK_BALITA,L,,,,-2.36,0.39,28,13.4,82.2,Gizi Baik,1108.6,35.0,45.1,140.6,no allergies,jeroan,test
+anak_balita_0251,ANAK_BALITA,P,,,,-0.29,0.64,24,12.9,86.0,Gizi Baik,1068.1,33.5,39.4,145.0,none,no allergies,train
+anak_balita_0252,ANAK_BALITA,P,,,,-0.24,1.48,8,8.5,65.9,Berisiko Gizi Lebih,717.0,26.6,26.0,94.3,none,tidak ada,train
+anak_balita_0253,ANAK_BALITA,L,,,,-0.01,-0.95,12,8.8,75.0,Gizi Baik,701.2,22.1,26.8,93.0,-,tidak suka gorengan,train
+anak_balita_0254,ANAK_BALITA,P,,,,-1.18,-1.13,35,12.7,91.4,Gizi Baik,1049.8,40.5,42.2,127.1,tidak ada,tidak ada,train
+anak_balita_0255,ANAK_BALITA,L,,,,-1.98,0.1,25,12.5,81.2,Gizi Baik,1031.2,37.7,43.4,122.5,tidak ada,,test
+anak_balita_0256,ANAK_BALITA,P,,,,-0.19,-0.38,8,7.2,66.1,Gizi Baik,613.8,20.7,21.0,85.5,none,-,train
+anak_balita_0257,ANAK_BALITA,P,,,,-1.18,-0.37,14,9.7,73.1,Gizi Baik,783.2,24.6,31.8,99.6,tidak ada,,test
+anak_balita_0258,ANAK_BALITA,P,,,,2.0,0.8,5,6.3,67.0,Gizi Baik,540.6,20.8,20.7,67.7,ebi,tidak ada,train
+anak_balita_0259,ANAK_BALITA,P,,,,0.14,0.02,33,13.8,94.2,Gizi Baik,1148.4,34.6,40.6,161.2,no allergies,-,train
+anak_balita_0260,ANAK_BALITA,P,,,,0.29,-0.73,34,13.0,95.5,Gizi Baik,1079.9,39.1,41.1,138.5,cumi-cumi,daging merah,test
+anak_balita_0261,ANAK_BALITA,P,,,,-1.47,-1.26,23,10.6,81.1,Gizi Baik,865.5,30.9,31.5,114.7,-,"hindari makanan manis, jeroan",train
+anak_balita_0262,ANAK_BALITA,L,,,,-1.51,0.02,6,6.5,57.5,Gizi Baik,549.6,21.5,21.2,68.3,no allergies,"tidak suka mie instan, jeroan",train
+anak_balita_0263,ANAK_BALITA,P,,,,-4.0,-2.78,5,4.4,47.2,Gizi Kurang,384.3,13.6,15.2,48.4,no allergies,"hindari daging merah, mie instan",train
+anak_balita_0264,ANAK_BALITA,P,,,,-1.97,1.23,16,11.6,72.5,Berisiko Gizi Lebih,954.8,33.3,39.3,117.1,none,,train
+anak_balita_0265,ANAK_BALITA,L,,,,0.26,0.16,29,13.3,91.6,Gizi Baik,1100.8,34.9,40.5,149.3,no allergies,"hindari spicy, daging merah",train
+anak_balita_0266,ANAK_BALITA,P,,,,-2.55,2.09,13,11.7,67.6,Gizi Lebih,958.0,33.9,39.6,116.6,seafood; cumi-cumi,"hindari jeroan, santan",train
+anak_balita_0267,ANAK_BALITA,P,,,,-0.07,-1.57,33,11.8,93.5,Gizi Baik,972.9,29.2,39.0,126.3,Alergi: crab,none,train
+anak_balita_0268,ANAK_BALITA,P,,,,-0.2,-0.49,42,14.6,98.6,Gizi Baik,1114.6,38.9,46.2,135.8,,"hindari santan, spicy",train
+anak_balita_0269,ANAK_BALITA,L,,,,-0.93,0.11,54,17.5,102.7,Gizi Baik,1585.9,54.9,65.0,195.3,alergi udang dan makanan laut,kopi,train
+anak_balita_0270,ANAK_BALITA,P,,,,0.25,1.42,19,12.5,82.8,Berisiko Gizi Lebih,1035.8,36.6,36.4,140.6,allergic to telur,none,train
+anak_balita_0271,ANAK_BALITA,L,,,,1.89,-0.37,16,10.1,85.2,Gizi Baik,820.6,27.2,32.5,104.8,Alergi: suus,hindari mie instan,train
+anak_balita_0272,ANAK_BALITA,L,,,,-1.76,-1.3,49,14.5,97.2,Gizi Baik,1286.5,50.5,52.9,152.0,tidak ada,-,test
+anak_balita_0273,ANAK_BALITA,P,,,,-1.81,0.12,13,9.9,70.0,Gizi Baik,803.1,29.1,30.5,102.9,tidak ada,"hindari gorengan, pedas",train
+anak_balita_0274,ANAK_BALITA,L,,,,-3.12,0.17,46,16.2,91.1,Gizi Baik,1290.2,39.5,52.9,164.1,alergi fish dan susu,-,train
+anak_balita_0275,ANAK_BALITA,L,,,,-0.36,-0.57,57,16.9,106.2,Gizi Baik,1224.2,46.4,46.1,155.8,tidak ada,manis,train
+anak_balita_0276,ANAK_BALITA,P,,,,0.59,0.27,17,10.9,81.9,Gizi Baik,894.0,31.2,29.9,125.0,Alergi: ikan,gorengan,train
+anak_balita_0277,ANAK_BALITA,P,,,,-1.21,2.1,20,13.5,79.0,Gizi Lebih,1119.6,43.4,37.7,151.6,no allergies,daging merah,train
+anak_balita_0278,ANAK_BALITA,L,,,,1.22,-0.26,18,10.6,85.0,Gizi Baik,867.6,32.3,34.3,107.5,Alergi: milk & eggs,tidak ada,train
+anak_balita_0279,ANAK_BALITA,P,,,,-0.03,-0.77,38,13.6,97.0,Gizi Baik,1099.7,40.3,40.1,144.5,wheat & seafood,no allergies,train
+anak_balita_0280,ANAK_BALITA,P,,,,-0.54,1.97,13,11.6,74.2,Berisiko Gizi Lebih,948.7,36.8,36.4,118.6,laktosa; ikn,tidak ada,train
+anak_balita_0281,ANAK_BALITA,P,,,,-0.87,-1.56,45,13.6,98.0,Gizi Baik,1227.7,41.2,45.5,163.4,tidak ada,,train
+anak_balita_0282,ANAK_BALITA,P,,,,-0.99,-0.91,53,15.7,101.9,Gizi Baik,1272.8,40.5,42.5,182.2,,none,test
+anak_balita_0283,ANAK_BALITA,L,,,,0.59,0.7,60,19.5,111.0,Gizi Baik,1320.5,41.0,52.3,171.5,egg,pantangan pedas,train
+anak_balita_0284,ANAK_BALITA,L,,,,-1.6,-0.63,30,12.5,86.2,Gizi Baik,1032.8,35.6,35.1,143.7,none,"daging merah, jeroan",train
+anak_balita_0285,ANAK_BALITA,L,,,,0.32,0.76,9,8.6,69.8,Gizi Baik,722.9,23.6,30.0,89.5,crab,tidak suka manis,test
+anak_balita_0286,ANAK_BALITA,P,,,,-4.0,-0.78,34,13.0,81.3,Gizi Baik,1074.9,35.2,39.8,143.9,tidak ada,tidak ada,train
+anak_balita_0287,ANAK_BALITA,P,,,,-1.53,-0.34,27,12.3,84.2,Gizi Baik,1017.9,37.6,35.0,138.1,no allergies,pantangan gorengan,train
+anak_balita_0288,ANAK_BALITA,P,,,,-0.73,-1.95,36,11.8,93.6,Gizi Baik,1183.9,46.9,43.3,151.7,,,train
+anak_balita_0289,ANAK_BALITA,L,,,,0.17,-0.3,35,13.7,95.8,Gizi Baik,1142.7,38.6,46.7,141.9,kepiting & ikan,none,train
+anak_balita_0290,ANAK_BALITA,P,,,,-0.79,0.18,57,18.1,104.8,Gizi Baik,1168.6,46.2,43.3,148.5,alergi udnag dan kedelai,none,test
+anak_balita_0291,ANAK_BALITA,P,,,,0.51,1.29,57,19.9,109.1,Berisiko Gizi Lebih,1384.7,43.9,57.6,172.7,"alergi kacang tanah, makanan laut",-,test
+anak_balita_0292,ANAK_BALITA,P,,,,-0.51,0.4,55,18.1,104.6,Gizi Baik,1322.5,47.8,52.4,165.0,-,"hindari goreng-gorengan, makanan manis",train
+anak_balita_0293,ANAK_BALITA,P,,,,1.44,0.8,46,17.1,106.2,Gizi Baik,1351.1,42.6,46.0,191.6,tidak ada,manis,train
+anak_balita_0294,ANAK_BALITA,P,,,,-0.84,-1.49,51,14.5,101.4,Gizi Baik,1258.6,41.2,47.4,166.8,,tidak suka pedas,train
+anak_balita_0295,ANAK_BALITA,P,,,,1.16,0.53,42,16.0,103.1,Gizi Baik,1170.5,35.6,44.8,156.2,none,tidak ada,train
+anak_balita_0296,ANAK_BALITA,P,,,,-0.77,-1.09,58,16.2,105.4,Gizi Baik,1152.7,43.7,48.0,136.6,no allergies,"tidak suka spicy, santan",train
+anak_balita_0297,ANAK_BALITA,P,,,,2.63,-1.0,19,10.1,90.7,Gizi Baik,820.6,31.6,28.5,109.4,-,"makanan manis, santan",train
+anak_balita_0298,ANAK_BALITA,L,,,,-1.37,-0.3,32,13.2,88.5,Gizi Baik,1097.2,34.7,45.9,136.2,Alergi: kedele,tidak suka spicy,train
+anak_balita_0299,ANAK_BALITA,P,,,,0.39,2.54,2,5.3,55.5,Gizi Lebih,458.3,16.9,18.3,56.5,kedele; kacng,manis,train
+anak_balita_0300,ANAK_BALITA,P,,,,-1.02,-0.1,27,12.6,85.9,Gizi Baik,1042.0,37.9,43.2,125.3,crab,no allergies,test
+anak_balita_0301,ANAK_BALITA,L,,,,-0.96,-1.21,39,13.2,94.5,Gizi Baik,1269.2,48.9,49.4,157.3,none,tidak suka gorengan,test
+anak_balita_0302,ANAK_BALITA,L,,,,-1.49,0.32,35,14.5,90.3,Gizi Baik,1213.1,39.1,45.5,161.9,"ebi, cumi-cumi",-,train
+anak_balita_0303,ANAK_BALITA,L,,,,-0.24,0.84,3,5.2,55.5,Gizi Baik,449.9,14.3,16.7,60.6,,hindari makanan manis,train
+anak_balita_0304,ANAK_BALITA,P,,,,-1.57,1.37,21,13.0,78.8,Berisiko Gizi Lebih,1075.1,39.2,42.8,133.2,-,tidak ada,train
+anak_balita_0305,ANAK_BALITA,L,,,,-0.51,-1.52,34,12.0,92.8,Gizi Baik,991.5,35.1,35.3,133.3,allergic to suus,no allergies,train
+anak_balita_0306,ANAK_BALITA,P,,,,0.73,1.57,19,12.7,84.4,Berisiko Gizi Lebih,1049.1,39.9,36.3,140.8,none,"goreng-gorengan, pedas",train
+anak_balita_0307,ANAK_BALITA,L,,,,-0.18,0.77,36,15.3,95.4,Gizi Baik,1192.6,40.1,47.2,151.9,no allergies,-,train
+anak_balita_0308,ANAK_BALITA,L,,,,0.65,1.77,43,17.9,101.9,Berisiko Gizi Lebih,1468.1,47.1,50.1,207.2,-,tidak suka makanan manis,train
+anak_balita_0309,ANAK_BALITA,L,,,,-0.95,-2.1,29,10.6,87.6,Gizi Kurang,863.5,33.5,30.1,114.7,no allergies,-,train
+anak_balita_0310,ANAK_BALITA,L,,,,-0.8,-0.05,8,7.5,64.0,Gizi Baik,632.5,19.7,23.1,86.5,Alergi: kepiting,no allergies,train
+anak_balita_0311,ANAK_BALITA,L,,,,-0.48,0.28,7,7.2,63.0,Gizi Baik,606.4,20.7,24.6,75.6,"alergi soy, crab",,test
+anak_balita_0312,ANAK_BALITA,P,,,,0.76,1.23,37,16.1,99.1,Berisiko Gizi Lebih,1428.6,47.2,58.5,178.2,none,none,test
+anak_balita_0313,ANAK_BALITA,L,,,,-1.75,-0.6,4,5.1,52.6,Gizi Baik,438.9,14.5,16.2,58.8,Alergi: gandum,gorengan,train
+anak_balita_0314,ANAK_BALITA,P,,,,-0.84,-0.09,31,13.3,89.5,Gizi Baik,1105.1,40.5,44.9,134.8,no allergies,,train
+anak_balita_0315,ANAK_BALITA,P,,,,-2.07,-1.44,1,3.3,45.2,Gizi Baik,300.0,10.9,10.4,40.7,Alergi: fish,tidak suka manis,train
+anak_balita_0316,ANAK_BALITA,P,,,,-2.76,0.68,1,4.1,43.0,Gizi Baik,352.9,11.4,14.8,43.6,none,-,train
+anak_balita_0317,ANAK_BALITA,L,,,,-1.13,0.43,21,12.0,80.3,Gizi Baik,988.1,30.8,34.0,139.7,allergic to kacang,none,train
+anak_balita_0318,ANAK_BALITA,L,,,,-2.72,-1.12,36,12.9,87.0,Gizi Baik,1051.9,38.0,39.8,135.4,-,"manis, daging merah",train
+anak_balita_0319,ANAK_BALITA,P,,,,-0.0,0.16,0,3.3,50.0,Gizi Baik,300.0,9.2,10.8,41.5,none,tidak ada,test
+anak_balita_0320,ANAK_BALITA,P,,,,-1.75,0.49,12,10.0,69.2,Gizi Baik,812.0,25.9,30.1,109.4,none,"pantangan kopi, spicy",train
+anak_balita_0321,ANAK_BALITA,L,,,,1.48,1.18,14,11.1,81.9,Berisiko Gizi Lebih,908.0,32.4,31.4,123.8,tidak ada,,train
+anak_balita_0322,ANAK_BALITA,L,,,,0.58,0.04,37,14.5,98.4,Gizi Baik,1526.0,50.6,55.2,206.7,tidak ada,tidak suka daging merah,test
+anak_balita_0323,ANAK_BALITA,L,,,,1.14,-0.1,22,11.7,88.7,Gizi Baik,957.9,29.5,34.8,131.8,-,no allergies,train
+anak_balita_0324,ANAK_BALITA,P,,,,0.95,-2.93,32,10.0,96.1,Gizi Kurang,811.7,28.9,33.1,99.5,crab dan kedelai,no allergies,test
+anak_balita_0325,ANAK_BALITA,L,,,,-0.47,0.08,10,8.6,69.3,Gizi Baik,726.2,28.7,28.9,87.8,Alergi: tahu tempe dan laktosa,pantangan daging merah,train
+anak_balita_0326,ANAK_BALITA,L,,,,-1.61,0.17,60,18.6,103.7,Gizi Baik,1603.7,50.7,63.7,206.8,none,none,train
+anak_balita_0327,ANAK_BALITA,P,,,,-1.07,1.62,35,16.2,91.7,Berisiko Gizi Lebih,1360.0,42.0,51.7,181.6,Alergi: telurr dan cumi-cumi,tidak ada,train
+anak_balita_0328,ANAK_BALITA,P,,,,0.82,-1.32,3,4.3,59.0,Gizi Baik,372.1,14.7,12.8,49.5,Alergi: crab dan ikan,none,train
+anak_balita_0329,ANAK_BALITA,P,,,,0.45,2.05,12,11.4,76.5,Gizi Lebih,931.9,30.2,34.1,126.2,Alergi: wheat,kopi,test
+anak_balita_0330,ANAK_BALITA,P,,,,-0.43,0.43,27,13.2,87.8,Gizi Baik,1096.2,38.9,40.2,144.8,no allergies,none,train
+anak_balita_0331,ANAK_BALITA,P,,,,0.03,0.51,21,12.1,84.1,Gizi Baik,995.4,34.1,38.6,127.8,alergi makanan laut,tidak suka pedas,train
+anak_balita_0332,ANAK_BALITA,L,,,,-0.44,-0.02,1,3.8,50.6,Gizi Baik,333.1,10.2,12.1,45.8,allergic to ebi,"hindari goreng-gorengan, spicy",test
+anak_balita_0333,ANAK_BALITA,L,,,,-1.56,-1.52,30,11.4,86.4,Gizi Baik,937.5,34.8,37.8,114.5,ebi,manis,train
+anak_balita_0334,ANAK_BALITA,L,,,,0.05,1.76,51,19.5,104.3,Berisiko Gizi Lebih,1686.6,53.4,64.7,222.6,-,"hindari manis, spicy",train
+anak_balita_0335,ANAK_BALITA,L,,,,-0.89,-0.4,38,14.1,94.1,Gizi Baik,1458.1,48.3,49.4,205.0,tidak ada,"jeroan, manis",train
+anak_balita_0336,ANAK_BALITA,P,,,,-0.05,-0.93,40,13.7,98.0,Gizi Baik,1105.1,36.2,37.7,155.3,alergi egg,tidak ada,train
+anak_balita_0337,ANAK_BALITA,P,,,,0.61,2.45,23,14.6,88.0,Gizi Lebih,1221.6,37.9,41.7,173.6,,none,train
+anak_balita_0338,ANAK_BALITA,P,,,,-0.35,1.16,50,18.4,102.4,Berisiko Gizi Lebih,1463.9,44.6,60.1,186.3,tahu tempe,-,train
+anak_balita_0339,ANAK_BALITA,P,,,,0.03,0.87,47,17.4,102.1,Gizi Baik,1308.5,51.2,44.0,176.9,Alergi: seafood,"hindari daging merah, gorengan",test
+anak_balita_0340,ANAK_BALITA,L,,,,-0.36,1.14,30,14.6,90.3,Berisiko Gizi Lebih,1220.3,47.6,41.0,165.2,tidak ada,spicy,train
+anak_balita_0341,ANAK_BALITA,P,,,,-0.53,0.06,16,10.5,77.3,Gizi Baik,856.3,33.9,34.2,103.3,tidak ada,none,test
+anak_balita_0342,ANAK_BALITA,L,,,,-1.18,0.15,54,17.5,101.9,Gizi Baik,1578.6,58.7,61.1,198.5,allergic to ikn,"pantangan manis, kopi",train
+anak_balita_0343,ANAK_BALITA,L,,,,-0.86,0.07,53,17.2,102.4,Gizi Baik,1219.7,38.6,43.4,168.7,ebi,tidak ada,train
+anak_balita_0344,ANAK_BALITA,L,,,,0.77,-0.07,18,10.8,83.5,Gizi Baik,884.3,32.2,34.7,110.8,squid & ikan,no allergies,train
+anak_balita_0345,ANAK_BALITA,L,,,,-0.43,-0.25,7,6.8,63.1,Gizi Baik,579.1,20.7,23.4,71.4,allergic to ikan,"tidak suka daging merah, pedas",train
+anak_balita_0346,ANAK_BALITA,P,,,,-0.49,-0.88,34,12.8,92.9,Gizi Baik,1063.6,39.4,40.1,136.3,none,"tidak suka santan, pedas",train
+anak_balita_0347,ANAK_BALITA,L,,,,1.18,-0.17,49,16.2,106.9,Gizi Baik,1436.3,52.2,55.3,182.4,Alergi: sea food; laktosa,,test
+anak_balita_0348,ANAK_BALITA,P,,,,-0.81,2.21,31,16.1,89.6,Gizi Lebih,1352.0,46.5,50.8,177.2,tidak ada,"pantangan santan, makanan manis",train
+anak_balita_0349,ANAK_BALITA,P,,,,-0.42,0.5,27,13.3,87.9,Gizi Baik,1103.7,42.5,37.3,149.6,,"hindari pedas, santan",train
+anak_balita_0350,ANAK_BALITA,L,,,,-0.45,-1.38,39,13.0,96.1,Gizi Baik,1121.5,44.7,41.4,142.5,no allergies,tidak ada,train
+anak_balita_0351,ANAK_BALITA,P,,,,-1.43,0.84,18,11.7,76.3,Gizi Baik,963.1,33.8,37.9,121.6,alergi sea food,kopi,train
+anak_balita_0352,ANAK_BALITA,L,,,,-1.1,-1.3,11,8.0,69.3,Gizi Baik,677.1,25.5,23.2,91.6,allergic to makanan laut,tidak suka goreng-gorengan,train
+anak_balita_0353,ANAK_BALITA,L,,,,-0.13,-0.16,40,14.7,97.8,Gizi Baik,1178.6,38.0,45.6,153.9,no allergies,,test
+anak_balita_0354,ANAK_BALITA,P,,,,0.4,-0.01,36,14.3,97.3,Gizi Baik,1388.4,53.4,49.8,181.7,tidak ada,none,test
+anak_balita_0355,ANAK_BALITA,L,,,,-1.4,0.98,1,4.2,47.5,Gizi Baik,361.2,11.1,14.3,47.0,,pantangan pedas,train
+anak_balita_0356,ANAK_BALITA,L,,,,0.02,1.37,17,12.0,80.1,Berisiko Gizi Lebih,988.1,32.1,35.6,134.8,kepiting,-,train
+anak_balita_0357,ANAK_BALITA,L,,,,-0.14,0.74,22,12.6,84.5,Gizi Baik,1037.1,41.2,43.6,120.0,none,"hindari santan, makanan manis",test
+anak_balita_0358,ANAK_BALITA,P,,,,-0.7,-0.29,34,13.6,92.2,Gizi Baik,1129.2,38.4,40.8,152.1,allergic to ebi,tidak ada,train
+anak_balita_0359,ANAK_BALITA,P,,,,1.16,-1.66,0,2.8,53.8,Gizi Baik,300.0,11.3,10.7,39.7,-,,train
+anak_balita_0360,ANAK_BALITA,L,,,,-2.87,-1.51,23,10.4,76.5,Gizi Baik,841.9,25.6,33.0,110.5,alergi terigu & shrimp,"hindari pedas, makanan manis",train
+anak_balita_0361,ANAK_BALITA,L,,,,-1.08,-0.32,16,10.2,75.4,Gizi Baik,825.1,26.5,33.4,104.5,"alergi milk, ikn",pantangan kopi,test
+anak_balita_0362,ANAK_BALITA,P,,,,-0.31,-0.99,11,8.3,71.9,Gizi Baik,697.5,24.7,24.5,94.6,no allergies,none,test
+anak_balita_0363,ANAK_BALITA,P,,,,-0.6,-1.23,20,10.1,81.0,Gizi Baik,817.3,31.9,32.6,99.1,,"goreng-gorengan, daging merah",train
+anak_balita_0364,ANAK_BALITA,L,,,,0.49,0.31,44,16.1,101.9,Gizi Baik,1582.0,55.1,57.2,211.7,tidak ada,"hindari pedas, spicy",train
+anak_balita_0365,ANAK_BALITA,L,,,,-0.23,-1.54,33,11.9,93.0,Gizi Baik,975.6,38.3,39.3,117.1,wheat,"tidak suka spicy, mie instan",train
+anak_balita_0366,ANAK_BALITA,P,,,,0.19,1.01,52,18.5,105.3,Berisiko Gizi Lebih,1494.2,50.1,62.6,182.7,Alergi: sea food,jeroan,train
+anak_balita_0367,ANAK_BALITA,P,,,,-0.77,-3.12,17,7.7,77.5,Gizi Buruk,603.7,19.4,24.2,77.0,"allergic to ebi, ikn",-,train
+anak_balita_0368,ANAK_BALITA,L,,,,-0.13,0.37,44,16.1,99.9,Gizi Baik,1388.2,46.8,52.9,181.2,Alergi: ebi,tidak ada,train
+anak_balita_0369,ANAK_BALITA,L,,,,-0.4,-1.41,41,13.2,97.4,Gizi Baik,1129.1,34.3,46.4,143.6,,pantangan jeroan,train
+anak_balita_0370,ANAK_BALITA,L,,,,-0.55,-2.44,50,13.0,101.8,Gizi Kurang,1116.1,40.0,37.7,154.2,Alergi: kacng,tidak suka gorengan,test
+anak_balita_0371,ANAK_BALITA,L,,,,-0.72,-1.36,23,10.5,83.6,Gizi Baik,856.1,31.3,32.6,109.4,tidak ada,"tidak suka gorengan, spicy",train
+anak_balita_0372,ANAK_BALITA,P,,,,-1.86,0.06,20,11.4,76.9,Gizi Baik,934.2,34.2,39.0,111.5,no allergies,none,train
+anak_balita_0373,ANAK_BALITA,P,,,,-1.54,0.83,29,14.1,85.7,Gizi Baik,1171.1,40.2,49.0,142.3,-,,train
+anak_balita_0374,ANAK_BALITA,L,,,,-1.41,-2.55,47,12.4,97.3,Gizi Kurang,1076.6,36.6,37.7,147.8,no allergies,,train
+anak_balita_0375,ANAK_BALITA,L,,,,0.07,-1.04,5,5.4,60.7,Gizi Baik,460.2,15.1,19.2,56.8,,tidak ada,train
+anak_balita_0376,ANAK_BALITA,P,,,,-1.46,-1.51,30,11.4,86.7,Gizi Baik,938.6,32.5,36.6,119.9,tidak ada,pantangan manis,train
+anak_balita_0377,ANAK_BALITA,L,,,,-1.7,1.35,21,13.0,78.4,Berisiko Gizi Lebih,1072.9,41.2,44.8,126.2,Alergi: cumi-cumi dan peanut,tidak ada,train
+anak_balita_0378,ANAK_BALITA,P,,,,-2.36,-1.53,47,13.9,94.2,Gizi Baik,1318.0,45.0,55.5,159.6,"peanut, fish",-,train
+anak_balita_0379,ANAK_BALITA,P,,,,0.41,-1.41,55,15.3,107.6,Gizi Baik,1322.6,52.0,52.6,160.4,,-,train
+anak_balita_0380,ANAK_BALITA,P,,,,1.17,0.29,26,12.9,92.4,Gizi Baik,1066.6,37.0,40.2,139.3,Alergi: gandum; seafood,pantangan goreng-gorengan,train
+anak_balita_0381,ANAK_BALITA,P,,,,0.45,0.67,47,17.1,103.4,Gizi Baik,1467.5,47.0,54.3,197.7,Alergi: makanan laut,tidak ada,train
+anak_balita_0382,ANAK_BALITA,L,,,,-1.78,0.98,46,17.4,95.5,Gizi Baik,1370.2,46.0,54.5,173.9,tidak ada,none,train
+anak_balita_0383,ANAK_BALITA,P,,,,-0.51,-0.63,15,9.7,76.3,Gizi Baik,780.2,24.3,28.6,106.3,alergi kedelai,tidak suka makanan manis,train
+anak_balita_0384,ANAK_BALITA,L,,,,-1.56,1.12,9,8.8,63.6,Berisiko Gizi Lebih,744.3,28.9,25.0,100.9,,tidak ada,train
+anak_balita_0385,ANAK_BALITA,L,,,,0.42,0.44,0,3.4,51.4,Gizi Baik,301.4,9.6,11.2,40.6,tidak ada,hindari spicy,train
+anak_balita_0386,ANAK_BALITA,L,,,,-0.42,-1.32,52,15.0,103.3,Gizi Baik,1172.2,39.4,42.1,159.0,no allergies,"tidak suka santan, pedas",train
+anak_balita_0387,ANAK_BALITA,P,,,,1.04,1.43,31,15.1,95.7,Berisiko Gizi Lebih,1268.2,38.4,48.6,169.3,tidak ada,tidak suka pedas,train
+anak_balita_0388,ANAK_BALITA,L,,,,-1.2,1.01,0,3.6,46.0,Berisiko Gizi Lebih,315.2,10.8,12.8,39.3,,none,train
+anak_balita_0389,ANAK_BALITA,L,,,,0.3,-2.03,4,4.4,59.3,Gizi Kurang,382.1,12.1,15.5,48.6,"Alergi: fish, kepiting",no allergies,train
+anak_balita_0390,ANAK_BALITA,P,,,,-2.27,-0.54,5,5.6,52.9,Gizi Baik,482.4,16.6,19.3,60.6,allergic to wheat,no allergies,train
+anak_balita_0391,ANAK_BALITA,P,,,,-1.14,0.38,48,16.9,98.7,Gizi Baik,1406.3,52.4,47.8,191.7,alergi ikan & udnag,hindari spicy,test
+anak_balita_0392,ANAK_BALITA,L,,,,-0.86,-0.98,32,12.4,90.2,Gizi Baik,1023.2,38.2,38.8,130.2,no allergies,hindari gorengan,train
+anak_balita_0393,ANAK_BALITA,P,,,,-1.7,-0.04,13,9.8,70.4,Gizi Baik,790.6,26.6,27.3,109.7,allergic to tahu tempe,tidak ada,train
+anak_balita_0394,ANAK_BALITA,L,,,,-2.09,0.08,57,17.9,100.5,Gizi Baik,1560.7,61.1,59.4,195.4,allergic to udang,pantangan jeroan,train
+anak_balita_0395,ANAK_BALITA,L,,,,0.67,0.42,29,13.6,93.0,Gizi Baik,1127.5,34.4,45.2,145.7,Alergi: tahu tempe dan squid,pedas,train
+anak_balita_0396,ANAK_BALITA,P,,,,1.97,-0.34,32,13.2,99.5,Gizi Baik,1093.2,35.8,41.3,144.6,allergic to dairy dan udnag,"goreng-gorengan, spicy",test
+anak_balita_0397,ANAK_BALITA,P,,,,1.17,-0.92,31,12.3,96.1,Gizi Baik,1015.5,39.3,42.7,118.4,udang; susu,none,test
+anak_balita_0398,ANAK_BALITA,L,,,,-2.24,-1.17,58,16.1,100.5,Gizi Baik,1493.8,48.4,56.8,197.3,,-,train
+anak_balita_0399,ANAK_BALITA,P,,,,-0.71,0.94,20,12.3,80.7,Gizi Baik,1013.9,35.0,36.9,135.4,no allergies,"tidak suka santan, jeroan",train
+anak_balita_0400,ANAK_BALITA,L,,,,-3.07,-1.58,13,8.4,65.9,Gizi Baik,669.4,20.6,25.9,88.6,none,tidak suka jeroan,train
+anak_balita_0401,ANAK_BALITA,L,,,,0.81,0.98,26,13.7,91.2,Gizi Baik,1135.4,37.0,43.2,149.8,allergic to sea food; nuts,hindari jeroan,train
+anak_balita_0402,ANAK_BALITA,L,,,,0.14,-1.82,59,15.2,108.9,Gizi Baik,1192.6,43.5,42.0,160.1,squid & sea food,pedas,train
+anak_balita_0403,ANAK_BALITA,L,,,,-3.74,0.56,48,17.1,90.2,Gizi Baik,1297.5,47.7,49.5,165.4,none,"hindari manis, mie instan",train
+anak_balita_0404,ANAK_BALITA,L,,,,-0.07,1.96,16,12.3,78.8,Berisiko Gizi Lebih,1015.5,31.7,42.7,126.2,no allergies,"hindari mie instan, kopi",train
+anak_balita_0405,ANAK_BALITA,L,,,,0.37,0.57,51,17.7,105.3,Gizi Baik,1638.0,58.6,57.5,221.4,tidak ada,santan,train
+anak_balita_0406,ANAK_BALITA,L,,,,-1.05,-1.12,22,10.6,81.5,Gizi Baik,861.8,29.6,35.0,107.1,tidak ada,tidak ada,train
+anak_balita_0407,ANAK_BALITA,P,,,,0.88,-1.04,40,13.6,101.1,Gizi Baik,1413.1,51.1,49.9,189.8,no allergies,pantangan goreng-gorengan,train
+anak_balita_0408,ANAK_BALITA,P,,,,-1.07,-0.19,17,10.5,76.5,Gizi Baik,854.9,26.0,28.6,123.4,,pantangan goreng-gorengan,train
+anak_balita_0409,ANAK_BALITA,P,,,,-0.1,0.05,27,12.8,88.9,Gizi Baik,1057.6,38.2,42.2,131.2,-,-,train
+anak_balita_0410,ANAK_BALITA,L,,,,-0.62,1.88,3,5.7,54.2,Berisiko Gizi Lebih,487.2,17.0,18.2,63.8,milk,"hindari gorengan, santan",test
+anak_balita_0411,ANAK_BALITA,L,,,,-3.24,1.63,54,19.8,95.1,Berisiko Gizi Lebih,1217.9,37.7,46.5,162.1,no allergies,none,train
+anak_balita_0412,ANAK_BALITA,L,,,,-0.49,0.9,53,18.5,103.6,Gizi Baik,1636.9,56.8,66.1,203.8,alergi dairy dan crab,pantangan gorengan,train
+anak_balita_0413,ANAK_BALITA,P,,,,2.5,0.96,19,12.1,90.2,Gizi Baik,995.2,36.8,36.1,130.8,none,none,train
+anak_balita_0414,ANAK_BALITA,L,,,,-0.67,-0.04,52,16.9,102.5,Gizi Baik,1217.0,38.0,47.2,160.1,,tidak ada,train
+anak_balita_0415,ANAK_BALITA,L,,,,-3.43,-1.16,45,14.2,89.6,Gizi Baik,1217.4,38.0,45.3,164.5,-,tidak ada,train
+anak_balita_0416,ANAK_BALITA,L,,,,-1.67,1.25,38,16.3,91.6,Berisiko Gizi Lebih,1174.0,42.3,49.5,139.8,none,hindari mie instan,train
+anak_balita_0417,ANAK_BALITA,L,,,,-0.89,0.3,35,14.5,92.3,Gizi Baik,1211.4,43.3,40.6,168.1,no allergies,mie instan,train
+anak_balita_0418,ANAK_BALITA,P,,,,-1.96,-2.16,53,13.8,98.7,Gizi Kurang,1355.2,47.5,45.9,188.1,tidak ada,"pedas, manis",train
+anak_balita_0419,ANAK_BALITA,P,,,,-0.47,3.32,46,20.7,99.9,Obesitas,1473.7,56.2,58.7,180.1,allergic to dairy,"daging merah, spicy",train
+anak_balita_0420,ANAK_BALITA,P,,,,0.14,0.13,10,8.7,71.3,Gizi Baik,729.4,23.4,29.2,93.4,Alergi: kedele,no allergies,train
+anak_balita_0421,ANAK_BALITA,P,,,,-0.49,0.48,12,10.0,73.4,Gizi Baik,811.1,27.9,30.1,107.2,-,tidak suka goreng-gorengan,train
+anak_balita_0422,ANAK_BALITA,L,,,,-0.89,-1.98,5,4.9,57.5,Gizi Baik,419.1,13.1,14.8,58.2,tidak ada,santan,train
+anak_balita_0423,ANAK_BALITA,P,,,,-0.06,0.72,10,9.1,70.6,Gizi Baik,766.3,24.1,31.7,96.2,allergic to milk,none,test
+anak_balita_0424,ANAK_BALITA,L,,,,-1.07,-0.89,35,13.0,91.7,Gizi Baik,1076.9,40.6,40.2,138.2,Alergi: ikan,hindari kopi,train
+anak_balita_0425,ANAK_BALITA,L,,,,-0.05,0.45,4,5.6,58.2,Gizi Baik,480.7,15.6,17.7,64.8,,"pantangan manis, goreng-gorengan",test
+anak_balita_0426,ANAK_BALITA,L,,,,0.12,-0.22,38,14.3,97.5,Gizi Baik,1504.2,55.8,52.4,202.3,tidak ada,hindari daging merah,train
+anak_balita_0427,ANAK_BALITA,P,,,,-0.02,-1.21,40,13.3,98.1,Gizi Baik,1102.4,34.4,37.4,157.0,no allergies,none,train
+anak_balita_0428,ANAK_BALITA,L,,,,2.13,-1.85,3,4.1,63.3,Gizi Baik,353.1,13.0,14.2,43.2,-,"goreng-gorengan, kopi",train
+anak_balita_0429,ANAK_BALITA,P,,,,0.83,1.07,49,18.1,105.8,Berisiko Gizi Lebih,1350.2,46.4,45.3,189.1,alergi kedele; gandum,none,train
+anak_balita_0430,ANAK_BALITA,P,,,,0.33,1.34,14,11.2,78.1,Berisiko Gizi Lebih,920.3,28.5,33.9,125.4,none,tidak ada,train
+anak_balita_0431,ANAK_BALITA,P,,,,-0.43,1.68,14,11.5,75.6,Berisiko Gizi Lebih,947.7,35.0,36.9,118.9,,no allergies,train
+anak_balita_0432,ANAK_BALITA,P,,,,0.82,-1.13,24,11.0,89.7,Gizi Baik,895.5,30.5,30.7,124.3,,spicy,test
+anak_balita_0433,ANAK_BALITA,L,,,,-1.4,1.51,5,6.7,55.8,Berisiko Gizi Lebih,571.8,22.0,24.0,66.8,"seafood, udnag",-,test
+anak_balita_0434,ANAK_BALITA,P,,,,-2.12,0.84,45,17.0,93.9,Gizi Baik,1358.5,48.3,48.1,183.1,-,none,train
+anak_balita_0435,ANAK_BALITA,L,,,,0.12,0.75,24,13.0,87.4,Gizi Baik,1079.0,35.3,44.6,134.0,-,spicy,train
+anak_balita_0436,ANAK_BALITA,L,,,,0.51,2.2,34,16.7,96.2,Gizi Lebih,1407.2,51.1,49.2,189.9,allergic to sea food,"pantangan spicy, kopi",train
+anak_balita_0437,ANAK_BALITA,P,,,,-0.59,-0.17,27,12.5,87.3,Gizi Baik,1035.2,37.7,40.7,129.6,kacang,pantangan daging merah,train
+anak_balita_0438,ANAK_BALITA,L,,,,-1.6,-0.88,52,15.6,99.4,Gizi Baik,1154.9,38.1,47.3,144.2,no allergies,tidak ada,train
+anak_balita_0439,ANAK_BALITA,L,,,,0.33,-0.51,27,12.1,90.3,Gizi Baik,1000.1,38.3,41.2,119.1,allergic to cumi-cumi,tidak ada,train
+anak_balita_0440,ANAK_BALITA,P,,,,-1.44,0.69,34,14.8,89.7,Gizi Baik,1238.9,45.1,48.9,154.6,"allergic to kepiting, cumi-cumi",pantangan jeroan,train
+anak_balita_0441,ANAK_BALITA,L,,,,-0.46,1.3,35,15.8,93.7,Berisiko Gizi Lebih,1324.3,44.3,47.3,180.4,no allergies,none,train
+anak_balita_0442,ANAK_BALITA,P,,,,0.61,1.39,54,19.5,107.8,Berisiko Gizi Lebih,1374.0,49.3,45.9,190.8,,none,train
+anak_balita_0443,ANAK_BALITA,P,,,,0.47,-0.59,31,12.7,93.8,Gizi Baik,1051.2,35.6,39.4,138.6,no allergies,no allergies,train
+anak_balita_0444,ANAK_BALITA,P,,,,2.33,-1.75,2,3.7,61.8,Gizi Baik,320.4,9.7,12.8,41.7,no allergies,"tidak suka makanan manis, manis",train
+anak_balita_0445,ANAK_BALITA,L,,,,-3.14,-1.55,27,11.0,78.9,Gizi Baik,894.9,31.5,37.3,108.3,,"makanan manis, manis",train
+anak_balita_0446,ANAK_BALITA,L,,,,-2.04,-0.67,11,8.5,66.2,Gizi Baik,719.5,25.9,30.3,85.9,Alergi: egg dan soy,pantangan makanan manis,train
+anak_balita_0447,ANAK_BALITA,P,,,,-0.1,1.5,50,18.9,103.3,Berisiko Gizi Lebih,1480.0,53.4,55.4,192.0,,tidak ada,test
+anak_balita_0448,ANAK_BALITA,P,,,,-1.6,-0.35,59,17.6,103.2,Gizi Baik,1291.4,50.5,44.5,172.2,tidak ada,tidak ada,train
+anak_balita_0449,ANAK_BALITA,L,,,,-1.23,0.69,39,15.7,93.6,Gizi Baik,1336.1,51.3,55.5,157.8,,"pantangan jeroan, goreng-gorengan",train
+anak_balita_0450,ANAK_BALITA,P,,,,-0.17,1.51,20,12.9,82.4,Berisiko Gizi Lebih,1065.8,42.3,38.3,138.0,allergic to eggs,"mie instan, makanan manis",train
+anak_balita_0451,ANAK_BALITA,P,,,,-1.07,-1.05,53,15.5,101.7,Gizi Baik,1267.8,43.5,47.4,166.8,tidak ada,"hindari makanan manis, daging merah",train
+anak_balita_0452,ANAK_BALITA,L,,,,-2.12,1.31,54,19.3,98.7,Berisiko Gizi Lebih,1604.0,59.1,61.0,204.7,none,manis,train
+anak_balita_0453,ANAK_BALITA,P,,,,-1.3,-0.97,51,15.3,99.8,Gizi Baik,1110.1,38.8,43.4,140.9,alergi ebi,-,train
+anak_balita_0454,ANAK_BALITA,P,,,,0.34,-2.7,37,11.0,97.7,Gizi Kurang,1082.0,32.5,39.2,149.8,tidak ada,none,train
+anak_balita_0455,ANAK_BALITA,L,,,,-1.01,1.18,2,4.8,50.8,Berisiko Gizi Lebih,414.7,12.5,17.1,52.7,,tidak suka gorengan,train
+anak_balita_0456,ANAK_BALITA,P,,,,-2.68,-0.08,20,11.3,74.2,Gizi Baik,921.8,28.3,36.6,119.7,alergi cumi,,train
+anak_balita_0457,ANAK_BALITA,L,,,,-1.28,1.54,48,18.6,98.3,Berisiko Gizi Lebih,1244.2,40.8,50.9,155.6,no allergies,-,train
+anak_balita_0458,ANAK_BALITA,L,,,,0.01,-3.71,45,10.5,100.9,Gizi Buruk,1378.5,50.7,53.6,173.2,Alergi: susu dan tahu tempe,makanan manis,train
+anak_balita_0459,ANAK_BALITA,P,,,,-2.69,-0.42,4,5.2,49.5,Gizi Baik,446.2,15.8,15.2,61.5,Alergi: peanut; eggs,none,train
+anak_balita_0460,ANAK_BALITA,L,,,,-0.13,-0.94,52,15.5,104.2,Gizi Baik,1196.0,40.0,48.6,149.7,,,train
+anak_balita_0461,ANAK_BALITA,L,,,,-0.56,-0.77,4,5.0,56.5,Gizi Baik,432.3,17.3,16.8,53.1,none,hindari daging merah,train
+anak_balita_0462,ANAK_BALITA,P,,,,-2.1,-2.27,35,11.2,88.3,Gizi Kurang,920.2,34.9,31.8,123.6,-,"tidak suka kopi, manis",train
+anak_balita_0463,ANAK_BALITA,P,,,,-1.83,-1.51,12,8.3,69.0,Gizi Baik,658.5,21.3,23.9,89.5,alergi crab,kopi,train
+anak_balita_0464,ANAK_BALITA,L,,,,-0.68,-1.69,21,9.8,81.8,Gizi Baik,791.9,24.5,30.9,103.9,Alergi: telor & crab,jeroan,train
+anak_balita_0465,ANAK_BALITA,P,,,,-2.24,-0.28,34,13.6,87.1,Gizi Baik,1130.8,44.2,40.2,148.0,-,no allergies,train
+anak_balita_0466,ANAK_BALITA,L,,,,-4.0,-0.9,43,14.2,86.6,Gizi Baik,1048.2,32.4,35.8,149.0,none,no allergies,train
+anak_balita_0467,ANAK_BALITA,P,,,,-1.25,-0.83,48,15.1,98.4,Gizi Baik,1380.0,42.7,46.0,198.8,none,"tidak suka pedas, daging merah",train
+anak_balita_0468,ANAK_BALITA,L,,,,-1.12,-2.53,27,9.8,85.6,Gizi Kurang,795.0,29.3,26.7,109.4,Alergi: soy,,train
+anak_balita_0469,ANAK_BALITA,P,,,,0.13,-1.38,5,5.2,60.9,Gizi Baik,445.4,15.7,16.8,57.8,none,none,train
+anak_balita_0470,ANAK_BALITA,L,,,,0.12,-0.96,48,14.9,102.9,Gizi Baik,1532.9,50.7,60.5,196.5,none,none,train
+anak_balita_0471,ANAK_BALITA,P,,,,0.66,0.37,5,6.1,62.6,Gizi Baik,521.9,19.3,20.3,65.5,-,"hindari manis, kopi",test
+anak_balita_0472,ANAK_BALITA,P,,,,-1.11,0.33,21,11.9,80.3,Gizi Baik,978.6,31.5,34.3,136.0,-,tidak ada,train
+anak_balita_0473,ANAK_BALITA,P,,,,-0.81,2.33,53,20.7,102.5,Gizi Lebih,1487.1,47.9,55.6,198.8,,tidak ada,train
+anak_balita_0474,ANAK_BALITA,L,,,,0.42,1.51,57,20.2,108.8,Berisiko Gizi Lebih,1336.5,44.7,50.7,175.4,seafood,-,test
+anak_balita_0475,ANAK_BALITA,P,,,,0.68,0.95,45,17.2,103.1,Gizi Baik,1321.9,45.6,47.8,177.3,,"tidak suka santan, manis",train
+anak_balita_0476,ANAK_BALITA,P,,,,-1.56,1.76,14,11.6,71.8,Berisiko Gizi Lebih,954.0,31.1,32.6,134.1,no allergies,tidak ada,train
+anak_balita_0477,ANAK_BALITA,L,,,,-0.83,0.6,49,17.4,100.3,Gizi Baik,1403.0,49.0,50.2,188.8,,"pantangan jeroan, goreng-gorengan",train
+anak_balita_0478,ANAK_BALITA,L,,,,-1.1,-0.19,43,15.2,96.2,Gizi Baik,1160.9,42.5,47.5,140.8,,pantangan makanan manis,train
+anak_balita_0479,ANAK_BALITA,L,,,,-0.29,-0.42,8,7.2,65.7,Gizi Baik,611.8,22.9,23.9,76.4,Alergi: squid; ikn,"pantangan pedas, daging merah",test
+anak_balita_0480,ANAK_BALITA,L,,,,-2.93,-0.43,50,16.0,93.9,Gizi Baik,1291.3,43.8,47.1,173.2,tidak ada,none,train
+anak_balita_0481,ANAK_BALITA,L,,,,1.0,1.28,3,5.4,59.5,Berisiko Gizi Lebih,465.8,17.8,16.8,60.8,"Alergi: peanut, ikn","pantangan spicy, pedas",train
+anak_balita_0482,ANAK_BALITA,L,,,,-4.0,0.42,58,18.6,94.7,Gizi Baik,1514.2,60.4,60.3,182.4,allergic to kacang tanah dan cumi,none,train
+anak_balita_0483,ANAK_BALITA,P,,,,-3.27,0.06,46,16.1,90.6,Gizi Baik,1175.0,45.7,40.9,156.1,egg,"pantangan jeroan, daging merah",test
+anak_balita_0484,ANAK_BALITA,L,,,,0.08,0.23,6,6.6,62.8,Gizi Baik,559.7,17.7,19.4,78.5,susu sapi,,test
+anak_balita_0485,ANAK_BALITA,P,,,,-1.48,-1.08,29,11.8,85.9,Gizi Baik,970.4,38.0,36.4,122.7,Alergi: udang,tidak suka spicy,train
+anak_balita_0486,ANAK_BALITA,P,,,,-1.51,-1.04,39,13.4,92.6,Gizi Baik,1314.5,42.7,45.0,184.7,-,tidak ada,test
+anak_balita_0487,ANAK_BALITA,P,,,,-0.86,-0.78,17,9.9,77.2,Gizi Baik,804.1,27.8,28.9,108.2,Alergi: laktosa & fish,pantangan pedas,train
+anak_balita_0488,ANAK_BALITA,P,,,,-0.52,3.67,51,22.3,102.4,Obesitas,1357.8,48.9,52.9,171.5,allergic to terigu; udnag,"pantangan goreng-gorengan, manis",test
+anak_balita_0489,ANAK_BALITA,P,,,,-0.76,-1.79,54,14.5,103.3,Gizi Baik,1270.4,45.3,50.4,159.0,-,-,train
+anak_balita_0490,ANAK_BALITA,P,,,,-2.44,0.69,33,14.6,85.7,Gizi Baik,1221.7,43.4,46.7,157.0,ikan & ebi,tidak suka daging merah,train
+anak_balita_0491,ANAK_BALITA,P,,,,-0.99,-0.27,21,11.3,80.7,Gizi Baik,922.5,27.9,35.2,123.6,none,-,train
+anak_balita_0492,ANAK_BALITA,P,,,,-0.33,2.45,46,19.5,100.3,Gizi Lebih,1463.3,50.0,55.1,192.0,alergi kacng; kepiting,-,train
+anak_balita_0493,ANAK_BALITA,P,,,,-3.22,-0.79,33,12.8,83.1,Gizi Baik,1059.2,34.8,39.7,140.6,tidak ada,,train
+anak_balita_0494,ANAK_BALITA,L,,,,-2.0,1.47,26,14.2,81.9,Berisiko Gizi Lebih,1185.0,46.3,39.6,161.0,cumi,"hindari daging merah, jeroan",train
+anak_balita_0495,ANAK_BALITA,L,,,,-0.44,1.86,48,19.0,101.0,Berisiko Gizi Lebih,1650.8,64.8,64.0,203.8,allergic to kedele dan cumi,hindari santan,train
+anak_balita_0496,ANAK_BALITA,P,,,,1.31,-0.9,17,9.8,84.3,Gizi Baik,793.4,26.0,32.1,100.2,,"hindari makanan manis, spicy",train
+anak_balita_0497,ANAK_BALITA,P,,,,0.63,-0.77,55,16.3,108.4,Gizi Baik,1494.4,51.8,53.8,200.7,allergic to telurr,"tidak suka makanan manis, gorengan",train
+anak_balita_0498,ANAK_BALITA,P,,,,-0.87,1.25,23,13.3,83.1,Berisiko Gizi Lebih,1106.3,38.2,45.3,136.5,tidak ada,no allergies,train
+anak_balita_0499,ANAK_BALITA,L,,,,-0.26,-0.89,26,11.5,87.6,Gizi Baik,947.6,33.9,38.5,116.3,-,tidak suka kopi,train
+anak_balita_0500,ANAK_BALITA,P,,,,-1.38,-0.84,10,7.9,66.3,Gizi Baik,668.4,20.7,23.5,93.6,none,,test
+anak_balita_0501,ANAK_BALITA,P,,,,-0.73,1.09,9,8.8,66.4,Berisiko Gizi Lebih,742.5,28.5,25.0,100.9,alergi telur & crab,"pedas, mie instan",test
+anak_balita_0502,ANAK_BALITA,L,,,,-0.89,0.4,34,14.5,91.6,Gizi Baik,1206.1,44.1,45.0,156.3,-,-,train
+anak_balita_0503,ANAK_BALITA,P,,,,-2.91,1.15,2,4.8,44.6,Berisiko Gizi Lebih,413.5,12.4,14.6,58.2,tidak ada,"tidak suka makanan manis, spicy",train
+anak_balita_0504,ANAK_BALITA,P,,,,0.42,-0.97,46,14.6,102.8,Gizi Baik,1143.1,39.0,42.0,152.3,tidak ada,"jeroan, daging merah",train
+anak_balita_0505,ANAK_BALITA,L,,,,-1.96,-0.11,23,11.9,79.5,Gizi Baik,976.1,37.7,39.2,118.1,tidak ada,"tidak suka spicy, jeroan",train
+anak_balita_0506,ANAK_BALITA,L,,,,-3.86,0.39,46,16.5,88.7,Gizi Baik,1113.5,38.0,40.0,150.3,no allergies,"hindari pedas, mie instan",train
+anak_balita_0507,ANAK_BALITA,L,,,,-1.34,0.5,47,16.9,97.5,Gizi Baik,1369.9,49.1,50.2,180.3,none,,train
+anak_balita_0508,ANAK_BALITA,L,,,,-2.56,-0.07,53,17.0,96.8,Gizi Baik,1163.2,38.9,40.0,161.9,tidak ada,tidak ada,test
+anak_balita_0509,ANAK_BALITA,L,,,,-1.2,-0.14,1,3.8,48.1,Gizi Baik,329.8,13.0,13.6,38.9,,daging merah,train
+anak_balita_0510,ANAK_BALITA,P,,,,-1.93,0.62,34,14.7,88.1,Gizi Baik,1230.3,42.1,44.6,165.1,"seafood, ikan",-,train
+anak_balita_0511,ANAK_BALITA,P,,,,-0.6,-0.59,50,15.8,101.6,Gizi Baik,1133.4,39.3,46.8,138.7,Alergi: squid,-,train
+anak_balita_0512,ANAK_BALITA,L,,,,-0.27,-1.63,22,10.0,84.1,Gizi Baik,814.0,32.2,31.0,101.5,Alergi: crab,no allergies,test
+anak_balita_0513,ANAK_BALITA,P,,,,-1.36,-1.55,41,13.0,94.2,Gizi Baik,1191.5,44.7,47.0,147.4,alergi seafood,,train
+anak_balita_0514,ANAK_BALITA,L,,,,-0.49,-0.35,36,13.9,94.4,Gizi Baik,1144.9,38.8,41.2,154.7,Alergi: kedele,-,train
+anak_balita_0515,ANAK_BALITA,P,,,,-0.33,-2.19,21,9.3,82.9,Gizi Kurang,745.1,27.0,30.2,91.4,-,"tidak suka kopi, manis",train
+anak_balita_0516,ANAK_BALITA,L,,,,-0.7,4.0,45,21.5,98.6,Obesitas,1720.6,55.0,69.3,219.2,makanan laut dan suus,"hindari mie instan, makanan manis",test
+anak_balita_0517,ANAK_BALITA,P,,,,-2.59,-0.58,30,12.6,83.0,Gizi Baik,1037.9,32.0,37.3,143.6,Alergi: kedelai & laktosa,none,test
+anak_balita_0518,ANAK_BALITA,P,,,,-1.42,-1.61,27,10.9,84.6,Gizi Baik,888.5,28.8,33.8,117.2,tidak ada,tidak ada,test
+anak_balita_0519,ANAK_BALITA,L,,,,-2.12,-0.28,31,13.1,85.3,Gizi Baik,1084.8,34.2,37.5,152.7,none,-,train
+anak_balita_0520,ANAK_BALITA,L,,,,1.71,1.08,21,12.7,89.6,Berisiko Gizi Lebih,1048.2,37.1,37.8,139.9,"Alergi: squid, gluten",-,train
+anak_balita_0521,ANAK_BALITA,P,,,,-2.33,-0.87,59,16.7,100.8,Gizi Baik,1112.1,38.9,40.2,148.7,-,none,train
+anak_balita_0522,ANAK_BALITA,L,,,,-2.61,-0.38,49,15.9,94.4,Gizi Baik,1464.9,58.2,59.2,174.8,"Alergi: kepiting, kedele","kopi, jeroan",train
+anak_balita_0523,ANAK_BALITA,L,,,,-1.57,-2.26,37,11.5,91.4,Gizi Kurang,1050.4,40.5,37.4,138.0,-,none,train
+anak_balita_0524,ANAK_BALITA,L,,,,0.15,0.44,56,18.3,107.3,Gizi Baik,1278.4,45.9,46.4,169.3,"telurr, gandum",spicy,train
+anak_balita_0525,ANAK_BALITA,P,,,,0.16,-2.45,9,6.3,69.3,Gizi Kurang,533.0,19.2,18.9,71.5,udang,tidak suka makanan manis,train
+anak_balita_0526,ANAK_BALITA,L,,,,1.75,-0.14,0,3.3,55.8,Gizi Baik,300.0,11.0,10.9,39.4,-,tidak ada,test
+anak_balita_0527,ANAK_BALITA,L,,,,-1.42,0.41,10,8.9,66.1,Gizi Baik,747.1,23.3,30.3,95.4,crab & ebi,pantangan makanan manis,train
+anak_balita_0528,ANAK_BALITA,P,,,,-1.13,1.76,11,10.5,69.2,Berisiko Gizi Lebih,882.1,30.7,32.9,115.8,allergic to shrimp; wheat,-,train
+anak_balita_0529,ANAK_BALITA,L,,,,-1.34,-1.29,51,14.8,99.7,Gizi Baik,1142.0,40.8,46.7,139.7,-,tidak ada,train
+anak_balita_0530,ANAK_BALITA,P,,,,0.29,1.49,6,7.3,63.4,Berisiko Gizi Lebih,620.0,22.9,24.5,77.0,-,,train
+anak_balita_0531,ANAK_BALITA,P,,,,-0.43,0.1,1,3.9,50.7,Gizi Baik,336.5,12.2,12.7,43.3,no allergies,tidak suka daging merah,train
+anak_balita_0532,ANAK_BALITA,P,,,,0.81,-0.81,9,7.4,71.4,Gizi Baik,630.1,21.7,24.9,79.8,susu sapi,"pantangan gorengan, kopi",train
+anak_balita_0533,ANAK_BALITA,P,,,,-1.55,0.68,3,5.2,51.1,Gizi Baik,444.1,14.7,17.0,58.0,no allergies,"tidak suka gorengan, makanan manis",train
+anak_balita_0534,ANAK_BALITA,L,,,,-1.35,-0.88,5,5.5,56.0,Gizi Baik,467.5,16.3,19.1,57.5,Alergi: kacang tanah; kepiting,-,test
+anak_balita_0535,ANAK_BALITA,P,,,,0.93,-0.22,54,17.0,108.8,Gizi Baik,1202.6,36.6,44.7,163.5,Alergi: cumi-cumi & tahu tempe,none,train
+anak_balita_0536,ANAK_BALITA,L,,,,0.48,0.94,56,19.1,108.4,Gizi Baik,1696.9,53.1,64.9,225.0,-,"tidak suka makanan manis, gorengan",train
+anak_balita_0537,ANAK_BALITA,P,,,,-0.69,0.21,55,17.8,104.0,Gizi Baik,1313.0,48.5,51.8,163.1,,hindari jeroan,train
+anak_balita_0538,ANAK_BALITA,P,,,,0.13,0.33,19,11.4,82.4,Gizi Baik,939.0,36.3,35.7,118.1,,goreng-gorengan,train
+anak_balita_0539,ANAK_BALITA,L,,,,-1.78,-1.18,12,8.6,69.1,Gizi Baik,683.4,24.4,25.0,90.1,alergi susu sapi; crab,-,train
+anak_balita_0540,ANAK_BALITA,L,,,,1.93,1.01,1,4.2,58.5,Berisiko Gizi Lebih,362.1,14.3,15.2,42.1,alergi cumi,tidak ada,train
+anak_balita_0541,ANAK_BALITA,P,,,,-0.14,0.92,57,19.3,106.9,Gizi Baik,1355.3,51.3,53.3,167.5,-,-,train
+anak_balita_0542,ANAK_BALITA,L,,,,-0.58,-0.12,47,16.0,100.1,Gizi Baik,1368.4,50.6,53.5,171.1,"alergi dairy, crab",none,test
+anak_balita_0543,ANAK_BALITA,P,,,,-1.51,0.05,58,18.0,102.9,Gizi Baik,1296.7,49.8,43.7,176.0,none,"tidak suka pedas, makanan manis",train
+anak_balita_0544,ANAK_BALITA,P,,,,-1.59,-0.63,6,6.1,57.2,Gizi Baik,519.0,19.3,17.6,71.0,Alergi: cumi; wheat,-,test
+anak_balita_0545,ANAK_BALITA,P,,,,0.6,-0.46,42,14.7,101.2,Gizi Baik,1139.6,38.5,44.0,147.4,Alergi: gandum & cumi-cumi,,train
+anak_balita_0546,ANAK_BALITA,L,,,,0.51,-1.44,17,9.3,81.7,Gizi Baik,747.4,23.3,28.6,99.1,-,-,train
+anak_balita_0547,ANAK_BALITA,L,,,,-1.25,0.56,17,11.2,75.9,Gizi Baik,918.8,32.1,36.3,116.0,none,,train
+anak_balita_0548,ANAK_BALITA,L,,,,-1.12,-0.67,9,7.5,65.1,Gizi Baik,638.5,25.4,25.4,77.1,none,none,train
+anak_balita_0549,ANAK_BALITA,P,,,,-1.46,0.88,16,11.3,74.2,Gizi Baik,925.2,30.8,38.7,113.5,tidak ada,"hindari jeroan, kopi",train
+anak_balita_0550,ANAK_BALITA,L,,,,-0.68,-1.32,29,11.5,88.5,Gizi Baik,945.0,36.2,34.3,122.9,no allergies,tidak ada,test
+anak_balita_0551,ANAK_BALITA,L,,,,-2.08,0.79,56,18.9,100.0,Gizi Baik,1592.6,52.3,60.8,209.0,no allergies,tidak suka makanan manis,train
+anak_balita_0552,ANAK_BALITA,L,,,,1.3,-2.14,34,11.3,98.8,Gizi Kurang,922.5,31.7,35.0,120.1,Alergi: milk,pantangan kopi,train
+anak_balita_0553,ANAK_BALITA,P,,,,-1.27,-0.52,9,7.6,64.6,Gizi Baik,647.0,22.4,22.5,88.8,alergi terigu,no allergies,train
+anak_balita_0554,ANAK_BALITA,P,,,,-0.42,-1.35,5,5.2,59.0,Gizi Baik,447.0,17.6,15.9,58.4,"allergic to ikan, squid",-,train
+anak_balita_0555,ANAK_BALITA,P,,,,-0.73,-0.78,22,10.9,82.6,Gizi Baik,894.0,34.1,31.3,119.1,-,mie instan,train
+anak_balita_0556,ANAK_BALITA,L,,,,-0.88,-0.07,56,17.5,103.9,Gizi Baik,1408.7,44.9,52.2,189.8,none,-,train
+anak_balita_0557,ANAK_BALITA,L,,,,-0.86,-0.04,32,13.6,90.1,Gizi Baik,1126.6,36.5,37.7,160.3,tidak ada,-,train
+anak_balita_0558,ANAK_BALITA,P,,,,-0.25,0.43,10,8.9,70.0,Gizi Baik,748.5,29.0,27.8,95.6,tidak ada,"pantangan pedas, mie instan",test
+anak_balita_0559,ANAK_BALITA,P,,,,-3.08,0.91,57,19.3,97.2,Gizi Baik,1109.6,42.9,37.5,150.1,no allergies,pantangan kopi,train
+anak_balita_0560,ANAK_BALITA,P,,,,-0.52,-0.32,44,15.2,98.6,Gizi Baik,1115.4,40.9,46.8,132.7,cumi; telor,-,test
+anak_balita_0561,ANAK_BALITA,L,,,,-3.29,-0.29,53,16.7,94.4,Gizi Baik,1132.8,45.2,40.0,148.0,no allergies,mie instan,train
+anak_balita_0562,ANAK_BALITA,P,,,,0.46,2.13,35,16.8,96.8,Gizi Lebih,1418.2,46.1,52.1,191.2,allergic to telor,tidak ada,train
+anak_balita_0563,ANAK_BALITA,L,,,,-2.47,-2.74,17,8.0,71.9,Gizi Kurang,636.2,23.5,22.1,85.9,no allergies,hindari daging merah,train
+anak_balita_0564,ANAK_BALITA,P,,,,-1.26,0.05,44,15.7,96.2,Gizi Baik,1235.0,46.9,51.4,146.2,Alergi: cumi,tidak ada,train
+anak_balita_0565,ANAK_BALITA,L,,,,-1.13,1.18,56,19.5,103.1,Berisiko Gizi Lebih,1460.4,47.9,50.8,202.9,,,train
+anak_balita_0566,ANAK_BALITA,P,,,,-2.86,-0.61,18,10.3,71.6,Gizi Baik,836.6,32.3,34.0,100.4,none,"pantangan goreng-gorengan, santan",train
+anak_balita_0567,ANAK_BALITA,L,,,,-0.16,-1.8,35,11.8,94.7,Gizi Baik,973.6,36.2,36.5,125.0,allergic to tahu tempe,tidak ada,train
+anak_balita_0568,ANAK_BALITA,L,,,,-2.15,-0.68,6,6.1,55.4,Gizi Baik,516.4,20.1,18.6,67.1,none,tidak ada,train
+anak_balita_0569,ANAK_BALITA,L,,,,-0.43,0.45,1,4.0,50.7,Gizi Baik,346.4,11.9,12.8,45.8,"Alergi: crab, udnag",no allergies,train
+anak_balita_0570,ANAK_BALITA,P,,,,1.32,-1.13,7,6.3,68.9,Gizi Baik,534.0,20.3,20.9,66.1,allergic to laktosa,"manis, jeroan",train
+anak_balita_0571,ANAK_BALITA,P,,,,0.49,-0.58,54,16.4,107.4,Gizi Baik,1183.5,36.1,40.6,168.4,egg; peanut,"kopi, makanan manis",test
+anak_balita_0572,ANAK_BALITA,L,,,,-2.39,-0.27,18,10.6,73.1,Gizi Baik,866.5,33.8,36.1,101.6,Alergi: milk; kedele,"tidak suka santan, kopi",train
+anak_balita_0573,ANAK_BALITA,P,,,,0.4,-1.77,59,15.2,109.8,Gizi Baik,1488.0,59.3,57.9,182.4,alergi ebi; gandum,no allergies,train
+anak_balita_0574,ANAK_BALITA,P,,,,-1.87,-1.04,30,12.0,85.3,Gizi Baik,989.3,36.7,39.4,122.1,,-,train
+anak_balita_0575,ANAK_BALITA,P,,,,-0.5,-3.24,44,11.1,98.7,Gizi Buruk,1209.0,38.4,48.0,155.8,none,none,train
+anak_balita_0576,ANAK_BALITA,L,,,,1.12,0.5,28,13.5,93.7,Gizi Baik,1120.1,37.5,37.5,158.1,,tidak ada,train
+anak_balita_0577,ANAK_BALITA,P,,,,0.07,-1.16,16,9.4,79.2,Gizi Baik,754.4,22.7,25.6,108.3,gandum & kacang tanah,"hindari gorengan, manis",train
+anak_balita_0578,ANAK_BALITA,L,,,,0.8,-1.68,34,11.8,97.1,Gizi Baik,973.8,34.8,38.1,122.9,Alergi: gluten,"tidak suka mie instan, kopi",train
+anak_balita_0579,ANAK_BALITA,P,,,,-2.34,1.97,43,18.2,92.1,Berisiko Gizi Lebih,1222.3,39.5,50.3,152.8,alergi seafood,hindari daging merah,test
+anak_balita_0580,ANAK_BALITA,P,,,,-0.54,-1.68,8,6.4,64.9,Gizi Baik,542.2,17.6,22.0,68.6,"allergic to nuts, seafood",none,train
+anak_balita_0581,ANAK_BALITA,L,,,,-2.6,-1.88,45,13.1,92.3,Gizi Baik,1367.9,50.9,52.9,172.1,none,none,train
+anak_balita_0582,ANAK_BALITA,P,,,,0.61,-0.86,25,11.4,89.8,Gizi Baik,935.7,29.1,34.6,126.8,alergi cumi,,train
+anak_balita_0583,ANAK_BALITA,L,,,,-0.39,0.1,49,16.6,101.7,Gizi Baik,1218.0,38.1,51.0,151.6,,tidak ada,test
+anak_balita_0584,ANAK_BALITA,L,,,,0.47,1.12,38,16.1,98.6,Berisiko Gizi Lebih,1576.6,61.5,65.9,184.4,ikan,tidak suka daging merah,train
+anak_balita_0585,ANAK_BALITA,L,,,,-2.39,0.43,60,19.0,101.1,Gizi Baik,1404.1,46.2,47.3,198.5,allergic to wheat,,train
+anak_balita_0586,ANAK_BALITA,P,,,,-0.1,-1.01,37,13.2,96.2,Gizi Baik,1090.3,41.5,39.9,141.3,none,tidak ada,train
+anak_balita_0587,ANAK_BALITA,L,,,,-0.34,0.38,36,14.8,94.9,Gizi Baik,1499.6,52.7,59.1,189.3,tidak ada,"pantangan santan, gorengan",train
+anak_balita_0588,ANAK_BALITA,L,,,,1.29,0.93,6,7.0,66.8,Gizi Baik,593.1,19.9,23.1,76.4,allergic to gandum,"tidak suka gorengan, jeroan",train
+anak_balita_0589,ANAK_BALITA,P,,,,-1.86,1.38,16,11.8,72.9,Berisiko Gizi Lebih,967.0,38.6,32.5,130.1,ebi & terigu,hindari santan,train
+anak_balita_0590,ANAK_BALITA,L,,,,-0.36,-1.92,59,15.0,107.3,Gizi Baik,1173.4,35.5,42.1,163.1,-,tidak suka daging merah,train
+anak_balita_0591,ANAK_BALITA,L,,,,-1.58,-0.62,19,10.5,76.8,Gizi Baik,854.2,31.9,30.6,112.9,no allergies,tidak ada,train
+anak_balita_0592,ANAK_BALITA,L,,,,-0.39,0.58,6,6.8,61.2,Gizi Baik,576.3,17.8,20.4,80.4,no allergies,tidak ada,train
+anak_balita_0593,ANAK_BALITA,P,,,,2.01,1.15,54,19.1,112.4,Berisiko Gizi Lebih,1579.9,53.4,58.9,209.0,soy,pantangan daging merah,train
+anak_balita_0594,ANAK_BALITA,P,,,,1.42,-1.45,10,7.4,75.5,Gizi Baik,629.5,25.1,22.8,81.0,-,santan,train
+anak_balita_0595,ANAK_BALITA,L,,,,-0.13,1.47,21,13.1,83.6,Berisiko Gizi Lebih,1084.3,35.8,42.8,139.1,none,"tidak suka jeroan, manis",train
+anak_balita_0596,ANAK_BALITA,P,,,,0.32,-1.17,27,11.4,90.3,Gizi Baik,932.8,35.1,34.5,120.5,,-,train
+anak_balita_0597,ANAK_BALITA,L,,,,-0.35,0.11,54,17.5,104.6,Gizi Baik,1240.7,45.4,43.1,167.7,no allergies,no allergies,test
+anak_balita_0598,ANAK_BALITA,P,,,,0.07,-0.46,4,5.2,58.6,Gizi Baik,444.5,13.6,16.6,60.1,fish,"kopi, mie instan",train
+anak_balita_0599,ANAK_BALITA,L,,,,-0.33,0.99,25,13.5,86.7,Gizi Baik,1119.8,37.9,41.1,149.7,alergi gandum,hindari kopi,train
+anak_balita_0600,ANAK_BALITA,P,,,,-1.96,-1.05,26,11.4,82.0,Gizi Baik,931.6,32.5,34.3,123.3,,none,test
+anak_balita_0601,ANAK_BALITA,P,,,,-0.53,0.05,17,10.7,78.3,Gizi Baik,875.3,27.2,32.2,119.2,makanan laut dan cumi,,train
+anak_balita_0602,ANAK_BALITA,L,,,,0.9,-0.12,24,12.1,90.0,Gizi Baik,994.3,32.8,36.1,134.5,crab & egg,,test
+anak_balita_0603,ANAK_BALITA,P,,,,-0.54,-0.08,42,15.2,97.5,Gizi Baik,1109.7,33.9,43.6,145.4,allergic to soy,-,train
+anak_balita_0604,ANAK_BALITA,L,,,,-3.03,-0.79,3,4.5,46.3,Gizi Baik,391.3,14.6,15.8,47.7,-,"spicy, jeroan",train
+anak_balita_0605,ANAK_BALITA,L,,,,-0.05,-0.68,32,12.8,92.8,Gizi Baik,1056.1,34.8,36.0,148.3,allergic to makanan laut dan ikn,none,train
+anak_balita_0606,ANAK_BALITA,L,,,,-1.69,2.09,12,11.4,69.4,Gizi Lebih,934.9,36.5,38.3,111.1,telor,"pantangan daging merah, makanan manis",test
+anak_balita_0607,ANAK_BALITA,P,,,,-0.87,-1.48,45,13.7,98.0,Gizi Baik,1365.7,47.0,53.9,173.1,no allergies,none,train
+anak_balita_0608,ANAK_BALITA,P,,,,-2.14,-0.17,28,12.7,82.9,Gizi Baik,1050.0,36.0,40.7,135.0,,none,train
+anak_balita_0609,ANAK_BALITA,L,,,,-1.3,-1.19,31,12.0,88.0,Gizi Baik,987.0,37.8,40.7,117.3,-,none,train
+anak_balita_0610,ANAK_BALITA,L,,,,-0.56,0.1,8,7.6,64.8,Gizi Baik,640.5,20.9,25.4,82.0,allergic to gluten,"tidak suka daging merah, goreng-gorengan",train
+anak_balita_0611,ANAK_BALITA,P,,,,-1.91,-0.42,27,12.2,82.9,Gizi Baik,1009.5,38.6,33.9,137.4,no allergies,tidak ada,train
+anak_balita_0612,ANAK_BALITA,P,,,,1.08,1.23,19,12.3,85.6,Berisiko Gizi Lebih,1019.0,31.0,36.8,140.9,Alergi: ikan,"hindari spicy, daging merah",train
+anak_balita_0613,ANAK_BALITA,L,,,,-1.6,-1.79,5,5.0,55.1,Gizi Baik,427.8,16.9,15.9,54.3,kacang tanah,"hindari pedas, makanan manis",train
+anak_balita_0614,ANAK_BALITA,P,,,,-1.63,-2.29,19,8.8,76.6,Gizi Kurang,705.2,26.3,25.3,93.0,-,,train
+anak_balita_0615,ANAK_BALITA,P,,,,-0.9,0.09,57,18.0,104.4,Gizi Baik,1163.8,44.2,43.9,148.0,sea food,none,train
+anak_balita_0616,ANAK_BALITA,L,,,,-1.43,-2.64,43,11.8,95.1,Gizi Kurang,1212.8,42.8,46.8,155.0,,none,train
+anak_balita_0617,ANAK_BALITA,L,,,,-0.07,-2.99,55,12.8,106.1,Gizi Kurang,1292.4,46.0,48.4,168.3,none,daging merah,train
+anak_balita_0618,ANAK_BALITA,L,,,,-1.18,0.09,27,12.8,85.4,Gizi Baik,1061.7,33.6,44.0,132.9,tidak ada,hindari kopi,train
+anak_balita_0619,ANAK_BALITA,P,,,,-1.27,-0.72,1,3.6,47.9,Gizi Baik,313.3,10.6,11.7,41.4,no allergies,hindari spicy,train
+anak_balita_0620,ANAK_BALITA,L,,,,2.65,0.06,5,6.0,69.2,Gizi Baik,508.7,18.3,17.4,69.9,tidak ada,hindari gorengan,train
+anak_balita_0621,ANAK_BALITA,P,,,,2.08,1.85,58,21.0,114.8,Berisiko Gizi Lebih,1621.4,61.9,60.2,208.0,tidak ada,none,train
+anak_balita_0622,ANAK_BALITA,L,,,,-1.43,0.57,52,17.8,100.0,Gizi Baik,1577.6,57.2,65.4,190.0,"alergi kacng, telor",tidak ada,train
+anak_balita_0623,ANAK_BALITA,P,,,,0.68,0.58,0,3.5,52.3,Gizi Baik,304.8,10.8,12.9,36.5,alergi laktosa; kepiting,none,train
+anak_balita_0624,ANAK_BALITA,L,,,,1.33,-2.83,37,10.8,100.9,Gizi Kurang,1117.0,43.7,41.4,142.4,allergic to cumi-cumi dan laktosa,,train
+anak_balita_0625,ANAK_BALITA,P,,,,0.18,1.8,32,15.8,93.6,Berisiko Gizi Lebih,1326.4,42.2,52.2,172.0,sea food,"pedas, manis",train
+anak_balita_0626,ANAK_BALITA,L,,,,-2.28,1.39,53,19.3,97.7,Berisiko Gizi Lebih,1413.4,52.3,52.4,183.1,none,no allergies,train
+anak_balita_0627,ANAK_BALITA,L,,,,1.32,2.44,51,20.5,108.5,Gizi Lebih,1768.9,60.9,65.7,233.5,"allergic to ebi, milk","spicy, gorengan",test
+anak_balita_0628,ANAK_BALITA,L,,,,-1.36,2.24,36,17.2,91.5,Gizi Lebih,1208.1,39.1,41.7,169.0,allergic to gandum dan milk,none,test
+anak_balita_0629,ANAK_BALITA,P,,,,0.78,-1.41,30,11.6,94.1,Gizi Baik,949.6,36.5,35.2,121.7,tidak ada,no allergies,train
+anak_balita_0630,ANAK_BALITA,P,,,,-1.04,-1.49,3,4.2,52.8,Gizi Baik,366.0,12.7,12.3,51.2,-,"tidak suka pedas, kopi",train
+anak_balita_0631,ANAK_BALITA,P,,,,-3.01,-2.1,36,11.6,86.1,Gizi Kurang,1102.2,36.0,37.9,154.3,tidak ada,pantangan goreng-gorengan,train
+anak_balita_0632,ANAK_BALITA,L,,,,-0.13,3.78,23,16.1,85.6,Obesitas,1349.0,44.9,50.6,178.5,tidak ada,,test
+anak_balita_0633,ANAK_BALITA,P,,,,-1.92,0.28,16,10.7,72.7,Gizi Baik,875.3,32.5,30.8,117.0,alergi cumi,"goreng-gorengan, kopi",train
+anak_balita_0634,ANAK_BALITA,P,,,,2.05,0.41,34,14.5,101.3,Gizi Baik,1207.1,40.6,41.9,166.8,allergic to kedelai,"hindari mie instan, goreng-gorengan",train
+anak_balita_0635,ANAK_BALITA,P,,,,0.5,1.37,8,8.4,68.3,Berisiko Gizi Lebih,710.9,27.5,27.9,87.4,tidak ada,hindari pedas,test
+anak_balita_0636,ANAK_BALITA,P,,,,0.11,1.31,6,7.2,62.9,Berisiko Gizi Lebih,611.1,21.2,22.5,80.9,allergic to ikan; telor,"tidak suka pedas, spicy",train
+anak_balita_0637,ANAK_BALITA,P,,,,0.88,0.82,29,14.0,93.7,Gizi Baik,1170.0,44.8,46.6,142.8,,,test
+anak_balita_0638,ANAK_BALITA,L,,,,-1.2,-0.37,6,6.2,58.5,Gizi Baik,531.4,17.2,22.0,66.2,alergi cumi,"gorengan, spicy",train
+anak_balita_0639,ANAK_BALITA,P,,,,-0.43,0.26,8,7.7,65.3,Gizi Baik,649.2,22.5,26.7,79.6,no allergies,"pantangan kopi, makanan manis",train
+anak_balita_0640,ANAK_BALITA,L,,,,-0.67,0.75,47,17.2,99.8,Gizi Baik,1226.7,41.3,49.7,153.5,peanut & shrimp,"pantangan santan, jeroan",train
+anak_balita_0641,ANAK_BALITA,P,,,,-0.25,0.74,11,9.7,72.1,Gizi Baik,813.8,29.2,33.1,99.8,tidak ada,-,train
+anak_balita_0642,ANAK_BALITA,P,,,,-0.34,-0.91,16,9.6,77.9,Gizi Baik,775.4,30.1,29.1,98.4,no allergies,no allergies,test
+anak_balita_0643,ANAK_BALITA,L,,,,-1.99,0.39,31,13.9,85.7,Gizi Baik,1157.0,42.3,42.2,151.9,tidak ada,no allergies,train
+anak_balita_0644,ANAK_BALITA,P,,,,-2.2,-1.37,7,6.1,57.3,Gizi Baik,521.2,20.4,21.9,60.7,-,-,train
+anak_balita_0645,ANAK_BALITA,L,,,,-3.59,0.09,36,14.4,84.2,Gizi Baik,1365.4,41.5,49.3,188.9,-,,train
+anak_balita_0646,ANAK_BALITA,L,,,,0.29,1.61,14,11.5,77.9,Berisiko Gizi Lebih,942.4,37.0,32.6,125.1,tidak ada,pantangan pedas,train
+anak_balita_0647,ANAK_BALITA,P,,,,0.67,0.78,38,15.7,99.3,Gizi Baik,1423.6,45.0,57.2,182.2,fish; kedelai,"hindari mie instan, gorengan",train
+anak_balita_0648,ANAK_BALITA,L,,,,-3.74,-0.73,35,13.2,82.9,Gizi Baik,1095.1,35.2,43.5,140.8,none,"hindari gorengan, santan",train
+anak_balita_0649,ANAK_BALITA,L,,,,-0.54,-0.41,0,3.2,48.2,Gizi Baik,300.0,10.7,10.6,40.4,-,,train
+anak_balita_0650,ANAK_BALITA,P,,,,-3.04,2.51,17,13.1,70.0,Gizi Lebih,1085.4,41.9,38.6,142.6,no allergies,pantangan mie instan,train
+anak_balita_0651,ANAK_BALITA,P,,,,-1.53,0.8,35,15.1,90.2,Gizi Baik,1267.4,39.3,45.8,174.5,none,none,test
+anak_balita_0652,ANAK_BALITA,L,,,,0.06,-3.46,47,11.1,102.2,Gizi Buruk,1243.5,38.0,49.5,161.5,allergic to sea food,,train
+anak_balita_0653,ANAK_BALITA,P,,,,0.71,1.07,30,14.5,93.8,Berisiko Gizi Lebih,1212.6,47.4,42.0,161.1,none,-,train
+anak_balita_0654,ANAK_BALITA,L,,,,-1.25,-1.43,7,6.1,60.5,Gizi Baik,518.4,19.3,19.8,65.8,,pantangan jeroan,train
+anak_balita_0655,ANAK_BALITA,L,,,,-0.09,0.72,31,14.3,92.0,Gizi Baik,1192.4,42.9,45.0,153.9,Alergi: kedelai; kacang tanah,pantangan jeroan,train
+anak_balita_0656,ANAK_BALITA,P,,,,1.33,0.31,31,13.8,96.6,Gizi Baik,1147.9,42.5,41.6,150.9,allergic to seafood,"pantangan jeroan, santan",test
+anak_balita_0657,ANAK_BALITA,L,,,,-0.12,3.66,46,21.2,101.0,Obesitas,1542.5,52.2,55.2,209.3,no allergies,hindari goreng-gorengan,train
+anak_balita_0658,ANAK_BALITA,P,,,,1.55,0.2,9,8.2,73.9,Gizi Baik,690.2,27.1,27.7,83.2,,tidak ada,train
+anak_balita_0659,ANAK_BALITA,P,,,,-2.03,2.05,12,11.4,68.3,Gizi Lebih,932.2,32.7,39.1,112.4,,,train
+anak_balita_0660,ANAK_BALITA,L,,,,-2.71,1.02,53,18.7,96.3,Berisiko Gizi Lebih,1204.1,42.7,50.0,145.8,allergic to kacang,tidak ada,train
+anak_balita_0661,ANAK_BALITA,P,,,,-0.48,-2.27,18,8.7,79.4,Gizi Kurang,692.2,23.0,23.4,97.5,none,"pantangan mie instan, kopi",train
+anak_balita_0662,ANAK_BALITA,L,,,,-2.15,1.28,34,15.6,87.4,Berisiko Gizi Lebih,1304.5,51.3,47.0,169.0,alergi tahu tempe,"makanan manis, kopi",train
+anak_balita_0663,ANAK_BALITA,P,,,,1.34,2.47,49,20.1,107.5,Gizi Lebih,1391.2,49.6,49.0,187.9,soy dan wheat,-,train
+anak_balita_0664,ANAK_BALITA,L,,,,-1.33,-1.99,23,9.8,81.6,Gizi Baik,795.4,27.2,33.3,96.6,Alergi: cumi,none,train
+anak_balita_0665,ANAK_BALITA,L,,,,0.57,-0.41,54,16.7,107.6,Gizi Baik,1615.4,52.8,60.3,215.3,allergic to kepiting,"pantangan mie instan, kopi",train
+anak_balita_0666,ANAK_BALITA,P,,,,1.9,0.24,24,12.5,93.3,Gizi Baik,1029.5,34.6,39.4,134.0,allergic to kedele,-,train
+anak_balita_0667,ANAK_BALITA,L,,,,0.26,1.03,58,19.6,108.8,Berisiko Gizi Lebih,1315.5,46.6,52.9,163.2,alergi peanut,hindari santan,test
+anak_balita_0668,ANAK_BALITA,P,,,,-0.44,0.2,31,13.7,90.8,Gizi Baik,1136.1,45.1,46.2,134.9,dairy dan sea food,tidak ada,test
+anak_balita_0669,ANAK_BALITA,P,,,,-0.71,0.91,10,9.3,68.5,Gizi Baik,778.7,23.6,31.8,99.5,,"santan, kopi",test
+anak_balita_0670,ANAK_BALITA,P,,,,-2.25,-0.47,35,13.5,87.8,Gizi Baik,1124.3,39.5,46.7,136.6,none,tidak ada,train
+anak_balita_0671,ANAK_BALITA,L,,,,-1.61,1.44,8,8.5,61.4,Berisiko Gizi Lebih,714.9,24.8,26.3,94.8,tidak ada,"hindari mie instan, santan",train
+anak_balita_0672,ANAK_BALITA,L,,,,-1.88,2.85,26,15.8,82.3,Gizi Lebih,1323.6,49.1,55.7,156.4,Alergi: ikn,santan,train
+anak_balita_0673,ANAK_BALITA,L,,,,-3.71,-0.79,28,12.0,77.8,Gizi Baik,986.4,35.7,33.7,135.1,no allergies,,test
+anak_balita_0674,ANAK_BALITA,L,,,,-0.0,-0.62,38,13.8,97.1,Gizi Baik,1319.7,52.0,55.5,153.1,none,tidak suka daging merah,test
+anak_balita_0675,ANAK_BALITA,P,,,,-1.23,-2.06,12,7.8,70.9,Gizi Kurang,616.0,24.3,23.2,77.5,ikan,-,train
+anak_balita_0676,ANAK_BALITA,P,,,,-1.39,-1.3,43,13.7,95.2,Gizi Baik,1070.6,36.7,44.9,130.0,tidak ada,-,train
+anak_balita_0677,ANAK_BALITA,L,,,,-1.41,0.59,17,11.2,75.3,Gizi Baik,920.9,29.0,32.7,127.6,,"gorengan, jeroan",train
+anak_balita_0678,ANAK_BALITA,L,,,,0.44,-1.4,30,11.6,93.0,Gizi Baik,950.7,34.1,36.3,121.8,seafood & udnag,-,train
+anak_balita_0679,ANAK_BALITA,L,,,,-0.71,2.09,34,16.6,92.1,Gizi Lebih,1394.9,43.6,52.4,187.2,no allergies,"hindari goreng-gorengan, mie instan",train
+anak_balita_0680,ANAK_BALITA,P,,,,-0.93,1.1,1,4.2,49.0,Berisiko Gizi Lebih,364.7,12.2,12.4,51.0,-,none,train
+anak_balita_0681,ANAK_BALITA,P,,,,-0.39,-0.06,5,5.9,59.1,Gizi Baik,503.2,18.9,19.6,62.8,tidak ada,"tidak suka santan, makanan manis",train
+anak_balita_0682,ANAK_BALITA,L,,,,1.04,3.85,22,15.8,88.4,Obesitas,1329.7,46.0,53.5,166.1,,tidak ada,test
+anak_balita_0683,ANAK_BALITA,L,,,,-2.15,-1.8,23,10.0,78.9,Gizi Baik,813.4,25.9,32.8,103.6,-,"kopi, makanan manis",train
+anak_balita_0684,ANAK_BALITA,L,,,,-2.22,1.78,33,16.0,86.4,Berisiko Gizi Lebih,1341.9,42.5,51.1,178.0,no allergies,tidak ada,train
+anak_balita_0685,ANAK_BALITA,L,,,,-1.98,0.13,12,9.7,68.5,Gizi Baik,784.5,27.5,26.9,108.1,Alergi: sea food,pantangan goreng-gorengan,train
+anak_balita_0686,ANAK_BALITA,L,,,,-0.13,-1.94,39,12.2,97.2,Gizi Baik,1111.0,39.4,39.7,149.0,laktosa,tidak ada,train
+anak_balita_0687,ANAK_BALITA,L,,,,0.93,-2.44,55,13.6,109.4,Gizi Kurang,1351.7,48.3,54.1,167.8,none,pantangan pedas,train
+anak_balita_0688,ANAK_BALITA,P,,,,0.65,-1.98,54,14.2,107.9,Gizi Baik,1465.7,49.6,53.2,197.2,allergic to telor,"hindari manis, kopi",test
+anak_balita_0689,ANAK_BALITA,P,,,,-1.4,0.79,34,14.9,89.9,Gizi Baik,1249.6,40.3,45.3,170.1,allergic to makanan laut; kedele,no allergies,train
+anak_balita_0690,ANAK_BALITA,P,,,,0.16,-0.36,31,13.0,92.8,Gizi Baik,1076.6,36.9,37.2,148.5,tidak ada,tidak suka jeroan,train
+anak_balita_0691,ANAK_BALITA,P,,,,-0.14,-0.25,53,16.7,104.7,Gizi Baik,1313.8,52.3,52.9,157.2,tidak ada,,train
+anak_balita_0692,ANAK_BALITA,P,,,,-0.24,1.95,33,16.2,93.0,Berisiko Gizi Lebih,1361.1,46.3,56.4,167.0,no allergies,tidak ada,test
+anak_balita_0693,ANAK_BALITA,P,,,,-1.88,-0.68,31,12.6,86.0,Gizi Baik,1041.4,35.0,39.3,137.0,tidak ada,none,train
+anak_balita_0694,ANAK_BALITA,L,,,,-0.18,1.74,25,14.3,87.2,Berisiko Gizi Lebih,1194.1,39.6,40.9,166.8,allergic to udnag; terigu,,train
+anak_balita_0695,ANAK_BALITA,L,,,,-1.37,0.18,49,16.7,98.5,Gizi Baik,1192.2,40.8,42.8,160.9,,"manis, pedas",train
+anak_balita_0696,ANAK_BALITA,P,,,,-2.1,-1.73,17,9.0,73.1,Gizi Baik,722.9,27.2,24.2,98.9,tidak ada,pantangan goreng-gorengan,test
+anak_balita_0697,ANAK_BALITA,L,,,,0.81,-1.89,28,10.7,92.7,Gizi Baik,873.3,28.7,31.0,119.8,no allergies,"santan, jeroan",test
+anak_balita_0698,ANAK_BALITA,L,,,,-0.0,-0.09,4,5.4,58.3,Gizi Baik,459.2,14.1,19.1,57.6,-,gorengan,train
+anak_balita_0699,ANAK_BALITA,P,,,,0.74,-0.16,36,14.1,98.4,Gizi Baik,1398.8,46.8,50.3,189.6,none,,train
+anak_balita_0700,ANAK_BALITA,P,,,,-0.48,0.83,14,10.8,75.4,Gizi Baik,879.4,31.8,37.0,104.8,-,hindari pedas,train
