@@ -26,7 +26,7 @@ import pandas as pd
 from typing import Optional
 from dotenv import load_dotenv, find_dotenv
 
-from kategori import KATEGORI_LIST, modul as modul_kategori
+from shared import KATEGORI_LIST, modul as modul_kategori, model_path as _model_path
 load_dotenv(find_dotenv(usecwd=True))
 
 warnings.filterwarnings('ignore')
@@ -139,7 +139,7 @@ class NutriScaleDataError(ValueError):
 # ==========================================================================
 
 def _muat_bahaya(kategori: str) -> dict[str, dict[str, list[str]]]:
-    """Tabel bahaya dari kategori/<kategori>/bahaya.py; None = daftar alkohol bersama."""
+    """Tabel bahaya dari <kategori>/ai_models/bahaya.py; None = daftar alkohol bersama."""
     tabel = modul_kategori(kategori, 'bahaya').BAHAYA
     return {jenis: {kode: (ALCOHOL_KEYWORDS if kws is None else kws) for kode, kws in isi.items()}
             for jenis, isi in tabel.items()}
@@ -214,7 +214,7 @@ FOOD_TYPE_KEYWORDS: list[tuple[str, list[str]]] = [
                    'restaurant', 'nasi', 'roti', 'mie', 'kentang', 'singkong', 'ubi']),
 ]
 
-# Fitur ML: SATU daftar & SATU fungsi untuk training (kategori/dataset.py) dan inferensi (recommend_meal)
+# Fitur ML: SATU daftar & SATU fungsi untuk training (shared/dataset.py) dan inferensi (recommend_meal)
 FEATURE_COLS: list[str] = (
     ['log_kcal_ratio', 'abs_log_kcal_ratio', 'portion_clipped',
      'protein_pct', 'abs_protein_pct_diff', 'abs_fat_pct_diff', 'abs_carbs_pct_diff',
@@ -1142,16 +1142,15 @@ _MODEL_ARTIFACT = {}
 
 def get_recommender_model(kategori: str = 'UMUM'):
     """
-    Muat model Logistic Regression per kategori: models/recommender_<KATEGORI>.joblib.
+    Muat model Logistic Regression per kategori: <kategori>/model/recommender_<KATEGORI>.joblib.
     Bila model kategori belum ada, pakai model UMUM (dengan aturan BLOKIR kategori tetap berlaku).
     """
     kategori = kategori if kategori in CATEGORY_HAZARDS else 'UMUM'
     if kategori in _MODEL_ARTIFACT:
         return _MODEL_ARTIFACT[kategori]
 
-    models_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'models')
     for name in (kategori, 'UMUM'):
-        model_path = os.path.join(models_dir, f'recommender_{name}.joblib')
+        model_path = _model_path(name)
         if os.path.exists(model_path):
             try:
                 artifact = joblib.load(model_path)
@@ -1159,7 +1158,7 @@ def get_recommender_model(kategori: str = 'UMUM'):
                     artifact['kategori_dipakai'] = name
                     _MODEL_ARTIFACT[kategori] = artifact
                     return artifact
-                print(f"[Model WARNING] Fitur {model_path} tidak cocok dengan FEATURE_COLS. Latih ulang (kategori/<kategori>/latih_<kategori>.py).")
+                print(f"[Model WARNING] Fitur {model_path} tidak cocok dengan FEATURE_COLS. Latih ulang (<kategori>/ai_models/latih_<kategori>.py).")
             except Exception as e:
                 print(f"[Model WARNING] Gagal memuat {model_path}: {e}")
 

@@ -1,6 +1,6 @@
 """
 Komponen profil bersama untuk keempat kategori (rumus energi & klasifikasi status gizi).
-Dipakai oleh kategori/<kategori>/profil.py agar semua anggota memakai rumus yang sama.
+Dipakai oleh <kategori>/ai_models/profil.py agar semua anggota memakai rumus yang sama.
 """
 
 import numpy as np

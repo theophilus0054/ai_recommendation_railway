@@ -1,13 +1,13 @@
 """
 ==========================================================================
- NutriScale AI — Training Bersama (dipanggil per kategori lewat kategori/pipeline.py)
+ NutriScale AI — Training Bersama (dipanggil per kategori lewat shared/pipeline.py)
  Melatih SATU model Logistic Regression multinomial untuk SATU kategori, dengan gradient boosting
  sebagai pembanding. Kode, fitur, hyperparameter, dan seed sama untuk keempat kategori.
  - Label ordinal 0 (tidak sesuai), 1 (cukup sesuai), 2 (sangat sesuai).
  - Fitur = model.FEATURE_COLS (fungsi compute_ml_features yang sama dipakai saat inferensi).
  - Skor ranking inferensi = (P(1) + 2*P(2)) / 2 dari predict_proba.
  - Validasi silang GroupKFold per profil + evaluasi pada test set profil baru
-   (data/<kategori>/test_data.csv), termasuk subset "makanan baru".
+   (<kategori>/data/test_data.csv), termasuk subset "makanan baru".
  - Baseline: formula lama (0.45 kalori + 0.40 kemiripan makro + 0.15 protein) & acak.
  Data SINTETIS: angka ini mengukur seberapa baik model meniru rubrik, bukan uji klinis.
 ==========================================================================
@@ -28,19 +28,19 @@ from sklearn.metrics import accuracy_score, f1_score, cohen_kappa_score, confusi
 
 from model import FEATURE_COLS, score_from_proba
 
-from kategori import PEMILIK
+from shared import PEMILIK, data_dir, model_path
 
 MODEL_VERSION = 'lr-v2'
 CONFLICT_COLS = ['n_conflict_allergen', 'n_conflict_pantangan', 'n_conflict_free', 'n_block_kategori']
 
-def load_data(data_dir: str, kategori: str):
-    cat_dir = os.path.join(data_dir, kategori.lower())
+def load_data(kategori: str):
+    cat_dir = data_dir(kategori)
     train_path = os.path.join(cat_dir, 'train_data.csv')
     test_path = os.path.join(cat_dir, 'test_data.csv')
 
     if not os.path.exists(train_path) or not os.path.exists(test_path):
         raise FileNotFoundError(f"Dataset train/test {kategori} tidak ditemukan di {cat_dir}. "
-                                f"Jalankan kategori/{kategori.lower()}/latih_{kategori.lower()}.py --buat-data terlebih dahulu.")
+                                f"Jalankan {kategori.lower()}/ai_models/latih_{kategori.lower()}.py --buat-data terlebih dahulu.")
 
     df_train = pd.read_csv(train_path)
     df_test = pd.read_csv(test_path)
@@ -112,8 +112,8 @@ def classification_metrics(y: np.ndarray, proba: np.ndarray) -> dict:
         'confusion_matrix': confusion_matrix(y, pred, labels=[0, 1, 2]).tolist(),
     }
 
-def train_category(kategori: str, data_dir: str, models_dir: str) -> dict:
-    df_train, df_test = load_data(data_dir, kategori)
+def train_category(kategori: str) -> dict:
+    df_train, df_test = load_data(kategori)
     print(f"\n[{kategori}] Memuat Dataset:")
     print(f"  - Training samples : {len(df_train)} baris ({df_train['profile_id'].nunique()} profil)")
     print(f"  - Testing samples  : {len(df_test)} baris ({df_test['profile_id'].nunique()} profil baru, Held-Out)")
@@ -212,7 +212,8 @@ def train_category(kategori: str, data_dir: str, models_dir: str) -> dict:
         'sklearn_version': sklearn.__version__,
         'metrics': results,
     }
-    artifact_path = os.path.join(models_dir, f'recommender_{kategori}.joblib')
+    artifact_path = model_path(kategori)
+    os.makedirs(os.path.dirname(artifact_path), exist_ok=True)
     joblib.dump(model_artifact, artifact_path)
     print(f"  Model Artefak Disimpan ke: {artifact_path}")
     return results

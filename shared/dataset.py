@@ -1,8 +1,8 @@
 """
 ==========================================================================
- NutriScale AI — Generator Dataset Bersama (dipanggil per kategori lewat kategori/pipeline.py)
+ NutriScale AI — Generator Dataset Bersama (dipanggil per kategori lewat shared/pipeline.py)
  Menghasilkan data training dan testing SINTETIS untuk SATU kategori. Bagian khusus kategori
- diambil dari kategori/<kategori>/profil.py (profil user) dan rubrik.py (poin rubrik).
+ diambil dari <kategori>/ai_models/profil.py (profil user) dan rubrik.py (poin rubrik).
  - Profil Tier 1 realistis per kategori (Harris-Benedict x aktivitas, IOM EER balita,
    tambahan energi trimester kehamilan AKG 2019, faktor stres pasca operasi).
  - Setiap profil x 5 sesi makan x 12 kandidat (6 cocok sesi, 4 acak, 2 konflik).
@@ -27,7 +27,7 @@ from model import (
     classify_food_type, detect_texture, detect_allergens, detect_hazards, is_alcoholic, status_flags,
     session_group, TEKSTUR_ORDINAL,
 )
-from kategori import KATEGORI_LIST, modul as modul_kategori
+from shared import KATEGORI_LIST, data_dir, modul as modul_kategori
 
 RUBRIC_VERSION = 'rubric-v1'
 
@@ -125,7 +125,7 @@ def random_pantangan_text(rng, p_none: float) -> str:
 
 
 def generate_profile(rng, kategori: str, idx: int) -> dict:
-    """Profil sintetis: bagian khusus kategori dari kategori/<kategori>/profil.py, sisanya bersama."""
+    """Profil sintetis: bagian khusus kategori dari <kategori>/ai_models/profil.py, sisanya bersama."""
     sex = str(rng.choice(['L', 'P']))
     prof = {'profile_id': f'{kategori.lower()}_{idx + 1:04d}', 'kategoriKondisi': kategori, 'jenisKelamin': sex,
             'usiaKehamilanMinggu': None, 'tahapDiet': None, 'jenisOperasi': None, 'haz': None, 'whz': None}
@@ -212,7 +212,7 @@ def rubric_points(row: pd.Series, prof: dict, kategori: str, target_kcal: float,
     if (flags['status_kurang'] or flags['stunting']) and p_pct >= 0.15:
         pts += 0.5
 
-    # 7. Penekanan per kategori (kategori/<kategori>/rubrik.py, milik anggota tim kategori tsb.)
+    # 7. Penekanan per kategori (<kategori>/ai_models/rubrik.py, milik anggota tim kategori tsb.)
     pts += modul_kategori(kategori, 'rubrik').poin_kategori(row, prof, m_eff, p_pct)
     return pts
 
@@ -246,10 +246,10 @@ def _sample_candidates(rng, foods: pd.DataFrame, prof: dict, kategori: str, targ
     return pd.concat(parts).drop_duplicates(subset=['name'])
 
 
-def generate_category_dataset(df_food: pd.DataFrame, kategori: str, output_dir: str,
+def generate_category_dataset(df_food: pd.DataFrame, kategori: str,
                               num_profiles: int = 700, seed: int = 42) -> tuple[str, str]:
     rng = np.random.default_rng(seed + KATEGORI_LIST.index(kategori))
-    out_dir = os.path.join(output_dir, kategori.lower())
+    out_dir = data_dir(kategori)
     os.makedirs(out_dir, exist_ok=True)
 
     # 15% makanan hanya muncul di test (uji "makanan baru")

@@ -1,6 +1,6 @@
 """Generator profil sintetis UMUM: dewasa 19-75 tahun, arah energi mengikuti status gizi."""
 
-from kategori.bersama import profil_dewasa
+from shared.bersama import profil_dewasa
 
 KCAL_MIN = 1300
 

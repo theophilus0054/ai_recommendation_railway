@@ -39,7 +39,7 @@ Sesuai dengan spesifikasi arsitektur **Histori Chat AI NutriScale (20 Oktober 20
 
 ## 📊 Hasil Evaluasi Model (Test Set Profil Baru, Data Sintetis)
 
-Setiap kategori: 700 profil sintetis × 5 sesi × 12 kandidat (≈42.000 pasangan). Split berdasarkan profil (profil test tidak pernah ada di train) dan 15% makanan hanya muncul di test. Label berasal dari rubrik bersama di `kategori/dataset.py` ditambah rubrik khusus di `kategori/<kategori>/rubrik.py` (memakai kolom yang tidak masuk fitur model, mis. serat, folat, zat besi, kalsium, kafein), tanpa noise acak.
+Setiap kategori: 700 profil sintetis × 5 sesi × 12 kandidat (≈42.000 pasangan). Split berdasarkan profil (profil test tidak pernah ada di train) dan 15% makanan hanya muncul di test. Label berasal dari rubrik bersama di `shared/dataset.py` ditambah rubrik khusus di `<kategori>/ai_models/rubrik.py` (memakai kolom yang tidak masuk fitur model, mis. serat, folat, zat besi, kalsium, kafein), tanpa noise acak.
 
 | Kategori | Accuracy | Precision (macro) | Recall (macro) | Macro-F1 | Weighted Kappa | CV Kappa (GroupKFold) | NDCG@5 | Pembanding GB (Acc / F1) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -50,7 +50,7 @@ Setiap kategori: 700 profil sintetis × 5 sesi × 12 kandidat (≈42.000 pasanga
 
 - Model utama Logistic Regression (koefisien dapat dijelaskan). Gradient boosting hanya pembanding: lebih akurat meniru rubrik, tetapi kotak hitam. Fitur ambang (`porsi_ideal`, `natrium_lewat_jauh`, `gula_lewat_jauh`, dan lain-lain) membuat efek ambang terbaca oleh model linear.
 - Umur kategori `ANAK_BALITA` dalam **bulan** (0 sampai 60); kategori lain dalam tahun.
-- Uji end-to-end (`kategori/<kategori>/validasi_<kategori>.py`, 2 skenario per kategori): 0 pelanggaran alergen, BLOKIR, dan tekstur.
+- Uji end-to-end (`<kategori>/ai_models/validasi_<kategori>.py`, 2 skenario per kategori): 0 pelanggaran alergen, BLOKIR, dan tekstur.
 - **Catatan jujur**: angka di atas mengukur seberapa baik model meniru rubrik pada data sintetis, bukan uji klinis. Rubrik & tabel bahaya perlu ditinjau ahli gizi (gold set) sebelum klaim klinis.
 
 ---
@@ -59,17 +59,29 @@ Setiap kategori: 700 profil sintetis × 5 sesi × 12 kandidat (≈42.000 pasanga
 
 | Kategori | Pemilik | Folder | Laporan validasi |
 | :--- | :--- | :--- | :--- |
-| UMUM | Muel | `kategori/umum/` | `kategori/umum/hasil/laporan_validasi_umum.md` |
-| ANAK_BALITA | Arya | `kategori/anak_balita/` | `kategori/anak_balita/hasil/laporan_validasi_anak_balita.md` |
-| IBU_HAMIL | Muz | `kategori/ibu_hamil/` | `kategori/ibu_hamil/hasil/laporan_validasi_ibu_hamil.md` |
-| PASCA_OPERASI | Raymond | `kategori/pasca_operasi/` | `kategori/pasca_operasi/hasil/laporan_validasi_pasca_operasi.md` |
+| UMUM | Muel | `umum/` | `umum/outputs/laporan_validasi_umum.md` |
+| ANAK_BALITA | Arya | `anak_balita/` | `anak_balita/outputs/laporan_validasi_anak_balita.md` |
+| IBU_HAMIL | Muz | `ibu_hamil/` | `ibu_hamil/outputs/laporan_validasi_ibu_hamil.md` |
+| PASCA_OPERASI | Raymond | `pasca_operasi/` | `pasca_operasi/outputs/laporan_validasi_pasca_operasi.md` |
 
-Tiap folder berisi data dan aturan kategori: `profil.py`, `rubrik.py`, `bahaya.py`, `skenario.py`, script `latih_<kategori>.py` dan `validasi_<kategori>.py`, serta `test_<kategori>.py`. Kode bersama (fitur, safety filter, generator dataset, training, split, evaluasi) ada di `model.py`, `kategori/dataset.py`, `kategori/training.py`, dan `kategori/pipeline.py`, sehingga keempat model memakai metode dan konfigurasi yang sama (`config_hash` tercatat di metadata model).
+Struktur tiap folder kategori (contoh `umum/`):
+
+```
+umum/
+  ai_models/   profil.py, rubrik.py, bahaya.py, skenario.py, input_uji.py, latih_umum.py, validasi_umum.py
+  data/        profiles.csv, train_data.csv, test_data.csv
+  model/       recommender_UMUM.joblib
+  outputs/     hasil_latih.json, hasil_validasi.json, laporan_validasi_umum.md
+  tests/       test_umum.py, test_input_umum.py
+  README.md
+```
+
+Kode bersama (fitur, safety filter, generator dataset, training, split, evaluasi) ada di `model.py` dan `shared/` (`dataset.py`, `training.py`, `pipeline.py`, `uji_input.py`, `bersama.py`), sehingga keempat model memakai metode dan konfigurasi yang sama (`config_hash` tercatat di metadata model). Katalog makanan bersama dan snapshot produk ada di `data/` (`nutrition.csv`, `supabase_products.json`).
 
 ```bash
-python kategori/ibu_hamil/latih_ibu_hamil.py --buat-data
-python kategori/ibu_hamil/validasi_ibu_hamil.py
-python -m unittest discover -s kategori -t . -p "test_*.py"
+python ibu_hamil/ai_models/latih_ibu_hamil.py --buat-data
+python ibu_hamil/ai_models/validasi_ibu_hamil.py
+python -m unittest discover -s . -t . -p "test_*.py"
 ```
 
 ---
@@ -78,20 +90,20 @@ python -m unittest discover -s kategori -t . -p "test_*.py"
 
 1. **Buat Data, Latih, dan Validasi per Kategori** (dijalankan pemilik masing-masing; contoh UMUM):
    ```bash
-   python kategori/umum/latih_umum.py --buat-data   # data/umum/*.csv lalu models/recommender_UMUM.joblib
-   python kategori/umum/validasi_umum.py            # kategori/umum/hasil/laporan_validasi_umum.md
+   python umum/ai_models/latih_umum.py --buat-data   # umum/data/*.csv lalu umum/model/recommender_UMUM.joblib
+   python umum/ai_models/validasi_umum.py            # umum/outputs/laporan_validasi_umum.md
    ```
 2. **Jalankan Unit Test** (kode bersama + semua kategori):
    ```bash
    python -m unittest test_nutriscale_data.py test_safety_filter.py
-   python -m unittest discover -s kategori -t . -p "test_*.py"
+   python -m unittest discover -s . -t . -p "test_*.py"
    ```
 3. **Uji 30 Input User lewat `/api/recommend`** (UMUM 8, ANAK_BALITA 8, IBU_HAMIL 7, PASCA_OPERASI 7; kasus valid harus masuk dan menghasilkan 5 sesi tanpa pelanggaran alergen, BLOKIR, atau tekstur; kasus invalid harus ditolak 422):
    ```bash
-   python -m unittest discover -s kategori -t . -p "test_input_*.py"
-   python -m unittest kategori.ibu_hamil.test_input_ibu_hamil   # satu kategori
+   python -m unittest discover -s . -t . -p "test_input_*.py"
+   python -m unittest ibu_hamil.tests.test_input_ibu_hamil   # satu kategori
    ```
-   Kasus ada di `kategori/<kategori>/input_uji.py`; pemeriksanya bersama di `kategori/uji_input.py`.
+   Kasus ada di `<kategori>/ai_models/input_uji.py`; pemeriksanya bersama di `shared/uji_input.py`.
 4. **Jalankan API Server** (wajib set `AI_ENGINE_API_KEY`, tidak ada nilai default):
    ```bash
    AI_ENGINE_API_KEY=<kunci-rahasia> python api.py

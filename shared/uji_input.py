@@ -1,7 +1,7 @@
 """
 ==========================================================================
  NutriScale AI — Uji Input User lewat endpoint /api/recommend (dipakai 4 kategori)
- Tiap kategori punya daftar kasus di kategori/<kategori>/input_uji.py (total 30 kasus).
+ Tiap kategori punya daftar kasus di <kategori>/ai_models/input_uji.py (total 30 kasus).
  Setiap kasus mengirim JSON seperti dari web marketplace (form kesehatan), lalu diperiksa:
    - kasus valid  : HTTP 200, 5 sesi makan ada, minimal 1 bahan, kategori model benar,
                     0 pelanggaran alergen/BLOKIR, 0 pelanggaran tekstur (pasca operasi),
@@ -19,7 +19,7 @@ os.environ.setdefault("AI_ENGINE_API_KEY", "kunci-uji")
 from fastapi.testclient import TestClient
 
 import api
-from kategori import KATEGORI_LIST, modul
+from shared import KATEGORI_LIST, modul
 from model import TEKSTUR_ORDINAL, detect_allergens, detect_hazards, parse_pantangan_input
 
 SESI = ['rekomendasi_pagi', 'rekomendasi_snack_pagi', 'rekomendasi_siang', 'rekomendasi_snack_sore', 'rekomendasi_malam']

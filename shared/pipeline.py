@@ -1,10 +1,10 @@
 """
 ==========================================================================
  NutriScale AI — Pipeline Bersama per Kategori (metode SAMA untuk 4 anggota)
- Dipanggil oleh kategori/<kategori>/latih_<kategori>.py dan validasi_<kategori>.py.
+ Dipanggil oleh <kategori>/ai_models/latih_<kategori>.py dan validasi_<kategori>.py.
    latih_kategori    : (opsional) buat dataset -> latih model -> simpan hasil latih
    validasi_kategori : metrik test set profil baru + per kelas + uji end-to-end
-                       skenario kategori -> laporan kategori/<kategori>/hasil/
+                       skenario kategori -> laporan <kategori>/outputs/
 ==========================================================================
 """
 
@@ -17,22 +17,20 @@ import joblib
 import numpy as np
 import pandas as pd
 
-from kategori import PEMILIK, modul
+from shared import PEMILIK, modul, model_path, outputs_dir
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SESI = ['rekomendasi_pagi', 'rekomendasi_snack_pagi', 'rekomendasi_siang', 'rekomendasi_snack_sore', 'rekomendasi_malam']
 
 
 def folder_hasil(kategori: str) -> str:
-    path = os.path.join(ROOT, 'kategori', kategori.lower(), 'hasil')
-    os.makedirs(path, exist_ok=True)
-    return path
+    return outputs_dir(kategori)
 
 
 def latih_kategori(kategori: str, buat_data: bool = False, num_profiles: int = 700) -> dict:
     """Langkah yang sama untuk setiap kategori: dataset sintetis -> Logistic Regression -> metrik."""
-    from kategori.dataset import RUBRIC_VERSION, generate_category_dataset, load_food_catalog
-    from kategori.training import train_category
+    from shared.dataset import RUBRIC_VERSION, generate_category_dataset, load_food_catalog
+    from shared.training import train_category
 
     print("=" * 80)
     print(f"  NUTRISCALE AI — MODEL {kategori} (pemilik: {PEMILIK[kategori]})")
@@ -41,9 +39,8 @@ def latih_kategori(kategori: str, buat_data: bool = False, num_profiles: int = 7
     if buat_data:
         df_food = load_food_catalog(os.path.join(ROOT, 'data', 'nutrition.csv'))
         print(f"[Dataset Generator] Katalog siap: {len(df_food)} makanan. Rubrik label: {RUBRIC_VERSION}")
-        generate_category_dataset(df_food, kategori, os.path.join(ROOT, 'data'), num_profiles)
-    os.makedirs(os.path.join(ROOT, 'models'), exist_ok=True)
-    hasil = train_category(kategori, os.path.join(ROOT, 'data'), os.path.join(ROOT, 'models'))
+        generate_category_dataset(df_food, kategori, num_profiles)
+    hasil = train_category(kategori)
     with open(os.path.join(folder_hasil(kategori), 'hasil_latih.json'), 'w', encoding='utf-8') as f:
         json.dump({'kategori': kategori, 'pemilik': PEMILIK[kategori], **hasil}, f, indent=2)
     return hasil
@@ -63,7 +60,7 @@ def _profil_skenario(kategori: str, sc: dict) -> dict:
 
 
 def uji_end_to_end(kategori: str) -> list[dict]:
-    """Skenario kategori/<kategori>/skenario.py lewat pipeline produksi (filter keamanan + model + menu)."""
+    """Skenario <kategori>/ai_models/skenario.py lewat pipeline produksi (filter keamanan + model + menu)."""
     from model import (load_and_preprocess_api_data, jalankan_ai_rekomendasi, parse_pantangan_input,
                        detect_allergens, detect_hazards, TEKSTUR_ORDINAL)
 
@@ -161,7 +158,7 @@ def tulis_laporan(kategori: str, h: dict, e2e: list[dict]) -> str:
         baris.append(f"**{r['skenario']}**: " + '; '.join(f"{s}: {', '.join(v) or '-'}" for s, v in r['menu'].items()))
         baris.append("")
     baris += ["## 7. Catatan", "",
-              "Data sintetis dan label dari rubrik kategori (kategori/" + kategori.lower() + "/rubrik.py). "
+              "Data sintetis dan label dari rubrik kategori (" + kategori.lower() + "/ai_models/rubrik.py). "
               "Angka di atas mengukur seberapa baik model meniru rubrik, bukan hasil uji klinis. "
               "Diperlukan gold set ahli gizi (minimal 300 pasangan) sebelum klaim klinis.", ""]
     path = os.path.join(folder_hasil(kategori), f'laporan_validasi_{kategori.lower()}.md')
@@ -172,7 +169,7 @@ def tulis_laporan(kategori: str, h: dict, e2e: list[dict]) -> str:
 
 def validasi_kategori(kategori: str) -> str:
     """Muat hasil latih + jalankan uji end-to-end, lalu tulis laporan validasi kategori."""
-    artefak = joblib.load(os.path.join(ROOT, 'models', f'recommender_{kategori}.joblib'))
+    artefak = joblib.load(model_path(kategori))
     h = artefak['metrics']
     e2e = uji_end_to_end(kategori)
     with open(os.path.join(folder_hasil(kategori), 'hasil_validasi.json'), 'w', encoding='utf-8') as f:

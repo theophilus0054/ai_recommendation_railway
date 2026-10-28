@@ -1,6 +1,6 @@
 """
 Latih model UMUM (pemilik: Muel).
-Usage: python kategori/umum/latih_umum.py [--buat-data] [--profiles 700]
+Usage: python umum/ai_models/latih_umum.py [--buat-data] [--profiles 700]
   --buat-data : buat ulang dataset sintetis data/umum/ dari profil.py & rubrik.py kategori ini
 """
 
@@ -10,7 +10,7 @@ import argparse
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from kategori.pipeline import latih_kategori
+from shared.pipeline import latih_kategori
 
 KATEGORI = 'UMUM'
 

@@ -1,6 +1,6 @@
-"""Kasus input user UMUM (pemilik: Muel). Dikirim ke /api/recommend oleh kategori/uji_input.py."""
+"""Kasus input user UMUM (pemilik: Muel). Dikirim ke /api/recommend oleh shared/uji_input.py."""
 
-from kategori.bersama import buat_nutrisi
+from shared.bersama import buat_nutrisi
 
 def _b(umur, jk, bb, tb, nutrisi, bmi, status, **extra):
     return {"umur": umur, "jenisKelamin": jk, "beratBadan": bb, "tinggiBadan": tb, "kategoriKondisi": "UMUM",

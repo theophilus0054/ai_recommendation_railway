@@ -1,10 +1,10 @@
-"""Uji unit kategori UMUM (pemilik: Muel). Usage: python -m unittest kategori.umum.test_umum"""
+"""Uji unit kategori UMUM (pemilik: Muel). Usage: python -m unittest umum.tests.test_umum"""
 
 import unittest
 
 import numpy as np
 
-from kategori.umum import profil, rubrik
+from umum.ai_models import profil, rubrik
 from model import detect_hazards
 
 
