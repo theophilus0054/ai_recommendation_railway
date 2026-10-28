@@ -24,6 +24,8 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 | `latih_pasca_operasi.py` | Buat dataset (opsional) dan latih model |
 | `validasi_pasca_operasi.py` | Validasi dan tulis laporan |
 | `test_pasca_operasi.py` | Uji unit kategori |
+| `input_uji.py` | Kasus input user untuk `/api/recommend` (valid dan invalid) |
+| `test_input_pasca_operasi.py` | Uji kasus input lewat endpoint API |
 | `hasil/` | `hasil_latih.json`, `hasil_validasi.json`, `laporan_validasi_pasca_operasi.md` |
 
 ## Cara menjalankan (dari root repo)
@@ -32,6 +34,7 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 python kategori/pasca_operasi/latih_pasca_operasi.py --buat-data   # buat data/pasca_operasi/ lalu latih models/recommender_PASCA_OPERASI.joblib
 python kategori/pasca_operasi/validasi_pasca_operasi.py            # laporan: kategori/pasca_operasi/hasil/laporan_validasi_pasca_operasi.md
 python -m unittest kategori.pasca_operasi.test_pasca_operasi
+python -m unittest kategori.pasca_operasi.test_input_pasca_operasi   # uji input user via API
 ```
 
 ## Evaluasi khusus

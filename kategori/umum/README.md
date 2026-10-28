@@ -24,6 +24,8 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 | `latih_umum.py` | Buat dataset (opsional) dan latih model |
 | `validasi_umum.py` | Validasi dan tulis laporan |
 | `test_umum.py` | Uji unit kategori |
+| `input_uji.py` | Kasus input user untuk `/api/recommend` (valid dan invalid) |
+| `test_input_umum.py` | Uji kasus input lewat endpoint API |
 | `hasil/` | `hasil_latih.json`, `hasil_validasi.json`, `laporan_validasi_umum.md` |
 
 ## Cara menjalankan (dari root repo)
@@ -32,6 +34,7 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 python kategori/umum/latih_umum.py --buat-data   # buat data/umum/ lalu latih models/recommender_UMUM.joblib
 python kategori/umum/validasi_umum.py            # laporan: kategori/umum/hasil/laporan_validasi_umum.md
 python -m unittest kategori.umum.test_umum
+python -m unittest kategori.umum.test_input_umum   # uji input user via API
 ```
 
 ## Evaluasi khusus

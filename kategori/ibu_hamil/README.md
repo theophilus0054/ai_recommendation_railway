@@ -24,6 +24,8 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 | `latih_ibu_hamil.py` | Buat dataset (opsional) dan latih model |
 | `validasi_ibu_hamil.py` | Validasi dan tulis laporan |
 | `test_ibu_hamil.py` | Uji unit kategori |
+| `input_uji.py` | Kasus input user untuk `/api/recommend` (valid dan invalid) |
+| `test_input_ibu_hamil.py` | Uji kasus input lewat endpoint API |
 | `hasil/` | `hasil_latih.json`, `hasil_validasi.json`, `laporan_validasi_ibu_hamil.md` |
 
 ## Cara menjalankan (dari root repo)
@@ -32,6 +34,7 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 python kategori/ibu_hamil/latih_ibu_hamil.py --buat-data   # buat data/ibu_hamil/ lalu latih models/recommender_IBU_HAMIL.joblib
 python kategori/ibu_hamil/validasi_ibu_hamil.py            # laporan: kategori/ibu_hamil/hasil/laporan_validasi_ibu_hamil.md
 python -m unittest kategori.ibu_hamil.test_ibu_hamil
+python -m unittest kategori.ibu_hamil.test_input_ibu_hamil   # uji input user via API
 ```
 
 ## Evaluasi khusus

@@ -86,7 +86,13 @@ python -m unittest discover -s kategori -t . -p "test_*.py"
    python -m unittest test_nutriscale_data.py test_safety_filter.py
    python -m unittest discover -s kategori -t . -p "test_*.py"
    ```
-3. **Jalankan API Server** (wajib set `AI_ENGINE_API_KEY`, tidak ada nilai default):
+3. **Uji 30 Input User lewat `/api/recommend`** (UMUM 8, ANAK_BALITA 8, IBU_HAMIL 7, PASCA_OPERASI 7; kasus valid harus masuk dan menghasilkan 5 sesi tanpa pelanggaran alergen, BLOKIR, atau tekstur; kasus invalid harus ditolak 422):
+   ```bash
+   python -m unittest discover -s kategori -t . -p "test_input_*.py"
+   python -m unittest kategori.ibu_hamil.test_input_ibu_hamil   # satu kategori
+   ```
+   Kasus ada di `kategori/<kategori>/input_uji.py`; pemeriksanya bersama di `kategori/uji_input.py`.
+4. **Jalankan API Server** (wajib set `AI_ENGINE_API_KEY`, tidak ada nilai default):
    ```bash
    AI_ENGINE_API_KEY=<kunci-rahasia> python api.py
    ```

@@ -51,3 +51,11 @@ def profil_dewasa(rng, prof: dict, umur_max: int, perempuan: bool = False) -> di
     p_pct, f_pct = float(rng.uniform(0.15, 0.20)), float(rng.uniform(0.25, 0.30))
     return {'umur': round(umur, 1), 'umur_tahun': umur, 'kg': kg, 'cm': cm, 'kcal': kcal, 'status': status,
             'p_pct': p_pct, 'f_pct': f_pct}
+
+
+def buat_nutrisi(stage: str, kcal: float, c: tuple, p: tuple, f: tuple) -> dict:
+    """Bentuk `nutrisi` Tier 1 (output calculateMacros NutriScale): (persen, gram) untuk karbo, protein, lemak."""
+    return {"lifeStage": stage, "calories": kcal,
+            "carbohydrates": {"percent": c[0], "grams": c[1]},
+            "protein": {"percent": p[0], "grams": p[1]},
+            "fat": {"percent": f[0], "grams": f[1]}, "warnings": []}

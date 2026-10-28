@@ -24,6 +24,8 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 | `latih_anak_balita.py` | Buat dataset (opsional) dan latih model |
 | `validasi_anak_balita.py` | Validasi dan tulis laporan |
 | `test_anak_balita.py` | Uji unit kategori |
+| `input_uji.py` | Kasus input user untuk `/api/recommend` (valid dan invalid) |
+| `test_input_anak_balita.py` | Uji kasus input lewat endpoint API |
 | `hasil/` | `hasil_latih.json`, `hasil_validasi.json`, `laporan_validasi_anak_balita.md` |
 
 ## Cara menjalankan (dari root repo)
@@ -32,6 +34,7 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 python kategori/anak_balita/latih_anak_balita.py --buat-data   # buat data/anak_balita/ lalu latih models/recommender_ANAK_BALITA.joblib
 python kategori/anak_balita/validasi_anak_balita.py            # laporan: kategori/anak_balita/hasil/laporan_validasi_anak_balita.md
 python -m unittest kategori.anak_balita.test_anak_balita
+python -m unittest kategori.anak_balita.test_input_anak_balita   # uji input user via API
 ```
 
 ## Evaluasi khusus
