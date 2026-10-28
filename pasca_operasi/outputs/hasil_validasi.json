@@ -1,0 +1,121 @@
+{
+  "kategori": "PASCA_OPERASI",
+  "pemilik": "Raymond",
+  "config_hash": "7ec1c77b29e130d2",
+  "test": {
+    "accuracy": 0.9332,
+    "macro_f1": 0.8972,
+    "macro_precision": 0.9036,
+    "macro_recall": 0.8917,
+    "per_class": {
+      "0": {
+        "precision": 0.967,
+        "recall": 0.9721,
+        "f1": 0.9695,
+        "support": 5762
+      },
+      "1": {
+        "precision": 0.813,
+        "recall": 0.8343,
+        "f1": 0.8235,
+        "support": 1569
+      },
+      "2": {
+        "precision": 0.9307,
+        "recall": 0.8687,
+        "f1": 0.8986,
+        "support": 1066
+      }
+    },
+    "weighted_kappa": 0.932,
+    "confusion_matrix": [
+      [
+        5601,
+        161,
+        0
+      ],
+      [
+        191,
+        1309,
+        69
+      ],
+      [
+        0,
+        140,
+        926
+      ]
+    ]
+  },
+  "cv_groupkfold": {
+    "accuracy": {
+      "mean": 0.9326,
+      "std": 0.0038
+    },
+    "macro_f1": {
+      "mean": 0.8987,
+      "std": 0.0036
+    },
+    "weighted_kappa": {
+      "mean": 0.9353,
+      "std": 0.0034
+    },
+    "ndcg@5": {
+      "mean": 0.9872,
+      "std": 0.0026
+    }
+  },
+  "end_to_end": [
+    {
+      "skenario": "Pasca Operasi Saluran Cerna (Lunak)",
+      "jumlah_item": 11,
+      "kandidat_lolos_filter": 14,
+      "pelanggaran_alergen": 0,
+      "pelanggaran_blokir": 0,
+      "pelanggaran_tekstur": 0,
+      "rata_skor_kesesuaian": 75.7,
+      "latensi_ms": 59.9,
+      "menu": {
+        "pagi": [
+          "karbo: Organic Brown Rice",
+          "lauk: Edamame",
+          "buah/sayur: Banana"
+        ],
+        "snack_pagi": [
+          "sayur: Mustard Greens"
+        ],
+        "siang": [
+          "karbo: Oatmeal",
+          "lauk: Tilapia Fish",
+          "sayur: Sweet Potato"
+        ],
+        "snack_sore": [
+          "sayur: Broccoli"
+        ],
+        "malam": [
+          "karbo: Quinoa",
+          "lauk: Tofu",
+          "lauk: Lentils"
+        ]
+      }
+    },
+    {
+      "skenario": "Pasca Operasi Ortopedi (Cair)",
+      "jumlah_item": 1,
+      "kandidat_lolos_filter": 1,
+      "pelanggaran_alergen": 0,
+      "pelanggaran_blokir": 0,
+      "pelanggaran_tekstur": 0,
+      "rata_skor_kesesuaian": 3.5,
+      "latensi_ms": 54.4,
+      "menu": {
+        "pagi": [
+          "susu/olahan: Low Fat Milk"
+        ],
+        "snack_pagi": [],
+        "siang": [],
+        "snack_sore": [],
+        "malam": []
+      }
+    }
+  ]
+}

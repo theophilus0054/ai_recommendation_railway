@@ -1,107 +1,548 @@
 """
 ==========================================================================
- NutriScale AI Engine v2 — Content-Based ML Recommender + Gemini LLM
- Prisma DB Schema Compliance: ProfilKesehatan, RiwayatAnalisis, MealPlan
-==========================================================================
-
-ARSITEKTUR:
-  Layer 1 — ML Preprocessing  : TF-IDF + StandardScaler + cosine similarity
-                                  content-based filtering per profil gizi
-  Layer 2 — Nutritional Expert : BMI/Z-score WHO, Mifflin-St Jeor TDEE
-  Layer 3 — Gemini LLM         : Narasi rekomendasi personal berbahasa Indonesia
-                                  (via google-generativeai SDK)
-  Layer 4 — Output Mapper      : Strict mapping ke Prisma schema
-
-SETUP:
-  pip install pandas numpy scikit-learn google-generativeai
-  Set env var: GEMINI_API_KEY=<your_key>
+ NutriScale AI Engine v3 — Machine Learning Recommender + Gemini LLM
+ Sesuai Spesifikasi Histori Chat AI NutriScale (20 Oktober 2026):
+   - Tier 1: Nutrition Engine (NutriScale Web) sebagai Source of Truth target gizi.
+   - Tier 2: Recommendation Engine:
+       * Hard Safety Filtering (eliminasi alergen/pantangan & batasan medis)
+       * Machine Learning Ranking: 4 model Logistic Regression (UMUM, IBU_HAMIL, ANAK_BALITA,
+         PASCA_OPERASI), skor = (P(1) + 2*P(2)) / 2 dari predict_proba label 0/1/2
+   - Tier 3: Gemini LLM Narasi (penjelasan natural tanpa mengubah angka)
+   - Prisma DB Schema Compliance: ProfilKesehatan, RiwayatAnalisis, MealPlan
 ==========================================================================
 """
 
 import os
 import re
 import json
+import difflib
+import hashlib
+import datetime
 import warnings
+import joblib
 import numpy as np
 import requests
 import pandas as pd
 from typing import Optional
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
-from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.feature_extraction.text import TfidfVectorizer
+from dotenv import load_dotenv, find_dotenv
+
+from shared import KATEGORI_LIST, modul as modul_kategori, model_path as _model_path
+load_dotenv(find_dotenv(usecwd=True))
 
 warnings.filterwarnings('ignore')
 
 # ==========================================================================
-# CONSTANTS
+# CONSTANTS & DICTIONARIES
 # ==========================================================================
 
 ALLERGEN_KEYWORDS: dict[str, list[str]] = {
-    'ikan':     ['fish', 'salmon', 'tuna', 'cod', 'trout', 'tilapia', 'mackerel', 'sardine', 'anchovy', 'catfish', 'herring', 'halibut', 'snapper', 'ikan', 'bandeng', 'lele', 'gurame'],
-    'udang':    ['shrimp', 'prawn', 'udang', 'ebi'],
-    'kepiting': ['crab', 'kepiting', 'rajungan'],
-    'kerang':   ['clam', 'mussel', 'oyster', 'scallop', 'shellfish', 'kerang', 'tiram'],
+    'ikan':     ['fish', 'salmon', 'tuna', 'cod', 'trout', 'tilapia', 'mackerel', 'sardine', 'sardines', 'anchovy',
+                 'anchovies', 'catfish', 'herring', 'halibut', 'snapper', 'pollock', 'haddock', 'ikan', 'bandeng',
+                 'lele', 'gurame', 'bawal', 'tongkol', 'kembung', 'teri', 'nila', 'patin', 'tenggiri'],
+    'udang':    ['shrimp', 'shrimps', 'prawn', 'prawns', 'udang', 'ebi', 'terasi', 'rebon'],
+    'kepiting': ['crab', 'crabs', 'kepiting', 'rajungan'],
+    'kerang':   ['clam', 'clams', 'mussel', 'mussels', 'oyster', 'oysters', 'scallop', 'scallops', 'shellfish',
+                 'kerang', 'tiram', 'mollusks'],
     'lobster':  ['lobster', 'crayfish', 'langoustine'],
-    'cumi':     ['squid', 'octopus', 'cuttlefish', 'calamari', 'cumi', 'gurita'],
-    'telur':    ['egg', 'omelette', 'frittata', 'telur', 'telor', 'mayonnaise'],
-    'susu':     ['cheese', 'milk', 'cream', 'butter', 'yogurt', 'whey', 'dairy', 'lactose', 'cheddar', 'mozzarella', 'ricotta', 'brie', 'gouda', 'susu', 'keju', 'mentega', 'krim'],
-    'kacang':   ['peanut', 'almond', 'walnut', 'pecan', 'pistachio', 'cashew', 'hazelnut', 'macadamia', 'nut', 'groundnut', 'kacang', 'selai kacang'],
-    'kedelai':  ['soy', 'tofu', 'tempeh', 'edamame', 'miso', 'natto', 'kedelai', 'tahu', 'tempe'],
-    'gluten':   ['wheat', 'bread', 'pasta', 'noodle', 'flour', 'biscuit', 'croissant', 'bagel', 'muffin', 'tortilla', 'cracker', 'pretzel', 'barley', 'rye', 'semolina', 'spelt', 'roti', 'gandum', 'mie'],
+    'cumi':     ['squid', 'octopus', 'cuttlefish', 'calamari', 'cumi', 'cumi-cumi', 'gurita', 'sotong'],
+    'telur':    ['egg', 'eggs', 'omelette', 'omelet', 'frittata', 'telur', 'telor', 'mayonnaise', 'custard'],
+    'susu':     ['cheese', 'milk', 'cream', 'butter', 'yogurt', 'yoghurt', 'whey', 'dairy', 'lactose',
+                 'cheddar', 'mozzarella', 'ricotta', 'brie', 'gouda', 'parmesan', 'susu', 'keju', 'mentega', 'krim'],
+    'kacang':   ['peanut', 'peanuts', 'almond', 'almonds', 'walnut', 'walnuts', 'pecan', 'pecans', 'pistachio',
+                 'pistachios', 'cashew', 'cashews', 'hazelnut', 'hazelnuts', 'macadamia', 'nut', 'nuts',
+                 'groundnut', 'kacang', 'selai kacang', 'mete', 'mede'],
+    'kedelai':  ['soy', 'soya', 'soybean', 'soybeans', 'tofu', 'tempeh', 'edamame', 'miso', 'natto', 'kedelai',
+                 'kedele', 'tahu', 'tempe', 'kecap', 'soymilk'],
+    'gluten':   ['wheat', 'bread', 'pasta', 'noodle', 'noodles', 'flour', 'biscuit', 'biscuits', 'croissant',
+                 'bagel', 'muffin', 'tortilla', 'cracker', 'crackers', 'pretzel', 'pretzels', 'barley', 'rye',
+                 'semolina', 'spelt', 'couscous', 'roti', 'gandum', 'terigu', 'mie'],
+    'wijen':    ['sesame', 'tahini', 'wijen'],
+    'seafood':  ['seafood', 'fish', 'salmon', 'tuna', 'cod', 'trout', 'tilapia', 'mackerel', 'sardine', 'sardines',
+                 'shrimp', 'prawn', 'udang', 'ebi', 'crab', 'kepiting', 'rajungan', 'clam', 'mussel',
+                 'oyster', 'scallop', 'shellfish', 'kerang', 'lobster', 'squid', 'octopus', 'cumi', 'gurita'],
+    'manis':    ['manis', 'sweet', 'sweetened', 'gula', 'sugar', 'candy', 'candies', 'chocolate', 'coklat', 'cokelat',
+                 'sirup', 'syrup', 'madu', 'honey', 'permen', 'kue', 'dessert'],
+    'pedas':    ['pedas', 'spicy', 'chili', 'chilli', 'chile', 'cabai', 'cabe', 'sambal', 'hot pepper',
+                 'chili pepper', 'cayenne', 'jalapeno', 'jalapeño', 'habanero', 'balado'],
+    'gorengan': ['gorengan', 'goreng', 'fried', 'deep-fried', 'crispy', 'battered', 'breaded', 'berminyak',
+                 'berlemak', 'fatty', 'oily', 'santan'],
+}
+
+# Pengecualian frasa: kata kunci yang muncul di frasa ini BUKAN alergen tersebut.
+# Contoh: "peanut butter" bukan susu, "coconut milk"/"soy milk" bukan susu, "kacang hijau" bukan kacang tanah.
+ALLERGEN_EXCEPTIONS: dict[str, list[str]] = {
+    'susu':   ['peanut butter', 'almond butter', 'apple butter', 'cocoa butter', 'shea butter', 'nut butter',
+               'coconut milk', 'coconut cream', 'soy milk', 'soymilk', 'almond milk', 'oat milk', 'rice milk',
+               'susu kedelai', 'susu almond', 'cream of tartar', 'santan', 'butternut', 'butterhead', 'cream soda'],
+    'kacang': ['kacang hijau', 'kacang merah', 'kacang panjang', 'kacang polong', 'kacang tolo', 'kacang kedelai',
+               'coconut', 'nutmeg', 'butternut', 'water chestnut', 'chestnut', 'chestnuts', 'doughnut', 'donut'],
+    'telur':  ['eggplant', 'egg plant'],
+    'gluten': ['buckwheat', 'rice noodle', 'rice noodles', 'shirataki', 'bihun', 'kwetiau', 'gluten-free', 'gluten free'],
+    'manis':  ['sweet potato', 'sweet potatoes', 'potatoes, sweet', 'sweet corn', 'corn, sweet', 'ubi manis',
+               'sweet pepper', 'sweet peppers', 'peppers, sweet', 'pepper, sweet', 'cherries, sweet', 'sweet cherries'],
+}
+
+# Kata payung: satu kata user diperluas ke beberapa grup alergen
+ALLERGEN_UMBRELLA: dict[str, list[str]] = {
+    'seafood':      ['ikan', 'udang', 'kepiting', 'kerang', 'lobster', 'cumi'],
+    'sea food':     ['ikan', 'udang', 'kepiting', 'kerang', 'lobster', 'cumi'],
+    'makanan laut': ['ikan', 'udang', 'kepiting', 'kerang', 'lobster', 'cumi'],
+    'hasil laut':   ['ikan', 'udang', 'kepiting', 'kerang', 'lobster', 'cumi'],
+    'shellfish':    ['udang', 'kepiting', 'kerang', 'lobster'],
+}
+
+# Field "allergens" produk Supabase berbahasa Inggris -> grup alergen baku
+SUPABASE_ALLERGEN_MAP: dict[str, list[str]] = {
+    'fish': ['ikan'], 'milk': ['susu'], 'dairy': ['susu'], 'egg': ['telur'], 'eggs': ['telur'],
+    'soy': ['kedelai'], 'soybean': ['kedelai'], 'wheat': ['gluten'], 'gluten': ['gluten'],
+    'peanut': ['kacang'], 'peanuts': ['kacang'], 'tree nuts': ['kacang'], 'tree nut': ['kacang'], 'nuts': ['kacang'],
+    'shellfish': ['udang', 'kepiting', 'kerang', 'lobster'], 'crustacean': ['udang', 'kepiting', 'lobster'],
+    'shrimp': ['udang'], 'crab': ['kepiting'], 'squid': ['cumi'], 'sesame': ['wijen'],
 }
 
 ALCOHOL_KEYWORDS: list[str] = [
-    'beer', 'wine', 'whiskey', 'vodka', 'rum', 'gin', 'tequila',
+    'beer', 'wine', 'whiskey', 'whisky', 'vodka', 'rum', 'gin', 'tequila', 'sake', 'soju',
     'brandy', 'champagne', 'liqueur', 'bourbon', 'scotch', 'ale', 'cocktail', 'stout', 'lager',
+    'alcoholic', 'alkohol', 'bir', 'tuak', 'arak',
 ]
+ALCOHOL_EXCEPTIONS: list[str] = ['ginger ale', 'root beer', 'birch beer', 'non-alcoholic', 'wine vinegar', 'rum extract']
 
-# Makro distribusi per kondisi (protein/fat/carbs sebagai rasio kalori)
-MACRO_DISTRIBUTION: dict[str, dict[str, float]] = {
-    'UMUM':          {'protein': 0.15, 'fat': 0.25, 'carbs': 0.60},
-    'ANAK_BALITA':   {'protein': 0.15, 'fat': 0.30, 'carbs': 0.55},
-    'IBU_HAMIL':     {'protein': 0.20, 'fat': 0.25, 'carbs': 0.55},
-    'PASCA_OPERASI': {'protein': 0.25, 'fat': 0.20, 'carbs': 0.55},
+# Kata yang diabaikan di teks pantangan / alergi user
+PANTANGAN_STOPWORDS = {'tidak ada', 'lainnya', 'none', '-', 'no', 'tidak', 'ada', 'nihil', 'normal', 'aman',
+                       'tdk ada', 'gak ada', 'ga ada', 'no allergies', 'no allergy', 'tidak punya'}
+
+# Frasa pantangan umum yang bukan grup alergen -> kata kunci nama makanan (batas kata)
+PANTANGAN_PHRASES: dict[str, list[str]] = {
+    'daging merah': ['beef', 'pork', 'lamb', 'veal', 'mutton', 'daging sapi', 'daging kambing', 'sapi', 'kambing'],
+    'jeroan':       ['liver', 'giblets', 'kidney', 'tripe', 'heart', 'jeroan', 'hati', 'ati', 'usus', 'babat'],
+    'mie instan':   ['instant noodles', 'ramen', 'mie instan', 'mi instan'],
+    'babi':         ['pork', 'bacon', 'ham', 'lard', 'babi'],
+    'kafein':       ['coffee', 'espresso', 'caffeine', 'energy drink', 'cola', 'kopi'],
+    'kopi':         ['coffee', 'espresso', 'kopi'],
+    'santan':       ['coconut milk', 'coconut cream', 'santan'],
+    'makanan olahan': ['sausage', 'frankfurter', 'bacon', 'luncheon meat', 'nugget', 'sosis', 'kornet', 'hot dog'],
 }
 
-# Bobot fitur untuk content-based scoring per kondisi
-FEATURE_WEIGHTS: dict[str, dict[str, float]] = {
-    'ANAK_BALITA':   {'calories': 0.20, 'protein': 0.25, 'fat': 0.20, 'carbs': 0.15, 'calcium_score': 0.20},
-    'IBU_HAMIL':     {'calories': 0.15, 'protein': 0.30, 'fat': 0.15, 'carbs': 0.15, 'iron_score': 0.25},
-    'PASCA_OPERASI': {'calories': 0.15, 'protein': 0.40, 'fat': 0.15, 'carbs': 0.15, 'vitamin_score': 0.15},
-    'UMUM':          {'calories': 0.25, 'protein': 0.25, 'fat': 0.25, 'carbs': 0.25, 'calcium_score': 0.00},
-}
+NUTRISCALE_SOURCE = 'NUTRISCALE_NUTRI_CALC'
+KCAL_PER_G_CARBS = 4.0
+KCAL_PER_G_PROTEIN = 4.0
+KCAL_PER_G_FAT = 9.0
+ATWATER_TOLERANCE_RATIO = 0.05
+
+class NutriScaleDataError(ValueError):
+    """Data hasil perhitungan gizi dari NutriScale tidak ada atau tidak valid."""
 
 
 # ==========================================================================
-# [3.3.3] PRE-PROCESSING & FEATURE ENGINEERING
+# TABEL BAHAYA PER KATEGORI (BLOKIR = dibuang, BATASI = boleh tapi diturunkan)
+# Daftar akhir WAJIB ditinjau ahli gizi. Pencocokan memakai batas kata (word boundary).
+# ==========================================================================
+
+def _muat_bahaya(kategori: str) -> dict[str, dict[str, list[str]]]:
+    """Tabel bahaya dari <kategori>/ai_models/bahaya.py; None = daftar alkohol bersama."""
+    tabel = modul_kategori(kategori, 'bahaya').BAHAYA
+    return {jenis: {kode: (ALCOHOL_KEYWORDS if kws is None else kws) for kode, kws in isi.items()}
+            for jenis, isi in tabel.items()}
+
+CATEGORY_HAZARDS: dict[str, dict[str, dict[str, list[str]]]] = {k: _muat_bahaya(k) for k in KATEGORI_LIST}
+
+# Tahap diet pasca operasi (ditentukan dokter/ahli gizi) dan tekstur makanan
+TEKSTUR_ORDINAL = {'cair': 0, 'saring': 1, 'lunak': 2, 'biasa': 3}
+TEXTURE_KEYWORDS = {
+    'cair':   ['beverages', 'beverage', 'juice', 'drink', 'tea', 'coffee', 'broth', 'bouillon', 'consomme', 'milk',
+               'smoothie', 'water', 'soymilk', 'kaldu', 'jus', 'susu', 'teh'],
+    'saring': ['puree', 'pureed', 'strained', 'babyfood', 'soup', 'cream of', 'yogurt', 'pudding', 'custard',
+               'applesauce', 'mashed', 'bubur', 'porridge', 'gruel', 'sup'],
+    'lunak':  ['egg', 'eggs', 'tofu', 'oatmeal', 'oats', 'cooked', 'boiled', 'steamed', 'stewed', 'poached', 'banana',
+               'avocado', 'papaya', 'cottage cheese', 'fish', 'noodles', 'pasta', 'rice', 'tahu', 'rebus', 'kukus', 'tim'],
+}
+
+# Batas harian Gula-Garam-Lemak per kategori (lemak None = pakai target lemak Tier 1)
+DAILY_LIMITS = {k: modul_kategori(k, 'bahaya').BATAS_HARIAN for k in KATEGORI_LIST}
+
+SESSION_RATIOS = {'pagi': 0.25, 'snack_pagi': 0.10, 'siang': 0.35, 'snack_sore': 0.10, 'malam': 0.20}
+SESSION_GROUPS = ['pagi', 'snack', 'siang', 'malam']
+
+# Komposisi piring per sesi: (peran, foodType yang boleh, porsi kalori sesi). Peran pertama yang
+# tidak punya kandidat dilonggarkan ke foodType utama sesi (PIRING_CADANGAN).
+PIRING_SESI = {
+    'pagi':  [('karbo', ['carb'], 0.45), ('lauk', ['protein', 'dairy'], 0.35), ('buah/sayur', ['fruit', 'vegetable'], 0.20)],
+    'siang': [('karbo', ['carb'], 0.45), ('lauk', ['protein'], 0.35), ('sayur', ['vegetable'], 0.20)],
+    'malam': [('karbo', ['carb'], 0.40), ('lauk', ['protein'], 0.40), ('sayur', ['vegetable'], 0.20)],
+    'snack': [('selingan', ['fruit', 'dairy', 'snack'], 1.00)],
+}
+PIRING_CADANGAN = {   # snack tidak mengambil karbo/lauk agar tidak menghabiskan bahan sesi makan utama
+    'pagi': ['protein', 'carb', 'vegetable', 'fruit', 'dairy', 'snack'],
+    'siang': ['protein', 'carb', 'vegetable', 'fruit', 'dairy'],
+    'malam': ['protein', 'carb', 'vegetable', 'fruit', 'dairy'],
+    'snack': ['fruit', 'dairy', 'snack', 'beverage', 'vegetable'],
+}
+PERAN_BAHAN = {'carb': 'karbo', 'protein': 'lauk', 'dairy': 'susu/olahan', 'vegetable': 'sayur', 'fruit': 'buah',
+               'snack': 'selingan', 'beverage': 'minuman'}
+BAHAN_PELENGKAP = ['fat', 'spice', 'sweetener']   # minyak, bumbu, gula: pelengkap kecil, bukan menu utama
+VARIASI_TOP_K = 5             # jumlah kandidat teratas yang diundi
+VARIASI_SUHU = 0.05           # makin kecil makin condong ke skor tertinggi
+VARIASI_TOLERANSI = 0.85      # kandidat minimal 85% skor terbaik agar ikut diundi
+PENALTI_RIWAYAT = 0.7         # pengali skor bahan yang sudah muncul di hari-hari sebelumnya
+FOOD_TYPES = ['protein', 'carb', 'vegetable', 'fruit', 'dairy', 'snack', 'beverage', 'fat', 'sweetener', 'spice']
+
+# Klasifikasi foodType (kosakata produk Supabase) dari nama makanan, dipakai bila kolom foodType kosong
+FOOD_TYPE_KEYWORDS: list[tuple[str, list[str]]] = [
+    ('beverage',  ['beverages', 'beverage', 'alcoholic beverage', 'juice', 'drink', 'soda', 'coffee', 'tea', 'water', 'cola', 'lemonade']),
+    ('dairy',     ['milk', 'cheese', 'yogurt', 'yoghurt', 'cream', 'kefir', 'whey', 'soymilk']),
+    ('fat',       ['oil', 'butter', 'margarine', 'shortening', 'lard', 'salad dressing', 'mayonnaise']),
+    ('sweetener', ['sugar', 'sugars', 'honey', 'syrup', 'syrups', 'jams', 'jelly', 'molasses', 'sweetener']),
+    ('spice',     ['spices', 'spice', 'sauce', 'gravy', 'salt', 'vinegar', 'mustard', 'ketchup', 'seasoning', 'condiments']),
+    ('snack',     ['snacks', 'snack', 'cookies', 'cookie', 'crackers', 'candies', 'candy', 'cake', 'cakes', 'pie', 'pies',
+                   'puddings', 'pudding', 'ice creams', 'ice cream', 'frozen novelties', 'chips', 'pastry', 'pastries',
+                   'doughnuts', 'brownies', 'chocolate', 'granola', 'popcorn', 'pretzels', 'desserts']),
+    ('protein',   ['beef', 'pork', 'lamb', 'veal', 'chicken', 'turkey', 'duck', 'goose', 'game meat', 'ostrich', 'fish',
+                   'mollusks', 'crustaceans', 'egg', 'eggs', 'sausage', 'frankfurter', 'ham', 'bacon', 'tofu', 'tempeh',
+                   'beans', 'lentils', 'chickpeas', 'peas', 'lima beans', 'soybeans', 'nuts', 'seeds', 'peanuts',
+                   'bison', 'venison', 'salmon', 'tuna', 'shrimp', 'crab', 'ayam', 'daging', 'ikan', 'telur', 'tahu', 'tempe']),
+    ('fruit',     ['fruit', 'fruits', 'apples', 'apple', 'bananas', 'banana', 'oranges', 'orange', 'grapes', 'berries',
+                   'strawberries', 'blueberries', 'melons', 'melon', 'mangos', 'mango', 'papaya', 'peaches', 'pears',
+                   'pineapple', 'plums', 'cherries', 'dates', 'kiwifruit', 'avocados', 'avocado', 'watermelon',
+                   'guavas', 'figs', 'apricots', 'raisins', 'pisang', 'pepaya', 'jeruk', 'apel']),
+    ('vegetable', ['vegetables', 'vegetable', 'squash', 'peppers', 'cabbage', 'mushrooms', 'spinach', 'broccoli',
+                   'carrots', 'carrot', 'tomatoes', 'tomato', 'lettuce', 'onions', 'onion', 'kale', 'cauliflower',
+                   'cucumber', 'celery', 'asparagus', 'beets', 'eggplant', 'okra', 'radishes', 'greens', 'garlic',
+                   'pumpkin', 'soup', 'sayur', 'bayam', 'kangkung', 'brokoli', 'wortel']),
+    ('carb',      ['cereals ready-to-eat', 'cereals', 'cereal', 'bread', 'rolls', 'rice', 'pasta', 'noodles', 'potatoes',
+                   'potato', 'corn', 'wheat flour', 'flour', 'oats', 'oatmeal', 'tortillas', 'bagels', 'muffins',
+                   'waffles', 'pancakes', 'quinoa', 'couscous', 'sweet potato', 'yam', 'cassava', 'fast foods',
+                   'restaurant', 'nasi', 'roti', 'mie', 'kentang', 'singkong', 'ubi']),
+]
+
+# Fitur ML: SATU daftar & SATU fungsi untuk training (shared/dataset.py) dan inferensi (recommend_meal)
+FEATURE_COLS: list[str] = (
+    ['log_kcal_ratio', 'abs_log_kcal_ratio', 'portion_clipped',
+     'protein_pct', 'abs_protein_pct_diff', 'abs_fat_pct_diff', 'abs_carbs_pct_diff',
+     'sodium_share', 'sugar_share', 'fat_share', 'cholesterol_100',
+     'energy_density', 'protein_density',
+     'status_kurang', 'status_lebih', 'status_obes', 'stunting',
+     'ed_x_kurang', 'ed_x_lebih', 'ed_x_obes', 'protein_x_kurang', 'sugar_x_lebih', 'fried_x_lebih',
+     'balita_bawah_12bln', 'balita_bawah_36bln', 'umur_bulan_norm', 'trimester', 'protein_x_trimester',
+     'tekstur_ord', 'tahap_diet_ord', 'tekstur_violation', 'operasi_saluran_cerna', 'fat_x_saluran_cerna',
+     'n_conflict_allergen', 'n_conflict_pantangan', 'n_conflict_free', 'n_block_kategori', 'n_limit_kategori',
+     'n_user_restrictions', 'any_conflict',
+     'flag_fried', 'flag_processed', 'flag_sweet', 'flag_spicy',
+     'porsi_ideal', 'porsi_wajar', 'protein_pct_sesuai', 'protein_kurang_lauk_karbo', 'protein_15',
+     'natrium_lewat', 'natrium_lewat_jauh', 'gula_lewat', 'gula_lewat_jauh', 'gula_10',
+     'ed_tinggi_x_lebih', 'ed_rendah_x_kurang', 'protein15_x_kurang', 'lemak10_x_saluran_cerna', 'diet_lunak']
+    + [f'ft_{t}__{s}' for t in FOOD_TYPES for s in SESSION_GROUPS]
+)
+
+
+def _kw_pattern(keywords) -> Optional[re.Pattern]:
+    """Regex batas kata untuk daftar kata kunci (multi-kata diperbolehkan)."""
+    keywords = [k for k in keywords if k]
+    if not keywords:
+        return None
+    alts = '|'.join(re.escape(k).replace(r'\ ', r'\s+') for k in sorted(keywords, key=len, reverse=True))
+    return re.compile(r'(?<![\w])(?:' + alts + r')(?![\w])', re.IGNORECASE)
+
+
+_ALLERGEN_PATTERNS = {cat: _kw_pattern(kws) for cat, kws in ALLERGEN_KEYWORDS.items()}
+_EXCEPTION_PATTERNS = {cat: _kw_pattern(kws) for cat, kws in ALLERGEN_EXCEPTIONS.items()}
+_ALCOHOL_PATTERN = _kw_pattern(ALCOHOL_KEYWORDS)
+_ALCOHOL_EXCEPTION_PATTERN = _kw_pattern(ALCOHOL_EXCEPTIONS)
+_HAZARD_PATTERNS = {
+    kat: {kind: {code: _kw_pattern(kws) for code, kws in rules.items()} for kind, rules in table.items()}
+    for kat, table in CATEGORY_HAZARDS.items()
+}
+# MENTAH juga = kata 'raw'/'mentah' + produk hewani (buah/sayur mentah TIDAK diblokir)
+_RAW_PATTERN = _kw_pattern(['raw', 'mentah', 'rare'])
+_ANIMAL_PATTERN = _kw_pattern(
+    ALLERGEN_KEYWORDS['ikan'] + ALLERGEN_KEYWORDS['udang'] + ALLERGEN_KEYWORDS['kepiting'] + ALLERGEN_KEYWORDS['kerang']
+    + ALLERGEN_KEYWORDS['lobster'] + ALLERGEN_KEYWORDS['cumi'] + ['egg', 'eggs', 'telur', 'milk', 'susu']
+    + ['beef', 'pork', 'lamb', 'veal', 'chicken', 'turkey', 'duck', 'meat', 'liver', 'mollusks', 'crustaceans',
+       'roe', 'caviar', 'game meat', 'ayam', 'daging', 'sapi'])
+_TEXTURE_PATTERNS = {tek: _kw_pattern(kws) for tek, kws in TEXTURE_KEYWORDS.items()}
+_FOOD_TYPE_PATTERNS = [(ft, _kw_pattern(kws)) for ft, kws in FOOD_TYPE_KEYWORDS]
+_FRIED_PATTERN = _kw_pattern(['fried', 'deep-fried', 'battered', 'breaded', 'crispy', 'goreng', 'gorengan', 'tempura'])
+_PROCESSED_PATTERN = _kw_pattern(['fast foods', 'frankfurter', 'sausage', 'bacon', 'hot dog', 'luncheon meat',
+                                  'instant', 'chips', 'nugget', 'sosis', 'kornet', 'canned', 'processed'])
+
+
+def keyword_match(text: str, pattern: Optional[re.Pattern], exception: Optional[re.Pattern] = None) -> bool:
+    """True bila kata kunci muncul sebagai kata utuh dan bukan bagian frasa pengecualian."""
+    if pattern is None or not text:
+        return False
+    text = str(text).lower()
+    if exception is not None:
+        text = exception.sub(' ', text)
+    return pattern.search(text) is not None
+
+
+def is_alcoholic(name: str) -> bool:
+    return keyword_match(name, _ALCOHOL_PATTERN, _ALCOHOL_EXCEPTION_PATTERN)
+
+
+def classify_food_type(name: str, food_type: Optional[str] = None) -> str:
+    """foodType memakai kosakata produk Supabase. Kolom foodType asli diutamakan bila ada."""
+    if isinstance(food_type, str) and food_type.strip().lower() in FOOD_TYPES:
+        return food_type.strip().lower()
+    head = str(name).lower().split(',')[0]
+    for text in (head, str(name).lower()):
+        for ft, pat in _FOOD_TYPE_PATTERNS:
+            if keyword_match(text, pat):
+                return ft
+    return 'snack'
+
+
+_MEDIA_KEMASAN_PATTERN = re.compile(r'\(\s*water\s*\)|\b(?:packed|canned)?\s*in\s+(?:water|oil|brine|syrup)\b|\bwater[- ]packed\b')
+
+
+def detect_texture(name: str, food_type: str = '') -> str:
+    """Perkiraan tekstur dari nama: cair, saring, lunak, atau biasa."""
+    name = str(name).lower()
+    # Media kemasan ('canned in water', '(water)') bukan berarti makanannya cair
+    name = _MEDIA_KEMASAN_PATTERN.sub(' ', name)
+    for tek in ('cair', 'saring', 'lunak'):
+        if keyword_match(name, _TEXTURE_PATTERNS[tek]):
+            if tek == 'cair' and keyword_match(name, _kw_pattern(['powder', 'dry', 'mix', 'bar'])):
+                continue
+            return tek
+    if food_type == 'beverage':
+        return 'cair'
+    return 'biasa'
+
+
+def detect_hazards(name: str, kategori: str) -> tuple[list[str], list[str]]:
+    """Kode BLOKIR dan BATASI kategori yang terpenuhi oleh nama makanan."""
+    table = _HAZARD_PATTERNS.get(kategori, _HAZARD_PATTERNS['UMUM'])
+    blokir, batasi = [], []
+    for code, pat in table.get('blokir', {}).items():
+        exc = _ALCOHOL_EXCEPTION_PATTERN if code == 'ALKOHOL' else None
+        if keyword_match(name, pat, exc):
+            blokir.append(code)
+        elif code == 'MENTAH' and keyword_match(name, _RAW_PATTERN) and keyword_match(name, _ANIMAL_PATTERN):
+            blokir.append(code)
+    for code, pat in table.get('batasi', {}).items():
+        if keyword_match(name, pat):
+            batasi.append(code)
+    return blokir, batasi
+
+
+def status_flags(status: Optional[str], haz: Optional[float] = None, whz: Optional[float] = None) -> dict:
+    """Status gizi Tier 1 (dewasa & anak) -> flag arah rekomendasi."""
+    s = str(status or 'Normal').strip().lower()
+    kurang = s in {'underweight', 'gizi buruk', 'gizi kurang', 'severely wasted', 'wasted'}
+    lebih = s in {'overweight', 'berisiko gizi lebih', 'gizi lebih'}
+    obes = s in {'obese', 'obesitas'}
+    try:
+        if whz is not None and float(whz) < -2:
+            kurang = True
+    except (TypeError, ValueError):
+        pass
+    stunting = False
+    try:
+        stunting = haz is not None and float(haz) < -2
+    except (TypeError, ValueError):
+        pass
+    return {'status_kurang': float(kurang), 'status_lebih': float(lebih), 'status_obes': float(obes),
+            'stunting': float(stunting)}
+
+
+def session_group(meal_type: str) -> str:
+    return 'snack' if 'snack' in str(meal_type) else str(meal_type)
+
+
+def compute_ml_features(df: pd.DataFrame, target_kalori: float, target_macros: dict, meal_type: str,
+                        kategori: str, profil_ctx: Optional[dict] = None) -> pd.DataFrame:
+    """
+    Fitur ML untuk setiap baris makanan terhadap SATU target item (kkal & makro).
+    Kolom yang dibutuhkan: calories, protein, fat, carbs, sugars, sodium, cholesterol, name,
+    food_type, tekstur, n_conflict_* (dari safety filter). Dipakai sama persis saat training & inferensi.
+    """
+    ctx = profil_ctx or {}
+    n = len(df)
+    F = {}
+    kcal = df['calories'].to_numpy(dtype=float)
+    protein = df['protein'].to_numpy(dtype=float)
+    fat = df['fat'].to_numpy(dtype=float)
+    carbs = df['carbs'].to_numpy(dtype=float)
+    sugars = df['sugars'].to_numpy(dtype=float)
+    sodium = df['sodium'].to_numpy(dtype=float)
+    chol = df['cholesterol'].to_numpy(dtype=float)
+    safe_kcal = np.maximum(kcal, 1.0)
+
+    target_kalori = np.asarray(target_kalori, dtype=float) * np.ones(n)
+    t_p = np.asarray(target_macros.get('protein_g', 0.0), dtype=float) * np.ones(n)
+    t_f = np.asarray(target_macros.get('fat_g', 0.0), dtype=float) * np.ones(n)
+    t_c = np.asarray(target_macros.get('carbs_g', 0.0), dtype=float) * np.ones(n)
+    t_kcal_macro = np.maximum(4 * t_p + 9 * t_f + 4 * t_c, 1.0)
+
+    # A. Selisih terhadap target item (porsi dihitung dari target, dibatasi 0.5-3 porsi 100 g)
+    raw_mult = target_kalori / safe_kcal
+    mult = np.clip(raw_mult, 0.5, 3.0)
+    kcal_p = kcal * mult
+    lr = np.log((kcal_p + 5) / (target_kalori + 5))
+    F['log_kcal_ratio'] = lr
+    F['abs_log_kcal_ratio'] = np.abs(lr)
+    F['portion_clipped'] = np.abs(np.log(np.maximum(raw_mult, 1e-3) / mult))
+    p_pct = 4 * protein / safe_kcal
+    f_pct = 9 * fat / safe_kcal
+    c_pct = 4 * carbs / safe_kcal
+    F['protein_pct'] = np.clip(p_pct, 0, 1.5)
+    F['abs_protein_pct_diff'] = np.clip(np.abs(p_pct - 4 * t_p / t_kcal_macro), 0, 1.5)
+    F['abs_fat_pct_diff'] = np.clip(np.abs(f_pct - 9 * t_f / t_kcal_macro), 0, 1.5)
+    F['abs_carbs_pct_diff'] = np.clip(np.abs(c_pct - 4 * t_c / t_kcal_macro), 0, 1.5)
+
+    # B. Batas Gula-Garam-Lemak: porsi terpakai vs jatah item dari batas harian kategori
+    lim = DAILY_LIMITS.get(kategori, DAILY_LIMITS['UMUM'])
+    daily_kcal = float(ctx.get('target_kalori_harian') or 2000.0)
+    item_share = np.clip(target_kalori / max(daily_kcal, 1.0), 0.03, 1.0)
+    fat_limit = lim['fat'] if lim['fat'] else float(ctx.get('target_fat_g') or 67.0)
+    F['sodium_share'] = np.clip(sodium * mult / (lim['sodium'] * item_share), 0, 20)
+    F['sugar_share'] = np.clip(sugars * mult / (lim['sugars'] * item_share), 0, 20)
+    F['fat_share'] = np.clip(fat * mult / (fat_limit * item_share), 0, 20)
+    F['cholesterol_100'] = np.clip(chol / 100.0, 0, 20)
+
+    # C. Status gizi sebagai pengubah arah
+    flags = status_flags(ctx.get('statusNutrisi'), ctx.get('haz'), ctx.get('whz'))
+    ed = kcal / 100.0
+    F['energy_density'] = ed
+    F['protein_density'] = np.clip(protein / safe_kcal * 100, 0, 30)
+    for k, v in flags.items():
+        F[k] = np.full(n, v)
+    names = df['name'].astype(str).str.lower()
+    fried = names.apply(lambda x: keyword_match(x, _FRIED_PATTERN)).to_numpy(dtype=float)
+    F['ed_x_kurang'] = ed * (flags['status_kurang'] or flags['stunting'])
+    F['ed_x_lebih'] = ed * flags['status_lebih']
+    F['ed_x_obes'] = ed * flags['status_obes']
+    F['protein_x_kurang'] = F['protein_density'] * (flags['status_kurang'] or flags['stunting'])
+    F['sugar_x_lebih'] = np.clip(sugars * mult / 10.0, 0, 20) * (flags['status_lebih'] + flags['status_obes'])
+    F['fried_x_lebih'] = fried * (flags['status_lebih'] + flags['status_obes'])
+
+    # D. Konteks kategori (umur balita, trimester, tahap diet & jenis operasi)
+    # ANAK_BALITA: 'umur' dalam BULAN (0-60); kategori lain dalam tahun
+    umur_raw = ctx.get('umur')
+    umur_bln = float(umur_raw) if (kategori == 'ANAK_BALITA' and umur_raw is not None) else 30.0
+    F['balita_bawah_12bln'] = np.full(n, float(kategori == 'ANAK_BALITA' and umur_bln < 12))
+    F['balita_bawah_36bln'] = np.full(n, float(kategori == 'ANAK_BALITA' and umur_bln < 36))
+    F['umur_bulan_norm'] = np.full(n, umur_bln / 60.0 if kategori == 'ANAK_BALITA' else 0.0)
+    minggu = ctx.get('usiaKehamilanMinggu')
+    trimester = 0.0
+    if kategori == 'IBU_HAMIL' and minggu:
+        trimester = 1.0 if minggu <= 13 else (2.0 if minggu <= 27 else 3.0)
+    F['trimester'] = np.full(n, trimester)
+    F['protein_x_trimester'] = F['protein_density'] * trimester
+    tek = df['tekstur'].map(TEKSTUR_ORDINAL).fillna(3).to_numpy(dtype=float) if 'tekstur' in df else np.full(n, 3.0)
+    tahap = float(TEKSTUR_ORDINAL.get(str(ctx.get('tahapDiet') or 'biasa').lower(), 3))
+    F['tekstur_ord'] = tek
+    F['tahap_diet_ord'] = np.full(n, tahap)
+    F['tekstur_violation'] = (tek > tahap).astype(float)
+    saluran_cerna = float(str(ctx.get('jenisOperasi') or '').lower() == 'saluran_cerna')
+    F['operasi_saluran_cerna'] = np.full(n, saluran_cerna)
+    F['fat_x_saluran_cerna'] = np.clip(fat * mult / 10.0, 0, 20) * saluran_cerna
+
+    # H. Alergi & pantangan (hasil parser regex + tabel bahaya kategori)
+    for c in ['n_conflict_allergen', 'n_conflict_pantangan', 'n_conflict_free', 'n_block_kategori',
+              'n_limit_kategori', 'n_user_restrictions']:
+        F[c] = df[c].astype(float).to_numpy() if c in df else np.zeros(n)
+    F['any_conflict'] = ((F['n_conflict_allergen'] + F['n_conflict_pantangan'] + F['n_conflict_free']
+                          + F['n_block_kategori']) > 0).astype(float)
+
+    # I. Flag nama makanan
+    F['flag_fried'] = fried
+    F['flag_processed'] = names.apply(lambda x: keyword_match(x, _PROCESSED_PATTERN)).to_numpy(dtype=float)
+    F['flag_sweet'] = (sugars > 15).astype(float)
+    F['flag_spicy'] = names.apply(lambda x: keyword_match(x, _ALLERGEN_PATTERNS['pedas'])).to_numpy(dtype=float)
+
+    ft = df['food_type'].to_numpy() if 'food_type' in df else np.array(['snack'] * n)
+
+    # J. Indikator ambang (pedoman porsi, AMDR, batas GGL): membuat efek ambang terbaca oleh model linear
+    gizi_kurang = float(flags['status_kurang'] or flags['stunting'])
+    gizi_lebih = float(flags['status_lebih'] or flags['status_obes'])
+    F['porsi_ideal'] = ((raw_mult >= 0.67) & (raw_mult <= 2.0)).astype(float)
+    F['porsi_wajar'] = ((raw_mult >= 0.5) & (raw_mult <= 3.0)).astype(float)
+    t_p_pct = 4 * t_p / t_kcal_macro
+    F['protein_pct_sesuai'] = (np.abs(p_pct - t_p_pct) <= 0.07).astype(float)
+    F['protein_kurang_lauk_karbo'] = ((p_pct < t_p_pct - 0.12) & np.isin(ft, ['protein', 'carb'])).astype(float)
+    F['protein_15'] = (p_pct >= 0.15).astype(float)
+    F['natrium_lewat'] = (F['sodium_share'] > 1.0).astype(float)
+    F['natrium_lewat_jauh'] = (F['sodium_share'] > 1.5).astype(float)
+    F['gula_lewat'] = (F['sugar_share'] > 1.0).astype(float)
+    F['gula_lewat_jauh'] = (F['sugar_share'] > 1.5).astype(float)
+    F['gula_10'] = (sugars > 10).astype(float)
+    F['ed_tinggi_x_lebih'] = (ed > 3.0).astype(float) * gizi_lebih
+    F['ed_rendah_x_kurang'] = ((ed < 1.0) & ~np.isin(ft, ['vegetable', 'fruit'])).astype(float) * gizi_kurang
+    F['protein15_x_kurang'] = F['protein_15'] * gizi_kurang
+    F['lemak10_x_saluran_cerna'] = (fat * mult > 10).astype(float) * saluran_cerna
+    F['diet_lunak'] = np.full(n, float(tahap < 3))
+
+    # E. Kecocokan sesi x foodType
+    sg = session_group(meal_type)
+    for t in FOOD_TYPES:
+        for s in SESSION_GROUPS:
+            F[f'ft_{t}__{s}'] = ((ft == t) & (sg == s)).astype(float)
+
+    return pd.DataFrame(F, index=df.index)[FEATURE_COLS]
+
+
+# ==========================================================================
+# PRE-PROCESSING & FEATURE ENGINEERING
 # ==========================================================================
 
 def extract_numeric(val) -> float:
-    """Robust numeric extractor dari string misal '2.5g' -> 2.5"""
     if pd.isna(val) or str(val).strip() == '':
         return 0.0
     match = re.search(r'([\d.]+)', str(val))
     return float(match.group(1)) if match else 0.0
 
+def _all_alias_keywords() -> dict[str, list[str]]:
+    """Kata kunci (>= 4 huruf) -> grup alergen, untuk koreksi salah ketik (typo) input user."""
+    alias = {}
+    for cat, kws in ALLERGEN_KEYWORDS.items():
+        if cat == 'seafood':
+            continue
+        for kw in kws + [cat]:
+            if len(kw) >= 4 and ' ' not in kw:
+                alias.setdefault(kw, set()).add(cat)
+    for word, cats in ALLERGEN_UMBRELLA.items():
+        if ' ' not in word:
+            alias.setdefault(word, set()).update(cats)
+    return {k: sorted(v) for k, v in alias.items()}
+
+_ALIAS_KEYWORDS = _all_alias_keywords()
 
 def detect_allergens(food_name: str) -> list[str]:
-    food_lower = food_name.lower()
-    return [
-        allergen
-        for allergen, keywords in ALLERGEN_KEYWORDS.items()
-        if any(kw in food_lower for kw in keywords)
-    ]
+    """Grup alergen pada nama makanan (batas kata + frasa pengecualian, mis. 'eggplant' bukan telur)."""
+    food_lower = str(food_name).lower()
+    detected = []
+    for allergen, pattern in _ALLERGEN_PATTERNS.items():
+        if allergen == 'seafood':
+            continue
+        if keyword_match(food_lower, pattern, _EXCEPTION_PATTERNS.get(allergen)):
+            detected.append(allergen)
+    return detected
 
+def map_supabase_allergens(allergens) -> list[str]:
+    """Field 'allergens' produk Supabase (Inggris, mis. 'peanuts', 'tree nuts', 'wheat') -> grup alergen baku."""
+    if allergens is None or (isinstance(allergens, float) and pd.isna(allergens)):
+        return []
+    if isinstance(allergens, str):
+        allergens = [a for a in re.split(r'[,;]', allergens)]
+    out = set()
+    for a in allergens:
+        key = str(a).strip().lower()
+        if not key:
+            continue
+        if key in SUPABASE_ALLERGEN_MAP:
+            out.update(SUPABASE_ALLERGEN_MAP[key])
+        elif key in ALLERGEN_KEYWORDS:
+            out.add(key)
+    return sorted(out)
+
+def _split_label(label) -> set[str]:
+    if label is None or (isinstance(label, float) and pd.isna(label)):
+        return set()
+    return {a.strip().lower() for a in str(label).split(',') if a.strip() and a.strip().lower() != 'nan'}
 
 def derive_micronutrient_scores(row: pd.Series) -> dict[str, float]:
-    """
-    Heuristik skor mikronutrien dari nama makanan.
-    Dipakai sebagai fitur tambahan untuk content-based ML.
-    Calcium: dairy, leafy greens, tofu, sardines
-    Iron: red meat, legumes, spinach, fortified cereals
-    Vitamin: fruits, vegetables, liver
-    """
-    name = str(row['name']).lower()
+    name = str(row.get('name', '')).lower()
     cal_kw = ['milk', 'cheese', 'yogurt', 'spinach', 'kale', 'broccoli', 'tofu', 'sardine', 'almond', 'sesame']
     iron_kw = ['beef', 'lamb', 'liver', 'lentil', 'bean', 'spinach', 'pumpkin', 'quinoa', 'oyster', 'turkey']
     vit_kw  = ['orange', 'lemon', 'mango', 'papaya', 'carrot', 'sweet potato', 'tomato', 'bell pepper', 'strawberry', 'kiwi', 'liver', 'egg']
@@ -112,25 +553,21 @@ def derive_micronutrient_scores(row: pd.Series) -> dict[str, float]:
         'vitamin_score': min(1.0, sum(k in name for k in vit_kw) * 0.35),
     }
 
-
 def classify_category_suitability(row: pd.Series) -> list[str]:
-    """
-    Multi-label klasifikasi kelayakan makanan per kategori kondisi.
-    Menggunakan threshold klinis matematis dan string filtering (Hard Constraints).
-    """
     categories = []
     name = str(row['name']).lower()
-    cal, sod, chol, sug, pro, fat = (
-        row['calories'], row['sodium'], row['cholesterol'],
-        row['sugars'], row['protein'], row['fat']
-    )
-    banned = ['fried', 'crispy', 'deep-fried', 'bbq sauce', 'fast food', 'frankfurter', 'sausage', 'cookie', 'cracker', 'pie', 'cake', 'candy', 'pizza', 'gravy', 'macaroni', 'pastry', 'pudding', 'soda', 'sweetened', 'frosting']
+    cal = row['calories']
+    sod = row['sodium']
+    chol = row['cholesterol']
+    sug = row['sugars']
+    pro = row['protein']
+    fat = row['fat']
+    
+    banned = ['fried', 'crispy', 'deep-fried', 'bbq sauce', 'fast food', 'frankfurter', 'sausage', 
+              'cookie', 'cracker', 'pie', 'cake', 'candy', 'pizza', 'gravy', 'pastry', 'pudding', 'frosting']
     raw_banned = ['raw', 'sushi', 'sashimi', 'ceviche']
 
     is_processed_keyword = any(b in name for b in banned)
-    
-    # Nutritional Proxy untuk Junk Food (Angka Absolut menolak dibohongi)
-    # Sangat tinggi lemak, tanpa protein, atau di luar standar gula/garam wajar.
     is_ultra_processed = (fat > 30 and pro < 5) or (sod > 1000) or (sug > 25)
 
     if not is_ultra_processed and not is_processed_keyword:
@@ -145,61 +582,235 @@ def classify_category_suitability(row: pd.Series) -> list[str]:
     if pro >= 3.0 and fat <= 20 and sod <= 1500 and sug <= 20 and not is_ultra_processed and not is_processed_keyword:
         categories.append('PASCA_OPERASI')
 
-    # Fallback darurat ke UMUM (jika semua diblok, paling tidak sistem berjalan tanpa Crash, walau terisolasi)
     if not categories:
         categories.append('UMUM')
 
     return categories
 
+def compute_condition_relevance_row(row: pd.Series, kategori: str) -> float:
+    cal = row['calories']
+    sod = row['sodium']
+    chol = row['cholesterol']
+    sug = row['sugars']
+    pro = row['protein']
+    fat = row['fat']
+    name = str(row['name']).lower()
+    
+    junk_kw = ['fried', 'crispy', 'deep-fried', 'fast food', 'frankfurter', 'sausage', 
+               'cookie', 'cracker', 'pie', 'cake', 'candy', 'pizza', 'frosting']
+    is_junk = any(kw in name for kw in junk_kw) or (fat > 30 and pro < 5) or (sod > 1000) or (sug > 25)
+    
+    score = 0.8
+    if is_junk:
+        score -= 0.5
+        
+    if kategori == 'ANAK_BALITA':
+        if cal <= 400 and sod <= 400 and chol <= 100 and sug <= 12 and not is_junk:
+            score += 0.3
+        elif sod > 600 or sug > 15:
+            score -= 0.3
+    elif kategori == 'IBU_HAMIL':
+        if pro >= 6.0 and chol <= 250 and sug <= 15 and not is_junk:
+            score += 0.3
+        elif sod > 800:
+            score -= 0.2
+    elif kategori == 'PASCA_OPERASI':
+        if pro >= 8.0 and fat <= 15 and sod <= 600 and sug <= 15 and not is_junk:
+            score += 0.35
+        elif sod > 800 or fat > 20:
+            score -= 0.3
+    else:  # UMUM
+        if not is_junk and pro >= 4.0:
+            score += 0.2
+            
+    return float(np.clip(score, 0.0, 1.0))
 
-def build_tfidf_content_matrix(df: pd.DataFrame) -> tuple[np.ndarray, TfidfVectorizer]:
-    """
-    Bangun TF-IDF matrix dari nama makanan untuk content-based similarity.
-    Ini menangkap pola semantik nama makanan (misal: 'grilled chicken' vs 'fried chicken').
-    """
-    vectorizer = TfidfVectorizer(
-        ngram_range=(1, 2),
-        max_features=500,
-        min_df=2,
-        stop_words='english',
-        sublinear_tf=True
-    )
-    tfidf_matrix = vectorizer.fit_transform(df['name'].fillna('')).toarray()
-    return tfidf_matrix, vectorizer
-
+def _produk_supabase_ke_record(pid, nama, harga, gizi, risiko, kat, img, stok=None) -> dict:
+    """Satu baris tabel produk_makanan (Supabase) -> record makanan. nilai_gizi (JSON) diratakan."""
+    if isinstance(gizi, str):
+        try:
+            gizi = json.loads(gizi)
+        except Exception:
+            gizi = {}
+    elif not isinstance(gizi, dict):
+        gizi = {}
+    return {
+        'id': str(pid) if pid is not None else '',
+        'name': nama,
+        'price': float(harga) if harga is not None else 0.0,
+        'stok': stok,
+        'calories': float(gizi.get('calories', 0) or 0),
+        'protein': float(gizi.get('protein', 0) or 0),
+        'fat': float(gizi.get('fat', 0) or 0),
+        'carbs': float(gizi.get('carbs', 0) or 0),
+        'sodium': float(gizi.get('sodium', 0) or 0),
+        'cholesterol': float(gizi.get('cholesterol', 0) or 0),
+        'sugars': float(gizi.get('sugars', 0) or 0),
+        'image': img or '',
+        'label_risiko': risiko or '',
+        'allergens': gizi.get('allergens', []),
+        'foodType': gizi.get('foodType'),
+        'cookingMethod': gizi.get('cookingMethod'),
+        'category': kat or ''
+    }
 
 def load_and_preprocess_api_data(api_url: str) -> tuple[pd.DataFrame, dict]:
     """
-    Load + preprocess dataset dari Next.js API.
-    Menghasilkan tuple: (DataFrame, Dict Scaler untuk setiap kategori).
+    Memuat katalog produk marketplace NutriScale (tabel produk_makanan di Supabase) untuk rekomendasi real-time.
+    Hanya produk Supabase yang boleh direkomendasikan: CSV (nutrition.csv, data/<kategori>/) khusus training & testing.
+    Snapshot lokal data/supabase_products.json hanya dipakai bila AI_ALLOW_SNAPSHOT_FALLBACK=1 (dev & test offline).
     """
-    print(f"[Pipeline] Fetching data from {api_url}...")
+    print(f"[Pipeline] Memuat data makanan dari {api_url}...")
+    data = None
+    sumber_produk = None
+    # 1. Coba fetch dari Next.js Web API (/api/products)
     try:
-        response = requests.get(api_url, timeout=10)
+        response = requests.get(api_url, timeout=3)
         response.raise_for_status()
         res_json = response.json()
-        
-        # Next.js API returns { products: [...] } but we might also get a raw list
         if isinstance(res_json, dict) and 'products' in res_json:
             data = res_json['products']
-        else:
+        elif isinstance(res_json, list):
             data = res_json
-            
+        if data:
+            sumber_produk = 'NEXTJS_API_PRODUCTS'
+        print(f"[Pipeline] Sukses memuat data makanan dari Next.js API ({len(data)} item).")
     except Exception as e:
-        print(f"[Pipeline Error] Gagal fetch API: {e}")
-        # Kembalikan dataframe kosong jika gagal
+        print(f"[Pipeline] Fetch Next.js API offline ({e}).")
+
+    # 2. Coba koneksi langsung ke Supabase PostgreSQL via DIRECT_URL / DATABASE_URL
+    if not data:
+        db_url = os.environ.get("DIRECT_URL") or os.environ.get("DATABASE_URL")
+        if db_url:
+            try:
+                import psycopg2
+                print("[Pipeline] Mencoba koneksi langsung ke database Supabase PostgreSQL (produk_makanan)...")
+                conn = psycopg2.connect(db_url, connect_timeout=5)
+                cur = conn.cursor()
+                cur.execute('SELECT produk_id, nama_produk, harga, nilai_gizi, label_risiko, kategori, gambar, stok FROM produk_makanan;')
+                rows = cur.fetchall()
+                conn.close()
+                sb_foods = [_produk_supabase_ke_record(*r) for r in rows]
+                if sb_foods:
+                    data = sb_foods
+                    sumber_produk = 'SUPABASE_POSTGRESQL'
+                    print(f"[Pipeline] Sukses memuat {len(data)} produk langsung dari Supabase PostgreSQL!")
+            except Exception as pg_err:
+                print(f"[Pipeline] Supabase direct PostgreSQL offline/error: {pg_err}")
+
+    # 3. Coba fetch langsung dari Supabase REST API jika tersedia
+    if not data:
+        supabase_url = os.environ.get("SUPABASE_URL") or os.environ.get("NEXT_PUBLIC_SUPABASE_URL")
+        supabase_key = (
+            os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or
+            os.environ.get("SUPABASE_KEY") or
+            os.environ.get("NEXT_PUBLIC_SUPABASE_ANON_KEY")
+        )
+        table_name = os.environ.get("SUPABASE_FOOD_TABLE", "produk_makanan")
+        if supabase_url and supabase_key:
+            try:
+                rest_url = f"{supabase_url.rstrip('/')}/rest/v1/{table_name}?select=*"
+                print(f"[Pipeline] Mencoba fetch langsung dari Supabase REST ({rest_url})...")
+                sb_resp = requests.get(
+                    rest_url,
+                    headers={
+                        "apikey": supabase_key,
+                        "Authorization": f"Bearer {supabase_key}"
+                    },
+                    timeout=4
+                )
+                if sb_resp.status_code == 200:
+                    data = [
+                        _produk_supabase_ke_record(r.get('produk_id', r.get('id')), r.get('nama_produk'), r.get('harga'),
+                                                   r.get('nilai_gizi'), r.get('label_risiko'), r.get('kategori'),
+                                                   r.get('gambar'), r.get('stok'))
+                        for r in sb_resp.json()
+                    ]
+                    sumber_produk = 'SUPABASE_REST'
+                    print(f"[Pipeline] Sukses memuat {len(data)} produk langsung dari Supabase REST ({table_name})!")
+                else:
+                    print(f"[Pipeline] Supabase direct REST status {sb_resp.status_code}: {sb_resp.text[:100]}")
+            except Exception as sb_err:
+                print(f"[Pipeline] Supabase direct REST error: {sb_err}")
+
+    # 4. Snapshot lokal Supabase HANYA untuk dev/test offline (bisa berbeda dari isi marketplace saat ini)
+    if not data and os.environ.get("AI_ALLOW_SNAPSHOT_FALLBACK", "").lower() not in ("1", "true", "yes"):
+        print("[Pipeline ERROR] Supabase/Next.js offline. Snapshot lokal tidak dipakai di produksi "
+              "(set AI_ALLOW_SNAPSHOT_FALLBACK=1 hanya untuk dev/test).")
         return pd.DataFrame(), {}
-        
-    if isinstance(data, dict) and 'products' in data:
-        data = data['products']
-        
+    if not data:
+        print("[Pipeline] Mencoba snapshot lokal produk Supabase (data/supabase_products.json)...")
+        sb_cache = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'supabase_products.json')
+        if os.path.exists(sb_cache):
+            try:
+                with open(sb_cache, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                sumber_produk = 'SNAPSHOT_LOKAL_DEV'
+                print(f"[Pipeline] Sukses memuat {len(data)} produk dari snapshot Supabase NutriScale!")
+            except Exception as e:
+                print(f"[Pipeline ERROR] Gagal membaca snapshot Supabase: {e}")
+                return pd.DataFrame(), {}
+        else:
+            print("[Pipeline ERROR] Tidak ada data makanan Supabase yang tersedia!")
+            return pd.DataFrame(), {}
+            
     df = pd.DataFrame(data)
     if len(df) == 0:
         return df, {}
 
-    df = df.dropna(subset=['name'])
+    # Normalisasi nama kolom (Mendukung skema Bahasa Indonesia dari Supabase & Prisma)
+    col_mapping = {
+        'nama': 'name',
+        'nama_produk': 'name',
+        'nama_makanan': 'name',
+        'food_name': 'name',
+        'title': 'name',
+        'kalori': 'calories',
+        'energi': 'calories',
+        'energy': 'calories',
+        'lemak': 'fat',
+        'total_fat': 'fat',
+        'karbohidrat': 'carbs',
+        'karbo': 'carbs',
+        'carbohydrate': 'carbs',
+        'natrium': 'sodium',
+        'garam': 'sodium',
+        'gula': 'sugars',
+        'sugar': 'sugars',
+        'kolesterol': 'cholesterol',
+        'foto': 'image',
+        'gambar': 'image',
+        'foto_produk': 'image',
+        'image_url': 'image',
+        'harga': 'price',
+        'alergen': 'label_risiko',
+        'pantangan': 'label_risiko',
+        'kategori': 'category',
+    }
+    df = df.rename(columns={k: v for k, v in col_mapping.items() if k in df.columns and v not in df.columns})
 
-    # Ensure numeric columns
+    if 'name' not in df.columns:
+        print("[Pipeline WARNING] Kolom nama/name tidak ditemukan dalam dataset makanan!")
+        return pd.DataFrame(), {}
+
+    df = df.dropna(subset=['name']).copy()
+
+    # Hanya produk marketplace yang punya produk_id (dipakai web untuk keranjang & badge rekomendasi)
+    if 'id' not in df.columns and 'produk_id' in df.columns:
+        df = df.rename(columns={'produk_id': 'id'})
+    if 'id' not in df.columns:
+        print("[Pipeline WARNING] Kolom produk_id/id tidak ditemukan. Produk tanpa ID tidak bisa direkomendasikan!")
+        return pd.DataFrame(), {}
+    df['id'] = df['id'].astype(str).str.strip()
+    df = df[~df['id'].isin(['', 'None', 'nan'])].copy()
+    # Produk dengan stok habis tidak direkomendasikan
+    if 'stok' in df.columns:
+        stok = pd.to_numeric(df['stok'], errors='coerce')
+        n_habis = int((stok <= 0).sum())
+        df = df[~(stok <= 0)].copy()
+        if n_habis:
+            print(f"[Pipeline] {n_habis} produk stok habis dikeluarkan dari kandidat rekomendasi.")
+
     expected_cols = ['calories', 'protein', 'fat', 'carbs', 'sodium', 'cholesterol', 'sugars']
     for col in expected_cols:
         if col not in df.columns:
@@ -207,206 +818,380 @@ def load_and_preprocess_api_data(api_url: str) -> tuple[pd.DataFrame, dict]:
         else:
             df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0.0)
 
-    # --- Filter dasar ---
+    # Filter dasar: minimum kalori & bebas alkohol
     df = df[df['calories'] > 10].copy()
-    df = df[~df['name'].apply(lambda x: any(kw in str(x).lower() for kw in ALCOHOL_KEYWORDS))].copy()
+    df = df[~df['name'].apply(is_alcoholic)].copy()
 
-    # --- Feature Engineering ---
-    # Skor mikronutrien (fitur tambahan content-based)
+    # Precompute lowercased name untuk pencarian super cepat
+    df['name_lower'] = df['name'].str.lower()
+
+    # DETEKSI ALERGEN (nama makanan + field allergens Supabase berbahasa Inggris)
+    detected_allergens_series = df['name'].apply(lambda x: ', '.join(detect_allergens(str(x))))
+    if 'allergens' in df.columns:
+        supabase_allergens = df['allergens'].apply(lambda a: ', '.join(map_supabase_allergens(a)))
+        detected_allergens_series = (detected_allergens_series + ', ' + supabase_allergens).str.strip(', ')
+    if 'label_risiko' in df.columns:
+        df['label_risiko'] = df['label_risiko'].fillna('').astype(str)
+        df['label_risiko'] = df.apply(
+            lambda r: ', '.join(filter(None, set([a.strip() for a in (r['label_risiko'] + ', ' + detected_allergens_series.loc[r.name]).split(',') if a.strip()]))),
+            axis=1
+        )
+    else:
+        df['label_risiko'] = detected_allergens_series
+
+    # Fitur mikronutrien & kategori
     micronutrients = df.apply(derive_micronutrient_scores, axis=1)
     df['calcium_score'] = [m['calcium_score'] for m in micronutrients]
     df['iron_score']    = [m['iron_score'] for m in micronutrients]
     df['vitamin_score'] = [m['vitamin_score'] for m in micronutrients]
-
-    # Label allergen & kategori
-    if 'label_risiko' not in df.columns:
-        df['label_risiko'] = ''
-    else:
-        df['label_risiko'] = df['label_risiko'].fillna('')
-        
     df['category_tags'] = df.apply(classify_category_suitability, axis=1)
 
-    # Nutrient density score (protein + micronutrients per 100 kalori)
+    # Precompute condition relevance per kategori untuk kecepatan komputasi O(1)
+    df['rel_UMUM'] = df.apply(lambda r: compute_condition_relevance_row(r, 'UMUM'), axis=1)
+    df['rel_ANAK_BALITA'] = df.apply(lambda r: compute_condition_relevance_row(r, 'ANAK_BALITA'), axis=1)
+    df['rel_IBU_HAMIL'] = df.apply(lambda r: compute_condition_relevance_row(r, 'IBU_HAMIL'), axis=1)
+    df['rel_PASCA_OPERASI'] = df.apply(lambda r: compute_condition_relevance_row(r, 'PASCA_OPERASI'), axis=1)
+
+    # Nutrient density
     df['nutrient_density'] = (
         (df['protein'] / df['calories'].clip(lower=1)) * 100 +
         df['calcium_score'] * 10 +
         df['iron_score'] * 10
     ).round(3)
 
-    # Glycemic proxy (tinggi gula + rendah fiber warning)
     df['glycemic_flag'] = ((df['sugars'] > 20) | (df['carbs'] > 60)).astype(int)
 
-    print(f"[Pipeline] OK: {len(df)} food records siap. Fitur: {df.shape[1]} kolom.")
-    
-    # Pre-fit scalers untuk efisiensi CPU pada API endpoint O(1) request cost
-    scalers = {}
-    for cat, weights in FEATURE_WEIGHTS.items():
-        numeric_feats = [f for f in weights.keys() if f in df.columns]
-        if numeric_feats:
-            # Gunakan MinMax dibandingkan Standard Scaler karena nilai absolut lebih penting
-            sc = MinMaxScaler()
-            matrix = df[numeric_feats].values.astype(float)
-            if matrix.shape[0] > 0:
-                sc.fit(matrix)
-            scalers[cat] = {'scaler': sc, 'features': numeric_feats}
-            
-    return df.reset_index(drop=True), scalers
+    # foodType (kosakata Supabase) & tekstur untuk fitur sesi x foodType dan tahap diet pasca operasi
+    food_type_src = df['foodType'] if 'foodType' in df.columns else pd.Series([None] * len(df), index=df.index)
+    df['food_type'] = [classify_food_type(n, t) for n, t in zip(df['name'], food_type_src)]
+    cooking = df['cookingMethod'].fillna('').astype(str) if 'cookingMethod' in df.columns else pd.Series([''] * len(df), index=df.index)
+    df['tekstur'] = [detect_texture(f"{n} {c}", t) for n, c, t in zip(df['name'], cooking, df['food_type'])]
 
+    df = df.reset_index(drop=True)
 
-# ==========================================================================
-# [3.3.4] MODEL DAN ARSITEKTUR — LAYER 1: EXPERT SYSTEM (WHO Z-SCORE)
-# ==========================================================================
-
-# Referensi BMI-for-age median (CDC/WHO, disederhanakan)
-_CHILD_BMI_MEDIAN = {
-    2: 16.4, 3: 15.9, 4: 15.6, 5: 15.5, 6: 15.5, 7: 15.7,
-    8: 15.9, 9: 16.3, 10: 16.7, 11: 17.2, 12: 17.7, 13: 18.4,
-    14: 19.0, 15: 19.6, 16: 20.2, 17: 20.7, 18: 21.2,
-}
-
-
-def calculate_bmi(weight_kg: float, height_cm: float) -> float:
-    h = height_cm / 100.0
-    return round(weight_kg / (h ** 2), 2) if h > 0 else 0.0
-
-
-def assess_nutritional_status(umur, jenisKelamin, beratBadan, tinggiBadan, kategori) -> dict:
-    """
-    Asesmen status gizi sesuai standar CDC.
-    Adults: >= 20 years. Children/Teens: 2-19 years.
-    Output strict mapping ke Prisma RiwayatAnalisis schema.
-    """
-    umur = int(umur or 20)
-    bmi  = calculate_bmi(float(beratBadan), float(tinggiBadan))
-
-    # CDC: BMI is not accurate for pregnant women.
-    if kategori == 'IBU_HAMIL':
-        return {'bmi': bmi, 'haz': 0.0, 'whz': 0.0, 'lila': None, 'statusNutrisi': 'Pregnant (Monitoring)'}
-
-    # Anak Balita atau Child/Teen (<= 18 tahun)
-    if umur <= 18 or kategori == 'ANAK_BALITA':
-        # CDC Child/Teen percentiles approximated via Z-scores:
-        # < 5th percentile (~ z < -1.645) -> Underweight
-        # 5th to < 85th percentile -> Healthy Weight (Normal)
-        # 85th to < 95th percentile (~ z >= 1.036) -> Overweight
-        # >= 95th percentile (~ z >= 1.645) -> Obese
-        median = _CHILD_BMI_MEDIAN.get(umur, 16.5 + 0.5 * max(0, umur - 5))
-        sd     = median * 0.12
-        z      = round((bmi - median) / sd, 2) if sd > 0 else 0.0
-
-        if z < -1.645:   status = "Underweight"
-        elif z < 1.036:  status = "Normal"
-        elif z < 1.645:  status = "Overweight"
-        else:            status = "Obese"
-
-        return {'bmi': bmi, 'haz': z, 'whz': z, 'lila': None, 'statusNutrisi': status}
-
-    else:
-        # CDC Adult BMI (> 18 years old)
-        if bmi < 18.5:   status = "Underweight"
-        elif bmi < 25.0: status = "Normal"
-        elif bmi < 30.0: status = "Overweight"
-        else:            status = "Obese"
-
-        return {'bmi': bmi, 'haz': 0.0, 'whz': 0.0, 'lila': None, 'statusNutrisi': status}
-
-
-# ==========================================================================
-# [3.3.4] MODEL DAN ARSITEKTUR — LAYER 2: CALORIC ENGINE
-# ==========================================================================
-
-def calculate_daily_calories(umur, jenisKelamin, beratBadan, tinggiBadan,
-                              kategori, status_nutrisi, usia_kehamilan, anjuran_dokter) -> dict:
-    umur = int(umur or 20)
-    bb = float(beratBadan)
-    tb = float(tinggiBadan)
-
-    if anjuran_dokter and float(anjuran_dokter) > 0:
-        tdee = float(anjuran_dokter)
-    else:
-        # Mifflin-St Jeor BMR
-        if jenisKelamin == 'LAKI_LAKI':
-            bmr = (10 * bb) + (6.25 * tb) - (5 * umur) + 5
-        else:
-            bmr = (10 * bb) + (6.25 * tb) - (5 * umur) - 161
-
-        # Activity factor: sedentary default
-        tdee = bmr * 1.375  # light activity
-
-        # Koreksi status gizi
-        adjustments = {
-            "Underweight":          +500,
-            "Overweight":           -300,
-            "Obese":                -500,
-        }
-        tdee += adjustments.get(status_nutrisi, 0)
-
-        # Koreksi kondisi khusus
-        if kategori == 'IBU_HAMIL' and usia_kehamilan:
-            weeks = int(usia_kehamilan)
-            tdee += 340 if 14 <= weeks <= 27 else (452 if weeks >= 28 else 180)
-        elif kategori == 'PASCA_OPERASI':
-            tdee += 400  # hypermetabolism pasca operasi
-
-        # Koreksi anak balita (kebutuhan lebih rendah secara absolut)
-        if kategori == 'ANAK_BALITA' and umur < 6:
-            tdee = min(tdee, 1600)
-
-    dist = MACRO_DISTRIBUTION.get(kategori, MACRO_DISTRIBUTION['UMUM'])
-    return {
-        'target_kalori_harian': round(tdee, 1),
-        'distribusi': {
-            'protein_g': round((dist['protein'] * tdee) / 4, 1),
-            'fat_g':     round((dist['fat']     * tdee) / 9, 1),
-            'carbs_g':   round((dist['carbs']   * tdee) / 4, 1),
-        }
+    scaler_dict = {
+        'feature_cols': FEATURE_COLS,
+        'sumber_produk': sumber_produk,
     }
 
+    print(f"[Pipeline] OK: {len(df)} makanan siap dengan deteksi alergen & fitur ML.")
+    return df, scaler_dict
+
+load_and_preprocess_kaggle_data = load_and_preprocess_api_data
 
 # ==========================================================================
-# [3.3.4] MODEL DAN ARSITEKTUR — LAYER 3: CONTENT-BASED ML RECOMMENDER
+# TIER 1 DATA INTAKE: ASESMEN & TARGET GIZI DARI NUTRISCALE WEB
 # ==========================================================================
 
-def filter_dataset(df: pd.DataFrame, pantanganMedis: Optional[str], kategoriKondisi: str) -> pd.DataFrame:
+def ambil_data_asesmen_nutriscale(profil_kesehatan_dict: dict) -> dict:
+    asesmen = profil_kesehatan_dict.get('asesmen')
+    if not asesmen and isinstance(profil_kesehatan_dict.get('nutrisi'), dict):
+        nutrisi_obj = profil_kesehatan_dict['nutrisi']
+        if 'statusNutrisi' in nutrisi_obj or 'bmi' in nutrisi_obj:
+            asesmen = nutrisi_obj
+
+    if not isinstance(asesmen, dict) or not asesmen:
+        raise NutriScaleDataError(
+            "Data asesmen antropometri NutriScale ('asesmen') wajib dikirim. "
+            "AI tidak menghitung BMI atau status nutrisi sendiri."
+        )
+
+    try:
+        bmi_val = float(asesmen.get('bmi', 0.0))
+    except (TypeError, ValueError):
+        raise NutriScaleDataError("Data NutriScale 'asesmen.bmi' wajib berupa angka.")
+
+    if not np.isfinite(bmi_val) or bmi_val < 0:
+        raise NutriScaleDataError(f"Data NutriScale 'asesmen.bmi' harus >= 0, diterima: {asesmen.get('bmi')}.")
+
+    haz_val = asesmen.get('haz')
+    whz_val = asesmen.get('whz')
+
+    try:
+        haz_float = float(haz_val) if haz_val is not None else 0.0
+    except (TypeError, ValueError):
+        haz_float = 0.0
+
+    try:
+        whz_float = float(whz_val) if whz_val is not None else 0.0
+    except (TypeError, ValueError):
+        whz_float = 0.0
+
+    status_nutrisi = str(asesmen.get('statusNutrisi') or 'Normal').strip()
+
+    return {
+        'bmi': round(bmi_val, 2),
+        'haz': round(haz_float, 2),
+        'whz': round(whz_float, 2),
+        'lila': None,
+        'statusNutrisi': status_nutrisi,
+        '_source': NUTRISCALE_SOURCE,
+    }
+
+def _read_macro_grams(nutrisi: dict, key: str) -> float:
+    macro = nutrisi.get(key)
+    grams = macro.get('grams') if isinstance(macro, dict) else None
+    try:
+        value = float(grams)
+    except (TypeError, ValueError):
+        raise NutriScaleDataError(f"Data NutriScale '{key}.grams' wajib berupa angka.")
+    if not np.isfinite(value) or value < 0:
+        raise NutriScaleDataError(f"Data NutriScale '{key}.grams' harus >= 0, diterima: {grams}.")
+    return value
+
+def _read_macro_percent(nutrisi: dict, key: str) -> Optional[float]:
+    macro = nutrisi.get(key)
+    percent = macro.get('percent') if isinstance(macro, dict) else None
+    return float(percent) if isinstance(percent, (int, float)) else None
+
+def ambil_data_nutrisi_nutriscale(nutrisi: Optional[dict]) -> dict:
+    if not isinstance(nutrisi, dict) or not nutrisi:
+        raise NutriScaleDataError(
+            "Data perhitungan gizi NutriScale ('nutrisi') wajib dikirim. "
+            "AI tidak menghitung kebutuhan kalori/makro sendiri."
+        )
+
+    try:
+        calories = float(nutrisi.get('calories'))
+    except (TypeError, ValueError):
+        raise NutriScaleDataError("Data NutriScale 'calories' wajib berupa angka.")
+    if not np.isfinite(calories) or calories <= 0:
+        raise NutriScaleDataError(f"Data NutriScale 'calories' harus > 0, diterima: {nutrisi.get('calories')}.")
+
+    carbs_g = _read_macro_grams(nutrisi, 'carbohydrates')
+    protein_g = _read_macro_grams(nutrisi, 'protein')
+    fat_g = _read_macro_grams(nutrisi, 'fat')
+
+    atwater_kcal = carbs_g * KCAL_PER_G_CARBS + protein_g * KCAL_PER_G_PROTEIN + fat_g * KCAL_PER_G_FAT
+    diff_kcal = abs(atwater_kcal - calories)
+    if diff_kcal > calories * ATWATER_TOLERANCE_RATIO:
+        raise NutriScaleDataError(
+            f"Data NutriScale tidak konsisten: makro setara {atwater_kcal:.1f} kkal, "
+            f"sedangkan calories {calories:.1f} kkal."
+        )
+
+    warnings_list = nutrisi.get('warnings') or []
+
+    return {
+        'target_kalori_harian': round(calories, 1),
+        'distribusi': {
+            'protein_g': round(protein_g, 1),
+            'fat_g':     round(fat_g, 1),
+            'carbs_g':   round(carbs_g, 1),
+        },
+        'tier1_details': {
+            'sumber': NUTRISCALE_SOURCE,
+            'life_stage': nutrisi.get('lifeStage'),
+            'energy_method': nutrisi.get('energyMethod'),
+            'macro_percentages': {
+                'carbs':   _read_macro_percent(nutrisi, 'carbohydrates'),
+                'protein': _read_macro_percent(nutrisi, 'protein'),
+                'fat':     _read_macro_percent(nutrisi, 'fat'),
+            },
+            'warnings': [str(w) for w in warnings_list if w],
+            'energy_conservation_diff_kcal': round(diff_kcal, 2),
+        },
+    }
+
+# ==========================================================================
+# TIER 2: HARD SAFETY FILTERING (WAJIB SEBELUM RANKING)
+# ==========================================================================
+
+def _parse_restriction_text(text: Optional[str]) -> tuple[set[str], set[str]]:
     """
-    Filter makanan berdasarkan:
-    1. Allergen/pantangan medis (exact + partial match)
-    2. Kelayakan kategori kondisi
+    Parser teks alergi / pantangan user -> (grup alergen, frasa bebas).
+    - Pencocokan kata utuh (regex batas kata) + frasa pengecualian ('kacang hijau' bukan kacang tanah).
+    - Kata payung ('seafood' -> ikan, udang, kepiting, kerang, lobster, cumi).
+    - Koreksi salah ketik ('udnag' -> udang, 'kacng' -> kacang) dengan difflib.
+    - Frasa pantangan umum ('mie instan', 'daging merah', 'jeroan') memakai PANTANGAN_PHRASES,
+      bukan seluruh grup alergen. Kata yang tidak dikenali dicocokkan sebagai frasa utuh, bukan per token.
     """
-    if df is None or len(df) == 0 or 'label_risiko' not in df.columns:
+    if not text:
+        return set(), set()
+    raw_text = str(text).lower().strip()
+    if raw_text in PANTANGAN_STOPWORDS:
+        return set(), set()
+
+    # 1. Normalisasi pemisah (dan, serta, atau, &, /, ;, + diubah jadi koma), buang tanda baca lain
+    raw_text = re.sub(r'[^\w\s,&/;+\-]', ' ', raw_text)
+    text = re.sub(r'(\bdan\b|\bserta\b|\batau\b|\bdengan\b|\band\b|&|/|;|\+|\n)', ',', raw_text)
+    # 2. Hilangkan kata pengantar non-pantangan
+    text = re.sub(r'\b(alergi|alergy|allergy|allergic to|allergic|pantangan|hindari|tidak bisa makan|tidak boleh|'
+                  r'tidak suka|tdk suka|gak suka|riwayat|makanan|terhadap|to)\b', ' ', text)
+
+    categories, free_phrases = set(), set()
+    for chunk in [re.sub(r'\s+', ' ', t).strip(' .-') for t in text.split(',')]:
+        if not chunk or chunk in PANTANGAN_STOPWORDS:
+            continue
+        if chunk in PANTANGAN_PHRASES:
+            free_phrases.add(chunk)
+            continue
+        chunk_cats = set()
+        for word, cats in ALLERGEN_UMBRELLA.items():
+            if keyword_match(chunk, _kw_pattern([word])):
+                chunk_cats.update(cats)
+        for category, pattern in _ALLERGEN_PATTERNS.items():
+            if category == 'seafood':
+                continue
+            if keyword_match(chunk, pattern, _EXCEPTION_PATTERNS.get(category)) or chunk == category:
+                chunk_cats.add(category)
+        # 3. Koreksi typo kata per kata bila belum dikenali
+        if not chunk_cats:
+            for token in chunk.split():
+                # kata kunci persis (mis. 'kacang' di 'kacang hijau') sudah dikecualikan dengan sengaja
+                if len(token) < 4 or token in _ALIAS_KEYWORDS:
+                    continue
+                close = difflib.get_close_matches(token, _ALIAS_KEYWORDS.keys(), n=1, cutoff=0.8)
+                if close:
+                    chunk_cats.update(_ALIAS_KEYWORDS[close[0]])
+        if chunk_cats:
+            categories.update(chunk_cats)
+        elif len(chunk) >= 3:
+            free_phrases.add(chunk)
+    return categories, free_phrases
+
+def parse_pantangan_input(pantanganMedis: Optional[str]) -> tuple[set[str], set[str]]:
+    """
+    Ekstrak kategori pantangan dan kata kunci terlarang dari input pengguna.
+    Mendukung input alami seperti 'alergi susu dan kacang, tidak suka pedas'.
+    Mengembalikan (kategori/frasa terdeteksi, kata kunci terlarang).
+    """
+    categories, free_phrases = _parse_restriction_text(pantanganMedis)
+    forbidden_keywords = set(free_phrases)
+    for cat in categories:
+        forbidden_keywords.update(ALLERGEN_KEYWORDS.get(cat, []))
+    for phrase in free_phrases:
+        forbidden_keywords.update(PANTANGAN_PHRASES.get(phrase, []))
+    return categories | free_phrases, forbidden_keywords
+
+def hitung_konflik_keamanan(df: pd.DataFrame, pantanganMedis: Optional[str], kategoriKondisi: str,
+                            alergi: Optional[str] = None, profil_ctx: Optional[dict] = None) -> pd.DataFrame:
+    """
+    Hitung konflik keamanan per makanan (dipakai filter inferensi DAN generator dataset):
+      n_conflict_allergen  : grup alergen dari field alergi user yang ada di makanan
+      n_conflict_pantangan : grup pantangan (pantanganMedis) yang ada di makanan (+ batas klinis manis/gorengan)
+      n_conflict_free      : frasa bebas user (kata utuh) yang muncul di nama makanan
+      n_block_kategori     : kode BLOKIR tabel bahaya kategori (+ tekstur melebihi tahap diet pasca operasi)
+      n_limit_kategori     : kode BATASI tabel bahaya kategori (tidak dibuang, diturunkan peringkatnya)
+    """
+    ctx = profil_ctx or {}
+    out = df.copy()
+    allergy_cats, allergy_free = _parse_restriction_text(alergi)
+    pant_cats, pant_free = _parse_restriction_text(pantanganMedis)
+    free_phrases = allergy_free | pant_free
+    free_patterns = [_kw_pattern(PANTANGAN_PHRASES.get(p, [p])) for p in free_phrases]
+
+    names = out['name'].astype(str).str.lower().tolist()
+    labels = out['label_risiko'].tolist() if 'label_risiko' in out.columns else [''] * len(out)
+    sugars = out['sugars'].astype(float).tolist() if 'sugars' in out.columns else [0.0] * len(out)
+    fats = out['fat'].astype(float).tolist() if 'fat' in out.columns else [0.0] * len(out)
+    tekstur = out['tekstur'].tolist() if 'tekstur' in out.columns else ['biasa'] * len(out)
+    tahap = TEKSTUR_ORDINAL.get(str(ctx.get('tahapDiet') or 'biasa').lower(), 3)
+
+    n_alg, n_pant, n_free, n_blk, n_lim, blk_codes, lim_codes = [], [], [], [], [], [], []
+    for name, label, sug, fat, tek in zip(names, labels, sugars, fats, tekstur):
+        food_cats = set(detect_allergens(name)) | _split_label(label)
+        n_alg.append(len(allergy_cats & food_cats))
+        conflict_p = len(pant_cats & food_cats)
+        if 'manis' in pant_cats and sug > 15.0:
+            conflict_p += 1
+        if 'gorengan' in pant_cats and fat > 25.0:
+            conflict_p += 1
+        n_pant.append(conflict_p)
+        n_free.append(sum(keyword_match(name, p) for p in free_patterns))
+        blokir, batasi = detect_hazards(name, kategoriKondisi)
+        if kategoriKondisi == 'PASCA_OPERASI' and TEKSTUR_ORDINAL.get(str(tek), 3) > tahap:
+            blokir = blokir + ['TEKSTUR_TAHAP_DIET']
+        n_blk.append(len(blokir))
+        n_lim.append(len(batasi))
+        blk_codes.append(', '.join(blokir))
+        lim_codes.append(', '.join(batasi))
+
+    out['n_conflict_allergen'] = n_alg
+    out['n_conflict_pantangan'] = n_pant
+    out['n_conflict_free'] = n_free
+    out['n_block_kategori'] = n_blk
+    out['n_limit_kategori'] = n_lim
+    out['n_user_restrictions'] = len(allergy_cats) + len(pant_cats) + len(free_phrases)
+    out['blokir_kategori'] = blk_codes
+    out['batasi_kategori'] = lim_codes
+    return out
+
+def filter_dataset(df: pd.DataFrame, pantanganMedis: Optional[str], kategoriKondisi: str,
+                   alergi: Optional[str] = None, profil_ctx: Optional[dict] = None) -> pd.DataFrame:
+    if df is None or len(df) == 0:
         return pd.DataFrame()
 
-    pantangan = [p.strip().lower() for p in pantanganMedis.split(',')] if pantanganMedis else []
+    df_checked = hitung_konflik_keamanan(df, pantanganMedis, kategoriKondisi, alergi, profil_ctx)
+    blocked = (df_checked['n_conflict_allergen'] + df_checked['n_conflict_pantangan']
+               + df_checked['n_conflict_free'] + df_checked['n_block_kategori']) > 0
+    df_safe = df_checked[~blocked].copy()
 
-    def is_safe(label_risiko_str: str) -> bool:
-        if not pantangan:
-            return True
-        allergens = [a.strip().lower() for a in label_risiko_str.split(',') if a.strip()]
-        return not any(p in allergens for p in pantangan)
+    # Tidak ada fallback diam-diam ke kategori lain: aturan BLOKIR kategori selalu berlaku.
+    if len(df_safe) < 8:
+        print(f"[Safety WARNING] Hanya {len(df_safe)} makanan aman untuk {kategoriKondisi} "
+              f"setelah filter alergi/pantangan. Katalog perlu ditambah.")
 
-    df_safe = df[df['label_risiko'].apply(is_safe)].copy()
+    return df_safe.reset_index(drop=True)
 
-    # Ambil yang sesuai kategori kondisi, fallback ke UMUM jika < 10
-    df_cat = df_safe[df_safe['category_tags'].apply(lambda tags: kategoriKondisi in tags)].copy()
-    if len(df_cat) < 10:
-        print(f"[Recommender] Kategori '{kategoriKondisi}' hanya {len(df_cat)} item, fallback ke UMUM.")
-        df_cat = df_safe[df_safe['category_tags'].apply(lambda tags: 'UMUM' in tags)].copy()
+# ==========================================================================
+# TIER 2: MACHINE LEARNING RANKER (LOGISTIC REGRESSION PER KATEGORI)
+# ==========================================================================
 
-    return df_cat.reset_index(drop=True)
+_MODEL_ARTIFACT = {}
 
-
-def build_content_profile(row: pd.Series, kategori: str) -> np.ndarray:
+def get_recommender_model(kategori: str = 'UMUM'):
     """
-    Bangun vektor profil konten makanan dengan bobot per kategori.
-    Ini adalah inti content-based filtering yang sesungguhnya.
+    Muat model Logistic Regression per kategori: <kategori>/model/recommender_<KATEGORI>.joblib.
+    Bila model kategori belum ada, pakai model UMUM (dengan aturan BLOKIR kategori tetap berlaku).
     """
-    weights = FEATURE_WEIGHTS.get(kategori, FEATURE_WEIGHTS['UMUM'])
-    features = []
-    for feat, w in weights.items():
-        if feat in row.index and w > 0:
-            features.append(row[feat] * w)
-    return np.array(features)
+    kategori = kategori if kategori in CATEGORY_HAZARDS else 'UMUM'
+    if kategori in _MODEL_ARTIFACT:
+        return _MODEL_ARTIFACT[kategori]
 
+    for name in (kategori, 'UMUM'):
+        model_path = _model_path(name)
+        if os.path.exists(model_path):
+            try:
+                artifact = joblib.load(model_path)
+                if artifact.get('feature_names') == FEATURE_COLS:
+                    artifact['kategori_dipakai'] = name
+                    _MODEL_ARTIFACT[kategori] = artifact
+                    return artifact
+                print(f"[Model WARNING] Fitur {model_path} tidak cocok dengan FEATURE_COLS. Latih ulang (<kategori>/ai_models/latih_<kategori>.py).")
+            except Exception as e:
+                print(f"[Model WARNING] Gagal memuat {model_path}: {e}")
+
+    # Belum ada model terlatih: skor heuristik gizi (hanya agar API tetap jalan, lihat _meta.model)
+    _MODEL_ARTIFACT[kategori] = {'pipeline': None, 'kategori_dipakai': None, 'feature_names': FEATURE_COLS}
+    return _MODEL_ARTIFACT[kategori]
+
+def score_from_proba(proba: np.ndarray) -> np.ndarray:
+    """Skor kecocokan 0-1 dari probabilitas label ordinal 0/1/2: (P(1) + 2*P(2)) / 2."""
+    return (proba[:, 1] + 2.0 * proba[:, 2]) / 2.0
+
+def _heuristic_score(features: pd.DataFrame) -> np.ndarray:
+    return np.clip(1.0 - features['abs_log_kcal_ratio'].to_numpy() - features['abs_protein_pct_diff'].to_numpy()
+                   - 0.1 * features['n_limit_kategori'].to_numpy(), 0.0, 1.0)
+
+def _undi_kandidat(scores: np.ndarray, top_n: int, rng: np.random.Generator) -> list[int]:
+    """Undi top_n indeks tanpa pengembalian dari VARIASI_TOP_K kandidat teratas (bobot softmax skor)."""
+    order = scores.argsort(kind='stable')[::-1]
+    valid = [i for i in order[:VARIASI_TOP_K] if scores[i] > -100]
+    if not valid:
+        return []
+    best = scores[valid[0]]
+    pool = np.array([i for i in valid if scores[i] >= best * VARIASI_TOLERANSI])
+    w = np.exp((scores[pool] - best) / VARIASI_SUHU)
+    k = min(top_n, len(pool))
+    return [int(i) for i in rng.choice(pool, size=k, replace=False, p=w / w.sum())]
+
+def benih_variasi(profil: dict, tanggal: Optional[str] = None) -> int:
+    """Benih acak dari identitas user + tanggal: menu sama di hari yang sama, berganti di hari berikutnya."""
+    tanggal = tanggal or datetime.date.today().isoformat()
+    ident = profil.get('userId') or '|'.join(str(profil.get(k, '')) for k in
+                                             ['kategoriKondisi', 'umur', 'jenisKelamin', 'beratBadan', 'tinggiBadan'])
+    return int(hashlib.sha256(f'{ident}|{tanggal}'.encode()).hexdigest()[:12], 16)
 
 def recommend_meal(
     target_kalori: float,
@@ -416,200 +1201,164 @@ def recommend_meal(
     scaler_dict: dict,
     meal_type: str,
     used_foods: set,
-    top_n: int = 5
+    top_n: int = 5,
+    profil_ctx: Optional[dict] = None,
+    allowed_types: Optional[list] = None,
+    rng: Optional[np.random.Generator] = None,
+    riwayat_makanan: Optional[set] = None,
 ) -> list[dict]:
     """
-    Content-based ML recommendation:
-    1. Normalisasi fitur numerik (StandardScaler)
-    2. Bangun target vector dari kebutuhan kalori + makro
-    3. Cosine similarity antara target vs semua makanan
-    4. Boosting nutrient_density untuk makanan padat gizi
-    5. Penalty untuk glycemic_flag tinggi
-
-    Return top-N makanan per sesi makan.
+    Rekomendasi makanan dengan model Logistic Regression multinomial per kategori.
+    Fitur dihitung oleh compute_ml_features (fungsi yang sama dipakai saat training),
+    lalu skor = (P(cukup sesuai) + 2 * P(sangat sesuai)) / 2 dari predict_proba.
+    allowed_types membatasi foodType (komposisi piring). rng mengundi di antara kandidat teratas
+    (variasi antarhari); riwayat_makanan menurunkan skor bahan yang sudah dipakai di hari sebelumnya.
     """
+    if allowed_types is not None and len(df) and 'food_type' in df.columns:
+        df = df[df['food_type'].isin(allowed_types)]
     if len(df) == 0:
         return []
 
-    weights = FEATURE_WEIGHTS.get(kategori, FEATURE_WEIGHTS['UMUM'])
-    numeric_feats = [f for f in weights.keys() if f in df.columns]
+    model_info = get_recommender_model(kategori)
+    features = compute_ml_features(df, target_kalori, target_macros, meal_type, kategori, profil_ctx)
+    pipeline = model_info.get('pipeline')
+    if pipeline is not None:
+        proba = pipeline.predict_proba(features.to_numpy())
+        ml_scores = score_from_proba(proba)
+        p_best = proba[:, 2]
+    else:
+        ml_scores = _heuristic_score(features)
+        p_best = np.zeros(len(df))
 
-    # Ambil Pre-Fitted Scaler
-    scaler_info = scaler_dict.get(kategori, scaler_dict.get('UMUM', {}))
-    sc = scaler_info.get('scaler')
-    
-    if not sc:
-        print("[Recommender] Scaler not found.")
-        return []
-        
-    food_matrix = df[numeric_feats].values.astype(float)
+    ranking_scores = ml_scores.copy()
+    names_lower = df['name_lower'].values if 'name_lower' in df.columns else df['name'].str.lower().values
 
-    # Susun Target Vector
-    target = []
-    for feat in numeric_feats:
-        if feat == 'calories': target.append(target_kalori)
-        elif feat == 'protein': target.append(target_macros['protein_g'])
-        elif feat == 'fat': target.append(target_macros['fat_g'])
-        elif feat == 'carbs': target.append(target_macros['carbs_g'])
-        else: target.append(0.5)
-    target_vec = np.array([target])
+    # Variasi antarhari: bahan yang sudah dipakai di hari sebelumnya diturunkan (tidak dibuang)
+    if riwayat_makanan:
+        ranking_scores = np.where(np.isin(names_lower, list(riwayat_makanan)), ranking_scores * PENALTI_RIWAYAT, ranking_scores)
 
-    # Scale Food Matrix dan Target secara terpisah (Matematis yang benar)
-    food_matrix_scaled = sc.transform(food_matrix)
-    target_vec_scaled = sc.transform(target_vec)
+    # Anti-Repetisi Mutlak dalam satu hari
+    if used_foods:
+        used_mask = np.isin(names_lower, list(used_foods))
+        ranking_scores[used_mask] = -999.0
 
-    # Cosine similarity
-    sims = cosine_similarity(target_vec_scaled, food_matrix_scaled)[0]
-
-    # --- Boosting, Penalty, and Contextual Awareness ---
-    nutrient_boost = MinMaxScaler().fit_transform(
-        df['nutrient_density'].values.reshape(-1, 1)
-    ).flatten() * 0.08
-
-    glycemic_penalty = df['glycemic_flag'].values * 0.1 # Ditingkatkan ke 0.1 (strict penalty)
-
-    context_boost = np.zeros(len(df))
-    for i, n_bytes in enumerate(df['name'].values):
-        n = str(n_bytes).lower()
-        
-        # 1. Anti-Repetisi Mutlak
-        if n in used_foods:
-            context_boost[i] = -999.0 # Lenyapkan
-            continue
-            
-        # 2. Local Proxy Preference (Prefer whole foods / Indonesia equivalent basics)
-        local_kw = ['rice', 'chicken', 'soup', 'tofu', 'tempe', 'spinach', 'bean', 'fish', 'egg', 'potato']
-        cat = str(df.iloc[i].get('category', '')).lower()
-        if any(lw in n for lw in local_kw) or 'vegetable' in cat or 'fruit' in cat:
-            context_boost[i] += 0.15
-            
-        # 3. Keterkaitan Waktu Makan (Temporal Awareness)
-        if meal_type == 'pagi':
-            pagi_kw = ['egg', 'oat', 'bread', 'rice', 'milk', 'toast', 'porridge', 'cereal']
-            if any(k in n for k in pagi_kw): context_boost[i] += 0.2
-            if 'meat' in n or 'beef' in n: context_boost[i] -= 0.1
-            
-        elif meal_type == 'snack':
-            snack_kw = ['apple', 'banana', 'orange', 'yogurt', 'papaya', 'almond', 'salad', 'fruit']
-            if any(k in n for k in snack_kw): context_boost[i] += 0.3
-            if 'pork' in n or 'beef' in n or 'chicken' in n or 'rice' in n: context_boost[i] -= 0.3
-            
-        elif meal_type in ['siang', 'malam']:
-            heavy_kw = ['rice', 'chicken', 'beef', 'fish', 'vegetable', 'soup', 'salad', 'potatoes']
-            cat = str(df.iloc[i].get('category', '')).lower()
-            if any(k in n for k in heavy_kw) or 'vegetable' in cat: context_boost[i] += 0.25
-            if 'cereal' in n or 'oat' in n: context_boost[i] -= 0.2
-
-    final_score = sims + nutrient_boost - glycemic_penalty + context_boost
-    final_score = np.clip(final_score, 0, 1)
-
-    top_idx = final_score.argsort()[-top_n:][::-1]
-    result_df = df.iloc[top_idx].copy()
-    result_df['match_score'] = np.round(final_score[top_idx] * 100, 2)
+    # Ambil Top-N (rng: undi berbobot di antara kandidat teratas yang skornya dekat dengan terbaik)
+    if rng is not None:
+        top_indices = _undi_kandidat(ranking_scores, top_n, rng)
+    else:
+        top_indices = ranking_scores.argsort(kind='stable')[-top_n:][::-1]
 
     records = []
-    for _, row in result_df.iterrows():
+    for idx in top_indices:
+        if ranking_scores[idx] < -100:
+            continue
+        row = df.iloc[idx]
         food_name = str(row['name'])
-        used_foods.add(food_name.lower()) # Blokir repitisi di cycle selanjutnya
-        
-        # Kalkulasi recommended_quantity
-        food_calories = float(row['calories'])
-        if food_calories > 0:
-            recommended_quantity = max(1, int(round(target_kalori / food_calories)))
-        else:
-            recommended_quantity = 1
-            
+        used_foods.add(food_name.lower())
+
+        food_cal = float(row['calories'])
+        quantity = max(1, int(round(target_kalori / max(food_cal, 1.0))))
+        match_pct = round(float(ml_scores[idx]) * 100, 1)
+
+        # Metadata reasons
+        reasons_list = []
+        if features['abs_log_kcal_ratio'].iloc[idx] <= 0.25:
+            reasons_list.append(f"Keseimbangan kalori pas (~{round(food_cal * quantity)} kkal per {quantity} porsi)")
+        if row['protein'] >= 8.0:
+            reasons_list.append("Tinggi protein pendukung pemulihan & metabolisme")
+        if p_best[idx] >= 0.5:
+            reasons_list.append(f"Model {kategori} menilai sangat sesuai")
+        batasi = str(row.get('batasi_kategori', '') or '')
+        if batasi:
+            reasons_list.append(f"Perlu dibatasi ({batasi})")
+        if not reasons_list:
+            reasons_list.append("Nutrisi seimbang dan aman dikonsumsi")
+
         records.append({
-            'produk_id':    row.get('id', ''),
-            'nama_makanan': food_name,
-            'gambar':       row.get('image', ''),
-            'harga':        float(row.get('price', 0)),
-            'calories':     round(food_calories, 1),
-            'protein':      round(float(row['protein']), 1),
-            'fat':          round(float(row['fat']), 1),
-            'carbs':        round(float(row['carbs']), 1),
-            'match_score':  row['match_score'],
-            'allergen_info': row['label_risiko'] or 'Tidak ada',
-            'nutrient_density': round(float(row['nutrient_density']), 2),
-            'recommended_quantity': recommended_quantity,
+            'produk_id':           row.get('id', ''),
+            'nama_makanan':        food_name,
+            'gambar':              row.get('image', ''),
+            'harga':               float(row.get('price', 0) or 0),
+            'calories':            round(food_cal, 1),
+            'protein':             round(float(row['protein']), 1),
+            'fat':                 round(float(row['fat']), 1),
+            'carbs':               round(float(row['carbs']), 1),
+            'match_score':         match_pct,
+            'allergen_info':       row.get('label_risiko', '') or 'Tidak ada',
+            'nutrient_density':    round(float(row.get('nutrient_density', 0)), 2),
+            'recommended_quantity': quantity,
+            'alasan_rekomendasi':  '; '.join(reasons_list),
+            'jenis_bahan':         row.get('food_type', ''),
         })
+
     return records
 
+def pilih_bahan_pelengkap(df_filtered: pd.DataFrame, n: int = 3) -> list[dict]:
+    """Minyak, bumbu, dan gula yang lolos filter: pelengkap opsional, tidak dihitung ke target kalori."""
+    if 'food_type' not in df_filtered.columns:
+        return []
+    d = df_filtered[df_filtered['food_type'].isin(BAHAN_PELENGKAP)]
+    if 'sodium' in d.columns:
+        d = d.sort_values('sodium', kind='stable')
+    return [{'produk_id': r.get('id', ''), 'nama_makanan': str(r['name']), 'jenis_bahan': r['food_type'],
+             'harga': float(r.get('price', 0) or 0), 'catatan': 'Pelengkap opsional secukupnya, tidak dihitung ke target kalori'}
+            for _, r in d.head(n).iterrows()]
 
-def build_meal_plan(kalori_info: dict, df_filtered: pd.DataFrame, kategori: str, scaler_dict: dict) -> dict:
-    """
-    Susun meal plan harian dengan distribusi:
-    Pagi 25% | Snack pagi 10% | Siang 35% | Snack sore 10% | Malam 20%
-    """
-    target  = kalori_info['target_kalori_harian']
-    dist    = kalori_info['distribusi']
-    sesi    = {
-        'pagi':        0.25,
-        'snack_pagi':  0.10,
-        'siang':       0.35,
-        'snack_sore':  0.10,
-        'malam':       0.20,
-    }
+def build_meal_plan(kalori_info: dict, df_filtered: pd.DataFrame, kategori: str, scaler_dict: dict,
+                    profil_ctx: Optional[dict] = None, rng: Optional[np.random.Generator] = None,
+                    riwayat_makanan: Optional[set] = None) -> dict:
+    target = kalori_info['target_kalori_harian']
+    dist   = kalori_info['distribusi']
+    sesi   = SESSION_RATIOS
+    ctx    = {'target_kalori_harian': target, 'target_fat_g': dist.get('fat_g'), **(profil_ctx or {})}
+    riwayat_makanan = {str(x).lower() for x in (riwayat_makanan or set())}
 
     def split_macro(ratio: float) -> dict:
         return {k: v * ratio for k, v in dist.items()}
 
     used_foods = set()
 
-    def get_paket(ratio: float, meal_type: str, n: int) -> list:
+    def get_paket(ratio: float, meal_type: str) -> list:
+        """Satu bahan per peran piring (karbo + lauk + sayur/buah); peran tanpa kandidat dilonggarkan."""
         paket = []
-        if n == 1:
-            return recommend_meal(target * ratio, split_macro(ratio), df_filtered, kategori, scaler_dict, meal_type, used_foods, 1)
-            
-        fractions = []
-        if n == 2:
-            fractions = [0.6, 0.4]
-        elif n == 3:
-            fractions = [0.5, 0.25, 0.25]
-        else:
-            fractions = [1.0/n] * n
-            
-        for frac in fractions:
+        sg = session_group(meal_type)
+        for peran, types, frac in PIRING_SESI[sg]:
             item_ratio = ratio * frac
-            item = recommend_meal(target * item_ratio, split_macro(item_ratio), df_filtered, kategori, scaler_dict, meal_type, used_foods, 1)
-            if item:
-                paket.extend(item)
+            args = (target * item_ratio, split_macro(item_ratio), df_filtered, kategori, scaler_dict, meal_type, used_foods, 1, ctx)
+            item = recommend_meal(*args, allowed_types=types, rng=rng, riwayat_makanan=riwayat_makanan)
+            for it in item:
+                it['peran'] = peran
+            if not item:   # dilonggarkan: peran mengikuti jenis bahan yang benar-benar terpilih
+                item = recommend_meal(*args, allowed_types=PIRING_CADANGAN[sg], rng=rng, riwayat_makanan=riwayat_makanan)
+                for it in item:
+                    it['peran'] = PERAN_BAHAN.get(it['jenis_bahan'], peran)
+            paket.extend(item)
         return paket
 
     return {
         'target_kalori_harian': target,
         'distribusi':           dist,
-        'rekomendasi_pagi':        get_paket(sesi['pagi'],       'pagi',  3),
-        'rekomendasi_snack_pagi':  get_paket(sesi['snack_pagi'], 'snack', 1),
-        'rekomendasi_siang':       get_paket(sesi['siang'],      'siang', 3),
-        'rekomendasi_snack_sore':  get_paket(sesi['snack_sore'], 'snack', 1),
-        'rekomendasi_malam':       get_paket(sesi['malam'],      'malam', 2),
+        'rekomendasi_pagi':        get_paket(sesi['pagi'],       'pagi'),
+        'rekomendasi_snack_pagi':  get_paket(sesi['snack_pagi'], 'snack'),
+        'rekomendasi_siang':       get_paket(sesi['siang'],      'siang'),
+        'rekomendasi_snack_sore':  get_paket(sesi['snack_sore'], 'snack'),
+        'rekomendasi_malam':       get_paket(sesi['malam'],      'malam'),
+        'bahan_pelengkap_opsional': pilih_bahan_pelengkap(df_filtered),
     }
 
-
 # ==========================================================================
-# [3.3.4] MODEL DAN ARSITEKTUR — LAYER 4: GENREATIVE LLM (GEMINI)
+# TIER 3: GEMINI LLM EXPLANATION ENGINE (ATURAN KETAT SESUAI PDF)
 # ==========================================================================
 
 def _get_gemini_client():
-    """Lazy init Gemini client. Butuh GEMINI_API_KEY di env."""
+    api_key = os.environ.get('GEMINI_API_KEY')
+    if not api_key:
+        raise EnvironmentError("GEMINI_API_KEY tidak ditemukan di environment variables.")
     try:
-        import google.generativeai as genai
-        api_key = os.environ.get('GEMINI_API_KEY')
-        if not api_key:
-            raise EnvironmentError("GEMINI_API_KEY tidak ditemukan di environment variables.")
-        genai.configure(api_key=api_key)
-        return genai.GenerativeModel(
-            model_name='gemini-2.0-flash',
-            generation_config={
-                'temperature': 0.6,
-                'max_output_tokens': 1024,
-                'top_p': 0.9,
-            }
-        )
+        from google import genai
+        return genai.Client(api_key=api_key)
     except ImportError:
-        raise ImportError("Paket google-generativeai belum terinstall. Jalankan: pip install google-generativeai")
-
+        raise ImportError("google-genai belum terinstall. Jalankan: pip install google-genai")
 
 def generate_llm_narasi(
     profil: dict,
@@ -618,81 +1367,86 @@ def generate_llm_narasi(
     meal_plan_summary: dict,
     pantangan: str
 ) -> str:
-    """
-    Panggil Gemini LLM untuk menghasilkan narasi rekomendasi personal.
-    Prompt dirancang untuk output klinis yang empatik dalam Bahasa Indonesia.
-    """
     kategori = profil.get('kategoriKondisi', 'UMUM')
     status   = riwayat_analisis.get('statusNutrisi', 'Normal')
     bmi      = riwayat_analisis.get('bmi', 0)
     target_k = kalori_info.get('target_kalori_harian', 0)
     dist     = kalori_info.get('distribusi', {})
 
-    # Ambil 3 makanan teratas pagi + siang untuk disertakan dalam narasi
     top_pagi  = [m['nama_makanan'] for m in meal_plan_summary.get('rekomendasi_pagi', [])[:3]]
     top_siang = [m['nama_makanan'] for m in meal_plan_summary.get('rekomendasi_siang', [])[:3]]
 
     prompt = f"""
-Kamu adalah ahli gizi klinis berpengalaman. Berikan rekomendasi gizi yang personal, empatik, dan mudah dipahami dalam Bahasa Indonesia.
+Kamu adalah ahli gizi klinis NutriScale. Jelaskan rekomendasi makanan berikut secara personal dan mudah dipahami dalam Bahasa Indonesia.
 
-DATA PASIEN:
-- Usia: {profil.get('umur')} tahun
-- Jenis Kelamin: {profil.get('jenisKelamin')}
-- Berat Badan: {profil.get('beratBadan')} kg | Tinggi: {profil.get('tinggiBadan')} cm
+[ATURAN KETAT SISTEM]:
+1. Gunakan HANYA data nutrisi yang tertera di bawah. DILARANG menghitung ulang target kalori atau makronutrien.
+2. DILARANG mengubah angka nutrisi (misal jika ayam 165 kkal dan 31g protein, pertahankan angka tersebut).
+3. DILARANG membuat klaim diagnosis penyakit sendiri.
+4. Rekomendasikan HANYA makanan dari daftar kandidat di bawah.
+5. Bila terdapat makanan Barat/impor pada daftar, berikan padanan bahan makanan Nusantara lokal yang setara (misal: sosis/daging asap diganti tempe bacem atau telur rebus).
+
+DATA PENGGUNA (SUMBER RESMI TIER 1):
+- Usia: {str(profil.get('umur')) + ' bulan' if kategori == 'ANAK_BALITA' else str(profil.get('umur')) + ' tahun'} | Jenis Kelamin: {profil.get('jenisKelamin')}
 - Status Gizi: {status} (BMI: {bmi})
-- Kondisi: {kategori}
+- Kategori Kondisi: {kategori}
 {"- Usia Kehamilan: " + str(profil.get('usiaKehamilanMinggu')) + " minggu" if profil.get('usiaKehamilanMinggu') else ""}
-- Pantangan: {pantangan or "Tidak ada"}
+- Pantangan Medis/Alergi: {pantangan or "Tidak ada"}
 
 TARGET GIZI HARIAN:
-- Kalori: {target_k} kkal
-- Protein: {dist.get('protein_g', 0)} g | Lemak: {dist.get('fat_g', 0)} g | Karbohidrat: {dist.get('carbs_g', 0)} g
+- Target Energi: {target_k} kkal
+- Protein: {dist.get('protein_g', 0)}g | Lemak: {dist.get('fat_g', 0)}g | Karbohidrat: {dist.get('carbs_g', 0)}g
 
-CONTOH REKOMENDASI MAKANAN:
-- Pagi: {', '.join(top_pagi) if top_pagi else 'Beragam pilihan tersedia'}
-- Siang: {', '.join(top_siang) if top_siang else 'Beragam pilihan tersedia'}
+CONTOH MAKANAN TERPILIH DARI ENGINE:
+- Sarapan (Pagi): {', '.join(top_pagi) if top_pagi else 'Pilihan sehat tersedia'}
+- Makan Siang: {', '.join(top_siang) if top_siang else 'Pilihan sehat tersedia'}
 
-Tuliskan dalam 3 paragraf pendek (total ~150-200 kata):
-1. Ringkasan status gizi pasien dan apa target hariannya.
-2. Jelaskan menu rekomendasi untuk pasien. [PENTING] Jika pada menu contoh terdapat makanan asing/Barat/Fast Food (seperti Beef brisket, Omelet, Cereal), jelaskan ALTERNATIF masakan Nusantara lokal yang setara makronutrisinya (misal: "Sosis/Daging Asap bisa diganti Semur Daging atau Telur Rebus").
-3. Tips praktis makan sehat spesifik untuk kondisi {kategori}, ingat untuk mengutamakan bahan makanan murni (whole foods) buatan rumah yang dapat dicari di pasar tradisional Indonesia, serta yang perlu dihindari.
-
-Gunakan bahasa yang hangat, suportif, dan merakyat.
+SUSUN DALAM 3 PARAGRAF RINGKAS (~150 KATA):
+1. Ringkasan status gizi dan target energi harian pengguna.
+2. Penjelasan makanan terpilih serta alternatif masakan pasar tradisional Nusantara yang setara gizinya.
+3. Tips praktis pola makan sehat spesifik kondisi {kategori} dan anjuran konsultasi dokter/ahli gizi untuk pemantauan lebih lanjut.
 """.strip()
 
     try:
-        model  = _get_gemini_client()
-        resp   = model.generate_content(prompt)
-        narasi = resp.text.strip()
-        return narasi
+        client = _get_gemini_client()
+        from google.genai import types
+        # Menggunakan model aktif Google GenAI (gemini-2.5-flash sebagai penerus resmi gemini-2.0-flash yang di-sunset)
+        model_name = os.environ.get('GEMINI_MODEL', 'gemini-2.5-flash')
+        config = types.GenerateContentConfig(
+            temperature=0.5,
+            max_output_tokens=1024,
+            top_p=0.85,
+        )
+        resp = client.models.generate_content(
+            model=model_name,
+            contents=prompt,
+            config=config
+        )
+        return resp.text.strip()
     except Exception as e:
-        # Fallback narasi jika Gemini gagal (mode offline)
+        print(f"[Tier 3 Gemini] Narasi LLM beralih ke fallback template ({e}).")
         return _fallback_narasi(profil, riwayat_analisis, kalori_info, pantangan)
 
-
 def _fallback_narasi(profil: dict, riwayat: dict, kalori_info: dict, pantangan: str) -> str:
-    """Narasi fallback berbasis template jika Gemini tidak tersedia."""
     status  = riwayat.get('statusNutrisi', 'Normal')
     target  = kalori_info.get('target_kalori_harian', 0)
     kategori = profil.get('kategoriKondisi', 'UMUM')
 
     pesan = {
-        'Underweight':          "Berat badan Anda saat ini di bawah ideal. Fokus pada peningkatan asupan kalori dan protein berkualitas tinggi.",
-        'Overweight':           "Berat badan Anda sedikit di atas ideal. Kurangi makanan tinggi lemak jenuh dan gula tambahan.",
-        'Obese':                "Diperlukan penurunan berat badan secara bertahap. Hindari makanan ultra-processed dan perbanyak sayuran.",
-        'Normal':               "Status gizi Anda dalam kondisi baik. Pertahankan pola makan seimbang dan aktifitas fisik rutin.",
-        'Pregnant (Monitoring)': "Fokus pada pemenuhan nutrisi esensial seperti asam folat dan zat besi untuk mendukung kehamilan."
+        'Underweight':          "Berat badan Anda saat ini di bawah ideal. Fokus pada pemenuhan kalori dan protein berkualitas tinggi.",
+        'Overweight':           "Berat badan Anda sedikit di atas ideal. Batasi makanan tinggi lemak jenuh dan gula tambahan.",
+        'Obese':                "Dibutuhkan pengelolaan kalori bertahap. Perbanyak sayuran dan makanan kaya serat alami.",
+        'Normal':               "Status gizi Anda dalam kondisi baik. Pertahankan pola makan seimbang dan hidrasi yang cukup.",
+        'Pregnant (Monitoring)': "Fokus pada nutrisi esensial seperti protein, asam folat, dan zat besi untuk perkembangan janin."
     }
 
     base = pesan.get(status, pesan['Normal'])
-    p_note = f" Perhatikan pantangan: {pantangan}." if pantangan else ""
-    k_note = f"Target kalori Anda adalah {round(target)} kkal/hari sesuai kondisi {kategori}."
-
-    return f"{base}{p_note} {k_note} Ikuti rekomendasi makanan di bawah dan konsultasikan dengan tenaga medis untuk panduan lebih lanjut."
-
+    p_note = f" Pastikan menghindari pantangan: {pantangan}." if pantangan else ""
+    k_note = f" Target energi harian Anda adalah {round(target)} kkal sesuai kondisi {kategori}."
+    return f"{base}{p_note}{k_note} Ikuti rekomendasi menu di bawah ini dan konsultasikan dengan dokter atau tenaga gizi untuk panduan klinis berkala."
 
 # ==========================================================================
-# MODUL 6 — MAIN CONTROLLER (PRISMA DB MAPPER)
+# MAIN CONTROLLER & ENTRYPOINT PIPELINE
 # ==========================================================================
 
 def jalankan_ai_rekomendasi(
@@ -701,62 +1455,70 @@ def jalankan_ai_rekomendasi(
     scaler_dict: dict,
     use_llm: bool = True
 ) -> dict:
-    """
-    ENTRYPOINT UTAMA NutriScale AI Engine v2.
+    kategori = profil_kesehatan_dict.get('kategoriKondisi', 'UMUM')
 
-    Parameter:
-        profil_kesehatan_dict : dict sesuai Prisma model ProfilKesehatan
-        dataset_dataframe     : pd.DataFrame hasil load_and_preprocess_api_data()
-        use_llm               : aktifkan Gemini narasi (butuh GEMINI_API_KEY)
-
-    Return:
-        dict mapping ke Prisma RiwayatAnalisis + MealPlan JSON
-    """
-    # --- Ekstrak profil ---
-    umur        = profil_kesehatan_dict.get('umur')
-    jk          = profil_kesehatan_dict.get('jenisKelamin', 'LAKI_LAKI')
-    bb          = profil_kesehatan_dict.get('beratBadan', 0)
-    tb          = profil_kesehatan_dict.get('tinggiBadan', 0)
-    kategori    = profil_kesehatan_dict.get('kategoriKondisi', 'UMUM')
-    usia_hamil  = profil_kesehatan_dict.get('usiaKehamilanMinggu')
-    anjuran_dr  = profil_kesehatan_dict.get('anjuranKaloriDokter')
-    
-    # [GUARDRAIL] Sanitize input mencegah Prompt Injection NLP
+    # Sanitasi pantangan medis & alergi (tanpa pemotongan panjang agar daftar alergi tidak hilang)
     pantangan_raw = str(profil_kesehatan_dict.get('pantanganMedis', '') or '')
-    pantangan   = re.sub(r'[^\w\s\,-]', '', pantangan_raw)[:100].strip()
+    pantangan = re.sub(r'[^\w\s\,-]', '', pantangan_raw)[:1000].strip()
+    alergi_raw = str(profil_kesehatan_dict.get('alergi', '') or '')
+    alergi = re.sub(r'[^\w\s\,-]', '', alergi_raw)[:1000].strip()
 
-    # --- Layer 1: Asesmen Gizi ---
-    riwayat  = assess_nutritional_status(umur, jk, bb, tb, kategori)
+    # 1. Tier 1: Ambil target gizi & asesmen antropometri resmi NutriScale
+    kalori  = ambil_data_nutrisi_nutriscale(profil_kesehatan_dict.get('nutrisi'))
+    riwayat = ambil_data_asesmen_nutriscale(profil_kesehatan_dict)
 
-    # --- Layer 2: Kalori + Makro ---
-    kalori   = calculate_daily_calories(umur, jk, bb, tb, kategori, riwayat['statusNutrisi'], usia_hamil, anjuran_dr)
+    profil_ctx = {
+        'statusNutrisi':       riwayat.get('statusNutrisi'),
+        'haz':                 riwayat.get('haz'),
+        'whz':                 riwayat.get('whz'),
+        'umur':                profil_kesehatan_dict.get('umur'),
+        'usiaKehamilanMinggu': profil_kesehatan_dict.get('usiaKehamilanMinggu'),
+        'tahapDiet':           profil_kesehatan_dict.get('tahapDiet'),
+        'jenisOperasi':        profil_kesehatan_dict.get('jenisOperasi'),
+    }
 
-    # --- Layer 3: ML Filtering + Content-Based Recommendation ---
-    df_filtered    = filter_dataset(dataset_dataframe, pantangan, kategori)
-    rencana_makan  = build_meal_plan(kalori, df_filtered, kategori, scaler_dict)
+    # 2. Tier 2: Hard Safety Filter (Eliminasi alergen, pantangan & BLOKIR kategori sebelum ranking)
+    df_filtered = filter_dataset(dataset_dataframe, pantangan, kategori, alergi, profil_ctx)
 
-    # --- Layer 4: LLM Narasi (Gemini) ---
+    # 3. Tier 2: Machine Learning Meal Ranking + komposisi piring + variasi antarhari
+    benih = benih_variasi(profil_kesehatan_dict, profil_kesehatan_dict.get('tanggal'))
+    riwayat_makanan = set(profil_kesehatan_dict.get('riwayatMakanan') or [])
+    rencana_makan = build_meal_plan(kalori, df_filtered, kategori, scaler_dict, profil_ctx,
+                                    rng=np.random.default_rng(benih), riwayat_makanan=riwayat_makanan)
+
+    # 4. Tier 3: Gemini LLM Narasi (penjelasan tanpa mengubah angka)
     narasi_ai = ""
     if use_llm:
-        narasi_ai = generate_llm_narasi(
-            profil_kesehatan_dict, riwayat, kalori, rencana_makan, pantangan
-        )
+        pantangan_narasi = ', '.join(filter(None, [alergi, pantangan]))
+        narasi_ai = generate_llm_narasi(profil_kesehatan_dict, riwayat, kalori, rencana_makan, pantangan_narasi)
 
-    # --- Output: Strict Prisma Schema Mapping ---
+    detected_cats, _ = parse_pantangan_input(pantangan)
+    detected_alergi, _ = parse_pantangan_input(alergi)
+    model_info = get_recommender_model(kategori)
+
     return {
-        # Maps to: RiwayatAnalisis
         'riwayat_analisis': {
             **riwayat,
             'narasiAI': narasi_ai,
         },
-        # Maps to: MealPlan.detailRencanaMakan (JSON field)
         'meal_plan': {
             'detailRencanaMakan': rencana_makan,
         },
-        # Debug info (bisa dihapus di produksi)
         '_meta': {
             'total_kandidat_makanan': len(df_filtered),
+            'sumber_produk': (scaler_dict or {}).get('sumber_produk'),
             'kategori': kategori,
-            'pantangan_terdeteksi': [p.strip() for p in pantangan.split(',') if p.strip()],
+            'pantangan_terdeteksi': sorted(list(detected_cats)),
+            'alergi_terdeteksi': sorted(list(detected_alergi)),
+            'sumber_target_gizi': NUTRISCALE_SOURCE,
+            'sumber_asesmen_antropometri': riwayat.get('_source', 'LOCAL_FALLBACK'),
+            'model': {
+                'algoritma': 'LogisticRegression (multinomial, label 0/1/2)' if model_info.get('pipeline') is not None else 'HEURISTIK (model belum dilatih)',
+                'kategori_model': model_info.get('kategori_dipakai'),
+                'versi': model_info.get('version'),
+            },
+            'tier1_details': kalori.get('tier1_details', {}),
+            'variasi': {'benih': benih, 'tanggal': profil_kesehatan_dict.get('tanggal') or datetime.date.today().isoformat(),
+                        'riwayat_dipakai': len(riwayat_makanan)},
         }
     }

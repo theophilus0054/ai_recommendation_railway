@@ -1,0 +1,701 @@
+profile_id,kategoriKondisi,jenisKelamin,usiaKehamilanMinggu,tahapDiet,jenisOperasi,haz,whz,umur,beratBadan,tinggiBadan,statusNutrisi,target_kalori_harian,target_protein_g,target_fat_g,target_carbs_g,alergi,pantanganMedis,split
+ibu_hamil_0001,IBU_HAMIL,P,20,,,,,25.0,72.1,156.9,Overweight,2652.1,121.3,83.2,354.5,-,hindari goreng-gorengan,train
+ibu_hamil_0002,IBU_HAMIL,P,17,,,,,20.0,62.9,155.1,Overweight,2800.9,136.9,93.3,353.5,no allergies,,train
+ibu_hamil_0003,IBU_HAMIL,P,24,,,,,31.0,72.8,156.9,Overweight,2619.1,119.6,83.8,346.6,,-,test
+ibu_hamil_0004,IBU_HAMIL,P,14,,,,,21.0,63.2,152.8,Overweight,2033.0,102.3,66.3,256.7,-,tidak ada,train
+ibu_hamil_0005,IBU_HAMIL,P,25,,,,,21.0,50.7,154.7,Normal,2590.0,117.0,83.0,343.8,Alergi: telurr,"manis, goreng-gorengan",train
+ibu_hamil_0006,IBU_HAMIL,P,27,,,,,26.0,60.0,154.5,Overweight,2703.5,136.9,84.3,349.3,telor,tidak ada,train
+ibu_hamil_0007,IBU_HAMIL,P,13,,,,,28.0,76.6,158.7,Obese,2312.1,117.9,71.6,299.0,no allergies,,test
+ibu_hamil_0008,IBU_HAMIL,P,29,,,,,21.0,57.8,164.7,Normal,1996.9,96.5,57.2,273.9,Alergi: cumi dan makanan laut,"pantangan gorengan, manis",train
+ibu_hamil_0009,IBU_HAMIL,P,22,,,,,20.0,67.4,151.6,Overweight,2863.8,154.8,94.2,349.3,none,none,train
+ibu_hamil_0010,IBU_HAMIL,P,16,,,,,34.0,65.0,159.1,Overweight,2735.2,148.7,86.8,339.8,ikn & shrimp,none,train
+ibu_hamil_0011,IBU_HAMIL,P,29,,,,,21.0,53.6,163.8,Normal,2186.5,118.1,64.1,284.3,kedelai dan suus,no allergies,test
+ibu_hamil_0012,IBU_HAMIL,P,4,,,,,39.0,65.4,144.7,Obese,1819.5,98.0,52.5,238.8,none,none,train
+ibu_hamil_0013,IBU_HAMIL,P,14,,,,,29.0,79.7,170.5,Overweight,2775.3,130.5,77.2,389.6,none,no allergies,train
+ibu_hamil_0014,IBU_HAMIL,P,36,,,,,22.0,45.9,149.1,Normal,2042.6,95.8,66.8,264.5,tidak ada,tidak suka kopi,train
+ibu_hamil_0015,IBU_HAMIL,P,23,,,,,21.0,48.5,156.0,Normal,2558.8,117.4,83.0,335.6,none,,train
+ibu_hamil_0016,IBU_HAMIL,P,38,,,,,26.0,64.0,151.9,Overweight,2261.6,116.1,66.6,299.5,,-,train
+ibu_hamil_0017,IBU_HAMIL,P,6,,,,,40.0,66.3,160.9,Overweight,2349.4,126.8,75.8,290.0,,"jeroan, manis",train
+ibu_hamil_0018,IBU_HAMIL,P,4,,,,,37.0,59.4,161.8,Normal,1799.7,92.9,50.3,243.9,-,"tidak suka goreng-gorengan, jeroan",train
+ibu_hamil_0019,IBU_HAMIL,P,33,,,,,41.0,52.3,148.6,Normal,2003.2,93.4,66.2,258.4,none,"daging merah, santan",train
+ibu_hamil_0020,IBU_HAMIL,P,19,,,,,33.0,61.4,142.5,Obese,2158.3,106.5,67.1,282.1,no allergies,pantangan kopi,train
+ibu_hamil_0021,IBU_HAMIL,P,32,,,,,40.0,72.5,158.4,Overweight,2300.3,104.8,74.1,303.5,Alergi: kedele; milk,pantangan santan,train
+ibu_hamil_0022,IBU_HAMIL,P,26,,,,,24.0,66.0,162.5,Normal,2069.5,100.7,64.3,272.0,,,train
+ibu_hamil_0023,IBU_HAMIL,P,4,,,,,20.0,67.9,157.6,Overweight,1983.2,106.0,59.9,255.0,Alergi: makanan laut,"pantangan daging merah, pedas",train
+ibu_hamil_0024,IBU_HAMIL,P,21,,,,,39.0,53.1,151.3,Normal,2032.5,92.5,62.2,275.7,Alergi: sea food,tidak suka spicy,train
+ibu_hamil_0025,IBU_HAMIL,P,13,,,,,38.0,37.3,152.6,Underweight,1714.6,88.2,51.3,225.1,allergic to tahu tempe; eggs,-,test
+ibu_hamil_0026,IBU_HAMIL,P,13,,,,,41.0,52.1,151.8,Normal,2324.0,107.9,77.3,299.2,no allergies,no allergies,train
+ibu_hamil_0027,IBU_HAMIL,P,27,,,,,35.0,52.1,151.3,Normal,2046.1,96.0,65.6,267.9,-,hindari daging merah,train
+ibu_hamil_0028,IBU_HAMIL,P,30,,,,,27.0,72.6,153.4,Obese,2371.3,126.1,77.5,292.3,,hindari mie instan,train
+ibu_hamil_0029,IBU_HAMIL,P,38,,,,,28.0,61.4,151.1,Overweight,2212.5,101.6,67.2,300.4,-,"tidak suka pedas, jeroan",train
+ibu_hamil_0030,IBU_HAMIL,P,28,,,,,33.0,52.0,137.3,Overweight,2022.2,95.6,57.1,281.4,,hindari goreng-gorengan,train
+ibu_hamil_0031,IBU_HAMIL,P,24,,,,,19.0,72.9,161.4,Overweight,2994.2,156.6,87.8,394.4,none,,test
+ibu_hamil_0032,IBU_HAMIL,P,38,,,,,26.0,73.5,163.7,Overweight,2416.9,108.9,79.6,316.3,wheat,tidak suka manis,test
+ibu_hamil_0033,IBU_HAMIL,P,33,,,,,25.0,67.0,159.5,Overweight,2842.9,155.5,93.3,345.4,Alergi: wheat,,train
+ibu_hamil_0034,IBU_HAMIL,P,33,,,,,34.0,47.2,152.6,Normal,1776.1,87.8,58.7,224.2,-,"hindari manis, kopi",train
+ibu_hamil_0035,IBU_HAMIL,P,5,,,,,39.0,61.1,165.5,Normal,2054.3,95.2,60.4,282.4,none,none,train
+ibu_hamil_0036,IBU_HAMIL,P,23,,,,,36.0,58.0,159.2,Normal,2136.9,106.2,61.1,290.6,alergi seafood; kepiting,-,train
+ibu_hamil_0037,IBU_HAMIL,P,40,,,,,26.0,61.9,158.8,Normal,2251.0,111.5,63.0,309.6,alergi laktosa,"pantangan jeroan, gorengan",train
+ibu_hamil_0038,IBU_HAMIL,P,7,,,,,32.0,53.5,156.7,Normal,2206.4,117.5,62.0,294.6,tidak ada,-,train
+ibu_hamil_0039,IBU_HAMIL,P,24,,,,,34.0,43.0,152.7,Underweight,2144.0,96.9,65.9,290.8,crab & laktosa,none,train
+ibu_hamil_0040,IBU_HAMIL,P,36,,,,,33.0,48.8,158.0,Normal,2472.8,123.5,73.6,329.1,no allergies,,test
+ibu_hamil_0041,IBU_HAMIL,P,25,,,,,36.0,52.2,154.6,Normal,2048.7,92.4,66.3,270.7,,no allergies,train
+ibu_hamil_0042,IBU_HAMIL,P,40,,,,,22.0,50.4,154.0,Normal,2114.4,111.6,61.2,279.2,no allergies,hindari santan,test
+ibu_hamil_0043,IBU_HAMIL,P,12,,,,,37.0,55.5,152.2,Normal,1959.8,92.2,55.6,272.6,-,-,train
+ibu_hamil_0044,IBU_HAMIL,P,23,,,,,23.0,64.4,153.9,Overweight,2544.8,124.8,75.7,341.2,allergic to suus dan ikn,tidak ada,train
+ibu_hamil_0045,IBU_HAMIL,P,34,,,,,23.0,67.9,158.4,Overweight,2870.5,132.3,80.2,405.0,-,"jeroan, manis",test
+ibu_hamil_0046,IBU_HAMIL,P,11,,,,,21.0,74.5,157.9,Overweight,2326.6,125.9,76.5,283.6,allergic to kepiting & dairy,none,train
+ibu_hamil_0047,IBU_HAMIL,P,19,,,,,30.0,59.0,152.1,Overweight,1932.0,94.5,56.6,261.2,tidak ada,,train
+ibu_hamil_0048,IBU_HAMIL,P,22,,,,,38.0,41.7,150.1,Normal,1886.2,91.3,60.8,243.6,allergic to makanan laut,none,train
+ibu_hamil_0049,IBU_HAMIL,P,10,,,,,26.0,44.6,148.5,Normal,2093.9,104.2,64.9,273.2,no allergies,none,train
+ibu_hamil_0050,IBU_HAMIL,P,31,,,,,19.0,46.9,161.6,Underweight,2565.3,125.7,83.9,326.8,"alergi cumi-cumi, telur",,test
+ibu_hamil_0051,IBU_HAMIL,P,10,,,,,38.0,53.2,151.4,Normal,2142.2,109.8,68.3,272.2,Alergi: telor,tidak suka pedas,train
+ibu_hamil_0052,IBU_HAMIL,P,38,,,,,33.0,76.2,156.0,Obese,2387.3,128.4,78.4,292.1,Alergi: ikan,"goreng-gorengan, manis",train
+ibu_hamil_0053,IBU_HAMIL,P,14,,,,,37.0,57.8,153.4,Normal,1881.9,99.0,56.0,245.4,Alergi: gandum,tidak ada,train
+ibu_hamil_0054,IBU_HAMIL,P,23,,,,,38.0,71.5,151.9,Obese,2536.1,135.2,79.8,319.2,no allergies,pantangan daging merah,train
+ibu_hamil_0055,IBU_HAMIL,P,37,,,,,36.0,64.5,161.5,Normal,2473.1,114.8,76.4,331.5,none,,test
+ibu_hamil_0056,IBU_HAMIL,P,21,,,,,38.0,63.2,156.6,Overweight,1946.1,101.5,58.2,254.0,no allergies,pantangan kopi,test
+ibu_hamil_0057,IBU_HAMIL,P,22,,,,,22.0,77.2,159.9,Obese,3036.2,156.0,91.9,396.2,tidak ada,no allergies,test
+ibu_hamil_0058,IBU_HAMIL,P,24,,,,,30.0,73.2,157.5,Overweight,2635.4,121.1,77.0,364.5,allergic to dairy,tidak ada,train
+ibu_hamil_0059,IBU_HAMIL,P,8,,,,,20.0,82.3,160.6,Obese,3018.8,144.9,86.8,414.5,fish,"pantangan manis, gorengan",train
+ibu_hamil_0060,IBU_HAMIL,P,36,,,,,21.0,60.2,153.1,Overweight,1999.2,96.7,61.1,265.6,alergi susu,pantangan spicy,train
+ibu_hamil_0061,IBU_HAMIL,P,14,,,,,31.0,39.4,156.8,Underweight,2123.9,113.1,64.3,273.2,tidak ada,"tidak suka jeroan, kopi",test
+ibu_hamil_0062,IBU_HAMIL,P,30,,,,,27.0,49.5,157.6,Normal,2532.3,133.8,83.4,311.6,Alergi: udang,tidak suka santan,train
+ibu_hamil_0063,IBU_HAMIL,P,16,,,,,20.0,68.1,159.8,Overweight,2374.7,124.9,72.7,305.1,tidak ada,none,train
+ibu_hamil_0064,IBU_HAMIL,P,35,,,,,35.0,51.2,148.4,Normal,1806.9,95.6,52.3,238.4,no allergies,pantangan jeroan,test
+ibu_hamil_0065,IBU_HAMIL,P,35,,,,,41.0,66.3,164.5,Normal,2227.5,116.3,73.8,274.5,Alergi: egg; cumi,hindari kopi,train
+ibu_hamil_0066,IBU_HAMIL,P,8,,,,,38.0,48.5,159.7,Normal,2313.5,114.5,73.2,299.2,allergic to squid dan kepiting,,test
+ibu_hamil_0067,IBU_HAMIL,P,20,,,,,19.0,60.4,158.5,Normal,2527.7,120.2,84.0,322.9,kedelai,-,train
+ibu_hamil_0068,IBU_HAMIL,P,18,,,,,38.0,45.3,158.9,Underweight,2377.7,112.5,77.9,306.6,Alergi: squid & telur,hindari gorengan,train
+ibu_hamil_0069,IBU_HAMIL,P,10,,,,,42.0,51.6,156.1,Normal,1669.2,75.7,51.1,226.7,,manis,train
+ibu_hamil_0070,IBU_HAMIL,P,22,,,,,27.0,38.4,141.5,Normal,1689.2,89.6,48.4,223.9,tidak ada,no allergies,test
+ibu_hamil_0071,IBU_HAMIL,P,36,,,,,33.0,67.4,161.4,Overweight,2791.1,130.6,87.7,369.9,no allergies,"mie instan, kopi",test
+ibu_hamil_0072,IBU_HAMIL,P,38,,,,,27.0,46.0,158.3,Underweight,1814.1,81.8,55.0,247.9,none,"tidak suka santan, mie instan",train
+ibu_hamil_0073,IBU_HAMIL,P,35,,,,,38.0,51.1,155.4,Normal,1803.7,92.0,56.5,231.7,alergi ikn dan udang,none,test
+ibu_hamil_0074,IBU_HAMIL,P,7,,,,,23.0,86.8,164.8,Obese,3082.4,157.1,85.7,420.7,,"pantangan jeroan, manis",train
+ibu_hamil_0075,IBU_HAMIL,P,20,,,,,21.0,68.6,159.4,Overweight,2637.1,123.8,80.4,354.5,,goreng-gorengan,train
+ibu_hamil_0076,IBU_HAMIL,P,36,,,,,29.0,57.0,151.8,Normal,2620.5,121.0,86.7,339.2,allergic to ikan,pantangan spicy,train
+ibu_hamil_0077,IBU_HAMIL,P,39,,,,,20.0,52.5,150.5,Normal,2145.4,100.3,69.3,280.3,allergic to makanan laut & ikn,tidak ada,test
+ibu_hamil_0078,IBU_HAMIL,P,19,,,,,42.0,59.4,151.9,Overweight,1869.1,87.1,54.9,256.5,allergic to fish,"pantangan makanan manis, jeroan",test
+ibu_hamil_0079,IBU_HAMIL,P,39,,,,,33.0,50.8,149.6,Normal,2258.7,115.8,71.7,287.6,no allergies,"hindari pedas, jeroan",test
+ibu_hamil_0080,IBU_HAMIL,P,11,,,,,24.0,78.2,170.5,Overweight,2387.9,120.2,67.9,323.9,allergic to cumi-cumi,"hindari daging merah, makanan manis",train
+ibu_hamil_0081,IBU_HAMIL,P,33,,,,,40.0,39.2,148.9,Underweight,1642.3,83.6,49.0,216.7,-,"tidak suka gorengan, makanan manis",train
+ibu_hamil_0082,IBU_HAMIL,P,9,,,,,24.0,51.9,145.8,Normal,2438.7,126.1,74.3,316.5,sea food & nuts,no allergies,test
+ibu_hamil_0083,IBU_HAMIL,P,28,,,,,29.0,61.2,151.6,Overweight,2689.3,123.3,81.9,364.8,alergi terigu,no allergies,train
+ibu_hamil_0084,IBU_HAMIL,P,21,,,,,32.0,48.7,150.8,Normal,2457.2,110.8,69.9,346.2,-,"gorengan, spicy",train
+ibu_hamil_0085,IBU_HAMIL,P,20,,,,,26.0,48.2,156.0,Normal,2288.6,104.8,73.1,302.9,alergi kepiting,-,train
+ibu_hamil_0086,IBU_HAMIL,P,34,,,,,23.0,58.5,161.9,Normal,2480.0,122.5,79.7,318.2,,hindari daging merah,train
+ibu_hamil_0087,IBU_HAMIL,P,29,,,,,36.0,63.4,155.1,Overweight,2438.7,124.3,77.3,311.5,none,no allergies,test
+ibu_hamil_0088,IBU_HAMIL,P,11,,,,,35.0,80.1,159.9,Obese,2315.6,106.5,72.5,309.4,"Alergi: eggs, fish",no allergies,train
+ibu_hamil_0089,IBU_HAMIL,P,25,,,,,29.0,79.1,153.5,Obese,2444.9,126.1,78.7,308.1,none,"tidak suka santan, daging merah",train
+ibu_hamil_0090,IBU_HAMIL,P,34,,,,,30.0,40.2,158.5,Underweight,1731.0,80.2,56.4,225.6,alergi sea food dan soy,tidak suka jeroan,train
+ibu_hamil_0091,IBU_HAMIL,P,17,,,,,39.0,53.4,153.8,Normal,2043.3,108.6,67.9,249.5,tidak ada,-,test
+ibu_hamil_0092,IBU_HAMIL,P,14,,,,,34.0,43.3,159.2,Underweight,1745.2,81.7,48.5,245.5,tidak ada,none,train
+ibu_hamil_0093,IBU_HAMIL,P,4,,,,,34.0,56.4,163.0,Normal,2252.4,104.8,68.0,305.3,ikan,tidak ada,train
+ibu_hamil_0094,IBU_HAMIL,P,27,,,,,20.0,50.6,155.3,Normal,2366.3,117.8,69.0,318.4,Alergi: dairy & wheat,no allergies,train
+ibu_hamil_0095,IBU_HAMIL,P,4,,,,,34.0,78.7,159.2,Obese,2572.5,126.3,80.9,334.8,no allergies,"hindari pedas, makanan manis",train
+ibu_hamil_0096,IBU_HAMIL,P,26,,,,,19.0,53.7,159.1,Normal,2430.3,112.0,80.6,314.2,no allergies,"pantangan pedas, santan",train
+ibu_hamil_0097,IBU_HAMIL,P,35,,,,,28.0,35.4,148.7,Underweight,1864.5,88.1,55.6,252.8,-,no allergies,train
+ibu_hamil_0098,IBU_HAMIL,P,12,,,,,20.0,86.0,161.3,Obese,2198.7,115.0,70.6,275.7,allergic to telurr,,train
+ibu_hamil_0099,IBU_HAMIL,P,11,,,,,28.0,42.8,153.2,Underweight,2279.7,122.1,69.1,292.5,,makanan manis,train
+ibu_hamil_0100,IBU_HAMIL,P,29,,,,,38.0,45.1,157.8,Underweight,1741.0,79.4,51.9,239.1,soy,"gorengan, goreng-gorengan",train
+ibu_hamil_0101,IBU_HAMIL,P,36,,,,,39.0,43.8,139.4,Normal,1880.0,102.3,55.8,242.1,no allergies,,train
+ibu_hamil_0102,IBU_HAMIL,P,22,,,,,35.0,68.1,164.4,Overweight,2542.0,123.4,84.2,322.7,allergic to susu & kepiting,none,test
+ibu_hamil_0103,IBU_HAMIL,P,18,,,,,29.0,51.9,156.4,Normal,2551.1,132.5,82.5,319.6,no allergies,"kopi, goreng-gorengan",train
+ibu_hamil_0104,IBU_HAMIL,P,6,,,,,26.0,53.1,158.2,Normal,2014.0,98.5,58.3,273.9,alergi wheat,no allergies,train
+ibu_hamil_0105,IBU_HAMIL,P,28,,,,,34.0,45.8,150.7,Normal,1968.0,107.4,55.7,259.3,alergi gluten,kopi,train
+ibu_hamil_0106,IBU_HAMIL,P,23,,,,,24.0,50.5,142.5,Normal,2524.5,129.8,71.4,340.6,tidak ada,"hindari santan, goreng-gorengan",train
+ibu_hamil_0107,IBU_HAMIL,P,17,,,,,24.0,67.2,156.4,Overweight,2585.6,116.7,82.1,345.1,Alergi: cumi,jeroan,train
+ibu_hamil_0108,IBU_HAMIL,P,13,,,,,24.0,38.2,154.5,Underweight,1612.5,86.0,48.4,208.3,"allergic to cumi-cumi, tahu tempe",none,train
+ibu_hamil_0109,IBU_HAMIL,P,9,,,,,39.0,68.6,160.6,Overweight,2140.4,112.4,67.4,271.0,allergic to udang,"tidak suka spicy, kopi",test
+ibu_hamil_0110,IBU_HAMIL,P,34,,,,,32.0,56.9,145.2,Overweight,1881.3,91.8,56.3,251.9,"alergi tahu tempe, terigu",,test
+ibu_hamil_0111,IBU_HAMIL,P,20,,,,,40.0,61.7,167.4,Normal,2659.9,131.0,76.1,362.8,-,tidak ada,test
+ibu_hamil_0112,IBU_HAMIL,P,12,,,,,42.0,68.1,155.7,Overweight,2101.5,111.9,69.1,258.1,tidak ada,pantangan santan,train
+ibu_hamil_0113,IBU_HAMIL,P,35,,,,,21.0,90.3,156.4,Obese,2351.9,119.4,73.4,303.5,none,tidak ada,train
+ibu_hamil_0114,IBU_HAMIL,P,33,,,,,36.0,57.9,151.4,Overweight,2577.5,124.2,76.2,348.7,"alergi sea food, ikan",none,train
+ibu_hamil_0115,IBU_HAMIL,P,26,,,,,35.0,61.6,156.7,Overweight,2424.4,116.4,75.8,319.1,alergi tahu tempe & telor,none,train
+ibu_hamil_0116,IBU_HAMIL,P,17,,,,,32.0,57.3,153.5,Normal,2373.3,119.4,70.9,314.4,tidak ada,hindari jeroan,train
+ibu_hamil_0117,IBU_HAMIL,P,27,,,,,38.0,66.8,147.7,Obese,2697.3,139.7,79.2,356.5,none,,train
+ibu_hamil_0118,IBU_HAMIL,P,35,,,,,41.0,44.1,160.1,Underweight,1718.2,93.4,55.1,212.2,allergic to crab,"tidak suka goreng-gorengan, jeroan",train
+ibu_hamil_0119,IBU_HAMIL,P,12,,,,,21.0,67.5,152.2,Overweight,1961.0,88.5,64.0,257.7,,mie instan,test
+ibu_hamil_0120,IBU_HAMIL,P,35,,,,,20.0,67.6,152.6,Overweight,2871.1,146.0,92.5,363.6,alergi terigu,none,train
+ibu_hamil_0121,IBU_HAMIL,P,9,,,,,23.0,40.4,158.9,Underweight,2083.3,107.4,65.9,265.2,-,daging merah,test
+ibu_hamil_0122,IBU_HAMIL,P,38,,,,,39.0,45.8,155.0,Normal,2155.9,101.3,63.3,295.3,alergi susu dan cumi,pantangan gorengan,train
+ibu_hamil_0123,IBU_HAMIL,P,20,,,,,36.0,75.8,159.8,Overweight,2108.6,113.8,63.3,270.9,-,tidak suka makanan manis,train
+ibu_hamil_0124,IBU_HAMIL,P,14,,,,,42.0,74.3,158.8,Overweight,2567.3,121.7,77.2,346.4,"alergi shrimp, kacng","hindari manis, goreng-gorengan",train
+ibu_hamil_0125,IBU_HAMIL,P,8,,,,,40.0,68.3,162.2,Overweight,2631.1,129.3,86.5,333.8,,"pantangan mie instan, goreng-gorengan",train
+ibu_hamil_0126,IBU_HAMIL,P,10,,,,,40.0,60.6,151.0,Overweight,2005.1,95.5,56.8,278.0,-,-,train
+ibu_hamil_0127,IBU_HAMIL,P,7,,,,,36.0,46.9,157.7,Normal,1652.6,84.1,50.6,215.1,"allergic to suus, shrimp",tidak suka makanan manis,train
+ibu_hamil_0128,IBU_HAMIL,P,18,,,,,23.0,44.4,152.4,Normal,2244.4,113.0,72.6,284.7,tidak ada,tidak ada,train
+ibu_hamil_0129,IBU_HAMIL,P,36,,,,,33.0,55.0,162.4,Normal,2125.1,108.7,62.5,282.1,tidak ada,-,train
+ibu_hamil_0130,IBU_HAMIL,P,23,,,,,21.0,65.4,163.7,Normal,2861.5,139.1,88.3,377.5,alergi susu & telurr,"pantangan gorengan, pedas",train
+ibu_hamil_0131,IBU_HAMIL,P,34,,,,,42.0,43.0,147.7,Normal,1672.0,84.2,52.6,215.5,,"hindari mie instan, santan",train
+ibu_hamil_0132,IBU_HAMIL,P,14,,,,,22.0,52.9,143.5,Overweight,1888.3,101.9,54.3,247.9,eggs; gluten,tidak suka spicy,test
+ibu_hamil_0133,IBU_HAMIL,P,4,,,,,39.0,43.9,153.3,Normal,2209.1,99.5,65.2,306.2,allergic to tahu tempe,no allergies,test
+ibu_hamil_0134,IBU_HAMIL,P,22,,,,,40.0,61.6,160.6,Normal,2636.6,119.8,74.1,372.6,-,"hindari manis, kopi",test
+ibu_hamil_0135,IBU_HAMIL,P,17,,,,,23.0,81.7,161.5,Obese,2252.9,121.7,65.0,295.3,Alergi: squid; nuts,tidak suka kopi,train
+ibu_hamil_0136,IBU_HAMIL,P,23,,,,,25.0,40.8,152.7,Underweight,1752.7,87.1,57.2,222.3,fish,,test
+ibu_hamil_0137,IBU_HAMIL,P,30,,,,,42.0,70.2,162.5,Overweight,2517.3,122.3,75.5,337.3,-,"pantangan manis, mie instan",test
+ibu_hamil_0138,IBU_HAMIL,P,36,,,,,28.0,75.6,142.3,Obese,2640.7,140.2,79.0,342.3,Alergi: fish,no allergies,train
+ibu_hamil_0139,IBU_HAMIL,P,14,,,,,25.0,52.2,154.8,Normal,2119.7,95.8,69.7,277.3,Alergi: fish,tidak ada,train
+ibu_hamil_0140,IBU_HAMIL,P,16,,,,,25.0,72.8,152.1,Obese,2383.6,120.8,77.5,300.6,allergic to kepiting,"hindari makanan manis, pedas",train
+ibu_hamil_0141,IBU_HAMIL,P,37,,,,,21.0,76.6,149.9,Obese,2180.5,119.0,70.5,267.5,fish & laktosa,"pantangan spicy, mie instan",train
+ibu_hamil_0142,IBU_HAMIL,P,32,,,,,26.0,72.5,147.5,Obese,2362.5,128.2,72.6,299.0,alergi shrimp; kepiting,pantangan manis,train
+ibu_hamil_0143,IBU_HAMIL,P,19,,,,,37.0,53.3,143.8,Overweight,2030.1,110.8,57.5,267.3,-,tidak suka mie instan,train
+ibu_hamil_0144,IBU_HAMIL,P,31,,,,,27.0,66.2,153.8,Overweight,2794.6,131.0,80.2,387.2,Alergi: soy,none,train
+ibu_hamil_0145,IBU_HAMIL,P,24,,,,,29.0,82.6,150.7,Obese,2205.7,111.3,61.7,301.3,no allergies,no allergies,train
+ibu_hamil_0146,IBU_HAMIL,P,32,,,,,38.0,72.1,157.3,Overweight,2560.2,139.4,78.5,324.0,,"pantangan kopi, goreng-gorengan",test
+ibu_hamil_0147,IBU_HAMIL,P,15,,,,,19.0,61.1,146.4,Overweight,2254.6,115.7,71.4,287.3,Alergi: sea food,tidak suka goreng-gorengan,train
+ibu_hamil_0148,IBU_HAMIL,P,28,,,,,30.0,75.1,157.2,Obese,2394.7,125.3,72.8,309.5,no allergies,pantangan gorengan,train
+ibu_hamil_0149,IBU_HAMIL,P,33,,,,,25.0,72.5,161.2,Overweight,2402.7,122.7,72.1,315.8,no allergies,tidak ada,test
+ibu_hamil_0150,IBU_HAMIL,P,39,,,,,19.0,59.7,160.1,Normal,2270.3,104.2,71.8,301.7,-,-,train
+ibu_hamil_0151,IBU_HAMIL,P,35,,,,,38.0,49.7,158.7,Normal,2013.6,98.0,59.9,270.7,-,jeroan,train
+ibu_hamil_0152,IBU_HAMIL,P,4,,,,,40.0,78.9,149.9,Obese,2504.6,137.0,74.7,321.0,Alergi: kacang,kopi,train
+ibu_hamil_0153,IBU_HAMIL,P,22,,,,,19.0,68.8,153.6,Overweight,2638.3,129.5,78.6,353.1,allergic to squid & ikn,jeroan,train
+ibu_hamil_0154,IBU_HAMIL,P,34,,,,,27.0,69.3,163.7,Overweight,2093.0,100.4,59.9,288.2,alergi makanan laut,,train
+ibu_hamil_0155,IBU_HAMIL,P,36,,,,,32.0,68.5,163.8,Overweight,2311.8,108.8,69.0,314.0,tidak ada,"tidak suka makanan manis, jeroan",train
+ibu_hamil_0156,IBU_HAMIL,P,34,,,,,34.0,76.0,164.7,Overweight,2935.8,151.6,83.4,394.7,ikan; telor,"tidak suka spicy, santan",test
+ibu_hamil_0157,IBU_HAMIL,P,7,,,,,24.0,52.8,158.9,Normal,2024.4,109.0,57.8,267.2,,pantangan pedas,train
+ibu_hamil_0158,IBU_HAMIL,P,7,,,,,39.0,57.7,154.4,Normal,2440.7,122.2,68.9,333.0,"alergi ebi, squid",tidak suka spicy,train
+ibu_hamil_0159,IBU_HAMIL,P,26,,,,,24.0,69.1,154.0,Overweight,2867.5,134.0,94.4,370.4,no allergies,"santan, spicy",test
+ibu_hamil_0160,IBU_HAMIL,P,23,,,,,27.0,56.7,148.3,Overweight,2621.0,135.4,84.2,330.3,Alergi: soy,none,train
+ibu_hamil_0161,IBU_HAMIL,P,4,,,,,27.0,75.2,163.1,Overweight,2582.3,136.3,71.8,347.7,tidak ada,tidak ada,train
+ibu_hamil_0162,IBU_HAMIL,P,14,,,,,35.0,58.8,156.8,Normal,2618.3,132.6,79.4,343.3,Alergi: sea food,none,train
+ibu_hamil_0163,IBU_HAMIL,P,37,,,,,20.0,34.8,144.9,Underweight,2304.8,113.4,64.7,317.2,allergic to kepiting,"daging merah, goreng-gorengan",train
+ibu_hamil_0164,IBU_HAMIL,P,34,,,,,20.0,77.8,158.0,Obese,3056.1,164.5,89.0,399.2,none,tidak suka kopi,train
+ibu_hamil_0165,IBU_HAMIL,P,7,,,,,42.0,55.4,152.2,Normal,2371.6,110.9,68.7,327.5,no allergies,-,test
+ibu_hamil_0166,IBU_HAMIL,P,33,,,,,40.0,65.4,170.9,Normal,2484.7,122.1,80.6,317.7,,-,test
+ibu_hamil_0167,IBU_HAMIL,P,29,,,,,29.0,56.4,159.7,Normal,2162.1,115.0,60.6,289.3,-,pedas,train
+ibu_hamil_0168,IBU_HAMIL,P,9,,,,,41.0,62.2,150.3,Overweight,2251.5,105.0,64.9,312.0,Alergi: kepiting; squid,none,train
+ibu_hamil_0169,IBU_HAMIL,P,13,,,,,41.0,76.3,163.6,Overweight,2235.9,101.1,69.7,301.1,tidak ada,,train
+ibu_hamil_0170,IBU_HAMIL,P,15,,,,,30.0,57.0,153.4,Normal,1912.7,89.0,62.8,247.9,Alergi: egg dan tahu tempe,no allergies,train
+ibu_hamil_0171,IBU_HAMIL,P,30,,,,,42.0,41.1,152.6,Underweight,2058.4,102.1,62.1,272.9,-,"hindari daging merah, mie instan",train
+ibu_hamil_0172,IBU_HAMIL,P,10,,,,,28.0,49.5,158.0,Normal,2179.3,110.2,61.6,296.0,no allergies,,train
+ibu_hamil_0173,IBU_HAMIL,P,32,,,,,41.0,53.6,157.3,Normal,2263.3,112.9,65.0,306.8,-,no allergies,train
+ibu_hamil_0174,IBU_HAMIL,P,22,,,,,32.0,59.6,159.6,Normal,1945.2,98.4,54.8,264.5,tahu tempe; udnag,pantangan daging merah,train
+ibu_hamil_0175,IBU_HAMIL,P,10,,,,,24.0,57.1,171.3,Normal,2604.5,122.7,73.4,363.2,telor; nuts,pantangan spicy,test
+ibu_hamil_0176,IBU_HAMIL,P,23,,,,,33.0,45.4,158.7,Underweight,2419.1,130.5,78.3,298.2,susu,"pantangan manis, goreng-gorengan",train
+ibu_hamil_0177,IBU_HAMIL,P,17,,,,,33.0,51.8,154.1,Normal,1837.2,100.5,52.8,240.0,alergi udang; ikan,santan,test
+ibu_hamil_0178,IBU_HAMIL,P,18,,,,,41.0,69.5,159.9,Overweight,2755.8,129.6,90.6,355.4,Alergi: peanut,mie instan,train
+ibu_hamil_0179,IBU_HAMIL,P,25,,,,,28.0,39.4,154.5,Underweight,2346.5,107.9,75.8,308.0,,none,train
+ibu_hamil_0180,IBU_HAMIL,P,35,,,,,20.0,67.3,158.9,Overweight,2886.5,152.9,89.7,366.9,-,,train
+ibu_hamil_0181,IBU_HAMIL,P,21,,,,,25.0,46.5,152.2,Normal,2260.1,117.7,62.9,305.8,"kedele, squid",no allergies,train
+ibu_hamil_0182,IBU_HAMIL,P,31,,,,,22.0,47.4,149.3,Normal,1838.3,100.2,56.3,232.7,"alergi cumi-cumi, seafood",no allergies,test
+ibu_hamil_0183,IBU_HAMIL,P,30,,,,,20.0,72.5,162.0,Overweight,2437.9,127.4,79.0,304.3,none,"goreng-gorengan, santan",train
+ibu_hamil_0184,IBU_HAMIL,P,8,,,,,21.0,62.3,152.9,Overweight,2655.5,135.8,83.1,341.2,no allergies,hindari mie instan,train
+ibu_hamil_0185,IBU_HAMIL,P,35,,,,,21.0,69.6,154.1,Overweight,2372.6,118.7,69.8,317.3,Alergi: udnag dan squid,tidak suka kopi,train
+ibu_hamil_0186,IBU_HAMIL,P,10,,,,,35.0,53.5,155.5,Normal,1954.2,100.7,61.1,250.3,tidak ada,"pantangan mie instan, daging merah",train
+ibu_hamil_0187,IBU_HAMIL,P,11,,,,,41.0,48.0,155.7,Normal,1844.2,95.2,53.8,244.7,allergic to tahu tempe,tidak suka jeroan,train
+ibu_hamil_0188,IBU_HAMIL,P,34,,,,,26.0,83.9,153.6,Obese,2527.2,137.4,82.9,307.9,none,tidak ada,train
+ibu_hamil_0189,IBU_HAMIL,P,15,,,,,33.0,70.2,165.0,Overweight,2072.5,100.9,64.7,271.6,Alergi: shrimp,gorengan,train
+ibu_hamil_0190,IBU_HAMIL,P,15,,,,,21.0,38.7,152.9,Underweight,1752.0,95.9,58.1,211.4,-,,train
+ibu_hamil_0191,IBU_HAMIL,P,34,,,,,28.0,56.9,158.7,Normal,2410.3,130.6,71.4,311.3,none,hindari kopi,train
+ibu_hamil_0192,IBU_HAMIL,P,19,,,,,31.0,113.7,167.3,Obese,3256.0,173.7,92.4,432.4,none,"pantangan goreng-gorengan, jeroan",train
+ibu_hamil_0193,IBU_HAMIL,P,31,,,,,30.0,48.7,156.5,Normal,2269.0,108.1,72.4,296.2,,tidak ada,test
+ibu_hamil_0194,IBU_HAMIL,P,6,,,,,35.0,65.0,151.6,Overweight,2584.6,133.2,74.1,346.2,Alergi: susu sapi & kedele,"pantangan mie instan, manis",train
+ibu_hamil_0195,IBU_HAMIL,P,28,,,,,19.0,85.4,163.0,Obese,3206.0,156.7,91.0,440.1,no allergies,"hindari spicy, mie instan",train
+ibu_hamil_0196,IBU_HAMIL,P,38,,,,,36.0,41.1,145.3,Normal,2280.9,118.9,66.1,302.7,no allergies,"hindari makanan manis, spicy",train
+ibu_hamil_0197,IBU_HAMIL,P,17,,,,,21.0,90.7,155.1,Obese,3251.6,154.5,96.7,440.9,none,tidak ada,train
+ibu_hamil_0198,IBU_HAMIL,P,7,,,,,19.0,52.8,147.7,Normal,2029.1,111.5,60.3,260.0,Alergi: kepiting; fish,tidak ada,train
+ibu_hamil_0199,IBU_HAMIL,P,20,,,,,42.0,50.9,160.3,Normal,2007.6,101.2,61.1,263.2,allergic to susu,"tidak suka makanan manis, mie instan",train
+ibu_hamil_0200,IBU_HAMIL,P,12,,,,,23.0,42.6,147.4,Normal,2083.4,103.5,65.7,269.6,tidak ada,no allergies,test
+ibu_hamil_0201,IBU_HAMIL,P,32,,,,,27.0,64.5,160.2,Overweight,2786.7,141.5,87.2,358.9,no allergies,pantangan kopi,train
+ibu_hamil_0202,IBU_HAMIL,P,6,,,,,31.0,80.6,157.5,Obese,2067.1,101.8,59.4,281.4,no allergies,"goreng-gorengan, manis",train
+ibu_hamil_0203,IBU_HAMIL,P,33,,,,,23.0,38.3,154.6,Underweight,1949.2,106.4,62.0,241.2,squid,,train
+ibu_hamil_0204,IBU_HAMIL,P,39,,,,,34.0,75.5,167.5,Overweight,2401.5,123.7,70.2,318.8,Alergi: terigu,-,train
+ibu_hamil_0205,IBU_HAMIL,P,5,,,,,24.0,39.6,157.1,Underweight,1634.3,76.8,50.4,218.3,tidak ada,pantangan gorengan,test
+ibu_hamil_0206,IBU_HAMIL,P,29,,,,,28.0,52.8,151.1,Normal,2557.1,123.1,77.2,342.5,tidak ada,tidak ada,train
+ibu_hamil_0207,IBU_HAMIL,P,23,,,,,19.0,50.9,152.8,Normal,2370.9,116.5,66.5,326.6,Alergi: ikan,-,train
+ibu_hamil_0208,IBU_HAMIL,P,24,,,,,35.0,89.5,170.1,Obese,3167.1,168.7,97.8,403.0,,-,train
+ibu_hamil_0209,IBU_HAMIL,P,12,,,,,41.0,39.3,156.8,Underweight,2128.5,98.6,63.7,290.2,,no allergies,test
+ibu_hamil_0210,IBU_HAMIL,P,23,,,,,39.0,37.9,146.9,Underweight,1822.7,84.8,55.1,246.9,Alergi: gluten,hindari daging merah,test
+ibu_hamil_0211,IBU_HAMIL,P,10,,,,,34.0,88.5,166.6,Obese,3027.3,160.7,100.6,369.9,ebi & eggs,hindari manis,train
+ibu_hamil_0212,IBU_HAMIL,P,19,,,,,38.0,80.9,157.7,Obese,2962.0,148.8,95.0,377.9,no allergies,-,test
+ibu_hamil_0213,IBU_HAMIL,P,37,,,,,38.0,68.9,156.9,Overweight,2012.2,95.1,66.2,259.0,-,none,test
+ibu_hamil_0214,IBU_HAMIL,P,17,,,,,27.0,55.1,148.9,Normal,2364.0,122.4,75.3,299.1,tidak ada,tidak ada,train
+ibu_hamil_0215,IBU_HAMIL,P,28,,,,,33.0,41.0,158.8,Underweight,2346.3,109.8,70.0,319.3,none,tidak ada,train
+ibu_hamil_0216,IBU_HAMIL,P,16,,,,,37.0,57.7,158.1,Normal,2123.9,108.6,64.4,277.5,no allergies,hindari mie instan,train
+ibu_hamil_0217,IBU_HAMIL,P,21,,,,,27.0,66.8,156.4,Overweight,2812.8,127.8,84.7,384.8,,"gorengan, kopi",train
+ibu_hamil_0218,IBU_HAMIL,P,4,,,,,40.0,49.6,153.8,Normal,1652.7,83.7,48.5,220.4,allergic to shrimp,"hindari mie instan, gorengan",train
+ibu_hamil_0219,IBU_HAMIL,P,26,,,,,20.0,55.8,159.3,Normal,2454.6,111.1,71.5,341.7,tidak ada,tidak suka goreng-gorengan,test
+ibu_hamil_0220,IBU_HAMIL,P,18,,,,,20.0,77.5,160.8,Overweight,2779.5,142.3,90.8,348.3,-,tidak suka manis,train
+ibu_hamil_0221,IBU_HAMIL,P,8,,,,,20.0,68.1,161.7,Overweight,1994.8,94.9,61.5,265.5,,-,train
+ibu_hamil_0222,IBU_HAMIL,P,40,,,,,26.0,60.3,164.7,Normal,2739.9,129.8,77.9,379.8,no allergies,none,train
+ibu_hamil_0223,IBU_HAMIL,P,33,,,,,34.0,67.1,160.7,Overweight,2775.7,148.6,90.9,340.9,allergic to udang,"hindari mie instan, manis",train
+ibu_hamil_0224,IBU_HAMIL,P,14,,,,,35.0,37.0,152.1,Underweight,1652.4,82.8,53.6,209.7,-,tidak ada,test
+ibu_hamil_0225,IBU_HAMIL,P,39,,,,,30.0,64.5,153.1,Overweight,2740.0,144.6,91.3,335.0,allergic to suus,"hindari jeroan, daging merah",train
+ibu_hamil_0226,IBU_HAMIL,P,9,,,,,21.0,45.7,157.5,Underweight,1721.8,85.3,48.3,236.5,udang,"tidak suka manis, kopi",train
+ibu_hamil_0227,IBU_HAMIL,P,21,,,,,31.0,74.2,161.9,Overweight,2123.4,112.9,62.4,277.5,"milk, udnag",,train
+ibu_hamil_0228,IBU_HAMIL,P,35,,,,,34.0,55.1,158.8,Normal,2341.7,114.7,78.0,295.2,"allergic to susu, telur","mie instan, spicy",test
+ibu_hamil_0229,IBU_HAMIL,P,28,,,,,39.0,57.1,155.1,Normal,1866.6,85.4,57.1,252.7,no allergies,none,train
+ibu_hamil_0230,IBU_HAMIL,P,5,,,,,36.0,51.3,151.8,Normal,1910.3,93.7,63.0,242.1,,tidak ada,train
+ibu_hamil_0231,IBU_HAMIL,P,28,,,,,24.0,76.2,159.0,Obese,2452.9,127.6,75.9,314.9,allergic to cumi-cumi,,train
+ibu_hamil_0232,IBU_HAMIL,P,9,,,,,22.0,59.4,149.0,Overweight,2343.9,112.4,75.6,303.5,,pantangan makanan manis,train
+ibu_hamil_0233,IBU_HAMIL,P,12,,,,,37.0,75.0,158.6,Overweight,2493.2,130.4,82.0,308.4,Alergi: dairy; kepiting,"hindari goreng-gorengan, jeroan",train
+ibu_hamil_0234,IBU_HAMIL,P,13,,,,,40.0,65.2,162.4,Normal,1850.6,87.4,54.6,252.5,alergi shrimp,none,train
+ibu_hamil_0235,IBU_HAMIL,P,13,,,,,32.0,61.4,149.2,Overweight,2062.3,106.6,60.0,273.9,,"hindari goreng-gorengan, kopi",test
+ibu_hamil_0236,IBU_HAMIL,P,33,,,,,26.0,63.4,165.5,Normal,2793.6,133.2,80.3,384.5,tidak ada,none,train
+ibu_hamil_0237,IBU_HAMIL,P,19,,,,,32.0,48.4,157.8,Normal,2253.3,113.9,64.0,305.4,,no allergies,train
+ibu_hamil_0238,IBU_HAMIL,P,9,,,,,28.0,53.8,161.1,Normal,2251.6,122.3,70.0,283.0,-,,train
+ibu_hamil_0239,IBU_HAMIL,P,38,,,,,25.0,55.0,152.2,Normal,2150.3,105.6,70.1,274.2,allergic to cumi-cumi,none,train
+ibu_hamil_0240,IBU_HAMIL,P,34,,,,,33.0,66.2,159.7,Overweight,2015.5,96.5,57.0,279.2,allergic to nuts,none,train
+ibu_hamil_0241,IBU_HAMIL,P,34,,,,,28.0,44.1,150.3,Normal,1982.8,100.1,62.4,255.2,allergic to cumi-cumi & terigu,no allergies,train
+ibu_hamil_0242,IBU_HAMIL,P,17,,,,,27.0,57.3,155.9,Normal,2177.6,112.8,66.0,283.0,tidak ada,"hindari gorengan, goreng-gorengan",train
+ibu_hamil_0243,IBU_HAMIL,P,26,,,,,27.0,77.7,153.8,Obese,2440.4,111.3,69.8,341.8,none,tidak suka gorengan,train
+ibu_hamil_0244,IBU_HAMIL,P,9,,,,,34.0,74.7,154.3,Obese,2760.5,150.1,78.0,364.5,Alergi: cumi dan laktosa,tidak ada,train
+ibu_hamil_0245,IBU_HAMIL,P,27,,,,,33.0,55.7,149.6,Normal,1872.3,95.6,61.8,233.3,Alergi: sea food,none,test
+ibu_hamil_0246,IBU_HAMIL,P,14,,,,,39.0,57.3,144.7,Overweight,1845.7,85.2,59.7,242.0,alergi cumi-cumi; gandum,tidak suka manis,train
+ibu_hamil_0247,IBU_HAMIL,P,14,,,,,28.0,83.4,163.2,Obese,2817.4,147.2,86.3,363.0,alergi ikn; kedele,-,train
+ibu_hamil_0248,IBU_HAMIL,P,23,,,,,22.0,55.0,146.2,Overweight,2154.2,102.3,71.2,276.0,no allergies,pedas,train
+ibu_hamil_0249,IBU_HAMIL,P,36,,,,,19.0,72.6,157.0,Overweight,2703.2,127.4,88.7,348.8,allergic to terigu,hindari goreng-gorengan,test
+ibu_hamil_0250,IBU_HAMIL,P,6,,,,,33.0,54.7,147.7,Overweight,1737.1,94.9,50.9,224.7,Alergi: kepiting,pantangan kopi,test
+ibu_hamil_0251,IBU_HAMIL,P,32,,,,,26.0,82.4,153.5,Obese,2507.3,136.1,75.9,320.0,-,tidak ada,train
+ibu_hamil_0252,IBU_HAMIL,P,37,,,,,20.0,71.6,160.8,Overweight,2152.8,116.4,65.6,274.2,-,"pantangan kopi, daging merah",train
+ibu_hamil_0253,IBU_HAMIL,P,10,,,,,25.0,66.1,154.3,Overweight,2437.3,133.9,73.5,310.0,Alergi: terigu dan kedele,"tidak suka daging merah, spicy",train
+ibu_hamil_0254,IBU_HAMIL,P,11,,,,,37.0,46.7,154.2,Normal,1636.5,79.8,50.9,214.8,no allergies,"makanan manis, goreng-gorengan",train
+ibu_hamil_0255,IBU_HAMIL,P,22,,,,,24.0,75.6,153.5,Obese,2431.2,116.0,80.5,310.5,none,daging merah,test
+ibu_hamil_0256,IBU_HAMIL,P,35,,,,,40.0,72.1,151.1,Obese,2024.4,92.5,57.9,283.3,tidak ada,none,train
+ibu_hamil_0257,IBU_HAMIL,P,30,,,,,24.0,82.0,162.1,Obese,2821.2,154.7,92.5,342.5,,no allergies,test
+ibu_hamil_0258,IBU_HAMIL,P,29,,,,,23.0,78.4,168.4,Overweight,2231.3,114.2,67.4,292.0,allergic to fish,makanan manis,train
+ibu_hamil_0259,IBU_HAMIL,P,32,,,,,42.0,78.2,165.6,Overweight,2380.5,130.4,78.4,288.4,alergi ikan & kepiting,-,train
+ibu_hamil_0260,IBU_HAMIL,P,14,,,,,24.0,68.5,144.4,Obese,2826.4,132.2,81.0,392.2,tidak ada,tidak suka kopi,test
+ibu_hamil_0261,IBU_HAMIL,P,18,,,,,21.0,60.3,153.4,Overweight,2249.1,110.8,67.1,300.5,-,no allergies,train
+ibu_hamil_0262,IBU_HAMIL,P,21,,,,,34.0,63.8,166.9,Normal,2245.0,112.5,67.0,298.0,allergic to makanan laut dan udnag,tidak ada,train
+ibu_hamil_0263,IBU_HAMIL,P,13,,,,,34.0,73.7,148.3,Obese,2466.6,124.4,75.6,322.2,makanan laut; kedelai,"tidak suka goreng-gorengan, spicy",train
+ibu_hamil_0264,IBU_HAMIL,P,20,,,,,31.0,55.7,149.8,Normal,1883.6,85.0,60.3,250.3,alergi kacang dan squid,"tidak suka makanan manis, pedas",train
+ibu_hamil_0265,IBU_HAMIL,P,18,,,,,19.0,81.2,158.9,Obese,2264.0,104.6,72.4,298.4,alergi telur,pantangan kopi,train
+ibu_hamil_0266,IBU_HAMIL,P,25,,,,,22.0,66.7,162.5,Overweight,2349.0,112.5,70.0,317.3,none,tidak ada,train
+ibu_hamil_0267,IBU_HAMIL,P,12,,,,,31.0,52.6,158.7,Normal,2433.7,133.1,74.5,307.8,no allergies,"tidak suka pedas, mie instan",train
+ibu_hamil_0268,IBU_HAMIL,P,35,,,,,36.0,56.1,152.2,Normal,2551.5,122.7,84.3,325.6,allergic to terigu,-,train
+ibu_hamil_0269,IBU_HAMIL,P,37,,,,,40.0,85.8,166.2,Obese,2774.6,130.7,77.6,388.3,allergic to kedele; squid,,train
+ibu_hamil_0270,IBU_HAMIL,P,33,,,,,29.0,41.3,160.6,Underweight,2177.3,114.4,63.3,287.5,none,"hindari goreng-gorengan, mie instan",train
+ibu_hamil_0271,IBU_HAMIL,P,7,,,,,21.0,64.0,165.2,Normal,2465.2,134.8,72.9,317.5,-,daging merah,train
+ibu_hamil_0272,IBU_HAMIL,P,15,,,,,29.0,60.7,165.7,Normal,2726.8,134.2,89.7,345.8,-,none,test
+ibu_hamil_0273,IBU_HAMIL,P,30,,,,,31.0,58.6,152.3,Overweight,1922.8,105.6,59.1,242.1,tidak ada,pantangan makanan manis,train
+ibu_hamil_0274,IBU_HAMIL,P,15,,,,,20.0,90.3,164.8,Obese,2982.3,152.3,92.7,384.7,none,none,train
+ibu_hamil_0275,IBU_HAMIL,P,20,,,,,35.0,58.5,160.3,Normal,1916.6,102.2,57.7,247.1,allergic to telor dan cumi,pantangan manis,train
+ibu_hamil_0276,IBU_HAMIL,P,34,,,,,20.0,59.0,168.0,Normal,2275.2,115.1,65.4,306.5,tidak ada,no allergies,train
+ibu_hamil_0277,IBU_HAMIL,P,33,,,,,22.0,62.4,163.1,Normal,2548.5,129.6,78.3,331.4,no allergies,pantangan goreng-gorengan,train
+ibu_hamil_0278,IBU_HAMIL,P,39,,,,,24.0,52.2,152.5,Normal,2120.9,102.7,68.7,272.9,allergic to seafood,"pantangan goreng-gorengan, kopi",train
+ibu_hamil_0279,IBU_HAMIL,P,15,,,,,19.0,58.6,153.8,Normal,2240.9,112.8,74.4,279.9,"allergic to kedele, gluten","hindari spicy, santan",train
+ibu_hamil_0280,IBU_HAMIL,P,35,,,,,23.0,50.9,152.3,Normal,2109.6,115.1,68.4,258.3,,manis,train
+ibu_hamil_0281,IBU_HAMIL,P,8,,,,,27.0,68.5,158.5,Overweight,2469.2,123.9,80.8,311.6,allergic to telur,no allergies,train
+ibu_hamil_0282,IBU_HAMIL,P,32,,,,,28.0,52.4,152.5,Normal,2097.2,108.8,59.7,281.2,"alergi telor, kacang",jeroan,test
+ibu_hamil_0283,IBU_HAMIL,P,28,,,,,40.0,61.7,161.3,Normal,2640.2,133.1,84.6,336.6,tidak ada,"pantangan makanan manis, goreng-gorengan",train
+ibu_hamil_0284,IBU_HAMIL,P,32,,,,,33.0,49.3,146.6,Normal,2444.4,129.2,76.7,309.3,-,pedas,train
+ibu_hamil_0285,IBU_HAMIL,P,7,,,,,20.0,58.7,148.1,Overweight,2589.9,127.5,82.0,335.4,no allergies,"pedas, makanan manis",test
+ibu_hamil_0286,IBU_HAMIL,P,13,,,,,28.0,42.0,148.4,Normal,2250.8,101.4,70.5,302.7,tidak ada,no allergies,train
+ibu_hamil_0287,IBU_HAMIL,P,18,,,,,28.0,57.3,157.8,Normal,2415.0,115.8,68.9,332.9,"Alergi: sea food, kacang",no allergies,train
+ibu_hamil_0288,IBU_HAMIL,P,17,,,,,30.0,71.7,165.2,Overweight,2371.6,119.3,70.4,315.2,-,"tidak suka mie instan, pedas",train
+ibu_hamil_0289,IBU_HAMIL,P,39,,,,,33.0,62.6,165.2,Normal,2723.0,143.1,90.0,335.0,alergi udang & peanut,"makanan manis, manis",train
+ibu_hamil_0290,IBU_HAMIL,P,6,,,,,35.0,73.9,153.5,Obese,2218.3,100.1,67.2,303.3,alergi ikan dan terigu,-,test
+ibu_hamil_0291,IBU_HAMIL,P,11,,,,,20.0,55.9,157.2,Normal,2087.5,98.1,58.8,291.5,none,"mie instan, manis",test
+ibu_hamil_0292,IBU_HAMIL,P,18,,,,,30.0,52.4,165.4,Normal,1886.8,91.7,58.7,248.0,-,no allergies,train
+ibu_hamil_0293,IBU_HAMIL,P,14,,,,,23.0,47.6,156.7,Normal,2077.8,103.2,67.9,263.5,,,train
+ibu_hamil_0294,IBU_HAMIL,P,38,,,,,22.0,59.7,153.0,Overweight,2726.6,131.0,89.2,349.8,Alergi: crab,"santan, mie instan",train
+ibu_hamil_0295,IBU_HAMIL,P,38,,,,,25.0,43.8,150.8,Normal,1783.6,83.1,59.0,230.1,-,no allergies,train
+ibu_hamil_0296,IBU_HAMIL,P,32,,,,,33.0,45.5,155.0,Normal,2409.7,116.8,73.7,319.8,-,tidak suka pedas,train
+ibu_hamil_0297,IBU_HAMIL,P,26,,,,,30.0,50.9,160.3,Normal,2312.5,112.2,67.3,314.4,no allergies,-,train
+ibu_hamil_0298,IBU_HAMIL,P,9,,,,,29.0,57.9,161.3,Normal,2306.2,119.6,72.4,294.1,Alergi: kedelai,none,train
+ibu_hamil_0299,IBU_HAMIL,P,36,,,,,36.0,67.2,148.0,Obese,1983.3,102.0,64.5,248.7,allergic to crab,pantangan spicy,train
+ibu_hamil_0300,IBU_HAMIL,P,17,,,,,35.0,53.3,153.4,Normal,2291.3,109.1,70.0,306.1,allergic to makanan laut; crab,-,test
+ibu_hamil_0301,IBU_HAMIL,P,33,,,,,32.0,49.1,156.2,Normal,1816.4,85.8,56.6,240.9,Alergi: seafood,"hindari santan, spicy",test
+ibu_hamil_0302,IBU_HAMIL,P,34,,,,,40.0,49.0,150.8,Normal,1758.5,83.4,56.7,228.6,,no allergies,train
+ibu_hamil_0303,IBU_HAMIL,P,30,,,,,36.0,68.0,151.9,Overweight,2001.9,93.1,63.0,265.6,Alergi: udang,"hindari pedas, goreng-gorengan",train
+ibu_hamil_0304,IBU_HAMIL,P,15,,,,,22.0,76.1,159.0,Obese,2739.3,138.0,78.5,370.2,no allergies,"hindari santan, manis",train
+ibu_hamil_0305,IBU_HAMIL,P,39,,,,,28.0,72.8,156.3,Overweight,2904.2,150.4,94.0,364.2,,no allergies,train
+ibu_hamil_0306,IBU_HAMIL,P,30,,,,,40.0,44.5,162.2,Underweight,2359.6,119.6,66.6,320.6,-,no allergies,train
+ibu_hamil_0307,IBU_HAMIL,P,15,,,,,19.0,47.8,146.4,Normal,2306.6,109.5,64.6,321.7,-,,train
+ibu_hamil_0308,IBU_HAMIL,P,30,,,,,28.0,68.4,156.5,Overweight,2831.7,145.9,91.1,357.0,,"pantangan gorengan, daging merah",train
+ibu_hamil_0309,IBU_HAMIL,P,13,,,,,30.0,61.0,151.4,Overweight,2558.0,133.7,79.5,327.0,allergic to terigu,-,train
+ibu_hamil_0310,IBU_HAMIL,P,8,,,,,42.0,57.6,148.4,Overweight,1720.5,90.8,53.7,218.5,tidak ada,none,train
+ibu_hamil_0311,IBU_HAMIL,P,40,,,,,40.0,72.0,158.6,Overweight,2039.9,111.8,63.2,256.0,none,none,test
+ibu_hamil_0312,IBU_HAMIL,P,25,,,,,42.0,55.4,154.5,Normal,2052.0,105.7,66.0,258.8,no allergies,tidak ada,test
+ibu_hamil_0313,IBU_HAMIL,P,17,,,,,40.0,42.2,146.3,Normal,1670.2,89.3,51.4,212.6,none,hindari spicy,train
+ibu_hamil_0314,IBU_HAMIL,P,14,,,,,28.0,72.2,157.2,Overweight,2633.0,138.6,74.7,351.5,tidak ada,makanan manis,train
+ibu_hamil_0315,IBU_HAMIL,P,21,,,,,30.0,48.9,161.1,Normal,2284.5,105.5,72.6,302.3,allergic to eggs,makanan manis,train
+ibu_hamil_0316,IBU_HAMIL,P,32,,,,,32.0,53.7,167.7,Normal,2360.8,124.7,67.6,313.3,-,tidak suka kopi,train
+ibu_hamil_0317,IBU_HAMIL,P,36,,,,,21.0,57.4,161.4,Normal,1985.0,102.1,63.0,252.5,-,"hindari gorengan, goreng-gorengan",train
+ibu_hamil_0318,IBU_HAMIL,P,19,,,,,24.0,62.8,159.1,Normal,2781.0,137.0,88.8,358.6,"alergi kacang tanah, udang",-,train
+ibu_hamil_0319,IBU_HAMIL,P,11,,,,,32.0,71.9,155.0,Overweight,2474.0,116.2,76.5,330.1,wheat & kacang,no allergies,test
+ibu_hamil_0320,IBU_HAMIL,P,25,,,,,39.0,57.6,162.4,Normal,2352.2,128.2,70.2,301.9,alergi cumi-cumi,-,train
+ibu_hamil_0321,IBU_HAMIL,P,22,,,,,20.0,48.0,162.5,Underweight,2116.2,99.8,59.5,295.3,none,,train
+ibu_hamil_0322,IBU_HAMIL,P,14,,,,,24.0,62.1,150.0,Overweight,2740.1,125.4,82.0,375.1,tidak ada,-,test
+ibu_hamil_0323,IBU_HAMIL,P,37,,,,,38.0,67.3,158.9,Overweight,1998.2,108.6,57.0,262.7,Alergi: makanan laut & gluten,"tidak suka gorengan, makanan manis",train
+ibu_hamil_0324,IBU_HAMIL,P,24,,,,,23.0,48.8,141.2,Normal,2277.4,113.8,69.6,299.0,Alergi: wheat,no allergies,test
+ibu_hamil_0325,IBU_HAMIL,P,38,,,,,24.0,68.3,158.7,Overweight,2609.7,130.7,77.3,347.8,Alergi: ikn,hindari makanan manis,train
+ibu_hamil_0326,IBU_HAMIL,P,23,,,,,31.0,64.2,150.0,Overweight,2472.7,122.0,82.2,311.2,fish & sea food,"gorengan, jeroan",train
+ibu_hamil_0327,IBU_HAMIL,P,33,,,,,20.0,61.5,164.4,Normal,2044.3,110.8,62.3,260.2,tidak ada,"hindari manis, jeroan",train
+ibu_hamil_0328,IBU_HAMIL,P,21,,,,,28.0,56.6,149.0,Overweight,2613.1,128.0,85.4,333.1,susu sapi,"pantangan goreng-gorengan, gorengan",train
+ibu_hamil_0329,IBU_HAMIL,P,11,,,,,29.0,70.0,161.3,Overweight,1964.9,99.0,55.8,266.6,-,pantangan manis,test
+ibu_hamil_0330,IBU_HAMIL,P,29,,,,,31.0,47.6,150.4,Normal,1792.0,84.3,56.9,235.6,alergi wheat,pantangan santan,train
+ibu_hamil_0331,IBU_HAMIL,P,20,,,,,32.0,49.1,153.1,Normal,2030.0,97.9,65.5,262.3,tidak ada,jeroan,train
+ibu_hamil_0332,IBU_HAMIL,P,28,,,,,29.0,80.4,149.2,Obese,2450.5,117.9,75.4,325.1,allergic to telor,no allergies,test
+ibu_hamil_0333,IBU_HAMIL,P,29,,,,,36.0,60.0,151.0,Overweight,2611.2,143.1,85.0,318.3,no allergies,,train
+ibu_hamil_0334,IBU_HAMIL,P,40,,,,,42.0,84.7,157.3,Obese,2990.9,144.1,84.7,412.9,no allergies,mie instan,train
+ibu_hamil_0335,IBU_HAMIL,P,9,,,,,20.0,55.4,153.7,Normal,2312.6,122.4,65.3,308.8,none,no allergies,train
+ibu_hamil_0336,IBU_HAMIL,P,34,,,,,35.0,43.1,162.9,Underweight,2378.5,129.9,68.6,310.5,-,no allergies,train
+ibu_hamil_0337,IBU_HAMIL,P,34,,,,,38.0,39.9,157.8,Underweight,2083.4,106.1,65.1,268.3,,-,train
+ibu_hamil_0338,IBU_HAMIL,P,13,,,,,37.0,86.3,161.8,Obese,2951.1,151.0,87.5,389.9,-,tidak suka spicy,train
+ibu_hamil_0339,IBU_HAMIL,P,28,,,,,42.0,52.2,153.2,Normal,2441.1,110.0,69.9,343.0,alergi susu sapi,tidak suka jeroan,test
+ibu_hamil_0340,IBU_HAMIL,P,8,,,,,27.0,61.1,156.7,Normal,2109.5,111.7,69.9,258.3,kedele & laktosa,"tidak suka makanan manis, pedas",train
+ibu_hamil_0341,IBU_HAMIL,P,25,,,,,19.0,44.0,146.9,Normal,2031.0,103.9,63.2,261.7,no allergies,tidak ada,test
+ibu_hamil_0342,IBU_HAMIL,P,8,,,,,37.0,59.5,157.6,Normal,2025.7,96.3,58.7,278.0,-,tidak suka daging merah,train
+ibu_hamil_0343,IBU_HAMIL,P,5,,,,,38.0,51.7,158.8,Normal,1920.2,87.6,58.2,261.6,no allergies,,train
+ibu_hamil_0344,IBU_HAMIL,P,4,,,,,37.0,57.3,156.8,Normal,1763.9,92.8,49.6,236.7,-,tidak ada,train
+ibu_hamil_0345,IBU_HAMIL,P,8,,,,,37.0,74.2,155.1,Obese,2731.2,132.0,83.6,362.9,tidak ada,tidak suka makanan manis,train
+ibu_hamil_0346,IBU_HAMIL,P,39,,,,,31.0,69.3,157.5,Overweight,2056.7,95.9,65.5,270.9,"alergi seafood, susu sapi","hindari kopi, spicy",train
+ibu_hamil_0347,IBU_HAMIL,P,15,,,,,32.0,65.6,157.7,Overweight,2258.6,122.1,67.6,290.5,tidak ada,,test
+ibu_hamil_0348,IBU_HAMIL,P,6,,,,,37.0,40.8,159.7,Underweight,1785.8,81.9,58.5,233.0,allergic to sea food,no allergies,train
+ibu_hamil_0349,IBU_HAMIL,P,40,,,,,42.0,48.1,163.8,Underweight,1979.6,91.6,64.3,258.7,alergi kepiting,none,train
+ibu_hamil_0350,IBU_HAMIL,P,8,,,,,30.0,74.4,157.9,Overweight,2002.1,91.7,62.5,268.3,Alergi: sea food,,train
+ibu_hamil_0351,IBU_HAMIL,P,21,,,,,30.0,79.4,155.6,Obese,2447.1,132.7,73.1,314.5,-,"hindari kopi, santan",train
+ibu_hamil_0352,IBU_HAMIL,P,20,,,,,39.0,56.5,158.3,Normal,2095.8,111.6,61.7,273.6,"alergi sea food, telurr","tidak suka manis, pedas",train
+ibu_hamil_0353,IBU_HAMIL,P,29,,,,,23.0,62.5,158.3,Normal,2780.6,141.0,82.4,368.8,-,tidak ada,test
+ibu_hamil_0354,IBU_HAMIL,P,19,,,,,29.0,44.2,158.3,Underweight,1781.6,80.9,56.3,237.9,kedele dan ikn,,test
+ibu_hamil_0355,IBU_HAMIL,P,38,,,,,34.0,77.1,157.9,Obese,2130.2,101.5,69.4,275.0,none,no allergies,train
+ibu_hamil_0356,IBU_HAMIL,P,35,,,,,21.0,53.0,164.4,Normal,2660.0,132.7,81.8,348.1,no allergies,"pantangan gorengan, pedas",train
+ibu_hamil_0357,IBU_HAMIL,P,15,,,,,39.0,54.1,153.3,Normal,1828.3,93.1,60.8,227.1,-,"pantangan spicy, goreng-gorengan",test
+ibu_hamil_0358,IBU_HAMIL,P,15,,,,,29.0,53.0,153.1,Normal,2559.4,132.3,76.3,335.9,-,tidak ada,train
+ibu_hamil_0359,IBU_HAMIL,P,22,,,,,42.0,61.8,152.3,Overweight,1897.9,92.2,61.6,243.7,Alergi: kedelai,"hindari daging merah, gorengan",train
+ibu_hamil_0360,IBU_HAMIL,P,26,,,,,19.0,66.6,157.5,Overweight,2093.3,108.7,68.4,260.8,allergic to gandum,hindari gorengan,train
+ibu_hamil_0361,IBU_HAMIL,P,16,,,,,35.0,52.3,165.9,Normal,2540.4,115.8,77.0,346.1,alergi nuts dan udnag,"gorengan, spicy",test
+ibu_hamil_0362,IBU_HAMIL,P,18,,,,,30.0,54.7,155.9,Normal,2355.5,110.6,69.0,323.1,"alergi kedele, fish","manis, goreng-gorengan",test
+ibu_hamil_0363,IBU_HAMIL,P,40,,,,,26.0,63.9,161.2,Normal,2788.9,143.2,84.4,364.1,no allergies,"pantangan mie instan, manis",train
+ibu_hamil_0364,IBU_HAMIL,P,22,,,,,32.0,39.6,154.3,Underweight,2316.9,112.0,70.3,309.1,kacng; gluten,,train
+ibu_hamil_0365,IBU_HAMIL,P,17,,,,,30.0,55.2,154.4,Normal,1894.5,89.5,59.7,249.8,allergic to dairy,"pantangan kopi, daging merah",train
+ibu_hamil_0366,IBU_HAMIL,P,21,,,,,40.0,56.1,148.2,Overweight,2058.6,98.6,62.4,275.7,none,no allergies,train
+ibu_hamil_0367,IBU_HAMIL,P,17,,,,,37.0,66.4,158.7,Overweight,2733.1,132.7,90.1,347.9,alergi telor dan kepiting,"makanan manis, gorengan",train
+ibu_hamil_0368,IBU_HAMIL,P,12,,,,,26.0,68.6,161.0,Overweight,2746.3,126.7,77.7,385.0,tidak ada,hindari goreng-gorengan,train
+ibu_hamil_0369,IBU_HAMIL,P,21,,,,,42.0,72.9,156.9,Overweight,2541.0,118.2,72.6,353.6,Alergi: kacng,pantangan santan,train
+ibu_hamil_0370,IBU_HAMIL,P,27,,,,,37.0,56.1,152.2,Normal,2087.5,95.3,59.2,293.5,telur,none,test
+ibu_hamil_0371,IBU_HAMIL,P,38,,,,,41.0,54.1,167.7,Normal,1849.1,87.1,61.5,236.7,,no allergies,train
+ibu_hamil_0372,IBU_HAMIL,P,21,,,,,29.0,57.7,163.4,Normal,2668.9,121.8,74.8,377.0,tidak ada,-,train
+ibu_hamil_0373,IBU_HAMIL,P,40,,,,,22.0,64.8,149.6,Overweight,2291.8,110.1,72.3,300.2,alergi kedelai; laktosa,"tidak suka goreng-gorengan, mie instan",train
+ibu_hamil_0374,IBU_HAMIL,P,31,,,,,24.0,66.9,147.8,Obese,2811.8,134.0,91.2,363.7,allergic to peanut dan susu,"pantangan manis, mie instan",train
+ibu_hamil_0375,IBU_HAMIL,P,39,,,,,30.0,41.1,158.9,Underweight,2373.0,122.2,69.7,314.1,susu sapi dan makanan laut,tidak ada,train
+ibu_hamil_0376,IBU_HAMIL,P,27,,,,,38.0,58.8,154.2,Normal,1889.8,89.4,55.7,257.6,tidak ada,tidak ada,train
+ibu_hamil_0377,IBU_HAMIL,P,32,,,,,28.0,61.7,155.8,Overweight,2720.0,148.4,83.6,343.6,,hindari manis,train
+ibu_hamil_0378,IBU_HAMIL,P,8,,,,,39.0,67.1,155.3,Overweight,2353.0,114.3,74.6,306.0,Alergi: fish,tidak suka santan,train
+ibu_hamil_0379,IBU_HAMIL,P,27,,,,,30.0,42.9,151.1,Normal,2377.9,122.2,70.1,314.5,tidak ada,"pantangan pedas, spicy",train
+ibu_hamil_0380,IBU_HAMIL,P,16,,,,,38.0,46.1,143.4,Normal,2135.2,108.2,62.1,285.7,alergi susu sapi,tidak ada,train
+ibu_hamil_0381,IBU_HAMIL,P,23,,,,,20.0,60.3,150.2,Overweight,2742.8,149.5,87.1,340.3,none,goreng-gorengan,train
+ibu_hamil_0382,IBU_HAMIL,P,15,,,,,32.0,47.1,157.7,Normal,2451.5,116.3,71.5,335.7,tidak ada,,train
+ibu_hamil_0383,IBU_HAMIL,P,19,,,,,25.0,89.3,157.5,Obese,2614.7,136.9,74.1,350.1,none,no allergies,train
+ibu_hamil_0384,IBU_HAMIL,P,7,,,,,38.0,65.9,149.3,Overweight,2325.7,114.0,67.0,316.7,none,hindari spicy,train
+ibu_hamil_0385,IBU_HAMIL,P,29,,,,,33.0,60.8,149.8,Overweight,1930.7,91.7,59.9,256.3,kepiting & udnag,,train
+ibu_hamil_0386,IBU_HAMIL,P,38,,,,,27.0,48.1,148.2,Normal,1815.1,86.5,57.9,237.1,alergi ebi,"tidak suka manis, daging merah",train
+ibu_hamil_0387,IBU_HAMIL,P,5,,,,,19.0,53.5,155.2,Normal,2534.1,122.8,83.8,322.2,"egg, squid",none,train
+ibu_hamil_0388,IBU_HAMIL,P,15,,,,,32.0,69.6,160.8,Overweight,2575.8,123.9,74.3,353.0,Alergi: eggs,-,train
+ibu_hamil_0389,IBU_HAMIL,P,5,,,,,37.0,60.9,155.4,Overweight,2274.9,114.6,63.5,311.3,Alergi: udang,pantangan spicy,train
+ibu_hamil_0390,IBU_HAMIL,P,10,,,,,36.0,72.7,162.8,Overweight,2478.3,119.0,78.1,324.8,"alergi kepiting, suus","gorengan, spicy",train
+ibu_hamil_0391,IBU_HAMIL,P,21,,,,,27.0,59.7,141.8,Overweight,1934.6,95.4,64.5,243.2,Alergi: susu; soy,,test
+ibu_hamil_0392,IBU_HAMIL,P,31,,,,,21.0,53.0,147.5,Normal,2137.2,96.4,60.5,301.7,no allergies,-,train
+ibu_hamil_0393,IBU_HAMIL,P,25,,,,,27.0,66.0,150.3,Overweight,2529.3,130.2,71.8,340.5,cumi,,train
+ibu_hamil_0394,IBU_HAMIL,P,6,,,,,39.0,63.9,138.5,Obese,2491.7,113.0,81.4,326.8,alergi kepiting; makanan laut,"pantangan pedas, spicy",train
+ibu_hamil_0395,IBU_HAMIL,P,27,,,,,33.0,82.5,153.6,Obese,2739.5,139.8,78.1,369.3,Alergi: milk,tidak suka spicy,train
+ibu_hamil_0396,IBU_HAMIL,P,35,,,,,31.0,65.6,162.1,Normal,2025.3,92.7,60.6,277.3,no allergies,hindari jeroan,test
+ibu_hamil_0397,IBU_HAMIL,P,30,,,,,27.0,49.4,155.5,Normal,2072.5,94.3,61.4,285.8,allergic to suus,,test
+ibu_hamil_0398,IBU_HAMIL,P,23,,,,,37.0,60.0,156.2,Normal,1913.4,94.3,59.5,250.1,-,-,train
+ibu_hamil_0399,IBU_HAMIL,P,16,,,,,22.0,54.1,155.7,Normal,1929.6,104.7,57.3,248.9,tidak ada,hindari manis,train
+ibu_hamil_0400,IBU_HAMIL,P,25,,,,,36.0,44.9,154.1,Normal,1741.4,93.6,57.7,212.0,no allergies,none,train
+ibu_hamil_0401,IBU_HAMIL,P,26,,,,,22.0,64.1,152.6,Overweight,2037.0,99.7,57.6,279.9,none,none,train
+ibu_hamil_0402,IBU_HAMIL,P,18,,,,,20.0,66.9,159.6,Overweight,2619.9,129.6,81.8,341.4,no allergies,"spicy, makanan manis",train
+ibu_hamil_0403,IBU_HAMIL,P,30,,,,,35.0,55.5,157.7,Normal,1876.4,85.8,55.8,257.8,no allergies,"gorengan, daging merah",train
+ibu_hamil_0404,IBU_HAMIL,P,36,,,,,38.0,77.4,163.5,Overweight,2390.7,115.9,67.8,329.3,alergi terigu; ikan,-,train
+ibu_hamil_0405,IBU_HAMIL,P,25,,,,,20.0,62.4,152.1,Overweight,2531.4,123.3,74.6,341.8,allergic to kedele,no allergies,train
+ibu_hamil_0406,IBU_HAMIL,P,18,,,,,21.0,56.8,150.3,Overweight,1953.7,105.7,62.3,242.7,no allergies,,train
+ibu_hamil_0407,IBU_HAMIL,P,19,,,,,32.0,62.5,153.3,Overweight,2692.1,133.9,77.6,364.5,no allergies,"pantangan daging merah, mie instan",train
+ibu_hamil_0408,IBU_HAMIL,P,39,,,,,25.0,57.9,150.1,Overweight,2423.4,116.8,75.0,320.2,none,"santan, makanan manis",train
+ibu_hamil_0409,IBU_HAMIL,P,8,,,,,41.0,61.5,164.0,Normal,2042.8,98.4,60.3,276.6,Alergi: nuts,no allergies,train
+ibu_hamil_0410,IBU_HAMIL,P,28,,,,,40.0,52.0,153.3,Normal,1798.6,85.9,58.7,231.6,Alergi: kacng & wheat,hindari spicy,test
+ibu_hamil_0411,IBU_HAMIL,P,20,,,,,34.0,72.3,154.4,Obese,2840.7,138.6,92.3,363.8,"alergi seafood, dairy",tidak ada,train
+ibu_hamil_0412,IBU_HAMIL,P,9,,,,,39.0,59.9,161.6,Normal,2029.2,95.4,65.1,265.4,cumi-cumi & kedelai,hindari jeroan,train
+ibu_hamil_0413,IBU_HAMIL,P,8,,,,,35.0,61.3,170.5,Normal,1851.7,90.7,56.9,244.2,-,"hindari manis, jeroan",train
+ibu_hamil_0414,IBU_HAMIL,P,21,,,,,24.0,63.6,149.1,Overweight,2511.5,132.2,82.2,310.8,Alergi: ebi; kacng,-,train
+ibu_hamil_0415,IBU_HAMIL,P,7,,,,,27.0,56.3,153.4,Normal,2037.9,99.9,62.9,267.9,allergic to ikan; kepiting,pantangan manis,train
+ibu_hamil_0416,IBU_HAMIL,P,18,,,,,26.0,53.9,154.2,Normal,2368.4,123.8,69.6,311.8,Alergi: ikan; dairy,daging merah,train
+ibu_hamil_0417,IBU_HAMIL,P,19,,,,,39.0,63.0,154.5,Overweight,2648.1,137.9,86.3,329.9,-,"spicy, manis",train
+ibu_hamil_0418,IBU_HAMIL,P,28,,,,,29.0,57.3,156.1,Normal,1927.9,101.3,54.1,258.8,alergi ikn dan peanut,pantangan daging merah,train
+ibu_hamil_0419,IBU_HAMIL,P,7,,,,,36.0,65.9,156.9,Overweight,2361.7,116.0,67.4,322.8,-,hindari makanan manis,train
+ibu_hamil_0420,IBU_HAMIL,P,16,,,,,40.0,73.8,153.5,Obese,2048.9,105.6,63.6,263.5,no allergies,-,train
+ibu_hamil_0421,IBU_HAMIL,P,32,,,,,37.0,79.2,161.9,Obese,2954.4,150.2,84.3,398.8,Alergi: gandum,makanan manis,train
+ibu_hamil_0422,IBU_HAMIL,P,26,,,,,41.0,69.2,154.1,Overweight,2486.1,124.9,79.7,317.3,allergic to ikan,-,train
+ibu_hamil_0423,IBU_HAMIL,P,35,,,,,35.0,56.9,156.1,Normal,2352.5,120.3,71.9,306.1,alergi milk,none,test
+ibu_hamil_0424,IBU_HAMIL,P,32,,,,,28.0,43.5,151.9,Normal,1764.9,90.6,55.7,225.3,,none,train
+ibu_hamil_0425,IBU_HAMIL,P,13,,,,,41.0,52.5,151.0,Normal,2327.2,107.1,68.4,320.7,no allergies,tidak ada,test
+ibu_hamil_0426,IBU_HAMIL,P,34,,,,,29.0,63.9,151.3,Overweight,2732.7,123.3,88.0,361.9,tidak ada,pantangan pedas,train
+ibu_hamil_0427,IBU_HAMIL,P,12,,,,,23.0,60.3,154.9,Overweight,2612.8,131.5,81.5,338.4,Alergi: kedelai,"tidak suka gorengan, makanan manis",train
+ibu_hamil_0428,IBU_HAMIL,P,34,,,,,26.0,66.6,162.0,Overweight,2836.0,136.6,83.5,384.4,udang,"tidak suka jeroan, goreng-gorengan",train
+ibu_hamil_0429,IBU_HAMIL,P,34,,,,,40.0,68.8,162.9,Overweight,2012.3,104.1,61.6,260.3,"Alergi: gluten, egg",,train
+ibu_hamil_0430,IBU_HAMIL,P,35,,,,,36.0,50.9,162.9,Normal,2052.9,96.8,64.6,271.1,-,-,train
+ibu_hamil_0431,IBU_HAMIL,P,15,,,,,38.0,55.2,157.7,Normal,2083.5,100.0,61.3,282.9,cumi-cumi,"pantangan kopi, goreng-gorengan",train
+ibu_hamil_0432,IBU_HAMIL,P,26,,,,,24.0,80.3,155.3,Obese,2497.8,118.0,82.0,321.9,peanut,-,test
+ibu_hamil_0433,IBU_HAMIL,P,32,,,,,33.0,77.4,148.0,Obese,2648.4,138.5,87.1,327.6,,pantangan mie instan,test
+ibu_hamil_0434,IBU_HAMIL,P,40,,,,,20.0,68.3,165.3,Overweight,2124.9,113.3,67.6,265.8,none,none,train
+ibu_hamil_0435,IBU_HAMIL,P,21,,,,,37.0,67.4,159.7,Overweight,2006.2,106.1,58.5,263.8,no allergies,,train
+ibu_hamil_0436,IBU_HAMIL,P,24,,,,,42.0,41.6,149.9,Normal,2058.2,100.8,67.4,262.0,no allergies,"pantangan jeroan, makanan manis",train
+ibu_hamil_0437,IBU_HAMIL,P,37,,,,,21.0,60.4,154.0,Overweight,2003.2,106.5,61.0,257.0,Alergi: gandum dan crab,none,train
+ibu_hamil_0438,IBU_HAMIL,P,28,,,,,21.0,71.5,155.7,Overweight,2401.3,130.8,73.0,305.4,Alergi: makanan laut,"gorengan, jeroan",train
+ibu_hamil_0439,IBU_HAMIL,P,24,,,,,33.0,49.6,145.0,Normal,1792.5,86.9,58.3,229.9,,no allergies,train
+ibu_hamil_0440,IBU_HAMIL,P,6,,,,,28.0,58.7,166.2,Normal,1851.2,83.4,58.4,248.1,no allergies,pantangan kopi,train
+ibu_hamil_0441,IBU_HAMIL,P,20,,,,,38.0,88.7,166.6,Obese,2833.1,142.0,91.2,361.0,terigu,hindari santan,train
+ibu_hamil_0442,IBU_HAMIL,P,27,,,,,39.0,53.1,156.0,Normal,2267.1,107.9,65.3,312.1,alergi fish; eggs,"tidak suka goreng-gorengan, kopi",train
+ibu_hamil_0443,IBU_HAMIL,P,14,,,,,24.0,38.8,155.6,Underweight,2162.2,117.5,62.4,282.7,kedele dan ebi,pantangan spicy,train
+ibu_hamil_0444,IBU_HAMIL,P,16,,,,,28.0,53.4,156.4,Normal,2584.2,127.2,77.4,344.8,Alergi: crab; milk,-,train
+ibu_hamil_0445,IBU_HAMIL,P,18,,,,,37.0,65.9,153.9,Overweight,2709.7,123.4,78.6,377.2,none,hindari manis,train
+ibu_hamil_0446,IBU_HAMIL,P,20,,,,,25.0,59.0,165.0,Normal,1989.1,91.5,64.0,261.7,allergic to fish; kacang tanah,hindari goreng-gorengan,train
+ibu_hamil_0447,IBU_HAMIL,P,8,,,,,24.0,70.3,157.6,Overweight,2515.1,123.9,78.4,328.6,tidak ada,none,test
+ibu_hamil_0448,IBU_HAMIL,P,4,,,,,24.0,64.6,159.6,Overweight,2437.3,111.5,74.2,330.9,allergic to fish & udnag,tidak ada,train
+ibu_hamil_0449,IBU_HAMIL,P,8,,,,,31.0,89.3,157.9,Obese,2168.1,109.3,66.0,284.3,"Alergi: squid, makanan laut","tidak suka pedas, goreng-gorengan",train
+ibu_hamil_0450,IBU_HAMIL,P,17,,,,,29.0,61.3,150.4,Overweight,2203.3,118.5,66.4,282.9,tidak ada,-,train
+ibu_hamil_0451,IBU_HAMIL,P,32,,,,,39.0,48.6,151.7,Normal,1762.3,86.2,57.8,224.4,tidak ada,pantangan santan,train
+ibu_hamil_0452,IBU_HAMIL,P,18,,,,,33.0,45.0,155.3,Normal,1975.3,91.8,60.6,265.7,kacang; cumi-cumi,tidak suka spicy,train
+ibu_hamil_0453,IBU_HAMIL,P,14,,,,,42.0,68.1,153.2,Overweight,2703.1,130.5,80.9,363.2,,"pantangan manis, goreng-gorengan",train
+ibu_hamil_0454,IBU_HAMIL,P,7,,,,,26.0,60.4,164.1,Normal,2621.0,131.8,74.5,355.8,-,tidak ada,train
+ibu_hamil_0455,IBU_HAMIL,P,13,,,,,21.0,58.9,147.6,Overweight,2095.4,104.3,67.6,267.6,wheat,tidak ada,train
+ibu_hamil_0456,IBU_HAMIL,P,19,,,,,36.0,66.7,157.6,Overweight,1999.1,98.1,61.8,262.6,tidak ada,"tidak suka mie instan, manis",train
+ibu_hamil_0457,IBU_HAMIL,P,11,,,,,36.0,71.7,162.1,Overweight,1946.4,89.3,57.2,268.7,"Alergi: gandum, kacang",hindari gorengan,train
+ibu_hamil_0458,IBU_HAMIL,P,22,,,,,38.0,51.4,145.1,Normal,2218.5,110.5,69.2,288.5,tidak ada,"hindari gorengan, manis",train
+ibu_hamil_0459,IBU_HAMIL,P,31,,,,,32.0,60.4,155.5,Normal,1944.6,90.1,62.7,254.9,gandum,"hindari spicy, daging merah",train
+ibu_hamil_0460,IBU_HAMIL,P,40,,,,,35.0,62.0,155.7,Overweight,1946.4,101.6,62.8,243.6,none,no allergies,train
+ibu_hamil_0461,IBU_HAMIL,P,21,,,,,40.0,51.1,153.5,Normal,2439.7,127.3,71.1,322.5,-,no allergies,train
+ibu_hamil_0462,IBU_HAMIL,P,28,,,,,22.0,68.6,157.7,Overweight,2887.9,147.4,86.9,379.1,"alergi shrimp, egg","tidak suka daging merah, santan",train
+ibu_hamil_0463,IBU_HAMIL,P,20,,,,,31.0,53.3,138.8,Overweight,1831.5,93.3,60.7,228.0,telor,-,train
+ibu_hamil_0464,IBU_HAMIL,P,10,,,,,38.0,38.8,155.8,Underweight,1743.5,83.6,54.5,229.7,sea food dan telurr,-,train
+ibu_hamil_0465,IBU_HAMIL,P,29,,,,,39.0,48.3,151.6,Normal,2183.5,118.5,61.1,289.8,Alergi: udang,"pedas, mie instan",train
+ibu_hamil_0466,IBU_HAMIL,P,5,,,,,21.0,61.0,154.9,Overweight,2141.4,115.9,62.8,278.1,cumi; tahu tempe,no allergies,train
+ibu_hamil_0467,IBU_HAMIL,P,24,,,,,24.0,39.8,157.7,Underweight,2396.3,115.0,67.9,331.3,no allergies,tidak suka kopi,train
+ibu_hamil_0468,IBU_HAMIL,P,27,,,,,27.0,73.4,158.5,Overweight,2928.8,156.9,92.6,366.9,,-,train
+ibu_hamil_0469,IBU_HAMIL,P,40,,,,,35.0,51.5,150.8,Normal,2037.0,97.6,58.0,281.0,Alergi: telurr & ebi,pantangan spicy,train
+ibu_hamil_0470,IBU_HAMIL,P,20,,,,,33.0,50.0,153.1,Normal,2035.1,103.2,56.9,277.6,dairy,tidak suka mie instan,train
+ibu_hamil_0471,IBU_HAMIL,P,33,,,,,27.0,59.7,153.7,Overweight,2445.2,110.8,76.9,327.6,,"kopi, pedas",test
+ibu_hamil_0472,IBU_HAMIL,P,28,,,,,27.0,66.5,151.7,Overweight,2793.7,134.7,90.2,360.9,alergi crab dan dairy,"mie instan, gorengan",train
+ibu_hamil_0473,IBU_HAMIL,P,31,,,,,21.0,76.6,160.3,Overweight,2480.4,132.2,81.0,305.6,tidak ada,none,train
+ibu_hamil_0474,IBU_HAMIL,P,6,,,,,39.0,71.9,157.8,Overweight,2431.0,132.3,75.2,306.3,none,none,test
+ibu_hamil_0475,IBU_HAMIL,P,15,,,,,34.0,48.3,171.0,Underweight,2498.1,118.3,83.0,319.6,none,tidak suka kopi,train
+ibu_hamil_0476,IBU_HAMIL,P,29,,,,,39.0,45.4,152.7,Normal,1935.7,92.5,64.0,247.3,Alergi: ikan,-,train
+ibu_hamil_0477,IBU_HAMIL,P,7,,,,,39.0,64.8,150.2,Overweight,1823.8,92.2,59.2,230.6,-,tidak suka spicy,train
+ibu_hamil_0478,IBU_HAMIL,P,31,,,,,34.0,50.1,156.4,Normal,1817.4,86.2,58.7,236.1,"allergic to kepiting, telor",gorengan,train
+ibu_hamil_0479,IBU_HAMIL,P,28,,,,,20.0,59.7,159.5,Normal,2513.0,113.8,70.2,356.4,none,pantangan gorengan,test
+ibu_hamil_0480,IBU_HAMIL,P,23,,,,,22.0,67.5,163.1,Overweight,2624.6,126.1,83.7,341.7,"alergi crab, telur",pantangan santan,train
+ibu_hamil_0481,IBU_HAMIL,P,37,,,,,35.0,61.4,153.1,Overweight,2649.1,121.4,82.8,354.5,tidak ada,pantangan spicy,train
+ibu_hamil_0482,IBU_HAMIL,P,30,,,,,29.0,57.1,150.3,Overweight,2147.3,104.8,61.1,294.5,no allergies,jeroan,train
+ibu_hamil_0483,IBU_HAMIL,P,5,,,,,29.0,49.6,154.5,Normal,1939.2,105.7,54.5,256.4,,,test
+ibu_hamil_0484,IBU_HAMIL,P,32,,,,,34.0,61.4,152.2,Overweight,2654.7,145.0,82.4,333.2,"kepiting, kacang tanah",tidak ada,test
+ibu_hamil_0485,IBU_HAMIL,P,21,,,,,33.0,52.7,158.7,Normal,2540.1,130.2,83.2,317.8,allergic to terigu,tidak ada,train
+ibu_hamil_0486,IBU_HAMIL,P,37,,,,,34.0,51.3,153.0,Normal,2490.9,121.8,76.7,328.4,tidak ada,-,test
+ibu_hamil_0487,IBU_HAMIL,P,28,,,,,19.0,53.3,172.2,Underweight,2706.0,142.6,85.0,342.7,no allergies,hindari santan,train
+ibu_hamil_0488,IBU_HAMIL,P,14,,,,,28.0,50.5,138.6,Overweight,1816.0,99.2,57.7,225.1,alergi terigu,tidak ada,test
+ibu_hamil_0489,IBU_HAMIL,P,34,,,,,21.0,68.6,157.5,Overweight,2105.5,104.1,69.5,265.8,,"pantangan daging merah, spicy",train
+ibu_hamil_0490,IBU_HAMIL,P,32,,,,,28.0,60.2,153.8,Overweight,1961.4,91.0,55.5,274.5,alergi udnag,tidak ada,train
+ibu_hamil_0491,IBU_HAMIL,P,21,,,,,42.0,83.1,160.4,Obese,2702.0,125.0,84.8,359.8,tidak ada,"pantangan makanan manis, kopi",train
+ibu_hamil_0492,IBU_HAMIL,P,19,,,,,40.0,59.6,150.2,Overweight,1879.1,96.2,61.8,234.6,none,none,train
+ibu_hamil_0493,IBU_HAMIL,P,34,,,,,39.0,43.0,149.0,Normal,2299.7,110.6,69.2,308.7,no allergies,-,train
+ibu_hamil_0494,IBU_HAMIL,P,14,,,,,24.0,47.8,153.9,Normal,1841.8,94.4,58.3,234.8,,"tidak suka manis, gorengan",train
+ibu_hamil_0495,IBU_HAMIL,P,24,,,,,21.0,62.3,157.7,Overweight,2792.4,150.7,87.4,350.8,no allergies,tidak ada,train
+ibu_hamil_0496,IBU_HAMIL,P,38,,,,,24.0,48.3,144.3,Normal,2493.5,121.6,74.6,334.0,ikn,no allergies,train
+ibu_hamil_0497,IBU_HAMIL,P,17,,,,,23.0,74.2,170.4,Overweight,2737.0,150.5,80.9,351.8,allergic to soy,-,train
+ibu_hamil_0498,IBU_HAMIL,P,30,,,,,31.0,88.9,163.6,Obese,3169.1,152.2,94.8,426.9,none,pantangan jeroan,train
+ibu_hamil_0499,IBU_HAMIL,P,18,,,,,41.0,72.7,163.9,Overweight,2054.2,102.3,59.2,278.0,alergi seafood & cumi-cumi,pantangan jeroan,train
+ibu_hamil_0500,IBU_HAMIL,P,30,,,,,29.0,38.7,155.6,Underweight,2125.4,97.0,67.7,281.9,alergi crab dan shrimp,no allergies,test
+ibu_hamil_0501,IBU_HAMIL,P,11,,,,,36.0,85.7,155.2,Obese,2092.6,111.9,61.8,272.2,kedelai dan udnag,"pantangan daging merah, jeroan",test
+ibu_hamil_0502,IBU_HAMIL,P,11,,,,,28.0,52.0,151.4,Normal,2425.5,123.4,68.9,327.9,,-,train
+ibu_hamil_0503,IBU_HAMIL,P,36,,,,,34.0,72.4,161.8,Overweight,2866.5,136.9,92.1,372.6,,tidak ada,train
+ibu_hamil_0504,IBU_HAMIL,P,29,,,,,34.0,60.5,155.0,Overweight,2410.7,126.3,78.4,299.9,"allergic to cumi-cumi, dairy",tidak suka makanan manis,train
+ibu_hamil_0505,IBU_HAMIL,P,23,,,,,29.0,80.0,170.6,Overweight,2220.3,113.3,65.3,294.8,alergi fish,"pantangan spicy, jeroan",train
+ibu_hamil_0506,IBU_HAMIL,P,30,,,,,31.0,52.5,158.7,Normal,2095.5,112.7,60.1,276.0,Alergi: crab,no allergies,train
+ibu_hamil_0507,IBU_HAMIL,P,31,,,,,30.0,45.0,152.7,Normal,2418.3,127.3,68.7,322.6,tidak ada,-,train
+ibu_hamil_0508,IBU_HAMIL,P,25,,,,,34.0,52.5,154.1,Normal,1840.0,98.8,54.5,238.6,allergic to ikn,tidak suka kopi,test
+ibu_hamil_0509,IBU_HAMIL,P,13,,,,,35.0,48.6,166.8,Underweight,2361.0,124.4,77.2,292.1,alergi egg,"daging merah, manis",train
+ibu_hamil_0510,IBU_HAMIL,P,40,,,,,42.0,57.3,159.8,Normal,2090.1,95.7,58.9,294.3,Alergi: cumi-cumi; telor,"pantangan spicy, gorengan",train
+ibu_hamil_0511,IBU_HAMIL,P,34,,,,,25.0,59.8,147.7,Overweight,2686.8,126.1,81.9,361.3,Alergi: kepiting dan gluten,pantangan mie instan,train
+ibu_hamil_0512,IBU_HAMIL,P,9,,,,,39.0,59.7,158.2,Normal,2484.6,129.5,73.8,325.5,kacng & wheat,no allergies,test
+ibu_hamil_0513,IBU_HAMIL,P,23,,,,,41.0,56.3,159.8,Normal,2311.6,115.1,71.9,301.1,tidak ada,tidak suka spicy,train
+ibu_hamil_0514,IBU_HAMIL,P,12,,,,,20.0,49.2,142.5,Normal,1735.2,91.2,52.2,225.2,ebi & makanan laut,tidak suka mie instan,train
+ibu_hamil_0515,IBU_HAMIL,P,24,,,,,34.0,67.6,151.0,Overweight,2254.8,106.0,66.1,308.8,sea food; kedele,none,train
+ibu_hamil_0516,IBU_HAMIL,P,4,,,,,21.0,62.3,159.5,Normal,1917.5,104.4,59.9,240.3,fish dan egg,,test
+ibu_hamil_0517,IBU_HAMIL,P,32,,,,,40.0,45.6,156.9,Normal,2360.3,109.4,71.3,320.3,,no allergies,test
+ibu_hamil_0518,IBU_HAMIL,P,20,,,,,20.0,70.3,156.7,Overweight,2128.6,98.4,61.4,295.6,tidak ada,none,test
+ibu_hamil_0519,IBU_HAMIL,P,18,,,,,22.0,56.9,167.7,Normal,1988.3,108.4,62.6,247.9,tidak ada,,train
+ibu_hamil_0520,IBU_HAMIL,P,4,,,,,32.0,58.5,159.7,Normal,1812.5,88.9,54.9,240.6,,-,train
+ibu_hamil_0521,IBU_HAMIL,P,5,,,,,29.0,57.3,160.2,Normal,2054.7,106.9,65.0,260.4,tidak ada,-,train
+ibu_hamil_0522,IBU_HAMIL,P,31,,,,,35.0,66.3,160.7,Overweight,2256.5,114.7,68.4,295.5,no allergies,tidak ada,train
+ibu_hamil_0523,IBU_HAMIL,P,8,,,,,35.0,52.8,150.1,Normal,2377.3,113.9,66.2,331.4,Alergi: squid; wheat,hindari gorengan,train
+ibu_hamil_0524,IBU_HAMIL,P,11,,,,,41.0,71.4,151.3,Obese,2141.0,112.1,64.1,278.9,allergic to ebi; terigu,pantangan mie instan,train
+ibu_hamil_0525,IBU_HAMIL,P,18,,,,,20.0,50.7,158.0,Normal,2141.1,98.2,63.1,295.0,,-,train
+ibu_hamil_0526,IBU_HAMIL,P,35,,,,,37.0,62.2,151.0,Overweight,2639.7,119.6,74.3,373.1,terigu,"hindari daging merah, jeroan",test
+ibu_hamil_0527,IBU_HAMIL,P,16,,,,,26.0,58.4,150.2,Overweight,2663.6,131.0,78.2,358.9,no allergies,none,train
+ibu_hamil_0528,IBU_HAMIL,P,13,,,,,39.0,67.2,155.4,Overweight,2109.0,107.6,66.4,270.1,"allergic to cumi, kedelai",no allergies,train
+ibu_hamil_0529,IBU_HAMIL,P,21,,,,,26.0,94.8,166.0,Obese,3008.4,144.5,100.2,382.1,"allergic to cumi-cumi, milk",pantangan pedas,train
+ibu_hamil_0530,IBU_HAMIL,P,24,,,,,41.0,61.2,153.2,Overweight,2364.2,128.2,75.5,293.0,none,goreng-gorengan,train
+ibu_hamil_0531,IBU_HAMIL,P,39,,,,,26.0,76.1,152.8,Obese,2963.4,153.2,90.6,383.7,none,pantangan spicy,train
+ibu_hamil_0532,IBU_HAMIL,P,16,,,,,27.0,57.3,149.0,Overweight,1922.9,92.6,60.0,253.2,none,tidak ada,train
+ibu_hamil_0533,IBU_HAMIL,P,23,,,,,42.0,90.5,169.0,Obese,2551.1,132.3,73.7,339.6,-,"hindari kopi, spicy",train
+ibu_hamil_0534,IBU_HAMIL,P,9,,,,,23.0,64.5,149.1,Overweight,1908.1,91.1,55.4,261.1,none,"mie instan, jeroan",test
+ibu_hamil_0535,IBU_HAMIL,P,19,,,,,32.0,70.4,154.0,Overweight,2568.9,131.4,79.9,331.2,allergic to crab,tidak ada,train
+ibu_hamil_0536,IBU_HAMIL,P,38,,,,,30.0,61.2,156.3,Overweight,1966.8,91.1,57.1,272.1,none,"hindari jeroan, mie instan",train
+ibu_hamil_0537,IBU_HAMIL,P,13,,,,,24.0,57.8,152.0,Overweight,1832.6,94.4,54.4,241.2,none,pantangan kopi,train
+ibu_hamil_0538,IBU_HAMIL,P,28,,,,,24.0,77.5,152.4,Obese,2727.8,140.7,82.0,356.8,Alergi: crab; egg,tidak ada,train
+ibu_hamil_0539,IBU_HAMIL,P,9,,,,,36.0,66.7,155.4,Overweight,2121.6,115.8,66.9,264.1,alergi eggs,tidak suka daging merah,train
+ibu_hamil_0540,IBU_HAMIL,P,23,,,,,23.0,48.3,164.4,Underweight,2105.6,105.4,69.2,265.2,no allergies,hindari goreng-gorengan,train
+ibu_hamil_0541,IBU_HAMIL,P,13,,,,,32.0,59.6,154.1,Overweight,1812.5,90.9,60.2,226.7,,"pedas, daging merah",train
+ibu_hamil_0542,IBU_HAMIL,P,6,,,,,25.0,55.5,159.5,Normal,2055.0,112.8,67.8,248.3,Alergi: nuts,,test
+ibu_hamil_0543,IBU_HAMIL,P,35,,,,,33.0,47.7,157.2,Normal,1797.4,92.4,59.7,222.5,,no allergies,train
+ibu_hamil_0544,IBU_HAMIL,P,15,,,,,37.0,58.5,158.0,Normal,2367.9,127.6,76.1,293.2,Alergi: udnag,gorengan,test
+ibu_hamil_0545,IBU_HAMIL,P,14,,,,,20.0,66.7,158.5,Overweight,2612.9,138.2,74.5,347.4,tidak ada,no allergies,train
+ibu_hamil_0546,IBU_HAMIL,P,21,,,,,25.0,51.5,156.5,Normal,1883.7,90.5,58.8,248.1,-,,train
+ibu_hamil_0547,IBU_HAMIL,P,30,,,,,27.0,67.0,156.5,Overweight,2050.6,101.7,64.7,265.4,Alergi: soy dan squid,tidak ada,train
+ibu_hamil_0548,IBU_HAMIL,P,13,,,,,41.0,64.4,161.1,Normal,1832.7,95.8,59.1,229.4,allergic to cumi-cumi,pantangan jeroan,train
+ibu_hamil_0549,IBU_HAMIL,P,13,,,,,30.0,38.9,148.3,Underweight,1979.5,96.1,57.1,270.4,,none,train
+ibu_hamil_0550,IBU_HAMIL,P,19,,,,,32.0,63.2,154.7,Overweight,2463.3,120.7,77.0,321.8,no allergies,"pantangan santan, daging merah",test
+ibu_hamil_0551,IBU_HAMIL,P,39,,,,,36.0,56.8,144.6,Overweight,1857.4,85.9,61.0,241.2,allergic to cumi; fish,,train
+ibu_hamil_0552,IBU_HAMIL,P,11,,,,,30.0,53.7,158.2,Normal,1765.5,80.4,53.8,239.8,alergi dairy; gandum,"pantangan manis, makanan manis",train
+ibu_hamil_0553,IBU_HAMIL,P,5,,,,,40.0,76.3,156.7,Obese,2486.1,114.0,73.3,342.6,none,"hindari manis, spicy",train
+ibu_hamil_0554,IBU_HAMIL,P,30,,,,,33.0,59.3,164.7,Normal,2186.6,108.6,63.0,296.4,tidak ada,,train
+ibu_hamil_0555,IBU_HAMIL,P,40,,,,,42.0,73.5,156.0,Obese,2547.4,132.4,74.2,337.6,Alergi: telor,"pantangan makanan manis, santan",train
+ibu_hamil_0556,IBU_HAMIL,P,24,,,,,41.0,76.2,161.9,Overweight,2350.5,129.1,77.7,283.7,allergic to kepiting,tidak suka daging merah,train
+ibu_hamil_0557,IBU_HAMIL,P,22,,,,,42.0,63.0,160.3,Normal,2642.5,120.8,80.7,358.3,no allergies,-,train
+ibu_hamil_0558,IBU_HAMIL,P,16,,,,,33.0,74.6,166.0,Overweight,2923.5,145.1,95.3,371.5,tidak ada,-,test
+ibu_hamil_0559,IBU_HAMIL,P,32,,,,,24.0,45.5,158.3,Underweight,2270.2,109.6,72.0,295.9,no allergies,"pantangan manis, mie instan",train
+ibu_hamil_0560,IBU_HAMIL,P,34,,,,,42.0,41.0,160.1,Underweight,1877.0,88.9,60.2,244.8,-,tidak ada,test
+ibu_hamil_0561,IBU_HAMIL,P,6,,,,,28.0,80.8,170.5,Overweight,2961.0,137.3,85.8,410.0,Alergi: tahu tempe & cumi-cumi,none,train
+ibu_hamil_0562,IBU_HAMIL,P,15,,,,,21.0,59.2,154.6,Normal,2237.1,104.8,68.5,300.3,tidak ada,tidak ada,train
+ibu_hamil_0563,IBU_HAMIL,P,28,,,,,28.0,78.6,163.2,Overweight,2192.9,114.3,61.1,296.4,-,tidak ada,train
+ibu_hamil_0564,IBU_HAMIL,P,19,,,,,32.0,43.7,161.4,Underweight,1766.8,90.3,54.3,229.2,alergi sea food & telur,no allergies,train
+ibu_hamil_0565,IBU_HAMIL,P,27,,,,,35.0,57.2,145.8,Overweight,2098.3,109.8,66.5,265.3,,tidak suka daging merah,train
+ibu_hamil_0566,IBU_HAMIL,P,36,,,,,26.0,38.3,154.7,Underweight,2346.1,115.0,75.4,301.8,tidak ada,-,train
+ibu_hamil_0567,IBU_HAMIL,P,7,,,,,40.0,41.7,155.0,Underweight,1766.2,87.9,53.4,233.6,none,"jeroan, manis",train
+ibu_hamil_0568,IBU_HAMIL,P,31,,,,,36.0,54.8,144.9,Overweight,2505.4,121.9,79.4,325.8,alergi sea food,"hindari jeroan, makanan manis",train
+ibu_hamil_0569,IBU_HAMIL,P,23,,,,,38.0,68.6,152.0,Overweight,1997.6,97.1,63.6,259.2,Alergi: seafood dan cumi,,train
+ibu_hamil_0570,IBU_HAMIL,P,9,,,,,38.0,70.4,156.6,Overweight,2412.2,110.1,67.1,341.9,susu dan udnag,no allergies,train
+ibu_hamil_0571,IBU_HAMIL,P,19,,,,,37.0,65.4,146.7,Obese,2437.4,128.3,79.6,301.9,allergic to cumi-cumi,"tidak suka spicy, kopi",test
+ibu_hamil_0572,IBU_HAMIL,P,25,,,,,25.0,50.6,155.0,Normal,1870.6,101.6,53.0,246.8,-,mie instan,train
+ibu_hamil_0573,IBU_HAMIL,P,23,,,,,40.0,64.5,154.5,Overweight,2424.9,130.1,68.0,323.2,no allergies,"hindari makanan manis, kopi",train
+ibu_hamil_0574,IBU_HAMIL,P,23,,,,,42.0,71.0,160.8,Overweight,2775.6,148.5,79.2,367.1,-,none,train
+ibu_hamil_0575,IBU_HAMIL,P,4,,,,,22.0,66.0,153.9,Overweight,2456.1,132.8,72.5,318.2,sea food,no allergies,train
+ibu_hamil_0576,IBU_HAMIL,P,20,,,,,36.0,36.1,150.1,Underweight,2213.6,109.0,72.1,282.3,allergic to kacang,tidak ada,train
+ibu_hamil_0577,IBU_HAMIL,P,20,,,,,27.0,53.1,153.6,Normal,2116.0,109.5,59.8,284.9,,,train
+ibu_hamil_0578,IBU_HAMIL,P,27,,,,,21.0,66.3,160.0,Overweight,2865.1,156.9,82.6,373.4,alergi kacng,"tidak suka makanan manis, kopi",train
+ibu_hamil_0579,IBU_HAMIL,P,24,,,,,34.0,38.4,155.0,Underweight,1680.4,81.1,52.1,221.7,alergi soy; sea food,-,test
+ibu_hamil_0580,IBU_HAMIL,P,34,,,,,33.0,70.7,160.7,Overweight,2585.4,122.0,78.4,348.0,alergi cumi-cumi; terigu,tidak ada,train
+ibu_hamil_0581,IBU_HAMIL,P,21,,,,,27.0,58.4,163.1,Normal,2695.5,124.4,77.5,375.0,,hindari pedas,train
+ibu_hamil_0582,IBU_HAMIL,P,40,,,,,31.0,85.4,163.1,Obese,2539.0,133.6,78.3,325.0,,pantangan gorengan,train
+ibu_hamil_0583,IBU_HAMIL,P,27,,,,,31.0,38.0,154.0,Underweight,1892.5,92.2,53.6,260.3,Alergi: shrimp,tidak ada,test
+ibu_hamil_0584,IBU_HAMIL,P,18,,,,,24.0,48.9,150.9,Normal,2073.7,111.3,58.7,275.0,no allergies,"hindari daging merah, gorengan",train
+ibu_hamil_0585,IBU_HAMIL,P,14,,,,,22.0,62.6,170.7,Normal,2060.2,111.9,66.6,253.2,none,"pantangan mie instan, spicy",train
+ibu_hamil_0586,IBU_HAMIL,P,33,,,,,23.0,57.2,158.1,Normal,2450.4,121.6,70.2,332.9,Alergi: nuts,no allergies,train
+ibu_hamil_0587,IBU_HAMIL,P,28,,,,,39.0,45.8,160.4,Underweight,1960.7,98.5,60.4,255.7,no allergies,"pantangan mie instan, kopi",train
+ibu_hamil_0588,IBU_HAMIL,P,8,,,,,35.0,56.5,152.6,Normal,1987.2,92.3,61.0,267.3,,tidak suka santan,train
+ibu_hamil_0589,IBU_HAMIL,P,23,,,,,31.0,61.9,158.6,Normal,2462.4,128.8,73.3,321.9,no allergies,-,train
+ibu_hamil_0590,IBU_HAMIL,P,39,,,,,19.0,64.5,156.9,Overweight,2841.3,134.7,84.2,386.1,no allergies,no allergies,train
+ibu_hamil_0591,IBU_HAMIL,P,23,,,,,19.0,44.9,154.1,Normal,1836.7,91.0,60.9,231.0,none,,train
+ibu_hamil_0592,IBU_HAMIL,P,13,,,,,42.0,74.1,155.2,Obese,2689.2,143.9,80.5,347.4,-,none,train
+ibu_hamil_0593,IBU_HAMIL,P,14,,,,,32.0,48.6,160.2,Normal,2041.5,103.0,65.1,261.0,tidak ada,daging merah,train
+ibu_hamil_0594,IBU_HAMIL,P,38,,,,,40.0,69.6,146.9,Obese,2232.3,118.0,65.3,293.1,tidak ada,"pantangan santan, pedas",train
+ibu_hamil_0595,IBU_HAMIL,P,6,,,,,19.0,54.1,153.5,Normal,1821.2,97.2,57.7,228.4,none,"pantangan spicy, manis",train
+ibu_hamil_0596,IBU_HAMIL,P,9,,,,,21.0,48.1,156.8,Normal,1976.7,96.9,58.4,266.0,none,"tidak suka santan, pedas",train
+ibu_hamil_0597,IBU_HAMIL,P,23,,,,,24.0,55.3,152.5,Normal,2161.5,99.0,61.8,302.3,,"tidak suka makanan manis, daging merah",test
+ibu_hamil_0598,IBU_HAMIL,P,18,,,,,38.0,42.8,160.5,Underweight,2134.8,102.0,70.4,273.4,Alergi: gandum dan udang,-,train
+ibu_hamil_0599,IBU_HAMIL,P,31,,,,,25.0,43.2,164.4,Underweight,2466.0,119.3,74.0,330.6,-,"tidak suka makanan manis, pedas",train
+ibu_hamil_0600,IBU_HAMIL,P,27,,,,,21.0,45.5,161.7,Underweight,2526.6,135.8,74.2,328.9,allergic to milk,"pantangan manis, gorengan",test
+ibu_hamil_0601,IBU_HAMIL,P,18,,,,,24.0,75.6,168.3,Overweight,2744.0,150.4,87.0,339.8,kepiting,"pantangan manis, kopi",train
+ibu_hamil_0602,IBU_HAMIL,P,13,,,,,19.0,56.7,154.8,Normal,1854.1,94.0,55.1,245.5,none,tidak suka manis,test
+ibu_hamil_0603,IBU_HAMIL,P,27,,,,,35.0,68.4,156.7,Overweight,2775.3,141.8,86.5,357.4,,"santan, manis",train
+ibu_hamil_0604,IBU_HAMIL,P,28,,,,,31.0,52.3,143.6,Overweight,2278.4,104.1,72.6,302.1,,no allergies,train
+ibu_hamil_0605,IBU_HAMIL,P,14,,,,,39.0,66.2,154.7,Overweight,2457.5,128.3,72.7,322.5,alergi squid,santan,train
+ibu_hamil_0606,IBU_HAMIL,P,39,,,,,23.0,57.4,150.9,Overweight,2673.0,137.3,88.7,331.4,alergi cumi,tidak ada,test
+ibu_hamil_0607,IBU_HAMIL,P,23,,,,,30.0,58.4,153.2,Normal,1928.0,97.4,63.2,242.5,Alergi: ikan,mie instan,train
+ibu_hamil_0608,IBU_HAMIL,P,22,,,,,41.0,59.0,156.7,Normal,1881.0,92.4,55.2,253.7,alergi telor,hindari manis,train
+ibu_hamil_0609,IBU_HAMIL,P,29,,,,,20.0,54.0,143.8,Overweight,2147.6,97.4,69.6,282.8,none,no allergies,train
+ibu_hamil_0610,IBU_HAMIL,P,27,,,,,38.0,51.9,167.0,Normal,2287.6,120.1,68.6,297.5,Alergi: kedelai,"tidak suka kopi, santan",train
+ibu_hamil_0611,IBU_HAMIL,P,21,,,,,26.0,47.1,155.1,Normal,2493.0,122.6,80.6,319.3,allergic to ebi,"gorengan, santan",train
+ibu_hamil_0612,IBU_HAMIL,P,13,,,,,41.0,66.3,151.2,Overweight,1832.4,93.3,51.1,249.9,allergic to kacang tanah dan suus,tidak ada,train
+ibu_hamil_0613,IBU_HAMIL,P,29,,,,,39.0,55.7,154.7,Normal,2302.0,116.0,74.7,291.4,allergic to ikn,no allergies,train
+ibu_hamil_0614,IBU_HAMIL,P,35,,,,,24.0,57.6,154.6,Normal,2196.8,105.6,62.6,302.7,"Alergi: kacng, kedele","pantangan goreng-gorengan, mie instan",train
+ibu_hamil_0615,IBU_HAMIL,P,8,,,,,35.0,49.6,161.7,Normal,1919.1,105.1,62.4,234.4,none,tidak suka spicy,train
+ibu_hamil_0616,IBU_HAMIL,P,21,,,,,19.0,40.2,152.5,Underweight,1994.8,91.4,55.8,281.7,no allergies,tidak ada,train
+ibu_hamil_0617,IBU_HAMIL,P,37,,,,,28.0,47.6,149.2,Normal,2465.7,122.9,76.5,321.2,Alergi: nuts dan udang,none,train
+ibu_hamil_0618,IBU_HAMIL,P,18,,,,,34.0,40.5,157.6,Underweight,2326.1,106.2,72.9,311.4,none,hindari jeroan,train
+ibu_hamil_0619,IBU_HAMIL,P,27,,,,,38.0,69.7,165.0,Overweight,2038.7,96.0,66.2,264.7,egg,tidak ada,train
+ibu_hamil_0620,IBU_HAMIL,P,26,,,,,32.0,56.0,152.1,Normal,2118.7,100.6,64.0,284.9,-,no allergies,train
+ibu_hamil_0621,IBU_HAMIL,P,29,,,,,36.0,62.0,148.0,Overweight,2397.1,108.0,78.5,314.7,none,tidak suka gorengan,train
+ibu_hamil_0622,IBU_HAMIL,P,19,,,,,34.0,61.4,161.8,Normal,2201.3,103.3,63.0,305.3,alergi peanut,hindari mie instan,train
+ibu_hamil_0623,IBU_HAMIL,P,6,,,,,22.0,62.3,153.3,Overweight,1898.3,102.3,62.9,230.9,no allergies,,train
+ibu_hamil_0624,IBU_HAMIL,P,15,,,,,36.0,36.8,151.6,Underweight,1838.3,93.5,56.0,240.0,,"tidak suka mie instan, gorengan",train
+ibu_hamil_0625,IBU_HAMIL,P,10,,,,,30.0,62.1,152.0,Overweight,2091.4,96.3,60.2,291.1,"allergic to shrimp, kepiting",none,train
+ibu_hamil_0626,IBU_HAMIL,P,11,,,,,31.0,64.5,157.6,Overweight,2627.6,143.2,76.9,340.7,tidak ada,tidak ada,train
+ibu_hamil_0627,IBU_HAMIL,P,24,,,,,31.0,68.2,149.5,Obese,2530.7,134.0,79.0,320.9,alergi crab,-,test
+ibu_hamil_0628,IBU_HAMIL,P,33,,,,,27.0,42.5,163.0,Underweight,2433.2,121.8,72.7,323.0,-,"hindari manis, goreng-gorengan",test
+ibu_hamil_0629,IBU_HAMIL,P,30,,,,,35.0,65.5,162.4,Normal,2747.2,124.0,78.8,385.5,alergi telur; cumi-cumi,none,train
+ibu_hamil_0630,IBU_HAMIL,P,10,,,,,37.0,57.0,148.4,Overweight,1969.6,96.8,58.8,263.4,,hindari santan,train
+ibu_hamil_0631,IBU_HAMIL,P,40,,,,,35.0,56.4,161.7,Normal,2361.6,123.4,76.7,294.5,-,no allergies,train
+ibu_hamil_0632,IBU_HAMIL,P,6,,,,,42.0,44.5,145.4,Normal,1766.2,91.1,54.5,227.8,tidak ada,"manis, gorengan",test
+ibu_hamil_0633,IBU_HAMIL,P,22,,,,,35.0,60.3,154.1,Overweight,2397.5,129.3,71.0,310.3,,no allergies,train
+ibu_hamil_0634,IBU_HAMIL,P,33,,,,,28.0,42.9,155.8,Underweight,2409.1,113.4,80.1,308.6,no allergies,tidak suka spicy,train
+ibu_hamil_0635,IBU_HAMIL,P,40,,,,,26.0,80.5,155.6,Obese,2766.7,137.9,82.9,367.3,no allergies,tidak suka kopi,test
+ibu_hamil_0636,IBU_HAMIL,P,30,,,,,23.0,75.3,168.1,Overweight,3022.8,143.5,89.7,410.4,alergi telurr; crab,tidak ada,train
+ibu_hamil_0637,IBU_HAMIL,P,12,,,,,28.0,45.5,154.7,Normal,2328.7,107.9,65.8,326.3,,"pantangan santan, daging merah",test
+ibu_hamil_0638,IBU_HAMIL,P,25,,,,,30.0,76.2,158.0,Obese,2681.3,137.3,81.0,350.8,allergic to seafood,"pantangan daging merah, mie instan",train
+ibu_hamil_0639,IBU_HAMIL,P,27,,,,,28.0,48.3,145.6,Normal,2466.5,112.2,79.3,326.1,cumi,tidak ada,train
+ibu_hamil_0640,IBU_HAMIL,P,25,,,,,34.0,79.1,153.1,Obese,2680.9,137.6,85.6,339.9,tidak ada,goreng-gorengan,train
+ibu_hamil_0641,IBU_HAMIL,P,35,,,,,39.0,57.6,151.5,Overweight,1864.5,100.9,52.5,247.0,telor & kepiting,"pantangan spicy, daging merah",train
+ibu_hamil_0642,IBU_HAMIL,P,29,,,,,33.0,69.4,162.8,Overweight,2829.0,152.5,94.0,343.3,tidak ada,"gorengan, makanan manis",test
+ibu_hamil_0643,IBU_HAMIL,P,31,,,,,35.0,55.3,157.0,Normal,2331.1,113.6,76.0,298.1,allergic to ikan & crab,tidak suka mie instan,train
+ibu_hamil_0644,IBU_HAMIL,P,15,,,,,35.0,75.0,163.6,Overweight,2642.4,135.6,78.5,348.3,Alergi: kedele,"hindari santan, spicy",train
+ibu_hamil_0645,IBU_HAMIL,P,27,,,,,24.0,55.8,152.7,Normal,2406.4,118.8,80.0,302.8,allergic to cumi-cumi & fish,"pantangan pedas, jeroan",train
+ibu_hamil_0646,IBU_HAMIL,P,26,,,,,28.0,53.7,162.3,Normal,2607.6,133.4,81.8,334.6,"alergi ikan, telurr","hindari spicy, mie instan",train
+ibu_hamil_0647,IBU_HAMIL,P,9,,,,,34.0,56.0,154.5,Normal,1761.5,86.4,53.7,233.1,none,"pantangan makanan manis, gorengan",train
+ibu_hamil_0648,IBU_HAMIL,P,25,,,,,38.0,46.0,139.5,Normal,1916.1,102.1,59.8,242.3,tidak ada,"tidak suka mie instan, makanan manis",train
+ibu_hamil_0649,IBU_HAMIL,P,7,,,,,25.0,63.9,164.4,Normal,2687.2,129.1,80.8,360.9,tidak ada,tidak suka kopi,train
+ibu_hamil_0650,IBU_HAMIL,P,35,,,,,39.0,71.8,164.4,Overweight,2056.4,106.7,62.3,267.4,tidak ada,hindari santan,train
+ibu_hamil_0651,IBU_HAMIL,P,16,,,,,33.0,53.2,152.2,Normal,1849.7,91.2,61.1,233.7,"alergi wheat, seafood","pedas, mie instan",test
+ibu_hamil_0652,IBU_HAMIL,P,17,,,,,41.0,42.1,144.7,Normal,2058.1,109.4,57.4,275.9,tidak ada,pantangan kopi,train
+ibu_hamil_0653,IBU_HAMIL,P,22,,,,,24.0,75.1,167.2,Overweight,2184.1,101.7,69.0,289.0,nuts dan makanan laut,"tidak suka gorengan, daging merah",train
+ibu_hamil_0654,IBU_HAMIL,P,18,,,,,33.0,38.8,155.7,Underweight,1894.4,100.9,58.6,240.8,alergi susu,,train
+ibu_hamil_0655,IBU_HAMIL,P,28,,,,,38.0,62.6,162.2,Normal,2673.9,142.7,85.6,333.2,,tidak suka kopi,train
+ibu_hamil_0656,IBU_HAMIL,P,38,,,,,27.0,45.2,157.7,Underweight,2022.3,101.3,59.3,270.9,alergi kepiting dan telurr,no allergies,test
+ibu_hamil_0657,IBU_HAMIL,P,5,,,,,36.0,64.5,157.9,Overweight,2099.6,115.3,58.4,278.2,tidak ada,tidak ada,train
+ibu_hamil_0658,IBU_HAMIL,P,20,,,,,26.0,54.0,141.9,Overweight,2563.7,119.4,82.3,336.4,alergi eggs,"hindari daging merah, jeroan",train
+ibu_hamil_0659,IBU_HAMIL,P,28,,,,,37.0,93.2,166.9,Obese,2613.6,141.7,76.4,339.9,-,no allergies,train
+ibu_hamil_0660,IBU_HAMIL,P,35,,,,,42.0,86.8,165.4,Obese,2492.5,133.6,71.4,328.8,allergic to kedele,hindari gorengan,train
+ibu_hamil_0661,IBU_HAMIL,P,37,,,,,20.0,80.4,150.8,Obese,2795.3,141.2,82.3,372.4,alergi wheat dan cumi-cumi,"pantangan gorengan, mie instan",train
+ibu_hamil_0662,IBU_HAMIL,P,37,,,,,30.0,49.8,147.4,Normal,1817.2,92.6,56.6,234.3,-,no allergies,train
+ibu_hamil_0663,IBU_HAMIL,P,10,,,,,19.0,54.5,152.6,Normal,2543.3,115.1,83.9,331.9,"telurr, peanut",tidak suka makanan manis,train
+ibu_hamil_0664,IBU_HAMIL,P,23,,,,,24.0,60.3,159.4,Normal,2492.5,125.9,75.5,327.4,no allergies,pantangan spicy,train
+ibu_hamil_0665,IBU_HAMIL,P,17,,,,,35.0,45.8,146.9,Normal,1952.0,105.9,58.1,251.5,none,no allergies,train
+ibu_hamil_0666,IBU_HAMIL,P,6,,,,,29.0,52.5,155.2,Normal,2208.7,112.8,71.6,278.3,no allergies,hindari goreng-gorengan,train
+ibu_hamil_0667,IBU_HAMIL,P,6,,,,,42.0,52.6,154.5,Normal,1895.0,92.7,61.4,243.0,allergic to fish dan tahu tempe,no allergies,test
+ibu_hamil_0668,IBU_HAMIL,P,5,,,,,27.0,61.4,144.6,Overweight,2324.6,121.9,77.4,285.1,no allergies,"hindari gorengan, spicy",test
+ibu_hamil_0669,IBU_HAMIL,P,11,,,,,36.0,50.7,155.1,Normal,1690.3,88.3,55.3,209.8,-,pantangan spicy,test
+ibu_hamil_0670,IBU_HAMIL,P,8,,,,,41.0,60.8,149.3,Overweight,1765.1,96.9,53.8,223.3,,none,train
+ibu_hamil_0671,IBU_HAMIL,P,5,,,,,38.0,38.4,155.0,Underweight,1538.3,82.5,45.8,198.9,-,,train
+ibu_hamil_0672,IBU_HAMIL,P,22,,,,,39.0,58.3,163.6,Normal,2599.3,129.5,86.1,326.7,allergic to gandum,"pantangan manis, spicy",train
+ibu_hamil_0673,IBU_HAMIL,P,40,,,,,38.0,49.6,161.1,Normal,2237.4,112.6,65.3,299.9,allergic to seafood & eggs,pantangan pedas,test
+ibu_hamil_0674,IBU_HAMIL,P,6,,,,,27.0,88.1,155.4,Obese,2751.0,132.2,81.7,371.7,allergic to susu sapi dan nuts,"tidak suka santan, spicy",test
+ibu_hamil_0675,IBU_HAMIL,P,35,,,,,30.0,46.0,146.5,Normal,1985.9,98.8,55.3,273.2,cumi,"tidak suka pedas, santan",train
+ibu_hamil_0676,IBU_HAMIL,P,22,,,,,33.0,51.3,160.4,Normal,1846.0,91.0,54.2,248.5,,no allergies,train
+ibu_hamil_0677,IBU_HAMIL,P,33,,,,,26.0,68.4,157.1,Overweight,2591.2,131.2,80.7,335.0,no allergies,pantangan kopi,train
+ibu_hamil_0678,IBU_HAMIL,P,38,,,,,25.0,72.7,154.1,Obese,2122.2,107.0,61.7,284.6,tidak ada,,train
+ibu_hamil_0679,IBU_HAMIL,P,33,,,,,37.0,57.2,158.2,Normal,2579.2,132.3,79.0,334.7,Alergi: sea food,hindari spicy,train
+ibu_hamil_0680,IBU_HAMIL,P,20,,,,,19.0,52.0,153.4,Normal,1917.1,87.0,53.7,271.5,-,"hindari makanan manis, kopi",train
+ibu_hamil_0681,IBU_HAMIL,P,17,,,,,37.0,51.8,147.3,Normal,1800.2,90.8,57.1,230.8,alergi milk,"hindari spicy, goreng-gorengan",train
+ibu_hamil_0682,IBU_HAMIL,P,5,,,,,40.0,75.6,150.1,Obese,2199.7,118.4,64.8,285.8,allergic to cumi-cumi dan kepiting,,test
+ibu_hamil_0683,IBU_HAMIL,P,23,,,,,34.0,76.0,163.6,Overweight,2131.0,97.7,65.4,287.8,none,"hindari spicy, jeroan",train
+ibu_hamil_0684,IBU_HAMIL,P,8,,,,,25.0,79.6,158.5,Obese,2091.3,103.0,60.4,283.9,tidak ada,-,train
+ibu_hamil_0685,IBU_HAMIL,P,9,,,,,41.0,53.1,147.4,Normal,2107.7,113.9,69.7,256.2,"kacang tanah, kepiting","pantangan goreng-gorengan, gorengan",train
+ibu_hamil_0686,IBU_HAMIL,P,5,,,,,33.0,48.3,146.0,Normal,2306.3,121.1,70.3,297.4,peanut,hindari goreng-gorengan,train
+ibu_hamil_0687,IBU_HAMIL,P,8,,,,,32.0,56.8,152.6,Normal,1776.7,81.8,51.7,246.2,tidak ada,tidak suka pedas,train
+ibu_hamil_0688,IBU_HAMIL,P,18,,,,,41.0,68.8,161.2,Overweight,2749.2,139.7,79.6,368.4,,"hindari mie instan, jeroan",test
+ibu_hamil_0689,IBU_HAMIL,P,33,,,,,29.0,70.0,156.9,Overweight,2850.9,148.4,85.0,372.9,kedele,"pantangan makanan manis, mie instan",train
+ibu_hamil_0690,IBU_HAMIL,P,19,,,,,30.0,64.9,155.3,Overweight,2256.1,122.3,75.0,273.0,alergi sea food,,train
+ibu_hamil_0691,IBU_HAMIL,P,27,,,,,32.0,51.8,148.7,Normal,2277.1,112.8,73.9,290.1,no allergies,hindari goreng-gorengan,train
+ibu_hamil_0692,IBU_HAMIL,P,21,,,,,41.0,63.7,152.8,Overweight,2163.2,100.4,60.3,304.7,Alergi: milk,tidak suka manis,test
+ibu_hamil_0693,IBU_HAMIL,P,27,,,,,29.0,47.8,154.9,Normal,2037.0,109.4,66.4,250.5,,none,train
+ibu_hamil_0694,IBU_HAMIL,P,40,,,,,32.0,59.0,165.1,Normal,2431.0,122.1,80.0,305.5,no allergies,none,train
+ibu_hamil_0695,IBU_HAMIL,P,15,,,,,40.0,74.7,160.2,Overweight,2074.6,101.2,62.4,277.1,no allergies,"pantangan daging merah, jeroan",train
+ibu_hamil_0696,IBU_HAMIL,P,36,,,,,25.0,42.9,154.4,Underweight,1781.5,97.2,56.4,221.2,-,"tidak suka kopi, manis",test
+ibu_hamil_0697,IBU_HAMIL,P,36,,,,,20.0,62.3,149.8,Overweight,2775.2,137.6,83.0,369.6,-,"hindari goreng-gorengan, jeroan",test
+ibu_hamil_0698,IBU_HAMIL,P,19,,,,,29.0,39.8,157.7,Underweight,2355.9,107.1,77.6,307.2,allergic to squid,-,train
+ibu_hamil_0699,IBU_HAMIL,P,20,,,,,36.0,52.2,144.1,Overweight,2240.7,116.3,65.6,296.3,allergic to shrimp,tidak ada,train
+ibu_hamil_0700,IBU_HAMIL,P,35,,,,,36.0,50.1,157.7,Normal,2248.6,117.3,69.8,287.9,,no allergies,train

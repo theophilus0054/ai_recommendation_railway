@@ -4,29 +4,31 @@ from typing import Optional
 from fastapi import FastAPI, HTTPException, Security, Request
 from fastapi.security.api_key import APIKeyHeader
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 from contextlib import asynccontextmanager
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
 
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
-from model import load_and_preprocess_api_data, jalankan_ai_rekomendasi
+from model import load_and_preprocess_api_data, jalankan_ai_rekomendasi, get_recommender_model, NutriScaleDataError
 from prometheus_fastapi_instrumentator import Instrumentator
 
 # ==========================================================
 # GLOABAL STATE: PRE-LOAD DATASET & SCALER KE MEMORY RAM
 # ==========================================
 # Load .env (Local fallback)
-load_dotenv()
+load_dotenv(find_dotenv(usecwd=True))
 
 df_dataset = None
 scaler_dict = None
 
-# Gunakan AI_ENGINE_API_KEY agar sinkron dengan .env di root
-API_KEY = os.environ.get("AI_ENGINE_API_KEY", "nutriscale-secret-key-2026")
+# Gunakan AI_ENGINE_API_KEY agar sinkron dengan .env di root (wajib, tanpa nilai default)
+API_KEY = os.environ.get("AI_ENGINE_API_KEY")
+if not API_KEY:
+    raise RuntimeError("AI_ENGINE_API_KEY belum diset di environment. Set dulu sebelum menjalankan API.")
 api_key_header = APIKeyHeader(name="X-API-Key", auto_error=True)
 
 async def verify_api_key(api_key: str = Security(api_key_header)):
@@ -59,6 +61,15 @@ async def lifespan(app: FastAPI):
 # ==========================================================
 # INSTANCE APP
 # ==========================================================
+# Compatibility shim for Starlette 1.x Router.__init__ where on_startup/shutdown were deprecated
+import starlette.routing
+_orig_router_init = starlette.routing.Router.__init__
+def _compat_router_init(self, *args, **kwargs):
+    kwargs.pop('on_startup', None)
+    kwargs.pop('on_shutdown', None)
+    return _orig_router_init(self, *args, **kwargs)
+starlette.routing.Router.__init__ = _compat_router_init
+
 app = FastAPI(
     title="NutriScale AI Engine API",
     description="Endpoint sistem rekomendasi Production-safe ML+LLM.",
@@ -83,8 +94,39 @@ Instrumentator().instrument(app).expose(app, include_in_schema=False, should_gzi
 # ==========================================================
 # SCHEMAS (Strict dengan Prisma DB)
 # ==========================================================
+class MakroNutriScaleInput(BaseModel):
+    """Satu makronutrien dari MacroResult nutri-calc.ts."""
+    percent: float = Field(..., ge=0, le=100)
+    grams: float = Field(..., ge=0)
+
+
+class NutrisiNutriScaleInput(BaseModel):
+    """
+    Hasil perhitungan gizi NutriScale (output `calculateMacros` di nutri-calc.ts).
+    AI hanya MEMBACA data ini — tidak menghitung kalori/makro sendiri.
+    """
+    lifeStage: Optional[str] = None
+    calories: float = Field(..., gt=0, description="Target kalori harian (kkal)")
+    carbohydrates: MakroNutriScaleInput
+    protein: MakroNutriScaleInput
+    fat: MakroNutriScaleInput
+    warnings: list[str] = Field(default_factory=list)
+    energyMethod: Optional[str] = Field(default=None, description="EstimatedEnergy.method dari nutri-calc.ts")
+
+
+class AsesmenNutriScaleInput(BaseModel):
+    """
+    Hasil asesmen antropometri resmi dari NutriScale (nutritional-assessment.ts).
+    AI hanya membaca data ini (BMI, HAZ, WHZ, status gizi) tanpa menghitung ulang.
+    """
+    bmi: float = Field(..., ge=0, description="Indeks Massa Tubuh (BMI)")
+    haz: Optional[float] = Field(default=0.0, description="WHO Height-for-Age Z-Score")
+    whz: Optional[float] = Field(default=0.0, description="WHO Weight-for-Height Z-Score")
+    statusNutrisi: str = Field(default="Normal", description="Klasifikasi status gizi Kemenkes/WHO")
+
+
 class ProfilKesehatanInput(BaseModel):
-    umur: int = Field(..., gt=0, description="Umur pasien dalam tahun")
+    umur: int = Field(..., ge=0, description="Umur pasien: dalam BULAN (0-60) untuk kategori ANAK_BALITA, dalam TAHUN untuk kategori lain")
     jenisKelamin: str = Field(..., pattern="^(LAKI_LAKI|PEREMPUAN)$")
     beratBadan: float = Field(..., gt=0)
     tinggiBadan: float = Field(..., gt=0)
@@ -93,8 +135,26 @@ class ProfilKesehatanInput(BaseModel):
         pattern="^(UMUM|ANAK_BALITA|IBU_HAMIL|PASCA_OPERASI)$"
     )
     usiaKehamilanMinggu: Optional[int] = Field(default=None, ge=1, le=42)
-    anjuranKaloriDokter: Optional[int] = Field(default=None, gt=0)
     pantanganMedis: Optional[str] = Field(default="")
+    # Isian alergi dari form web (dipisah dari pantangan agar tidak hilang)
+    alergi: Optional[str] = Field(default="")
+    # Khusus PASCA_OPERASI: tahap diet dari dokter/ahli gizi & jenis operasi
+    tahapDiet: Optional[str] = Field(default=None, pattern="^(cair|saring|lunak|biasa)$")
+    jenisOperasi: Optional[str] = Field(default=None, pattern="^(saluran_cerna|ortopedi|caesar|umum)$")
+    # Variasi menu antarhari (opsional): id user + tanggal sebagai benih, riwayat nama bahan hari sebelumnya
+    userId: Optional[str] = Field(default=None, max_length=100)
+    tanggal: Optional[str] = Field(default=None, pattern=r"^\d{4}-\d{2}-\d{2}$", description="YYYY-MM-DD, default hari ini")
+    riwayatMakanan: Optional[list[str]] = Field(default=None, max_length=200, description="Nama bahan yang direkomendasikan beberapa hari terakhir")
+    # Tier 1: target gizi WAJIB berasal dari perhitungan NutriScale
+    nutrisi: NutrisiNutriScaleInput
+    # Asesmen antropometri resmi NutriScale (BMI, HAZ, WHZ, status gizi)
+    asesmen: Optional[AsesmenNutriScaleInput] = None
+
+    @model_validator(mode='after')
+    def _cek_umur_balita(self):
+        if self.kategoriKondisi == 'ANAK_BALITA' and self.umur > 60:
+            raise ValueError('Untuk ANAK_BALITA, umur dalam BULAN dan maksimal 60')
+        return self
 
     class Config:
         json_schema_extra = {
@@ -105,8 +165,17 @@ class ProfilKesehatanInput(BaseModel):
                 "tinggiBadan": 162.0,
                 "kategoriKondisi": "IBU_HAMIL",
                 "usiaKehamilanMinggu": 32,
-                "anjuranKaloriDokter": None,
-                "pantanganMedis": "Udang, Ikan"
+                "pantanganMedis": "tidak suka pedas",
+                "alergi": "Udang, Ikan",
+                "nutrisi": {
+                    "lifeStage": "pregnantAdult",
+                    "calories": 2448,
+                    "carbohydrates": {"percent": 50, "grams": 306.0},
+                    "protein": {"percent": 20, "grams": 122.4},
+                    "fat": {"percent": 30, "grams": 81.6},
+                    "warnings": [],
+                    "energyMethod": "DRI 2023 EER kehamilan trimester 3"
+                }
             }
         }
 
@@ -116,6 +185,20 @@ class ProfilKesehatanInput(BaseModel):
 @app.get("/")
 def root():
     return {"status": "ok", "message": "NutriScale AI Engine is running", "models_loaded": df_dataset is not None}
+
+@app.get("/api/models")
+def list_models():
+    """Model Logistic Regression yang aktif per kategori kondisi."""
+    out = {}
+    for kategori in ["UMUM", "IBU_HAMIL", "ANAK_BALITA", "PASCA_OPERASI"]:
+        info = get_recommender_model(kategori)
+        out[kategori] = {
+            "loaded": info.get("pipeline") is not None,
+            "model_kategori": info.get("kategori_dipakai"),
+            "version": info.get("version"),
+            "test_weighted_kappa": (info.get("metrics") or {}).get("test", {}).get("weighted_kappa"),
+        }
+    return {"success": True, "models": out}
 
 @app.post("/api/sync")
 @limiter.limit("10/minute")
@@ -177,6 +260,9 @@ async def get_dietary_recommendation(
     except HTTPException:
         # Re-raise explicit HTTP Exception
         raise
+    except NutriScaleDataError as e:
+        # Data gizi dari NutriScale tidak valid — aman ditampilkan (tidak ada traceback)
+        raise HTTPException(status_code=422, detail=str(e))
     except Exception as e:
         # Exception Hiding (mencegah leak traceback intern)
         print(f"[ERROR /api/recommend] Internal Exception Blocked: {e}")

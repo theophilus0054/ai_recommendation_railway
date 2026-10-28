@@ -1,0 +1,222 @@
+{
+  "kategori": "UMUM",
+  "pemilik": "Muel",
+  "train_rows": 33586,
+  "test_rows": 8398,
+  "config_hash": "7ec1c77b29e130d2",
+  "train_profiles": 560,
+  "test_profiles": 140,
+  "label_distribution_train": {
+    "0": 0.6679,
+    "1": 0.2424,
+    "2": 0.0897
+  },
+  "cv_groupkfold": {
+    "accuracy": {
+      "mean": 0.9126,
+      "std": 0.0054
+    },
+    "macro_f1": {
+      "mean": 0.8598,
+      "std": 0.0079
+    },
+    "weighted_kappa": {
+      "mean": 0.8936,
+      "std": 0.0068
+    },
+    "ndcg@5": {
+      "mean": 0.9795,
+      "std": 0.0022
+    }
+  },
+  "test": {
+    "accuracy": 0.9127,
+    "macro_f1": 0.8665,
+    "macro_precision": 0.8755,
+    "macro_recall": 0.8589,
+    "per_class": {
+      "0": {
+        "precision": 0.9576,
+        "recall": 0.9586,
+        "f1": 0.9581,
+        "support": 5584
+      },
+      "1": {
+        "precision": 0.8123,
+        "recall": 0.8369,
+        "f1": 0.8244,
+        "support": 2042
+      },
+      "2": {
+        "precision": 0.8565,
+        "recall": 0.7811,
+        "f1": 0.8171,
+        "support": 772
+      }
+    },
+    "weighted_kappa": 0.8939,
+    "confusion_matrix": [
+      [
+        5353,
+        226,
+        5
+      ],
+      [
+        237,
+        1709,
+        96
+      ],
+      [
+        0,
+        169,
+        603
+      ]
+    ]
+  },
+  "test_ranking_ndcg": {
+    "model_lr": {
+      "ndcg@5": 0.9799,
+      "ndcg@10": 0.9855
+    },
+    "baseline_lama": {
+      "ndcg@5": 0.685,
+      "ndcg@10": 0.7827
+    },
+    "baseline_acak": {
+      "ndcg@5": 0.5406,
+      "ndcg@10": 0.6872
+    }
+  },
+  "test_new_food": {
+    "accuracy": 0.9131,
+    "macro_f1": 0.8669,
+    "macro_precision": 0.8803,
+    "macro_recall": 0.856,
+    "per_class": {
+      "0": {
+        "precision": 0.9571,
+        "recall": 0.9629,
+        "f1": 0.96,
+        "support": 835
+      },
+      "1": {
+        "precision": 0.8201,
+        "recall": 0.845,
+        "f1": 0.8323,
+        "support": 329
+      },
+      "2": {
+        "precision": 0.8636,
+        "recall": 0.76,
+        "f1": 0.8085,
+        "support": 125
+      }
+    },
+    "weighted_kappa": 0.8987,
+    "confusion_matrix": [
+      [
+        804,
+        31,
+        0
+      ],
+      [
+        36,
+        278,
+        15
+      ],
+      [
+        0,
+        30,
+        95
+      ]
+    ]
+  },
+  "conflict_pairs_predicted_nonzero": 0.0008,
+  "pembanding_gradient_boosting": {
+    "accuracy": 0.955,
+    "macro_f1": 0.9284,
+    "macro_precision": 0.93,
+    "macro_recall": 0.9269,
+    "per_class": {
+      "0": {
+        "precision": 0.9794,
+        "recall": 0.9807,
+        "f1": 0.98,
+        "support": 5584
+      },
+      "1": {
+        "precision": 0.9076,
+        "recall": 0.9089,
+        "f1": 0.9082,
+        "support": 2042
+      },
+      "2": {
+        "precision": 0.9029,
+        "recall": 0.8912,
+        "f1": 0.897,
+        "support": 772
+      }
+    },
+    "weighted_kappa": 0.9461,
+    "confusion_matrix": [
+      [
+        5476,
+        105,
+        3
+      ],
+      [
+        115,
+        1856,
+        71
+      ],
+      [
+        0,
+        84,
+        688
+      ]
+    ],
+    "ndcg@5": 0.9912366258374349
+  },
+  "top_coefficients_p2_vs_p0": [
+    [
+      "natrium_lewat_jauh",
+      -7.3361
+    ],
+    [
+      "gula_lewat_jauh",
+      -6.6586
+    ],
+    [
+      "any_conflict",
+      -5.9807
+    ],
+    [
+      "fat_share",
+      -5.8654
+    ],
+    [
+      "porsi_wajar",
+      5.4341
+    ],
+    [
+      "porsi_ideal",
+      4.0657
+    ],
+    [
+      "protein_pct_sesuai",
+      3.6375
+    ],
+    [
+      "ft_protein__snack",
+      -3.4469
+    ],
+    [
+      "n_block_kategori",
+      -3.1791
+    ],
+    [
+      "n_conflict_pantangan",
+      -3.0418
+    ]
+  ]
+}

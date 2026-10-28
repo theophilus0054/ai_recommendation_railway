@@ -1,0 +1,701 @@
+profile_id,kategoriKondisi,jenisKelamin,usiaKehamilanMinggu,tahapDiet,jenisOperasi,haz,whz,umur,beratBadan,tinggiBadan,statusNutrisi,target_kalori_harian,target_protein_g,target_fat_g,target_carbs_g,alergi,pantanganMedis,split
+umum_0001,UMUM,L,,,,,,41.0,92.2,167.8,Obese,2208.8,96.7,66.7,305.5,tidak ada,"tidak suka goreng-gorengan, gorengan",train
+umum_0002,UMUM,L,,,,,,72.0,75.3,170.2,Overweight,1360.8,66.1,42.6,178.2,tidak ada,,train
+umum_0003,UMUM,P,,,,,,37.0,55.5,172.3,Normal,2297.7,94.5,65.6,332.4,susu,,test
+umum_0004,UMUM,P,,,,,,25.0,41.1,155.9,Underweight,2189.7,84.0,71.2,303.1,,kopi,train
+umum_0005,UMUM,P,,,,,,24.0,40.9,160.0,Underweight,1776.5,74.4,56.5,242.5,tidak ada,,train
+umum_0006,UMUM,P,,,,,,26.0,41.0,160.2,Underweight,2194.7,97.0,68.7,296.9,-,-,train
+umum_0007,UMUM,P,,,,,,67.0,60.2,163.4,Normal,2104.4,104.7,60.0,286.5,no allergies,"tidak suka mie instan, pedas",test
+umum_0008,UMUM,L,,,,,,30.0,72.9,169.6,Overweight,2559.1,108.3,73.0,367.3,Alergi: susu sapi,tidak suka manis,train
+umum_0009,UMUM,P,,,,,,22.0,64.0,165.0,Normal,2534.8,98.8,74.5,367.4,allergic to gandum dan kacang tanah,kopi,train
+umum_0010,UMUM,P,,,,,,29.0,39.4,150.2,Underweight,2324.7,90.0,72.8,327.3,allergic to kedele,none,train
+umum_0011,UMUM,P,,,,,,65.0,49.9,159.3,Normal,1741.1,73.1,51.1,247.2,tidak ada,,test
+umum_0012,UMUM,P,,,,,,21.0,49.7,156.3,Normal,1585.2,70.6,47.0,219.9,Alergi: nuts & crab,-,train
+umum_0013,UMUM,L,,,,,,58.0,68.0,159.0,Overweight,1777.8,76.2,53.6,247.7,alergi sea food,no allergies,train
+umum_0014,UMUM,L,,,,,,20.0,61.4,163.2,Normal,1910.1,87.4,55.2,266.0,Alergi: gluten,"makanan manis, pedas",train
+umum_0015,UMUM,P,,,,,,30.0,66.5,152.8,Overweight,1320.2,62.5,37.8,182.6,-,tidak suka mie instan,train
+umum_0016,UMUM,L,,,,,,36.0,64.0,170.9,Normal,2415.6,111.0,72.4,329.9,no allergies,mie instan,train
+umum_0017,UMUM,L,,,,,,61.0,75.5,167.5,Overweight,2241.0,88.4,68.9,316.9,alergi udang,no allergies,train
+umum_0018,UMUM,L,,,,,,34.0,70.8,168.7,Normal,2565.8,99.9,78.2,365.7,tidak ada,-,train
+umum_0019,UMUM,L,,,,,,70.0,62.1,153.8,Overweight,1698.6,71.2,47.9,245.7,tidak ada,tidak suka makanan manis,train
+umum_0020,UMUM,P,,,,,,74.0,50.3,148.3,Normal,1650.1,78.2,47.4,227.7,tidak ada,"tidak suka santan, daging merah",train
+umum_0021,UMUM,L,,,,,,66.0,57.8,162.7,Normal,1690.7,82.7,55.6,214.9,alergi kepiting,,train
+umum_0022,UMUM,P,,,,,,44.0,52.0,156.9,Normal,1484.3,64.1,48.1,198.7,,no allergies,train
+umum_0023,UMUM,L,,,,,,20.0,93.9,179.0,Overweight,2883.0,109.0,80.7,430.2,alergi makanan laut & kacang,tidak suka kopi,train
+umum_0024,UMUM,P,,,,,,41.0,45.4,161.4,Underweight,1735.4,76.0,57.5,228.4,-,"pantangan kopi, makanan manis",train
+umum_0025,UMUM,P,,,,,,73.0,70.5,155.7,Overweight,1801.6,85.7,56.5,237.6,-,no allergies,test
+umum_0026,UMUM,P,,,,,,47.0,50.9,154.2,Normal,1660.6,64.1,52.5,232.9,"alergi udnag, suus","hindari manis, spicy",train
+umum_0027,UMUM,L,,,,,,47.0,86.9,164.1,Obese,2644.6,119.0,76.9,369.2,-,hindari manis,train
+umum_0028,UMUM,P,,,,,,40.0,72.4,148.8,Obese,1323.1,56.3,38.6,187.7,,"hindari jeroan, mie instan",train
+umum_0029,UMUM,P,,,,,,40.0,41.5,161.1,Underweight,1899.2,88.2,62.0,247.2,alergi suus,no allergies,train
+umum_0030,UMUM,P,,,,,,74.0,51.4,148.0,Normal,1853.0,90.8,59.3,239.0,none,tidak ada,train
+umum_0031,UMUM,L,,,,,,37.0,66.4,162.5,Overweight,2262.1,94.7,70.9,311.4,-,no allergies,test
+umum_0032,UMUM,P,,,,,,70.0,67.4,151.4,Overweight,1322.0,58.7,41.9,177.6,alergi susu sapi,none,test
+umum_0033,UMUM,P,,,,,,30.0,58.2,154.3,Normal,1865.7,80.8,59.1,252.6,allergic to udnag,,train
+umum_0034,UMUM,P,,,,,,48.0,69.9,155.8,Overweight,1507.7,60.3,43.0,219.8,"allergic to telor, nuts",manis,train
+umum_0035,UMUM,P,,,,,,49.0,69.9,152.8,Overweight,1976.3,74.2,60.7,283.4,,"hindari gorengan, manis",train
+umum_0036,UMUM,L,,,,,,31.0,65.9,168.4,Normal,2488.9,122.8,76.5,327.3,-,tidak ada,train
+umum_0037,UMUM,L,,,,,,25.0,50.8,160.3,Normal,2412.8,106.4,76.0,325.8,alergi suus,,train
+umum_0038,UMUM,L,,,,,,45.0,65.2,166.5,Normal,2314.1,89.9,76.1,317.4,Alergi: soy,no allergies,train
+umum_0039,UMUM,P,,,,,,32.0,55.7,143.1,Overweight,1619.1,77.7,52.3,209.5,,tidak suka mie instan,train
+umum_0040,UMUM,L,,,,,,57.0,57.1,167.4,Normal,1566.3,68.3,45.9,220.0,alergi squid,"pantangan mie instan, manis",test
+umum_0041,UMUM,L,,,,,,28.0,61.8,162.7,Normal,2389.4,106.2,77.7,316.3,no allergies,"tidak suka kopi, makanan manis",train
+umum_0042,UMUM,L,,,,,,53.0,68.2,158.3,Overweight,1830.3,69.7,58.9,255.4,,-,test
+umum_0043,UMUM,L,,,,,,58.0,53.9,163.8,Normal,2131.3,99.5,70.7,274.2,allergic to peanut dan susu,none,train
+umum_0044,UMUM,P,,,,,,37.0,77.9,157.4,Obese,2218.3,83.5,67.1,320.1,,pantangan kopi,train
+umum_0045,UMUM,L,,,,,,37.0,75.1,174.5,Normal,2970.8,112.9,98.1,409.1,none,"mie instan, spicy",test
+umum_0046,UMUM,L,,,,,,63.0,73.5,167.1,Overweight,1385.2,60.1,44.1,187.0,"alergi udang, telurr",no allergies,train
+umum_0047,UMUM,L,,,,,,24.0,73.8,178.1,Normal,2488.2,109.3,70.3,354.7,-,"tidak suka kopi, pedas",train
+umum_0048,UMUM,P,,,,,,28.0,63.6,168.7,Normal,1733.3,81.1,56.7,224.6,-,"kopi, mie instan",train
+umum_0049,UMUM,P,,,,,,73.0,48.6,160.4,Normal,1300.0,53.3,42.3,176.4,,no allergies,train
+umum_0050,UMUM,P,,,,,,28.0,43.0,155.6,Underweight,2196.6,106.4,63.8,299.1,,,test
+umum_0051,UMUM,L,,,,,,49.0,87.2,171.3,Overweight,2690.7,120.3,82.2,367.4,Alergi: kepiting; peanut,jeroan,train
+umum_0052,UMUM,P,,,,,,30.0,48.2,156.4,Normal,1739.4,86.1,56.2,222.2,alergi kacang tanah & soy,,train
+umum_0053,UMUM,P,,,,,,67.0,60.0,157.2,Normal,2080.9,96.1,62.8,282.8,alergi terigu; kepiting,,train
+umum_0054,UMUM,L,,,,,,50.0,81.2,176.2,Overweight,1672.1,66.0,53.2,232.2,none,no allergies,train
+umum_0055,UMUM,P,,,,,,25.0,75.1,157.0,Obese,1726.3,75.7,49.0,245.5,alergi gluten,"hindari pedas, gorengan",test
+umum_0056,UMUM,P,,,,,,38.0,51.8,155.9,Normal,1733.7,65.3,56.9,240.1,Alergi: shrimp & sea food,none,test
+umum_0057,UMUM,P,,,,,,55.0,64.5,160.0,Overweight,1632.4,63.7,51.7,228.0,Alergi: udnag,no allergies,test
+umum_0058,UMUM,P,,,,,,38.0,38.8,155.7,Underweight,1663.8,62.9,54.7,230.0,,"hindari makanan manis, santan",train
+umum_0059,UMUM,P,,,,,,35.0,50.5,155.8,Normal,1957.7,96.9,63.0,250.9,-,daging merah,train
+umum_0060,UMUM,P,,,,,,67.0,69.5,155.8,Overweight,1833.9,79.7,52.9,259.7,alergi shrimp & dairy,pedas,train
+umum_0061,UMUM,L,,,,,,43.0,61.3,169.4,Normal,1760.2,80.5,57.6,230.0,laktosa,,test
+umum_0062,UMUM,P,,,,,,64.0,74.1,162.4,Overweight,1955.0,84.3,54.9,280.8,alergi udang & gandum,-,train
+umum_0063,UMUM,P,,,,,,51.0,85.0,162.9,Obese,1973.5,98.2,56.2,268.9,no allergies,-,train
+umum_0064,UMUM,L,,,,,,49.0,68.6,157.6,Overweight,1362.0,65.7,40.2,184.4,allergic to dairy,hindari makanan manis,test
+umum_0065,UMUM,P,,,,,,39.0,57.0,154.5,Normal,1792.4,76.6,51.1,256.6,,tidak ada,train
+umum_0066,UMUM,L,,,,,,34.0,45.0,167.0,Underweight,2301.2,101.9,74.8,305.0,"allergic to ikn, susu","hindari goreng-gorengan, daging merah",test
+umum_0067,UMUM,L,,,,,,39.0,65.1,164.3,Normal,2622.4,101.6,81.7,370.1,,,train
+umum_0068,UMUM,P,,,,,,29.0,59.8,158.5,Normal,1661.9,81.2,50.2,221.3,tidak ada,"gorengan, jeroan",train
+umum_0069,UMUM,P,,,,,,21.0,57.5,163.3,Normal,2430.4,100.8,76.2,335.4,ikn dan shrimp,tidak suka makanan manis,train
+umum_0070,UMUM,P,,,,,,74.0,58.3,155.1,Normal,1989.7,88.2,59.2,276.0,alergi kacang tanah,hindari pedas,test
+umum_0071,UMUM,P,,,,,,23.0,57.3,162.6,Normal,2164.4,101.7,70.3,281.3,none,hindari kopi,test
+umum_0072,UMUM,L,,,,,,55.0,67.4,170.1,Normal,2539.9,112.9,72.8,358.3,,pantangan mie instan,train
+umum_0073,UMUM,L,,,,,,20.0,69.4,165.1,Overweight,2551.5,126.0,76.9,338.9,"kedelai, telor",pantangan gorengan,test
+umum_0074,UMUM,P,,,,,,52.0,60.6,146.0,Overweight,1300.0,59.4,42.9,169.1,-,hindari jeroan,train
+umum_0075,UMUM,P,,,,,,19.0,42.2,162.4,Underweight,1824.5,79.7,56.9,248.3,none,pantangan jeroan,train
+umum_0076,UMUM,L,,,,,,33.0,55.7,166.3,Normal,1729.8,84.2,54.8,224.9,alergi gluten,none,train
+umum_0077,UMUM,P,,,,,,31.0,64.0,153.6,Overweight,1534.0,76.6,45.8,203.9,allergic to cumi dan ikan,tidak ada,test
+umum_0078,UMUM,P,,,,,,31.0,64.9,166.9,Normal,2484.0,95.8,73.5,359.9,no allergies,tidak ada,test
+umum_0079,UMUM,P,,,,,,58.0,69.0,154.0,Overweight,1300.0,59.8,40.2,174.7,,tidak ada,test
+umum_0080,UMUM,L,,,,,,47.0,61.5,164.1,Normal,2194.3,85.3,61.7,324.4,Alergi: ebi; ikn,no allergies,train
+umum_0081,UMUM,P,,,,,,34.0,50.7,144.5,Normal,1716.6,71.3,48.3,249.2,none,,train
+umum_0082,UMUM,L,,,,,,66.0,91.4,165.7,Obese,2544.9,125.6,75.8,340.1,none,none,test
+umum_0083,UMUM,L,,,,,,46.0,96.8,171.1,Obese,2950.4,147.1,88.0,392.5,nuts & soy,"hindari daging merah, makanan manis",train
+umum_0084,UMUM,L,,,,,,34.0,71.4,171.0,Normal,2008.8,85.9,61.5,278.0,none,tidak ada,train
+umum_0085,UMUM,L,,,,,,48.0,50.5,164.3,Normal,2170.3,87.9,69.0,299.4,kedele,"spicy, santan",train
+umum_0086,UMUM,P,,,,,,34.0,49.4,166.6,Underweight,2278.6,102.4,68.1,313.9,allergic to wheat & squid,"goreng-gorengan, kopi",train
+umum_0087,UMUM,P,,,,,,55.0,70.8,149.1,Obese,1457.7,64.7,43.4,202.0,kacang tanah,hindari jeroan,test
+umum_0088,UMUM,L,,,,,,72.0,94.5,167.4,Obese,2261.5,100.8,72.5,301.3,none,hindari daging merah,train
+umum_0089,UMUM,P,,,,,,20.0,70.7,159.7,Overweight,2244.1,103.9,74.4,289.7,allergic to nuts dan sea food,"pedas, spicy",train
+umum_0090,UMUM,P,,,,,,22.0,60.9,155.7,Overweight,2054.5,90.4,66.2,274.4,Alergi: gandum; squid,"hindari pedas, makanan manis",train
+umum_0091,UMUM,L,,,,,,49.0,81.8,168.2,Overweight,2537.3,96.9,70.5,378.9,no allergies,no allergies,test
+umum_0092,UMUM,P,,,,,,52.0,57.5,166.6,Normal,1524.2,75.6,45.6,202.9,-,pantangan mie instan,train
+umum_0093,UMUM,P,,,,,,74.0,81.4,163.6,Obese,1755.1,77.3,54.6,238.6,,"hindari goreng-gorengan, spicy",train
+umum_0094,UMUM,L,,,,,,34.0,87.2,180.4,Overweight,1927.1,87.3,54.6,271.5,kepiting,none,train
+umum_0095,UMUM,L,,,,,,23.0,51.3,170.9,Underweight,2839.5,120.0,84.0,400.8,no allergies,no allergies,train
+umum_0096,UMUM,P,,,,,,37.0,50.4,150.7,Normal,1491.2,58.2,44.6,214.2,telor dan cumi-cumi,,train
+umum_0097,UMUM,L,,,,,,27.0,81.4,166.8,Overweight,1805.9,84.0,59.7,233.2,,"tidak suka kopi, gorengan",train
+umum_0098,UMUM,L,,,,,,49.0,49.9,159.8,Normal,2106.2,105.1,59.9,286.7,allergic to terigu,"hindari gorengan, goreng-gorengan",train
+umum_0099,UMUM,P,,,,,,28.0,55.3,159.8,Normal,2090.1,87.0,63.6,292.4,"alergi terigu, ikn",tidak ada,train
+umum_0100,UMUM,L,,,,,,23.0,81.1,165.8,Overweight,1827.8,74.4,56.6,255.3,none,tidak ada,train
+umum_0101,UMUM,P,,,,,,55.0,61.9,147.6,Overweight,1336.1,66.1,41.5,174.7,allergic to dairy,"pantangan daging merah, jeroan",train
+umum_0102,UMUM,L,,,,,,35.0,72.0,169.2,Overweight,2182.7,107.9,71.2,277.6,no allergies,no allergies,test
+umum_0103,UMUM,P,,,,,,45.0,81.2,167.1,Overweight,2239.2,102.6,63.8,313.6,-,-,train
+umum_0104,UMUM,P,,,,,,51.0,66.0,141.9,Obese,1300.0,51.3,39.2,185.6,allergic to gandum,"pantangan daging merah, manis",train
+umum_0105,UMUM,L,,,,,,60.0,59.2,160.0,Normal,1530.5,76.5,47.4,199.4,alergi terigu; telurr,,train
+umum_0106,UMUM,P,,,,,,52.0,59.1,149.5,Overweight,1323.3,65.0,39.8,176.2,"egg, makanan laut","hindari spicy, manis",train
+umum_0107,UMUM,P,,,,,,39.0,65.5,156.5,Overweight,1995.3,97.8,59.0,268.2,no allergies,tidak ada,train
+umum_0108,UMUM,P,,,,,,40.0,49.2,146.5,Normal,1662.7,67.8,49.2,237.2,-,"hindari jeroan, gorengan",train
+umum_0109,UMUM,L,,,,,,47.0,59.6,169.9,Normal,2198.4,106.7,69.7,286.1,alergi milk,-,test
+umum_0110,UMUM,P,,,,,,68.0,57.4,157.2,Normal,1824.4,69.3,52.4,268.8,Alergi: ikn; cumi-cumi,"pantangan pedas, goreng-gorengan",test
+umum_0111,UMUM,P,,,,,,71.0,42.5,162.9,Underweight,1716.9,68.6,52.7,242.0,-,none,test
+umum_0112,UMUM,P,,,,,,20.0,70.8,162.0,Overweight,2254.0,93.1,65.4,323.3,no allergies,none,train
+umum_0113,UMUM,P,,,,,,52.0,67.0,165.0,Normal,2342.8,102.0,76.1,312.5,Alergi: peanut,no allergies,train
+umum_0114,UMUM,P,,,,,,75.0,64.0,155.5,Overweight,1677.0,75.5,51.6,227.7,none,hindari santan,train
+umum_0115,UMUM,P,,,,,,53.0,59.2,150.5,Overweight,1300.0,60.3,36.5,182.6,crab,manis,train
+umum_0116,UMUM,P,,,,,,37.0,47.2,155.7,Normal,1894.2,91.4,62.3,242.0,tidak ada,no allergies,train
+umum_0117,UMUM,P,,,,,,32.0,63.2,155.0,Overweight,2009.4,90.7,64.1,267.5,allergic to laktosa,pantangan manis,train
+umum_0118,UMUM,L,,,,,,64.0,57.4,170.4,Normal,2202.0,92.7,64.4,312.8,Alergi: gluten,"hindari pedas, santan",train
+umum_0119,UMUM,P,,,,,,41.0,55.9,146.1,Overweight,1566.1,75.9,47.7,208.4,no allergies,-,test
+umum_0120,UMUM,P,,,,,,63.0,61.4,156.1,Overweight,1300.0,53.3,39.0,183.9,shrimp,goreng-gorengan,train
+umum_0121,UMUM,L,,,,,,57.0,75.3,161.5,Overweight,1697.7,72.0,55.9,226.6,"alergi shrimp, egg",-,test
+umum_0122,UMUM,L,,,,,,23.0,90.4,177.8,Overweight,3124.8,132.4,102.5,418.3,"Alergi: laktosa, ikn",none,train
+umum_0123,UMUM,P,,,,,,32.0,64.8,160.0,Overweight,1304.8,54.5,39.7,182.4,tidak ada,,train
+umum_0124,UMUM,P,,,,,,27.0,85.1,165.3,Obese,1577.9,66.8,50.0,215.1,-,tidak ada,train
+umum_0125,UMUM,P,,,,,,51.0,63.2,157.5,Overweight,1404.8,67.1,40.5,193.0,no allergies,pantangan jeroan,train
+umum_0126,UMUM,P,,,,,,71.0,52.2,162.1,Normal,1934.9,92.5,59.6,257.1,-,no allergies,train
+umum_0127,UMUM,P,,,,,,43.0,69.7,160.4,Overweight,1548.9,65.4,51.2,206.7,-,hindari jeroan,train
+umum_0128,UMUM,P,,,,,,26.0,45.4,154.2,Normal,2161.0,81.4,62.6,317.9,allergic to crab,none,train
+umum_0129,UMUM,L,,,,,,53.0,77.7,167.7,Overweight,2388.9,97.2,70.6,341.1,tidak ada,-,train
+umum_0130,UMUM,L,,,,,,73.0,58.0,170.2,Normal,1894.8,89.2,60.4,248.6,tidak ada,"tidak suka santan, jeroan",train
+umum_0131,UMUM,L,,,,,,25.0,73.2,178.0,Normal,3097.2,120.2,89.4,452.8,none,mie instan,train
+umum_0132,UMUM,P,,,,,,75.0,72.5,158.6,Overweight,1827.7,87.6,57.3,240.3,allergic to seafood dan egg,,test
+umum_0133,UMUM,L,,,,,,31.0,64.2,160.8,Normal,2393.9,111.1,68.5,333.1,no allergies,"hindari jeroan, santan",test
+umum_0134,UMUM,L,,,,,,38.0,85.0,178.2,Overweight,2170.8,92.8,67.6,297.9,Alergi: makanan laut,no allergies,test
+umum_0135,UMUM,L,,,,,,56.0,79.4,162.6,Obese,2069.2,101.0,68.4,262.3,,,train
+umum_0136,UMUM,L,,,,,,72.0,67.1,176.2,Normal,2387.9,113.8,71.0,323.3,tidak ada,tidak suka pedas,test
+umum_0137,UMUM,L,,,,,,34.0,64.0,165.7,Normal,2395.9,117.3,73.9,315.5,allergic to nuts dan shrimp,,test
+umum_0138,UMUM,L,,,,,,20.0,51.2,156.1,Normal,1699.2,79.5,50.3,232.0,no allergies,pedas,train
+umum_0139,UMUM,P,,,,,,51.0,48.0,155.0,Normal,1802.3,79.6,57.4,241.8,"Alergi: gluten, cumi-cumi",hindari pedas,train
+umum_0140,UMUM,P,,,,,,46.0,89.2,156.4,Obese,2052.6,94.2,61.2,281.3,no allergies,,train
+umum_0141,UMUM,L,,,,,,45.0,52.6,164.1,Normal,1568.6,74.1,50.3,204.9,tidak ada,none,train
+umum_0142,UMUM,L,,,,,,62.0,73.6,164.9,Overweight,1381.6,57.6,45.8,184.9,tidak ada,no allergies,train
+umum_0143,UMUM,L,,,,,,34.0,65.2,160.8,Overweight,1445.1,71.8,44.6,189.2,none,tidak suka pedas,train
+umum_0144,UMUM,L,,,,,,57.0,62.8,167.5,Normal,1659.5,68.4,48.1,238.1,allergic to dairy & kepiting,"pedas, makanan manis",train
+umum_0145,UMUM,L,,,,,,22.0,66.2,165.5,Normal,2276.4,86.4,71.2,322.4,cumi,no allergies,train
+umum_0146,UMUM,L,,,,,,39.0,51.5,166.5,Normal,2082.4,78.8,58.1,311.2,no allergies,none,test
+umum_0147,UMUM,P,,,,,,51.0,54.3,161.4,Normal,1481.5,62.5,42.4,212.5,allergic to udang & makanan laut,spicy,train
+umum_0148,UMUM,P,,,,,,72.0,52.1,160.9,Normal,1921.6,81.8,59.8,264.1,alergi cumi,"pantangan pedas, goreng-gorengan",train
+umum_0149,UMUM,L,,,,,,22.0,73.8,170.3,Overweight,2054.8,96.1,64.7,272.0,none,no allergies,test
+umum_0150,UMUM,P,,,,,,38.0,84.7,164.1,Obese,1787.0,85.9,52.8,242.0,allergic to eggs,-,train
+umum_0151,UMUM,L,,,,,,73.0,73.1,164.5,Overweight,1526.8,67.0,48.4,205.9,"Alergi: cumi, sea food",hindari santan,train
+umum_0152,UMUM,L,,,,,,40.0,71.2,165.0,Overweight,1520.8,70.4,48.1,201.5,tidak ada,tidak ada,train
+umum_0153,UMUM,L,,,,,,74.0,66.0,162.2,Overweight,1367.9,60.3,38.3,195.5,tidak ada,"spicy, makanan manis",train
+umum_0154,UMUM,L,,,,,,50.0,80.9,163.2,Obese,2460.5,121.0,70.3,335.8,none,tidak suka jeroan,train
+umum_0155,UMUM,P,,,,,,55.0,43.0,137.9,Normal,1649.7,81.2,49.5,219.9,,-,train
+umum_0156,UMUM,P,,,,,,73.0,44.2,154.8,Underweight,1706.1,78.3,51.7,232.0,alergi terigu dan laktosa,none,test
+umum_0157,UMUM,L,,,,,,40.0,71.1,166.7,Overweight,2374.6,96.4,73.7,331.5,tidak ada,manis,train
+umum_0158,UMUM,P,,,,,,73.0,71.7,156.9,Overweight,1300.0,59.2,39.2,177.6,,,train
+umum_0159,UMUM,P,,,,,,40.0,66.6,158.3,Overweight,1521.3,65.1,44.2,215.6,none,,test
+umum_0160,UMUM,P,,,,,,31.0,50.7,154.1,Normal,2208.7,88.2,71.9,302.0,-,tidak suka goreng-gorengan,train
+umum_0161,UMUM,P,,,,,,25.0,47.5,154.8,Normal,1758.6,80.3,53.1,239.8,,,train
+umum_0162,UMUM,P,,,,,,49.0,69.0,160.5,Overweight,1501.1,58.0,45.4,215.2,none,pantangan kopi,train
+umum_0163,UMUM,L,,,,,,63.0,68.9,176.2,Normal,2536.5,104.2,81.9,345.6,allergic to kacng; wheat,santan,train
+umum_0164,UMUM,P,,,,,,20.0,54.4,140.4,Overweight,1913.6,94.3,55.9,258.4,tidak ada,pantangan pedas,train
+umum_0165,UMUM,P,,,,,,26.0,76.6,162.5,Overweight,1754.5,66.9,49.6,260.0,none,"jeroan, spicy",test
+umum_0166,UMUM,L,,,,,,68.0,78.0,161.3,Obese,1384.4,57.0,42.3,193.8,none,no allergies,test
+umum_0167,UMUM,P,,,,,,44.0,67.1,161.6,Overweight,1754.7,71.0,55.7,242.3,no allergies,,train
+umum_0168,UMUM,P,,,,,,55.0,74.1,149.0,Obese,1984.1,83.8,58.1,281.5,no allergies,"kopi, daging merah",train
+umum_0169,UMUM,L,,,,,,61.0,85.1,165.5,Obese,2162.4,106.6,60.4,298.0,no allergies,"hindari santan, gorengan",train
+umum_0170,UMUM,P,,,,,,37.0,55.3,154.9,Normal,1783.6,77.0,56.0,242.9,Alergi: shrimp; crab,jeroan,train
+umum_0171,UMUM,L,,,,,,64.0,53.7,172.2,Underweight,1996.2,77.1,63.1,279.9,alergi cumi & shrimp,none,train
+umum_0172,UMUM,P,,,,,,68.0,66.7,155.6,Overweight,1336.2,51.9,39.2,194.0,-,-,train
+umum_0173,UMUM,L,,,,,,21.0,54.2,163.3,Normal,2304.2,103.2,70.2,315.0,none,none,train
+umum_0174,UMUM,L,,,,,,32.0,86.1,168.3,Obese,2837.1,107.8,80.8,419.7,none,"pantangan daging merah, jeroan",train
+umum_0175,UMUM,L,,,,,,67.0,61.1,162.5,Normal,1963.5,74.7,57.4,287.0,-,-,test
+umum_0176,UMUM,L,,,,,,55.0,74.4,170.0,Overweight,2031.3,83.1,56.8,297.0,no allergies,hindari pedas,train
+umum_0177,UMUM,L,,,,,,64.0,67.1,174.1,Normal,1962.8,89.8,60.4,265.1,allergic to eggs,hindari mie instan,test
+umum_0178,UMUM,L,,,,,,23.0,54.0,163.6,Normal,2023.7,91.7,66.8,263.9,sea food,"spicy, pedas",train
+umum_0179,UMUM,L,,,,,,72.0,76.6,168.0,Overweight,2143.6,103.8,70.3,274.0,alergi sea food dan terigu,"pantangan daging merah, makanan manis",train
+umum_0180,UMUM,P,,,,,,23.0,66.9,150.1,Overweight,2127.1,91.5,59.1,307.2,nuts; susu,daging merah,train
+umum_0181,UMUM,L,,,,,,63.0,47.9,159.2,Normal,1315.2,52.1,39.2,188.6,makanan laut,tidak suka pedas,train
+umum_0182,UMUM,P,,,,,,35.0,54.2,157.3,Normal,2016.6,98.0,56.7,278.7,alergi soy dan gandum,kopi,test
+umum_0183,UMUM,L,,,,,,33.0,66.6,174.4,Normal,2244.0,107.0,68.7,299.5,kepiting,tidak suka manis,train
+umum_0184,UMUM,P,,,,,,59.0,56.1,154.9,Normal,1442.4,69.2,47.7,184.0,ikn,"pantangan daging merah, goreng-gorengan",train
+umum_0185,UMUM,P,,,,,,30.0,49.9,163.0,Normal,2230.7,107.6,68.9,295.0,"suus, peanut",tidak ada,train
+umum_0186,UMUM,L,,,,,,46.0,72.2,158.8,Overweight,2262.3,110.2,66.3,306.1,-,tidak suka kopi,train
+umum_0187,UMUM,P,,,,,,31.0,37.1,152.2,Underweight,2277.4,112.9,72.4,293.6,Alergi: udang,hindari manis,train
+umum_0188,UMUM,L,,,,,,37.0,77.3,167.0,Overweight,2257.9,111.4,67.9,300.3,tidak ada,none,train
+umum_0189,UMUM,L,,,,,,70.0,57.0,174.2,Normal,1936.4,86.9,57.7,267.3,alergi ikn; kacng,no allergies,train
+umum_0190,UMUM,L,,,,,,31.0,76.7,170.5,Overweight,2644.2,126.9,80.2,353.7,Alergi: telor dan tahu tempe,"pantangan daging merah, jeroan",train
+umum_0191,UMUM,P,,,,,,61.0,43.5,149.4,Normal,1646.8,73.6,48.5,228.9,"Alergi: gluten, susu sapi",tidak suka goreng-gorengan,train
+umum_0192,UMUM,L,,,,,,21.0,65.5,163.6,Normal,1972.8,98.2,59.5,261.3,no allergies,tidak ada,train
+umum_0193,UMUM,P,,,,,,75.0,64.4,161.1,Normal,2100.8,104.5,69.9,263.5,tidak ada,hindari pedas,test
+umum_0194,UMUM,P,,,,,,63.0,53.1,153.1,Normal,1381.8,54.8,41.9,196.3,,tidak ada,train
+umum_0195,UMUM,L,,,,,,34.0,70.6,179.2,Normal,2045.2,78.7,62.8,291.3,no allergies,"tidak suka spicy, manis",train
+umum_0196,UMUM,P,,,,,,21.0,59.2,159.6,Normal,2198.1,89.6,71.3,299.5,Alergi: kedele,hindari manis,train
+umum_0197,UMUM,P,,,,,,26.0,54.3,162.7,Normal,2335.3,99.2,74.3,317.5,tidak ada,"pantangan makanan manis, kopi",train
+umum_0198,UMUM,P,,,,,,21.0,54.7,161.4,Normal,1895.6,85.5,57.3,259.5,alergi kepiting; laktosa,tidak ada,train
+umum_0199,UMUM,P,,,,,,23.0,42.3,155.1,Underweight,1786.6,73.3,52.2,255.9,none,hindari kopi,train
+umum_0200,UMUM,P,,,,,,33.0,56.4,157.9,Normal,2297.5,100.9,70.5,314.9,Alergi: sea food,hindari makanan manis,test
+umum_0201,UMUM,L,,,,,,62.0,61.5,161.4,Normal,1561.9,69.4,45.4,219.0,no allergies,hindari spicy,train
+umum_0202,UMUM,P,,,,,,74.0,65.4,165.5,Normal,2139.4,98.7,66.5,286.6,no allergies,no allergies,train
+umum_0203,UMUM,P,,,,,,58.0,59.7,150.9,Overweight,1512.4,64.1,44.2,214.6,"allergic to peanut, fish",none,train
+umum_0204,UMUM,L,,,,,,47.0,59.0,163.5,Normal,2136.6,102.8,60.7,294.7,crab; eggs,no allergies,train
+umum_0205,UMUM,L,,,,,,37.0,60.6,155.8,Normal,1716.1,77.1,50.5,238.2,none,tidak ada,test
+umum_0206,UMUM,P,,,,,,55.0,45.1,148.6,Normal,1325.3,60.8,41.3,177.7,no allergies,none,train
+umum_0207,UMUM,P,,,,,,28.0,57.0,160.5,Normal,2117.5,87.6,68.0,288.7,,no allergies,train
+umum_0208,UMUM,L,,,,,,26.0,75.2,170.2,Overweight,1730.9,79.1,50.3,240.5,no allergies,pantangan santan,train
+umum_0209,UMUM,P,,,,,,19.0,58.9,153.2,Overweight,1300.0,59.6,38.8,178.1,,"pantangan jeroan, gorengan",test
+umum_0210,UMUM,L,,,,,,28.0,82.3,169.2,Overweight,2152.0,82.1,64.5,310.8,tidak ada,"pantangan spicy, pedas",test
+umum_0211,UMUM,L,,,,,,49.0,79.7,161.3,Obese,2425.7,93.5,78.5,336.2,makanan laut; squid,"tidak suka makanan manis, daging merah",train
+umum_0212,UMUM,L,,,,,,37.0,63.4,161.8,Normal,2583.6,108.9,77.8,361.9,"Alergi: wheat, kepiting",,test
+umum_0213,UMUM,P,,,,,,52.0,68.1,159.7,Overweight,1300.0,63.6,38.6,174.5,no allergies,"manis, mie instan",test
+umum_0214,UMUM,L,,,,,,58.0,62.5,163.2,Normal,1620.9,60.8,48.1,236.1,telor,none,train
+umum_0215,UMUM,P,,,,,,66.0,75.6,160.3,Overweight,1300.0,54.8,43.1,173.2,shrimp,tidak ada,train
+umum_0216,UMUM,P,,,,,,50.0,48.6,159.3,Normal,1830.1,78.4,51.2,263.9,tidak ada,none,train
+umum_0217,UMUM,P,,,,,,46.0,65.8,146.9,Obese,1913.1,85.3,61.7,254.2,tidak ada,goreng-gorengan,train
+umum_0218,UMUM,P,,,,,,52.0,70.6,159.9,Overweight,1501.2,58.4,45.0,215.6,allergic to egg & fish,hindari gorengan,train
+umum_0219,UMUM,L,,,,,,54.0,73.0,165.5,Overweight,1440.3,70.3,47.1,183.9,Alergi: gluten,pantangan kopi,test
+umum_0220,UMUM,L,,,,,,42.0,68.1,170.0,Normal,2708.1,132.1,82.5,359.3,tidak ada,"pantangan manis, spicy",train
+umum_0221,UMUM,P,,,,,,38.0,49.2,147.8,Normal,1679.7,67.3,50.4,239.1,alergi sea food; ikan,-,train
+umum_0222,UMUM,P,,,,,,47.0,41.5,157.4,Underweight,2237.9,88.7,67.0,320.1,alergi udnag,kopi,train
+umum_0223,UMUM,L,,,,,,39.0,63.3,170.4,Normal,2098.8,92.9,64.7,286.3,kepiting & cumi-cumi,"pantangan spicy, kopi",train
+umum_0224,UMUM,P,,,,,,35.0,55.4,149.3,Normal,1556.7,71.6,49.2,206.9,tidak ada,none,test
+umum_0225,UMUM,L,,,,,,24.0,67.1,159.3,Overweight,2401.7,100.1,68.0,347.4,no allergies,"santan, kopi",train
+umum_0226,UMUM,L,,,,,,36.0,73.8,164.5,Overweight,2173.9,107.7,67.5,283.8,tidak ada,hindari jeroan,train
+umum_0227,UMUM,P,,,,,,62.0,55.5,155.0,Normal,1625.7,80.0,46.7,221.3,allergic to shrimp dan soy,no allergies,train
+umum_0228,UMUM,L,,,,,,43.0,54.0,168.3,Normal,2108.9,83.1,70.0,286.6,,tidak ada,test
+umum_0229,UMUM,P,,,,,,36.0,67.1,156.9,Overweight,2047.7,100.3,64.3,266.8,Alergi: kepiting,-,train
+umum_0230,UMUM,L,,,,,,47.0,87.8,168.6,Obese,2075.5,98.6,62.5,279.7,-,tidak ada,train
+umum_0231,UMUM,L,,,,,,48.0,69.5,173.8,Normal,2705.1,128.9,75.4,377.7,-,"pantangan daging merah, spicy",train
+umum_0232,UMUM,P,,,,,,72.0,73.4,160.3,Overweight,1300.0,52.1,42.8,176.5,none,"santan, goreng-gorengan",train
+umum_0233,UMUM,L,,,,,,27.0,63.2,161.8,Normal,2695.1,101.7,86.5,377.5,no allergies,"hindari goreng-gorengan, daging merah",train
+umum_0234,UMUM,P,,,,,,32.0,44.9,159.1,Underweight,1989.5,87.8,60.8,272.8,Alergi: makanan laut,pantangan manis,train
+umum_0235,UMUM,P,,,,,,20.0,68.3,141.4,Obese,1371.8,68.0,41.3,182.1,,"hindari gorengan, kopi",test
+umum_0236,UMUM,P,,,,,,34.0,61.4,154.7,Overweight,1961.6,96.4,62.5,253.3,,tidak ada,train
+umum_0237,UMUM,P,,,,,,61.0,72.8,155.5,Obese,1300.0,48.9,38.4,189.8,Alergi: ebi; sea food,"tidak suka santan, daging merah",train
+umum_0238,UMUM,P,,,,,,33.0,55.7,147.4,Overweight,1854.0,72.9,58.5,259.0,allergic to kacng,tidak ada,train
+umum_0239,UMUM,P,,,,,,68.0,70.8,168.5,Normal,1823.5,88.9,55.3,242.7,Alergi: eggs,"tidak suka mie instan, spicy",train
+umum_0240,UMUM,P,,,,,,30.0,58.9,153.2,Overweight,1710.5,77.4,49.0,239.9,alergi shrimp,tidak suka santan,train
+umum_0241,UMUM,L,,,,,,26.0,64.0,175.7,Normal,2847.3,125.4,79.8,406.9,allergic to ikan; shrimp,"tidak suka jeroan, santan",train
+umum_0242,UMUM,P,,,,,,49.0,62.1,152.0,Overweight,1389.0,63.6,41.8,189.6,no allergies,"tidak suka makanan manis, gorengan",train
+umum_0243,UMUM,L,,,,,,29.0,46.4,167.7,Underweight,2389.2,93.0,74.8,336.0,allergic to tahu tempe,"santan, manis",train
+umum_0244,UMUM,P,,,,,,57.0,69.8,162.1,Overweight,1938.3,94.6,58.3,258.8,Alergi: peanut,no allergies,train
+umum_0245,UMUM,P,,,,,,45.0,66.3,163.2,Normal,1656.5,70.2,51.0,229.2,,gorengan,test
+umum_0246,UMUM,L,,,,,,37.0,71.9,172.9,Normal,2589.6,105.1,78.6,365.5,alergi kacng; ebi,,train
+umum_0247,UMUM,L,,,,,,30.0,66.3,173.4,Normal,1971.9,84.4,57.8,278.6,-,pantangan goreng-gorengan,train
+umum_0248,UMUM,L,,,,,,46.0,67.6,163.8,Overweight,1933.1,86.9,63.2,254.0,,mie instan,train
+umum_0249,UMUM,L,,,,,,26.0,76.8,170.4,Overweight,1758.5,83.0,55.6,231.5,none,"tidak suka kopi, daging merah",test
+umum_0250,UMUM,L,,,,,,60.0,68.5,165.6,Normal,1718.2,65.1,55.6,239.3,-,tidak ada,test
+umum_0251,UMUM,P,,,,,,21.0,37.0,152.0,Underweight,1729.8,72.6,49.6,248.1,,tidak ada,train
+umum_0252,UMUM,P,,,,,,47.0,89.4,168.1,Obese,1521.0,65.0,43.3,217.7,none,,train
+umum_0253,UMUM,P,,,,,,59.0,56.4,156.3,Normal,1449.6,54.4,40.5,216.9,none,,train
+umum_0254,UMUM,P,,,,,,75.0,41.8,161.6,Underweight,1503.2,70.0,48.0,197.7,-,"daging merah, santan",train
+umum_0255,UMUM,P,,,,,,39.0,62.7,165.3,Normal,2136.1,92.9,68.4,287.2,tidak ada,"pantangan daging merah, pedas",test
+umum_0256,UMUM,P,,,,,,42.0,60.6,152.5,Overweight,1300.0,60.5,40.2,174.0,none,"hindari pedas, spicy",train
+umum_0257,UMUM,P,,,,,,60.0,50.8,151.4,Normal,1368.7,53.7,39.8,198.9,no allergies,,test
+umum_0258,UMUM,L,,,,,,31.0,59.9,175.1,Normal,1868.8,76.4,58.8,258.5,none,pantangan goreng-gorengan,train
+umum_0259,UMUM,L,,,,,,51.0,52.9,168.3,Normal,1776.7,81.7,56.8,234.7,alergi milk; telur,no allergies,train
+umum_0260,UMUM,L,,,,,,52.0,46.0,169.5,Underweight,1734.9,80.8,50.4,239.5,alergi dairy,"spicy, gorengan",test
+umum_0261,UMUM,L,,,,,,50.0,46.9,171.2,Underweight,2207.6,96.0,68.7,301.4,tidak ada,-,train
+umum_0262,UMUM,P,,,,,,34.0,66.0,156.1,Overweight,1547.8,68.7,43.2,221.1,alergi kacng; squid,"pantangan pedas, goreng-gorengan",train
+umum_0263,UMUM,L,,,,,,36.0,71.7,180.1,Normal,2051.9,99.9,61.4,274.9,none,"hindari kopi, goreng-gorengan",train
+umum_0264,UMUM,P,,,,,,21.0,63.4,163.9,Normal,2272.2,112.2,63.9,312.0,suus dan makanan laut,pantangan spicy,train
+umum_0265,UMUM,L,,,,,,51.0,68.0,163.1,Overweight,1884.3,74.1,58.6,265.1,sea food,"tidak suka goreng-gorengan, manis",train
+umum_0266,UMUM,L,,,,,,27.0,75.1,166.2,Overweight,2003.4,79.7,65.5,273.8,"allergic to kacang tanah, crab",hindari jeroan,train
+umum_0267,UMUM,L,,,,,,22.0,66.6,171.1,Normal,2913.9,124.0,91.4,398.8,-,pedas,train
+umum_0268,UMUM,P,,,,,,41.0,58.2,153.5,Normal,1564.4,72.2,45.0,217.8,,"santan, spicy",train
+umum_0269,UMUM,L,,,,,,47.0,67.0,170.9,Normal,2096.9,99.0,58.7,293.2,"laktosa, gluten",tidak ada,train
+umum_0270,UMUM,P,,,,,,32.0,64.6,153.8,Overweight,2029.0,80.9,66.5,276.7,allergic to soy,no allergies,train
+umum_0271,UMUM,L,,,,,,23.0,45.0,158.8,Underweight,2584.5,108.8,79.0,359.6,Alergi: terigu & shrimp,,train
+umum_0272,UMUM,P,,,,,,70.0,70.2,152.6,Obese,1585.9,59.6,47.1,230.9,none,pantangan kopi,test
+umum_0273,UMUM,P,,,,,,40.0,76.7,147.0,Obese,2141.8,84.1,70.9,291.7,ikn,-,train
+umum_0274,UMUM,L,,,,,,36.0,72.0,166.9,Overweight,2442.7,115.0,78.5,319.0,milk dan cumi-cumi,,train
+umum_0275,UMUM,P,,,,,,46.0,45.6,148.2,Normal,1581.2,66.6,49.8,216.5,alergi milk; kedelai,hindari santan,train
+umum_0276,UMUM,L,,,,,,27.0,84.9,167.3,Obese,1866.9,91.3,57.4,246.3,"alergi ebi, cumi",,train
+umum_0277,UMUM,L,,,,,,29.0,65.8,164.0,Normal,2753.9,121.6,85.2,375.2,alergi terigu & ikn,pedas,train
+umum_0278,UMUM,L,,,,,,28.0,72.7,169.6,Overweight,2576.6,108.4,77.7,360.9,kepiting,"makanan manis, kopi",train
+umum_0279,UMUM,L,,,,,,46.0,72.3,169.1,Overweight,2354.3,91.8,72.6,333.5,makanan laut & suus,no allergies,train
+umum_0280,UMUM,L,,,,,,74.0,65.5,177.0,Normal,1623.3,75.3,52.5,212.5,tidak ada,"pantangan jeroan, makanan manis",train
+umum_0281,UMUM,P,,,,,,30.0,44.7,155.5,Underweight,2206.0,83.4,62.2,328.1,-,no allergies,train
+umum_0282,UMUM,L,,,,,,69.0,56.1,171.6,Normal,1906.6,84.9,56.8,264.0,no allergies,tidak ada,test
+umum_0283,UMUM,L,,,,,,59.0,58.4,175.6,Normal,1856.1,71.1,54.3,270.7,-,no allergies,train
+umum_0284,UMUM,L,,,,,,24.0,56.2,160.8,Normal,2296.5,110.1,75.6,293.8,allergic to cumi; egg,"pantangan mie instan, jeroan",train
+umum_0285,UMUM,L,,,,,,30.0,47.7,158.5,Normal,1805.3,82.9,53.6,247.7,-,none,test
+umum_0286,UMUM,P,,,,,,26.0,69.1,168.3,Normal,2333.0,111.4,73.7,306.0,no allergies,tidak ada,train
+umum_0287,UMUM,P,,,,,,39.0,56.9,144.7,Overweight,1815.2,70.2,53.1,264.1,alergi dairy,tidak suka mie instan,train
+umum_0288,UMUM,L,,,,,,73.0,83.6,176.4,Overweight,1527.9,66.1,45.7,213.0,allergic to cumi-cumi,-,train
+umum_0289,UMUM,L,,,,,,59.0,80.1,171.3,Overweight,1836.0,79.2,59.3,246.5,tidak ada,hindari jeroan,train
+umum_0290,UMUM,L,,,,,,64.0,93.8,170.4,Obese,2042.5,80.6,63.2,287.9,allergic to gluten; tahu tempe,,test
+umum_0291,UMUM,P,,,,,,45.0,65.5,155.0,Overweight,1942.0,79.7,61.0,268.7,,none,test
+umum_0292,UMUM,L,,,,,,52.0,53.9,168.9,Normal,1561.4,70.8,46.1,215.8,-,,train
+umum_0293,UMUM,P,,,,,,59.0,51.6,150.0,Normal,1380.3,64.2,40.2,190.5,,tidak ada,train
+umum_0294,UMUM,L,,,,,,38.0,55.7,151.9,Normal,1603.0,69.5,52.7,212.7,no allergies,tidak ada,train
+umum_0295,UMUM,L,,,,,,30.0,93.0,173.9,Obese,2366.7,108.8,73.3,317.8,tidak ada,jeroan,train
+umum_0296,UMUM,P,,,,,,28.0,62.2,162.2,Normal,1951.3,73.8,55.9,288.2,Alergi: cumi-cumi dan kepiting,none,train
+umum_0297,UMUM,L,,,,,,43.0,66.9,160.2,Overweight,1920.8,90.1,63.9,246.4,Alergi: squid & soy,-,train
+umum_0298,UMUM,P,,,,,,48.0,39.5,157.2,Underweight,1619.2,72.2,47.2,226.5,,-,train
+umum_0299,UMUM,L,,,,,,50.0,47.0,171.4,Underweight,2427.1,91.9,78.8,337.6,"allergic to kacang tanah, udnag",none,train
+umum_0300,UMUM,L,,,,,,43.0,53.4,167.6,Normal,1618.4,80.5,53.9,202.8,"alergi telurr, cumi",pantangan pedas,test
+umum_0301,UMUM,P,,,,,,70.0,54.1,154.8,Normal,1951.2,82.7,54.9,281.5,"alergi sea food, gluten",tidak ada,test
+umum_0302,UMUM,P,,,,,,25.0,60.7,151.7,Overweight,2014.0,88.0,56.3,288.9,no allergies,tidak suka mie instan,train
+umum_0303,UMUM,P,,,,,,39.0,48.8,166.6,Underweight,1797.6,75.1,57.0,246.1,ebi,tidak suka makanan manis,train
+umum_0304,UMUM,L,,,,,,53.0,93.3,187.6,Overweight,2254.6,104.4,73.3,294.3,,none,train
+umum_0305,UMUM,P,,,,,,67.0,79.9,153.2,Obese,1510.2,70.9,49.7,194.8,wheat,tidak suka pedas,train
+umum_0306,UMUM,L,,,,,,75.0,51.1,176.1,Underweight,2273.7,98.8,65.4,322.5,,hindari pedas,train
+umum_0307,UMUM,P,,,,,,42.0,49.2,149.6,Normal,1447.1,67.0,40.9,202.8,no allergies,none,train
+umum_0308,UMUM,L,,,,,,60.0,62.1,169.1,Normal,2348.4,111.2,70.0,318.3,no allergies,-,train
+umum_0309,UMUM,P,,,,,,45.0,46.1,145.3,Normal,1789.9,81.5,52.0,249.0,Alergi: telor,tidak ada,train
+umum_0310,UMUM,P,,,,,,42.0,60.5,151.0,Overweight,1871.2,72.4,59.7,261.1,-,tidak suka goreng-gorengan,train
+umum_0311,UMUM,P,,,,,,49.0,68.9,154.2,Overweight,1723.5,77.6,53.8,232.1,,,test
+umum_0312,UMUM,P,,,,,,40.0,44.5,144.2,Normal,1798.0,79.7,55.7,244.4,,,test
+umum_0313,UMUM,P,,,,,,66.0,65.2,161.7,Normal,1523.4,64.7,49.4,205.0,Alergi: laktosa & soy,hindari gorengan,train
+umum_0314,UMUM,L,,,,,,36.0,64.1,156.2,Overweight,1904.9,73.1,55.9,277.4,none,"mie instan, pedas",train
+umum_0315,UMUM,L,,,,,,41.0,76.9,169.5,Overweight,2228.1,105.0,72.9,288.0,,"mie instan, santan",train
+umum_0316,UMUM,P,,,,,,75.0,77.3,154.2,Obese,1300.0,56.3,39.1,180.6,,hindari mie instan,train
+umum_0317,UMUM,P,,,,,,68.0,83.8,153.0,Obese,2052.0,77.3,64.2,291.3,seafood,"pantangan daging merah, santan",train
+umum_0318,UMUM,L,,,,,,63.0,71.1,161.7,Overweight,1813.9,79.9,55.1,249.7,"alergi peanut, kedele","tidak suka santan, daging merah",train
+umum_0319,UMUM,L,,,,,,33.0,66.4,160.7,Overweight,1745.9,77.0,58.0,229.1,none,tidak ada,test
+umum_0320,UMUM,P,,,,,,42.0,41.6,136.4,Normal,1331.1,52.2,40.2,190.0,Alergi: kepiting,tidak suka kopi,train
+umum_0321,UMUM,P,,,,,,62.0,52.7,153.0,Normal,1786.4,78.6,51.4,252.4,alergi eggs dan cumi-cumi,none,train
+umum_0322,UMUM,L,,,,,,49.0,95.6,167.7,Obese,2197.5,108.3,64.1,296.9,Alergi: ikn,-,test
+umum_0323,UMUM,L,,,,,,21.0,68.5,155.7,Overweight,1574.2,76.3,43.9,218.4,,gorengan,train
+umum_0324,UMUM,P,,,,,,30.0,64.1,152.6,Overweight,1785.7,81.9,50.6,250.7,tidak ada,no allergies,test
+umum_0325,UMUM,L,,,,,,35.0,71.8,170.4,Normal,2879.9,119.6,91.5,394.5,Alergi: udang & cumi-cumi,no allergies,train
+umum_0326,UMUM,P,,,,,,23.0,60.6,150.9,Overweight,1779.1,75.5,58.8,237.0,sea food,,train
+umum_0327,UMUM,P,,,,,,25.0,40.5,159.2,Underweight,1977.9,89.9,61.9,265.3,none,"hindari santan, mie instan",train
+umum_0328,UMUM,L,,,,,,45.0,47.2,157.2,Normal,1858.2,79.8,54.2,262.8,allergic to egg,no allergies,train
+umum_0329,UMUM,L,,,,,,36.0,59.6,166.6,Normal,2547.5,96.5,78.0,364.8,none,mie instan,test
+umum_0330,UMUM,L,,,,,,49.0,76.8,165.6,Overweight,2394.7,108.9,79.3,311.3,,no allergies,train
+umum_0331,UMUM,L,,,,,,67.0,43.0,155.8,Underweight,1480.9,73.8,49.0,186.2,,santan,train
+umum_0332,UMUM,L,,,,,,35.0,66.3,162.1,Overweight,2007.6,79.0,66.0,274.4,,none,test
+umum_0333,UMUM,P,,,,,,27.0,47.7,157.8,Normal,1755.5,77.3,55.3,237.1,allergic to telur & cumi-cumi,"pantangan jeroan, gorengan",train
+umum_0334,UMUM,L,,,,,,23.0,55.2,167.9,Normal,1811.4,77.4,57.5,246.0,none,"tidak suka manis, goreng-gorengan",train
+umum_0335,UMUM,L,,,,,,53.0,40.2,154.6,Underweight,1541.8,62.1,49.9,211.1,kepiting,"hindari makanan manis, manis",train
+umum_0336,UMUM,L,,,,,,24.0,62.8,162.9,Normal,2731.6,119.0,78.6,387.0,-,"pantangan mie instan, manis",train
+umum_0337,UMUM,L,,,,,,32.0,60.2,168.6,Normal,2357.9,116.2,72.1,310.9,-,no allergies,train
+umum_0338,UMUM,P,,,,,,72.0,57.2,150.8,Overweight,1300.0,49.6,39.3,187.0,tidak ada,,train
+umum_0339,UMUM,P,,,,,,71.0,64.5,152.8,Overweight,1495.4,73.8,47.7,192.7,terigu,hindari jeroan,test
+umum_0340,UMUM,P,,,,,,63.0,74.0,146.9,Obese,1676.7,76.4,46.8,237.5,Alergi: tahu tempe,no allergies,train
+umum_0341,UMUM,P,,,,,,29.0,67.2,154.6,Overweight,1337.7,64.6,40.9,177.9,,-,test
+umum_0342,UMUM,L,,,,,,45.0,51.9,161.8,Normal,1768.0,81.2,57.5,231.4,milk,"tidak suka santan, daging merah",train
+umum_0343,UMUM,P,,,,,,52.0,41.3,147.4,Normal,1484.6,69.4,49.2,191.0,Alergi: squid,pantangan mie instan,train
+umum_0344,UMUM,P,,,,,,49.0,82.1,154.3,Obese,1395.7,64.6,41.9,190.1,-,pantangan pedas,train
+umum_0345,UMUM,P,,,,,,70.0,62.3,157.6,Overweight,1300.0,62.7,42.3,167.0,,,train
+umum_0346,UMUM,L,,,,,,29.0,68.2,157.1,Overweight,2350.6,99.4,71.4,327.7,-,tidak ada,train
+umum_0347,UMUM,L,,,,,,38.0,94.0,182.4,Overweight,2018.0,82.7,59.5,287.9,-,"hindari spicy, santan",test
+umum_0348,UMUM,P,,,,,,65.0,47.3,158.2,Normal,1507.1,56.6,45.9,216.8,none,none,train
+umum_0349,UMUM,P,,,,,,23.0,82.8,167.1,Overweight,1577.9,68.7,47.1,219.9,Alergi: susu sapi dan gandum,"pantangan goreng-gorengan, gorengan",train
+umum_0350,UMUM,P,,,,,,41.0,72.3,149.7,Obese,1318.2,49.8,37.9,194.4,alergi soy,hindari goreng-gorengan,train
+umum_0351,UMUM,P,,,,,,64.0,69.5,158.8,Overweight,1867.0,89.6,53.2,257.4,"allergic to cumi, crab",none,train
+umum_0352,UMUM,P,,,,,,61.0,56.6,154.7,Normal,1855.9,90.1,51.9,257.0,alergi cumi,"tidak suka gorengan, goreng-gorengan",train
+umum_0353,UMUM,P,,,,,,41.0,43.6,162.2,Underweight,1716.8,79.9,52.9,230.3,egg,"spicy, daging merah",test
+umum_0354,UMUM,P,,,,,,48.0,37.7,153.5,Underweight,1590.3,72.3,46.1,221.6,-,none,test
+umum_0355,UMUM,P,,,,,,54.0,60.9,148.7,Overweight,1300.0,49.5,37.5,191.2,"alergi telurr, susu",-,train
+umum_0356,UMUM,P,,,,,,29.0,52.4,164.0,Normal,2052.5,99.3,64.9,267.9,,tidak suka spicy,train
+umum_0357,UMUM,L,,,,,,40.0,75.4,167.3,Overweight,1897.8,75.3,53.0,279.9,no allergies,,test
+umum_0358,UMUM,P,,,,,,61.0,52.3,153.3,Normal,1989.8,85.8,59.5,277.7,no allergies,no allergies,train
+umum_0359,UMUM,P,,,,,,44.0,71.4,156.6,Overweight,1306.1,60.6,41.4,172.7,ikan,,train
+umum_0360,UMUM,P,,,,,,48.0,90.7,163.7,Obese,2360.9,94.0,74.0,329.8,-,"tidak suka goreng-gorengan, jeroan",train
+umum_0361,UMUM,L,,,,,,21.0,80.3,166.4,Overweight,2484.8,98.1,70.5,364.5,tidak ada,tidak suka santan,test
+umum_0362,UMUM,P,,,,,,28.0,62.0,159.2,Normal,2188.5,83.7,72.0,301.3,no allergies,-,test
+umum_0363,UMUM,L,,,,,,63.0,72.1,163.6,Overweight,1594.6,64.8,46.1,230.2,none,"tidak suka mie instan, spicy",train
+umum_0364,UMUM,L,,,,,,72.0,82.0,171.4,Overweight,1478.7,71.5,47.2,192.0,Alergi: susu; cumi-cumi,none,train
+umum_0365,UMUM,P,,,,,,38.0,60.2,152.7,Overweight,1669.9,79.2,52.8,219.4,Alergi: kacang tanah,"hindari goreng-gorengan, santan",train
+umum_0366,UMUM,L,,,,,,50.0,80.5,169.5,Overweight,2504.3,97.3,78.4,352.4,alergi kacang tanah dan cumi-cumi,-,train
+umum_0367,UMUM,L,,,,,,25.0,82.4,165.2,Obese,2478.8,111.4,69.4,352.1,-,"kopi, santan",train
+umum_0368,UMUM,P,,,,,,45.0,60.7,166.3,Normal,2066.2,90.4,59.7,291.7,kacang,hindari jeroan,train
+umum_0369,UMUM,P,,,,,,70.0,60.8,145.9,Overweight,1300.0,53.8,36.4,189.4,allergic to nuts & seafood,pantangan daging merah,train
+umum_0370,UMUM,P,,,,,,46.0,56.7,160.9,Normal,1536.1,60.2,46.5,219.3,none,none,test
+umum_0371,UMUM,L,,,,,,50.0,63.0,159.7,Normal,1672.7,62.9,49.9,242.9,telurr & squid,"pantangan daging merah, kopi",train
+umum_0372,UMUM,L,,,,,,48.0,51.0,157.2,Normal,1907.0,74.5,55.9,276.3,tidak ada,"pantangan makanan manis, santan",train
+umum_0373,UMUM,P,,,,,,66.0,75.1,151.2,Obese,1683.1,69.3,50.0,239.0,tidak ada,tidak ada,train
+umum_0374,UMUM,L,,,,,,73.0,58.9,159.7,Normal,1625.5,68.5,49.5,226.5,alergi wheat,,train
+umum_0375,UMUM,L,,,,,,27.0,53.9,168.5,Normal,2018.6,83.7,64.2,276.4,,,train
+umum_0376,UMUM,L,,,,,,38.0,80.4,178.3,Overweight,2717.0,128.8,79.5,371.6,"allergic to squid, telor",,train
+umum_0377,UMUM,L,,,,,,28.0,71.5,170.5,Normal,2955.5,134.9,91.6,398.0,allergic to cumi-cumi & tahu tempe,"tidak suka santan, kopi",train
+umum_0378,UMUM,P,,,,,,73.0,45.4,146.1,Normal,1300.0,54.1,39.5,181.9,ikn,none,train
+umum_0379,UMUM,P,,,,,,20.0,50.1,149.6,Normal,2272.1,90.1,63.3,335.5,no allergies,pantangan goreng-gorengan,train
+umum_0380,UMUM,P,,,,,,24.0,53.9,153.7,Normal,1846.4,82.4,60.8,242.4,tidak ada,no allergies,train
+umum_0381,UMUM,L,,,,,,25.0,67.4,164.7,Normal,2267.2,107.7,65.1,312.6,peanut,"pantangan kopi, jeroan",train
+umum_0382,UMUM,L,,,,,,56.0,65.7,169.1,Normal,1725.8,82.2,54.6,226.4,cumi-cumi; eggs,-,train
+umum_0383,UMUM,P,,,,,,25.0,66.0,156.5,Overweight,2117.2,105.1,60.5,288.2,-,"pantangan jeroan, goreng-gorengan",train
+umum_0384,UMUM,P,,,,,,56.0,56.8,160.1,Normal,1478.8,71.4,44.0,199.3,no allergies,no allergies,train
+umum_0385,UMUM,L,,,,,,44.0,60.8,168.4,Normal,2497.7,123.1,76.9,328.3,-,tidak ada,train
+umum_0386,UMUM,P,,,,,,31.0,56.4,151.5,Normal,1828.2,75.5,50.9,267.1,alergi kedelai,"hindari mie instan, manis",train
+umum_0387,UMUM,P,,,,,,37.0,69.2,162.5,Overweight,1839.3,84.6,54.8,251.9,no allergies,tidak suka kopi,train
+umum_0388,UMUM,P,,,,,,26.0,50.0,153.7,Normal,2234.7,85.4,67.3,322.0,allergic to milk,,train
+umum_0389,UMUM,L,,,,,,44.0,64.0,178.9,Normal,2124.1,100.6,62.8,289.2,alergi telur,pedas,train
+umum_0390,UMUM,P,,,,,,73.0,63.8,154.4,Overweight,1685.8,66.3,51.5,239.2,no allergies,"hindari gorengan, manis",train
+umum_0391,UMUM,P,,,,,,42.0,58.1,149.9,Overweight,1300.0,59.5,42.4,170.1,kacang tanah & telur,"hindari goreng-gorengan, daging merah",test
+umum_0392,UMUM,L,,,,,,25.0,68.5,181.8,Normal,3018.0,131.0,83.8,434.9,allergic to milk,"pantangan kopi, goreng-gorengan",train
+umum_0393,UMUM,L,,,,,,43.0,91.7,173.2,Obese,1883.8,82.7,54.5,265.7,-,none,train
+umum_0394,UMUM,L,,,,,,47.0,54.3,166.9,Normal,1830.4,84.7,56.6,245.6,allergic to kacang dan laktosa,"hindari santan, makanan manis",train
+umum_0395,UMUM,P,,,,,,44.0,65.0,152.8,Overweight,1698.7,65.0,50.6,245.8,no allergies,none,train
+umum_0396,UMUM,P,,,,,,34.0,71.1,157.1,Overweight,1872.9,79.6,55.1,264.5,tidak ada,none,test
+umum_0397,UMUM,L,,,,,,30.0,84.4,171.6,Overweight,2189.3,92.7,61.3,316.7,Alergi: gluten,no allergies,test
+umum_0398,UMUM,L,,,,,,58.0,64.1,165.8,Normal,1663.7,70.2,54.7,222.7,telurr,no allergies,train
+umum_0399,UMUM,L,,,,,,64.0,78.1,168.9,Overweight,1736.5,82.3,50.4,238.5,alergi crab,tidak ada,train
+umum_0400,UMUM,L,,,,,,26.0,97.1,174.5,Obese,2486.9,123.8,78.4,321.6,allergic to gandum,tidak ada,train
+umum_0401,UMUM,L,,,,,,37.0,51.8,165.9,Normal,2343.9,91.6,69.1,339.0,Alergi: crab dan gluten,"pantangan jeroan, daging merah",train
+umum_0402,UMUM,P,,,,,,65.0,44.1,147.7,Normal,1300.0,57.7,42.4,172.0,makanan laut,none,train
+umum_0403,UMUM,L,,,,,,20.0,46.8,156.5,Normal,2105.0,97.7,68.4,274.7,no allergies,goreng-gorengan,train
+umum_0404,UMUM,L,,,,,,70.0,61.3,167.8,Normal,2202.7,98.6,63.9,308.4,none,tidak ada,train
+umum_0405,UMUM,L,,,,,,40.0,70.4,166.2,Overweight,1515.8,67.4,42.2,216.7,no allergies,"santan, kopi",train
+umum_0406,UMUM,L,,,,,,34.0,44.6,165.7,Underweight,2283.6,86.2,75.5,314.8,no allergies,"tidak suka pedas, santan",train
+umum_0407,UMUM,L,,,,,,66.0,58.0,166.1,Normal,1718.2,80.4,52.2,231.7,allergic to fish & kedelai,"mie instan, goreng-gorengan",train
+umum_0408,UMUM,P,,,,,,57.0,38.6,146.2,Underweight,2073.4,89.0,63.3,286.8,"seafood, peanut",pantangan makanan manis,train
+umum_0409,UMUM,P,,,,,,51.0,60.7,155.6,Overweight,1591.9,73.3,49.7,213.0,,spicy,train
+umum_0410,UMUM,L,,,,,,25.0,84.7,182.7,Overweight,2663.7,106.3,84.1,370.4,alergi sea food & fish,-,test
+umum_0411,UMUM,L,,,,,,53.0,59.9,172.4,Normal,2405.8,94.8,73.6,341.1,kacang,"tidak suka kopi, makanan manis",train
+umum_0412,UMUM,P,,,,,,47.0,57.3,153.9,Normal,1965.4,81.3,65.1,263.5,-,no allergies,train
+umum_0413,UMUM,L,,,,,,38.0,50.3,169.5,Underweight,2392.9,102.4,70.0,338.4,Alergi: fish,none,train
+umum_0414,UMUM,P,,,,,,53.0,59.2,155.5,Normal,1954.1,85.4,57.5,273.8,allergic to kacang tanah,"hindari pedas, jeroan",train
+umum_0415,UMUM,L,,,,,,19.0,75.6,160.1,Overweight,2668.3,101.3,86.7,370.8,tidak ada,,train
+umum_0416,UMUM,P,,,,,,46.0,57.1,155.1,Normal,1750.3,73.8,56.2,237.3,,no allergies,train
+umum_0417,UMUM,L,,,,,,62.0,65.0,156.0,Overweight,1648.8,62.2,52.3,232.5,-,no allergies,train
+umum_0418,UMUM,P,,,,,,30.0,62.0,158.6,Normal,2416.3,107.9,77.4,322.0,kacang tanah,-,train
+umum_0419,UMUM,L,,,,,,61.0,85.7,168.2,Obese,1609.0,61.4,51.8,224.3,kacang dan kepiting,pantangan kopi,train
+umum_0420,UMUM,L,,,,,,58.0,61.5,171.0,Normal,1892.3,92.3,61.7,242.0,tidak ada,"tidak suka spicy, mie instan",train
+umum_0421,UMUM,P,,,,,,21.0,40.8,151.5,Underweight,2417.3,113.5,75.0,322.1,none,-,train
+umum_0422,UMUM,P,,,,,,21.0,63.9,152.4,Overweight,1847.5,78.7,60.8,246.5,none,hindari gorengan,train
+umum_0423,UMUM,L,,,,,,73.0,42.3,162.6,Underweight,1801.2,87.7,54.4,240.2,crab,pantangan kopi,test
+umum_0424,UMUM,L,,,,,,66.0,73.7,164.7,Overweight,1605.6,67.2,50.8,220.0,Alergi: makanan laut,no allergies,train
+umum_0425,UMUM,P,,,,,,28.0,66.1,154.6,Overweight,2088.1,93.6,62.6,287.6,"ikn, seafood",no allergies,test
+umum_0426,UMUM,L,,,,,,62.0,61.8,163.1,Normal,2037.0,96.9,66.1,263.6,,hindari spicy,train
+umum_0427,UMUM,L,,,,,,57.0,77.5,164.9,Overweight,2036.9,97.6,60.3,276.1,Alergi: makanan laut,-,train
+umum_0428,UMUM,P,,,,,,65.0,59.0,159.2,Normal,1664.0,67.8,47.0,242.4,Alergi: kepiting,,train
+umum_0429,UMUM,L,,,,,,33.0,55.4,176.6,Underweight,2607.1,102.3,80.7,367.9,,"pantangan jeroan, makanan manis",train
+umum_0430,UMUM,L,,,,,,44.0,53.8,156.7,Normal,1552.0,75.6,49.4,201.2,allergic to ebi,none,train
+umum_0431,UMUM,L,,,,,,47.0,53.7,162.2,Normal,1785.5,84.1,51.6,246.1,,no allergies,train
+umum_0432,UMUM,P,,,,,,52.0,64.2,155.9,Overweight,1300.0,64.3,41.7,166.8,none,-,test
+umum_0433,UMUM,P,,,,,,49.0,46.9,161.5,Underweight,2118.2,85.7,59.6,309.8,allergic to tahu tempe; seafood,tidak suka santan,test
+umum_0434,UMUM,L,,,,,,57.0,74.7,165.8,Overweight,2253.8,93.2,71.3,309.7,"alergi wheat, makanan laut",-,train
+umum_0435,UMUM,P,,,,,,37.0,48.9,147.3,Normal,1681.3,72.4,54.3,225.7,none,tidak ada,train
+umum_0436,UMUM,P,,,,,,58.0,68.8,156.8,Overweight,1300.0,50.9,41.2,181.4,nuts,"makanan manis, gorengan",train
+umum_0437,UMUM,L,,,,,,56.0,50.4,160.3,Normal,1420.4,58.5,45.4,194.4,seafood,none,train
+umum_0438,UMUM,L,,,,,,43.0,51.8,156.1,Normal,1968.2,94.7,62.3,257.2,no allergies,"tidak suka kopi, spicy",train
+umum_0439,UMUM,P,,,,,,60.0,51.2,157.2,Normal,1991.8,80.3,63.9,273.8,-,pantangan jeroan,train
+umum_0440,UMUM,L,,,,,,67.0,66.5,168.6,Normal,1886.4,86.5,54.3,262.9,Alergi: sea food,kopi,train
+umum_0441,UMUM,P,,,,,,68.0,76.5,171.6,Overweight,1506.6,68.1,44.3,208.8,none,none,train
+umum_0442,UMUM,L,,,,,,51.0,78.6,173.9,Overweight,2193.3,86.9,72.9,297.3,Alergi: laktosa,tidak suka makanan manis,train
+umum_0443,UMUM,P,,,,,,51.0,74.0,150.2,Obese,1300.0,52.9,39.5,183.3,no allergies,tidak suka kopi,train
+umum_0444,UMUM,P,,,,,,72.0,65.5,154.9,Overweight,1509.2,71.2,46.3,202.1,no allergies,"goreng-gorengan, jeroan",train
+umum_0445,UMUM,L,,,,,,32.0,81.8,171.0,Overweight,2117.6,96.5,64.3,288.2,ikan & tahu tempe,pantangan gorengan,train
+umum_0446,UMUM,P,,,,,,21.0,46.9,157.8,Normal,2010.5,86.2,64.8,270.7,milk,spicy,train
+umum_0447,UMUM,L,,,,,,38.0,55.3,167.6,Normal,1937.7,84.4,58.8,267.7,Alergi: seafood; kacng,"manis, pedas",test
+umum_0448,UMUM,P,,,,,,28.0,45.3,157.5,Underweight,2454.5,121.8,70.2,334.0,alergi telor; gandum,no allergies,train
+umum_0449,UMUM,P,,,,,,33.0,59.4,148.0,Overweight,1446.7,64.8,42.5,201.2,-,none,train
+umum_0450,UMUM,P,,,,,,56.0,46.8,146.7,Normal,1529.8,70.8,43.4,214.1,none,"tidak suka manis, gorengan",train
+umum_0451,UMUM,P,,,,,,73.0,75.7,160.0,Overweight,1667.7,68.4,52.3,230.8,Alergi: udnag,,train
+umum_0452,UMUM,P,,,,,,45.0,71.7,159.5,Overweight,1311.0,54.6,37.0,190.0,,none,train
+umum_0453,UMUM,P,,,,,,60.0,58.8,154.0,Normal,1466.5,69.8,42.5,201.3,kedele,mie instan,train
+umum_0454,UMUM,L,,,,,,32.0,57.4,173.6,Normal,2074.0,101.0,60.8,280.8,tahu tempe,-,train
+umum_0455,UMUM,L,,,,,,62.0,44.3,165.5,Underweight,1791.7,73.2,50.1,262.0,-,"pantangan mie instan, makanan manis",train
+umum_0456,UMUM,L,,,,,,54.0,82.1,166.2,Overweight,2468.4,109.9,71.8,345.7,,goreng-gorengan,train
+umum_0457,UMUM,L,,,,,,67.0,83.6,168.2,Overweight,1806.9,72.9,55.4,254.1,telur dan udnag,tidak suka pedas,train
+umum_0458,UMUM,L,,,,,,57.0,62.2,174.5,Normal,1939.3,73.3,55.0,287.8,none,none,train
+umum_0459,UMUM,L,,,,,,39.0,66.8,153.1,Overweight,1644.6,75.6,45.9,232.3,Alergi: kepiting dan peanut,"pantangan makanan manis, manis",train
+umum_0460,UMUM,L,,,,,,53.0,65.8,163.5,Normal,2218.1,97.8,69.7,300.0,Alergi: ebi,pantangan santan,train
+umum_0461,UMUM,L,,,,,,70.0,60.2,155.2,Normal,1856.8,86.5,56.8,250.0,none,no allergies,train
+umum_0462,UMUM,P,,,,,,54.0,68.1,156.0,Overweight,1680.3,76.9,55.4,218.7,-,pantangan daging merah,train
+umum_0463,UMUM,P,,,,,,73.0,64.8,152.3,Overweight,1300.0,55.0,42.9,173.5,tidak ada,pantangan goreng-gorengan,train
+umum_0464,UMUM,P,,,,,,24.0,44.3,150.2,Normal,2146.3,107.0,62.2,289.6,no allergies,"kopi, mie instan",train
+umum_0465,UMUM,P,,,,,,48.0,68.6,152.9,Overweight,1483.3,65.8,48.5,195.8,Alergi: cumi-cumi,none,train
+umum_0466,UMUM,L,,,,,,72.0,57.1,169.5,Normal,1455.9,60.7,42.6,207.3,none,makanan manis,train
+umum_0467,UMUM,L,,,,,,25.0,52.5,148.3,Normal,2109.9,98.0,65.2,282.8,none,hindari makanan manis,train
+umum_0468,UMUM,L,,,,,,25.0,70.8,165.9,Overweight,2534.1,120.5,71.0,353.4,alergi squid,hindari santan,train
+umum_0469,UMUM,P,,,,,,38.0,44.8,155.6,Normal,1850.5,84.9,54.4,255.4,peanut dan sea food,tidak suka santan,train
+umum_0470,UMUM,L,,,,,,72.0,70.5,164.1,Overweight,1724.2,80.1,48.1,242.8,allergic to shrimp,-,train
+umum_0471,UMUM,L,,,,,,55.0,48.7,164.1,Underweight,2345.0,114.6,71.9,309.9,,"tidak suka goreng-gorengan, jeroan",test
+umum_0472,UMUM,L,,,,,,61.0,90.3,164.6,Obese,2266.0,110.1,68.6,302.1,no allergies,none,train
+umum_0473,UMUM,L,,,,,,22.0,57.7,159.6,Normal,2076.5,86.1,66.2,284.1,,mie instan,train
+umum_0474,UMUM,L,,,,,,42.0,49.7,164.2,Underweight,2295.1,92.4,68.2,328.0,alergi kepiting,none,test
+umum_0475,UMUM,P,,,,,,41.0,45.1,149.7,Normal,1405.4,69.5,41.5,188.5,no allergies,-,train
+umum_0476,UMUM,P,,,,,,61.0,69.3,160.2,Overweight,1660.3,77.0,49.0,227.9,Alergi: eggs,hindari santan,train
+umum_0477,UMUM,P,,,,,,69.0,52.7,154.6,Normal,1347.3,64.3,37.8,187.5,squid & telurr,"santan, makanan manis",train
+umum_0478,UMUM,L,,,,,,28.0,90.0,174.7,Overweight,3031.7,127.4,90.7,426.4,none,,train
+umum_0479,UMUM,L,,,,,,56.0,55.6,170.9,Normal,1569.5,72.0,51.5,204.6,udnag,daging merah,test
+umum_0480,UMUM,L,,,,,,19.0,53.3,155.8,Normal,1741.2,70.5,51.1,249.8,tidak ada,"pantangan gorengan, goreng-gorengan",train
+umum_0481,UMUM,P,,,,,,70.0,49.3,148.9,Normal,1854.4,76.3,58.9,254.8,tidak ada,-,train
+umum_0482,UMUM,P,,,,,,48.0,71.9,151.9,Obese,1300.0,60.0,37.1,181.5,tidak ada,makanan manis,train
+umum_0483,UMUM,L,,,,,,21.0,67.2,165.4,Normal,2599.1,106.1,74.9,375.1,allergic to shrimp,"makanan manis, mie instan",test
+umum_0484,UMUM,P,,,,,,27.0,62.1,153.8,Overweight,1781.7,82.6,57.5,233.6,Alergi: sea food; shrimp,"pantangan gorengan, mie instan",test
+umum_0485,UMUM,L,,,,,,46.0,86.9,177.7,Overweight,2451.4,104.1,80.9,326.7,-,tidak ada,train
+umum_0486,UMUM,L,,,,,,42.0,60.9,171.4,Normal,2033.0,92.7,63.4,273.0,-,-,test
+umum_0487,UMUM,L,,,,,,32.0,85.5,155.3,Obese,1763.1,80.8,50.7,245.8,-,hindari goreng-gorengan,train
+umum_0488,UMUM,P,,,,,,65.0,69.9,156.4,Overweight,1858.1,76.9,52.4,269.6,none,tidak ada,test
+umum_0489,UMUM,P,,,,,,73.0,60.9,156.6,Normal,1630.4,68.7,51.2,223.8,none,-,train
+umum_0490,UMUM,L,,,,,,33.0,53.9,165.6,Normal,1695.8,79.4,47.7,237.2,sea food & dairy,-,train
+umum_0491,UMUM,L,,,,,,62.0,58.8,154.5,Normal,1476.2,56.8,45.1,210.7,"allergic to cumi-cumi, crab",-,train
+umum_0492,UMUM,P,,,,,,49.0,62.2,150.1,Overweight,1384.9,55.4,42.1,196.1,tidak ada,no allergies,train
+umum_0493,UMUM,L,,,,,,19.0,76.0,165.6,Overweight,2092.0,101.4,64.4,276.6,none,,train
+umum_0494,UMUM,P,,,,,,50.0,52.4,153.2,Normal,1657.8,68.8,49.0,235.4,susu sapi,none,train
+umum_0495,UMUM,L,,,,,,48.0,82.4,165.9,Overweight,1647.7,63.7,51.3,232.8,none,tidak suka spicy,train
+umum_0496,UMUM,L,,,,,,73.0,67.6,175.5,Normal,1657.4,79.4,49.4,223.8,tidak ada,"pantangan jeroan, mie instan",train
+umum_0497,UMUM,P,,,,,,58.0,52.8,148.6,Normal,2007.2,87.8,66.8,263.8,alergi gandum dan egg,"pantangan gorengan, pedas",train
+umum_0498,UMUM,L,,,,,,21.0,67.7,163.6,Overweight,2195.7,85.2,63.7,320.4,,spicy,train
+umum_0499,UMUM,P,,,,,,39.0,54.1,149.5,Normal,1963.8,77.3,58.3,282.5,allergic to laktosa; ikn,"tidak suka santan, jeroan",train
+umum_0500,UMUM,L,,,,,,25.0,45.6,168.8,Underweight,2422.9,106.2,70.2,341.5,alergi kacang,tidak ada,test
+umum_0501,UMUM,P,,,,,,66.0,57.9,164.6,Normal,1867.9,80.0,61.9,247.7,-,-,test
+umum_0502,UMUM,L,,,,,,27.0,54.4,157.6,Normal,2450.2,120.1,70.8,333.1,-,"jeroan, santan",train
+umum_0503,UMUM,L,,,,,,45.0,82.7,170.5,Overweight,2317.2,110.1,72.5,306.1,allergic to eggs,makanan manis,train
+umum_0504,UMUM,P,,,,,,22.0,67.0,157.5,Overweight,1381.3,56.8,43.3,191.0,-,tidak ada,train
+umum_0505,UMUM,P,,,,,,37.0,64.5,156.3,Overweight,1508.2,69.9,43.3,209.7,none,tidak ada,train
+umum_0506,UMUM,P,,,,,,59.0,42.8,153.5,Underweight,1962.5,94.2,62.3,256.2,none,"pantangan kopi, goreng-gorengan",train
+umum_0507,UMUM,L,,,,,,36.0,68.9,177.2,Normal,1988.9,91.4,59.4,272.3,,,train
+umum_0508,UMUM,L,,,,,,23.0,66.4,173.4,Normal,2029.8,95.1,65.1,265.9,no allergies,pantangan goreng-gorengan,test
+umum_0509,UMUM,P,,,,,,71.0,96.0,155.2,Obese,1434.4,55.2,45.4,201.4,nuts & telurr,-,train
+umum_0510,UMUM,P,,,,,,27.0,71.0,158.0,Overweight,2186.9,91.2,63.6,312.3,alergi udang & gandum,-,train
+umum_0511,UMUM,L,,,,,,47.0,65.8,165.4,Normal,1776.8,82.0,54.7,239.1,Alergi: gandum & kepiting,no allergies,train
+umum_0512,UMUM,L,,,,,,52.0,65.0,163.6,Normal,1713.1,74.8,51.6,237.3,alergi kacang; kedele,,test
+umum_0513,UMUM,P,,,,,,36.0,44.0,157.8,Underweight,2368.5,90.0,66.9,351.7,tidak ada,,train
+umum_0514,UMUM,P,,,,,,67.0,46.3,154.2,Normal,1658.5,75.1,47.2,233.3,allergic to kedele; kacang,no allergies,train
+umum_0515,UMUM,L,,,,,,60.0,76.1,168.9,Overweight,2278.3,90.3,72.1,317.1,,-,train
+umum_0516,UMUM,P,,,,,,34.0,54.5,153.8,Normal,2018.3,88.8,61.3,277.8,kacang tanah dan gandum,"tidak suka makanan manis, daging merah",test
+umum_0517,UMUM,P,,,,,,71.0,54.8,148.6,Normal,1738.8,72.9,57.8,231.7,-,tidak suka manis,test
+umum_0518,UMUM,P,,,,,,22.0,48.5,145.3,Normal,1991.8,94.4,56.2,277.2,allergic to crab & wheat,,test
+umum_0519,UMUM,P,,,,,,60.0,34.3,146.3,Underweight,1807.8,71.5,58.2,249.6,squid,none,train
+umum_0520,UMUM,P,,,,,,55.0,67.4,160.8,Overweight,1442.7,60.4,42.3,205.2,alergi telur,-,train
+umum_0521,UMUM,P,,,,,,59.0,79.5,159.3,Obese,1572.5,73.1,48.9,210.1,"alergi makanan laut, gandum",,train
+umum_0522,UMUM,P,,,,,,44.0,75.1,162.8,Overweight,1876.4,89.9,62.5,238.6,-,"hindari makanan manis, spicy",train
+umum_0523,UMUM,L,,,,,,70.0,77.5,169.7,Overweight,1410.9,61.6,45.2,189.4,no allergies,pantangan manis,train
+umum_0524,UMUM,P,,,,,,63.0,46.4,170.3,Underweight,2230.2,95.4,64.9,316.2,alergi wheat,no allergies,train
+umum_0525,UMUM,L,,,,,,38.0,49.3,171.3,Underweight,2149.4,103.4,61.2,296.2,no allergies,no allergies,train
+umum_0526,UMUM,P,,,,,,24.0,61.9,154.7,Overweight,2050.9,77.0,57.9,305.5,,no allergies,test
+umum_0527,UMUM,P,,,,,,23.0,64.2,153.9,Overweight,2094.5,82.4,61.5,302.8,no allergies,none,train
+umum_0528,UMUM,P,,,,,,47.0,71.4,159.9,Overweight,1300.0,52.1,43.2,175.7,tidak ada,"santan, pedas",train
+umum_0529,UMUM,L,,,,,,63.0,61.9,160.1,Normal,1551.4,73.2,49.2,203.9,Alergi: cumi-cumi,,train
+umum_0530,UMUM,L,,,,,,53.0,77.0,163.3,Overweight,1778.5,74.5,52.8,251.5,makanan laut & ikn,-,train
+umum_0531,UMUM,L,,,,,,53.0,67.0,172.9,Normal,2317.6,115.7,74.3,296.5,,no allergies,train
+umum_0532,UMUM,L,,,,,,28.0,53.9,164.1,Normal,2231.6,108.5,67.6,297.2,ikan,mie instan,train
+umum_0533,UMUM,P,,,,,,31.0,66.2,149.6,Overweight,1552.8,65.3,46.6,218.0,-,"tidak suka makanan manis, manis",train
+umum_0534,UMUM,P,,,,,,73.0,78.8,156.7,Obese,1300.0,59.4,37.6,181.0,eggs,hindari goreng-gorengan,test
+umum_0535,UMUM,P,,,,,,49.0,41.0,160.2,Underweight,2223.1,105.1,64.3,306.0,tidak ada,none,train
+umum_0536,UMUM,L,,,,,,25.0,83.5,171.7,Overweight,2552.6,116.5,79.6,342.5,no allergies,,train
+umum_0537,UMUM,P,,,,,,67.0,54.0,160.2,Normal,1587.2,71.0,52.8,207.1,none,"tidak suka gorengan, mie instan",train
+umum_0538,UMUM,L,,,,,,61.0,84.0,175.5,Overweight,1625.4,75.2,46.8,225.9,"allergic to udnag, kacang",makanan manis,train
+umum_0539,UMUM,P,,,,,,69.0,44.8,149.4,Normal,1426.8,61.1,47.5,188.7,no allergies,tidak suka goreng-gorengan,train
+umum_0540,UMUM,L,,,,,,27.0,71.4,168.7,Overweight,1651.7,64.3,51.6,232.6,alergi udnag; soy,tidak ada,train
+umum_0541,UMUM,L,,,,,,52.0,82.7,170.0,Overweight,1941.3,76.4,64.0,264.9,,hindari spicy,train
+umum_0542,UMUM,L,,,,,,54.0,69.2,166.9,Normal,1786.7,74.6,56.1,245.9,-,,test
+umum_0543,UMUM,P,,,,,,38.0,55.9,160.7,Normal,2258.8,99.7,70.0,307.5,fish,"daging merah, pedas",train
+umum_0544,UMUM,L,,,,,,44.0,62.8,166.9,Normal,2275.1,90.3,71.7,317.2,Alergi: ikan,,test
+umum_0545,UMUM,L,,,,,,62.0,62.5,169.3,Normal,2336.2,107.3,73.6,311.1,Alergi: susu sapi; sea food,no allergies,train
+umum_0546,UMUM,P,,,,,,72.0,81.5,163.9,Obese,2017.1,91.9,58.7,280.4,none,,train
+umum_0547,UMUM,P,,,,,,21.0,55.1,154.8,Normal,1883.7,87.0,55.3,259.4,none,,train
+umum_0548,UMUM,P,,,,,,24.0,52.6,156.1,Normal,2301.9,99.0,67.4,324.9,allergic to terigu & seafood,pantangan gorengan,train
+umum_0549,UMUM,P,,,,,,55.0,49.8,158.7,Normal,1809.6,85.3,55.4,242.4,-,no allergies,train
+umum_0550,UMUM,L,,,,,,37.0,69.4,161.5,Overweight,1771.3,71.7,52.3,253.3,-,"pantangan mie instan, kopi",test
+umum_0551,UMUM,P,,,,,,75.0,76.0,160.5,Overweight,1657.8,74.2,49.3,229.4,kepiting,tidak ada,train
+umum_0552,UMUM,P,,,,,,49.0,60.5,155.7,Normal,2003.9,84.6,64.5,271.3,,hindari mie instan,train
+umum_0553,UMUM,P,,,,,,66.0,70.4,159.5,Overweight,1867.4,79.3,62.0,248.0,tidak ada,tidak suka pedas,train
+umum_0554,UMUM,L,,,,,,26.0,67.1,164.4,Normal,1963.3,79.9,58.7,278.8,alergi gandum dan milk,-,train
+umum_0555,UMUM,P,,,,,,31.0,52.6,152.0,Normal,2006.7,90.5,65.7,263.4,alergi cumi,"hindari mie instan, spicy",train
+umum_0556,UMUM,P,,,,,,75.0,36.5,151.1,Underweight,1909.3,89.1,61.0,251.0,none,none,train
+umum_0557,UMUM,L,,,,,,45.0,65.2,170.1,Normal,2340.9,110.9,72.8,310.6,-,"pantangan kopi, daging merah",train
+umum_0558,UMUM,P,,,,,,75.0,42.9,148.1,Normal,1300.0,56.1,37.8,183.7,-,tidak ada,test
+umum_0559,UMUM,P,,,,,,40.0,60.7,162.4,Normal,1619.4,69.6,52.7,216.7,tidak ada,pantangan gorengan,train
+umum_0560,UMUM,P,,,,,,56.0,59.9,155.7,Normal,1505.4,60.4,45.9,212.7,none,"tidak suka mie instan, gorengan",test
+umum_0561,UMUM,L,,,,,,72.0,69.3,163.6,Overweight,1695.1,70.6,54.4,230.8,none,no allergies,train
+umum_0562,UMUM,L,,,,,,24.0,54.7,162.6,Normal,2535.2,103.0,82.9,344.3,-,-,train
+umum_0563,UMUM,L,,,,,,21.0,79.1,171.1,Overweight,1842.3,71.6,53.1,269.5,allergic to kedele & kepiting,,train
+umum_0564,UMUM,L,,,,,,40.0,57.3,163.8,Normal,2421.3,115.6,75.6,319.7,none,tidak ada,train
+umum_0565,UMUM,L,,,,,,75.0,64.0,161.1,Normal,1931.8,94.4,61.9,249.4,tidak ada,pantangan pedas,train
+umum_0566,UMUM,P,,,,,,51.0,74.4,155.5,Obese,1300.0,65.0,42.7,163.9,alergi cumi-cumi & egg,none,train
+umum_0567,UMUM,P,,,,,,49.0,42.5,157.8,Underweight,2043.0,85.4,62.6,284.6,-,"tidak suka goreng-gorengan, manis",train
+umum_0568,UMUM,P,,,,,,68.0,64.3,155.5,Overweight,1521.9,68.1,42.9,216.0,"cumi, fish","hindari kopi, jeroan",train
+umum_0569,UMUM,P,,,,,,59.0,56.7,155.5,Normal,1450.3,62.3,47.7,192.9,allergic to kacang tanah,-,train
+umum_0570,UMUM,P,,,,,,22.0,44.6,164.0,Underweight,1839.0,87.2,54.4,250.1,-,pedas,train
+umum_0571,UMUM,P,,,,,,55.0,49.3,150.8,Normal,1780.4,67.7,55.0,253.7,allergic to makanan laut,-,test
+umum_0572,UMUM,L,,,,,,47.0,53.8,166.9,Normal,2282.9,105.0,74.7,297.8,kedele,hindari manis,train
+umum_0573,UMUM,P,,,,,,32.0,61.5,153.7,Overweight,1494.9,63.4,44.7,209.7,-,hindari santan,train
+umum_0574,UMUM,L,,,,,,74.0,48.6,165.9,Underweight,1764.4,79.6,55.3,237.0,telor,,train
+umum_0575,UMUM,L,,,,,,43.0,65.9,153.8,Overweight,2103.8,87.0,62.9,297.5,Alergi: soy dan dairy,none,train
+umum_0576,UMUM,P,,,,,,73.0,71.8,151.1,Obese,1808.2,82.8,51.1,254.4,dairy,,train
+umum_0577,UMUM,P,,,,,,30.0,52.5,157.4,Normal,2257.1,105.8,73.1,294.1,allergic to udnag,no allergies,train
+umum_0578,UMUM,P,,,,,,41.0,71.4,161.4,Overweight,1838.7,73.5,56.6,258.8,none,tidak suka makanan manis,train
+umum_0579,UMUM,P,,,,,,55.0,81.1,168.1,Overweight,1900.8,88.3,54.1,265.3,allergic to susu,gorengan,test
+umum_0580,UMUM,L,,,,,,23.0,90.7,174.7,Overweight,2749.3,124.1,84.3,373.5,Alergi: susu sapi,"jeroan, daging merah",train
+umum_0581,UMUM,P,,,,,,63.0,72.9,156.4,Overweight,1452.2,69.2,47.8,186.2,cumi dan seafood,tidak ada,train
+umum_0582,UMUM,L,,,,,,46.0,46.2,165.5,Underweight,2188.5,92.5,63.8,311.0,-,,train
+umum_0583,UMUM,P,,,,,,49.0,50.1,155.5,Normal,1640.4,74.4,53.8,214.6,none,jeroan,test
+umum_0584,UMUM,L,,,,,,46.0,63.3,165.3,Normal,1999.1,76.3,63.0,281.6,allergic to ikan,-,train
+umum_0585,UMUM,L,,,,,,75.0,77.4,164.2,Overweight,1588.0,73.6,50.5,209.8,-,-,train
+umum_0586,UMUM,L,,,,,,60.0,88.9,166.9,Obese,2264.9,99.1,74.6,299.4,none,pantangan spicy,train
+umum_0587,UMUM,L,,,,,,57.0,50.4,170.4,Underweight,1772.7,81.4,51.4,246.0,none,tidak suka makanan manis,train
+umum_0588,UMUM,P,,,,,,37.0,59.7,151.3,Overweight,1666.5,71.2,47.1,239.5,no allergies,none,train
+umum_0589,UMUM,L,,,,,,21.0,85.5,169.5,Overweight,2962.1,122.6,94.8,404.5,,none,train
+umum_0590,UMUM,L,,,,,,41.0,57.2,176.1,Underweight,2048.2,89.8,58.8,289.9,,mie instan,train
+umum_0591,UMUM,P,,,,,,34.0,46.0,155.1,Normal,1681.0,82.9,52.9,218.4,-,"hindari pedas, makanan manis",train
+umum_0592,UMUM,P,,,,,,51.0,45.3,156.4,Normal,1566.8,69.5,50.2,209.2,udang & squid,tidak suka kopi,train
+umum_0593,UMUM,P,,,,,,47.0,47.6,158.2,Normal,2041.7,80.3,58.5,298.6,no allergies,no allergies,train
+umum_0594,UMUM,P,,,,,,57.0,68.2,155.9,Overweight,1300.0,59.4,38.6,178.6,Alergi: ikan dan gluten,none,train
+umum_0595,UMUM,L,,,,,,67.0,80.1,169.9,Overweight,2027.0,87.7,61.0,281.8,no allergies,no allergies,train
+umum_0596,UMUM,L,,,,,,75.0,75.6,170.4,Overweight,1342.7,54.1,41.5,188.2,tidak ada,"daging merah, manis",train
+umum_0597,UMUM,L,,,,,,46.0,63.5,159.3,Overweight,1811.2,82.0,54.8,247.5,Alergi: ikn; egg,-,test
+umum_0598,UMUM,L,,,,,,27.0,55.1,170.3,Normal,2315.1,101.4,70.2,319.3,shrimp; peanut,pantangan daging merah,train
+umum_0599,UMUM,L,,,,,,21.0,81.4,169.7,Overweight,2866.3,142.9,93.9,362.4,"alergi peanut, wheat",no allergies,train
+umum_0600,UMUM,P,,,,,,27.0,66.9,154.6,Overweight,1346.0,51.8,43.9,186.0,allergic to seafood,,test
+umum_0601,UMUM,P,,,,,,75.0,57.1,151.3,Normal,1554.0,61.9,48.2,218.1,allergic to makanan laut dan kedele,-,train
+umum_0602,UMUM,L,,,,,,29.0,105.9,175.3,Obese,2630.7,118.1,82.9,353.0,Alergi: soy,"mie instan, goreng-gorengan",test
+umum_0603,UMUM,P,,,,,,55.0,64.1,158.4,Overweight,1300.0,63.6,43.0,164.7,"allergic to crab, squid",none,train
+umum_0604,UMUM,P,,,,,,35.0,54.6,157.3,Normal,1565.2,63.3,43.7,229.6,allergic to kacng,,train
+umum_0605,UMUM,L,,,,,,22.0,52.4,171.6,Underweight,2882.8,133.9,88.1,388.5,none,tidak suka makanan manis,train
+umum_0606,UMUM,P,,,,,,67.0,53.4,155.2,Normal,1966.4,85.5,56.4,279.1,allergic to fish,-,test
+umum_0607,UMUM,L,,,,,,44.0,51.6,163.8,Normal,2239.2,98.7,73.1,296.6,no allergies,santan,train
+umum_0608,UMUM,L,,,,,,65.0,60.3,157.0,Normal,2144.1,103.0,68.8,278.1,,tidak ada,train
+umum_0609,UMUM,L,,,,,,62.0,42.1,155.4,Underweight,1504.9,60.5,42.1,221.1,soy,"pantangan mie instan, daging merah",train
+umum_0610,UMUM,P,,,,,,55.0,64.7,151.1,Overweight,1609.1,73.5,46.3,224.6,-,"pantangan mie instan, gorengan",train
+umum_0611,UMUM,L,,,,,,54.0,56.5,156.2,Normal,1733.3,84.9,52.5,230.2,no allergies,tidak ada,train
+umum_0612,UMUM,P,,,,,,60.0,45.8,152.2,Normal,1504.0,67.2,42.2,213.9,allergic to sea food & kepiting,,train
+umum_0613,UMUM,L,,,,,,33.0,63.8,163.3,Normal,2114.8,92.9,62.6,295.0,none,no allergies,train
+umum_0614,UMUM,L,,,,,,69.0,60.4,173.6,Normal,2013.8,92.3,57.6,281.5,Alergi: laktosa,,train
+umum_0615,UMUM,P,,,,,,50.0,49.6,156.0,Normal,1835.8,90.7,54.0,246.8,tidak ada,kopi,train
+umum_0616,UMUM,L,,,,,,28.0,77.4,171.9,Overweight,2393.3,102.7,76.6,323.4,Alergi: egg,tidak suka pedas,train
+umum_0617,UMUM,P,,,,,,54.0,49.0,155.0,Normal,1997.1,77.0,58.8,290.0,alergi ikan,no allergies,train
+umum_0618,UMUM,P,,,,,,28.0,58.0,150.7,Overweight,1941.3,83.0,57.7,272.5,Alergi: ikn; suus,none,train
+umum_0619,UMUM,P,,,,,,43.0,36.8,151.6,Underweight,1793.8,73.5,54.5,252.3,tidak ada,pantangan daging merah,train
+umum_0620,UMUM,L,,,,,,55.0,51.7,156.7,Normal,1636.8,71.7,52.5,219.4,allergic to squid,no allergies,train
+umum_0621,UMUM,P,,,,,,61.0,56.1,148.7,Overweight,1431.0,65.3,42.9,196.0,"crab, telur","santan, jeroan",train
+umum_0622,UMUM,L,,,,,,30.0,85.2,164.8,Obese,2807.6,109.7,88.9,392.0,no allergies,"tidak suka mie instan, spicy",train
+umum_0623,UMUM,P,,,,,,75.0,66.6,160.2,Overweight,1302.0,58.3,43.0,170.5,ikan dan sea food,none,train
+umum_0624,UMUM,P,,,,,,60.0,45.7,160.8,Underweight,1630.9,74.7,45.4,230.8,alergi wheat,"hindari santan, mie instan",train
+umum_0625,UMUM,L,,,,,,47.0,71.3,168.1,Overweight,1760.5,73.2,50.8,252.7,tidak ada,daging merah,train
+umum_0626,UMUM,L,,,,,,56.0,76.7,167.9,Overweight,1499.7,69.9,49.6,193.5,,"daging merah, kopi",train
+umum_0627,UMUM,P,,,,,,25.0,75.7,161.4,Overweight,1473.1,68.1,44.3,200.5,Alergi: kacang tanah dan seafood,,test
+umum_0628,UMUM,L,,,,,,42.0,95.0,169.4,Obese,1924.2,85.9,63.9,251.3,no allergies,,test
+umum_0629,UMUM,L,,,,,,25.0,45.2,161.6,Underweight,1892.5,74.4,59.3,265.3,tidak ada,goreng-gorengan,train
+umum_0630,UMUM,L,,,,,,58.0,67.5,166.4,Normal,2226.3,105.0,68.5,297.4,-,"tidak suka kopi, jeroan",train
+umum_0631,UMUM,L,,,,,,66.0,56.1,156.7,Normal,2028.2,82.5,63.8,281.0,tidak ada,hindari mie instan,train
+umum_0632,UMUM,L,,,,,,65.0,54.8,168.0,Normal,1680.2,71.4,48.8,238.8,tidak ada,,test
+umum_0633,UMUM,P,,,,,,74.0,60.3,148.6,Overweight,1300.0,59.3,42.9,169.3,-,none,train
+umum_0634,UMUM,P,,,,,,21.0,76.9,166.4,Overweight,2360.8,116.4,70.1,316.1,Alergi: kepiting & gluten,"pantangan pedas, kopi",train
+umum_0635,UMUM,L,,,,,,63.0,70.7,160.2,Overweight,1545.6,60.5,47.9,218.2,-,"tidak suka manis, gorengan",test
+umum_0636,UMUM,P,,,,,,40.0,41.7,152.0,Underweight,2079.7,89.1,66.1,282.1,-,,train
+umum_0637,UMUM,L,,,,,,55.0,54.8,165.9,Normal,1759.3,71.9,55.7,242.7,tidak ada,-,test
+umum_0638,UMUM,P,,,,,,37.0,46.7,157.9,Normal,1891.9,73.3,60.3,264.0,alergi fish dan makanan laut,"tidak suka spicy, santan",train
+umum_0639,UMUM,L,,,,,,56.0,44.9,164.9,Underweight,2250.6,89.8,70.4,314.4,Alergi: susu,goreng-gorengan,train
+umum_0640,UMUM,P,,,,,,49.0,60.1,154.4,Overweight,1300.0,52.3,42.8,176.4,"Alergi: cumi-cumi, crab",no allergies,train
+umum_0641,UMUM,L,,,,,,68.0,79.8,157.4,Obese,1390.6,66.8,40.9,188.8,tidak ada,,train
+umum_0642,UMUM,P,,,,,,22.0,66.3,157.5,Overweight,2148.2,104.0,61.6,294.5,telor & ikn,,test
+umum_0643,UMUM,P,,,,,,34.0,64.3,155.8,Overweight,1768.7,77.4,58.9,232.2,allergic to milk,-,train
+umum_0644,UMUM,L,,,,,,46.0,56.1,162.6,Normal,2078.2,79.0,64.9,294.6,squid,hindari gorengan,train
+umum_0645,UMUM,L,,,,,,21.0,59.7,163.0,Normal,1873.5,83.5,61.2,247.2,-,,train
+umum_0646,UMUM,P,,,,,,56.0,57.6,157.5,Normal,2130.8,84.0,61.2,311.0,allergic to eggs,none,train
+umum_0647,UMUM,L,,,,,,41.0,83.3,170.3,Overweight,2369.8,98.2,67.2,343.1,ebi; nuts,no allergies,train
+umum_0648,UMUM,L,,,,,,32.0,77.8,165.1,Overweight,2612.4,125.0,76.6,355.8,none,"jeroan, mie instan",train
+umum_0649,UMUM,P,,,,,,27.0,98.6,173.5,Obese,2692.9,125.4,86.6,353.1,Alergi: telor & squid,-,train
+umum_0650,UMUM,L,,,,,,36.0,54.8,162.7,Normal,2156.3,105.9,61.7,294.3,allergic to makanan laut,hindari goreng-gorengan,train
+umum_0651,UMUM,L,,,,,,71.0,88.9,162.3,Obese,2113.9,81.9,66.2,297.7,no allergies,none,test
+umum_0652,UMUM,P,,,,,,48.0,85.2,159.6,Obese,1988.7,93.0,66.2,255.2,tidak ada,tidak ada,train
+umum_0653,UMUM,L,,,,,,62.0,54.3,155.3,Normal,1405.1,63.4,45.5,185.5,-,-,train
+umum_0654,UMUM,L,,,,,,63.0,59.3,167.4,Normal,2005.2,84.9,57.1,287.8,no allergies,"tidak suka daging merah, spicy",train
+umum_0655,UMUM,L,,,,,,42.0,51.8,161.1,Normal,1561.2,70.5,50.2,206.8,Alergi: kepiting,tidak suka gorengan,train
+umum_0656,UMUM,L,,,,,,58.0,64.2,166.0,Normal,1909.2,91.4,62.0,246.5,no allergies,tidak suka makanan manis,test
+umum_0657,UMUM,L,,,,,,27.0,78.7,163.5,Overweight,1741.2,81.6,54.2,231.6,,pantangan goreng-gorengan,train
+umum_0658,UMUM,L,,,,,,29.0,51.6,174.8,Underweight,2554.8,109.3,76.5,357.2,,no allergies,train
+umum_0659,UMUM,P,,,,,,69.0,41.3,150.0,Underweight,1857.4,78.6,58.9,253.3,alergi peanut & ikn,-,train
+umum_0660,UMUM,L,,,,,,62.0,58.2,168.5,Normal,2228.2,111.0,65.1,299.5,none,no allergies,train
+umum_0661,UMUM,P,,,,,,48.0,85.2,154.7,Obese,1705.6,83.0,51.6,227.4,alergi sea food & telur,tidak ada,train
+umum_0662,UMUM,L,,,,,,69.0,93.8,167.4,Obese,1975.7,77.0,56.3,290.2,no allergies,"spicy, santan",train
+umum_0663,UMUM,P,,,,,,75.0,44.9,162.5,Underweight,1722.4,80.1,57.0,222.1,Alergi: fish,pedas,train
+umum_0664,UMUM,L,,,,,,36.0,69.2,166.3,Overweight,2371.1,97.3,69.1,340.1,tidak ada,-,train
+umum_0665,UMUM,L,,,,,,50.0,56.2,161.4,Normal,1800.4,89.1,53.5,240.6,-,"manis, spicy",train
+umum_0666,UMUM,P,,,,,,19.0,66.6,158.0,Overweight,1918.4,77.8,53.5,281.5,allergic to ikn,"tidak suka jeroan, makanan manis",train
+umum_0667,UMUM,P,,,,,,35.0,67.5,156.0,Overweight,1311.1,55.0,37.4,188.7,allergic to kacang tanah & kepiting,tidak suka mie instan,test
+umum_0668,UMUM,L,,,,,,49.0,55.9,164.3,Normal,2056.3,86.9,57.5,297.7,none,,test
+umum_0669,UMUM,P,,,,,,27.0,95.8,174.2,Obese,2030.3,84.8,65.4,275.6,none,-,test
+umum_0670,UMUM,P,,,,,,21.0,76.7,164.0,Overweight,1791.5,79.4,59.2,235.3,no allergies,"manis, mie instan",train
+umum_0671,UMUM,L,,,,,,66.0,51.1,163.7,Normal,1970.2,89.2,61.7,264.5,"alergi egg, sea food",hindari manis,train
+umum_0672,UMUM,P,,,,,,21.0,53.5,160.0,Normal,1637.3,78.3,51.9,214.4,no allergies,tidak suka makanan manis,train
+umum_0673,UMUM,P,,,,,,20.0,59.6,148.9,Overweight,1780.7,72.3,56.8,245.2,alergi cumi-cumi; shrimp,no allergies,test
+umum_0674,UMUM,L,,,,,,44.0,75.8,167.7,Overweight,1580.9,63.4,51.2,216.7,,,test
+umum_0675,UMUM,P,,,,,,60.0,35.8,149.7,Underweight,1493.2,60.3,49.7,201.2,tidak ada,no allergies,train
+umum_0676,UMUM,P,,,,,,26.0,53.0,147.0,Normal,2263.5,91.5,74.9,305.8,tidak ada,hindari manis,train
+umum_0677,UMUM,L,,,,,,25.0,65.2,168.2,Normal,2534.8,98.1,71.5,374.8,"alergi nuts, cumi",no allergies,train
+umum_0678,UMUM,P,,,,,,75.0,70.3,167.5,Overweight,1818.8,77.5,58.9,244.7,-,-,train
+umum_0679,UMUM,P,,,,,,42.0,55.6,153.6,Normal,1976.0,87.3,64.8,260.8,gandum dan udnag,no allergies,train
+umum_0680,UMUM,P,,,,,,72.0,44.3,150.5,Normal,1581.5,70.3,49.8,213.1,allergic to peanut dan cumi,"hindari manis, pedas",train
+umum_0681,UMUM,P,,,,,,45.0,57.2,162.3,Normal,1776.5,83.3,51.4,245.3,none,tidak suka gorengan,train
+umum_0682,UMUM,L,,,,,,54.0,40.9,159.8,Underweight,1576.3,62.2,46.4,227.5,Alergi: cumi,no allergies,test
+umum_0683,UMUM,L,,,,,,62.0,58.6,165.7,Normal,1539.2,71.3,42.9,217.0,tidak ada,hindari pedas,train
+umum_0684,UMUM,P,,,,,,28.0,52.4,159.2,Normal,1814.5,75.7,52.4,260.0,no allergies,none,train
+umum_0685,UMUM,L,,,,,,43.0,70.0,164.2,Overweight,2018.4,98.2,58.6,274.6,wheat; squid,tidak suka daging merah,train
+umum_0686,UMUM,L,,,,,,19.0,40.1,153.1,Underweight,2026.4,92.5,66.5,264.5,Alergi: crab; makanan laut,"goreng-gorengan, gorengan",train
+umum_0687,UMUM,P,,,,,,33.0,49.6,147.7,Normal,2154.1,98.5,67.7,287.7,Alergi: squid & kepiting,makanan manis,train
+umum_0688,UMUM,P,,,,,,27.0,65.0,154.8,Overweight,1575.3,59.3,50.6,220.7,none,none,test
+umum_0689,UMUM,L,,,,,,73.0,78.6,167.8,Overweight,1654.9,66.1,46.2,243.7,"allergic to kepiting, peanut",no allergies,train
+umum_0690,UMUM,L,,,,,,64.0,57.6,167.4,Normal,1959.7,84.7,57.9,275.0,-,tidak ada,train
+umum_0691,UMUM,P,,,,,,68.0,43.9,149.0,Normal,1780.9,68.9,50.1,263.6,,no allergies,train
+umum_0692,UMUM,P,,,,,,54.0,89.5,157.6,Obese,2273.5,105.8,72.5,299.5,"Alergi: kedelai, terigu",tidak ada,test
+umum_0693,UMUM,L,,,,,,44.0,72.2,176.0,Normal,2259.1,85.4,66.5,329.7,alergi crab dan shrimp,"pantangan kopi, santan",train
+umum_0694,UMUM,P,,,,,,58.0,63.1,150.8,Overweight,1300.0,63.5,37.6,176.9,gandum,tidak ada,train
+umum_0695,UMUM,P,,,,,,31.0,60.7,153.2,Overweight,1488.9,60.5,48.4,202.9,-,"hindari kopi, gorengan",train
+umum_0696,UMUM,P,,,,,,66.0,61.3,154.4,Overweight,1300.0,58.7,37.6,181.6,,-,test
+umum_0697,UMUM,L,,,,,,57.0,49.6,171.9,Underweight,2195.6,99.0,62.4,309.5,,gorengan,test
+umum_0698,UMUM,P,,,,,,71.0,48.4,149.1,Normal,1460.2,70.8,43.8,195.7,tidak ada,-,train
+umum_0699,UMUM,P,,,,,,64.0,69.8,165.8,Overweight,1428.3,59.7,47.4,190.7,-,tidak ada,train
+umum_0700,UMUM,P,,,,,,46.0,77.9,159.3,Obese,2153.2,99.1,69.7,282.4,none,tidak ada,train
