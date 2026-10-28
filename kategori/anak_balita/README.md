@@ -4,14 +4,14 @@
 
 Cakupan: Anak umur 0 sampai 60 BULAN. Status gizi memakai z-score WHO (HAZ, WHZ).
 
-Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12 kandidat, label 0/1/2 dari rubrik, split per profil, Logistic Regression multinomial dengan fitur dan hyperparameter yang sama (`model.FEATURE_COLS`, `train_model.make_model`). Yang berbeda hanya data dan aturan kategori di folder ini.
+Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12 kandidat, label 0/1/2 dari rubrik, split per profil, Logistic Regression multinomial dengan fitur dan hyperparameter yang sama (`model.FEATURE_COLS`, `kategori/training.make_model`). Yang berbeda hanya data dan aturan kategori di folder ini.
 
 ## Tanggung jawab
 
 - Generator profil umur dalam bulan, HAZ, WHZ, energi per umur (`profil.py`)
 - Rubrik: kalsium atau zat besi, gula tambahan, aturan BATASI (`rubrik.py`)
 - Tabel bahaya: risiko tersedak, kafein, mentah; batasi gula tambahan dan olahan; batas GGL anak (`bahaya.py`)
-- Tanggung jawab bersama: evaluation harness, utilitas split, pipeline training bersama (`kategori/pipeline.py`, `train_model.py`)
+- Tanggung jawab bersama: evaluation harness, utilitas split, pipeline training bersama (`kategori/pipeline.py`, `kategori/dataset.py`, `kategori/training.py`)
 
 ## File
 

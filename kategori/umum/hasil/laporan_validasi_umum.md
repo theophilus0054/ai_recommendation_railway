@@ -67,8 +67,8 @@ Confusion matrix (baris = label asli 0/1/2, kolom = prediksi 0/1/2):
 
 | Skenario | Item | Kandidat lolos | Alergen | BLOKIR | Tekstur | Skor rata-rata | Latensi (ms) |
 |---|---|---|---|---|---|---|---|
-| Dewasa Umum Obesitas | 11 | 41 | 0 | 0 | 0 | 74.9 | 49.1 |
-| Dewasa Umum Underweight | 11 | 46 | 0 | 0 | 0 | 73.4 | 48.9 |
+| Dewasa Umum Obesitas | 11 | 41 | 0 | 0 | 0 | 74.9 | 51.4 |
+| Dewasa Umum Underweight | 11 | 46 | 0 | 0 | 0 | 73.4 | 47.3 |
 
 **Dewasa Umum Obesitas**: pagi: karbo: Whole Wheat Bread, lauk: Lentils, buah/sayur: Banana; snack_pagi: selingan: Strawberry Yogurt; siang: karbo: Oatmeal, lauk: Fresh Chicken Breast, sayur: Sweet Potato; snack_sore: selingan: Ajwa Dates; malam: karbo: Organic Brown Rice, lauk: Tilapia Fish, sayur: Red Chili
 

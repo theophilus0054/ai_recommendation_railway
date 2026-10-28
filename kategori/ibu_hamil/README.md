@@ -4,7 +4,7 @@
 
 Cakupan: Ibu hamil usia kehamilan 4 sampai 40 minggu, tambahan energi per trimester (AKG 2019).
 
-Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12 kandidat, label 0/1/2 dari rubrik, split per profil, Logistic Regression multinomial dengan fitur dan hyperparameter yang sama (`model.FEATURE_COLS`, `train_model.make_model`). Yang berbeda hanya data dan aturan kategori di folder ini.
+Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12 kandidat, label 0/1/2 dari rubrik, split per profil, Logistic Regression multinomial dengan fitur dan hyperparameter yang sama (`model.FEATURE_COLS`, `kategori/training.make_model`). Yang berbeda hanya data dan aturan kategori di folder ini.
 
 ## Tanggung jawab
 

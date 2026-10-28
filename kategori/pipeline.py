@@ -31,15 +31,19 @@ def folder_hasil(kategori: str) -> str:
 
 def latih_kategori(kategori: str, buat_data: bool = False, num_profiles: int = 700) -> dict:
     """Langkah yang sama untuk setiap kategori: dataset sintetis -> Logistic Regression -> metrik."""
-    from generate_dataset import generate_recommendation_dataset
-    from train_model import train_and_evaluate
+    from kategori.dataset import RUBRIC_VERSION, generate_category_dataset, load_food_catalog
+    from kategori.training import train_category
 
-    print(f"[{kategori}] Pemilik model: {PEMILIK[kategori]}")
+    print("=" * 80)
+    print(f"  NUTRISCALE AI — MODEL {kategori} (pemilik: {PEMILIK[kategori]})")
+    print("  Logistic Regression multinomial | skor = (P(cukup) + 2 * P(sangat sesuai)) / 2")
+    print("=" * 80)
     if buat_data:
-        generate_recommendation_dataset(os.path.join(ROOT, 'data', 'nutrition.csv'), os.path.join(ROOT, 'data'),
-                                        [kategori], num_profiles)
-    hasil = train_and_evaluate(os.path.join(ROOT, 'data'), os.path.join(ROOT, 'models'),
-                               os.path.join(ROOT, 'outputs'), [kategori])[kategori]
+        df_food = load_food_catalog(os.path.join(ROOT, 'data', 'nutrition.csv'))
+        print(f"[Dataset Generator] Katalog siap: {len(df_food)} makanan. Rubrik label: {RUBRIC_VERSION}")
+        generate_category_dataset(df_food, kategori, os.path.join(ROOT, 'data'), num_profiles)
+    os.makedirs(os.path.join(ROOT, 'models'), exist_ok=True)
+    hasil = train_category(kategori, os.path.join(ROOT, 'data'), os.path.join(ROOT, 'models'))
     with open(os.path.join(folder_hasil(kategori), 'hasil_latih.json'), 'w', encoding='utf-8') as f:
         json.dump({'kategori': kategori, 'pemilik': PEMILIK[kategori], **hasil}, f, indent=2)
     return hasil

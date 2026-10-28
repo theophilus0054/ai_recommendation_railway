@@ -11,7 +11,8 @@
  batas harian GGL), skenario.py (kasus uji end-to-end), latih_<kategori>.py,
  validasi_<kategori>.py, test_<kategori>.py, dan hasil/ (laporan validasi).
  Kode training, daftar fitur, hyperparameter, seed, dan aturan split SAMA untuk
- keempat kategori (train_model.py, model.compute_ml_features, kategori/pipeline.py).
+ keempat kategori (kategori/dataset.py, kategori/training.py, kategori/pipeline.py,
+ model.compute_ml_features).
 ==========================================================================
 """
 

@@ -1,8 +1,8 @@
 """
 ==========================================================================
- NutriScale AI — Dataset Generator per Kategori (4 Model Logistic Regression)
- Menghasilkan data training dan testing SINTETIS untuk 4 kategori kondisi:
-   UMUM, IBU_HAMIL, ANAK_BALITA, PASCA_OPERASI (satu dataset per kategori).
+ NutriScale AI — Generator Dataset Bersama (dipanggil per kategori lewat kategori/pipeline.py)
+ Menghasilkan data training dan testing SINTETIS untuk SATU kategori. Bagian khusus kategori
+ diambil dari kategori/<kategori>/profil.py (profil user) dan rubrik.py (poin rubrik).
  - Profil Tier 1 realistis per kategori (Harris-Benedict x aktivitas, IOM EER balita,
    tambahan energi trimester kehamilan AKG 2019, faktor stres pasca operasi).
  - Setiap profil x 5 sesi makan x 12 kandidat (6 cocok sesi, 4 acak, 2 konflik).
@@ -18,7 +18,6 @@
 
 import os
 import re
-import argparse
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import GroupShuffleSplit
@@ -344,26 +343,3 @@ def generate_category_dataset(df_food: pd.DataFrame, kategori: str, output_dir: 
     print(f"  - Training Data: {train_path} ({len(df_train)} baris)")
     print(f"  - Testing Data : {test_path} ({len(df_test)} baris)")
     return train_path, test_path
-
-
-def generate_recommendation_dataset(food_csv_path: str, output_dir: str, kategori_list: list = None,
-                                    num_profiles: int = 700, seed: int = 42):
-    print(f"[Dataset Generator] Memuat katalog makanan dari {food_csv_path}...")
-    df_food = load_food_catalog(food_csv_path)
-    print(f"[Dataset Generator] Katalog siap: {len(df_food)} makanan. Rubrik label: {RUBRIC_VERSION}")
-    paths = {}
-    for kategori in kategori_list or KATEGORI_LIST:
-        paths[kategori] = generate_category_dataset(df_food, kategori, output_dir, num_profiles, seed)
-    return paths
-
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--category', choices=KATEGORI_LIST, help='Hanya buat dataset untuk satu kategori')
-    parser.add_argument('--profiles', type=int, default=700, help='Jumlah profil per kategori')
-    args = parser.parse_args()
-
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    food_csv = os.path.join(base_dir, 'data', 'nutrition.csv')
-    data_out = os.path.join(base_dir, 'data')
-    generate_recommendation_dataset(food_csv, data_out, [args.category] if args.category else None, args.profiles)

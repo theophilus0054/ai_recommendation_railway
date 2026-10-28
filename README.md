@@ -39,18 +39,18 @@ Sesuai dengan spesifikasi arsitektur **Histori Chat AI NutriScale (20 Oktober 20
 
 ## 📊 Hasil Evaluasi Model (Test Set Profil Baru, Data Sintetis)
 
-Setiap kategori: 700 profil sintetis × 5 sesi × 12 kandidat (≈42.000 pasangan). Split berdasarkan profil (profil test tidak pernah ada di train) dan 15% makanan hanya muncul di test. Label berasal dari rubrik per kategori di `generate_dataset.py` (memakai kolom yang tidak masuk fitur model, mis. serat, folat, zat besi, kalsium, kafein), tanpa noise acak.
+Setiap kategori: 700 profil sintetis × 5 sesi × 12 kandidat (≈42.000 pasangan). Split berdasarkan profil (profil test tidak pernah ada di train) dan 15% makanan hanya muncul di test. Label berasal dari rubrik bersama di `kategori/dataset.py` ditambah rubrik khusus di `kategori/<kategori>/rubrik.py` (memakai kolom yang tidak masuk fitur model, mis. serat, folat, zat besi, kalsium, kafein), tanpa noise acak.
 
 | Kategori | Accuracy | Precision (macro) | Recall (macro) | Macro-F1 | Weighted Kappa | CV Kappa (GroupKFold) | NDCG@5 | Pembanding GB (Acc / F1) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| UMUM | 0.9122 | 0.8744 | 0.8587 | 0.8660 | 0.8934 | 0.8933 ± 0.0070 | 0.9803 | 0.9570 / 0.9324 |
-| IBU_HAMIL | 0.8640 | 0.7993 | 0.7883 | 0.7930 | 0.8559 | 0.8614 ± 0.0046 | 0.9558 | 0.9173 / 0.8705 |
-| ANAK_BALITA | 0.9374 | 0.8933 | 0.8964 | 0.8948 | 0.9234 | 0.9155 ± 0.0046 | 0.9873 | 0.9607 / 0.9318 |
-| PASCA_OPERASI | 0.9321 | 0.9018 | 0.8931 | 0.8972 | 0.9301 | 0.9362 ± 0.0022 | 0.9878 | 0.9624 / 0.9411 |
+| UMUM | 0.9127 | 0.8755 | 0.8589 | 0.8665 | 0.8939 | 0.8936 ± 0.0068 | 0.9799 | 0.9550 / 0.9284 |
+| IBU_HAMIL | 0.8634 | 0.7983 | 0.7871 | 0.7918 | 0.8552 | 0.8612 ± 0.0048 | 0.9560 | 0.9204 / 0.8766 |
+| ANAK_BALITA | 0.9374 | 0.8933 | 0.8968 | 0.8950 | 0.9234 | 0.9154 ± 0.0042 | 0.9873 | 0.9615 / 0.9325 |
+| PASCA_OPERASI | 0.9332 | 0.9036 | 0.8917 | 0.8972 | 0.9320 | 0.9353 ± 0.0034 | 0.9899 | 0.9614 / 0.9385 |
 
 - Model utama Logistic Regression (koefisien dapat dijelaskan). Gradient boosting hanya pembanding: lebih akurat meniru rubrik, tetapi kotak hitam. Fitur ambang (`porsi_ideal`, `natrium_lewat_jauh`, `gula_lewat_jauh`, dan lain-lain) membuat efek ambang terbaca oleh model linear.
 - Umur kategori `ANAK_BALITA` dalam **bulan** (0 sampai 60); kategori lain dalam tahun.
-- Uji end-to-end (`evaluate_model_performance.py`): 0 pelanggaran alergen dan 0 pelanggaran BLOKIR kategori pada 4 skenario.
+- Uji end-to-end (`kategori/<kategori>/validasi_<kategori>.py`, 2 skenario per kategori): 0 pelanggaran alergen, BLOKIR, dan tekstur.
 - **Catatan jujur**: angka di atas mengukur seberapa baik model meniru rubrik pada data sintetis, bukan uji klinis. Rubrik & tabel bahaya perlu ditinjau ahli gizi (gold set) sebelum klaim klinis.
 
 ---
@@ -64,7 +64,7 @@ Setiap kategori: 700 profil sintetis × 5 sesi × 12 kandidat (≈42.000 pasanga
 | IBU_HAMIL | Muz | `kategori/ibu_hamil/` | `kategori/ibu_hamil/hasil/laporan_validasi_ibu_hamil.md` |
 | PASCA_OPERASI | Raymond | `kategori/pasca_operasi/` | `kategori/pasca_operasi/hasil/laporan_validasi_pasca_operasi.md` |
 
-Tiap folder berisi data dan aturan kategori: `profil.py`, `rubrik.py`, `bahaya.py`, `skenario.py`, script `latih_<kategori>.py` dan `validasi_<kategori>.py`, serta `test_<kategori>.py`. Kode bersama (fitur, safety filter, training, split, evaluasi) ada di `model.py`, `generate_dataset.py`, `train_model.py`, dan `kategori/pipeline.py`, sehingga keempat model memakai metode dan konfigurasi yang sama (`config_hash` tercatat di metadata model).
+Tiap folder berisi data dan aturan kategori: `profil.py`, `rubrik.py`, `bahaya.py`, `skenario.py`, script `latih_<kategori>.py` dan `validasi_<kategori>.py`, serta `test_<kategori>.py`. Kode bersama (fitur, safety filter, generator dataset, training, split, evaluasi) ada di `model.py`, `kategori/dataset.py`, `kategori/training.py`, dan `kategori/pipeline.py`, sehingga keempat model memakai metode dan konfigurasi yang sama (`config_hash` tercatat di metadata model).
 
 ```bash
 python kategori/ibu_hamil/latih_ibu_hamil.py --buat-data
@@ -76,26 +76,17 @@ python -m unittest discover -s kategori -t . -p "test_*.py"
 
 ## 🚀 Perintah Operasional
 
-1. **Generate Data Training & Testing** (`data/<kategori>/train_data.csv`, `test_data.csv`, `profiles.csv`):
+1. **Buat Data, Latih, dan Validasi per Kategori** (dijalankan pemilik masing-masing; contoh UMUM):
    ```bash
-   python generate_dataset.py                     # 4 kategori
-   python generate_dataset.py --category UMUM     # satu kategori saja
+   python kategori/umum/latih_umum.py --buat-data   # data/umum/*.csv lalu models/recommender_UMUM.joblib
+   python kategori/umum/validasi_umum.py            # kategori/umum/hasil/laporan_validasi_umum.md
    ```
-2. **Train & Evaluasi 4 Model Logistic Regression** (+ pembanding gradient boosting) (`models/recommender_<KATEGORI>.joblib`):
-   ```bash
-   python train_model.py
-   python train_model.py --category IBU_HAMIL
-   ```
-3. **Uji Validasi Akademik (Section 3.3.6)**:
-   ```bash
-   python evaluate_model_performance.py
-   ```
-4. **Jalankan Unit & Pipeline Test**:
+2. **Jalankan Unit Test** (kode bersama + semua kategori):
    ```bash
    python -m unittest test_nutriscale_data.py test_safety_filter.py
-   python test_pipeline.py
+   python -m unittest discover -s kategori -t . -p "test_*.py"
    ```
-5. **Jalankan API Server** (wajib set `AI_ENGINE_API_KEY`, tidak ada nilai default):
+3. **Jalankan API Server** (wajib set `AI_ENGINE_API_KEY`, tidak ada nilai default):
    ```bash
    AI_ENGINE_API_KEY=<kunci-rahasia> python api.py
    ```

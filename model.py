@@ -214,7 +214,7 @@ FOOD_TYPE_KEYWORDS: list[tuple[str, list[str]]] = [
                    'restaurant', 'nasi', 'roti', 'mie', 'kentang', 'singkong', 'ubi']),
 ]
 
-# Fitur ML: SATU daftar & SATU fungsi untuk training (generate_dataset.py) dan inferensi (recommend_meal)
+# Fitur ML: SATU daftar & SATU fungsi untuk training (kategori/dataset.py) dan inferensi (recommend_meal)
 FEATURE_COLS: list[str] = (
     ['log_kcal_ratio', 'abs_log_kcal_ratio', 'portion_clipped',
      'protein_pct', 'abs_protein_pct_diff', 'abs_fat_pct_diff', 'abs_carbs_pct_diff',
@@ -1159,7 +1159,7 @@ def get_recommender_model(kategori: str = 'UMUM'):
                     artifact['kategori_dipakai'] = name
                     _MODEL_ARTIFACT[kategori] = artifact
                     return artifact
-                print(f"[Model WARNING] Fitur {model_path} tidak cocok dengan FEATURE_COLS. Latih ulang (train_model.py).")
+                print(f"[Model WARNING] Fitur {model_path} tidak cocok dengan FEATURE_COLS. Latih ulang (kategori/<kategori>/latih_<kategori>.py).")
             except Exception as e:
                 print(f"[Model WARNING] Gagal memuat {model_path}: {e}")
 

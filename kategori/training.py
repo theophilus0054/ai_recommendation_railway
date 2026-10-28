@@ -1,8 +1,8 @@
 """
 ==========================================================================
- NutriScale AI — Training & Evaluation Script (4 Model per Kategori)
- Melatih SATU model Logistic Regression multinomial per kategori kondisi, dengan gradient boosting sebagai pembanding:
-   UMUM, IBU_HAMIL, ANAK_BALITA, PASCA_OPERASI.
+ NutriScale AI — Training Bersama (dipanggil per kategori lewat kategori/pipeline.py)
+ Melatih SATU model Logistic Regression multinomial untuk SATU kategori, dengan gradient boosting
+ sebagai pembanding. Kode, fitur, hyperparameter, dan seed sama untuk keempat kategori.
  - Label ordinal 0 (tidak sesuai), 1 (cukup sesuai), 2 (sangat sesuai).
  - Fitur = model.FEATURE_COLS (fungsi compute_ml_features yang sama dipakai saat inferensi).
  - Skor ranking inferensi = (P(1) + 2*P(2)) / 2 dari predict_proba.
@@ -15,7 +15,6 @@
 
 import os
 import json
-import argparse
 import joblib
 import numpy as np
 import pandas as pd
@@ -29,7 +28,8 @@ from sklearn.metrics import accuracy_score, f1_score, cohen_kappa_score, confusi
 
 from model import FEATURE_COLS, score_from_proba
 
-from kategori import KATEGORI_LIST, PEMILIK
+from kategori import PEMILIK
+
 MODEL_VERSION = 'lr-v2'
 CONFLICT_COLS = ['n_conflict_allergen', 'n_conflict_pantangan', 'n_conflict_free', 'n_block_kategori']
 
@@ -40,7 +40,7 @@ def load_data(data_dir: str, kategori: str):
 
     if not os.path.exists(train_path) or not os.path.exists(test_path):
         raise FileNotFoundError(f"Dataset train/test {kategori} tidak ditemukan di {cat_dir}. "
-                                f"Jalankan generate_dataset.py terlebih dahulu.")
+                                f"Jalankan kategori/{kategori.lower()}/latih_{kategori.lower()}.py --buat-data terlebih dahulu.")
 
     df_train = pd.read_csv(train_path)
     df_test = pd.read_csv(test_path)
@@ -216,62 +216,3 @@ def train_category(kategori: str, data_dir: str, models_dir: str) -> dict:
     joblib.dump(model_artifact, artifact_path)
     print(f"  Model Artefak Disimpan ke: {artifact_path}")
     return results
-
-def train_and_evaluate(data_dir: str = 'data', models_dir: str = 'models', outputs_dir: str = 'outputs',
-                       kategori_list: list = None):
-    os.makedirs(models_dir, exist_ok=True)
-    os.makedirs(outputs_dir, exist_ok=True)
-
-    print("=" * 80)
-    print("  NUTRISCALE AI — MACHINE LEARNING MODEL TRAINING & EVALUATION")
-    print("  Arsitektur: 4 model Logistic Regression multinomial (satu per kategori) + pembanding gradient boosting")
-    print("  Skor Ranking: (P(cukup sesuai) + 2 * P(sangat sesuai)) / 2")
-    print("=" * 80)
-
-    all_results = {}
-    for kategori in kategori_list or KATEGORI_LIST:
-        all_results[kategori] = train_category(kategori, data_dir, models_dir)
-
-    print("\n" + "-" * 92)
-    print(f"{'Kategori':<15} | {'Acc':<6} | {'F1-mac':<6} | {'Kappa':<6} | {'CV Kappa (±std)':<16} | {'NDCG@5':<6} | {'Lama':<6} | {'Acak':<6}")
-    print("-" * 92)
-    for kategori, r in all_results.items():
-        cvk = r['cv_groupkfold']['weighted_kappa']
-        nd = r['test_ranking_ndcg']
-        print(f"{kategori:<15} | {r['test']['accuracy']:<6.4f} | {r['test']['macro_f1']:<6.4f} | "
-              f"{r['test']['weighted_kappa']:<6.4f} | {cvk['mean']:.4f} ± {cvk['std']:.4f}  | "
-              f"{nd['model_lr']['ndcg@5']:<6.4f} | {nd['baseline_lama']['ndcg@5']:<6.4f} | {nd['baseline_acak']['ndcg@5']:<6.4f}")
-    print("-" * 92)
-
-    metrics_path = os.path.join(outputs_dir, 'training_evaluation.json')
-    existing = {}
-    if kategori_list and os.path.exists(metrics_path):
-        with open(metrics_path, 'r', encoding='utf-8') as f:
-            existing = json.load(f).get('kategori', {})
-    with open(metrics_path, 'w', encoding='utf-8') as f:
-        json.dump({
-            'model_version': MODEL_VERSION,
-            'algoritma': 'LogisticRegression (multinomial) + StandardScaler; pembanding HistGradientBoostingClassifier',
-            'catatan': 'Data sintetis; label dari rubrik per kategori (generate_dataset.py). Bukan uji klinis.',
-            'feature_names': FEATURE_COLS,
-            'kategori': {**existing, **all_results},
-        }, f, indent=2)
-    print(f"  Laporan Metrik Disimpan ke: {metrics_path}")
-    print("=" * 80)
-    print("PELATIHAN SELESAI DENGAN SUKSES!")
-    print("=" * 80)
-
-    return all_results
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--category', choices=KATEGORI_LIST, help='Hanya latih satu kategori')
-    args = parser.parse_args()
-
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    train_and_evaluate(
-        data_dir=os.path.join(base_dir, 'data'),
-        models_dir=os.path.join(base_dir, 'models'),
-        outputs_dir=os.path.join(base_dir, 'outputs'),
-        kategori_list=[args.category] if args.category else None,
-    )

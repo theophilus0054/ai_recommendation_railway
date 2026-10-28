@@ -1,4 +1,4 @@
-"""Poin rubrik khusus UMUM (ditambahkan ke poin rubrik bersama di generate_dataset.rubric_points)."""
+"""Poin rubrik khusus UMUM (ditambahkan ke poin rubrik bersama di kategori/dataset.rubric_points)."""
 
 
 def poin_kategori(row, prof: dict, m_eff: float, p_pct: float) -> float:

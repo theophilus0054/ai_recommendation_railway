@@ -4,7 +4,7 @@
 
 Cakupan: Dewasa 19 sampai 75 tahun tanpa kondisi klinis khusus. Arah rekomendasi mengikuti status gizi (kurang, normal, lebih, obesitas).
 
-Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12 kandidat, label 0/1/2 dari rubrik, split per profil, Logistic Regression multinomial dengan fitur dan hyperparameter yang sama (`model.FEATURE_COLS`, `train_model.make_model`). Yang berbeda hanya data dan aturan kategori di folder ini.
+Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12 kandidat, label 0/1/2 dari rubrik, split per profil, Logistic Regression multinomial dengan fitur dan hyperparameter yang sama (`model.FEATURE_COLS`, `kategori/training.make_model`). Yang berbeda hanya data dan aturan kategori di folder ini.
 
 ## Tanggung jawab
 
