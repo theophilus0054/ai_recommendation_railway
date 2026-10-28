@@ -1,6 +1,6 @@
 {
-  "model_version": "hgb-v1",
-  "algoritma": "HistGradientBoostingClassifier (multikelas 0/1/2); baseline LogisticRegression",
+  "model_version": "lr-v2",
+  "algoritma": "LogisticRegression (multinomial) + StandardScaler; pembanding HistGradientBoostingClassifier",
   "catatan": "Data sintetis; label dari rubrik per kategori (generate_dataset.py). Bukan uji klinis.",
   "feature_names": [
     "log_kcal_ratio",
@@ -47,6 +47,21 @@
     "flag_processed",
     "flag_sweet",
     "flag_spicy",
+    "porsi_ideal",
+    "porsi_wajar",
+    "protein_pct_sesuai",
+    "protein_kurang_lauk_karbo",
+    "protein_15",
+    "natrium_lewat",
+    "natrium_lewat_jauh",
+    "gula_lewat",
+    "gula_lewat_jauh",
+    "gula_10",
+    "ed_tinggi_x_lebih",
+    "ed_rendah_x_kurang",
+    "protein15_x_kurang",
+    "lemak10_x_saluran_cerna",
+    "diet_lunak",
     "ft_protein__pagi",
     "ft_protein__snack",
     "ft_protein__siang",
@@ -90,878 +105,878 @@
   ],
   "kategori": {
     "UMUM": {
-      "train_rows": 33582,
-      "test_rows": 8397,
-      "train_profiles": 560,
-      "test_profiles": 140,
-      "label_distribution_train": {
-        "0": 0.6598,
-        "1": 0.2487,
-        "2": 0.0914
-      },
-      "cv_groupkfold": {
-        "accuracy": {
-          "mean": 0.9157,
-          "std": 0.0016
-        },
-        "macro_f1": {
-          "mean": 0.865,
-          "std": 0.0048
-        },
-        "weighted_kappa": {
-          "mean": 0.9005,
-          "std": 0.0027
-        },
-        "ndcg@5": {
-          "mean": 0.9773,
-          "std": 0.0023
-        }
-      },
-      "test": {
-        "accuracy": 0.9153,
-        "macro_f1": 0.8684,
-        "macro_precision": 0.8703,
-        "macro_recall": 0.8665,
-        "per_class": {
-          "0": {
-            "precision": 0.9621,
-            "recall": 0.9618,
-            "f1": 0.9619,
-            "support": 5570
-          },
-          "1": {
-            "precision": 0.8218,
-            "recall": 0.8303,
-            "f1": 0.826,
-            "support": 2027
-          },
-          "2": {
-            "precision": 0.8271,
-            "recall": 0.8075,
-            "f1": 0.8172,
-            "support": 800
-          }
-        },
-        "weighted_kappa": 0.9015,
-        "confusion_matrix": [
-          [
-            5357,
-            211,
-            2
-          ],
-          [
-            211,
-            1683,
-            133
-          ],
-          [
-            0,
-            154,
-            646
-          ]
-        ]
-      },
-      "test_ranking_ndcg": {
-        "model_lr": {
-          "ndcg@5": 0.9804,
-          "ndcg@10": 0.9848
-        },
-        "baseline_lama": {
-          "ndcg@5": 0.6781,
-          "ndcg@10": 0.7757
-        },
-        "baseline_acak": {
-          "ndcg@5": 0.5209,
-          "ndcg@10": 0.6868
-        }
-      },
-      "test_new_food": {
-        "accuracy": 0.9003,
-        "macro_f1": 0.8418,
-        "macro_precision": 0.8515,
-        "macro_recall": 0.833,
-        "per_class": {
-          "0": {
-            "precision": 0.951,
-            "recall": 0.9719,
-            "f1": 0.9613,
-            "support": 818
-          },
-          "1": {
-            "precision": 0.8113,
-            "recall": 0.7914,
-            "f1": 0.8012,
-            "support": 326
-          },
-          "2": {
-            "precision": 0.7923,
-            "recall": 0.7357,
-            "f1": 0.763,
-            "support": 140
-          }
-        },
-        "weighted_kappa": 0.8914,
-        "confusion_matrix": [
-          [
-            795,
-            23,
-            0
-          ],
-          [
-            41,
-            258,
-            27
-          ],
-          [
-            0,
-            37,
-            103
-          ]
-        ]
-      },
-      "conflict_pairs_predicted_nonzero": 0.0,
-      "baseline_logistic_regression": {
-        "accuracy": 0.8152,
-        "macro_f1": 0.7088,
-        "macro_precision": 0.7434,
-        "macro_recall": 0.69,
-        "per_class": {
-          "0": {
-            "precision": 0.9064,
-            "recall": 0.9147,
-            "f1": 0.9106,
-            "support": 5570
-          },
-          "1": {
-            "precision": 0.6103,
-            "recall": 0.6729,
-            "f1": 0.6401,
-            "support": 2027
-          },
-          "2": {
-            "precision": 0.7135,
-            "recall": 0.4825,
-            "f1": 0.5757,
-            "support": 800
-          }
-        },
-        "weighted_kappa": 0.7624,
-        "confusion_matrix": [
-          [
-            5095,
-            475,
-            0
-          ],
-          [
-            508,
-            1364,
-            155
-          ],
-          [
-            18,
-            396,
-            386
-          ]
-        ],
-        "ndcg@5": 0.9114135514246342
-      },
-      "top_features_permutation": [
-        [
-          "any_conflict",
-          0.2247
-        ],
-        [
-          "sodium_share",
-          0.1513
-        ],
-        [
-          "sugar_share",
-          0.0956
-        ],
-        [
-          "abs_log_kcal_ratio",
-          0.0636
-        ],
-        [
-          "abs_protein_pct_diff",
-          0.0581
-        ],
-        [
-          "ft_protein__snack",
-          0.0354
-        ],
-        [
-          "energy_density",
-          0.0344
-        ],
-        [
-          "cholesterol_100",
-          0.0286
-        ],
-        [
-          "fat_share",
-          0.0276
-        ],
-        [
-          "ft_carb__snack",
-          0.0202
-        ]
-      ]
-    },
-    "IBU_HAMIL": {
-      "train_rows": 33585,
+      "train_rows": 33586,
       "test_rows": 8398,
       "train_profiles": 560,
       "test_profiles": 140,
       "label_distribution_train": {
-        "0": 0.6488,
-        "1": 0.2278,
-        "2": 0.1234
+        "0": 0.6679,
+        "1": 0.2424,
+        "2": 0.0897
       },
       "cv_groupkfold": {
         "accuracy": {
-          "mean": 0.8897,
-          "std": 0.0034
+          "mean": 0.9124,
+          "std": 0.0055
         },
         "macro_f1": {
-          "mean": 0.831,
-          "std": 0.005
+          "mean": 0.8594,
+          "std": 0.0084
         },
         "weighted_kappa": {
-          "mean": 0.8838,
-          "std": 0.0018
+          "mean": 0.8933,
+          "std": 0.007
         },
         "ndcg@5": {
-          "mean": 0.9674,
-          "std": 0.0032
+          "mean": 0.9795,
+          "std": 0.0021
         }
       },
       "test": {
-        "accuracy": 0.8821,
-        "macro_f1": 0.8219,
-        "macro_precision": 0.8256,
-        "macro_recall": 0.8186,
+        "accuracy": 0.9122,
+        "macro_f1": 0.866,
+        "macro_precision": 0.8744,
+        "macro_recall": 0.8587,
         "per_class": {
           "0": {
-            "precision": 0.9527,
-            "recall": 0.9533,
-            "f1": 0.953,
-            "support": 5351
+            "precision": 0.9574,
+            "recall": 0.9583,
+            "f1": 0.9578,
+            "support": 5584
           },
           "1": {
-            "precision": 0.7506,
-            "recall": 0.7692,
-            "f1": 0.7598,
-            "support": 2019
+            "precision": 0.8116,
+            "recall": 0.8355,
+            "f1": 0.8234,
+            "support": 2042
           },
           "2": {
-            "precision": 0.7733,
-            "recall": 0.7335,
-            "f1": 0.7529,
-            "support": 1028
+            "precision": 0.8543,
+            "recall": 0.7824,
+            "f1": 0.8168,
+            "support": 772
           }
         },
-        "weighted_kappa": 0.8763,
+        "weighted_kappa": 0.8934,
         "confusion_matrix": [
           [
-            5101,
-            245,
+            5351,
+            228,
             5
           ],
           [
-            250,
-            1553,
-            216
+            238,
+            1706,
+            98
           ],
           [
-            3,
-            271,
-            754
+            0,
+            168,
+            604
           ]
         ]
       },
       "test_ranking_ndcg": {
         "model_lr": {
-          "ndcg@5": 0.9607,
-          "ndcg@10": 0.97
+          "ndcg@5": 0.9803,
+          "ndcg@10": 0.9859
         },
         "baseline_lama": {
-          "ndcg@5": 0.6606,
-          "ndcg@10": 0.771
+          "ndcg@5": 0.685,
+          "ndcg@10": 0.7827
         },
         "baseline_acak": {
-          "ndcg@5": 0.535,
-          "ndcg@10": 0.7021
+          "ndcg@5": 0.5406,
+          "ndcg@10": 0.6872
         }
       },
       "test_new_food": {
-        "accuracy": 0.8575,
-        "macro_f1": 0.7925,
-        "macro_precision": 0.808,
-        "macro_recall": 0.7815,
+        "accuracy": 0.9131,
+        "macro_f1": 0.8669,
+        "macro_precision": 0.8803,
+        "macro_recall": 0.856,
         "per_class": {
           "0": {
-            "precision": 0.9331,
-            "recall": 0.9414,
-            "f1": 0.9372,
-            "support": 785
+            "precision": 0.9571,
+            "recall": 0.9629,
+            "f1": 0.96,
+            "support": 835
           },
           "1": {
-            "precision": 0.694,
-            "recall": 0.7407,
-            "f1": 0.7166,
-            "support": 297
+            "precision": 0.8201,
+            "recall": 0.845,
+            "f1": 0.8323,
+            "support": 329
           },
           "2": {
-            "precision": 0.797,
-            "recall": 0.6625,
-            "f1": 0.7235,
-            "support": 160
+            "precision": 0.8636,
+            "recall": 0.76,
+            "f1": 0.8085,
+            "support": 125
           }
         },
-        "weighted_kappa": 0.8459,
+        "weighted_kappa": 0.8987,
         "confusion_matrix": [
           [
-            739,
-            44,
-            2
-          ],
-          [
-            52,
-            220,
-            25
-          ],
-          [
-            1,
-            53,
-            106
-          ]
-        ]
-      },
-      "conflict_pairs_predicted_nonzero": 0.0,
-      "baseline_logistic_regression": {
-        "accuracy": 0.7959,
-        "macro_f1": 0.7032,
-        "macro_precision": 0.7093,
-        "macro_recall": 0.6977,
-        "per_class": {
-          "0": {
-            "precision": 0.8971,
-            "recall": 0.9174,
-            "f1": 0.9071,
-            "support": 5351
-          },
-          "1": {
-            "precision": 0.5894,
-            "recall": 0.5716,
-            "f1": 0.5803,
-            "support": 2019
-          },
-          "2": {
-            "precision": 0.6415,
-            "recall": 0.6041,
-            "f1": 0.6222,
-            "support": 1028
-          }
-        },
-        "weighted_kappa": 0.774,
-        "confusion_matrix": [
-          [
-            4909,
-            426,
-            16
-          ],
-          [
-            534,
-            1154,
-            331
-          ],
-          [
-            29,
-            378,
-            621
-          ]
-        ],
-        "ndcg@5": 0.8983085348143316
-      },
-      "top_features_permutation": [
-        [
-          "any_conflict",
-          0.2148
-        ],
-        [
-          "sodium_share",
-          0.1332
-        ],
-        [
-          "sugar_share",
-          0.0914
-        ],
-        [
-          "abs_log_kcal_ratio",
-          0.0558
-        ],
-        [
-          "fat_share",
-          0.0492
-        ],
-        [
-          "energy_density",
-          0.0471
-        ],
-        [
-          "abs_protein_pct_diff",
-          0.0438
-        ],
-        [
-          "cholesterol_100",
-          0.032
-        ],
-        [
-          "ft_protein__snack",
-          0.029
-        ],
-        [
-          "protein_pct",
-          0.0273
-        ]
-      ]
-    },
-    "ANAK_BALITA": {
-      "train_rows": 33587,
-      "test_rows": 8399,
-      "train_profiles": 560,
-      "test_profiles": 140,
-      "label_distribution_train": {
-        "0": 0.7025,
-        "1": 0.2047,
-        "2": 0.0928
-      },
-      "cv_groupkfold": {
-        "accuracy": {
-          "mean": 0.9142,
-          "std": 0.0038
-        },
-        "macro_f1": {
-          "mean": 0.8555,
-          "std": 0.0041
-        },
-        "weighted_kappa": {
-          "mean": 0.8983,
-          "std": 0.0046
-        },
-        "ndcg@5": {
-          "mean": 0.9787,
-          "std": 0.0034
-        }
-      },
-      "test": {
-        "accuracy": 0.9207,
-        "macro_f1": 0.8605,
-        "macro_precision": 0.8612,
-        "macro_recall": 0.8598,
-        "per_class": {
-          "0": {
-            "precision": 0.9693,
-            "recall": 0.9673,
-            "f1": 0.9683,
-            "support": 5967
-          },
-          "1": {
-            "precision": 0.7944,
-            "recall": 0.8069,
-            "f1": 0.8006,
-            "support": 1657
-          },
-          "2": {
-            "precision": 0.82,
-            "recall": 0.8052,
-            "f1": 0.8125,
-            "support": 775
-          }
-        },
-        "weighted_kappa": 0.9054,
-        "confusion_matrix": [
-          [
-            5772,
-            195,
+            804,
+            31,
             0
           ],
           [
-            183,
-            1337,
-            137
-          ],
-          [
-            0,
-            151,
-            624
-          ]
-        ]
-      },
-      "test_ranking_ndcg": {
-        "model_lr": {
-          "ndcg@5": 0.9809,
-          "ndcg@10": 0.9829
-        },
-        "baseline_lama": {
-          "ndcg@5": 0.6783,
-          "ndcg@10": 0.7643
-        },
-        "baseline_acak": {
-          "ndcg@5": 0.5102,
-          "ndcg@10": 0.6636
-        }
-      },
-      "test_new_food": {
-        "accuracy": 0.9257,
-        "macro_f1": 0.867,
-        "macro_precision": 0.8663,
-        "macro_recall": 0.8677,
-        "per_class": {
-          "0": {
-            "precision": 0.97,
-            "recall": 0.97,
-            "f1": 0.97,
-            "support": 934
-          },
-          "1": {
-            "precision": 0.8147,
-            "recall": 0.8115,
-            "f1": 0.8131,
-            "support": 260
-          },
-          "2": {
-            "precision": 0.8142,
-            "recall": 0.8214,
-            "f1": 0.8178,
-            "support": 112
-          }
-        },
-        "weighted_kappa": 0.9084,
-        "confusion_matrix": [
-          [
-            906,
-            28,
-            0
-          ],
-          [
-            28,
-            211,
-            21
-          ],
-          [
-            0,
-            20,
-            92
-          ]
-        ]
-      },
-      "conflict_pairs_predicted_nonzero": 0.0,
-      "baseline_logistic_regression": {
-        "accuracy": 0.8334,
-        "macro_f1": 0.7375,
-        "macro_precision": 0.7343,
-        "macro_recall": 0.7416,
-        "per_class": {
-          "0": {
-            "precision": 0.9157,
-            "recall": 0.9214,
-            "f1": 0.9186,
-            "support": 5967
-          },
-          "1": {
-            "precision": 0.59,
-            "recall": 0.5576,
-            "f1": 0.5734,
-            "support": 1657
-          },
-          "2": {
-            "precision": 0.6972,
-            "recall": 0.7458,
-            "f1": 0.7207,
-            "support": 775
-          }
-        },
-        "weighted_kappa": 0.795,
-        "confusion_matrix": [
-          [
-            5498,
-            458,
-            11
-          ],
-          [
-            493,
-            924,
-            240
-          ],
-          [
-            13,
-            184,
-            578
-          ]
-        ],
-        "ndcg@5": 0.9231199548847566
-      },
-      "top_features_permutation": [
-        [
-          "any_conflict",
-          0.1794
-        ],
-        [
-          "sugar_share",
-          0.1567
-        ],
-        [
-          "sodium_share",
-          0.1347
-        ],
-        [
-          "abs_log_kcal_ratio",
-          0.0723
-        ],
-        [
-          "abs_protein_pct_diff",
-          0.0452
-        ],
-        [
-          "fat_share",
-          0.032
-        ],
-        [
-          "ft_protein__snack",
-          0.023
-        ],
-        [
-          "energy_density",
-          0.0202
-        ],
-        [
-          "protein_pct",
-          0.0183
-        ],
-        [
-          "cholesterol_100",
-          0.0162
-        ]
-      ]
-    },
-    "PASCA_OPERASI": {
-      "train_rows": 33580,
-      "test_rows": 8399,
-      "train_profiles": 560,
-      "test_profiles": 140,
-      "label_distribution_train": {
-        "0": 0.6683,
-        "1": 0.1887,
-        "2": 0.143
-      },
-      "cv_groupkfold": {
-        "accuracy": {
-          "mean": 0.936,
-          "std": 0.0027
-        },
-        "macro_f1": {
-          "mean": 0.9016,
-          "std": 0.0055
-        },
-        "weighted_kappa": {
-          "mean": 0.9391,
-          "std": 0.0023
-        },
-        "ndcg@5": {
-          "mean": 0.9886,
-          "std": 0.0015
-        }
-      },
-      "test": {
-        "accuracy": 0.935,
-        "macro_f1": 0.8977,
-        "macro_precision": 0.9,
-        "macro_recall": 0.8963,
-        "per_class": {
-          "0": {
-            "precision": 0.9745,
-            "recall": 0.9709,
-            "f1": 0.9727,
-            "support": 5736
-          },
-          "1": {
-            "precision": 0.8041,
-            "recall": 0.8499,
-            "f1": 0.8264,
-            "support": 1526
-          },
-          "2": {
-            "precision": 0.9216,
-            "recall": 0.8681,
-            "f1": 0.894,
-            "support": 1137
-          }
-        },
-        "weighted_kappa": 0.936,
-        "confusion_matrix": [
-          [
-            5569,
-            166,
-            1
-          ],
-          [
-            146,
-            1297,
-            83
-          ],
-          [
-            0,
-            150,
-            987
-          ]
-        ]
-      },
-      "test_ranking_ndcg": {
-        "model_lr": {
-          "ndcg@5": 0.989,
-          "ndcg@10": 0.992
-        },
-        "baseline_lama": {
-          "ndcg@5": 0.7411,
-          "ndcg@10": 0.8125
-        },
-        "baseline_acak": {
-          "ndcg@5": 0.625,
-          "ndcg@10": 0.7349
-        }
-      },
-      "test_new_food": {
-        "accuracy": 0.891,
-        "macro_f1": 0.833,
-        "macro_precision": 0.8473,
-        "macro_recall": 0.8216,
-        "per_class": {
-          "0": {
-            "precision": 0.9439,
-            "recall": 0.956,
-            "f1": 0.9499,
-            "support": 863
-          },
-          "1": {
-            "precision": 0.7181,
-            "recall": 0.744,
-            "f1": 0.7308,
-            "support": 250
-          },
-          "2": {
-            "precision": 0.8797,
-            "recall": 0.7647,
-            "f1": 0.8182,
-            "support": 153
-          }
-        },
-        "weighted_kappa": 0.8817,
-        "confusion_matrix": [
-          [
-            825,
-            37,
-            1
-          ],
-          [
-            49,
-            186,
+            36,
+            278,
             15
           ],
           [
             0,
-            36,
-            117
+            30,
+            95
+          ]
+        ]
+      },
+      "conflict_pairs_predicted_nonzero": 0.0008,
+      "pembanding_gradient_boosting": {
+        "accuracy": 0.957,
+        "macro_f1": 0.9324,
+        "macro_precision": 0.9335,
+        "macro_recall": 0.9314,
+        "per_class": {
+          "0": {
+            "precision": 0.9801,
+            "recall": 0.981,
+            "f1": 0.9806,
+            "support": 5584
+          },
+          "1": {
+            "precision": 0.9119,
+            "recall": 0.9128,
+            "f1": 0.9124,
+            "support": 2042
+          },
+          "2": {
+            "precision": 0.9085,
+            "recall": 0.9003,
+            "f1": 0.9044,
+            "support": 772
+          }
+        },
+        "weighted_kappa": 0.9485,
+        "confusion_matrix": [
+          [
+            5478,
+            103,
+            3
+          ],
+          [
+            111,
+            1864,
+            67
+          ],
+          [
+            0,
+            77,
+            695
+          ]
+        ],
+        "ndcg@5": 0.9905838705116126
+      },
+      "top_coefficients_p2_vs_p0": [
+        [
+          "natrium_lewat_jauh",
+          -7.2849
+        ],
+        [
+          "gula_lewat_jauh",
+          -6.6471
+        ],
+        [
+          "any_conflict",
+          -5.8508
+        ],
+        [
+          "fat_share",
+          -5.8407
+        ],
+        [
+          "porsi_wajar",
+          5.4792
+        ],
+        [
+          "porsi_ideal",
+          4.0461
+        ],
+        [
+          "protein_pct_sesuai",
+          3.6295
+        ],
+        [
+          "ft_protein__snack",
+          -3.4145
+        ],
+        [
+          "n_conflict_pantangan",
+          -3.1148
+        ],
+        [
+          "n_conflict_allergen",
+          -3.0351
+        ]
+      ]
+    },
+    "IBU_HAMIL": {
+      "train_rows": 33586,
+      "test_rows": 8396,
+      "train_profiles": 560,
+      "test_profiles": 140,
+      "label_distribution_train": {
+        "0": 0.6546,
+        "1": 0.2269,
+        "2": 0.1184
+      },
+      "cv_groupkfold": {
+        "accuracy": {
+          "mean": 0.8681,
+          "std": 0.0055
+        },
+        "macro_f1": {
+          "mean": 0.7971,
+          "std": 0.0068
+        },
+        "weighted_kappa": {
+          "mean": 0.8614,
+          "std": 0.0046
+        },
+        "ndcg@5": {
+          "mean": 0.958,
+          "std": 0.0044
+        }
+      },
+      "test": {
+        "accuracy": 0.864,
+        "macro_f1": 0.793,
+        "macro_precision": 0.7993,
+        "macro_recall": 0.7883,
+        "per_class": {
+          "0": {
+            "precision": 0.9455,
+            "recall": 0.9405,
+            "f1": 0.943,
+            "support": 5500
+          },
+          "1": {
+            "precision": 0.6877,
+            "recall": 0.7326,
+            "f1": 0.7095,
+            "support": 1900
+          },
+          "2": {
+            "precision": 0.7647,
+            "recall": 0.6918,
+            "f1": 0.7264,
+            "support": 996
+          }
+        },
+        "weighted_kappa": 0.8559,
+        "confusion_matrix": [
+          [
+            5173,
+            327,
+            0
+          ],
+          [
+            296,
+            1392,
+            212
+          ],
+          [
+            2,
+            305,
+            689
+          ]
+        ]
+      },
+      "test_ranking_ndcg": {
+        "model_lr": {
+          "ndcg@5": 0.9558,
+          "ndcg@10": 0.967
+        },
+        "baseline_lama": {
+          "ndcg@5": 0.6614,
+          "ndcg@10": 0.7677
+        },
+        "baseline_acak": {
+          "ndcg@5": 0.536,
+          "ndcg@10": 0.6898
+        }
+      },
+      "test_new_food": {
+        "accuracy": 0.8551,
+        "macro_f1": 0.7828,
+        "macro_precision": 0.7933,
+        "macro_recall": 0.7754,
+        "per_class": {
+          "0": {
+            "precision": 0.9382,
+            "recall": 0.9348,
+            "f1": 0.9365,
+            "support": 828
+          },
+          "1": {
+            "precision": 0.6667,
+            "recall": 0.7203,
+            "f1": 0.6924,
+            "support": 286
+          },
+          "2": {
+            "precision": 0.7752,
+            "recall": 0.6711,
+            "f1": 0.7194,
+            "support": 149
+          }
+        },
+        "weighted_kappa": 0.8453,
+        "confusion_matrix": [
+          [
+            774,
+            54,
+            0
+          ],
+          [
+            51,
+            206,
+            29
+          ],
+          [
+            0,
+            49,
+            100
           ]
         ]
       },
       "conflict_pairs_predicted_nonzero": 0.0,
-      "baseline_logistic_regression": {
-        "accuracy": 0.8538,
-        "macro_f1": 0.7744,
-        "macro_precision": 0.7827,
-        "macro_recall": 0.7671,
+      "pembanding_gradient_boosting": {
+        "accuracy": 0.9173,
+        "macro_f1": 0.8705,
+        "macro_precision": 0.8773,
+        "macro_recall": 0.8646,
         "per_class": {
           "0": {
-            "precision": 0.927,
-            "recall": 0.9383,
-            "f1": 0.9326,
-            "support": 5736
+            "precision": 0.9644,
+            "recall": 0.9702,
+            "f1": 0.9673,
+            "support": 5500
           },
           "1": {
-            "precision": 0.6052,
-            "recall": 0.6147,
-            "f1": 0.6099,
-            "support": 1526
+            "precision": 0.813,
+            "recall": 0.8284,
+            "f1": 0.8206,
+            "support": 1900
           },
           "2": {
-            "precision": 0.8159,
-            "recall": 0.7485,
-            "f1": 0.7807,
-            "support": 1137
+            "precision": 0.8544,
+            "recall": 0.7952,
+            "f1": 0.8237,
+            "support": 996
           }
         },
-        "weighted_kappa": 0.8458,
+        "weighted_kappa": 0.9112,
         "confusion_matrix": [
           [
-            5382,
-            344,
-            10
+            5336,
+            160,
+            4
           ],
           [
-            406,
-            938,
-            182
+            195,
+            1574,
+            131
           ],
           [
-            18,
-            268,
-            851
+            2,
+            202,
+            792
           ]
         ],
-        "ndcg@5": 0.9340082553075637
+        "ndcg@5": 0.9756843156785615
       },
-      "top_features_permutation": [
+      "top_coefficients_p2_vs_p0": [
+        [
+          "fat_share",
+          -4.6434
+        ],
         [
           "any_conflict",
-          0.2386
+          -4.5375
         ],
         [
-          "sodium_share",
-          0.1388
+          "gula_lewat_jauh",
+          -4.4582
         ],
         [
-          "sugar_share",
-          0.0964
+          "natrium_lewat_jauh",
+          -4.347
         ],
         [
-          "protein_pct",
-          0.092
+          "porsi_wajar",
+          3.1963
         ],
         [
-          "abs_log_kcal_ratio",
-          0.0503
+          "n_block_kategori",
+          -2.7832
         ],
         [
-          "fat_x_saluran_cerna",
-          0.0373
-        ],
-        [
-          "abs_protein_pct_diff",
-          0.0294
-        ],
-        [
-          "ft_protein__snack",
-          0.0273
+          "porsi_ideal",
+          2.3452
         ],
         [
           "energy_density",
-          0.0238
+          2.2361
         ],
         [
-          "ft_carb__snack",
-          0.0102
+          "ft_protein__snack",
+          -2.1359
+        ],
+        [
+          "n_conflict_allergen",
+          -2.0399
+        ]
+      ]
+    },
+    "ANAK_BALITA": {
+      "train_rows": 33589,
+      "test_rows": 8399,
+      "train_profiles": 560,
+      "test_profiles": 140,
+      "label_distribution_train": {
+        "0": 0.7123,
+        "1": 0.2018,
+        "2": 0.086
+      },
+      "cv_groupkfold": {
+        "accuracy": {
+          "mean": 0.9318,
+          "std": 0.0036
+        },
+        "macro_f1": {
+          "mean": 0.887,
+          "std": 0.0075
+        },
+        "weighted_kappa": {
+          "mean": 0.9155,
+          "std": 0.0046
+        },
+        "ndcg@5": {
+          "mean": 0.9855,
+          "std": 0.0012
+        }
+      },
+      "test": {
+        "accuracy": 0.9374,
+        "macro_f1": 0.8948,
+        "macro_precision": 0.8933,
+        "macro_recall": 0.8964,
+        "per_class": {
+          "0": {
+            "precision": 0.9729,
+            "recall": 0.9708,
+            "f1": 0.9719,
+            "support": 6030
+          },
+          "1": {
+            "precision": 0.838,
+            "recall": 0.8411,
+            "f1": 0.8395,
+            "support": 1636
+          },
+          "2": {
+            "precision": 0.8689,
+            "recall": 0.8772,
+            "f1": 0.873,
+            "support": 733
+          }
+        },
+        "weighted_kappa": 0.9234,
+        "confusion_matrix": [
+          [
+            5854,
+            176,
+            0
+          ],
+          [
+            163,
+            1376,
+            97
+          ],
+          [
+            0,
+            90,
+            643
+          ]
+        ]
+      },
+      "test_ranking_ndcg": {
+        "model_lr": {
+          "ndcg@5": 0.9873,
+          "ndcg@10": 0.9897
+        },
+        "baseline_lama": {
+          "ndcg@5": 0.6819,
+          "ndcg@10": 0.7653
+        },
+        "baseline_acak": {
+          "ndcg@5": 0.5041,
+          "ndcg@10": 0.6654
+        }
+      },
+      "test_new_food": {
+        "accuracy": 0.9376,
+        "macro_f1": 0.8935,
+        "macro_precision": 0.8935,
+        "macro_recall": 0.8935,
+        "per_class": {
+          "0": {
+            "precision": 0.9717,
+            "recall": 0.9737,
+            "f1": 0.9727,
+            "support": 951
+          },
+          "1": {
+            "precision": 0.8479,
+            "recall": 0.8383,
+            "f1": 0.8431,
+            "support": 266
+          },
+          "2": {
+            "precision": 0.8609,
+            "recall": 0.8684,
+            "f1": 0.8646,
+            "support": 114
+          }
+        },
+        "weighted_kappa": 0.9231,
+        "confusion_matrix": [
+          [
+            926,
+            25,
+            0
+          ],
+          [
+            27,
+            223,
+            16
+          ],
+          [
+            0,
+            15,
+            99
+          ]
+        ]
+      },
+      "conflict_pairs_predicted_nonzero": 0.0,
+      "pembanding_gradient_boosting": {
+        "accuracy": 0.9607,
+        "macro_f1": 0.9318,
+        "macro_precision": 0.9326,
+        "macro_recall": 0.931,
+        "per_class": {
+          "0": {
+            "precision": 0.9809,
+            "recall": 0.9854,
+            "f1": 0.9831,
+            "support": 6030
+          },
+          "1": {
+            "precision": 0.9087,
+            "recall": 0.8881,
+            "f1": 0.8983,
+            "support": 1636
+          },
+          "2": {
+            "precision": 0.9084,
+            "recall": 0.9195,
+            "f1": 0.9139,
+            "support": 733
+          }
+        },
+        "weighted_kappa": 0.9514,
+        "confusion_matrix": [
+          [
+            5942,
+            87,
+            1
+          ],
+          [
+            116,
+            1453,
+            67
+          ],
+          [
+            0,
+            59,
+            674
+          ]
+        ],
+        "ndcg@5": 0.993322952747317
+      },
+      "top_coefficients_p2_vs_p0": [
+        [
+          "natrium_lewat_jauh",
+          -8.3955
+        ],
+        [
+          "fat_share",
+          -7.8411
+        ],
+        [
+          "gula_lewat_jauh",
+          -7.8385
+        ],
+        [
+          "porsi_wajar",
+          6.9566
+        ],
+        [
+          "any_conflict",
+          -6.763
+        ],
+        [
+          "n_block_kategori",
+          -4.5102
+        ],
+        [
+          "ft_protein__snack",
+          -4.1803
+        ],
+        [
+          "porsi_ideal",
+          3.7702
+        ],
+        [
+          "protein_pct_sesuai",
+          3.3549
+        ],
+        [
+          "n_conflict_pantangan",
+          -2.6021
+        ]
+      ]
+    },
+    "PASCA_OPERASI": {
+      "train_rows": 33585,
+      "test_rows": 8397,
+      "train_profiles": 560,
+      "test_profiles": 140,
+      "label_distribution_train": {
+        "0": 0.6693,
+        "1": 0.1903,
+        "2": 0.1404
+      },
+      "cv_groupkfold": {
+        "accuracy": {
+          "mean": 0.9333,
+          "std": 0.0031
+        },
+        "macro_f1": {
+          "mean": 0.9001,
+          "std": 0.0039
+        },
+        "weighted_kappa": {
+          "mean": 0.9362,
+          "std": 0.0022
+        },
+        "ndcg@5": {
+          "mean": 0.9882,
+          "std": 0.001
+        }
+      },
+      "test": {
+        "accuracy": 0.9321,
+        "macro_f1": 0.8972,
+        "macro_precision": 0.9018,
+        "macro_recall": 0.8931,
+        "per_class": {
+          "0": {
+            "precision": 0.9668,
+            "recall": 0.9696,
+            "f1": 0.9682,
+            "support": 5760
+          },
+          "1": {
+            "precision": 0.8152,
+            "recall": 0.8335,
+            "f1": 0.8243,
+            "support": 1604
+          },
+          "2": {
+            "precision": 0.9235,
+            "recall": 0.8761,
+            "f1": 0.8992,
+            "support": 1033
+          }
+        },
+        "weighted_kappa": 0.9301,
+        "confusion_matrix": [
+          [
+            5585,
+            175,
+            0
+          ],
+          [
+            192,
+            1337,
+            75
+          ],
+          [
+            0,
+            128,
+            905
+          ]
+        ]
+      },
+      "test_ranking_ndcg": {
+        "model_lr": {
+          "ndcg@5": 0.9878,
+          "ndcg@10": 0.9909
+        },
+        "baseline_lama": {
+          "ndcg@5": 0.73,
+          "ndcg@10": 0.8015
+        },
+        "baseline_acak": {
+          "ndcg@5": 0.6134,
+          "ndcg@10": 0.7345
+        }
+      },
+      "test_new_food": {
+        "accuracy": 0.9072,
+        "macro_f1": 0.8673,
+        "macro_precision": 0.8761,
+        "macro_recall": 0.8599,
+        "per_class": {
+          "0": {
+            "precision": 0.9522,
+            "recall": 0.9566,
+            "f1": 0.9544,
+            "support": 875
+          },
+          "1": {
+            "precision": 0.774,
+            "recall": 0.8014,
+            "f1": 0.7875,
+            "support": 282
+          },
+          "2": {
+            "precision": 0.9021,
+            "recall": 0.8217,
+            "f1": 0.86,
+            "support": 157
+          }
+        },
+        "weighted_kappa": 0.9024,
+        "confusion_matrix": [
+          [
+            837,
+            38,
+            0
+          ],
+          [
+            42,
+            226,
+            14
+          ],
+          [
+            0,
+            28,
+            129
+          ]
+        ]
+      },
+      "conflict_pairs_predicted_nonzero": 0.0,
+      "pembanding_gradient_boosting": {
+        "accuracy": 0.9624,
+        "macro_f1": 0.9411,
+        "macro_precision": 0.9422,
+        "macro_recall": 0.9401,
+        "per_class": {
+          "0": {
+            "precision": 0.9838,
+            "recall": 0.9835,
+            "f1": 0.9837,
+            "support": 5760
+          },
+          "1": {
+            "precision": 0.8961,
+            "recall": 0.9084,
+            "f1": 0.9022,
+            "support": 1604
+          },
+          "2": {
+            "precision": 0.9467,
+            "recall": 0.9284,
+            "f1": 0.9374,
+            "support": 1033
+          }
+        },
+        "weighted_kappa": 0.9616,
+        "confusion_matrix": [
+          [
+            5665,
+            95,
+            0
+          ],
+          [
+            93,
+            1457,
+            54
+          ],
+          [
+            0,
+            74,
+            959
+          ]
+        ],
+        "ndcg@5": 0.9944958738944565
+      },
+      "top_coefficients_p2_vs_p0": [
+        [
+          "any_conflict",
+          -9.5988
+        ],
+        [
+          "natrium_lewat_jauh",
+          -7.9727
+        ],
+        [
+          "gula_lewat_jauh",
+          -7.0323
+        ],
+        [
+          "n_block_kategori",
+          -6.4736
+        ],
+        [
+          "porsi_wajar",
+          5.4645
+        ],
+        [
+          "lemak10_x_saluran_cerna",
+          -4.3807
+        ],
+        [
+          "porsi_ideal",
+          3.9534
+        ],
+        [
+          "protein_15",
+          3.6819
+        ],
+        [
+          "ft_protein__snack",
+          -3.5566
+        ],
+        [
+          "protein_pct_sesuai",
+          3.2644
         ]
       ]
     }

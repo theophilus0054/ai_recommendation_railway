@@ -17,7 +17,7 @@ os.environ.setdefault("AI_ALLOW_SNAPSHOT_FALLBACK", "1")
 # ==========================================================================
 # NUTRISCALE AI — MODEL EVALUATION RUNNER (UPDATED FOR ACADEMIC REPORTING)
 # Menghasilkan tabel evaluasi formal untuk Laporan (Section 3.3.6)
-# 4 model gradient boosting per kategori pada test set profil baru + Uji Keamanan End-to-End
+# 4 model Logistic Regression per kategori pada test set profil baru + Uji Keamanan End-to-End
 # Catatan: data sintetis, label dari rubrik. Angka ini bukan hasil uji klinis.
 # ==========================================================================
 
@@ -25,7 +25,7 @@ def evaluate_model():
     print("="*85)
     print("  NUTRISCALE AI — PERFORMANCE EVALUATION SESSION")
     print("  Target: Validation for Report Section 3.3.6 (Machine Learning Evaluation)")
-    print("  Model: 4 x HistGradientBoosting (UMUM, IBU_HAMIL, ANAK_BALITA, PASCA_OPERASI)")
+    print("  Model: 4 x Logistic Regression multinomial (UMUM, IBU_HAMIL, ANAK_BALITA, PASCA_OPERASI)")
     print("="*85)
 
     base_dir = os.path.dirname(os.path.abspath(__file__))

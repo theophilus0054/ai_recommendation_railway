@@ -15,8 +15,13 @@ import pandas as pd
 
 import model
 
+import numpy as np
+
 from model import (
     FEATURE_COLS,
+    _undi_kandidat,
+    benih_variasi,
+    build_meal_plan,
     compute_ml_features,
     detect_allergens,
     detect_hazards,
@@ -148,6 +153,47 @@ class TestSumberProdukSupabase(unittest.TestCase):
         self.assertEqual(list(df['id']), ['abc'])
         self.assertEqual(float(df['calories'].iloc[0]), 208.0)
         self.assertIn('ikan', df['label_risiko'].iloc[0])
+
+
+
+class TestMenuComposition(unittest.TestCase):
+
+    def setUp(self):
+        names = ['Rice, white, cooked', 'Oats, cooked', 'Chicken breast, grilled', 'Tofu, steamed',
+                 'Spinach, boiled', 'Broccoli, steamed', 'Banana, raw', 'Yogurt, plain', 'Salt, table', 'Oil, olive']
+        types = ['carb', 'carb', 'protein', 'protein', 'vegetable', 'vegetable', 'fruit', 'dairy', 'spice', 'fat']
+        self.df = filter_dataset(make_foods(names, food_type=types), '', 'UMUM')
+        self.kalori = {'target_kalori_harian': 2000.0, 'distribusi': {'protein_g': 100.0, 'fat_g': 67.0, 'carbs_g': 250.0}}
+
+    def test_plate_roles_and_side_items(self):
+        plan = build_meal_plan(self.kalori, self.df, 'UMUM', {}, {}, rng=np.random.default_rng(1))
+        siang = plan['rekomendasi_siang']
+        self.assertEqual([m['peran'] for m in siang], ['karbo', 'lauk', 'sayur'])
+        self.assertEqual([m['jenis_bahan'] for m in siang], ['carb', 'protein', 'vegetable'])
+        utama = [m['nama_makanan'] for k, v in plan.items() if k.startswith('rekomendasi_') for m in v]
+        self.assertNotIn('Salt, table', utama)
+        self.assertNotIn('Oil, olive', utama)
+        pelengkap = {m['nama_makanan'] for m in plan['bahan_pelengkap_opsional']}
+        self.assertEqual(pelengkap, {'Salt, table', 'Oil, olive'})
+
+    def test_no_repeat_within_day(self):
+        plan = build_meal_plan(self.kalori, self.df, 'UMUM', {}, {}, rng=np.random.default_rng(2))
+        utama = [m['nama_makanan'] for k, v in plan.items() if k.startswith('rekomendasi_') for m in v]
+        self.assertEqual(len(utama), len(set(utama)))
+
+
+class TestDailyVariety(unittest.TestCase):
+
+    def test_seed_same_day_same_user_differs_next_day(self):
+        prof = {'userId': 'u1'}
+        self.assertEqual(benih_variasi(prof, '2026-10-28'), benih_variasi(prof, '2026-10-28'))
+        self.assertNotEqual(benih_variasi(prof, '2026-10-28'), benih_variasi(prof, '2026-10-29'))
+
+    def test_draw_only_from_close_top_candidates(self):
+        scores = np.array([0.90, 0.88, 0.86, 0.30, 0.89, -999.0])
+        picks = {_undi_kandidat(scores, 1, np.random.default_rng(s))[0] for s in range(200)}
+        self.assertTrue(picks <= {0, 1, 2, 4})
+        self.assertGreater(len(picks), 1)
 
 
 if __name__ == '__main__':

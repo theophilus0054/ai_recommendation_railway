@@ -141,6 +141,10 @@ class ProfilKesehatanInput(BaseModel):
     # Khusus PASCA_OPERASI: tahap diet dari dokter/ahli gizi & jenis operasi
     tahapDiet: Optional[str] = Field(default=None, pattern="^(cair|saring|lunak|biasa)$")
     jenisOperasi: Optional[str] = Field(default=None, pattern="^(saluran_cerna|ortopedi|caesar|umum)$")
+    # Variasi menu antarhari (opsional): id user + tanggal sebagai benih, riwayat nama bahan hari sebelumnya
+    userId: Optional[str] = Field(default=None, max_length=100)
+    tanggal: Optional[str] = Field(default=None, pattern=r"^\d{4}-\d{2}-\d{2}$", description="YYYY-MM-DD, default hari ini")
+    riwayatMakanan: Optional[list[str]] = Field(default=None, max_length=200, description="Nama bahan yang direkomendasikan beberapa hari terakhir")
     # Tier 1: target gizi WAJIB berasal dari perhitungan NutriScale
     nutrisi: NutrisiNutriScaleInput
     # Asesmen antropometri resmi NutriScale (BMI, HAZ, WHZ, status gizi)
@@ -184,7 +188,7 @@ def root():
 
 @app.get("/api/models")
 def list_models():
-    """Model gradient boosting yang aktif per kategori kondisi."""
+    """Model Logistic Regression yang aktif per kategori kondisi."""
     out = {}
     for kategori in ["UMUM", "IBU_HAMIL", "ANAK_BALITA", "PASCA_OPERASI"]:
         info = get_recommender_model(kategori)

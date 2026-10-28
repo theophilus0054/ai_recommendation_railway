@@ -5,7 +5,7 @@
    - Tier 1: Nutrition Engine (NutriScale Web) sebagai Source of Truth target gizi.
    - Tier 2: Recommendation Engine:
        * Hard Safety Filtering (eliminasi alergen/pantangan & batasan medis)
-       * Machine Learning Ranking: 4 model gradient boosting (UMUM, IBU_HAMIL, ANAK_BALITA,
+       * Machine Learning Ranking: 4 model Logistic Regression (UMUM, IBU_HAMIL, ANAK_BALITA,
          PASCA_OPERASI), skor = (P(1) + 2*P(2)) / 2 dari predict_proba label 0/1/2
    - Tier 3: Gemini LLM Narasi (penjelasan natural tanpa mengubah angka)
    - Prisma DB Schema Compliance: ProfilKesehatan, RiwayatAnalisis, MealPlan
@@ -16,6 +16,8 @@ import os
 import re
 import json
 import difflib
+import hashlib
+import datetime
 import warnings
 import joblib
 import numpy as np
@@ -203,6 +205,28 @@ DAILY_LIMITS = {
 
 SESSION_RATIOS = {'pagi': 0.25, 'snack_pagi': 0.10, 'siang': 0.35, 'snack_sore': 0.10, 'malam': 0.20}
 SESSION_GROUPS = ['pagi', 'snack', 'siang', 'malam']
+
+# Komposisi piring per sesi: (peran, foodType yang boleh, porsi kalori sesi). Peran pertama yang
+# tidak punya kandidat dilonggarkan ke foodType utama sesi (PIRING_CADANGAN).
+PIRING_SESI = {
+    'pagi':  [('karbo', ['carb'], 0.45), ('lauk', ['protein', 'dairy'], 0.35), ('buah/sayur', ['fruit', 'vegetable'], 0.20)],
+    'siang': [('karbo', ['carb'], 0.45), ('lauk', ['protein'], 0.35), ('sayur', ['vegetable'], 0.20)],
+    'malam': [('karbo', ['carb'], 0.40), ('lauk', ['protein'], 0.40), ('sayur', ['vegetable'], 0.20)],
+    'snack': [('selingan', ['fruit', 'dairy', 'snack'], 1.00)],
+}
+PIRING_CADANGAN = {   # snack tidak mengambil karbo/lauk agar tidak menghabiskan bahan sesi makan utama
+    'pagi': ['protein', 'carb', 'vegetable', 'fruit', 'dairy', 'snack'],
+    'siang': ['protein', 'carb', 'vegetable', 'fruit', 'dairy'],
+    'malam': ['protein', 'carb', 'vegetable', 'fruit', 'dairy'],
+    'snack': ['fruit', 'dairy', 'snack', 'beverage', 'vegetable'],
+}
+PERAN_BAHAN = {'carb': 'karbo', 'protein': 'lauk', 'dairy': 'susu/olahan', 'vegetable': 'sayur', 'fruit': 'buah',
+               'snack': 'selingan', 'beverage': 'minuman'}
+BAHAN_PELENGKAP = ['fat', 'spice', 'sweetener']   # minyak, bumbu, gula: pelengkap kecil, bukan menu utama
+VARIASI_TOP_K = 5             # jumlah kandidat teratas yang diundi
+VARIASI_SUHU = 0.05           # makin kecil makin condong ke skor tertinggi
+VARIASI_TOLERANSI = 0.85      # kandidat minimal 85% skor terbaik agar ikut diundi
+PENALTI_RIWAYAT = 0.7         # pengali skor bahan yang sudah muncul di hari-hari sebelumnya
 FOOD_TYPES = ['protein', 'carb', 'vegetable', 'fruit', 'dairy', 'snack', 'beverage', 'fat', 'sweetener', 'spice']
 
 # Klasifikasi foodType (kosakata produk Supabase) dari nama makanan, dipakai bila kolom foodType kosong
@@ -245,7 +269,10 @@ FEATURE_COLS: list[str] = (
      'tekstur_ord', 'tahap_diet_ord', 'tekstur_violation', 'operasi_saluran_cerna', 'fat_x_saluran_cerna',
      'n_conflict_allergen', 'n_conflict_pantangan', 'n_conflict_free', 'n_block_kategori', 'n_limit_kategori',
      'n_user_restrictions', 'any_conflict',
-     'flag_fried', 'flag_processed', 'flag_sweet', 'flag_spicy']
+     'flag_fried', 'flag_processed', 'flag_sweet', 'flag_spicy',
+     'porsi_ideal', 'porsi_wajar', 'protein_pct_sesuai', 'protein_kurang_lauk_karbo', 'protein_15',
+     'natrium_lewat', 'natrium_lewat_jauh', 'gula_lewat', 'gula_lewat_jauh', 'gula_10',
+     'ed_tinggi_x_lebih', 'ed_rendah_x_kurang', 'protein15_x_kurang', 'lemak10_x_saluran_cerna', 'diet_lunak']
     + [f'ft_{t}__{s}' for t in FOOD_TYPES for s in SESSION_GROUPS]
 )
 
@@ -462,8 +489,29 @@ def compute_ml_features(df: pd.DataFrame, target_kalori: float, target_macros: d
     F['flag_sweet'] = (sugars > 15).astype(float)
     F['flag_spicy'] = names.apply(lambda x: keyword_match(x, _ALLERGEN_PATTERNS['pedas'])).to_numpy(dtype=float)
 
-    # E. Kecocokan sesi x foodType
     ft = df['food_type'].to_numpy() if 'food_type' in df else np.array(['snack'] * n)
+
+    # J. Indikator ambang (pedoman porsi, AMDR, batas GGL): membuat efek ambang terbaca oleh model linear
+    gizi_kurang = float(flags['status_kurang'] or flags['stunting'])
+    gizi_lebih = float(flags['status_lebih'] or flags['status_obes'])
+    F['porsi_ideal'] = ((raw_mult >= 0.67) & (raw_mult <= 2.0)).astype(float)
+    F['porsi_wajar'] = ((raw_mult >= 0.5) & (raw_mult <= 3.0)).astype(float)
+    t_p_pct = 4 * t_p / t_kcal_macro
+    F['protein_pct_sesuai'] = (np.abs(p_pct - t_p_pct) <= 0.07).astype(float)
+    F['protein_kurang_lauk_karbo'] = ((p_pct < t_p_pct - 0.12) & np.isin(ft, ['protein', 'carb'])).astype(float)
+    F['protein_15'] = (p_pct >= 0.15).astype(float)
+    F['natrium_lewat'] = (F['sodium_share'] > 1.0).astype(float)
+    F['natrium_lewat_jauh'] = (F['sodium_share'] > 1.5).astype(float)
+    F['gula_lewat'] = (F['sugar_share'] > 1.0).astype(float)
+    F['gula_lewat_jauh'] = (F['sugar_share'] > 1.5).astype(float)
+    F['gula_10'] = (sugars > 10).astype(float)
+    F['ed_tinggi_x_lebih'] = (ed > 3.0).astype(float) * gizi_lebih
+    F['ed_rendah_x_kurang'] = ((ed < 1.0) & ~np.isin(ft, ['vegetable', 'fruit'])).astype(float) * gizi_kurang
+    F['protein15_x_kurang'] = F['protein_15'] * gizi_kurang
+    F['lemak10_x_saluran_cerna'] = (fat * mult > 10).astype(float) * saluran_cerna
+    F['diet_lunak'] = np.full(n, float(tahap < 3))
+
+    # E. Kecocokan sesi x foodType
     sg = session_group(meal_type)
     for t in FOOD_TYPES:
         for s in SESSION_GROUPS:
@@ -1165,6 +1213,25 @@ def _heuristic_score(features: pd.DataFrame) -> np.ndarray:
     return np.clip(1.0 - features['abs_log_kcal_ratio'].to_numpy() - features['abs_protein_pct_diff'].to_numpy()
                    - 0.1 * features['n_limit_kategori'].to_numpy(), 0.0, 1.0)
 
+def _undi_kandidat(scores: np.ndarray, top_n: int, rng: np.random.Generator) -> list[int]:
+    """Undi top_n indeks tanpa pengembalian dari VARIASI_TOP_K kandidat teratas (bobot softmax skor)."""
+    order = scores.argsort(kind='stable')[::-1]
+    valid = [i for i in order[:VARIASI_TOP_K] if scores[i] > -100]
+    if not valid:
+        return []
+    best = scores[valid[0]]
+    pool = np.array([i for i in valid if scores[i] >= best * VARIASI_TOLERANSI])
+    w = np.exp((scores[pool] - best) / VARIASI_SUHU)
+    k = min(top_n, len(pool))
+    return [int(i) for i in rng.choice(pool, size=k, replace=False, p=w / w.sum())]
+
+def benih_variasi(profil: dict, tanggal: Optional[str] = None) -> int:
+    """Benih acak dari identitas user + tanggal: menu sama di hari yang sama, berganti di hari berikutnya."""
+    tanggal = tanggal or datetime.date.today().isoformat()
+    ident = profil.get('userId') or '|'.join(str(profil.get(k, '')) for k in
+                                             ['kategoriKondisi', 'umur', 'jenisKelamin', 'beratBadan', 'tinggiBadan'])
+    return int(hashlib.sha256(f'{ident}|{tanggal}'.encode()).hexdigest()[:12], 16)
+
 def recommend_meal(
     target_kalori: float,
     target_macros: dict,
@@ -1174,13 +1241,20 @@ def recommend_meal(
     meal_type: str,
     used_foods: set,
     top_n: int = 5,
-    profil_ctx: Optional[dict] = None
+    profil_ctx: Optional[dict] = None,
+    allowed_types: Optional[list] = None,
+    rng: Optional[np.random.Generator] = None,
+    riwayat_makanan: Optional[set] = None,
 ) -> list[dict]:
     """
-    Rekomendasi makanan dengan model gradient boosting per kategori.
+    Rekomendasi makanan dengan model Logistic Regression multinomial per kategori.
     Fitur dihitung oleh compute_ml_features (fungsi yang sama dipakai saat training),
     lalu skor = (P(cukup sesuai) + 2 * P(sangat sesuai)) / 2 dari predict_proba.
+    allowed_types membatasi foodType (komposisi piring). rng mengundi di antara kandidat teratas
+    (variasi antarhari); riwayat_makanan menurunkan skor bahan yang sudah dipakai di hari sebelumnya.
     """
+    if allowed_types is not None and len(df) and 'food_type' in df.columns:
+        df = df[df['food_type'].isin(allowed_types)]
     if len(df) == 0:
         return []
 
@@ -1198,13 +1272,20 @@ def recommend_meal(
     ranking_scores = ml_scores.copy()
     names_lower = df['name_lower'].values if 'name_lower' in df.columns else df['name'].str.lower().values
 
-    # Anti-Repetisi Mutlak
+    # Variasi antarhari: bahan yang sudah dipakai di hari sebelumnya diturunkan (tidak dibuang)
+    if riwayat_makanan:
+        ranking_scores = np.where(np.isin(names_lower, list(riwayat_makanan)), ranking_scores * PENALTI_RIWAYAT, ranking_scores)
+
+    # Anti-Repetisi Mutlak dalam satu hari
     if used_foods:
         used_mask = np.isin(names_lower, list(used_foods))
         ranking_scores[used_mask] = -999.0
 
-    # Ambil Top-N
-    top_indices = ranking_scores.argsort(kind='stable')[-top_n:][::-1]
+    # Ambil Top-N (rng: undi berbobot di antara kandidat teratas yang skornya dekat dengan terbaik)
+    if rng is not None:
+        top_indices = _undi_kandidat(ranking_scores, top_n, rng)
+    else:
+        top_indices = ranking_scores.argsort(kind='stable')[-top_n:][::-1]
 
     records = []
     for idx in top_indices:
@@ -1246,43 +1327,62 @@ def recommend_meal(
             'nutrient_density':    round(float(row.get('nutrient_density', 0)), 2),
             'recommended_quantity': quantity,
             'alasan_rekomendasi':  '; '.join(reasons_list),
+            'jenis_bahan':         row.get('food_type', ''),
         })
 
     return records
 
+def pilih_bahan_pelengkap(df_filtered: pd.DataFrame, n: int = 3) -> list[dict]:
+    """Minyak, bumbu, dan gula yang lolos filter: pelengkap opsional, tidak dihitung ke target kalori."""
+    if 'food_type' not in df_filtered.columns:
+        return []
+    d = df_filtered[df_filtered['food_type'].isin(BAHAN_PELENGKAP)]
+    if 'sodium' in d.columns:
+        d = d.sort_values('sodium', kind='stable')
+    return [{'produk_id': r.get('id', ''), 'nama_makanan': str(r['name']), 'jenis_bahan': r['food_type'],
+             'harga': float(r.get('price', 0) or 0), 'catatan': 'Pelengkap opsional secukupnya, tidak dihitung ke target kalori'}
+            for _, r in d.head(n).iterrows()]
+
 def build_meal_plan(kalori_info: dict, df_filtered: pd.DataFrame, kategori: str, scaler_dict: dict,
-                    profil_ctx: Optional[dict] = None) -> dict:
+                    profil_ctx: Optional[dict] = None, rng: Optional[np.random.Generator] = None,
+                    riwayat_makanan: Optional[set] = None) -> dict:
     target = kalori_info['target_kalori_harian']
     dist   = kalori_info['distribusi']
     sesi   = SESSION_RATIOS
     ctx    = {'target_kalori_harian': target, 'target_fat_g': dist.get('fat_g'), **(profil_ctx or {})}
+    riwayat_makanan = {str(x).lower() for x in (riwayat_makanan or set())}
 
     def split_macro(ratio: float) -> dict:
         return {k: v * ratio for k, v in dist.items()}
 
     used_foods = set()
 
-    def get_paket(ratio: float, meal_type: str, n: int) -> list:
+    def get_paket(ratio: float, meal_type: str) -> list:
+        """Satu bahan per peran piring (karbo + lauk + sayur/buah); peran tanpa kandidat dilonggarkan."""
         paket = []
-        if n == 1:
-            return recommend_meal(target * ratio, split_macro(ratio), df_filtered, kategori, scaler_dict, meal_type, used_foods, 1, ctx)
-            
-        fractions = [0.6, 0.4] if n == 2 else ([0.5, 0.25, 0.25] if n == 3 else [1.0/n]*n)
-        for frac in fractions:
+        sg = session_group(meal_type)
+        for peran, types, frac in PIRING_SESI[sg]:
             item_ratio = ratio * frac
-            item = recommend_meal(target * item_ratio, split_macro(item_ratio), df_filtered, kategori, scaler_dict, meal_type, used_foods, 1, ctx)
-            if item:
-                paket.extend(item)
+            args = (target * item_ratio, split_macro(item_ratio), df_filtered, kategori, scaler_dict, meal_type, used_foods, 1, ctx)
+            item = recommend_meal(*args, allowed_types=types, rng=rng, riwayat_makanan=riwayat_makanan)
+            for it in item:
+                it['peran'] = peran
+            if not item:   # dilonggarkan: peran mengikuti jenis bahan yang benar-benar terpilih
+                item = recommend_meal(*args, allowed_types=PIRING_CADANGAN[sg], rng=rng, riwayat_makanan=riwayat_makanan)
+                for it in item:
+                    it['peran'] = PERAN_BAHAN.get(it['jenis_bahan'], peran)
+            paket.extend(item)
         return paket
 
     return {
         'target_kalori_harian': target,
         'distribusi':           dist,
-        'rekomendasi_pagi':        get_paket(sesi['pagi'],       'pagi',  3),
-        'rekomendasi_snack_pagi':  get_paket(sesi['snack_pagi'], 'snack', 1),
-        'rekomendasi_siang':       get_paket(sesi['siang'],      'siang', 3),
-        'rekomendasi_snack_sore':  get_paket(sesi['snack_sore'], 'snack', 1),
-        'rekomendasi_malam':       get_paket(sesi['malam'],      'malam', 2),
+        'rekomendasi_pagi':        get_paket(sesi['pagi'],       'pagi'),
+        'rekomendasi_snack_pagi':  get_paket(sesi['snack_pagi'], 'snack'),
+        'rekomendasi_siang':       get_paket(sesi['siang'],      'siang'),
+        'rekomendasi_snack_sore':  get_paket(sesi['snack_sore'], 'snack'),
+        'rekomendasi_malam':       get_paket(sesi['malam'],      'malam'),
+        'bahan_pelengkap_opsional': pilih_bahan_pelengkap(df_filtered),
     }
 
 # ==========================================================================
@@ -1419,8 +1519,11 @@ def jalankan_ai_rekomendasi(
     # 2. Tier 2: Hard Safety Filter (Eliminasi alergen, pantangan & BLOKIR kategori sebelum ranking)
     df_filtered = filter_dataset(dataset_dataframe, pantangan, kategori, alergi, profil_ctx)
 
-    # 3. Tier 2: Machine Learning Meal Ranking
-    rencana_makan = build_meal_plan(kalori, df_filtered, kategori, scaler_dict, profil_ctx)
+    # 3. Tier 2: Machine Learning Meal Ranking + komposisi piring + variasi antarhari
+    benih = benih_variasi(profil_kesehatan_dict, profil_kesehatan_dict.get('tanggal'))
+    riwayat_makanan = set(profil_kesehatan_dict.get('riwayatMakanan') or [])
+    rencana_makan = build_meal_plan(kalori, df_filtered, kategori, scaler_dict, profil_ctx,
+                                    rng=np.random.default_rng(benih), riwayat_makanan=riwayat_makanan)
 
     # 4. Tier 3: Gemini LLM Narasi (penjelasan tanpa mengubah angka)
     narasi_ai = ""
@@ -1449,10 +1552,12 @@ def jalankan_ai_rekomendasi(
             'sumber_target_gizi': NUTRISCALE_SOURCE,
             'sumber_asesmen_antropometri': riwayat.get('_source', 'LOCAL_FALLBACK'),
             'model': {
-                'algoritma': 'HistGradientBoosting (multikelas, label 0/1/2)' if model_info.get('pipeline') is not None else 'HEURISTIK (model belum dilatih)',
+                'algoritma': 'LogisticRegression (multinomial, label 0/1/2)' if model_info.get('pipeline') is not None else 'HEURISTIK (model belum dilatih)',
                 'kategori_model': model_info.get('kategori_dipakai'),
                 'versi': model_info.get('version'),
             },
             'tier1_details': kalori.get('tier1_details', {}),
+            'variasi': {'benih': benih, 'tanggal': profil_kesehatan_dict.get('tanggal') or datetime.date.today().isoformat(),
+                        'riwayat_dipakai': len(riwayat_makanan)},
         }
     }

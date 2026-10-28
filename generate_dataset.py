@@ -1,6 +1,6 @@
 """
 ==========================================================================
- NutriScale AI — Dataset Generator per Kategori (4 Model gradient boosting)
+ NutriScale AI — Dataset Generator per Kategori (4 Model Logistic Regression)
  Menghasilkan data training dan testing SINTETIS untuk 4 kategori kondisi:
    UMUM, IBU_HAMIL, ANAK_BALITA, PASCA_OPERASI (satu dataset per kategori).
  - Profil Tier 1 realistis per kategori (Harris-Benedict x aktivitas, IOM EER balita,
@@ -32,9 +32,10 @@ from model import (
 KATEGORI_LIST = ['UMUM', 'IBU_HAMIL', 'ANAK_BALITA', 'PASCA_OPERASI']
 RUBRIC_VERSION = 'rubric-v1'
 
-# Pecahan target item per sesi (sama dengan get_paket di build_meal_plan)
+# Pecahan target item per sesi (sama dengan model.PIRING_SESI yang dipakai get_paket di build_meal_plan)
 SESSION_ITEM_FRACTIONS = {
-    'pagi': [0.5, 0.25], 'snack_pagi': [1.0], 'siang': [0.5, 0.25], 'snack_sore': [1.0], 'malam': [0.6, 0.4],
+    'pagi': [0.45, 0.35, 0.20], 'snack_pagi': [1.0], 'siang': [0.45, 0.35, 0.20], 'snack_sore': [1.0],
+    'malam': [0.40, 0.40, 0.20],
 }
 
 # Variasi teks alergi / pantangan yang diketik user (termasuk bahasa campur & salah ketik)
