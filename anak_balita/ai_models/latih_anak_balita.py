@@ -1,6 +1,6 @@
 """
 Latih model ANAK_BALITA (pemilik: Arya).
-Usage: python kategori/anak_balita/latih_anak_balita.py [--buat-data] [--profiles 700]
+Usage: python anak_balita/ai_models/latih_anak_balita.py [--buat-data] [--profiles 700]
   --buat-data : buat ulang dataset sintetis data/anak_balita/ dari profil.py & rubrik.py kategori ini
 """
 
@@ -10,7 +10,7 @@ import argparse
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from kategori.pipeline import latih_kategori
+from shared.pipeline import latih_kategori
 
 KATEGORI = 'ANAK_BALITA'
 

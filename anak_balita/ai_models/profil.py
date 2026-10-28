@@ -2,7 +2,7 @@
 
 import numpy as np
 
-from kategori.bersama import child_status
+from shared.bersama import child_status
 
 KCAL_MIN = 300
 

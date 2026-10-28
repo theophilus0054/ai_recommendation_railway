@@ -1,10 +1,10 @@
-"""Uji unit kategori ANAK_BALITA (pemilik: Arya). Usage: python -m unittest kategori.anak_balita.test_anak_balita"""
+"""Uji unit kategori ANAK_BALITA (pemilik: Arya). Usage: python -m unittest anak_balita.tests.test_anak_balita"""
 
 import unittest
 
 import numpy as np
 
-from kategori.anak_balita import profil, rubrik
+from anak_balita.ai_models import profil, rubrik
 from model import compute_ml_features, detect_hazards, filter_dataset
 from test_safety_filter import make_foods
 

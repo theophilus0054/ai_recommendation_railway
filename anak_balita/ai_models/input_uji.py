@@ -1,6 +1,6 @@
-"""Kasus input user ANAK_BALITA (pemilik: Arya). Dikirim ke /api/recommend oleh kategori/uji_input.py."""
+"""Kasus input user ANAK_BALITA (pemilik: Arya). Dikirim ke /api/recommend oleh shared/uji_input.py."""
 
-from kategori.bersama import buat_nutrisi
+from shared.bersama import buat_nutrisi
 
 def _b(bulan, jk, bb, tb, nutrisi, bmi, status, haz=-0.5, whz=0.0, **extra):
     return {"umur": bulan, "jenisKelamin": jk, "beratBadan": bb, "tinggiBadan": tb, "kategoriKondisi": "ANAK_BALITA",
