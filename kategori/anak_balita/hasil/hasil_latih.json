@@ -1,0 +1,222 @@
+{
+  "kategori": "ANAK_BALITA",
+  "pemilik": "Arya",
+  "train_rows": 33589,
+  "test_rows": 8399,
+  "config_hash": "7ec1c77b29e130d2",
+  "train_profiles": 560,
+  "test_profiles": 140,
+  "label_distribution_train": {
+    "0": 0.7123,
+    "1": 0.2018,
+    "2": 0.086
+  },
+  "cv_groupkfold": {
+    "accuracy": {
+      "mean": 0.9317,
+      "std": 0.0034
+    },
+    "macro_f1": {
+      "mean": 0.8867,
+      "std": 0.0066
+    },
+    "weighted_kappa": {
+      "mean": 0.9154,
+      "std": 0.0042
+    },
+    "ndcg@5": {
+      "mean": 0.9855,
+      "std": 0.001
+    }
+  },
+  "test": {
+    "accuracy": 0.9374,
+    "macro_f1": 0.895,
+    "macro_precision": 0.8933,
+    "macro_recall": 0.8968,
+    "per_class": {
+      "0": {
+        "precision": 0.9729,
+        "recall": 0.9706,
+        "f1": 0.9718,
+        "support": 6030
+      },
+      "1": {
+        "precision": 0.838,
+        "recall": 0.8411,
+        "f1": 0.8395,
+        "support": 1636
+      },
+      "2": {
+        "precision": 0.8691,
+        "recall": 0.8786,
+        "f1": 0.8738,
+        "support": 733
+      }
+    },
+    "weighted_kappa": 0.9234,
+    "confusion_matrix": [
+      [
+        5853,
+        177,
+        0
+      ],
+      [
+        163,
+        1376,
+        97
+      ],
+      [
+        0,
+        89,
+        644
+      ]
+    ]
+  },
+  "test_ranking_ndcg": {
+    "model_lr": {
+      "ndcg@5": 0.9873,
+      "ndcg@10": 0.9897
+    },
+    "baseline_lama": {
+      "ndcg@5": 0.6819,
+      "ndcg@10": 0.7653
+    },
+    "baseline_acak": {
+      "ndcg@5": 0.5041,
+      "ndcg@10": 0.6654
+    }
+  },
+  "test_new_food": {
+    "accuracy": 0.9376,
+    "macro_f1": 0.8935,
+    "macro_precision": 0.8935,
+    "macro_recall": 0.8935,
+    "per_class": {
+      "0": {
+        "precision": 0.9717,
+        "recall": 0.9737,
+        "f1": 0.9727,
+        "support": 951
+      },
+      "1": {
+        "precision": 0.8479,
+        "recall": 0.8383,
+        "f1": 0.8431,
+        "support": 266
+      },
+      "2": {
+        "precision": 0.8609,
+        "recall": 0.8684,
+        "f1": 0.8646,
+        "support": 114
+      }
+    },
+    "weighted_kappa": 0.9231,
+    "confusion_matrix": [
+      [
+        926,
+        25,
+        0
+      ],
+      [
+        27,
+        223,
+        16
+      ],
+      [
+        0,
+        15,
+        99
+      ]
+    ]
+  },
+  "conflict_pairs_predicted_nonzero": 0.0,
+  "pembanding_gradient_boosting": {
+    "accuracy": 0.9615,
+    "macro_f1": 0.9325,
+    "macro_precision": 0.9325,
+    "macro_recall": 0.9327,
+    "per_class": {
+      "0": {
+        "precision": 0.9823,
+        "recall": 0.9854,
+        "f1": 0.9839,
+        "support": 6030
+      },
+      "1": {
+        "precision": 0.909,
+        "recall": 0.8918,
+        "f1": 0.9003,
+        "support": 1636
+      },
+      "2": {
+        "precision": 0.906,
+        "recall": 0.9209,
+        "f1": 0.9134,
+        "support": 733
+      }
+    },
+    "weighted_kappa": 0.953,
+    "confusion_matrix": [
+      [
+        5942,
+        88,
+        0
+      ],
+      [
+        107,
+        1459,
+        70
+      ],
+      [
+        0,
+        58,
+        675
+      ]
+    ],
+    "ndcg@5": 0.9931270573634817
+  },
+  "top_coefficients_p2_vs_p0": [
+    [
+      "natrium_lewat_jauh",
+      -8.4174
+    ],
+    [
+      "fat_share",
+      -7.9305
+    ],
+    [
+      "gula_lewat_jauh",
+      -7.835
+    ],
+    [
+      "porsi_wajar",
+      6.9483
+    ],
+    [
+      "any_conflict",
+      -6.7686
+    ],
+    [
+      "n_block_kategori",
+      -4.5104
+    ],
+    [
+      "ft_protein__snack",
+      -4.1791
+    ],
+    [
+      "porsi_ideal",
+      3.7658
+    ],
+    [
+      "protein_pct_sesuai",
+      3.3556
+    ],
+    [
+      "n_conflict_pantangan",
+      -2.5978
+    ]
+  ]
+}

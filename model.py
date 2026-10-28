@@ -25,6 +25,8 @@ import requests
 import pandas as pd
 from typing import Optional
 from dotenv import load_dotenv, find_dotenv
+
+from kategori import KATEGORI_LIST, modul as modul_kategori
 load_dotenv(find_dotenv(usecwd=True))
 
 warnings.filterwarnings('ignore')
@@ -136,53 +138,13 @@ class NutriScaleDataError(ValueError):
 # Daftar akhir WAJIB ditinjau ahli gizi. Pencocokan memakai batas kata (word boundary).
 # ==========================================================================
 
-CATEGORY_HAZARDS: dict[str, dict[str, dict[str, list[str]]]] = {
-    'UMUM': {
-        'blokir': {'ALKOHOL': ALCOHOL_KEYWORDS, 'MENTAH': []},  # MENTAH: hanya 'raw' + produk hewani
-        'batasi': {
-            'KAFEIN':  ['coffee', 'espresso', 'energy drink', 'cola', 'kopi'],
-            'OLAHAN':  ['fast foods', 'frankfurter', 'sausage', 'bacon', 'hot dog', 'instant', 'luncheon meat', 'sosis', 'nugget'],
-        },
-    },
-    'ANAK_BALITA': {
-        'blokir': {
-            'ALKOHOL':         ALCOHOL_KEYWORDS,
-            'KAFEIN':          ['coffee', 'espresso', 'energy drink', 'cola', 'kopi', 'caffeine'],
-            'RISIKO_TERSEDAK': ['whole nuts', 'popcorn', 'hard candy', 'hard candies', 'lollipop', 'gum', 'chewing gum',
-                                'peanuts', 'almonds', 'cashews', 'pistachios', 'seeds', 'grapes'],
-            'MENTAH':          ['sushi', 'sashimi', 'undercooked', 'setengah matang'],
-        },
-        'batasi': {
-            'GULA_TAMBAHAN': ['candy', 'candies', 'soda', 'carbonated', 'frosted', 'cookies', 'cake', 'syrup', 'sweetened'],
-            'OLAHAN':        ['fast foods', 'frankfurter', 'sausage', 'bacon', 'hot dog', 'instant', 'chips', 'luncheon meat'],
-        },
-    },
-    'IBU_HAMIL': {
-        'blokir': {
-            'ALKOHOL':         ALCOHOL_KEYWORDS,
-            'MENTAH':          ['sushi', 'sashimi', 'ceviche', 'tartare', 'undercooked', 'setengah matang'],
-            'TIDAK_PASTEUR':   ['unpasteurized', 'raw milk', 'brie', 'camembert', 'roquefort', 'feta', 'queso fresco'],
-            'IKAN_MERKURI':    ['shark', 'swordfish', 'king mackerel', 'marlin', 'tilefish', 'bigeye tuna', 'hiu', 'todak'],
-        },
-        'batasi': {
-            'KAFEIN':  ['coffee', 'espresso', 'energy drink', 'cola', 'kopi', 'caffeine'],
-            'JEROAN':  ['liver', 'giblets', 'kidney', 'hati', 'ati', 'jeroan'],
-            'TUNA':    ['tuna', 'tongkol'],
-            'OLAHAN':  ['fast foods', 'frankfurter', 'sausage', 'hot dog', 'deli', 'luncheon meat', 'pate'],
-        },
-    },
-    'PASCA_OPERASI': {
-        'blokir': {
-            'ALKOHOL': ALCOHOL_KEYWORDS,
-            'MENTAH':  ['sushi', 'sashimi', 'undercooked'],
-        },
-        'batasi': {
-            'GORENGAN': ['fried', 'deep-fried', 'battered', 'breaded', 'crispy', 'goreng'],
-            'OLAHAN':   ['fast foods', 'frankfurter', 'sausage', 'bacon', 'hot dog', 'instant', 'luncheon meat'],
-            'KAFEIN':   ['coffee', 'espresso', 'energy drink', 'kopi'],
-        },
-    },
-}
+def _muat_bahaya(kategori: str) -> dict[str, dict[str, list[str]]]:
+    """Tabel bahaya dari kategori/<kategori>/bahaya.py; None = daftar alkohol bersama."""
+    tabel = modul_kategori(kategori, 'bahaya').BAHAYA
+    return {jenis: {kode: (ALCOHOL_KEYWORDS if kws is None else kws) for kode, kws in isi.items()}
+            for jenis, isi in tabel.items()}
+
+CATEGORY_HAZARDS: dict[str, dict[str, dict[str, list[str]]]] = {k: _muat_bahaya(k) for k in KATEGORI_LIST}
 
 # Tahap diet pasca operasi (ditentukan dokter/ahli gizi) dan tekstur makanan
 TEKSTUR_ORDINAL = {'cair': 0, 'saring': 1, 'lunak': 2, 'biasa': 3}
@@ -196,12 +158,7 @@ TEXTURE_KEYWORDS = {
 }
 
 # Batas harian Gula-Garam-Lemak per kategori (lemak None = pakai target lemak Tier 1)
-DAILY_LIMITS = {
-    'UMUM':          {'sodium': 2000.0, 'sugars': 50.0, 'fat': 67.0},
-    'IBU_HAMIL':     {'sodium': 2000.0, 'sugars': 50.0, 'fat': None},
-    'PASCA_OPERASI': {'sodium': 2000.0, 'sugars': 50.0, 'fat': None},
-    'ANAK_BALITA':   {'sodium': 900.0,  'sugars': 25.0, 'fat': None},
-}
+DAILY_LIMITS = {k: modul_kategori(k, 'bahaya').BATAS_HARIAN for k in KATEGORI_LIST}
 
 SESSION_RATIOS = {'pagi': 0.25, 'snack_pagi': 0.10, 'siang': 0.35, 'snack_sore': 0.10, 'malam': 0.20}
 SESSION_GROUPS = ['pagi', 'snack', 'siang', 'malam']
@@ -334,9 +291,14 @@ def classify_food_type(name: str, food_type: Optional[str] = None) -> str:
     return 'snack'
 
 
+_MEDIA_KEMASAN_PATTERN = re.compile(r'\(\s*water\s*\)|\b(?:packed|canned)?\s*in\s+(?:water|oil|brine|syrup)\b|\bwater[- ]packed\b')
+
+
 def detect_texture(name: str, food_type: str = '') -> str:
     """Perkiraan tekstur dari nama: cair, saring, lunak, atau biasa."""
     name = str(name).lower()
+    # Media kemasan ('canned in water', '(water)') bukan berarti makanannya cair
+    name = _MEDIA_KEMASAN_PATTERN.sub(' ', name)
     for tek in ('cair', 'saring', 'lunak'):
         if keyword_match(name, _TEXTURE_PATTERNS[tek]):
             if tek == 'cair' and keyword_match(name, _kw_pattern(['powder', 'dry', 'mix', 'bar'])):

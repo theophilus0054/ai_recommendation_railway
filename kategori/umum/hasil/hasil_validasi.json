@@ -1,0 +1,135 @@
+{
+  "kategori": "UMUM",
+  "pemilik": "Muel",
+  "config_hash": "7ec1c77b29e130d2",
+  "test": {
+    "accuracy": 0.9127,
+    "macro_f1": 0.8665,
+    "macro_precision": 0.8755,
+    "macro_recall": 0.8589,
+    "per_class": {
+      "0": {
+        "precision": 0.9576,
+        "recall": 0.9586,
+        "f1": 0.9581,
+        "support": 5584
+      },
+      "1": {
+        "precision": 0.8123,
+        "recall": 0.8369,
+        "f1": 0.8244,
+        "support": 2042
+      },
+      "2": {
+        "precision": 0.8565,
+        "recall": 0.7811,
+        "f1": 0.8171,
+        "support": 772
+      }
+    },
+    "weighted_kappa": 0.8939,
+    "confusion_matrix": [
+      [
+        5353,
+        226,
+        5
+      ],
+      [
+        237,
+        1709,
+        96
+      ],
+      [
+        0,
+        169,
+        603
+      ]
+    ]
+  },
+  "cv_groupkfold": {
+    "accuracy": {
+      "mean": 0.9126,
+      "std": 0.0054
+    },
+    "macro_f1": {
+      "mean": 0.8598,
+      "std": 0.0079
+    },
+    "weighted_kappa": {
+      "mean": 0.8936,
+      "std": 0.0068
+    },
+    "ndcg@5": {
+      "mean": 0.9795,
+      "std": 0.0022
+    }
+  },
+  "end_to_end": [
+    {
+      "skenario": "Dewasa Umum Obesitas",
+      "jumlah_item": 11,
+      "kandidat_lolos_filter": 41,
+      "pelanggaran_alergen": 0,
+      "pelanggaran_blokir": 0,
+      "pelanggaran_tekstur": 0,
+      "rata_skor_kesesuaian": 74.9,
+      "latensi_ms": 49.1,
+      "menu": {
+        "pagi": [
+          "karbo: Whole Wheat Bread",
+          "lauk: Lentils",
+          "buah/sayur: Banana"
+        ],
+        "snack_pagi": [
+          "selingan: Strawberry Yogurt"
+        ],
+        "siang": [
+          "karbo: Oatmeal",
+          "lauk: Fresh Chicken Breast",
+          "sayur: Sweet Potato"
+        ],
+        "snack_sore": [
+          "selingan: Ajwa Dates"
+        ],
+        "malam": [
+          "karbo: Organic Brown Rice",
+          "lauk: Tilapia Fish",
+          "sayur: Red Chili"
+        ]
+      }
+    },
+    {
+      "skenario": "Dewasa Umum Underweight",
+      "jumlah_item": 11,
+      "kandidat_lolos_filter": 46,
+      "pelanggaran_alergen": 0,
+      "pelanggaran_blokir": 0,
+      "pelanggaran_tekstur": 0,
+      "rata_skor_kesesuaian": 73.4,
+      "latensi_ms": 48.9,
+      "menu": {
+        "pagi": [
+          "karbo: Organic Brown Rice",
+          "lauk: Lentils",
+          "buah/sayur: Sweet Potato"
+        ],
+        "snack_pagi": [
+          "selingan: Baked Potato Chips"
+        ],
+        "siang": [
+          "karbo: Quinoa",
+          "lauk: Kidney Beans",
+          "sayur: Mustard Greens"
+        ],
+        "snack_sore": [
+          "selingan: Ajwa Dates"
+        ],
+        "malam": [
+          "karbo: Oatmeal",
+          "lauk: Fresh Chicken Breast",
+          "sayur: Red Chili"
+        ]
+      }
+    }
+  ]
+}

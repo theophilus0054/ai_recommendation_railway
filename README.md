@@ -55,6 +55,25 @@ Setiap kategori: 700 profil sintetis × 5 sesi × 12 kandidat (≈42.000 pasanga
 
 ---
 
+## 👥 Pembagian 4 Model (satu anggota per kategori, metode sama)
+
+| Kategori | Pemilik | Folder | Laporan validasi |
+| :--- | :--- | :--- | :--- |
+| UMUM | Muel | `kategori/umum/` | `kategori/umum/hasil/laporan_validasi_umum.md` |
+| ANAK_BALITA | Arya | `kategori/anak_balita/` | `kategori/anak_balita/hasil/laporan_validasi_anak_balita.md` |
+| IBU_HAMIL | Muz | `kategori/ibu_hamil/` | `kategori/ibu_hamil/hasil/laporan_validasi_ibu_hamil.md` |
+| PASCA_OPERASI | Raymond | `kategori/pasca_operasi/` | `kategori/pasca_operasi/hasil/laporan_validasi_pasca_operasi.md` |
+
+Tiap folder berisi data dan aturan kategori: `profil.py`, `rubrik.py`, `bahaya.py`, `skenario.py`, script `latih_<kategori>.py` dan `validasi_<kategori>.py`, serta `test_<kategori>.py`. Kode bersama (fitur, safety filter, training, split, evaluasi) ada di `model.py`, `generate_dataset.py`, `train_model.py`, dan `kategori/pipeline.py`, sehingga keempat model memakai metode dan konfigurasi yang sama (`config_hash` tercatat di metadata model).
+
+```bash
+python kategori/ibu_hamil/latih_ibu_hamil.py --buat-data
+python kategori/ibu_hamil/validasi_ibu_hamil.py
+python -m unittest discover -s kategori -t . -p "test_*.py"
+```
+
+---
+
 ## 🚀 Perintah Operasional
 
 1. **Generate Data Training & Testing** (`data/<kategori>/train_data.csv`, `test_data.csv`, `profiles.csv`):

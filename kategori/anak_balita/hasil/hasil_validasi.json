@@ -1,0 +1,135 @@
+{
+  "kategori": "ANAK_BALITA",
+  "pemilik": "Arya",
+  "config_hash": "7ec1c77b29e130d2",
+  "test": {
+    "accuracy": 0.9374,
+    "macro_f1": 0.895,
+    "macro_precision": 0.8933,
+    "macro_recall": 0.8968,
+    "per_class": {
+      "0": {
+        "precision": 0.9729,
+        "recall": 0.9706,
+        "f1": 0.9718,
+        "support": 6030
+      },
+      "1": {
+        "precision": 0.838,
+        "recall": 0.8411,
+        "f1": 0.8395,
+        "support": 1636
+      },
+      "2": {
+        "precision": 0.8691,
+        "recall": 0.8786,
+        "f1": 0.8738,
+        "support": 733
+      }
+    },
+    "weighted_kappa": 0.9234,
+    "confusion_matrix": [
+      [
+        5853,
+        177,
+        0
+      ],
+      [
+        163,
+        1376,
+        97
+      ],
+      [
+        0,
+        89,
+        644
+      ]
+    ]
+  },
+  "cv_groupkfold": {
+    "accuracy": {
+      "mean": 0.9317,
+      "std": 0.0034
+    },
+    "macro_f1": {
+      "mean": 0.8867,
+      "std": 0.0066
+    },
+    "weighted_kappa": {
+      "mean": 0.9154,
+      "std": 0.0042
+    },
+    "ndcg@5": {
+      "mean": 0.9855,
+      "std": 0.001
+    }
+  },
+  "end_to_end": [
+    {
+      "skenario": "Anak Balita Underweight",
+      "jumlah_item": 11,
+      "kandidat_lolos_filter": 40,
+      "pelanggaran_alergen": 0,
+      "pelanggaran_blokir": 0,
+      "pelanggaran_tekstur": 0,
+      "rata_skor_kesesuaian": 75.4,
+      "latensi_ms": 47.8,
+      "menu": {
+        "pagi": [
+          "karbo: Quinoa",
+          "lauk: Lentils",
+          "buah/sayur: Red Chili"
+        ],
+        "snack_pagi": [
+          "selingan: Strawberry Yogurt"
+        ],
+        "siang": [
+          "karbo: Organic Brown Rice",
+          "lauk: Fresh Chicken Breast",
+          "sayur: Sweet Potato"
+        ],
+        "snack_sore": [
+          "selingan: Oranges"
+        ],
+        "malam": [
+          "karbo: Oatmeal",
+          "lauk: Edamame",
+          "sayur: Red Onion"
+        ]
+      }
+    },
+    {
+      "skenario": "Balita 18 Bulan Tanpa HAZ/WHZ",
+      "jumlah_item": 11,
+      "kandidat_lolos_filter": 42,
+      "pelanggaran_alergen": 0,
+      "pelanggaran_blokir": 0,
+      "pelanggaran_tekstur": 0,
+      "rata_skor_kesesuaian": 77.0,
+      "latensi_ms": 44.4,
+      "menu": {
+        "pagi": [
+          "karbo: Quinoa",
+          "lauk: Lentils",
+          "buah/sayur: Oranges"
+        ],
+        "snack_pagi": [
+          "selingan: Greek Yogurt"
+        ],
+        "siang": [
+          "karbo: Whole Wheat Bread",
+          "lauk: Tilapia Fish",
+          "sayur: Red Chili"
+        ],
+        "snack_sore": [
+          "selingan: Strawberry Yogurt"
+        ],
+        "malam": [
+          "karbo: Organic Brown Rice",
+          "lauk: Tofu",
+          "sayur: Red Onion"
+        ]
+      }
+    }
+  ]
+}

@@ -100,6 +100,12 @@ class TestCategoryHazards(unittest.TestCase):
         out = filter_dataset(df, '', 'PASCA_OPERASI', profil_ctx={'tahapDiet': 'cair'})
         self.assertEqual(list(out['name']), ['Broth, chicken'])
 
+    def test_packing_medium_is_not_liquid_texture(self):
+        from model import detect_texture
+        self.assertNotEqual(detect_texture('Canned Tuna (Water)'), 'cair')
+        self.assertNotEqual(detect_texture('Fish, tuna, light, canned in water, drained solids'), 'cair')
+        self.assertEqual(detect_texture('Broth, chicken'), 'cair')
+
     def test_no_silent_fallback_to_other_category(self):
         df = make_foods(['Coffee, brewed'])
         out = filter_dataset(df, '', 'ANAK_BALITA')

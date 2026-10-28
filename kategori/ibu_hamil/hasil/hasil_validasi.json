@@ -1,0 +1,135 @@
+{
+  "kategori": "IBU_HAMIL",
+  "pemilik": "Muz",
+  "config_hash": "7ec1c77b29e130d2",
+  "test": {
+    "accuracy": 0.8634,
+    "macro_f1": 0.7918,
+    "macro_precision": 0.7983,
+    "macro_recall": 0.7871,
+    "per_class": {
+      "0": {
+        "precision": 0.9455,
+        "recall": 0.9404,
+        "f1": 0.9429,
+        "support": 5500
+      },
+      "1": {
+        "precision": 0.6862,
+        "recall": 0.7321,
+        "f1": 0.7084,
+        "support": 1900
+      },
+      "2": {
+        "precision": 0.7631,
+        "recall": 0.6888,
+        "f1": 0.724,
+        "support": 996
+      }
+    },
+    "weighted_kappa": 0.8552,
+    "confusion_matrix": [
+      [
+        5172,
+        328,
+        0
+      ],
+      [
+        296,
+        1391,
+        213
+      ],
+      [
+        2,
+        308,
+        686
+      ]
+    ]
+  },
+  "cv_groupkfold": {
+    "accuracy": {
+      "mean": 0.8681,
+      "std": 0.0057
+    },
+    "macro_f1": {
+      "mean": 0.797,
+      "std": 0.007
+    },
+    "weighted_kappa": {
+      "mean": 0.8612,
+      "std": 0.0048
+    },
+    "ndcg@5": {
+      "mean": 0.9579,
+      "std": 0.0044
+    }
+  },
+  "end_to_end": [
+    {
+      "skenario": "Ibu Hamil T3",
+      "jumlah_item": 11,
+      "kandidat_lolos_filter": 43,
+      "pelanggaran_alergen": 0,
+      "pelanggaran_blokir": 0,
+      "pelanggaran_tekstur": 0,
+      "rata_skor_kesesuaian": 71.1,
+      "latensi_ms": 57.1,
+      "menu": {
+        "pagi": [
+          "karbo: Oatmeal",
+          "lauk: Mung Beans",
+          "buah/sayur: Banana"
+        ],
+        "snack_pagi": [
+          "selingan: Baked Potato Chips"
+        ],
+        "siang": [
+          "karbo: Whole Wheat Bread",
+          "lauk: Fresh Chicken Breast",
+          "sayur: Sweet Potato"
+        ],
+        "snack_sore": [
+          "selingan: Ajwa Dates"
+        ],
+        "malam": [
+          "karbo: Quinoa",
+          "lauk: Lentils",
+          "sayur: Red Chili"
+        ]
+      }
+    },
+    {
+      "skenario": "Ibu Hamil T1 Alergi Susu",
+      "jumlah_item": 11,
+      "kandidat_lolos_filter": 41,
+      "pelanggaran_alergen": 0,
+      "pelanggaran_blokir": 0,
+      "pelanggaran_tekstur": 0,
+      "rata_skor_kesesuaian": 75.6,
+      "latensi_ms": 45.4,
+      "menu": {
+        "pagi": [
+          "karbo: Oatmeal",
+          "lauk: Tilapia Fish",
+          "buah/sayur: Banana"
+        ],
+        "snack_pagi": [
+          "selingan: Baked Potato Chips"
+        ],
+        "siang": [
+          "karbo: Quinoa",
+          "lauk: Fresh Chicken Breast",
+          "sayur: Sweet Potato"
+        ],
+        "snack_sore": [
+          "selingan: Ajwa Dates"
+        ],
+        "malam": [
+          "karbo: Whole Wheat Bread",
+          "lauk: Mung Beans",
+          "sayur: Red Chili"
+        ]
+      }
+    }
+  ]
+}

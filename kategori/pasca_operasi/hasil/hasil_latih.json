@@ -1,0 +1,222 @@
+{
+  "kategori": "PASCA_OPERASI",
+  "pemilik": "Raymond",
+  "train_rows": 33583,
+  "test_rows": 8397,
+  "config_hash": "7ec1c77b29e130d2",
+  "train_profiles": 560,
+  "test_profiles": 140,
+  "label_distribution_train": {
+    "0": 0.6701,
+    "1": 0.1902,
+    "2": 0.1396
+  },
+  "cv_groupkfold": {
+    "accuracy": {
+      "mean": 0.9326,
+      "std": 0.0038
+    },
+    "macro_f1": {
+      "mean": 0.8987,
+      "std": 0.0036
+    },
+    "weighted_kappa": {
+      "mean": 0.9353,
+      "std": 0.0034
+    },
+    "ndcg@5": {
+      "mean": 0.9872,
+      "std": 0.0026
+    }
+  },
+  "test": {
+    "accuracy": 0.9332,
+    "macro_f1": 0.8972,
+    "macro_precision": 0.9036,
+    "macro_recall": 0.8917,
+    "per_class": {
+      "0": {
+        "precision": 0.967,
+        "recall": 0.9721,
+        "f1": 0.9695,
+        "support": 5762
+      },
+      "1": {
+        "precision": 0.813,
+        "recall": 0.8343,
+        "f1": 0.8235,
+        "support": 1569
+      },
+      "2": {
+        "precision": 0.9307,
+        "recall": 0.8687,
+        "f1": 0.8986,
+        "support": 1066
+      }
+    },
+    "weighted_kappa": 0.932,
+    "confusion_matrix": [
+      [
+        5601,
+        161,
+        0
+      ],
+      [
+        191,
+        1309,
+        69
+      ],
+      [
+        0,
+        140,
+        926
+      ]
+    ]
+  },
+  "test_ranking_ndcg": {
+    "model_lr": {
+      "ndcg@5": 0.9899,
+      "ndcg@10": 0.9926
+    },
+    "baseline_lama": {
+      "ndcg@5": 0.7416,
+      "ndcg@10": 0.8122
+    },
+    "baseline_acak": {
+      "ndcg@5": 0.6149,
+      "ndcg@10": 0.7418
+    }
+  },
+  "test_new_food": {
+    "accuracy": 0.9078,
+    "macro_f1": 0.8613,
+    "macro_precision": 0.8664,
+    "macro_recall": 0.8567,
+    "per_class": {
+      "0": {
+        "precision": 0.9554,
+        "recall": 0.9587,
+        "f1": 0.9571,
+        "support": 872
+      },
+      "1": {
+        "precision": 0.7578,
+        "recall": 0.776,
+        "f1": 0.7668,
+        "support": 250
+      },
+      "2": {
+        "precision": 0.8859,
+        "recall": 0.8354,
+        "f1": 0.8599,
+        "support": 158
+      }
+    },
+    "weighted_kappa": 0.9051,
+    "confusion_matrix": [
+      [
+        836,
+        36,
+        0
+      ],
+      [
+        39,
+        194,
+        17
+      ],
+      [
+        0,
+        26,
+        132
+      ]
+    ]
+  },
+  "conflict_pairs_predicted_nonzero": 0.0,
+  "pembanding_gradient_boosting": {
+    "accuracy": 0.9614,
+    "macro_f1": 0.9385,
+    "macro_precision": 0.9409,
+    "macro_recall": 0.9363,
+    "per_class": {
+      "0": {
+        "precision": 0.983,
+        "recall": 0.9847,
+        "f1": 0.9839,
+        "support": 5762
+      },
+      "1": {
+        "precision": 0.8918,
+        "recall": 0.9038,
+        "f1": 0.8978,
+        "support": 1569
+      },
+      "2": {
+        "precision": 0.9478,
+        "recall": 0.9203,
+        "f1": 0.9338,
+        "support": 1066
+      }
+    },
+    "weighted_kappa": 0.9608,
+    "confusion_matrix": [
+      [
+        5674,
+        87,
+        1
+      ],
+      [
+        98,
+        1418,
+        53
+      ],
+      [
+        0,
+        85,
+        981
+      ]
+    ],
+    "ndcg@5": 0.9959896052610204
+  },
+  "top_coefficients_p2_vs_p0": [
+    [
+      "any_conflict",
+      -9.6186
+    ],
+    [
+      "natrium_lewat_jauh",
+      -7.8156
+    ],
+    [
+      "gula_lewat_jauh",
+      -7.0608
+    ],
+    [
+      "n_block_kategori",
+      -6.4302
+    ],
+    [
+      "porsi_wajar",
+      5.5468
+    ],
+    [
+      "lemak10_x_saluran_cerna",
+      -4.338
+    ],
+    [
+      "porsi_ideal",
+      3.9316
+    ],
+    [
+      "protein_15",
+      3.6608
+    ],
+    [
+      "ft_protein__snack",
+      -3.5766
+    ],
+    [
+      "protein_pct_sesuai",
+      3.3201
+    ]
+  ]
+}

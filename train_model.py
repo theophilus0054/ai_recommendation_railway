@@ -29,7 +29,7 @@ from sklearn.metrics import accuracy_score, f1_score, cohen_kappa_score, confusi
 
 from model import FEATURE_COLS, score_from_proba
 
-KATEGORI_LIST = ['UMUM', 'IBU_HAMIL', 'ANAK_BALITA', 'PASCA_OPERASI']
+from kategori import KATEGORI_LIST, PEMILIK
 MODEL_VERSION = 'lr-v2'
 CONFLICT_COLS = ['n_conflict_allergen', 'n_conflict_pantangan', 'n_conflict_free', 'n_block_kategori']
 
@@ -59,6 +59,14 @@ def make_baseline_gb() -> Pipeline:
     return Pipeline([
         ('clf', HistGradientBoostingClassifier(max_depth=6, learning_rate=0.08, max_iter=300, random_state=42)),
     ])
+
+def config_hash() -> str:
+    """Sidik konfigurasi training (algoritma, hyperparameter, fitur, versi). Harus sama untuk 4 kategori."""
+    import hashlib
+    params = make_model().get_params(deep=True)
+    spec = json.dumps({'version': MODEL_VERSION, 'features': FEATURE_COLS,
+                       'params': {k: repr(v) for k, v in sorted(params.items()) if '__' in k}}, sort_keys=True)
+    return hashlib.sha256(spec.encode()).hexdigest()[:16]
 
 def legacy_score(df: pd.DataFrame) -> np.ndarray:
     """Formula ranking lama (sebelum perbaikan): 0.45 kalori + 0.40 kemiripan makro + 0.15 protein."""
@@ -181,7 +189,7 @@ def train_category(kategori: str, data_dir: str, models_dir: str) -> dict:
     print(f"  Koefisien teratas (P2 vs P0): {top_coefs[:5]}")
 
     results = {
-        'train_rows': len(df_train), 'test_rows': len(df_test),
+        'train_rows': len(df_train), 'test_rows': len(df_test), 'config_hash': config_hash(),
         'train_profiles': int(df_train['profile_id'].nunique()), 'test_profiles': int(df_test['profile_id'].nunique()),
         'label_distribution_train': {str(k): round(float(v), 4) for k, v in df_train['label'].value_counts(normalize=True).sort_index().items()},
         'cv_groupkfold': cv_summary,
@@ -199,6 +207,8 @@ def train_category(kategori: str, data_dir: str, models_dir: str) -> dict:
         'kategori': kategori,
         'labels': {0: 'tidak sesuai', 1: 'cukup sesuai', 2: 'sangat sesuai'},
         'version': MODEL_VERSION,
+        'config_hash': config_hash(),
+        'pemilik': PEMILIK.get(kategori),
         'sklearn_version': sklearn.__version__,
         'metrics': results,
     }

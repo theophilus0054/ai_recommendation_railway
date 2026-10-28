@@ -28,8 +28,8 @@ from model import (
     classify_food_type, detect_texture, detect_allergens, detect_hazards, is_alcoholic, status_flags,
     session_group, TEKSTUR_ORDINAL,
 )
+from kategori import KATEGORI_LIST, modul as modul_kategori
 
-KATEGORI_LIST = ['UMUM', 'IBU_HAMIL', 'ANAK_BALITA', 'PASCA_OPERASI']
 RUBRIC_VERSION = 'rubric-v1'
 
 # Pecahan target item per sesi (sama dengan model.PIRING_SESI yang dipakai get_paket di build_meal_plan)
@@ -107,36 +107,6 @@ def load_food_catalog(csv_path: str) -> pd.DataFrame:
 # PROFIL TIER 1 PER KATEGORI
 # ==========================================================================
 
-def harris_benedict(sex: str, kg: float, cm: float, umur: float) -> float:
-    if sex == 'L':
-        return 66.5 + 13.75 * kg + 5.003 * cm - 6.75 * umur
-    return 655.1 + 9.563 * kg + 1.850 * cm - 4.676 * umur
-
-
-def adult_status(bmi: float) -> str:
-    if bmi < 18.5:
-        return 'Underweight'
-    if bmi < 25:
-        return 'Normal'
-    if bmi < 30:
-        return 'Overweight'
-    return 'Obese'
-
-
-def child_status(whz: float) -> str:
-    if whz < -3:
-        return 'Gizi Buruk'
-    if whz < -2:
-        return 'Gizi Kurang'
-    if whz > 3:
-        return 'Obesitas'
-    if whz > 2:
-        return 'Gizi Lebih'
-    if whz > 1:
-        return 'Berisiko Gizi Lebih'
-    return 'Gizi Baik'
-
-
 def random_restriction_text(rng, variants: dict, p_none: float) -> str:
     if rng.random() < p_none:
         return str(rng.choice(NONE_VARIANTS))
@@ -156,61 +126,18 @@ def random_pantangan_text(rng, p_none: float) -> str:
 
 
 def generate_profile(rng, kategori: str, idx: int) -> dict:
+    """Profil sintetis: bagian khusus kategori dari kategori/<kategori>/profil.py, sisanya bersama."""
     sex = str(rng.choice(['L', 'P']))
     prof = {'profile_id': f'{kategori.lower()}_{idx + 1:04d}', 'kategoriKondisi': kategori, 'jenisKelamin': sex,
             'usiaKehamilanMinggu': None, 'tahapDiet': None, 'jenisOperasi': None, 'haz': None, 'whz': None}
 
-    if kategori == 'ANAK_BALITA':
-        umur_bulan = int(rng.integers(0, 61))
-        umur = umur_bulan / 12.0
-        haz = float(np.clip(rng.normal(-0.6, 1.2), -4, 3))
-        whz = float(np.clip(rng.normal(0.0, 1.3), -4, 4))
-        cm = float(np.interp(umur, [0, 1, 2, 3, 5], [50.0, 75.0, 87.0, 96.0, 109.0])) + haz * 3.3
-        kg = float(np.interp(umur, [0, 1, 2, 3, 5], [3.3, 9.6, 12.2, 14.3, 18.3])) * (1 + 0.09 * whz)
-        if umur < 1:
-            kcal = 82 * kg + 20
-        elif umur < 3:
-            kcal = 89 * kg - 100 + 20
-        else:
-            pa = float(rng.choice([1.0, 1.13, 1.26]))
-            m = cm / 100
-            kcal = (88.5 - 61.9 * umur + pa * (26.7 * kg + 903 * m) + 20) if sex == 'L' \
-                else (135.3 - 30.8 * umur + pa * (10.0 * kg + 934 * m) + 20)
-        p_pct, f_pct = float(rng.uniform(0.12, 0.16)), float(rng.uniform(0.30, 0.38))
-        status = child_status(whz)
-        prof.update({'haz': round(haz, 2), 'whz': round(whz, 2)})
-    else:
-        umur = float(rng.integers(19, 76 if kategori != 'IBU_HAMIL' else 43))
-        if kategori == 'IBU_HAMIL':
-            sex = 'P'
-            prof['jenisKelamin'] = 'P'
-        cm = float(rng.normal(167 if sex == 'L' else 156, 6))
-        bmi = float(np.clip(rng.normal(24.5, 4.8), 16, 42))
-        kg = bmi * (cm / 100) ** 2
-        af = float(rng.choice([1.2, 1.375, 1.55, 1.725]))
-        kcal = harris_benedict(sex, kg, cm, umur) * af
-        status = adult_status(bmi)
-        p_pct, f_pct = float(rng.uniform(0.15, 0.20)), float(rng.uniform(0.25, 0.30))
-        if kategori == 'IBU_HAMIL':
-            minggu = int(rng.integers(4, 41))
-            kcal += 180 if minggu <= 13 else 300
-            p_pct = float(rng.uniform(0.18, 0.22))
-            prof['usiaKehamilanMinggu'] = minggu
-        elif kategori == 'PASCA_OPERASI':
-            kcal = harris_benedict(sex, kg, cm, umur) * 1.2 * float(rng.uniform(1.1, 1.3))
-            p_pct, f_pct = float(rng.uniform(0.20, 0.25)), float(rng.uniform(0.22, 0.28))
-            prof['tahapDiet'] = str(rng.choice(['cair', 'saring', 'lunak', 'biasa'], p=[0.15, 0.2, 0.3, 0.35]))
-            prof['jenisOperasi'] = str(rng.choice(['saluran_cerna', 'ortopedi', 'caesar', 'umum'], p=[0.3, 0.25, 0.2, 0.25]))
-        elif kategori == 'UMUM':
-            if status in ('Overweight', 'Obese'):
-                kcal -= 400
-            elif status == 'Underweight':
-                kcal += 300
-
-    kcal = float(np.clip(kcal, 300 if kategori == 'ANAK_BALITA' else 1300, 3600))
+    profil_mod = modul_kategori(kategori, 'profil')
+    d = profil_mod.buat_profil(rng, prof)
+    kcal = float(np.clip(d['kcal'], profil_mod.KCAL_MIN, 3600))
+    p_pct, f_pct = d['p_pct'], d['f_pct']
     c_pct = 1.0 - p_pct - f_pct
     prof.update({
-        'umur': umur_bulan if kategori == 'ANAK_BALITA' else round(umur, 1), 'beratBadan': round(kg, 1), 'tinggiBadan': round(cm, 1), 'statusNutrisi': status,
+        'umur': d['umur'], 'beratBadan': round(d['kg'], 1), 'tinggiBadan': round(d['cm'], 1), 'statusNutrisi': d['status'],
         'target_kalori_harian': round(kcal, 1),
         'target_protein_g': round(kcal * p_pct / 4, 1),
         'target_fat_g': round(kcal * f_pct / 9, 1),
@@ -286,38 +213,8 @@ def rubric_points(row: pd.Series, prof: dict, kategori: str, target_kcal: float,
     if (flags['status_kurang'] or flags['stunting']) and p_pct >= 0.15:
         pts += 0.5
 
-    # 7. Penekanan per kategori
-    n_limit = int(row['n_limit_kategori'])
-    if kategori == 'ANAK_BALITA':
-        if row['calcium'] >= 120 or row['iron'] >= 2.0:
-            pts += 1.0
-        if row['sugars'] > 10:
-            pts -= 1.0
-        pts -= 1.0 * n_limit
-    elif kategori == 'IBU_HAMIL':
-        if row['folate'] >= 60:
-            pts += 1.0
-        if row['iron'] >= 2.5:
-            pts += 1.0
-        if row['vitamin_c'] >= 15:
-            pts += 0.5
-        if row['caffeine'] * m_eff > 50:
-            pts -= 2.0
-        pts -= 1.0 * n_limit
-    elif kategori == 'PASCA_OPERASI':
-        if p_pct >= 0.15:
-            pts += 1.0
-        if row['vitamin_c'] >= 15 or row['zinc'] >= 1.5:
-            pts += 1.0
-        if prof.get('jenisOperasi') == 'saluran_cerna' and float(row['fat']) * m_eff > 10:
-            pts -= 2.0
-        if prof.get('tahapDiet') in ('cair', 'saring', 'lunak') and row['fiber'] > 4:
-            pts -= 1.0
-        pts -= 1.0 * n_limit
-    else:  # UMUM
-        if row['fiber'] >= 3.0 or row['vitamin_c'] >= 15:
-            pts += 0.5
-        pts -= 0.5 * n_limit
+    # 7. Penekanan per kategori (kategori/<kategori>/rubrik.py, milik anggota tim kategori tsb.)
+    pts += modul_kategori(kategori, 'rubrik').poin_kategori(row, prof, m_eff, p_pct)
     return pts
 
 
