@@ -24,7 +24,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.model_selection import GroupKFold
-from sklearn.metrics import accuracy_score, f1_score, cohen_kappa_score, confusion_matrix, precision_recall_fscore_support
+from sklearn.metrics import (accuracy_score, f1_score, cohen_kappa_score, confusion_matrix, precision_recall_fscore_support,
+                             balanced_accuracy_score, roc_auc_score, roc_curve, log_loss)
 
 from model import FEATURE_COLS, score_from_proba
 
@@ -98,18 +99,85 @@ def ndcg_at_k(df: pd.DataFrame, score: np.ndarray, k: int) -> float:
         vals.append(_dcg(grades, k) / idcg if idcg > 0 else 1.0)
     return float(np.mean(vals)) if vals else 0.0
 
+def _auc(y_bin: np.ndarray, score: np.ndarray) -> float | None:
+    """ROC-AUC biner; None bila hanya ada satu kelas di y_bin (AUC tidak terdefinisi)."""
+    return round(float(roc_auc_score(y_bin, score)), 4) if 0 < y_bin.sum() < len(y_bin) else None
+
+def roc_auc_metrics(y: np.ndarray, proba: np.ndarray) -> dict:
+    """
+    ROC-AUC dari predict_proba (bukan dari prediksi kelas):
+    - per kelas one-vs-rest (kelas k vs dua kelas lain, skor P(k)),
+    - rata-rata macro & weighted one-vs-rest, dan macro one-vs-one (Hand & Till),
+    - dua sudut pandang biner yang dipakai produk: layak (label >= 1, skor P1 + P2) vs tidak,
+      dan sangat sesuai (label 2, skor P2) vs lainnya.
+    """
+    per_class = {str(c): _auc((y == c).astype(int), proba[:, c]) for c in [0, 1, 2]}
+    lengkap = len(np.unique(y)) == 3
+    return {
+        'per_class_ovr': per_class,
+        'macro_ovr': round(float(roc_auc_score(y, proba, multi_class='ovr', average='macro', labels=[0, 1, 2])), 4) if lengkap else None,
+        'weighted_ovr': round(float(roc_auc_score(y, proba, multi_class='ovr', average='weighted', labels=[0, 1, 2])), 4) if lengkap else None,
+        'macro_ovo': round(float(roc_auc_score(y, proba, multi_class='ovo', average='macro', labels=[0, 1, 2])), 4) if lengkap else None,
+        'layak_vs_tidak': _auc((y >= 1).astype(int), proba[:, 1] + proba[:, 2]),
+        'sangat_vs_lainnya': _auc((y == 2).astype(int), proba[:, 2]),
+    }
+
+def roc_curve_points(y: np.ndarray, proba: np.ndarray, max_points: int = 200) -> dict:
+    """Titik kurva ROC (FPR, TPR) per kelas one-vs-rest dan biner 'layak vs tidak', untuk grafik laporan."""
+    curves = {}
+    targets = {f'kelas_{c}': ((y == c).astype(int), proba[:, c]) for c in [0, 1, 2]}
+    targets['layak_vs_tidak'] = ((y >= 1).astype(int), proba[:, 1] + proba[:, 2])
+    for name, (y_bin, score) in targets.items():
+        if not 0 < y_bin.sum() < len(y_bin):
+            continue
+        fpr, tpr, _ = roc_curve(y_bin, score)
+        idx = np.unique(np.linspace(0, len(fpr) - 1, min(max_points, len(fpr))).round().astype(int))
+        curves[name] = {'fpr': [round(float(v), 4) for v in fpr[idx]], 'tpr': [round(float(v), 4) for v in tpr[idx]]}
+    return curves
+
 def classification_metrics(y: np.ndarray, proba: np.ndarray) -> dict:
     pred = proba.argmax(axis=1)
     prec, rec, f1, sup = precision_recall_fscore_support(y, pred, labels=[0, 1, 2], zero_division=0)
+    w_prec, w_rec, w_f1, _ = precision_recall_fscore_support(y, pred, labels=[0, 1, 2], average='weighted', zero_division=0)
+    cm = confusion_matrix(y, pred, labels=[0, 1, 2])
+    row = cm.sum(axis=1, keepdims=True)
     return {
         'accuracy': round(float(accuracy_score(y, pred)), 4),
+        'balanced_accuracy': round(float(balanced_accuracy_score(y, pred)), 4),
         'macro_f1': round(float(f1_score(y, pred, average='macro')), 4),
         'macro_precision': round(float(prec.mean()), 4),
         'macro_recall': round(float(rec.mean()), 4),
+        'weighted_precision': round(float(w_prec), 4),
+        'weighted_recall': round(float(w_rec), 4),
+        'weighted_f1': round(float(w_f1), 4),
         'per_class': {str(c): {'precision': round(float(prec[i]), 4), 'recall': round(float(rec[i]), 4),
                                'f1': round(float(f1[i]), 4), 'support': int(sup[i])} for i, c in enumerate([0, 1, 2])},
         'weighted_kappa': round(float(cohen_kappa_score(y, pred, weights='quadratic')), 4),
-        'confusion_matrix': confusion_matrix(y, pred, labels=[0, 1, 2]).tolist(),
+        'log_loss': round(float(log_loss(y, proba, labels=[0, 1, 2])), 4),
+        'roc_auc': roc_auc_metrics(y, proba),
+        'confusion_matrix': cm.tolist(),
+        'confusion_matrix_row_pct': np.round(100 * cm / np.maximum(row, 1), 2).tolist(),
+    }
+
+def evaluasi_test_set(kategori: str) -> dict:
+    """
+    Validasi AI ulang dari artefak model tersimpan pada test set profil baru (<kategori>/data/test_data.csv),
+    tanpa melatih ulang: metrik klasifikasi + ROC-AUC, titik kurva ROC, dan subset makanan baru.
+    """
+    artefak = joblib.load(model_path(kategori))
+    _, df_test = load_data(kategori)
+    y = df_test['label'].to_numpy()
+    proba = artefak['pipeline'].predict_proba(df_test[artefak['feature_names']].to_numpy())
+    new_mask = df_test['is_new_food'].to_numpy(dtype=bool)
+    return {
+        'test_rows': len(df_test),
+        'test_profiles': int(df_test['profile_id'].nunique()),
+        'label_distribution_test': {str(k): int(v) for k, v in df_test['label'].value_counts().sort_index().items()},
+        'test': classification_metrics(y, proba),
+        'roc_curve': roc_curve_points(y, proba),
+        'test_new_food': classification_metrics(y[new_mask], proba[new_mask]) if new_mask.any() else {},
+        'ndcg': {'ndcg@5': round(ndcg_at_k(df_test, score_from_proba(proba), 5), 4),
+                 'ndcg@10': round(ndcg_at_k(df_test, score_from_proba(proba), 10), 4)},
     }
 
 def train_category(kategori: str) -> dict:
@@ -132,8 +200,9 @@ def train_category(kategori: str) -> dict:
         m = make_model().fit(X_train[tr], y_train[tr])
         proba = m.predict_proba(X_train[va])
         cm = classification_metrics(y_train[va], proba)
-        cv_rows.append({'accuracy': cm['accuracy'], 'macro_f1': cm['macro_f1'],
-                        'weighted_kappa': cm['weighted_kappa'],
+        cv_rows.append({'accuracy': cm['accuracy'], 'macro_precision': cm['macro_precision'],
+                        'macro_recall': cm['macro_recall'], 'macro_f1': cm['macro_f1'],
+                        'weighted_kappa': cm['weighted_kappa'], 'roc_auc_macro_ovr': cm['roc_auc']['macro_ovr'],
                         'ndcg@5': ndcg_at_k(df_train.iloc[va], score_from_proba(proba), 5)})
     cv = pd.DataFrame(cv_rows)
     cv_summary = {k: {'mean': round(float(cv[k].mean()), 4), 'std': round(float(cv[k].std(ddof=1)), 4)} for k in cv.columns}
@@ -173,7 +242,8 @@ def train_category(kategori: str) -> dict:
 
     print(f"  Test (profil baru): Acc {test_metrics['accuracy']:.4f} | macro-F1 {test_metrics['macro_f1']:.4f} | "
           f"kappa {test_metrics['weighted_kappa']:.4f}")
-    print(f"  Macro precision {test_metrics['macro_precision']:.4f} | macro recall {test_metrics['macro_recall']:.4f}")
+    print(f"  Macro precision {test_metrics['macro_precision']:.4f} | macro recall {test_metrics['macro_recall']:.4f} | "
+          f"ROC-AUC macro OvR {test_metrics['roc_auc']['macro_ovr']:.4f}")
     for c, v in test_metrics['per_class'].items():
         print(f"    Kelas {c}: precision {v['precision']:.4f} | recall {v['recall']:.4f} | F1 {v['f1']:.4f} | n={v['support']}")
     print(f"  Confusion matrix (baris=asli, kolom=prediksi): {test_metrics['confusion_matrix']}")

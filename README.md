@@ -41,12 +41,14 @@ Sesuai dengan spesifikasi arsitektur **Histori Chat AI NutriScale (20 Oktober 20
 
 Setiap kategori: 700 profil sintetis × 5 sesi × 12 kandidat (≈42.000 pasangan). Split berdasarkan profil (profil test tidak pernah ada di train) dan 15% makanan hanya muncul di test. Label berasal dari rubrik bersama di `shared/dataset.py` ditambah rubrik khusus di `<kategori>/ai_models/rubrik.py` (memakai kolom yang tidak masuk fitur model, mis. serat, folat, zat besi, kalsium, kafein), tanpa noise acak.
 
-| Kategori | Accuracy | Precision (macro) | Recall (macro) | Macro-F1 | Weighted Kappa | CV Kappa (GroupKFold) | NDCG@5 | Pembanding GB (Acc / F1) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| UMUM | 0.9127 | 0.8755 | 0.8589 | 0.8665 | 0.8939 | 0.8936 ± 0.0068 | 0.9799 | 0.9550 / 0.9284 |
-| IBU_HAMIL | 0.8634 | 0.7983 | 0.7871 | 0.7918 | 0.8552 | 0.8612 ± 0.0048 | 0.9560 | 0.9204 / 0.8766 |
-| ANAK_BALITA | 0.9374 | 0.8933 | 0.8968 | 0.8950 | 0.9234 | 0.9154 ± 0.0042 | 0.9873 | 0.9615 / 0.9325 |
-| PASCA_OPERASI | 0.9332 | 0.9036 | 0.8917 | 0.8972 | 0.9320 | 0.9353 ± 0.0034 | 0.9899 | 0.9614 / 0.9385 |
+| Kategori | Accuracy | Precision (macro) | Recall (macro) | Macro-F1 | ROC-AUC (macro OvR) | Weighted Kappa | CV Kappa (GroupKFold) | NDCG@5 | Pembanding GB (Acc / F1) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| UMUM | 0.9127 | 0.8755 | 0.8589 | 0.8665 | 0.9820 | 0.8939 | 0.8936 ± 0.0068 | 0.9799 | 0.9550 / 0.9284 |
+| IBU_HAMIL | 0.8634 | 0.7983 | 0.7871 | 0.7918 | 0.9625 | 0.8552 | 0.8612 ± 0.0048 | 0.9560 | 0.9204 / 0.8766 |
+| ANAK_BALITA | 0.9374 | 0.8933 | 0.8968 | 0.8950 | 0.9889 | 0.9234 | 0.9154 ± 0.0042 | 0.9873 | 0.9615 / 0.9325 |
+| PASCA_OPERASI | 0.9332 | 0.9036 | 0.8917 | 0.8972 | 0.9897 | 0.9320 | 0.9353 ± 0.0034 | 0.9899 | 0.9614 / 0.9385 |
+
+**Validasi AI lengkap** (accuracy, balanced accuracy, precision/recall/F1 per kelas, confusion matrix jumlah & persen, ROC-AUC per kelas one-vs-rest, macro/weighted, one-vs-one, layak vs tidak, beserta grafik confusion matrix dan kurva ROC): [`laporan_validasi_ai.md`](laporan_validasi_ai.md) untuk 4 model, dan `<kategori>/outputs/laporan_validasi_<kategori>.md` + `<kategori>/outputs/gambar/` per model. Dibuat ulang dengan `python validasi_ai.py` (tanpa melatih ulang model).
 
 - Model utama Logistic Regression (koefisien dapat dijelaskan). Gradient boosting hanya pembanding: lebih akurat meniru rubrik, tetapi kotak hitam. Fitur ambang (`porsi_ideal`, `natrium_lewat_jauh`, `gula_lewat_jauh`, dan lain-lain) membuat efek ambang terbaca oleh model linear.
 - Umur kategori `ANAK_BALITA` dalam **bulan** (0 sampai 60); kategori lain dalam tahun.
@@ -92,6 +94,7 @@ python -m unittest discover -s . -t . -p "test_*.py"
    ```bash
    python umum/ai_models/latih_umum.py --buat-data   # umum/data/*.csv lalu umum/model/recommender_UMUM.joblib
    python umum/ai_models/validasi_umum.py            # umum/outputs/laporan_validasi_umum.md
+   python validasi_ai.py                             # Validasi AI 4 model -> laporan_validasi_ai.md (+ grafik)
    ```
 2. **Jalankan Unit Test** (kode bersama + semua kategori):
    ```bash
