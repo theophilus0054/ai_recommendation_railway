@@ -41,8 +41,20 @@ Untuk satu kelas k (one-vs-rest): TP = label k diprediksi k, FP = label lain dip
 - Macro = rata-rata biasa 3 kelas; weighted = rata-rata berbobot jumlah data (support) tiap kelas.
 - Confusion matrix: baris = label asli, kolom = prediksi; diagonal = prediksi benar.
 - ROC-AUC: luas di bawah kurva TPR (recall) terhadap FPR untuk semua ambang probabilitas. Nilai = peluang model memberi skor lebih tinggi pada contoh positif acak daripada contoh negatif acak.
+- Weighted kappa kuadratik = 1 - (sum w_ij O_ij) / (sum w_ij E_ij), dengan w_ij = (i - j)^2 / (3 - 1)^2, O = confusion matrix teramati, E = matriks yang diharapkan bila prediksi acak dengan distribusi kelas yang sama. 1 = sepakat sempurna, 0 = setara kebetulan.
+- NDCG@k = DCG@k / IDCG@k per (profil, sesi), DCG@k = sum_{i=1..k} (2^label_i - 1) / log2(i + 1) untuk makanan yang diurutkan dengan skor model (P(1) + 2 x P(2)) / 2; IDCG@k = DCG urutan ideal menurut label. 1 = urutan sempurna.
 
-### 1.3 Precision, recall, F1 per kelas
+### 1.3 Pemilihan metrik utama: weighted kappa dan NDCG
+
+Label 0/1/2 bersifat ordinal (tidak sesuai < cukup sesuai < sangat sesuai) dan produk memakai model untuk mengurutkan makanan per sesi, sehingga metrik utama adalah weighted kappa dan NDCG@k. Accuracy, precision, recall, confusion matrix, dan ROC-AUC tetap dilaporkan sebagai metrik pendukung untuk analisis per kelas.
+
+1. **Label ordinal.** Accuracy, precision, dan recall memperlakukan kelas sebagai kategori lepas (nominal): setiap salah prediksi dihitung sama. Memprediksi 2 untuk label 1 (meleset satu tingkat) dihukum sama dengan memprediksi 2 untuk label 0 (makanan tidak sesuai disebut sangat sesuai), padahal kesalahan kedua jauh lebih berbahaya. Weighted kappa kuadratik membobot kesalahan dengan kuadrat jarak tingkat (meleset 1 tingkat bobot 1, meleset 2 tingkat bobot 4). Pada ANAK_BALITA, dari 526 prediksi salah, 526 meleset satu tingkat dan hanya 0 yang ekstrem (0 <-> 2); accuracy 0.9374 tidak membedakan keduanya, sedangkan weighted kappa 0.9234 memperhitungkannya.
+2. **Koreksi kebetulan (kelas tidak seimbang).** 71.8% label test adalah 0. Model yang selalu menjawab 0 sudah mendapat accuracy 0.7179, tetapi kappa-nya 0 (tidak lebih baik dari kebetulan). Kappa mengukur kesepakatan di atas yang diharapkan secara kebetulan, sehingga tidak tertipu kelas mayoritas. Untuk alasan yang sama laporan ini menambahkan balanced accuracy (0.8968) serta precision dan recall macro.
+3. **Produk memakai ranking.** Di produksi model tidak mengeluarkan satu kelas, tetapi mengurutkan kandidat makanan per sesi dengan skor (P(1) + 2 x P(2)) / 2, lalu penyusun menu mengambil yang teratas. NDCG@k menilai urutan itu: gain bertingkat (label 2 bernilai 3, label 1 bernilai 1, label 0 bernilai 0) dan diskon posisi (salah di peringkat 1 lebih berat dari peringkat 5). NDCG@5 model 0.9873 dibanding formula lama 0.6819 dan urutan acak 0.5041: bukti langsung bahwa model memperbaiki rekomendasi.
+
+Metrik pendukung tetap diperlukan: accuracy, precision, dan recall adalah metrik standar yang mudah dijelaskan; per kelas metrik ini menjawab pertanyaan spesifik, misalnya recall kelas 0 (0.9706) = berapa banyak makanan tidak sesuai yang benar-benar ditolak (keamanan), dan precision kelas 2 (0.8691) = seberapa bisa dipercaya saat model menyebut 'sangat sesuai'. Confusion matrix menunjukkan letak kesalahan, dan ROC-AUC menilai pemisahan kelas dari probabilitas di semua ambang.
+
+### 1.4 Precision, recall, F1 per kelas
 
 | Kelas | Precision | Recall | F1 | ROC-AUC (OvR) | Jumlah (support) |
 |---|---|---|---|---|---|
@@ -55,7 +67,7 @@ Untuk satu kelas k (one-vs-rest): TP = label k diprediksi k, FP = label lain dip
 - Kelas 0 (tidak sesuai): precision 0.9729 berarti makanan yang ditolak model memang hampir selalu tidak sesuai menurut rubrik; recall 0.9706 berarti hampir semua makanan tidak sesuai berhasil ditolak.
 - Kelas 2 (sangat sesuai): precision 0.8691, recall 0.8786. Recall setara atau lebih tinggi dari precision.
 
-### 1.4 Confusion matrix
+### 1.5 Confusion matrix
 
 Jumlah pasangan (baris = label asli, kolom = prediksi):
 
@@ -78,7 +90,7 @@ Persen per baris (diagonal = recall kelas tersebut):
 
 ![Confusion matrix ANAK_BALITA](gambar/confusion_matrix_anak_balita.png)
 
-### 1.5 ROC-AUC
+### 1.6 ROC-AUC
 
 | Sudut pandang | Positif | Skor | ROC-AUC |
 |---|---|---|---|
@@ -96,7 +108,7 @@ Persen per baris (diagonal = recall kelas tersebut):
 
 ![Kurva ROC ANAK_BALITA](gambar/roc_anak_balita.png)
 
-### 1.6 Validasi silang GroupKFold (5 lipatan, data latih)
+### 1.7 Validasi silang GroupKFold (5 lipatan, data latih)
 
 Profil di lipatan validasi tidak pernah ada di lipatan latih. Simpangan baku kecil = performa stabil antar subset profil.
 
@@ -109,7 +121,7 @@ Profil di lipatan validasi tidak pernah ada di lipatan latih. Simpangan baku kec
 
 Precision, recall, dan ROC-AUC per lipatan ikut tercatat setelah model dilatih ulang (`python anak_balita/ai_models/latih_anak_balita.py`).
 
-### 1.7 Generalisasi ke makanan baru
+### 1.8 Generalisasi ke makanan baru
 
 15% makanan hanya muncul di test (tidak pernah dilihat model saat training):
 
@@ -148,8 +160,8 @@ Precision, recall, dan ROC-AUC per lipatan ikut tercatat setelah model dilatih u
 
 | Skenario | Item | Kandidat lolos | Alergen | BLOKIR | Tekstur | Skor rata-rata | Latensi (ms) |
 |---|---|---|---|---|---|---|---|
-| Anak Balita Underweight | 11 | 40 | 0 | 0 | 0 | 75.4 | 39.4 |
-| Balita 18 Bulan Tanpa HAZ/WHZ | 11 | 42 | 0 | 0 | 0 | 77.0 | 37.4 |
+| Anak Balita Underweight | 11 | 40 | 0 | 0 | 0 | 75.4 | 46.1 |
+| Balita 18 Bulan Tanpa HAZ/WHZ | 11 | 42 | 0 | 0 | 0 | 77.0 | 47.3 |
 
 **Anak Balita Underweight**: pagi: karbo: Quinoa, lauk: Lentils, buah/sayur: Red Chili; snack_pagi: selingan: Strawberry Yogurt; siang: karbo: Organic Brown Rice, lauk: Fresh Chicken Breast, sayur: Sweet Potato; snack_sore: selingan: Oranges; malam: karbo: Oatmeal, lauk: Edamame, sayur: Red Onion
 

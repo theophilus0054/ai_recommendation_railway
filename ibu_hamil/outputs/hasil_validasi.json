@@ -1795,6 +1795,20 @@
     "ndcg@5": 0.956,
     "ndcg@10": 0.9672
   },
+  "ndcg_pembanding": {
+    "model_lr": {
+      "ndcg@5": 0.956,
+      "ndcg@10": 0.9672
+    },
+    "baseline_lama": {
+      "ndcg@5": 0.6614,
+      "ndcg@10": 0.7677
+    },
+    "baseline_acak": {
+      "ndcg@5": 0.536,
+      "ndcg@10": 0.6898
+    }
+  },
   "cv_groupkfold": {
     "accuracy": {
       "mean": 0.8681,
@@ -1826,7 +1840,7 @@
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
       "rata_skor_kesesuaian": 71.1,
-      "latensi_ms": 38.4,
+      "latensi_ms": 47.3,
       "menu": {
         "pagi": [
           "karbo: Oatmeal",
@@ -1859,7 +1873,7 @@
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
       "rata_skor_kesesuaian": 75.6,
-      "latensi_ms": 37.2,
+      "latensi_ms": 56.1,
       "menu": {
         "pagi": [
           "karbo: Oatmeal",

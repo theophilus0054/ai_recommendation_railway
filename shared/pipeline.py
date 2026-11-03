@@ -167,7 +167,7 @@ def buat_grafik(kategori: str, v: dict) -> dict:
 
 def _bagian_validasi_ai(kategori: str, h: dict, v: dict, gambar: dict) -> list[str]:
     """Bagian 'Validasi AI' laporan: definisi metrik, accuracy, precision, recall, confusion matrix, ROC-AUC."""
-    t, auc, cv = v['test'], v['test']['roc_auc'], h['cv_groupkfold']
+    t, auc, cv, nd = v['test'], v['test']['roc_auc'], h['cv_groupkfold'], h['test_ranking_ndcg']
     cm = np.array(t['confusion_matrix'])
     total = int(cm.sum())
     benar = int(np.trace(cm))
@@ -219,8 +219,40 @@ def _bagian_validasi_ai(kategori: str, h: dict, v: dict, gambar: dict) -> list[s
         "- Macro = rata-rata biasa 3 kelas; weighted = rata-rata berbobot jumlah data (support) tiap kelas.",
         "- Confusion matrix: baris = label asli, kolom = prediksi; diagonal = prediksi benar.",
         "- ROC-AUC: luas di bawah kurva TPR (recall) terhadap FPR untuk semua ambang probabilitas. Nilai = peluang model memberi skor lebih tinggi pada contoh positif acak daripada contoh negatif acak.",
+        "- Weighted kappa kuadratik = 1 - (sum w_ij O_ij) / (sum w_ij E_ij), dengan w_ij = (i - j)^2 / (3 - 1)^2, O = confusion matrix "
+        "teramati, E = matriks yang diharapkan bila prediksi acak dengan distribusi kelas yang sama. 1 = sepakat sempurna, 0 = setara kebetulan.",
+        "- NDCG@k = DCG@k / IDCG@k per (profil, sesi), DCG@k = sum_{i=1..k} (2^label_i - 1) / log2(i + 1) untuk makanan yang diurutkan "
+        "dengan skor model (P(1) + 2 x P(2)) / 2; IDCG@k = DCG urutan ideal menurut label. 1 = urutan sempurna.",
         "",
-        "### 1.3 Precision, recall, F1 per kelas",
+        "### 1.3 Pemilihan metrik utama: weighted kappa dan NDCG",
+        "",
+        "Label 0/1/2 bersifat ordinal (tidak sesuai < cukup sesuai < sangat sesuai) dan produk memakai model untuk mengurutkan "
+        "makanan per sesi, sehingga metrik utama adalah weighted kappa dan NDCG@k. Accuracy, precision, recall, confusion matrix, "
+        "dan ROC-AUC tetap dilaporkan sebagai metrik pendukung untuk analisis per kelas.",
+        "",
+        f"1. **Label ordinal.** Accuracy, precision, dan recall memperlakukan kelas sebagai kategori lepas (nominal): setiap salah "
+        f"prediksi dihitung sama. Memprediksi 2 untuk label 1 (meleset satu tingkat) dihukum sama dengan memprediksi 2 untuk label 0 "
+        f"(makanan tidak sesuai disebut sangat sesuai), padahal kesalahan kedua jauh lebih berbahaya. Weighted kappa kuadratik "
+        f"membobot kesalahan dengan kuadrat jarak tingkat (meleset 1 tingkat bobot 1, meleset 2 tingkat bobot 4). Pada {kategori}, "
+        f"dari {total - benar} prediksi salah, {bersebelahan} meleset satu tingkat dan hanya {ekstrem} yang ekstrem (0 <-> 2); "
+        f"accuracy {_f4(t['accuracy'])} tidak membedakan keduanya, sedangkan weighted kappa {_f4(t['weighted_kappa'])} memperhitungkannya.",
+        f"2. **Koreksi kebetulan (kelas tidak seimbang).** {dist.get('0', 0) / total:.1%} label test adalah 0. Model yang selalu "
+        f"menjawab 0 sudah mendapat accuracy {dist.get('0', 0) / total:.4f}, tetapi kappa-nya 0 (tidak lebih baik dari kebetulan). "
+        f"Kappa mengukur kesepakatan di atas yang diharapkan secara kebetulan, sehingga tidak tertipu kelas mayoritas. Untuk alasan "
+        f"yang sama laporan ini menambahkan balanced accuracy ({_f4(t['balanced_accuracy'])}) serta precision dan recall macro.",
+        f"3. **Produk memakai ranking.** Di produksi model tidak mengeluarkan satu kelas, tetapi mengurutkan kandidat makanan per sesi "
+        f"dengan skor (P(1) + 2 x P(2)) / 2, lalu penyusun menu mengambil yang teratas. NDCG@k menilai urutan itu: gain bertingkat "
+        f"(label 2 bernilai 3, label 1 bernilai 1, label 0 bernilai 0) dan diskon posisi (salah di peringkat 1 lebih berat dari "
+        f"peringkat 5). NDCG@5 model {_f4(nd['model_lr']['ndcg@5'])} dibanding formula lama {_f4(nd['baseline_lama']['ndcg@5'])} "
+        f"dan urutan acak {_f4(nd['baseline_acak']['ndcg@5'])}: bukti langsung bahwa model memperbaiki rekomendasi.",
+        "",
+        "Metrik pendukung tetap diperlukan: accuracy, precision, dan recall adalah metrik standar yang mudah dijelaskan; per kelas "
+        f"metrik ini menjawab pertanyaan spesifik, misalnya recall kelas 0 ({_f4(pc['0']['recall'])}) = berapa banyak makanan tidak "
+        f"sesuai yang benar-benar ditolak (keamanan), dan precision kelas 2 ({_f4(pc['2']['precision'])}) = seberapa bisa dipercaya "
+        "saat model menyebut 'sangat sesuai'. Confusion matrix menunjukkan letak kesalahan, dan ROC-AUC menilai pemisahan kelas "
+        "dari probabilitas di semua ambang.",
+        "",
+        "### 1.4 Precision, recall, F1 per kelas",
         "",
         _tabel(['Kelas', 'Precision', 'Recall', 'F1', 'ROC-AUC (OvR)', 'Jumlah (support)'],
                [[NAMA_KELAS[c], _f4(r['precision']), _f4(r['recall']), _f4(r['f1']), _f4(auc['per_class_ovr'][c]), r['support']]
@@ -234,7 +266,7 @@ def _bagian_validasi_ai(kategori: str, h: dict, v: dict, gambar: dict) -> list[s
         + ("Recall lebih rendah dari precision: model cenderung hati-hati, sebagian makanan terbaik dinilai 'cukup sesuai'."
            if pc['2']['recall'] < pc['2']['precision'] else "Recall setara atau lebih tinggi dari precision."),
         "",
-        "### 1.4 Confusion matrix",
+        "### 1.5 Confusion matrix",
         "",
         "Jumlah pasangan (baris = label asli, kolom = prediksi):",
         "",
@@ -254,7 +286,7 @@ def _bagian_validasi_ai(kategori: str, h: dict, v: dict, gambar: dict) -> list[s
     if gambar.get('confusion_matrix'):
         baris += [f"![Confusion matrix {kategori}]({gambar['confusion_matrix']})", ""]
     baris += [
-        "### 1.5 ROC-AUC",
+        "### 1.6 ROC-AUC",
         "",
         _tabel(['Sudut pandang', 'Positif', 'Skor', 'ROC-AUC'], [
             ['Kelas 0 vs lainnya', 'label 0', 'P(0)', _f4(auc['per_class_ovr']['0'])],
@@ -276,7 +308,7 @@ def _bagian_validasi_ai(kategori: str, h: dict, v: dict, gambar: dict) -> list[s
         baris += [f"![Kurva ROC {kategori}]({gambar['roc']})", ""]
     nf = v.get('test_new_food') or {}
     baris += [
-        "### 1.6 Validasi silang GroupKFold (5 lipatan, data latih)",
+        "### 1.7 Validasi silang GroupKFold (5 lipatan, data latih)",
         "",
         "Profil di lipatan validasi tidak pernah ada di lipatan latih. Simpangan baku kecil = performa stabil antar subset profil.",
         "",
@@ -287,7 +319,7 @@ def _bagian_validasi_ai(kategori: str, h: dict, v: dict, gambar: dict) -> list[s
         baris += [f"Precision, recall, dan ROC-AUC per lipatan ikut tercatat setelah model dilatih ulang "
                   f"(`python {kategori.lower()}/ai_models/latih_{kategori.lower()}.py`).", ""]
     baris += [
-        "### 1.7 Generalisasi ke makanan baru",
+        "### 1.8 Generalisasi ke makanan baru",
         "",
         "15% makanan hanya muncul di test (tidak pernah dilihat model saat training):",
         "",
@@ -361,7 +393,8 @@ def validasi_kategori(kategori: str, e2e: bool = True) -> dict:
     hasil = {'kategori': kategori, 'pemilik': PEMILIK[kategori], 'config_hash': artefak.get('config_hash'),
              'test_rows': v['test_rows'], 'test_profiles': v['test_profiles'],
              'label_distribution_test': v['label_distribution_test'], 'test': v['test'], 'roc_curve': v['roc_curve'],
-             'test_new_food': v['test_new_food'], 'ndcg': v['ndcg'], 'cv_groupkfold': h['cv_groupkfold'],
+             'test_new_food': v['test_new_food'], 'ndcg': v['ndcg'], 'ndcg_pembanding': h['test_ranking_ndcg'],
+             'cv_groupkfold': h['cv_groupkfold'],
              'gambar': gambar, 'end_to_end': hasil_e2e}
     with open(os.path.join(folder_hasil(kategori), 'hasil_validasi.json'), 'w', encoding='utf-8') as f:
         json.dump(hasil, f, indent=2)
@@ -378,10 +411,14 @@ def validasi_kategori(kategori: str, e2e: bool = True) -> dict:
 
 def tulis_laporan_gabungan(hasil: dict) -> str:
     """Laporan Validasi AI gabungan 4 model di root repo: laporan_validasi_ai.md."""
-    rows, auc_rows, cm_rows = [], [], []
+    rows, auc_rows, cm_rows, utama_rows = [], [], [], []
     for k, r in hasil.items():
         t, a = r['test'], r['test']['roc_auc']
         cm = np.array(t['confusion_matrix'])
+        dist0 = r['label_distribution_test'].get('0', 0) / max(r['test_rows'], 1)
+        nd = r['ndcg_pembanding']
+        utama_rows.append([k, _f4(t['weighted_kappa']), _f4(nd['model_lr']['ndcg@5']), _f4(nd['baseline_lama']['ndcg@5']),
+                           _f4(nd['baseline_acak']['ndcg@5']), _f4(t['accuracy']), f"{dist0:.4f}"])
         rows.append([k, PEMILIK[k], r['test_rows'], _f4(t['accuracy']), _f4(t['balanced_accuracy']), _f4(t['macro_precision']),
                      _f4(t['macro_recall']), _f4(t['macro_f1']), _f4(a['macro_ovr']), _f4(t['weighted_kappa'])])
         auc_rows.append([k, _f4(a['per_class_ovr']['0']), _f4(a['per_class_ovr']['1']), _f4(a['per_class_ovr']['2']),
@@ -401,7 +438,26 @@ def tulis_laporan_gabungan(hasil: dict) -> str:
         "(`shared/dataset.py` + `<kategori>/ai_models/rubrik.py`), dengan aturan keamanan (alergi, pantangan, BLOKIR) memaksa label 0.",
         "- Prediksi: kelas dengan probabilitas tertinggi; ROC-AUC dari `predict_proba`.",
         "",
-        "## 1. Ringkasan per model",
+        "## 1. Metrik utama: weighted kappa dan NDCG",
+        "",
+        "Label 0/1/2 bersifat ordinal dan produk memakai model untuk mengurutkan makanan, sehingga metrik utama adalah weighted "
+        "kappa kuadratik dan NDCG@k; accuracy, precision, recall, confusion matrix, dan ROC-AUC menjadi metrik pendukung.",
+        "",
+        _tabel(['Model', 'Weighted kappa', 'NDCG@5 model', 'NDCG@5 formula lama', 'NDCG@5 acak', 'Accuracy model',
+                'Accuracy jika selalu menjawab 0'], utama_rows),
+        "",
+        "- **Label ordinal**: accuracy, precision, dan recall menghukum semua salah prediksi sama besar, sedangkan weighted kappa "
+        "kuadratik membobot dengan kuadrat jarak tingkat, sehingga salah 0 <-> 2 (makanan tidak sesuai disebut sangat sesuai) "
+        "dihukum 4 kali salah satu tingkat.",
+        "- **Koreksi kebetulan**: sekitar dua pertiga label adalah 0, sehingga model yang selalu menjawab 0 sudah mendapat accuracy "
+        "tinggi (kolom terakhir) dengan kappa 0. Kappa hanya menghitung kesepakatan di atas kebetulan.",
+        "- **Ranking**: di produksi model mengurutkan kandidat per sesi dengan skor (P(1) + 2 x P(2)) / 2. NDCG@k menilai urutan itu "
+        "dengan gain bertingkat (label 2 = 3, label 1 = 1, label 0 = 0) dan diskon posisi; selisih dengan formula lama dan urutan acak "
+        "menunjukkan manfaat model secara langsung.",
+        "- Metrik pendukung menjawab pertanyaan per kelas: recall kelas 0 = makanan tidak sesuai yang benar-benar ditolak (keamanan), "
+        "precision kelas 2 = keandalan saat model menyebut 'sangat sesuai'.",
+        "",
+        "## 2. Ringkasan per model",
         "",
         _tabel(['Model', 'Pemilik', 'Data uji', 'Accuracy', 'Balanced acc.', 'Precision (macro)', 'Recall (macro)',
                 'F1 (macro)', 'ROC-AUC (macro OvR)', 'Weighted kappa'], rows),
@@ -409,16 +465,16 @@ def tulis_laporan_gabungan(hasil: dict) -> str:
         f"Rata-rata 4 model: accuracy {rata('accuracy'):.4f}, precision macro {rata('macro_precision'):.4f}, "
         f"recall macro {rata('macro_recall'):.4f}, F1 macro {rata('macro_f1'):.4f}, ROC-AUC macro OvR {rata_auc:.4f}.",
         "",
-        "## 2. ROC-AUC",
+        "## 3. ROC-AUC",
         "",
         _tabel(['Model', 'Kelas 0 vs lain', 'Kelas 1 vs lain', 'Kelas 2 vs lain', 'Macro OvR', 'Weighted OvR',
                 'Macro OvO', 'Layak vs tidak', 'Sangat vs lainnya'], auc_rows),
         "",
-        "## 3. Precision / recall per kelas dan kesalahan",
+        "## 4. Precision / recall per kelas dan kesalahan",
         "",
         _tabel(['Model', 'Kelas 0 (P / R)', 'Kelas 1 (P / R)', 'Kelas 2 (P / R)', 'Prediksi benar', 'Salah ekstrem (0 <-> 2)'], cm_rows),
         "",
-        "## 4. Confusion matrix dan kurva ROC per model",
+        "## 5. Confusion matrix dan kurva ROC per model",
         "",
     ]
     for k, r in hasil.items():
@@ -430,7 +486,7 @@ def tulis_laporan_gabungan(hasil: dict) -> str:
                 baris += [f"![{judul} {k}]({folder}/outputs/{r['gambar'][jenis]})", ""]
         baris += [f"Detail lengkap: [{folder}/outputs/laporan_validasi_{folder}.md]({folder}/outputs/laporan_validasi_{folder}.md)", ""]
     baris += [
-        "## 5. Cara membaca dan batasan",
+        "## 6. Cara membaca dan batasan",
         "",
         "- Accuracy, precision, recall, F1, dan confusion matrix menilai kelas yang dipilih model; ROC-AUC menilai urutan "
         "probabilitas di semua ambang. Karena label 0 dominan (sekitar dua pertiga data), gunakan metrik macro, balanced accuracy, dan ROC-AUC, bukan accuracy saja.",

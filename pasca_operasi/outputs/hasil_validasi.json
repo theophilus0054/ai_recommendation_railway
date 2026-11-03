@@ -1795,6 +1795,20 @@
     "ndcg@5": 0.9899,
     "ndcg@10": 0.9926
   },
+  "ndcg_pembanding": {
+    "model_lr": {
+      "ndcg@5": 0.9899,
+      "ndcg@10": 0.9926
+    },
+    "baseline_lama": {
+      "ndcg@5": 0.7416,
+      "ndcg@10": 0.8122
+    },
+    "baseline_acak": {
+      "ndcg@5": 0.6149,
+      "ndcg@10": 0.7418
+    }
+  },
   "cv_groupkfold": {
     "accuracy": {
       "mean": 0.9326,
@@ -1826,7 +1840,7 @@
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
       "rata_skor_kesesuaian": 75.7,
-      "latensi_ms": 46.5,
+      "latensi_ms": 52.1,
       "menu": {
         "pagi": [
           "karbo: Organic Brown Rice",
@@ -1859,7 +1873,7 @@
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
       "rata_skor_kesesuaian": 3.5,
-      "latensi_ms": 42.9,
+      "latensi_ms": 43.8,
       "menu": {
         "pagi": [
           "susu/olahan: Low Fat Milk"

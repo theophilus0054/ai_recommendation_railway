@@ -1795,6 +1795,20 @@
     "ndcg@5": 0.9873,
     "ndcg@10": 0.9897
   },
+  "ndcg_pembanding": {
+    "model_lr": {
+      "ndcg@5": 0.9873,
+      "ndcg@10": 0.9897
+    },
+    "baseline_lama": {
+      "ndcg@5": 0.6819,
+      "ndcg@10": 0.7653
+    },
+    "baseline_acak": {
+      "ndcg@5": 0.5041,
+      "ndcg@10": 0.6654
+    }
+  },
   "cv_groupkfold": {
     "accuracy": {
       "mean": 0.9317,
@@ -1826,7 +1840,7 @@
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
       "rata_skor_kesesuaian": 75.4,
-      "latensi_ms": 39.4,
+      "latensi_ms": 46.1,
       "menu": {
         "pagi": [
           "karbo: Quinoa",
@@ -1859,7 +1873,7 @@
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
       "rata_skor_kesesuaian": 77.0,
-      "latensi_ms": 37.4,
+      "latensi_ms": 47.3,
       "menu": {
         "pagi": [
           "karbo: Quinoa",

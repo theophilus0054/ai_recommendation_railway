@@ -6,7 +6,23 @@
 - Ground truth: kolom `label` (0 tidak sesuai, 1 cukup sesuai, 2 sangat sesuai) dari rubrik pakar (`shared/dataset.py` + `<kategori>/ai_models/rubrik.py`), dengan aturan keamanan (alergi, pantangan, BLOKIR) memaksa label 0.
 - Prediksi: kelas dengan probabilitas tertinggi; ROC-AUC dari `predict_proba`.
 
-## 1. Ringkasan per model
+## 1. Metrik utama: weighted kappa dan NDCG
+
+Label 0/1/2 bersifat ordinal dan produk memakai model untuk mengurutkan makanan, sehingga metrik utama adalah weighted kappa kuadratik dan NDCG@k; accuracy, precision, recall, confusion matrix, dan ROC-AUC menjadi metrik pendukung.
+
+| Model | Weighted kappa | NDCG@5 model | NDCG@5 formula lama | NDCG@5 acak | Accuracy model | Accuracy jika selalu menjawab 0 |
+|---|---|---|---|---|---|---|
+| UMUM | 0.8939 | 0.9799 | 0.6850 | 0.5406 | 0.9127 | 0.6649 |
+| IBU_HAMIL | 0.8552 | 0.9560 | 0.6614 | 0.5360 | 0.8634 | 0.6551 |
+| ANAK_BALITA | 0.9234 | 0.9873 | 0.6819 | 0.5041 | 0.9374 | 0.7179 |
+| PASCA_OPERASI | 0.9320 | 0.9899 | 0.7416 | 0.6149 | 0.9332 | 0.6862 |
+
+- **Label ordinal**: accuracy, precision, dan recall menghukum semua salah prediksi sama besar, sedangkan weighted kappa kuadratik membobot dengan kuadrat jarak tingkat, sehingga salah 0 <-> 2 (makanan tidak sesuai disebut sangat sesuai) dihukum 4 kali salah satu tingkat.
+- **Koreksi kebetulan**: sekitar dua pertiga label adalah 0, sehingga model yang selalu menjawab 0 sudah mendapat accuracy tinggi (kolom terakhir) dengan kappa 0. Kappa hanya menghitung kesepakatan di atas kebetulan.
+- **Ranking**: di produksi model mengurutkan kandidat per sesi dengan skor (P(1) + 2 x P(2)) / 2. NDCG@k menilai urutan itu dengan gain bertingkat (label 2 = 3, label 1 = 1, label 0 = 0) dan diskon posisi; selisih dengan formula lama dan urutan acak menunjukkan manfaat model secara langsung.
+- Metrik pendukung menjawab pertanyaan per kelas: recall kelas 0 = makanan tidak sesuai yang benar-benar ditolak (keamanan), precision kelas 2 = keandalan saat model menyebut 'sangat sesuai'.
+
+## 2. Ringkasan per model
 
 | Model | Pemilik | Data uji | Accuracy | Balanced acc. | Precision (macro) | Recall (macro) | F1 (macro) | ROC-AUC (macro OvR) | Weighted kappa |
 |---|---|---|---|---|---|---|---|---|---|
@@ -17,7 +33,7 @@
 
 Rata-rata 4 model: accuracy 0.9117, precision macro 0.8677, recall macro 0.8586, F1 macro 0.8626, ROC-AUC macro OvR 0.9808.
 
-## 2. ROC-AUC
+## 3. ROC-AUC
 
 | Model | Kelas 0 vs lain | Kelas 1 vs lain | Kelas 2 vs lain | Macro OvR | Weighted OvR | Macro OvO | Layak vs tidak | Sangat vs lainnya |
 |---|---|---|---|---|---|---|---|---|
@@ -26,7 +42,7 @@ Rata-rata 4 model: accuracy 0.9117, precision macro 0.8677, recall macro 0.8586,
 | ANAK_BALITA | 0.9930 | 0.9791 | 0.9947 | 0.9889 | 0.9904 | 0.9800 | 0.9930 | 0.9947 |
 | PASCA_OPERASI | 0.9945 | 0.9791 | 0.9956 | 0.9897 | 0.9918 | 0.9824 | 0.9945 | 0.9956 |
 
-## 3. Precision / recall per kelas dan kesalahan
+## 4. Precision / recall per kelas dan kesalahan
 
 | Model | Kelas 0 (P / R) | Kelas 1 (P / R) | Kelas 2 (P / R) | Prediksi benar | Salah ekstrem (0 <-> 2) |
 |---|---|---|---|---|---|
@@ -35,7 +51,7 @@ Rata-rata 4 model: accuracy 0.9117, precision macro 0.8677, recall macro 0.8586,
 | ANAK_BALITA | 0.9729 / 0.9706 | 0.8380 / 0.8411 | 0.8691 / 0.8786 | 7873 (93.74%) | 0 (0.00%) |
 | PASCA_OPERASI | 0.9670 / 0.9721 | 0.8130 / 0.8343 | 0.9307 / 0.8687 | 7836 (93.32%) | 0 (0.00%) |
 
-## 4. Confusion matrix dan kurva ROC per model
+## 5. Confusion matrix dan kurva ROC per model
 
 ### UMUM (Muel)
 
@@ -93,7 +109,7 @@ Detail lengkap: [anak_balita/outputs/laporan_validasi_anak_balita.md](anak_balit
 
 Detail lengkap: [pasca_operasi/outputs/laporan_validasi_pasca_operasi.md](pasca_operasi/outputs/laporan_validasi_pasca_operasi.md)
 
-## 5. Cara membaca dan batasan
+## 6. Cara membaca dan batasan
 
 - Accuracy, precision, recall, F1, dan confusion matrix menilai kelas yang dipilih model; ROC-AUC menilai urutan probabilitas di semua ambang. Karena label 0 dominan (sekitar dua pertiga data), gunakan metrik macro, balanced accuracy, dan ROC-AUC, bukan accuracy saja.
 - Kelas 1 (cukup sesuai) berada di tengah skala ordinal sehingga paling sering tertukar; salah ekstrem (0 ke 2 atau 2 ke 0) adalah kesalahan paling berbahaya dan dipantau terpisah.
