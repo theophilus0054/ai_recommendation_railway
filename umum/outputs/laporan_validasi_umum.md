@@ -160,8 +160,8 @@ Precision, recall, dan ROC-AUC per lipatan ikut tercatat setelah model dilatih u
 
 | Skenario | Item | Kandidat lolos | Alergen | BLOKIR | Tekstur | Skor rata-rata | Latensi (ms) |
 |---|---|---|---|---|---|---|---|
-| Dewasa Umum Obesitas | 11 | 41 | 0 | 0 | 0 | 74.9 | 41.6 |
-| Dewasa Umum Underweight | 11 | 46 | 0 | 0 | 0 | 73.4 | 39.8 |
+| Dewasa Umum Obesitas | 11 | 41 | 0 | 0 | 0 | 74.9 | 38.4 |
+| Dewasa Umum Underweight | 11 | 46 | 0 | 0 | 0 | 73.4 | 36.1 |
 
 **Dewasa Umum Obesitas**: pagi: karbo: Whole Wheat Bread, lauk: Lentils, buah/sayur: Banana; snack_pagi: selingan: Strawberry Yogurt; siang: karbo: Oatmeal, lauk: Fresh Chicken Breast, sayur: Sweet Potato; snack_sore: selingan: Ajwa Dates; malam: karbo: Organic Brown Rice, lauk: Tilapia Fish, sayur: Red Chili
 
@@ -170,3 +170,5 @@ Precision, recall, dan ROC-AUC per lipatan ikut tercatat setelah model dilatih u
 ## 5. Catatan
 
 Data sintetis dan label dari rubrik kategori (umum/ai_models/rubrik.py). Angka di atas mengukur seberapa baik model meniru rubrik, bukan hasil uji klinis. Diperlukan gold set ahli gizi (minimal 300 pasangan) sebelum klaim klinis.
+
+Keterbatasan data dan ground truth sintetis serta rencana pengembangannya dibahas di [laporan_validasi_ai.md](../../laporan_validasi_ai.md) bagian 7 dan 8.

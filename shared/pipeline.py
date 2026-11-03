@@ -374,7 +374,9 @@ def tulis_laporan(kategori: str, h: dict, v: dict, e2e: list[dict], gambar: dict
     baris += ["## 5. Catatan", "",
               "Data sintetis dan label dari rubrik kategori (" + kategori.lower() + "/ai_models/rubrik.py). "
               "Angka di atas mengukur seberapa baik model meniru rubrik, bukan hasil uji klinis. "
-              "Diperlukan gold set ahli gizi (minimal 300 pasangan) sebelum klaim klinis.", ""]
+              "Diperlukan gold set ahli gizi (minimal 300 pasangan) sebelum klaim klinis.", "",
+              "Keterbatasan data dan ground truth sintetis serta rencana pengembangannya dibahas di "
+              "[laporan_validasi_ai.md](../../laporan_validasi_ai.md) bagian 7 dan 8.", ""]
     path = os.path.join(folder_hasil(kategori), f'laporan_validasi_{kategori.lower()}.md')
     with open(path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(baris))
@@ -407,6 +409,86 @@ def validasi_kategori(kategori: str, e2e: bool = True) -> dict:
           f"{sum(r['pelanggaran_tekstur'] for r in hasil_e2e)}")
     print(f"[{kategori}] Laporan: {path}")
     return hasil
+
+
+def _bagian_pengembangan(hasil: dict) -> list[str]:
+    """Keterbatasan data & ground truth sintetis dan rencana pengembangan (untuk laporan gabungan)."""
+    n_katalog = len(pd.read_csv(os.path.join(ROOT, 'data', 'nutrition.csv'), usecols=[0]))
+    porsi0 = np.mean([r['label_distribution_test'].get('0', 0) / max(r['test_rows'], 1) for r in hasil.values()])
+    kappa = [r['test']['weighted_kappa'] for r in hasil.values()]
+    return [
+        "## 7. Keterbatasan data dan ground truth",
+        "",
+        "Dataset dan label pada laporan ini sepenuhnya sintetis. Ground truth (kolom `label`) dihitung otomatis oleh rubrik "
+        "berbasis aturan (`shared/dataset.py` + `<kategori>/ai_models/rubrik.py`), bukan penilaian ahli gizi atau data pengguna "
+        "nyata. Konsekuensinya:",
+        "",
+        _tabel(['No', 'Keterbatasan', 'Dampak pada hasil'], [
+            [1, 'Label berasal dari rumus rubrik, bukan penilaian ahli',
+             f"Metrik (weighted kappa {min(kappa):.2f} sampai {max(kappa):.2f}) mengukur seberapa setia model meniru rubrik. "
+             "Bila ambang rubrik keliru, model mempelajari kekeliruan itu dengan setia dan metrik tetap tinggi."],
+            [2, 'Sebagian fitur model mencerminkan aturan rubrik secara langsung',
+             'Contoh: `porsi_ideal` (0,67 sampai 2 porsi) dan `porsi_wajar` (0,5 sampai 3 porsi) sama dengan poin porsi rubrik; '
+             '`natrium_lewat_jauh` dan `gula_lewat_jauh` sama dengan poin gula-garam. Sebagian akurasi berasal dari menghitung '
+             'ulang rumus yang sama. Rubrik juga memakai kolom yang tidak masuk fitur (serat, lemak jenuh, vitamin C, folat, dan lain-lain), '
+             'sehingga model tidak sekadar menyalin.'],
+            [3, 'Tidak ada noise label',
+             'Rubrik deterministik: input sama selalu berlabel sama. Label dari ahli gizi nyata biasanya tidak sepenuhnya sepakat '
+             'antar-penilai, sehingga performa pada data nyata diperkirakan lebih rendah dari angka laporan ini.'],
+            [4, 'Distribusi data ditentukan generator',
+             f"Sekitar {porsi0:.0%} label adalah 0 karena skema pengambilan kandidat (6 cocok sesi, 4 acak, 2 konflik per sesi), "
+             "bukan karena pola menu nyata. Profil pengguna juga sintetis."],
+            [5, 'Beda target kalori antara data latih dan produk',
+             'Profil UMUM latih dengan status gemuk/obesitas memakai target -400 kkal, sedangkan target produk (nutri-calc NutriScale) '
+             'untuk dewasa umum tidak memakai defisit. Model menerima target per sesi yang lebih besar dari yang dilihat saat latih.'],
+            [6, 'Beda katalog makanan',
+             f"Model dilatih pada katalog `data/nutrition.csv` ({n_katalog} makanan), sedangkan produk merekomendasikan dari katalog "
+             "produk Supabase yang jauh lebih kecil. Performa khusus pada katalog produk belum diukur dengan label."],
+            [7, 'Label menilai per item, bukan per hari',
+             'Kesesuaian total kalori harian dan kewajaran porsi setelah penyusunan menu tidak tercakup ground truth maupun metrik.'],
+            [8, 'Keamanan tetap terjaga',
+             'Konflik alergi, pantangan, dan BLOKIR dipaksa berlabel 0 dan di produksi disaring sebelum ranking; uji end-to-end '
+             'menunjukkan 0 pelanggaran. Keterbatasan di atas terutama memengaruhi kualitas kecocokan gizi, bukan keamanan.'],
+        ]),
+        "",
+        "## 8. Pengembangan ke depan: data dan ground truth",
+        "",
+        "Usulan berikut diurutkan dari yang paling berdampak pada validitas ground truth. Tahap 1 dan 2 dapat dikerjakan dalam "
+        "lingkup proyek; tahap 3 sampai 5 membutuhkan data pengguna nyata dan persetujuan etik.",
+        "",
+        _tabel(['Tahap', 'Kegiatan', 'Keluaran / metrik', 'Kriteria berhasil'], [
+            ['1. Gold set ahli gizi',
+             'Ambil 300 pasangan (profil, sesi, makanan) dari test set secara stratified (100 per label, tersebar di 4 kategori). '
+             'Dua ahli gizi atau dosen gizi melabeli 0/1/2 secara buta (tanpa melihat label rubrik dan prediksi model).',
+             'Kappa antar-penilai; kappa rubrik vs ahli (validitas ground truth); kappa model vs ahli (performa model sebenarnya).',
+             'Kappa antar-penilai dan kappa rubrik vs ahli >= 0,6 (kesepakatan substansial).'],
+            ['2. Revisi rubrik dan uji sensitivitas',
+             'Analisis pasangan yang tidak disepakati rubrik dan ahli, revisi ambang rubrik (versi baru di `RUBRIC_VERSION`). '
+             'Uji ketahanan: geser ambang rubrik 10 sampai 20 persen dan tambahkan noise label 5 sampai 10 persen, lalu latih ulang. '
+             'Ablasi: latih tanpa fitur yang mencerminkan rubrik (`porsi_*`, `*_lewat_jauh`).',
+             'Perubahan weighted kappa dan NDCG@5 per skenario; daftar ambang yang paling sensitif.',
+             'Penurunan metrik kecil (misalnya < 0,05) menunjukkan kesimpulan tidak bergantung pada ambang tertentu.'],
+            ['3. Selaraskan data latih dengan produk',
+             'Samakan logika target kalori (defisit untuk gemuk/obesitas) antara generator dan nutri-calc. Bangun kandidat dari '
+             'katalog produk Supabase dan profil yang meniru distribusi asesmen NutriScale (anonim).',
+             'Metrik pada test set berbasis katalog produk; selisih distribusi fitur latih vs produk.',
+             'Metrik pada katalog produk tidak jauh di bawah metrik test set sintetis.'],
+            ['4. Ground truth dari perilaku pengguna',
+             'Catat umpan balik implisit secara anonim: rekomendasi yang ditambahkan ke keranjang, dibeli, atau dilewati. '
+             'Gunakan sebagai label tambahan (learning to rank) dan evaluasi offline dengan NDCG pada interaksi nyata, lalu uji A/B.',
+             'NDCG@5 pada interaksi nyata; tingkat penambahan ke keranjang per sesi.',
+             'Model mengungguli formula lama dan urutan acak pada data interaksi nyata.'],
+            ['5. Evaluasi tingkat menu harian',
+             'Tambahkan label dan metrik per hari: deviasi total kalori dan makro terhadap target, kewajaran porsi, variasi bahan; '
+             'dinilai ahli gizi pada contoh menu.',
+             'Rata-rata deviasi kalori harian (persen), persentase menu dengan porsi wajar, skor ahli per menu.',
+             'Deviasi kalori harian dalam +-5 persen dan porsi dalam batas wajar.'],
+        ]),
+        "",
+        "Catatan etika: data pengguna nyata (tahap 3 dan 4) hanya dipakai dengan persetujuan pengguna, dianonimkan, dan disimpan "
+        "terbatas sesuai kebijakan privasi NutriScale. Klaim klinis baru layak setelah tahap 1 menunjukkan kesepakatan memadai.",
+        "",
+    ]
 
 
 def tulis_laporan_gabungan(hasil: dict) -> str:
@@ -495,6 +577,7 @@ def tulis_laporan_gabungan(hasil: dict) -> str:
         "sampel 100 sampai 300 pasangan dilabeli manual oleh ahli gizi, lalu hitung kesepakatan (kappa) rubrik dan model terhadap ahli.",
         "",
     ]
+    baris += _bagian_pengembangan(hasil)
     path = os.path.join(ROOT, 'laporan_validasi_ai.md')
     with open(path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(baris))
