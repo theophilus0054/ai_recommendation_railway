@@ -104,6 +104,10 @@ python -m unittest discover -s . -t . -p "test_*.py"
    python -m unittest ibu_hamil.tests.test_input_ibu_hamil   # satu kategori
    ```
    Kasus ada di `<kategori>/ai_models/input_uji.py`; pemeriksanya bersama di `shared/uji_input.py`.
+   Uji menu harian (`test_menu_harian.py`): porsi per bahan 1 sampai 3 (snack maksimal 2), total kalori harian
+   diseimbangkan ulang ke ±5% target (`ringkasan_kalori` di respons), bumbu aromatik (bawang, garlic, jahe, cabai)
+   tidak boleh mengisi slot sayur, dan snack untuk pengguna overweight/obesitas mengutamakan buah/susu.
+   Aturan ini dijalankan setelah ranking model, jadi model dan metrik validasinya tidak berubah.
 4. **Jalankan API Server** (wajib set `AI_ENGINE_API_KEY`, tidak ada nilai default):
    ```bash
    AI_ENGINE_API_KEY=<kunci-rahasia> python api.py
