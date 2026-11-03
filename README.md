@@ -4,7 +4,7 @@ emoji: 🥗
 colorFrom: green
 colorTo: blue
 sdk: gradio
-sdk_version: 4.44.0
+sdk_version: 5.50.0
 app_file: app.py
 pinned: false
 license: mit
@@ -53,6 +53,7 @@ Setiap kategori: 700 profil sintetis × 5 sesi × 12 kandidat (≈42.000 pasanga
 - Model utama Logistic Regression (koefisien dapat dijelaskan). Gradient boosting hanya pembanding: lebih akurat meniru rubrik, tetapi kotak hitam. Fitur ambang (`porsi_ideal`, `natrium_lewat_jauh`, `gula_lewat_jauh`, dan lain-lain) membuat efek ambang terbaca oleh model linear.
 - Umur kategori `ANAK_BALITA` dalam **bulan** (0 sampai 60); kategori lain dalam tahun.
 - Uji end-to-end (`<kategori>/ai_models/validasi_<kategori>.py`, 2 skenario per kategori): 0 pelanggaran alergen, BLOKIR, dan tekstur.
+- Penyusun menu harian: porsi 1 sampai 3 per bahan, bumbu/aromatik (bawang putih, cabai, jahe, dan lain-lain) tidak mengisi peran sayur, selingan pengguna gizi lebih/obesitas diutamakan buah atau susu, dan total kalori harian diseimbangkan ke dalam ±5% target (`test_menu_harian.py`).
 - **Catatan jujur**: angka di atas mengukur seberapa baik model meniru rubrik pada data sintetis, bukan uji klinis. Rubrik & tabel bahaya perlu ditinjau ahli gizi (gold set) sebelum klaim klinis.
 
 ---

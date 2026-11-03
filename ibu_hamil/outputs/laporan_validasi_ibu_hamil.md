@@ -160,12 +160,12 @@ Precision, recall, dan ROC-AUC per lipatan ikut tercatat setelah model dilatih u
 
 | Skenario | Item | Kandidat lolos | Alergen | BLOKIR | Tekstur | Skor rata-rata | Latensi (ms) |
 |---|---|---|---|---|---|---|---|
-| Ibu Hamil T3 | 11 | 43 | 0 | 0 | 0 | 71.1 | 39.5 |
-| Ibu Hamil T1 Alergi Susu | 11 | 41 | 0 | 0 | 0 | 75.6 | 38.0 |
+| Ibu Hamil T3 | 11 | 43 | 0 | 0 | 0 | 68.7 | 40.1 |
+| Ibu Hamil T1 Alergi Susu | 11 | 41 | 0 | 0 | 0 | 74.7 | 37.6 |
 
-**Ibu Hamil T3**: pagi: karbo: Oatmeal, lauk: Mung Beans, buah/sayur: Banana; snack_pagi: selingan: Baked Potato Chips; siang: karbo: Whole Wheat Bread, lauk: Fresh Chicken Breast, sayur: Sweet Potato; snack_sore: selingan: Ajwa Dates; malam: karbo: Quinoa, lauk: Lentils, sayur: Red Chili
+**Ibu Hamil T3**: pagi: karbo: Oatmeal, lauk: Fresh Chicken Breast, buah/sayur: Banana; snack_pagi: selingan: Ajwa Dates; siang: karbo: Quinoa, lauk: Kidney Beans, sayur: Sweet Potato; snack_sore: selingan: Baked Potato Chips; malam: karbo: Organic Brown Rice, lauk: Lentils, sayur: Broccoli
 
-**Ibu Hamil T1 Alergi Susu**: pagi: karbo: Oatmeal, lauk: Tilapia Fish, buah/sayur: Banana; snack_pagi: selingan: Baked Potato Chips; siang: karbo: Quinoa, lauk: Fresh Chicken Breast, sayur: Sweet Potato; snack_sore: selingan: Ajwa Dates; malam: karbo: Whole Wheat Bread, lauk: Mung Beans, sayur: Red Chili
+**Ibu Hamil T1 Alergi Susu**: pagi: karbo: Oatmeal, lauk: Tilapia Fish, buah/sayur: Banana; snack_pagi: selingan: Ajwa Dates; siang: karbo: Quinoa, lauk: Fresh Chicken Breast, sayur: Sweet Potato; snack_sore: selingan: Baked Potato Chips; malam: karbo: Whole Wheat Bread, lauk: Lentils, sayur: Broccoli
 
 ## 5. Catatan
 

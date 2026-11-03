@@ -160,12 +160,12 @@ Precision, recall, dan ROC-AUC per lipatan ikut tercatat setelah model dilatih u
 
 | Skenario | Item | Kandidat lolos | Alergen | BLOKIR | Tekstur | Skor rata-rata | Latensi (ms) |
 |---|---|---|---|---|---|---|---|
-| Anak Balita Underweight | 11 | 40 | 0 | 0 | 0 | 75.4 | 37.9 |
-| Balita 18 Bulan Tanpa HAZ/WHZ | 11 | 42 | 0 | 0 | 0 | 77.0 | 37.1 |
+| Anak Balita Underweight | 11 | 40 | 0 | 0 | 0 | 75.0 | 42.9 |
+| Balita 18 Bulan Tanpa HAZ/WHZ | 11 | 42 | 0 | 0 | 0 | 75.8 | 45.9 |
 
-**Anak Balita Underweight**: pagi: karbo: Quinoa, lauk: Lentils, buah/sayur: Red Chili; snack_pagi: selingan: Strawberry Yogurt; siang: karbo: Organic Brown Rice, lauk: Fresh Chicken Breast, sayur: Sweet Potato; snack_sore: selingan: Oranges; malam: karbo: Oatmeal, lauk: Edamame, sayur: Red Onion
+**Anak Balita Underweight**: pagi: karbo: Quinoa, lauk: Lentils, buah/sayur: Oranges; snack_pagi: selingan: Strawberry Yogurt; siang: karbo: Organic Brown Rice, lauk: Fresh Chicken Breast, sayur: Sweet Potato; snack_sore: selingan: Dragon Fruit; malam: karbo: Oatmeal, lauk: Edamame, sayur: Broccoli
 
-**Balita 18 Bulan Tanpa HAZ/WHZ**: pagi: karbo: Quinoa, lauk: Lentils, buah/sayur: Oranges; snack_pagi: selingan: Greek Yogurt; siang: karbo: Whole Wheat Bread, lauk: Tilapia Fish, sayur: Red Chili; snack_sore: selingan: Strawberry Yogurt; malam: karbo: Organic Brown Rice, lauk: Tofu, sayur: Red Onion
+**Balita 18 Bulan Tanpa HAZ/WHZ**: pagi: karbo: Quinoa, lauk: Lentils, buah/sayur: Oranges; snack_pagi: selingan: Greek Yogurt; siang: karbo: Whole Wheat Bread, lauk: Tilapia Fish, sayur: Sweet Potato; snack_sore: selingan: Strawberry Yogurt; malam: karbo: Organic Brown Rice, lauk: Tofu, sayur: Spinach
 
 ## 5. Catatan
 

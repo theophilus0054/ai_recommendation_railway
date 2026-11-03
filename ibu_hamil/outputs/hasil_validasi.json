@@ -1839,29 +1839,29 @@
       "pelanggaran_alergen": 0,
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
-      "rata_skor_kesesuaian": 71.1,
-      "latensi_ms": 39.5,
+      "rata_skor_kesesuaian": 68.7,
+      "latensi_ms": 40.1,
       "menu": {
         "pagi": [
           "karbo: Oatmeal",
-          "lauk: Mung Beans",
+          "lauk: Fresh Chicken Breast",
           "buah/sayur: Banana"
         ],
         "snack_pagi": [
-          "selingan: Baked Potato Chips"
+          "selingan: Ajwa Dates"
         ],
         "siang": [
-          "karbo: Whole Wheat Bread",
-          "lauk: Fresh Chicken Breast",
+          "karbo: Quinoa",
+          "lauk: Kidney Beans",
           "sayur: Sweet Potato"
         ],
         "snack_sore": [
-          "selingan: Ajwa Dates"
+          "selingan: Baked Potato Chips"
         ],
         "malam": [
-          "karbo: Quinoa",
+          "karbo: Organic Brown Rice",
           "lauk: Lentils",
-          "sayur: Red Chili"
+          "sayur: Broccoli"
         ]
       }
     },
@@ -1872,8 +1872,8 @@
       "pelanggaran_alergen": 0,
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
-      "rata_skor_kesesuaian": 75.6,
-      "latensi_ms": 38.0,
+      "rata_skor_kesesuaian": 74.7,
+      "latensi_ms": 37.6,
       "menu": {
         "pagi": [
           "karbo: Oatmeal",
@@ -1881,7 +1881,7 @@
           "buah/sayur: Banana"
         ],
         "snack_pagi": [
-          "selingan: Baked Potato Chips"
+          "selingan: Ajwa Dates"
         ],
         "siang": [
           "karbo: Quinoa",
@@ -1889,12 +1889,12 @@
           "sayur: Sweet Potato"
         ],
         "snack_sore": [
-          "selingan: Ajwa Dates"
+          "selingan: Baked Potato Chips"
         ],
         "malam": [
           "karbo: Whole Wheat Bread",
-          "lauk: Mung Beans",
-          "sayur: Red Chili"
+          "lauk: Lentils",
+          "sayur: Broccoli"
         ]
       }
     }

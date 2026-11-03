@@ -160,12 +160,12 @@ Precision, recall, dan ROC-AUC per lipatan ikut tercatat setelah model dilatih u
 
 | Skenario | Item | Kandidat lolos | Alergen | BLOKIR | Tekstur | Skor rata-rata | Latensi (ms) |
 |---|---|---|---|---|---|---|---|
-| Dewasa Umum Obesitas | 11 | 41 | 0 | 0 | 0 | 74.9 | 38.3 |
-| Dewasa Umum Underweight | 11 | 46 | 0 | 0 | 0 | 73.4 | 35.8 |
+| Dewasa Umum Obesitas | 11 | 41 | 0 | 0 | 0 | 69.9 | 48.0 |
+| Dewasa Umum Underweight | 11 | 46 | 0 | 0 | 0 | 73.3 | 44.7 |
 
-**Dewasa Umum Obesitas**: pagi: karbo: Whole Wheat Bread, lauk: Lentils, buah/sayur: Banana; snack_pagi: selingan: Strawberry Yogurt; siang: karbo: Oatmeal, lauk: Fresh Chicken Breast, sayur: Sweet Potato; snack_sore: selingan: Ajwa Dates; malam: karbo: Organic Brown Rice, lauk: Tilapia Fish, sayur: Red Chili
+**Dewasa Umum Obesitas**: pagi: karbo: Whole Wheat Bread, lauk: Lentils, buah/sayur: Banana; snack_pagi: selingan: Strawberry Yogurt; siang: karbo: Oatmeal, lauk: Fresh Chicken Breast, sayur: Sweet Potato; snack_sore: selingan: Ajwa Dates; malam: karbo: Organic Brown Rice, lauk: Tilapia Fish, sayur: Broccoli
 
-**Dewasa Umum Underweight**: pagi: karbo: Organic Brown Rice, lauk: Lentils, buah/sayur: Sweet Potato; snack_pagi: selingan: Baked Potato Chips; siang: karbo: Quinoa, lauk: Kidney Beans, sayur: Mustard Greens; snack_sore: selingan: Ajwa Dates; malam: karbo: Oatmeal, lauk: Fresh Chicken Breast, sayur: Red Chili
+**Dewasa Umum Underweight**: pagi: karbo: Organic Brown Rice, lauk: Lentils, buah/sayur: Sweet Potato; snack_pagi: selingan: Baked Potato Chips; siang: karbo: Quinoa, lauk: Kidney Beans, sayur: Mustard Greens; snack_sore: selingan: Ajwa Dates; malam: karbo: Oatmeal, lauk: Fresh Chicken Breast, sayur: Red Bell Pepper
 
 ## 5. Catatan
 

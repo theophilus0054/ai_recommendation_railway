@@ -184,6 +184,17 @@ VARIASI_TOP_K = 5             # jumlah kandidat teratas yang diundi
 VARIASI_SUHU = 0.05           # makin kecil makin condong ke skor tertinggi
 VARIASI_TOLERANSI = 0.85      # kandidat minimal 85% skor terbaik agar ikut diundi
 PENALTI_RIWAYAT = 0.7         # pengali skor bahan yang sudah muncul di hari-hari sebelumnya
+PENALTI_PORSI = 0.85          # pengali skor kandidat yang porsinya tidak pas dengan target item (1 porsi kebesaran / perlu > batas porsi)
+TOLERANSI_TOTAL = 0.05        # total kalori menu harian diseimbangkan ke dalam +-5% target
+MAX_PORSI = {'karbo': 3, 'lauk': 3, 'sayur': 3, 'buah/sayur': 3, 'buah': 3, 'susu/olahan': 2, 'selingan': 2, 'minuman': 2}
+# Bumbu & aromatik: tidak boleh mengisi peran sayur/lauk walau foodType di katalog bukan 'spice'
+BUMBU_NAMA = {'garlic', 'ginger', 'chili', 'chilli', 'chili pepper', 'pepper', 'turmeric', 'galangal', 'lemongrass',
+              'cinnamon', 'clove', 'cloves', 'nutmeg', 'coriander', 'cumin', 'basil', 'oregano', 'thyme', 'rosemary',
+              'bay leaf', 'bay leaves', 'candlenut', 'shallot', 'shallots', 'onion', 'onions', 'bawang putih', 'bawang merah',
+              'bawang bombay', 'jahe', 'kunyit', 'lengkuas', 'serai', 'cabai', 'cabe', 'cabai rawit', 'cabe rawit', 'lada',
+              'merica', 'kayu manis', 'cengkeh', 'pala', 'ketumbar', 'jinten', 'kemiri', 'daun salam'}
+_KATA_SIFAT_BUMBU = {'fresh', 'raw', 'red', 'green', 'white', 'black', 'yellow', 'dried', 'dry', 'ground', 'powder',
+                     'organic', 'whole', 'minced', 'chopped', 'sliced', 'segar', 'merah', 'hijau', 'kering', 'bubuk'}
 FOOD_TYPES = ['protein', 'carb', 'vegetable', 'fruit', 'dairy', 'snack', 'beverage', 'fat', 'sweetener', 'spice']
 
 # Klasifikasi foodType (kosakata produk Supabase) dari nama makanan, dipakai bila kolom foodType kosong
@@ -323,6 +334,13 @@ def detect_hazards(name: str, kategori: str) -> tuple[list[str], list[str]]:
         if keyword_match(name, pat):
             batasi.append(code)
     return blokir, batasi
+
+
+def _is_bumbu(name: str) -> bool:
+    """True bila nama makanan hanyalah bumbu/aromatik (mis. 'Garlic', 'Red Chili'), bukan hidangan ('Garlic Bread')."""
+    head = re.sub(r'[^a-z\s]', ' ', str(name).lower().split(',')[0])
+    kata = [k for k in head.split() if k not in _KATA_SIFAT_BUMBU]
+    return bool(kata) and ' '.join(kata) in BUMBU_NAMA
 
 
 def status_flags(status: Optional[str], haz: Optional[float] = None, whz: Optional[float] = None) -> dict:
@@ -1206,6 +1224,7 @@ def recommend_meal(
     allowed_types: Optional[list] = None,
     rng: Optional[np.random.Generator] = None,
     riwayat_makanan: Optional[set] = None,
+    max_porsi: int = 3,
 ) -> list[dict]:
     """
     Rekomendasi makanan dengan model Logistic Regression multinomial per kategori.
@@ -1213,6 +1232,7 @@ def recommend_meal(
     lalu skor = (P(cukup sesuai) + 2 * P(sangat sesuai)) / 2 dari predict_proba.
     allowed_types membatasi foodType (komposisi piring). rng mengundi di antara kandidat teratas
     (variasi antarhari); riwayat_makanan menurunkan skor bahan yang sudah dipakai di hari sebelumnya.
+    Porsi dibulatkan ke 1 sampai max_porsi; kandidat yang porsinya tidak pas dengan target item diberi penalti.
     """
     if allowed_types is not None and len(df) and 'food_type' in df.columns:
         df = df[df['food_type'].isin(allowed_types)]
@@ -1237,6 +1257,11 @@ def recommend_meal(
     if riwayat_makanan:
         ranking_scores = np.where(np.isin(names_lower, list(riwayat_makanan)), ranking_scores * PENALTI_RIWAYAT, ranking_scores)
 
+    # Porsi tidak pas: 1 porsi sudah > 1.5x target item, atau butuh lebih dari batas porsi
+    kebutuhan_porsi = target_kalori / np.maximum(df['calories'].to_numpy(dtype=float), 1.0)
+    porsi_tidak_pas = (kebutuhan_porsi < 0.67) | (kebutuhan_porsi > max_porsi + 0.5)
+    ranking_scores = np.where(porsi_tidak_pas & (ranking_scores > 0), ranking_scores * PENALTI_PORSI, ranking_scores)
+
     # Anti-Repetisi Mutlak dalam satu hari
     if used_foods:
         used_mask = np.isin(names_lower, list(used_foods))
@@ -1257,7 +1282,7 @@ def recommend_meal(
         used_foods.add(food_name.lower())
 
         food_cal = float(row['calories'])
-        quantity = max(1, int(round(target_kalori / max(food_cal, 1.0))))
+        quantity = int(np.clip(round(target_kalori / max(food_cal, 1.0)), 1, max_porsi))
         match_pct = round(float(ml_scores[idx]) * 100, 1)
 
         # Metadata reasons
@@ -1297,7 +1322,7 @@ def pilih_bahan_pelengkap(df_filtered: pd.DataFrame, n: int = 3) -> list[dict]:
     """Minyak, bumbu, dan gula yang lolos filter: pelengkap opsional, tidak dihitung ke target kalori."""
     if 'food_type' not in df_filtered.columns:
         return []
-    d = df_filtered[df_filtered['food_type'].isin(BAHAN_PELENGKAP)]
+    d = df_filtered[df_filtered['food_type'].isin(BAHAN_PELENGKAP) | df_filtered['name'].map(_is_bumbu)]
     if 'sodium' in d.columns:
         d = d.sort_values('sodium', kind='stable')
     return [{'produk_id': r.get('id', ''), 'nama_makanan': str(r['name']), 'jenis_bahan': r['food_type'],
@@ -1317,6 +1342,10 @@ def build_meal_plan(kalori_info: dict, df_filtered: pd.DataFrame, kategori: str,
         return {k: v * ratio for k, v in dist.items()}
 
     used_foods = set()
+    # Bumbu/aromatik hanya boleh jadi bahan pelengkap, tidak mengisi peran piring
+    df_menu = df_filtered[~df_filtered['name'].map(_is_bumbu)] if len(df_filtered) else df_filtered
+    flags = status_flags(ctx.get('statusNutrisi'), ctx.get('haz'), ctx.get('whz'))
+    gizi_lebih = bool(flags['status_lebih'] or flags['status_obes'])
 
     def get_paket(ratio: float, meal_type: str) -> list:
         """Satu bahan per peran piring (karbo + lauk + sayur/buah); peran tanpa kandidat dilonggarkan."""
@@ -1324,18 +1353,23 @@ def build_meal_plan(kalori_info: dict, df_filtered: pd.DataFrame, kategori: str,
         sg = session_group(meal_type)
         for peran, types, frac in PIRING_SESI[sg]:
             item_ratio = ratio * frac
-            args = (target * item_ratio, split_macro(item_ratio), df_filtered, kategori, scaler_dict, meal_type, used_foods, 1, ctx)
-            item = recommend_meal(*args, allowed_types=types, rng=rng, riwayat_makanan=riwayat_makanan)
+            args = (target * item_ratio, split_macro(item_ratio), df_menu, kategori, scaler_dict, meal_type, used_foods, 1, ctx)
+            kw = dict(rng=rng, riwayat_makanan=riwayat_makanan, max_porsi=MAX_PORSI.get(peran, 3))
+            item = []
+            if sg == 'snack' and gizi_lebih:   # gizi lebih/obesitas: selingan buah atau susu dulu, bukan camilan olahan
+                item = recommend_meal(*args, allowed_types=['fruit', 'dairy'], **kw)
+            if not item:
+                item = recommend_meal(*args, allowed_types=types, **kw)
             for it in item:
                 it['peran'] = peran
             if not item:   # dilonggarkan: peran mengikuti jenis bahan yang benar-benar terpilih
-                item = recommend_meal(*args, allowed_types=PIRING_CADANGAN[sg], rng=rng, riwayat_makanan=riwayat_makanan)
+                item = recommend_meal(*args, allowed_types=PIRING_CADANGAN[sg], **kw)
                 for it in item:
                     it['peran'] = PERAN_BAHAN.get(it['jenis_bahan'], peran)
             paket.extend(item)
         return paket
 
-    return {
+    rencana = {
         'target_kalori_harian': target,
         'distribusi':           dist,
         'rekomendasi_pagi':        get_paket(sesi['pagi'],       'pagi'),
@@ -1345,6 +1379,44 @@ def build_meal_plan(kalori_info: dict, df_filtered: pd.DataFrame, kategori: str,
         'rekomendasi_malam':       get_paket(sesi['malam'],      'malam'),
         'bahan_pelengkap_opsional': pilih_bahan_pelengkap(df_filtered),
     }
+    seimbangkan_porsi(rencana, target)
+    return rencana
+
+
+SESI_MENU = ['rekomendasi_pagi', 'rekomendasi_snack_pagi', 'rekomendasi_siang', 'rekomendasi_snack_sore', 'rekomendasi_malam']
+
+
+def seimbangkan_porsi(rencana: dict, target: float, toleransi: float = TOLERANSI_TOTAL, max_langkah: int = 60) -> dict:
+    """
+    Seimbangkan total kalori menu harian ke dalam +-toleransi dari target dengan menambah/mengurangi
+    satu porsi per langkah pada item yang paling mendekatkan total ke target (porsi tetap 1 sampai MAX_PORSI peran).
+    Pilihan makanan dari model tidak berubah, hanya jumlah porsinya.
+    """
+    items = [it for s in SESI_MENU for it in rencana.get(s, [])]
+    if not items or not target:
+        return rencana
+    total = sum(it['calories'] * it['recommended_quantity'] for it in items)
+    for _ in range(max_langkah):
+        selisih = total - target
+        if abs(selisih) <= toleransi * target:
+            break
+        arah = -1 if selisih > 0 else 1
+        terbaik = None
+        for it in items:
+            q = it['recommended_quantity'] + arah
+            if not 1 <= q <= MAX_PORSI.get(it.get('peran'), 3):
+                continue
+            sisa = abs(selisih + arah * it['calories'])
+            if sisa < abs(selisih) and (terbaik is None or sisa < terbaik[0]):
+                terbaik = (sisa, it, q)
+        if terbaik is None:
+            break
+        _, it, q = terbaik
+        total += arah * it['calories']
+        it['recommended_quantity'] = q
+        it['alasan_rekomendasi'] = re.sub(r'~\d+ kkal per \d+ porsi', f"~{round(it['calories'] * q)} kkal per {q} porsi",
+                                          it['alasan_rekomendasi'])
+    return rencana
 
 # ==========================================================================
 # TIER 3: GEMINI LLM EXPLANATION ENGINE (ATURAN KETAT SESUAI PDF)
@@ -1412,19 +1484,23 @@ SUSUN DALAM 3 PARAGRAF RINGKAS (~150 KATA):
         from google.genai import types
         # Menggunakan model aktif Google GenAI (gemini-2.5-flash sebagai penerus resmi gemini-2.0-flash yang di-sunset)
         model_name = os.environ.get('GEMINI_MODEL', 'gemini-2.5-flash')
-        config = types.GenerateContentConfig(
-            temperature=0.5,
-            max_output_tokens=1024,
-            top_p=0.85,
-        )
+        config_kw = dict(temperature=0.5, max_output_tokens=2048, top_p=0.85)
+        if 'flash' in model_name:
+            # Model 2.5 "berpikir" dulu dan token berpikir ikut memakan max_output_tokens, sehingga jawaban bisa kosong.
+            # Narasi singkat tidak butuh berpikir.
+            config_kw['thinking_config'] = types.ThinkingConfig(thinking_budget=0)
         resp = client.models.generate_content(
             model=model_name,
             contents=prompt,
-            config=config
+            config=types.GenerateContentConfig(**config_kw)
         )
-        return resp.text.strip()
+        teks = (resp.text or '').strip()
+        if not teks:
+            alasan = getattr((resp.candidates or [None])[0], 'finish_reason', None)
+            raise ValueError(f"respons Gemini kosong (model {model_name}, finish_reason {alasan})")
+        return teks
     except Exception as e:
-        print(f"[Tier 3 Gemini] Narasi LLM beralih ke fallback template ({e}).")
+        print(f"[Tier 3 Gemini] Narasi LLM beralih ke fallback template ({type(e).__name__}: {e}).")
         return _fallback_narasi(profil, riwayat_analisis, kalori_info, pantangan)
 
 def _fallback_narasi(profil: dict, riwayat: dict, kalori_info: dict, pantangan: str) -> str:

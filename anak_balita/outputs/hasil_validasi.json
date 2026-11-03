@@ -1839,13 +1839,13 @@
       "pelanggaran_alergen": 0,
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
-      "rata_skor_kesesuaian": 75.4,
-      "latensi_ms": 37.9,
+      "rata_skor_kesesuaian": 75.0,
+      "latensi_ms": 42.9,
       "menu": {
         "pagi": [
           "karbo: Quinoa",
           "lauk: Lentils",
-          "buah/sayur: Red Chili"
+          "buah/sayur: Oranges"
         ],
         "snack_pagi": [
           "selingan: Strawberry Yogurt"
@@ -1856,12 +1856,12 @@
           "sayur: Sweet Potato"
         ],
         "snack_sore": [
-          "selingan: Oranges"
+          "selingan: Dragon Fruit"
         ],
         "malam": [
           "karbo: Oatmeal",
           "lauk: Edamame",
-          "sayur: Red Onion"
+          "sayur: Broccoli"
         ]
       }
     },
@@ -1872,8 +1872,8 @@
       "pelanggaran_alergen": 0,
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
-      "rata_skor_kesesuaian": 77.0,
-      "latensi_ms": 37.1,
+      "rata_skor_kesesuaian": 75.8,
+      "latensi_ms": 45.9,
       "menu": {
         "pagi": [
           "karbo: Quinoa",
@@ -1886,7 +1886,7 @@
         "siang": [
           "karbo: Whole Wheat Bread",
           "lauk: Tilapia Fish",
-          "sayur: Red Chili"
+          "sayur: Sweet Potato"
         ],
         "snack_sore": [
           "selingan: Strawberry Yogurt"
@@ -1894,7 +1894,7 @@
         "malam": [
           "karbo: Organic Brown Rice",
           "lauk: Tofu",
-          "sayur: Red Onion"
+          "sayur: Spinach"
         ]
       }
     }

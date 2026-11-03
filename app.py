@@ -19,8 +19,11 @@ with gr.Blocks(title="NutriScale AI Recommendation Engine") as demo:
     gr.Markdown("API Endpoints active at `/api/recommend`, `/api/sync`, `/metrics`.")
 
 # Mount Gradio UI onto FastAPI app
-app = gr.mount_gradio_app(fastapi_app, demo, path="/ui")
+# ssr_mode=False: di HF Spaces Gradio 5 menyalakan SSR (server Node di port 7861)
+# yang bentrok dengan uvicorn di bawah.
+app = gr.mount_gradio_app(fastapi_app, demo, path="/ui", ssr_mode=False)
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 7860))
+    # HF Spaces memberi GRADIO_SERVER_PORT (7860); Railway memberi PORT.
+    port = int(os.environ.get("GRADIO_SERVER_PORT") or os.environ.get("PORT") or 7860)
     uvicorn.run(app, host="0.0.0.0", port=port)

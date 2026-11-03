@@ -444,7 +444,10 @@ def _bagian_keterbatasan_pengembangan(hasil: dict, no_bab: int) -> list[str]:
              f"Model dilatih dengan katalog `data/nutrition.csv` yang berisi {n_katalog} makanan, sedangkan aplikasi memakai "
              "katalog produk Supabase yang jauh lebih sedikit. Performa model pada katalog produk belum diuji dengan label."],
             ['K7', 'Label menilai satu makanan, bukan satu hari',
-             'Total kalori harian dan kewajaran porsi setelah menu disusun tidak tercakup dalam label maupun metrik.'],
+             'Total kalori harian dan kewajaran porsi tidak tercakup dalam label maupun metrik model. Untuk menutupinya, '
+             'penyusun menu diberi aturan tambahan: porsi dibatasi 1 sampai 3 per bahan, bumbu tidak boleh mengisi peran sayur, '
+             'dan total kalori harian diseimbangkan ke dalam 5 persen dari target (diuji pada `test_menu_harian.py`). '
+             'Aturan ini belum dinilai oleh ahli gizi.'],
         ]),
         "",
         "Keterbatasan di atas lebih banyak berpengaruh pada ketepatan kecocokan gizi, bukan pada keamanan. Makanan yang "
@@ -481,10 +484,10 @@ def _bagian_keterbatasan_pengembangan(hasil: dict, no_bab: int) -> list[str]:
              'NDCG@5 pada data interaksi nyata dan tingkat penambahan ke keranjang.',
              'Model lebih baik daripada formula lama dan urutan acak.', 'K1, K4, K6'],
             ['5. Evaluasi menu harian',
-             'Menambah penilaian per hari, yaitu selisih total kalori dan makro terhadap target, kewajaran porsi, dan variasi '
-             'bahan, yang juga dinilai oleh ahli gizi.',
-             'Rata-rata selisih kalori harian dan persentase menu dengan porsi wajar.',
-             'Selisih kalori harian dalam 5 persen dari target.', 'K7'],
+             'Aturan penyeimbang kalori dan batas porsi sudah diterapkan. Tahap ini menambah penilaian makro harian dan '
+             'variasi bahan, lalu meminta ahli gizi menilai contoh menu harian.',
+             'Selisih makro harian terhadap target dan skor ahli per menu.',
+             'Selisih kalori dan makro harian dalam 5 persen dari target, menu dinilai layak oleh ahli.', 'K7'],
         ]),
         "",
         "Penggunaan data pengguna nyata pada tahap 3 dan 4 hanya dilakukan dengan persetujuan pengguna dan data yang sudah "
