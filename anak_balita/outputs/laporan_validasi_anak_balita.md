@@ -160,8 +160,8 @@ Precision, recall, dan ROC-AUC per lipatan ikut tercatat setelah model dilatih u
 
 | Skenario | Item | Kandidat lolos | Alergen | BLOKIR | Tekstur | Skor rata-rata | Latensi (ms) |
 |---|---|---|---|---|---|---|---|
-| Anak Balita Underweight | 11 | 40 | 0 | 0 | 0 | 75.0 | 42.9 |
-| Balita 18 Bulan Tanpa HAZ/WHZ | 11 | 42 | 0 | 0 | 0 | 75.8 | 45.9 |
+| Anak Balita Underweight | 11 | 40 | 0 | 0 | 0 | 75.0 | 56.3 |
+| Balita 18 Bulan Tanpa HAZ/WHZ | 11 | 42 | 0 | 0 | 0 | 75.8 | 56.0 |
 
 **Anak Balita Underweight**: pagi: karbo: Quinoa, lauk: Lentils, buah/sayur: Oranges; snack_pagi: selingan: Strawberry Yogurt; siang: karbo: Organic Brown Rice, lauk: Fresh Chicken Breast, sayur: Sweet Potato; snack_sore: selingan: Dragon Fruit; malam: karbo: Oatmeal, lauk: Edamame, sayur: Broccoli
 
@@ -171,4 +171,4 @@ Precision, recall, dan ROC-AUC per lipatan ikut tercatat setelah model dilatih u
 
 Data sintetis dan label dari rubrik kategori (anak_balita/ai_models/rubrik.py). Angka di atas mengukur seberapa baik model meniru rubrik, bukan hasil uji klinis. Diperlukan gold set ahli gizi (minimal 300 pasangan) sebelum klaim klinis.
 
-Keterbatasan data dan ground truth sintetis serta rencana pengembangannya dibahas pada [laporan_validasi_ai.md](../../laporan_validasi_ai.md) Bab 5 dan Bab 6.
+Keterbatasan data dan ground truth sintetis serta rencana pengembangannya dibahas pada [laporan_validasi_ai.md](../../laporan_validasi_ai.md) Bab 6 dan Bab 7.

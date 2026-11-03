@@ -160,8 +160,8 @@ Precision, recall, dan ROC-AUC per lipatan ikut tercatat setelah model dilatih u
 
 | Skenario | Item | Kandidat lolos | Alergen | BLOKIR | Tekstur | Skor rata-rata | Latensi (ms) |
 |---|---|---|---|---|---|---|---|
-| Ibu Hamil T3 | 11 | 43 | 0 | 0 | 0 | 68.7 | 40.1 |
-| Ibu Hamil T1 Alergi Susu | 11 | 41 | 0 | 0 | 0 | 74.7 | 37.6 |
+| Ibu Hamil T3 | 11 | 43 | 0 | 0 | 0 | 68.7 | 57.3 |
+| Ibu Hamil T1 Alergi Susu | 11 | 41 | 0 | 0 | 0 | 74.7 | 55.6 |
 
 **Ibu Hamil T3**: pagi: karbo: Oatmeal, lauk: Fresh Chicken Breast, buah/sayur: Banana; snack_pagi: selingan: Ajwa Dates; siang: karbo: Quinoa, lauk: Kidney Beans, sayur: Sweet Potato; snack_sore: selingan: Baked Potato Chips; malam: karbo: Organic Brown Rice, lauk: Lentils, sayur: Broccoli
 
@@ -171,4 +171,4 @@ Precision, recall, dan ROC-AUC per lipatan ikut tercatat setelah model dilatih u
 
 Data sintetis dan label dari rubrik kategori (ibu_hamil/ai_models/rubrik.py). Angka di atas mengukur seberapa baik model meniru rubrik, bukan hasil uji klinis. Diperlukan gold set ahli gizi (minimal 300 pasangan) sebelum klaim klinis.
 
-Keterbatasan data dan ground truth sintetis serta rencana pengembangannya dibahas pada [laporan_validasi_ai.md](../../laporan_validasi_ai.md) Bab 5 dan Bab 6.
+Keterbatasan data dan ground truth sintetis serta rencana pengembangannya dibahas pada [laporan_validasi_ai.md](../../laporan_validasi_ai.md) Bab 6 dan Bab 7.

@@ -154,19 +154,101 @@ Gambar 8. Kurva ROC model PASCA_OPERASI
 
 Detail model PASCA_OPERASI ada pada [pasca_operasi/outputs/laporan_validasi_pasca_operasi.md](pasca_operasi/outputs/laporan_validasi_pasca_operasi.md).
 
-## 4. Pembahasan
+## 4. Pengujian Sistem
+
+Selain validasi model, sistem rekomendasi juga diuji secara keseluruhan, yaitu filter keamanan, penyusun menu, dan integrasi dengan target gizi NutriScale.
+
+### 4.1 Uji otomatis
+
+Pengujian otomatis dijalankan dengan `python -m unittest discover`. Sebanyak 76 dari 76 uji lulus (semua lulus). Rincian per berkas uji ditunjukkan pada Tabel 6.
+
+Tabel 6. Hasil uji otomatis
+
+| Berkas uji | Yang diuji | Jumlah uji | Lulus |
+|---|---|---|---|
+| `anak_balita/tests/test_anak_balita.py` | Uji unit model kategori (profil, rubrik, bahaya, skenario) | 4 | 4 |
+| `anak_balita/tests/test_input_anak_balita.py` | Uji input pengguna lewat /api/recommend | 3 | 3 |
+| `ibu_hamil/tests/test_ibu_hamil.py` | Uji unit model kategori (profil, rubrik, bahaya, skenario) | 4 | 4 |
+| `ibu_hamil/tests/test_input_ibu_hamil.py` | Uji input pengguna lewat /api/recommend | 3 | 3 |
+| `pasca_operasi/tests/test_input_pasca_operasi.py` | Uji input pengguna lewat /api/recommend | 3 | 3 |
+| `pasca_operasi/tests/test_pasca_operasi.py` | Uji unit model kategori (profil, rubrik, bahaya, skenario) | 3 | 3 |
+| `test_menu_harian.py` | Total kalori harian +-5%, batas porsi, bumbu bukan sayur, selingan untuk obesitas | 8 | 8 |
+| `test_narasi_gemini.py` | Panggilan Gemini (tanpa thinking) dan template cadangan bila respons kosong | 3 | 3 |
+| `test_nutriscale_data.py` | Pembacaan target gizi dan asesmen dari NutriScale | 13 | 13 |
+| `test_safety_filter.py` | Filter alergi, pantangan, dan BLOKIR per kategori; fitur model; variasi menu | 19 | 19 |
+| `test_validasi_ai.py` | Rumus metrik validasi dan konsistensi evaluasi ulang dengan hasil training | 6 | 6 |
+| `umum/tests/test_input_umum.py` | Uji input pengguna lewat /api/recommend | 3 | 3 |
+| `umum/tests/test_umum.py` | Uji unit model kategori (profil, rubrik, bahaya, skenario) | 4 | 4 |
+| **Total** |  | 76 | 76 |
+
+### 4.2 Uji end-to-end keamanan
+
+Setiap kategori diuji dengan skenario pengguna yang memiliki alergi atau kondisi tertentu. Skenario dijalankan melalui alur yang sama dengan aplikasi, yaitu filter keamanan, model, lalu penyusun menu, menggunakan katalog produk Supabase. Hasilnya ditunjukkan pada Tabel 7.
+
+Tabel 7. Hasil uji end-to-end keamanan
+
+| Kategori | Jumlah skenario | Pelanggaran alergen | Pelanggaran BLOKIR | Pelanggaran tekstur |
+|---|---|---|---|---|
+| UMUM | 2 | 0 | 0 | 0 |
+| IBU_HAMIL | 2 | 0 | 0 | 0 |
+| ANAK_BALITA | 2 | 0 | 0 | 0 |
+| PASCA_OPERASI | 2 | 0 | 0 | 0 |
+
+### 4.3 Uji penyusun menu harian
+
+Pada uji coba aplikasi ditemukan bahwa menu harian dapat melebihi target kalori, ada bahan dengan porsi tidak wajar (misalnya tomat 11 porsi), bumbu yang dijadikan sayur, dan camilan olahan untuk pengguna obesitas. Penyusun menu kemudian diperbaiki dengan empat aturan: porsi dibatasi 1 sampai 3 per bahan, total kalori harian diseimbangkan ke dalam 5 persen dari target, bumbu tidak boleh mengisi peran sayur, dan selingan untuk pengguna gizi lebih atau obesitas diutamakan buah atau susu. Aturan ini tidak mengubah model dan label, sehingga hasil validasi pada Bab 3 tetap sama. Pengujian dilakukan pada 18 profil dari keempat kategori dengan katalog produk Supabase. Hasilnya dibandingkan pada Tabel 8. Nilai sebelum perbaikan diukur pada versi sebelumnya (3 November 2026) dengan daftar profil yang sama.
+
+Tabel 8. Kualitas menu harian sebelum dan sesudah perbaikan
+
+| Indikator | Sebelum | Sesudah |
+|---|---|---|
+| Profil dengan total kalori dalam 5% target | 3 dari 18 | 18 dari 18 |
+| Rata-rata selisih total kalori terhadap target | 11.0% | 2.2% |
+| Selisih terbesar | 23.6% | 4.9% |
+| Porsi terbanyak untuk satu bahan | 14 | 3 |
+| Bumbu yang mengisi peran sayur | Red Chili x3 sebagai sayur | tidak ada |
+| Selingan untuk profil obesitas | Baked Potato Chips (400 kkal) | Ajwa Dates, Strawberry Yogurt |
+
+Tabel 9. Total kalori harian per profil uji setelah perbaikan
+
+| Profil | Target (kkal) | Total menu (kkal) | Selisih | Porsi terbanyak |
+|---|---|---|---|---|
+| UMUM obesitas 2829 kkal | 2829 | 2781 | -1.7% | 3 |
+| UMUM Normal 1600 kkal | 1600 | 1672 | +4.5% | 3 |
+| UMUM Normal 2100 kkal | 2100 | 2155 | +2.6% | 2 |
+| UMUM Normal 2600 kkal | 2600 | 2669 | +2.7% | 3 |
+| UMUM Underweight 1600 kkal | 1600 | 1613 | +0.8% | 3 |
+| UMUM Underweight 2100 kkal | 2100 | 2124 | +1.1% | 2 |
+| UMUM Underweight 2600 kkal | 2600 | 2481 | -4.6% | 3 |
+| UMUM Overweight 1600 kkal | 1600 | 1522 | -4.9% | 3 |
+| UMUM Overweight 2100 kkal | 2100 | 2176 | +3.6% | 2 |
+| UMUM Overweight 2600 kkal | 2600 | 2590 | -0.4% | 3 |
+| IBU_HAMIL Normal 1600 kkal | 1600 | 1672 | +4.5% | 3 |
+| IBU_HAMIL Normal 2100 kkal | 2100 | 2124 | +1.1% | 2 |
+| IBU_HAMIL Normal 2600 kkal | 2600 | 2649 | +1.9% | 3 |
+| ANAK_BALITA Normal 1100 kkal | 1100 | 1101 | +0.1% | 2 |
+| ANAK_BALITA Normal 1400 kkal | 1400 | 1396 | -0.3% | 3 |
+| PASCA_OPERASI Normal 1600 kkal | 1600 | 1592 | -0.5% | 3 |
+| PASCA_OPERASI Normal 2100 kkal | 2100 | 2181 | +3.9% | 2 |
+| PASCA_OPERASI Normal 2600 kkal | 2600 | 2600 | +0.0% | 3 |
+
+Untuk profil pengguna uji coba (UMUM, obesitas, target 2829 kkal), total menu berubah dari 3023 kkal (+6.9%) menjadi 2781 kkal (-1.7%). Pada dasbor NutriScale setelah perbaikan dipasang, total menu tercatat 2808 kkal (-0.7%).
+
+## 5. Pembahasan
 
 Kelas 1 (cukup sesuai) adalah kelas yang paling sulit dikenali. Hal ini terlihat dari ROC-AUC kelas 1 yang paling rendah pada keempat model serta precision dan recall kelas 1 yang lebih rendah daripada kelas 0. Kondisi ini wajar karena kelas 1 berada di tengah, sehingga sering tertukar dengan kelas 0 maupun kelas 2. Sebagian besar kesalahan model terjadi antara kelas yang bersebelahan, sedangkan kesalahan ekstrem sangat sedikit.
 
 Model IBU_HAMIL memiliki nilai metrik paling rendah. Kemungkinan penyebabnya adalah rubrik IBU_HAMIL paling banyak memakai kolom yang tidak menjadi fitur model, seperti folat, zat besi, dan kafein, serta memberi pengurangan poin lebih besar untuk makanan yang perlu dibatasi. Akibatnya, label pada kategori ini lebih sulit ditiru oleh model linear. Dugaan ini masih perlu dibuktikan, misalnya dengan menambahkan fitur yang berkaitan dengan zat gizi tersebut.
 
-Dari sisi keamanan, model jarang menilai makanan yang tidak sesuai sebagai sangat sesuai. Selain itu, aplikasi tetap menyaring makanan yang bertentangan dengan alergi, pantangan, dan daftar BLOKIR sebelum ranking dilakukan, sehingga keamanan rekomendasi tidak hanya bergantung pada prediksi model.
+Dari sisi keamanan, model jarang menilai makanan yang tidak sesuai sebagai sangat sesuai. Selain itu, mesin AI tetap menyaring makanan yang bertentangan dengan alergi, pantangan, dan daftar BLOKIR sebelum ranking dilakukan, sehingga keamanan rekomendasi tidak hanya bergantung pada prediksi model. Filter ini hanya bekerja bila data alergi dan pantangan ikut dikirim oleh aplikasi; pada versi aplikasi saat ini data tersebut belum dikirim (lihat K8).
 
-## 5. Keterbatasan Data dan Ground Truth
+Perbaikan penyusun menu menjaga total kalori harian, tetapi pembagian kalori antar sesi makan belum ikut dijaga. Pada beberapa menu, satu sesi dapat jauh di atas atau di bawah porsinya, misalnya selingan pagi yang lebih besar dari targetnya karena porsi buah ditambah untuk memenuhi total harian. Aturan batas per sesi dapat ditambahkan pada pengembangan berikutnya.
 
-Seluruh dataset pada penelitian ini adalah data sintetis. Label yang dijadikan ground truth juga tidak berasal dari ahli gizi, melainkan dihitung oleh rubrik berbasis aturan. Hal ini membawa beberapa keterbatasan yang perlu diperhatikan saat membaca hasil pada Bab 3, seperti dirangkum pada Tabel 6.
+## 6. Keterbatasan Data dan Ground Truth
 
-Tabel 6. Keterbatasan data dan ground truth
+Seluruh dataset pada penelitian ini adalah data sintetis. Label yang dijadikan ground truth juga tidak berasal dari ahli gizi, melainkan dihitung oleh rubrik berbasis aturan. Hal ini membawa beberapa keterbatasan yang perlu diperhatikan saat membaca hasil pada Bab 3 dan Bab 4, seperti dirangkum pada Tabel 10.
+
+Tabel 10. Keterbatasan data, ground truth, dan integrasi
 
 | No | Keterbatasan | Dampak terhadap hasil |
 |---|---|---|
@@ -177,17 +259,19 @@ Tabel 6. Keterbatasan data dan ground truth
 | K5 | Target kalori data latih berbeda dengan aplikasi | Pada data latih UMUM, profil gemuk dan obesitas diberi target 400 kkal lebih rendah, sedangkan perhitungan NutriScale untuk dewasa tidak memakai pengurangan tersebut. |
 | K6 | Katalog makanan berbeda | Model dilatih dengan katalog `data/nutrition.csv` yang berisi 8789 makanan, sedangkan aplikasi memakai katalog produk Supabase yang jauh lebih sedikit. Performa model pada katalog produk belum diuji dengan label. |
 | K7 | Label menilai satu makanan, bukan satu hari | Total kalori harian dan kewajaran porsi tidak tercakup dalam label maupun metrik model. Untuk menutupinya, penyusun menu diberi aturan tambahan: porsi dibatasi 1 sampai 3 per bahan, bumbu tidak boleh mengisi peran sayur, dan total kalori harian diseimbangkan ke dalam 5 persen dari target (diuji pada `test_menu_harian.py`). Aturan ini belum dinilai oleh ahli gizi. |
+| K8 | Data alergi dan pantangan dari formulir belum dikirim ke mesin AI | Formulir asesmen NutriScale sudah meminta alergi dan pantangan, tetapi nilai tersebut belum ikut dikirim ke `/api/recommend` (pantangan hanya dikirim untuk kategori pasca operasi). Akibatnya filter alergi tidak berjalan di aplikasi: pengguna dengan alergi susu masih mendapat yoghurt. Saat data dikirim, mesin AI sudah menyaring dengan benar (diuji dengan katalog Supabase). |
 
-Keterbatasan di atas lebih banyak berpengaruh pada ketepatan kecocokan gizi, bukan pada keamanan. Makanan yang bertentangan dengan alergi, pantangan, atau daftar BLOKIR selalu diberi label 0 dan di aplikasi sudah disaring sebelum proses ranking. Pada uji end-to-end tidak ditemukan pelanggaran alergen, BLOKIR, maupun tekstur.
+Keterbatasan K1 sampai K7 lebih banyak berpengaruh pada ketepatan kecocokan gizi, bukan pada keamanan. Makanan yang bertentangan dengan alergi, pantangan, atau daftar BLOKIR selalu diberi label 0 dan disaring oleh mesin AI sebelum proses ranking, dan pada uji end-to-end tidak ditemukan pelanggaran. Keterbatasan K8 berkaitan langsung dengan keamanan, sehingga perlu diperbaiki di aplikasi sebelum dipakai oleh pengguna.
 
-## 6. Rencana Pengembangan
+## 7. Rencana Pengembangan
 
-Untuk mengatasi keterbatasan pada Bab 5, disusun lima tahap pengembangan pada Tabel 7. Tahap 1 dan 2 masih dapat dikerjakan dalam lingkup proyek ini, sedangkan tahap 3 sampai 5 memerlukan data pengguna nyata.
+Untuk mengatasi keterbatasan pada Bab 6, disusun rencana pengembangan pada Tabel 11. Perbaikan integrasi alergi (K8) perlu dikerjakan lebih dulu karena menyangkut keamanan. Tahap 1 dan 2 masih dapat dikerjakan dalam lingkup proyek ini, sedangkan tahap 3 sampai 5 memerlukan data pengguna nyata.
 
-Tabel 7. Rencana pengembangan data dan ground truth
+Tabel 11. Rencana pengembangan
 
 | Tahap | Kegiatan | Keluaran | Target | Mengatasi |
 |---|---|---|---|---|
+| Segera. Integrasi alergi dan pantangan | Mengirim isian alergi dan pantangan dari formulir NutriScale ke `/api/recommend` (kolom `alergi` dan `pantanganMedis`) untuk semua kategori. | Menu pengguna dengan alergi atau pantangan pada dasbor. | Tidak ada makanan yang bertentangan dengan alergi atau pantangan pengguna. | K8 |
 | 1. Gold set ahli gizi | Memilih 300 pasangan dari test set secara stratified (100 per label, dari keempat kategori), lalu dua ahli gizi atau dosen gizi memberi label 0/1/2 tanpa melihat label rubrik maupun prediksi model. | Kappa antar penilai, kappa rubrik terhadap ahli, dan kappa model terhadap ahli. | Kappa antar penilai dan kappa rubrik terhadap ahli minimal 0.6. | K1, K3 |
 | 2. Revisi rubrik dan uji sensitivitas | Memperbaiki ambang rubrik berdasarkan pasangan yang tidak disepakati ahli. Menguji model dengan ambang rubrik digeser 10 sampai 20 persen dan noise label 5 sampai 10 persen, serta melatih model tanpa fitur yang mirip aturan rubrik. | Perubahan weighted kappa dan NDCG@5 pada setiap skenario. | Penurunan metrik kurang dari 0.05. | K1, K2, K3 |
 | 3. Penyesuaian data latih dengan aplikasi | Menyamakan perhitungan target kalori antara generator dan NutriScale, membuat kandidat dari katalog produk Supabase, dan membuat profil yang mendekati data asesmen pengguna (dianonimkan). | Metrik pada test set berbasis katalog produk. | Metrik tidak turun jauh dibanding test set sintetis. | K4, K5, K6 |
@@ -196,6 +280,6 @@ Tabel 7. Rencana pengembangan data dan ground truth
 
 Penggunaan data pengguna nyata pada tahap 3 dan 4 hanya dilakukan dengan persetujuan pengguna dan data yang sudah dianonimkan. Model belum dapat diklaim valid secara klinis sebelum tahap 1 menunjukkan kesepakatan yang cukup antara rubrik dan ahli gizi.
 
-## 7. Kesimpulan
+## 8. Kesimpulan
 
-Keempat model Logistic Regression mampu meniru penilaian rubrik dengan baik pada data uji, dengan weighted kappa 0.8552 sampai 0.9320 dan ROC-AUC macro rata-rata 0.9808. Urutan rekomendasi yang dihasilkan model juga lebih baik daripada formula lama dan urutan acak berdasarkan NDCG@5. Namun, karena data dan label masih sintetis, hasil ini belum menggambarkan ketepatan gizi secara klinis. Langkah berikutnya yang paling penting adalah membuat gold set yang dilabeli ahli gizi (tahap 1 pada Bab 6) untuk menguji kebenaran rubrik dan model.
+Keempat model Logistic Regression mampu meniru penilaian rubrik dengan baik pada data uji, dengan weighted kappa 0.8552 sampai 0.9320 dan ROC-AUC macro rata-rata 0.9808. Urutan rekomendasi yang dihasilkan model juga lebih baik daripada formula lama dan urutan acak berdasarkan NDCG@5. Namun, karena data dan label masih sintetis, hasil ini belum menggambarkan ketepatan gizi secara klinis. Langkah berikutnya yang paling penting adalah memastikan data alergi dan pantangan dari aplikasi ikut dikirim ke mesin AI, lalu membuat gold set yang dilabeli ahli gizi (tahap 1 pada Bab 7) untuk menguji kebenaran rubrik dan model.

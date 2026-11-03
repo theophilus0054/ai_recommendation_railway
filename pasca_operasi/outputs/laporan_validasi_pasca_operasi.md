@@ -160,8 +160,8 @@ Precision, recall, dan ROC-AUC per lipatan ikut tercatat setelah model dilatih u
 
 | Skenario | Item | Kandidat lolos | Alergen | BLOKIR | Tekstur | Skor rata-rata | Latensi (ms) |
 |---|---|---|---|---|---|---|---|
-| Pasca Operasi Saluran Cerna (Lunak) | 11 | 14 | 0 | 0 | 0 | 75.8 | 46.7 |
-| Pasca Operasi Ortopedi (Cair) | 1 | 1 | 0 | 0 | 0 | 3.5 | 49.9 |
+| Pasca Operasi Saluran Cerna (Lunak) | 11 | 14 | 0 | 0 | 0 | 75.8 | 63.4 |
+| Pasca Operasi Ortopedi (Cair) | 1 | 1 | 0 | 0 | 0 | 3.5 | 72.0 |
 
 **Pasca Operasi Saluran Cerna (Lunak)**: pagi: karbo: Organic Brown Rice, lauk: Edamame, buah/sayur: Banana; snack_pagi: sayur: Sweet Potato; siang: karbo: Oatmeal, lauk: Lentils, sayur: Mustard Greens; snack_sore: sayur: Broccoli; malam: karbo: Quinoa, lauk: Tofu, lauk: Tilapia Fish
 
@@ -171,4 +171,4 @@ Precision, recall, dan ROC-AUC per lipatan ikut tercatat setelah model dilatih u
 
 Data sintetis dan label dari rubrik kategori (pasca_operasi/ai_models/rubrik.py). Angka di atas mengukur seberapa baik model meniru rubrik, bukan hasil uji klinis. Diperlukan gold set ahli gizi (minimal 300 pasangan) sebelum klaim klinis.
 
-Keterbatasan data dan ground truth sintetis serta rencana pengembangannya dibahas pada [laporan_validasi_ai.md](../../laporan_validasi_ai.md) Bab 5 dan Bab 6.
+Keterbatasan data dan ground truth sintetis serta rencana pengembangannya dibahas pada [laporan_validasi_ai.md](../../laporan_validasi_ai.md) Bab 6 dan Bab 7.

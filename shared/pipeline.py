@@ -374,7 +374,7 @@ def tulis_laporan(kategori: str, h: dict, v: dict, e2e: list[dict], gambar: dict
               "Angka di atas mengukur seberapa baik model meniru rubrik, bukan hasil uji klinis. "
               "Diperlukan gold set ahli gizi (minimal 300 pasangan) sebelum klaim klinis.", "",
               "Keterbatasan data dan ground truth sintetis serta rencana pengembangannya dibahas pada "
-              "[laporan_validasi_ai.md](../../laporan_validasi_ai.md) Bab 5 dan Bab 6.", ""]
+              "[laporan_validasi_ai.md](../../laporan_validasi_ai.md) Bab 6 dan Bab 7.", ""]
     path = os.path.join(folder_hasil(kategori), f'laporan_validasi_{kategori.lower()}.md')
     with open(path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(baris))
@@ -419,9 +419,9 @@ def _bagian_keterbatasan_pengembangan(hasil: dict, no_bab: int) -> list[str]:
         "",
         "Seluruh dataset pada penelitian ini adalah data sintetis. Label yang dijadikan ground truth juga tidak berasal dari ahli "
         "gizi, melainkan dihitung oleh rubrik berbasis aturan. Hal ini membawa beberapa keterbatasan yang perlu diperhatikan "
-        "saat membaca hasil pada Bab 3, seperti dirangkum pada Tabel 6.",
+        "saat membaca hasil pada Bab 3 dan Bab 4, seperti dirangkum pada Tabel 10.",
         "",
-        "Tabel 6. Keterbatasan data dan ground truth",
+        "Tabel 10. Keterbatasan data, ground truth, dan integrasi",
         "",
         _tabel(['No', 'Keterbatasan', 'Dampak terhadap hasil'], [
             ['K1', 'Label dihasilkan oleh rubrik, bukan dinilai ahli gizi',
@@ -448,20 +448,32 @@ def _bagian_keterbatasan_pengembangan(hasil: dict, no_bab: int) -> list[str]:
              'penyusun menu diberi aturan tambahan: porsi dibatasi 1 sampai 3 per bahan, bumbu tidak boleh mengisi peran sayur, '
              'dan total kalori harian diseimbangkan ke dalam 5 persen dari target (diuji pada `test_menu_harian.py`). '
              'Aturan ini belum dinilai oleh ahli gizi.'],
+            ['K8', 'Data alergi dan pantangan dari formulir belum dikirim ke mesin AI',
+             'Formulir asesmen NutriScale sudah meminta alergi dan pantangan, tetapi nilai tersebut belum ikut dikirim ke '
+             '`/api/recommend` (pantangan hanya dikirim untuk kategori pasca operasi). Akibatnya filter alergi tidak berjalan di '
+             'aplikasi: pengguna dengan alergi susu masih mendapat yoghurt. Saat data dikirim, mesin AI sudah menyaring dengan '
+             'benar (diuji dengan katalog Supabase).'],
         ]),
         "",
-        "Keterbatasan di atas lebih banyak berpengaruh pada ketepatan kecocokan gizi, bukan pada keamanan. Makanan yang "
-        "bertentangan dengan alergi, pantangan, atau daftar BLOKIR selalu diberi label 0 dan di aplikasi sudah disaring sebelum "
-        "proses ranking. Pada uji end-to-end tidak ditemukan pelanggaran alergen, BLOKIR, maupun tekstur.",
+        "Keterbatasan K1 sampai K7 lebih banyak berpengaruh pada ketepatan kecocokan gizi, bukan pada keamanan. Makanan yang "
+        "bertentangan dengan alergi, pantangan, atau daftar BLOKIR selalu diberi label 0 dan disaring oleh mesin AI sebelum "
+        "proses ranking, dan pada uji end-to-end tidak ditemukan pelanggaran. Keterbatasan K8 berkaitan langsung dengan "
+        "keamanan, sehingga perlu diperbaiki di aplikasi sebelum dipakai oleh pengguna.",
         "",
         f"## {no_bab + 1}. Rencana Pengembangan",
         "",
-        "Untuk mengatasi keterbatasan pada Bab " + str(no_bab) + ", disusun lima tahap pengembangan pada Tabel 7. Tahap 1 dan 2 "
-        "masih dapat dikerjakan dalam lingkup proyek ini, sedangkan tahap 3 sampai 5 memerlukan data pengguna nyata.",
+        "Untuk mengatasi keterbatasan pada Bab " + str(no_bab) + ", disusun rencana pengembangan pada Tabel 11. Perbaikan "
+        "integrasi alergi (K8) perlu dikerjakan lebih dulu karena menyangkut keamanan. Tahap 1 dan 2 masih dapat dikerjakan "
+        "dalam lingkup proyek ini, sedangkan tahap 3 sampai 5 memerlukan data pengguna nyata.",
         "",
-        "Tabel 7. Rencana pengembangan data dan ground truth",
+        "Tabel 11. Rencana pengembangan",
         "",
         _tabel(['Tahap', 'Kegiatan', 'Keluaran', 'Target', 'Mengatasi'], [
+            ['Segera. Integrasi alergi dan pantangan',
+             'Mengirim isian alergi dan pantangan dari formulir NutriScale ke `/api/recommend` (kolom `alergi` dan '
+             '`pantanganMedis`) untuk semua kategori.',
+             'Menu pengguna dengan alergi atau pantangan pada dasbor.',
+             'Tidak ada makanan yang bertentangan dengan alergi atau pantangan pengguna.', 'K8'],
             ['1. Gold set ahli gizi',
              'Memilih 300 pasangan dari test set secara stratified (100 per label, dari keempat kategori), lalu dua ahli gizi '
              'atau dosen gizi memberi label 0/1/2 tanpa melihat label rubrik maupun prediksi model.',
@@ -497,7 +509,158 @@ def _bagian_keterbatasan_pengembangan(hasil: dict, no_bab: int) -> list[str]:
     ]
 
 
-def tulis_laporan_gabungan(hasil: dict) -> str:
+# Profil uji penyusun menu harian (target kalori berbeda di 4 kategori), dipakai laporan gabungan Bab 4.3
+PROFIL_MENU = [('UMUM obesitas 2829 kkal', 'UMUM', 2829, 'Obese', {'umur': 22, 'beratBadan': 95, 'tinggiBadan': 170})]
+for _kat, _status in [('UMUM', 'Normal'), ('UMUM', 'Underweight'), ('UMUM', 'Overweight'), ('IBU_HAMIL', 'Normal'),
+                      ('ANAK_BALITA', 'Normal'), ('PASCA_OPERASI', 'Normal')]:
+    for _kcal in ([1100, 1400] if _kat == 'ANAK_BALITA' else [1600, 2100, 2600]):
+        _extra = {'IBU_HAMIL': {'usiaKehamilanMinggu': 24, 'jenisKelamin': 'PEREMPUAN'}, 'ANAK_BALITA': {'umur': 30},
+                  'PASCA_OPERASI': {'tahapDiet': 'biasa', 'jenisOperasi': 'umum'}}.get(_kat, {})
+        PROFIL_MENU.append((f'{_kat} {_status} {_kcal} kkal', _kat, _kcal, _status, _extra))
+
+# Hasil ukur penyusun menu SEBELUM perbaikan (commit 5b2b70d, katalog Supabase, 3 November 2026), urutan = PROFIL_MENU
+MENU_SEBELUM = {'total': [3023, 1658, 2595, 2850, 1727, 2464, 2678, 1727, 2568, 2682, 1751, 2408, 2907, 1246, 1318, 1892, 2313, 2840],
+                'porsi_maks': 14, 'bumbu': 'Red Chili x3 sebagai sayur', 'selingan_obesitas': 'Baked Potato Chips (400 kkal)'}
+
+TUJUAN_UJI = {
+    'test_safety_filter': 'Filter alergi, pantangan, dan BLOKIR per kategori; fitur model; variasi menu',
+    'test_nutriscale_data': 'Pembacaan target gizi dan asesmen dari NutriScale',
+    'test_validasi_ai': 'Rumus metrik validasi dan konsistensi evaluasi ulang dengan hasil training',
+    'test_menu_harian': 'Total kalori harian +-5%, batas porsi, bumbu bukan sayur, selingan untuk obesitas',
+    'test_narasi_gemini': 'Panggilan Gemini (tanpa thinking) dan template cadangan bila respons kosong',
+}
+
+
+def evaluasi_menu_harian() -> list[dict]:
+    """Susun menu harian untuk PROFIL_MENU dengan katalog produk (sama seperti produksi) dan ukur kualitasnya."""
+    from model import (load_and_preprocess_api_data, jalankan_ai_rekomendasi, SESSION_RATIOS, SESI_MENU, _is_bumbu)
+
+    api_url = os.environ.get("NEXT_PUBLIC_APP_URL", "http://localhost:3000") + "/api/products"
+    df_food, scaler = load_and_preprocess_api_data(api_url)
+    rasio = dict(zip(SESI_MENU, SESSION_RATIOS.values()))
+    hasil = []
+    for nama, kat, kcal, status, extra in PROFIL_MENU:
+        g = lambda pct, div: round(kcal * pct / 100 / div, 1)
+        prof = {'kategoriKondisi': kat, 'umur': 30, 'jenisKelamin': 'LAKI_LAKI', 'beratBadan': 60, 'tinggiBadan': 165,
+                'pantanganMedis': '', 'alergi': '', 'tanggal': '2026-11-03', 'userId': 'uji-menu',
+                'nutrisi': {'lifeStage': 'ADULT', 'calories': kcal, 'warnings': [], 'protein': {'percent': 20, 'grams': g(20, 4)},
+                            'fat': {'percent': 30, 'grams': g(30, 9)}, 'carbohydrates': {'percent': 50, 'grams': g(50, 4)}},
+                'asesmen': {'bmi': 22, 'statusNutrisi': status}, **extra}
+        menu = jalankan_ai_rekomendasi(prof, df_food, scaler, use_llm=False)['meal_plan']['detailRencanaMakan']
+        items = [m for sesi in SESI_MENU for m in menu.get(sesi, [])]
+        total = sum(m['calories'] * m['recommended_quantity'] for m in items)
+        dev_sesi = {sesi: (sum(m['calories'] * m['recommended_quantity'] for m in menu.get(sesi, [])) - kcal * rasio[sesi])
+                    / (kcal * rasio[sesi]) for sesi in SESI_MENU}
+        hasil.append({'nama': nama, 'target': kcal, 'total': round(total), 'deviasi': (total - kcal) / kcal,
+                      'porsi_maks': max((m['recommended_quantity'] for m in items), default=0),
+                      'bumbu': [m['nama_makanan'] for m in items if _is_bumbu(m['nama_makanan'])],
+                      'deviasi_sesi_maks': max(abs(v) for v in dev_sesi.values()),
+                      'selingan': [m['nama_makanan'] for sesi in ('rekomendasi_snack_pagi', 'rekomendasi_snack_sore')
+                                   for m in menu.get(sesi, [])]})
+    return hasil
+
+
+_SKRIP_UJI = """
+import json, sys, unittest
+gagal = set()
+class Hasil(unittest.TextTestResult):
+    def addFailure(self, test, err):
+        gagal.add(test.id()); super().addFailure(test, err)
+    def addError(self, test, err):
+        gagal.add(getattr(test, 'id', lambda: str(test))()); super().addError(test, err)
+suite = unittest.defaultTestLoader.discover('.', pattern='test_*.py', top_level_dir='.')
+def daftar(s):
+    for t in s:
+        yield from (daftar(t) if isinstance(t, unittest.TestSuite) else [t])
+semua = [t.id() for t in daftar(suite)]
+r = unittest.TextTestRunner(stream=sys.stderr, resultclass=Hasil, verbosity=0).run(suite)
+print(json.dumps({'semua': semua, 'gagal': sorted(gagal), 'jalan': r.testsRun, 'sukses': r.wasSuccessful()}))
+"""
+
+
+def jalankan_uji_otomatis() -> dict:
+    """Jalankan seluruh unit test di proses terpisah dan rangkum jumlah serta status per berkas uji."""
+    import subprocess
+    import sys
+    env = {**os.environ, 'AI_ALLOW_SNAPSHOT_FALLBACK': '1', 'AI_ENGINE_API_KEY': os.environ.get('AI_ENGINE_API_KEY') or 'kunci-uji'}
+    out = subprocess.run([sys.executable, '-c', _SKRIP_UJI], cwd=ROOT, env=env, capture_output=True, text=True,
+                         encoding='utf-8', errors='replace')
+    data = json.loads(out.stdout.strip().splitlines()[-1])
+    per_berkas = {}
+    for tid in data['semua']:
+        b = per_berkas.setdefault(tid.rsplit('.', 2)[0], {'jumlah': 0, 'lulus': 0})
+        b['jumlah'] += 1
+        b['lulus'] += tid not in data['gagal']
+    return {'total': data['jalan'], 'lulus': data['jalan'] - len(data['gagal']), 'semua_lulus': data['sukses'],
+            'per_berkas': dict(sorted(per_berkas.items()))}
+
+
+def _bagian_pengujian(hasil: dict, menu: list | None, uji: dict | None) -> list[str]:
+    """Bab 4 laporan gabungan: uji otomatis, uji end-to-end keamanan, dan uji penyusun menu harian."""
+    baris = ["## 4. Pengujian Sistem", "",
+             "Selain validasi model, sistem rekomendasi juga diuji secara keseluruhan, yaitu filter keamanan, penyusun "
+             "menu, dan integrasi dengan target gizi NutriScale.", ""]
+    if uji:
+        rows = []
+        for modul_uji, b in uji['per_berkas'].items():
+            nama = modul_uji.split('.')[-1]
+            tujuan = TUJUAN_UJI.get(nama) or ('Uji input pengguna lewat /api/recommend' if nama.startswith('test_input_')
+                                              else 'Uji unit model kategori (profil, rubrik, bahaya, skenario)')
+            rows.append([f"`{modul_uji.replace('.', '/')}.py`", tujuan, b['jumlah'], b['lulus']])
+        baris += ["### 4.1 Uji otomatis", "",
+                  f"Pengujian otomatis dijalankan dengan `python -m unittest discover`. Sebanyak {uji['lulus']} dari "
+                  f"{uji['total']} uji lulus{' (semua lulus)' if uji['semua_lulus'] else ''}. Rincian per berkas uji "
+                  "ditunjukkan pada Tabel 6.", "",
+                  "Tabel 6. Hasil uji otomatis", "",
+                  _tabel(['Berkas uji', 'Yang diuji', 'Jumlah uji', 'Lulus'], rows + [['**Total**', '', uji['total'], uji['lulus']]]),
+                  ""]
+    e2e_rows = [[k, len(r['end_to_end']), sum(x['pelanggaran_alergen'] for x in r['end_to_end']),
+                 sum(x['pelanggaran_blokir'] for x in r['end_to_end']), sum(x['pelanggaran_tekstur'] for x in r['end_to_end'])]
+                for k, r in hasil.items() if r.get('end_to_end')]
+    if e2e_rows:
+        baris += ["### 4.2 Uji end-to-end keamanan", "",
+                  "Setiap kategori diuji dengan skenario pengguna yang memiliki alergi atau kondisi tertentu. Skenario dijalankan "
+                  "melalui alur yang sama dengan aplikasi, yaitu filter keamanan, model, lalu penyusun menu, menggunakan katalog "
+                  "produk Supabase. Hasilnya ditunjukkan pada Tabel 7.", "",
+                  "Tabel 7. Hasil uji end-to-end keamanan", "",
+                  _tabel(['Kategori', 'Jumlah skenario', 'Pelanggaran alergen', 'Pelanggaran BLOKIR', 'Pelanggaran tekstur'], e2e_rows),
+                  ""]
+    if menu:
+        sebelum = MENU_SEBELUM['total']
+        dev_lama = [abs(t - m['target']) / m['target'] for t, m in zip(sebelum, menu)]
+        dev_baru = [abs(m['deviasi']) for m in menu]
+        n = len(menu)
+        kasus = menu[0]
+        baris += ["### 4.3 Uji penyusun menu harian", "",
+                  "Pada uji coba aplikasi ditemukan bahwa menu harian dapat melebihi target kalori, ada bahan dengan porsi tidak "
+                  "wajar (misalnya tomat 11 porsi), bumbu yang dijadikan sayur, dan camilan olahan untuk pengguna obesitas. Penyusun "
+                  "menu kemudian diperbaiki dengan empat aturan: porsi dibatasi 1 sampai 3 per bahan, total kalori harian "
+                  "diseimbangkan ke dalam 5 persen dari target, bumbu tidak boleh mengisi peran sayur, dan selingan untuk pengguna "
+                  "gizi lebih atau obesitas diutamakan buah atau susu. Aturan ini tidak mengubah model dan label, sehingga hasil "
+                  f"validasi pada Bab 3 tetap sama. Pengujian dilakukan pada {n} profil dari keempat kategori dengan katalog produk "
+                  "Supabase. Hasilnya dibandingkan pada Tabel 8. Nilai sebelum perbaikan diukur pada versi sebelumnya "
+                  "(3 November 2026) dengan daftar profil yang sama.", "",
+                  "Tabel 8. Kualitas menu harian sebelum dan sesudah perbaikan", "",
+                  _tabel(['Indikator', 'Sebelum', 'Sesudah'], [
+                      ['Profil dengan total kalori dalam 5% target', f"{sum(d <= 0.05 for d in dev_lama)} dari {n}",
+                       f"{sum(d <= 0.05 for d in dev_baru)} dari {n}"],
+                      ['Rata-rata selisih total kalori terhadap target', f"{100 * np.mean(dev_lama):.1f}%", f"{100 * np.mean(dev_baru):.1f}%"],
+                      ['Selisih terbesar', f"{100 * max(dev_lama):.1f}%", f"{100 * max(dev_baru):.1f}%"],
+                      ['Porsi terbanyak untuk satu bahan', MENU_SEBELUM['porsi_maks'], max(m['porsi_maks'] for m in menu)],
+                      ['Bumbu yang mengisi peran sayur', MENU_SEBELUM['bumbu'], sum(len(m['bumbu']) for m in menu) or 'tidak ada'],
+                      ['Selingan untuk profil obesitas', MENU_SEBELUM['selingan_obesitas'], ', '.join(kasus['selingan'])],
+                  ]), "",
+                  "Tabel 9. Total kalori harian per profil uji setelah perbaikan", "",
+                  _tabel(['Profil', 'Target (kkal)', 'Total menu (kkal)', 'Selisih', 'Porsi terbanyak'],
+                         [[m['nama'], m['target'], m['total'], f"{100 * m['deviasi']:+.1f}%", m['porsi_maks']] for m in menu]), "",
+                  f"Untuk profil pengguna uji coba (UMUM, obesitas, target {kasus['target']} kkal), total menu berubah dari "
+                  f"{sebelum[0]} kkal ({100 * (sebelum[0] - kasus['target']) / kasus['target']:+.1f}%) menjadi {kasus['total']} kkal "
+                  f"({100 * kasus['deviasi']:+.1f}%). Pada dasbor NutriScale setelah perbaikan dipasang, total menu tercatat 2808 kkal "
+                  "(-0.7%).", ""]
+    return baris
+
+
+def tulis_laporan_gabungan(hasil: dict, menu: list | None = None, uji: dict | None = None) -> str:
     """Laporan Validasi AI gabungan 4 model di root repo: laporan_validasi_ai.md."""
     rows, auc_rows, cm_rows, utama_rows = [], [], [], []
     for k, r in hasil.items():
@@ -524,7 +687,7 @@ def tulis_laporan_gabungan(hasil: dict) -> str:
     ekstrem = {k: int(np.array(r['test']['confusion_matrix'])[[0, 2], [2, 0]].sum()) for k, r in hasil.items()}
     kelas1_terendah = [k for k, r in hasil.items()
                        if min(r['test']['roc_auc']['per_class_ovr'], key=r['test']['roc_auc']['per_class_ovr'].get) == '1']
-    uji = sum(r['test_rows'] for r in hasil.values())
+    n_uji = sum(r['test_rows'] for r in hasil.values())
     dasar0 = [r['label_distribution_test'].get('0', 0) / max(r['test_rows'], 1) for r in hasil.values()]
 
     baris = [
@@ -540,7 +703,7 @@ def tulis_laporan_gabungan(hasil: dict) -> str:
         "Validasi ini bertujuan mengukur seberapa baik model memberi penilaian tersebut pada data yang belum pernah dilihat "
         "saat pelatihan.",
         "",
-        f"Data uji yang dipakai adalah test set setiap kategori (`<kategori>/data/test_data.csv`) dengan total {uji} pasangan "
+        f"Data uji yang dipakai adalah test set setiap kategori (`<kategori>/data/test_data.csv`) dengan total {n_uji} pasangan "
         "(profil, sesi, makanan). Pembagian data dilakukan berdasarkan profil, sehingga profil pada data uji tidak pernah "
         "muncul pada data latih. Ground truth diambil dari kolom `label` yang dihitung oleh rubrik pada `shared/dataset.py` dan "
         "`<kategori>/ai_models/rubrik.py`. Makanan yang bertentangan dengan alergi, pantangan, atau daftar BLOKIR selalu "
@@ -621,7 +784,7 @@ def tulis_laporan_gabungan(hasil: dict) -> str:
         "",
         "Kesalahan ekstrem adalah label 0 yang diprediksi 2 atau label 2 yang diprediksi 0. Jumlahnya adalah "
         + ", ".join(f"{v} pada {k}" for k, v in list(ekstrem.items())[:-1])
-        + f", dan {list(ekstrem.values())[-1]} pada {list(ekstrem)[-1]}, dari sekitar {round(uji / len(hasil))} data uji per model.",
+        + f", dan {list(ekstrem.values())[-1]} pada {list(ekstrem)[-1]}, dari sekitar {round(n_uji / len(hasil))} data uji per model.",
         "",
         "### 3.5 Confusion matrix dan kurva ROC",
         "",
@@ -642,8 +805,9 @@ def tulis_laporan_gabungan(hasil: dict) -> str:
         baris += [f"Detail model {k} ada pada [{folder}/outputs/laporan_validasi_{folder}.md]"
                   f"({folder}/outputs/laporan_validasi_{folder}.md).", ""]
 
+    baris += _bagian_pengujian(hasil, menu, uji)
     baris += [
-        "## 4. Pembahasan",
+        "## 5. Pembahasan",
         "",
         "Kelas 1 (cukup sesuai) adalah kelas yang paling sulit dikenali. Hal ini terlihat dari ROC-AUC kelas 1 yang paling "
         f"rendah pada {'keempat model' if len(kelas1_terendah) == len(hasil) else f'{len(kelas1_terendah)} dari {len(hasil)} model'} "
@@ -656,20 +820,27 @@ def tulis_laporan_gabungan(hasil: dict) -> str:
         "untuk makanan yang perlu dibatasi. Akibatnya, label pada kategori ini lebih sulit ditiru oleh model linear. Dugaan ini "
         "masih perlu dibuktikan, misalnya dengan menambahkan fitur yang berkaitan dengan zat gizi tersebut.",
         "",
-        "Dari sisi keamanan, model jarang menilai makanan yang tidak sesuai sebagai sangat sesuai. Selain itu, aplikasi tetap "
+        "Dari sisi keamanan, model jarang menilai makanan yang tidak sesuai sebagai sangat sesuai. Selain itu, mesin AI tetap "
         "menyaring makanan yang bertentangan dengan alergi, pantangan, dan daftar BLOKIR sebelum ranking dilakukan, sehingga "
-        "keamanan rekomendasi tidak hanya bergantung pada prediksi model.",
+        "keamanan rekomendasi tidak hanya bergantung pada prediksi model. Filter ini hanya bekerja bila data alergi dan "
+        "pantangan ikut dikirim oleh aplikasi; pada versi aplikasi saat ini data tersebut belum dikirim (lihat K8).",
+        "",
+        "Perbaikan penyusun menu menjaga total kalori harian, tetapi pembagian kalori antar sesi makan belum ikut dijaga. Pada "
+        "beberapa menu, satu sesi dapat jauh di atas atau di bawah porsinya, misalnya selingan pagi yang lebih besar dari "
+        "targetnya karena porsi buah ditambah untuk memenuhi total harian. Aturan batas per sesi dapat ditambahkan pada "
+        "pengembangan berikutnya.",
         "",
     ]
-    baris += _bagian_keterbatasan_pengembangan(hasil, 5)
+    baris += _bagian_keterbatasan_pengembangan(hasil, 6)
     baris += [
-        "## 7. Kesimpulan",
+        "## 8. Kesimpulan",
         "",
         f"Keempat model Logistic Regression mampu meniru penilaian rubrik dengan baik pada data uji, dengan weighted kappa "
         f"{kappa(terendah):.4f} sampai {kappa(tertinggi):.4f} dan ROC-AUC macro rata-rata {rata_auc:.4f}. Urutan rekomendasi "
         "yang dihasilkan model juga lebih baik daripada formula lama dan urutan acak berdasarkan NDCG@5. Namun, karena data dan "
         "label masih sintetis, hasil ini belum menggambarkan ketepatan gizi secara klinis. Langkah berikutnya yang paling "
-        "penting adalah membuat gold set yang dilabeli ahli gizi (tahap 1 pada Bab 6) untuk menguji kebenaran rubrik dan model.",
+        "penting adalah memastikan data alergi dan pantangan dari aplikasi ikut dikirim ke mesin AI, lalu membuat gold set "
+        "yang dilabeli ahli gizi (tahap 1 pada Bab 7) untuk menguji kebenaran rubrik dan model.",
         "",
     ]
     path = os.path.join(ROOT, 'laporan_validasi_ai.md')
