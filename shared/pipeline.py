@@ -226,31 +226,29 @@ def _bagian_validasi_ai(kategori: str, h: dict, v: dict, gambar: dict) -> list[s
         "",
         "### 1.3 Pemilihan metrik utama: weighted kappa dan NDCG",
         "",
-        "Label 0/1/2 bersifat ordinal (tidak sesuai < cukup sesuai < sangat sesuai) dan produk memakai model untuk mengurutkan "
-        "makanan per sesi, sehingga metrik utama adalah weighted kappa dan NDCG@k. Accuracy, precision, recall, confusion matrix, "
-        "dan ROC-AUC tetap dilaporkan sebagai metrik pendukung untuk analisis per kelas.",
+        "Metrik utama yang dipakai adalah weighted kappa kuadratik dan NDCG@k, sedangkan accuracy, precision, recall, confusion "
+        "matrix, dan ROC-AUC dipakai sebagai metrik pendukung. Alasannya dijelaskan sebagai berikut.",
         "",
-        f"1. **Label ordinal.** Accuracy, precision, dan recall memperlakukan kelas sebagai kategori lepas (nominal): setiap salah "
-        f"prediksi dihitung sama. Memprediksi 2 untuk label 1 (meleset satu tingkat) dihukum sama dengan memprediksi 2 untuk label 0 "
-        f"(makanan tidak sesuai disebut sangat sesuai), padahal kesalahan kedua jauh lebih berbahaya. Weighted kappa kuadratik "
-        f"membobot kesalahan dengan kuadrat jarak tingkat (meleset 1 tingkat bobot 1, meleset 2 tingkat bobot 4). Pada {kategori}, "
-        f"dari {total - benar} prediksi salah, {bersebelahan} meleset satu tingkat dan hanya {ekstrem} yang ekstrem (0 <-> 2); "
-        f"accuracy {_f4(t['accuracy'])} tidak membedakan keduanya, sedangkan weighted kappa {_f4(t['weighted_kappa'])} memperhitungkannya.",
-        f"2. **Koreksi kebetulan (kelas tidak seimbang).** {dist.get('0', 0) / total:.1%} label test adalah 0. Model yang selalu "
-        f"menjawab 0 sudah mendapat accuracy {dist.get('0', 0) / total:.4f}, tetapi kappa-nya 0 (tidak lebih baik dari kebetulan). "
-        f"Kappa mengukur kesepakatan di atas yang diharapkan secara kebetulan, sehingga tidak tertipu kelas mayoritas. Untuk alasan "
-        f"yang sama laporan ini menambahkan balanced accuracy ({_f4(t['balanced_accuracy'])}) serta precision dan recall macro.",
-        f"3. **Produk memakai ranking.** Di produksi model tidak mengeluarkan satu kelas, tetapi mengurutkan kandidat makanan per sesi "
-        f"dengan skor (P(1) + 2 x P(2)) / 2, lalu penyusun menu mengambil yang teratas. NDCG@k menilai urutan itu: gain bertingkat "
-        f"(label 2 bernilai 3, label 1 bernilai 1, label 0 bernilai 0) dan diskon posisi (salah di peringkat 1 lebih berat dari "
-        f"peringkat 5). NDCG@5 model {_f4(nd['model_lr']['ndcg@5'])} dibanding formula lama {_f4(nd['baseline_lama']['ndcg@5'])} "
-        f"dan urutan acak {_f4(nd['baseline_acak']['ndcg@5'])}: bukti langsung bahwa model memperbaiki rekomendasi.",
+        f"1. Label bersifat ordinal (0 < 1 < 2). Accuracy, precision, dan recall menganggap semua kesalahan sama, padahal salah "
+        f"memprediksi label 0 sebagai 2 lebih berbahaya daripada salah memprediksi label 1 sebagai 2. Weighted kappa kuadratik "
+        f"memberi bobot sesuai kuadrat jarak antar kelas, yaitu 1 untuk selisih satu tingkat dan 4 untuk selisih dua tingkat. "
+        f"Pada model {kategori}, dari {total - benar} prediksi yang salah, {bersebelahan} hanya berbeda satu tingkat dan {ekstrem} "
+        f"berbeda dua tingkat. Perbedaan ini tidak terlihat pada accuracy ({_f4(t['accuracy'])}), tetapi tercermin pada "
+        f"weighted kappa ({_f4(t['weighted_kappa'])}).",
+        f"2. Jumlah data setiap kelas tidak seimbang. Sebanyak {dist.get('0', 0) / total:.1%} label pada data uji bernilai 0, "
+        f"sehingga model yang selalu menjawab 0 sudah mendapat accuracy {dist.get('0', 0) / total:.4f}, tetapi nilai kappa-nya 0. "
+        f"Kappa memperhitungkan kesepakatan yang terjadi secara kebetulan. Karena alasan yang sama, laporan ini juga mencantumkan "
+        f"balanced accuracy ({_f4(t['balanced_accuracy'])}) serta precision dan recall macro.",
+        f"3. Aplikasi memakai model untuk mengurutkan makanan. Pada setiap sesi, kandidat makanan diurutkan dengan skor "
+        f"(P(1) + 2 x P(2)) / 2 dan makanan teratas dipilih untuk menu. NDCG@k menilai urutan tersebut, dengan nilai 3 untuk "
+        f"label 2, 1 untuk label 1, dan 0 untuk label 0, serta bobot yang lebih besar untuk urutan teratas. NDCG@5 model adalah "
+        f"{_f4(nd['model_lr']['ndcg@5'])}, lebih tinggi daripada formula lama ({_f4(nd['baseline_lama']['ndcg@5'])}) dan urutan "
+        f"acak ({_f4(nd['baseline_acak']['ndcg@5'])}).",
         "",
-        "Metrik pendukung tetap diperlukan: accuracy, precision, dan recall adalah metrik standar yang mudah dijelaskan; per kelas "
-        f"metrik ini menjawab pertanyaan spesifik, misalnya recall kelas 0 ({_f4(pc['0']['recall'])}) = berapa banyak makanan tidak "
-        f"sesuai yang benar-benar ditolak (keamanan), dan precision kelas 2 ({_f4(pc['2']['precision'])}) = seberapa bisa dipercaya "
-        "saat model menyebut 'sangat sesuai'. Confusion matrix menunjukkan letak kesalahan, dan ROC-AUC menilai pemisahan kelas "
-        "dari probabilitas di semua ambang.",
+        "Metrik pendukung tetap dicantumkan karena umum dipakai dan dapat menunjukkan performa setiap kelas. Contohnya, recall "
+        f"kelas 0 ({_f4(pc['0']['recall'])}) menunjukkan berapa banyak makanan tidak sesuai yang berhasil ditolak, dan precision "
+        f"kelas 2 ({_f4(pc['2']['precision'])}) menunjukkan seberapa sering prediksi 'sangat sesuai' benar. Confusion matrix "
+        "menunjukkan di mana kesalahan terjadi, sedangkan ROC-AUC menilai pemisahan kelas berdasarkan probabilitas.",
         "",
         "### 1.4 Precision, recall, F1 per kelas",
         "",
@@ -280,7 +278,7 @@ def _bagian_validasi_ai(kategori: str, h: dict, v: dict, gambar: dict) -> list[s
         "",
         f"- Benar: {benar} ({benar / total:.2%}). Salah ke kelas bersebelahan (0-1 atau 1-2): {bersebelahan} ({bersebelahan / total:.2%}).",
         f"- Salah ekstrem (0 diprediksi 2 atau 2 diprediksi 0): {ekstrem} ({ekstrem / total:.2%}). "
-        "Kesalahan ekstrem paling berbahaya untuk rekomendasi; nilai kecil berarti model jarang membalik penilaian.",
+        "Kesalahan ini paling berbahaya untuk rekomendasi, sehingga jumlahnya dipantau secara terpisah.",
         "",
     ]
     if gambar.get('confusion_matrix'):
@@ -300,8 +298,8 @@ def _bagian_validasi_ai(kategori: str, h: dict, v: dict, gambar: dict) -> list[s
         ]),
         "",
         "- Kelas 1 (cukup sesuai) berada di tengah skala ordinal sehingga paling sulit dipisahkan; AUC-nya wajar paling rendah.",
-        "- AUC 'layak vs tidak' paling relevan untuk keamanan produk: seberapa baik model memisahkan makanan yang boleh "
-        "direkomendasikan dari yang tidak, sebelum filter keamanan (alergi, pantangan, BLOKIR) diterapkan di produksi.",
+        "- AUC layak vs tidak menunjukkan kemampuan model membedakan makanan yang boleh direkomendasikan dari makanan yang "
+        "tidak, sebelum filter keamanan (alergi, pantangan, BLOKIR) diterapkan di aplikasi.",
         "",
     ]
     if gambar.get('roc'):
@@ -375,8 +373,8 @@ def tulis_laporan(kategori: str, h: dict, v: dict, e2e: list[dict], gambar: dict
               "Data sintetis dan label dari rubrik kategori (" + kategori.lower() + "/ai_models/rubrik.py). "
               "Angka di atas mengukur seberapa baik model meniru rubrik, bukan hasil uji klinis. "
               "Diperlukan gold set ahli gizi (minimal 300 pasangan) sebelum klaim klinis.", "",
-              "Keterbatasan data dan ground truth sintetis serta rencana pengembangannya dibahas di "
-              "[laporan_validasi_ai.md](../../laporan_validasi_ai.md) bagian 7 dan 8.", ""]
+              "Keterbatasan data dan ground truth sintetis serta rencana pengembangannya dibahas pada "
+              "[laporan_validasi_ai.md](../../laporan_validasi_ai.md) Bab 5 dan Bab 6.", ""]
     path = os.path.join(folder_hasil(kategori), f'laporan_validasi_{kategori.lower()}.md')
     with open(path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(baris))
@@ -411,82 +409,87 @@ def validasi_kategori(kategori: str, e2e: bool = True) -> dict:
     return hasil
 
 
-def _bagian_pengembangan(hasil: dict) -> list[str]:
-    """Keterbatasan data & ground truth sintetis dan rencana pengembangan (untuk laporan gabungan)."""
+def _bagian_keterbatasan_pengembangan(hasil: dict, no_bab: int) -> list[str]:
+    """Bab keterbatasan data & ground truth dan bab rencana pengembangan (laporan gabungan)."""
     n_katalog = len(pd.read_csv(os.path.join(ROOT, 'data', 'nutrition.csv'), usecols=[0]))
     porsi0 = np.mean([r['label_distribution_test'].get('0', 0) / max(r['test_rows'], 1) for r in hasil.values()])
     kappa = [r['test']['weighted_kappa'] for r in hasil.values()]
     return [
-        "## 7. Keterbatasan data dan ground truth",
+        f"## {no_bab}. Keterbatasan Data dan Ground Truth",
         "",
-        "Dataset dan label pada laporan ini sepenuhnya sintetis. Ground truth (kolom `label`) dihitung otomatis oleh rubrik "
-        "berbasis aturan (`shared/dataset.py` + `<kategori>/ai_models/rubrik.py`), bukan penilaian ahli gizi atau data pengguna "
-        "nyata. Konsekuensinya:",
+        "Seluruh dataset pada penelitian ini adalah data sintetis. Label yang dijadikan ground truth juga tidak berasal dari ahli "
+        "gizi, melainkan dihitung oleh rubrik berbasis aturan. Hal ini membawa beberapa keterbatasan yang perlu diperhatikan "
+        "saat membaca hasil pada Bab 3, seperti dirangkum pada Tabel 6.",
         "",
-        _tabel(['No', 'Keterbatasan', 'Dampak pada hasil'], [
-            [1, 'Label berasal dari rumus rubrik, bukan penilaian ahli',
-             f"Metrik (weighted kappa {min(kappa):.2f} sampai {max(kappa):.2f}) mengukur seberapa setia model meniru rubrik. "
-             "Bila ambang rubrik keliru, model mempelajari kekeliruan itu dengan setia dan metrik tetap tinggi."],
-            [2, 'Sebagian fitur model mencerminkan aturan rubrik secara langsung',
-             'Contoh: `porsi_ideal` (0,67 sampai 2 porsi) dan `porsi_wajar` (0,5 sampai 3 porsi) sama dengan poin porsi rubrik; '
-             '`natrium_lewat_jauh` dan `gula_lewat_jauh` sama dengan poin gula-garam. Sebagian akurasi berasal dari menghitung '
-             'ulang rumus yang sama. Rubrik juga memakai kolom yang tidak masuk fitur (serat, lemak jenuh, vitamin C, folat, dan lain-lain), '
-             'sehingga model tidak sekadar menyalin.'],
-            [3, 'Tidak ada noise label',
-             'Rubrik deterministik: input sama selalu berlabel sama. Label dari ahli gizi nyata biasanya tidak sepenuhnya sepakat '
-             'antar-penilai, sehingga performa pada data nyata diperkirakan lebih rendah dari angka laporan ini.'],
-            [4, 'Distribusi data ditentukan generator',
-             f"Sekitar {porsi0:.0%} label adalah 0 karena skema pengambilan kandidat (6 cocok sesi, 4 acak, 2 konflik per sesi), "
-             "bukan karena pola menu nyata. Profil pengguna juga sintetis."],
-            [5, 'Beda target kalori antara data latih dan produk',
-             'Profil UMUM latih dengan status gemuk/obesitas memakai target -400 kkal, sedangkan target produk (nutri-calc NutriScale) '
-             'untuk dewasa umum tidak memakai defisit. Model menerima target per sesi yang lebih besar dari yang dilihat saat latih.'],
-            [6, 'Beda katalog makanan',
-             f"Model dilatih pada katalog `data/nutrition.csv` ({n_katalog} makanan), sedangkan produk merekomendasikan dari katalog "
-             "produk Supabase yang jauh lebih kecil. Performa khusus pada katalog produk belum diukur dengan label."],
-            [7, 'Label menilai per item, bukan per hari',
-             'Kesesuaian total kalori harian dan kewajaran porsi setelah penyusunan menu tidak tercakup ground truth maupun metrik.'],
-            [8, 'Keamanan tetap terjaga',
-             'Konflik alergi, pantangan, dan BLOKIR dipaksa berlabel 0 dan di produksi disaring sebelum ranking; uji end-to-end '
-             'menunjukkan 0 pelanggaran. Keterbatasan di atas terutama memengaruhi kualitas kecocokan gizi, bukan keamanan.'],
+        "Tabel 6. Keterbatasan data dan ground truth",
+        "",
+        _tabel(['No', 'Keterbatasan', 'Dampak terhadap hasil'], [
+            ['K1', 'Label dihasilkan oleh rubrik, bukan dinilai ahli gizi',
+             f"Weighted kappa {min(kappa):.2f} sampai {max(kappa):.2f} menunjukkan kemampuan model meniru rubrik. Jika ada "
+             "ambang rubrik yang kurang tepat, model ikut mempelajarinya dan nilai metrik tetap tinggi."],
+            ['K2', 'Sebagian fitur model mirip dengan aturan rubrik',
+             'Fitur `porsi_ideal`, `porsi_wajar`, `natrium_lewat_jauh`, dan `gula_lewat_jauh` memakai ambang yang sama dengan '
+             'rubrik, sehingga sebagian akurasi didapat dari menghitung ulang aturan yang sama. Namun rubrik juga memakai kolom '
+             'yang tidak menjadi fitur (serat, lemak jenuh, vitamin C, folat, zat besi), jadi model tidak sekadar menyalin rubrik.'],
+            ['K3', 'Label tidak mengandung noise',
+             'Rubrik selalu memberi label yang sama untuk input yang sama. Pada data nyata, penilaian antar ahli gizi biasanya '
+             'tidak selalu sama, sehingga performa model pada data nyata kemungkinan lebih rendah.'],
+            ['K4', 'Distribusi data ditentukan oleh generator',
+             f"Sekitar {porsi0:.0%} label bernilai 0 karena cara pengambilan kandidat (6 kandidat sesuai sesi, 4 acak, dan "
+             "2 kandidat konflik per sesi), bukan karena pola menu sebenarnya. Profil pengguna juga dibuat secara sintetis."],
+            ['K5', 'Target kalori data latih berbeda dengan aplikasi',
+             'Pada data latih UMUM, profil gemuk dan obesitas diberi target 400 kkal lebih rendah, sedangkan perhitungan '
+             'NutriScale untuk dewasa tidak memakai pengurangan tersebut.'],
+            ['K6', 'Katalog makanan berbeda',
+             f"Model dilatih dengan katalog `data/nutrition.csv` yang berisi {n_katalog} makanan, sedangkan aplikasi memakai "
+             "katalog produk Supabase yang jauh lebih sedikit. Performa model pada katalog produk belum diuji dengan label."],
+            ['K7', 'Label menilai satu makanan, bukan satu hari',
+             'Total kalori harian dan kewajaran porsi setelah menu disusun tidak tercakup dalam label maupun metrik.'],
         ]),
         "",
-        "## 8. Pengembangan ke depan: data dan ground truth",
+        "Keterbatasan di atas lebih banyak berpengaruh pada ketepatan kecocokan gizi, bukan pada keamanan. Makanan yang "
+        "bertentangan dengan alergi, pantangan, atau daftar BLOKIR selalu diberi label 0 dan di aplikasi sudah disaring sebelum "
+        "proses ranking. Pada uji end-to-end tidak ditemukan pelanggaran alergen, BLOKIR, maupun tekstur.",
         "",
-        "Usulan berikut diurutkan dari yang paling berdampak pada validitas ground truth. Tahap 1 dan 2 dapat dikerjakan dalam "
-        "lingkup proyek; tahap 3 sampai 5 membutuhkan data pengguna nyata dan persetujuan etik.",
+        f"## {no_bab + 1}. Rencana Pengembangan",
         "",
-        _tabel(['Tahap', 'Kegiatan', 'Keluaran / metrik', 'Kriteria berhasil'], [
+        "Untuk mengatasi keterbatasan pada Bab " + str(no_bab) + ", disusun lima tahap pengembangan pada Tabel 7. Tahap 1 dan 2 "
+        "masih dapat dikerjakan dalam lingkup proyek ini, sedangkan tahap 3 sampai 5 memerlukan data pengguna nyata.",
+        "",
+        "Tabel 7. Rencana pengembangan data dan ground truth",
+        "",
+        _tabel(['Tahap', 'Kegiatan', 'Keluaran', 'Target', 'Mengatasi'], [
             ['1. Gold set ahli gizi',
-             'Ambil 300 pasangan (profil, sesi, makanan) dari test set secara stratified (100 per label, tersebar di 4 kategori). '
-             'Dua ahli gizi atau dosen gizi melabeli 0/1/2 secara buta (tanpa melihat label rubrik dan prediksi model).',
-             'Kappa antar-penilai; kappa rubrik vs ahli (validitas ground truth); kappa model vs ahli (performa model sebenarnya).',
-             'Kappa antar-penilai dan kappa rubrik vs ahli >= 0,6 (kesepakatan substansial).'],
+             'Memilih 300 pasangan dari test set secara stratified (100 per label, dari keempat kategori), lalu dua ahli gizi '
+             'atau dosen gizi memberi label 0/1/2 tanpa melihat label rubrik maupun prediksi model.',
+             'Kappa antar penilai, kappa rubrik terhadap ahli, dan kappa model terhadap ahli.',
+             'Kappa antar penilai dan kappa rubrik terhadap ahli minimal 0.6.', 'K1, K3'],
             ['2. Revisi rubrik dan uji sensitivitas',
-             'Analisis pasangan yang tidak disepakati rubrik dan ahli, revisi ambang rubrik (versi baru di `RUBRIC_VERSION`). '
-             'Uji ketahanan: geser ambang rubrik 10 sampai 20 persen dan tambahkan noise label 5 sampai 10 persen, lalu latih ulang. '
-             'Ablasi: latih tanpa fitur yang mencerminkan rubrik (`porsi_*`, `*_lewat_jauh`).',
-             'Perubahan weighted kappa dan NDCG@5 per skenario; daftar ambang yang paling sensitif.',
-             'Penurunan metrik kecil (misalnya < 0,05) menunjukkan kesimpulan tidak bergantung pada ambang tertentu.'],
-            ['3. Selaraskan data latih dengan produk',
-             'Samakan logika target kalori (defisit untuk gemuk/obesitas) antara generator dan nutri-calc. Bangun kandidat dari '
-             'katalog produk Supabase dan profil yang meniru distribusi asesmen NutriScale (anonim).',
-             'Metrik pada test set berbasis katalog produk; selisih distribusi fitur latih vs produk.',
-             'Metrik pada katalog produk tidak jauh di bawah metrik test set sintetis.'],
+             'Memperbaiki ambang rubrik berdasarkan pasangan yang tidak disepakati ahli. Menguji model dengan ambang rubrik '
+             'digeser 10 sampai 20 persen dan noise label 5 sampai 10 persen, serta melatih model tanpa fitur yang mirip aturan '
+             'rubrik.',
+             'Perubahan weighted kappa dan NDCG@5 pada setiap skenario.',
+             'Penurunan metrik kurang dari 0.05.', 'K1, K2, K3'],
+            ['3. Penyesuaian data latih dengan aplikasi',
+             'Menyamakan perhitungan target kalori antara generator dan NutriScale, membuat kandidat dari katalog produk '
+             'Supabase, dan membuat profil yang mendekati data asesmen pengguna (dianonimkan).',
+             'Metrik pada test set berbasis katalog produk.',
+             'Metrik tidak turun jauh dibanding test set sintetis.', 'K4, K5, K6'],
             ['4. Ground truth dari perilaku pengguna',
-             'Catat umpan balik implisit secara anonim: rekomendasi yang ditambahkan ke keranjang, dibeli, atau dilewati. '
-             'Gunakan sebagai label tambahan (learning to rank) dan evaluasi offline dengan NDCG pada interaksi nyata, lalu uji A/B.',
-             'NDCG@5 pada interaksi nyata; tingkat penambahan ke keranjang per sesi.',
-             'Model mengungguli formula lama dan urutan acak pada data interaksi nyata.'],
-            ['5. Evaluasi tingkat menu harian',
-             'Tambahkan label dan metrik per hari: deviasi total kalori dan makro terhadap target, kewajaran porsi, variasi bahan; '
-             'dinilai ahli gizi pada contoh menu.',
-             'Rata-rata deviasi kalori harian (persen), persentase menu dengan porsi wajar, skor ahli per menu.',
-             'Deviasi kalori harian dalam +-5 persen dan porsi dalam batas wajar.'],
+             'Mencatat rekomendasi yang dimasukkan ke keranjang, dibeli, atau dilewati pengguna, lalu menjadikannya label '
+             'tambahan dan mengujinya dengan A/B testing.',
+             'NDCG@5 pada data interaksi nyata dan tingkat penambahan ke keranjang.',
+             'Model lebih baik daripada formula lama dan urutan acak.', 'K1, K4, K6'],
+            ['5. Evaluasi menu harian',
+             'Menambah penilaian per hari, yaitu selisih total kalori dan makro terhadap target, kewajaran porsi, dan variasi '
+             'bahan, yang juga dinilai oleh ahli gizi.',
+             'Rata-rata selisih kalori harian dan persentase menu dengan porsi wajar.',
+             'Selisih kalori harian dalam 5 persen dari target.', 'K7'],
         ]),
         "",
-        "Catatan etika: data pengguna nyata (tahap 3 dan 4) hanya dipakai dengan persetujuan pengguna, dianonimkan, dan disimpan "
-        "terbatas sesuai kebijakan privasi NutriScale. Klaim klinis baru layak setelah tahap 1 menunjukkan kesepakatan memadai.",
+        "Penggunaan data pengguna nyata pada tahap 3 dan 4 hanya dilakukan dengan persetujuan pengguna dan data yang sudah "
+        "dianonimkan. Model belum dapat diklaim valid secara klinis sebelum tahap 1 menunjukkan kesepakatan yang cukup antara "
+        "rubrik dan ahli gizi.",
         "",
     ]
 
@@ -502,82 +505,170 @@ def tulis_laporan_gabungan(hasil: dict) -> str:
         utama_rows.append([k, _f4(t['weighted_kappa']), _f4(nd['model_lr']['ndcg@5']), _f4(nd['baseline_lama']['ndcg@5']),
                            _f4(nd['baseline_acak']['ndcg@5']), _f4(t['accuracy']), f"{dist0:.4f}"])
         rows.append([k, PEMILIK[k], r['test_rows'], _f4(t['accuracy']), _f4(t['balanced_accuracy']), _f4(t['macro_precision']),
-                     _f4(t['macro_recall']), _f4(t['macro_f1']), _f4(a['macro_ovr']), _f4(t['weighted_kappa'])])
+                     _f4(t['macro_recall']), _f4(t['macro_f1']), _f4(a['macro_ovr'])])
         auc_rows.append([k, _f4(a['per_class_ovr']['0']), _f4(a['per_class_ovr']['1']), _f4(a['per_class_ovr']['2']),
                          _f4(a['macro_ovr']), _f4(a['weighted_ovr']), _f4(a['macro_ovo']), _f4(a['layak_vs_tidak']),
                          _f4(a['sangat_vs_lainnya'])])
         cm_rows.append([k] + [f"{t['per_class'][c]['precision']:.4f} / {t['per_class'][c]['recall']:.4f}" for c in '012']
                        + [f"{int(np.trace(cm))} ({np.trace(cm) / cm.sum():.2%})", f"{int(cm[0, 2] + cm[2, 0])} ({(cm[0, 2] + cm[2, 0]) / cm.sum():.2%})"])
+
     rata = lambda key: np.mean([r['test'][key] for r in hasil.values()])
     rata_auc = np.mean([r['test']['roc_auc']['macro_ovr'] for r in hasil.values()])
+    urut = sorted(hasil, key=lambda k: hasil[k]['test']['weighted_kappa'])
+    terendah, tertinggi = urut[0], urut[-1]
+    kappa = lambda k: hasil[k]['test']['weighted_kappa']
+    nd5 = lambda k, m: hasil[k]['ndcg_pembanding'][m]['ndcg@5']
+    ekstrem = {k: int(np.array(r['test']['confusion_matrix'])[[0, 2], [2, 0]].sum()) for k, r in hasil.items()}
+    kelas1_terendah = [k for k, r in hasil.items()
+                       if min(r['test']['roc_auc']['per_class_ovr'], key=r['test']['roc_auc']['per_class_ovr'].get) == '1']
+    uji = sum(r['test_rows'] for r in hasil.values())
+    dasar0 = [r['label_distribution_test'].get('0', 0) / max(r['test_rows'], 1) for r in hasil.values()]
+
     baris = [
-        "# Laporan Validasi AI NutriScale (4 Model Logistic Regression)",
+        "# Laporan Validasi AI NutriScale",
         "",
-        f"- Tanggal laporan: {datetime.date.today().isoformat()}",
-        "- Dibuat oleh `python validasi_ai.py` (memanggil `shared/pipeline.validasi_kategori` untuk tiap kategori).",
-        "- Data uji: test set profil baru per kategori (`<kategori>/data/test_data.csv`), tidak pernah dilihat saat training; split per profil.",
-        "- Ground truth: kolom `label` (0 tidak sesuai, 1 cukup sesuai, 2 sangat sesuai) dari rubrik pakar "
-        "(`shared/dataset.py` + `<kategori>/ai_models/rubrik.py`), dengan aturan keamanan (alergi, pantangan, BLOKIR) memaksa label 0.",
-        "- Prediksi: kelas dengan probabilitas tertinggi; ROC-AUC dari `predict_proba`.",
+        f"Tanggal laporan: {datetime.date.today().isoformat()}. Laporan ini dibuat dengan perintah `python validasi_ai.py`.",
         "",
-        "## 1. Metrik utama: weighted kappa dan NDCG",
+        "## 1. Pendahuluan",
         "",
-        "Label 0/1/2 bersifat ordinal dan produk memakai model untuk mengurutkan makanan, sehingga metrik utama adalah weighted "
-        "kappa kuadratik dan NDCG@k; accuracy, precision, recall, confusion matrix, dan ROC-AUC menjadi metrik pendukung.",
+        "Sistem rekomendasi NutriScale memakai empat model Logistic Regression multinomial, satu model untuk setiap kategori "
+        "pengguna, yaitu UMUM, IBU_HAMIL, ANAK_BALITA, dan PASCA_OPERASI. Setiap model menilai kesesuaian satu makanan untuk "
+        "satu pengguna pada satu sesi makan dengan tiga kelas: 0 (tidak sesuai), 1 (cukup sesuai), dan 2 (sangat sesuai). "
+        "Validasi ini bertujuan mengukur seberapa baik model memberi penilaian tersebut pada data yang belum pernah dilihat "
+        "saat pelatihan.",
         "",
-        _tabel(['Model', 'Weighted kappa', 'NDCG@5 model', 'NDCG@5 formula lama', 'NDCG@5 acak', 'Accuracy model',
+        f"Data uji yang dipakai adalah test set setiap kategori (`<kategori>/data/test_data.csv`) dengan total {uji} pasangan "
+        "(profil, sesi, makanan). Pembagian data dilakukan berdasarkan profil, sehingga profil pada data uji tidak pernah "
+        "muncul pada data latih. Ground truth diambil dari kolom `label` yang dihitung oleh rubrik pada `shared/dataset.py` dan "
+        "`<kategori>/ai_models/rubrik.py`. Makanan yang bertentangan dengan alergi, pantangan, atau daftar BLOKIR selalu "
+        "diberi label 0. Prediksi model adalah kelas dengan probabilitas tertinggi dari `predict_proba`.",
+        "",
+        "## 2. Metrik Evaluasi",
+        "",
+        "### 2.1 Metrik utama",
+        "",
+        "Metrik utama yang dipakai adalah weighted kappa kuadratik dan NDCG@k. Pemilihan ini didasarkan pada tiga alasan.",
+        "",
+        "Pertama, label bersifat ordinal, artinya label 0, 1, dan 2 memiliki urutan. Accuracy, precision, dan recall "
+        "menganggap semua kesalahan sama. Salah memprediksi label 1 sebagai 2 dihitung sama dengan salah memprediksi label 0 "
+        "sebagai 2, padahal kesalahan kedua lebih berbahaya karena makanan yang tidak sesuai dianggap sangat sesuai. Weighted "
+        "kappa kuadratik memberi bobot berdasarkan kuadrat jarak antar kelas, sehingga kesalahan sejauh dua tingkat diberi "
+        "bobot empat kali lebih besar daripada kesalahan satu tingkat.",
+        "",
+        "Kedua, jumlah data setiap kelas tidak seimbang. Sekitar dua pertiga label bernilai 0, sehingga model yang selalu "
+        "menjawab 0 sudah memperoleh accuracy yang cukup tinggi. Weighted kappa memperhitungkan kesepakatan yang dapat terjadi "
+        "secara kebetulan, sehingga model seperti itu hanya mendapat nilai kappa 0.",
+        "",
+        "Ketiga, aplikasi memakai model untuk mengurutkan makanan, bukan hanya untuk mengelompokkan. Pada setiap sesi makan, "
+        "kandidat makanan diurutkan dengan skor (P(1) + 2 x P(2)) / 2, lalu makanan teratas dipilih untuk menu. NDCG@k menilai "
+        "kualitas urutan tersebut. Makanan berlabel 2 memberi nilai lebih besar daripada makanan berlabel 1, dan kesalahan pada "
+        "urutan teratas berpengaruh lebih besar daripada kesalahan pada urutan bawah.",
+        "",
+        "### 2.2 Metrik pendukung",
+        "",
+        "Accuracy, precision, recall, F1, confusion matrix, dan ROC-AUC tetap dilaporkan karena metrik ini umum dipakai dan "
+        "berguna untuk melihat performa setiap kelas. Precision kelas k adalah proporsi prediksi kelas k yang benar, sedangkan "
+        "recall kelas k adalah proporsi data kelas k yang berhasil dikenali model. Nilai macro adalah rata-rata ketiga kelas "
+        "dengan bobot yang sama. ROC-AUC dihitung dari probabilitas dengan pendekatan one-vs-rest, yaitu satu kelas "
+        "dibandingkan dengan dua kelas lainnya. Nilai 0.5 setara dengan tebakan acak dan nilai 1 berarti pemisahan sempurna. "
+        "Rumus lengkap setiap metrik dapat dilihat pada laporan per kategori.",
+        "",
+        "## 3. Hasil Validasi",
+        "",
+        "### 3.1 Metrik utama",
+        "",
+        "Tabel 1. Weighted kappa dan NDCG@5 setiap model",
+        "",
+        _tabel(['Model', 'Weighted kappa', 'NDCG@5 model', 'NDCG@5 formula lama', 'NDCG@5 urutan acak', 'Accuracy model',
                 'Accuracy jika selalu menjawab 0'], utama_rows),
         "",
-        "- **Label ordinal**: accuracy, precision, dan recall menghukum semua salah prediksi sama besar, sedangkan weighted kappa "
-        "kuadratik membobot dengan kuadrat jarak tingkat, sehingga salah 0 <-> 2 (makanan tidak sesuai disebut sangat sesuai) "
-        "dihukum 4 kali salah satu tingkat.",
-        "- **Koreksi kebetulan**: sekitar dua pertiga label adalah 0, sehingga model yang selalu menjawab 0 sudah mendapat accuracy "
-        "tinggi (kolom terakhir) dengan kappa 0. Kappa hanya menghitung kesepakatan di atas kebetulan.",
-        "- **Ranking**: di produksi model mengurutkan kandidat per sesi dengan skor (P(1) + 2 x P(2)) / 2. NDCG@k menilai urutan itu "
-        "dengan gain bertingkat (label 2 = 3, label 1 = 1, label 0 = 0) dan diskon posisi; selisih dengan formula lama dan urutan acak "
-        "menunjukkan manfaat model secara langsung.",
-        "- Metrik pendukung menjawab pertanyaan per kelas: recall kelas 0 = makanan tidak sesuai yang benar-benar ditolak (keamanan), "
-        "precision kelas 2 = keandalan saat model menyebut 'sangat sesuai'.",
+        f"Berdasarkan Tabel 1, weighted kappa keempat model berada di antara {kappa(terendah):.4f} ({terendah}) dan "
+        f"{kappa(tertinggi):.4f} ({tertinggi}). NDCG@5 model pada semua kategori lebih tinggi daripada formula lama dan urutan "
+        f"acak. Sebagai contoh, pada kategori UMUM NDCG@5 model adalah {nd5('UMUM', 'model_lr'):.4f}, sedangkan formula lama "
+        f"hanya {nd5('UMUM', 'baseline_lama'):.4f} dan urutan acak {nd5('UMUM', 'baseline_acak'):.4f}. Kolom terakhir "
+        "menunjukkan bahwa accuracy saja kurang tepat untuk menilai model, karena menjawab 0 untuk semua data sudah "
+        f"menghasilkan accuracy {min(dasar0):.2f} sampai {max(dasar0):.2f}.",
         "",
-        "## 2. Ringkasan per model",
+        "### 3.2 Metrik pendukung",
         "",
-        _tabel(['Model', 'Pemilik', 'Data uji', 'Accuracy', 'Balanced acc.', 'Precision (macro)', 'Recall (macro)',
-                'F1 (macro)', 'ROC-AUC (macro OvR)', 'Weighted kappa'], rows),
+        "Tabel 2. Ringkasan metrik pendukung setiap model",
         "",
-        f"Rata-rata 4 model: accuracy {rata('accuracy'):.4f}, precision macro {rata('macro_precision'):.4f}, "
-        f"recall macro {rata('macro_recall'):.4f}, F1 macro {rata('macro_f1'):.4f}, ROC-AUC macro OvR {rata_auc:.4f}.",
+        _tabel(['Model', 'Pemilik', 'Data uji', 'Accuracy', 'Balanced accuracy', 'Precision (macro)', 'Recall (macro)',
+                'F1 (macro)', 'ROC-AUC (macro OvR)'], rows),
         "",
-        "## 3. ROC-AUC",
+        f"Rata-rata keempat model adalah accuracy {rata('accuracy'):.4f}, precision macro {rata('macro_precision'):.4f}, "
+        f"recall macro {rata('macro_recall'):.4f}, F1 macro {rata('macro_f1'):.4f}, dan ROC-AUC macro {rata_auc:.4f}.",
+        "",
+        "### 3.3 ROC-AUC",
+        "",
+        "Tabel 3. ROC-AUC setiap model",
         "",
         _tabel(['Model', 'Kelas 0 vs lain', 'Kelas 1 vs lain', 'Kelas 2 vs lain', 'Macro OvR', 'Weighted OvR',
-                'Macro OvO', 'Layak vs tidak', 'Sangat vs lainnya'], auc_rows),
+                'Macro OvO', 'Layak vs tidak', 'Sangat sesuai vs lain'], auc_rows),
         "",
-        "## 4. Precision / recall per kelas dan kesalahan",
+        "Kolom layak vs tidak membandingkan label 1 dan 2 dengan label 0 menggunakan skor P(1) + P(2). Kolom ini menunjukkan "
+        "kemampuan model membedakan makanan yang boleh direkomendasikan dari makanan yang tidak.",
         "",
-        _tabel(['Model', 'Kelas 0 (P / R)', 'Kelas 1 (P / R)', 'Kelas 2 (P / R)', 'Prediksi benar', 'Salah ekstrem (0 <-> 2)'], cm_rows),
+        "### 3.4 Precision, recall, dan pola kesalahan",
         "",
-        "## 5. Confusion matrix dan kurva ROC per model",
+        "Tabel 4. Precision dan recall per kelas serta jumlah kesalahan ekstrem",
+        "",
+        _tabel(['Model', 'Kelas 0 (P / R)', 'Kelas 1 (P / R)', 'Kelas 2 (P / R)', 'Prediksi benar', 'Kesalahan ekstrem (0 dan 2 tertukar)'],
+               cm_rows),
+        "",
+        "Kesalahan ekstrem adalah label 0 yang diprediksi 2 atau label 2 yang diprediksi 0. Jumlahnya adalah "
+        + ", ".join(f"{v} pada {k}" for k, v in list(ekstrem.items())[:-1])
+        + f", dan {list(ekstrem.values())[-1]} pada {list(ekstrem)[-1]}, dari sekitar {round(uji / len(hasil))} data uji per model.",
+        "",
+        "### 3.5 Confusion matrix dan kurva ROC",
+        "",
+        "Tabel 5 dan gambar berikut menunjukkan confusion matrix (baris adalah label asli dan kolom adalah prediksi) serta "
+        "kurva ROC setiap model.",
         "",
     ]
+    no_gambar = 1
     for k, r in hasil.items():
         folder = k.lower()
-        baris += [f"### {k} ({PEMILIK[k]})", "",
+        baris += [f"Tabel 5{'abcd'[list(hasil).index(k)]}. Confusion matrix {k}", "",
                   _tabel(['Asli \\ Prediksi', '0', '1', '2'], [[i] + x for i, x in enumerate(r['test']['confusion_matrix'])]), ""]
         for jenis, judul in [('confusion_matrix', 'Confusion matrix'), ('roc', 'Kurva ROC')]:
             if r['gambar'].get(jenis):
-                baris += [f"![{judul} {k}]({folder}/outputs/{r['gambar'][jenis]})", ""]
-        baris += [f"Detail lengkap: [{folder}/outputs/laporan_validasi_{folder}.md]({folder}/outputs/laporan_validasi_{folder}.md)", ""]
+                baris += [f"![{judul} {k}]({folder}/outputs/{r['gambar'][jenis]})", "",
+                          f"Gambar {no_gambar}. {judul} model {k}", ""]
+                no_gambar += 1
+        baris += [f"Detail model {k} ada pada [{folder}/outputs/laporan_validasi_{folder}.md]"
+                  f"({folder}/outputs/laporan_validasi_{folder}.md).", ""]
+
     baris += [
-        "## 6. Cara membaca dan batasan",
+        "## 4. Pembahasan",
         "",
-        "- Accuracy, precision, recall, F1, dan confusion matrix menilai kelas yang dipilih model; ROC-AUC menilai urutan "
-        "probabilitas di semua ambang. Karena label 0 dominan (sekitar dua pertiga data), gunakan metrik macro, balanced accuracy, dan ROC-AUC, bukan accuracy saja.",
-        "- Kelas 1 (cukup sesuai) berada di tengah skala ordinal sehingga paling sering tertukar; salah ekstrem (0 ke 2 atau 2 ke 0) adalah kesalahan paling berbahaya dan dipantau terpisah.",
-        "- Semua angka mengukur seberapa baik model meniru rubrik pada data sintetis, bukan uji klinis. Validasi lanjutan: "
-        "sampel 100 sampai 300 pasangan dilabeli manual oleh ahli gizi, lalu hitung kesepakatan (kappa) rubrik dan model terhadap ahli.",
+        "Kelas 1 (cukup sesuai) adalah kelas yang paling sulit dikenali. Hal ini terlihat dari ROC-AUC kelas 1 yang paling "
+        f"rendah pada {'keempat model' if len(kelas1_terendah) == len(hasil) else f'{len(kelas1_terendah)} dari {len(hasil)} model'} "
+        "serta precision dan recall kelas 1 yang lebih rendah daripada kelas 0. Kondisi ini wajar karena kelas 1 berada di "
+        "tengah, sehingga sering tertukar dengan kelas 0 maupun kelas 2. Sebagian besar "
+        "kesalahan model terjadi antara kelas yang bersebelahan, sedangkan kesalahan ekstrem sangat sedikit.",
+        "",
+        f"Model {terendah} memiliki nilai metrik paling rendah. Kemungkinan penyebabnya adalah rubrik {terendah} paling banyak memakai "
+        "kolom yang tidak menjadi fitur model, seperti folat, zat besi, dan kafein, serta memberi pengurangan poin lebih besar "
+        "untuk makanan yang perlu dibatasi. Akibatnya, label pada kategori ini lebih sulit ditiru oleh model linear. Dugaan ini "
+        "masih perlu dibuktikan, misalnya dengan menambahkan fitur yang berkaitan dengan zat gizi tersebut.",
+        "",
+        "Dari sisi keamanan, model jarang menilai makanan yang tidak sesuai sebagai sangat sesuai. Selain itu, aplikasi tetap "
+        "menyaring makanan yang bertentangan dengan alergi, pantangan, dan daftar BLOKIR sebelum ranking dilakukan, sehingga "
+        "keamanan rekomendasi tidak hanya bergantung pada prediksi model.",
         "",
     ]
-    baris += _bagian_pengembangan(hasil)
+    baris += _bagian_keterbatasan_pengembangan(hasil, 5)
+    baris += [
+        "## 7. Kesimpulan",
+        "",
+        f"Keempat model Logistic Regression mampu meniru penilaian rubrik dengan baik pada data uji, dengan weighted kappa "
+        f"{kappa(terendah):.4f} sampai {kappa(tertinggi):.4f} dan ROC-AUC macro rata-rata {rata_auc:.4f}. Urutan rekomendasi "
+        "yang dihasilkan model juga lebih baik daripada formula lama dan urutan acak berdasarkan NDCG@5. Namun, karena data dan "
+        "label masih sintetis, hasil ini belum menggambarkan ketepatan gizi secara klinis. Langkah berikutnya yang paling "
+        "penting adalah membuat gold set yang dilabeli ahli gizi (tahap 1 pada Bab 6) untuk menguji kebenaran rubrik dan model.",
+        "",
+    ]
     path = os.path.join(ROOT, 'laporan_validasi_ai.md')
     with open(path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(baris))
