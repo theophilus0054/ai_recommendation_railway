@@ -1123,13 +1123,14 @@ def hitung_konflik_keamanan(df: pd.DataFrame, pantanganMedis: Optional[str], kat
     n_alg, n_pant, n_free, n_blk, n_lim, blk_codes, lim_codes = [], [], [], [], [], [], []
     for name, label, sug, fat, tek in zip(names, labels, sugars, fats, tekstur):
         food_cats = set(detect_allergens(name)) | _split_label(label)
+        # Batas klinis berbasis nilai gizi (gula > 15 g, lemak > 25 g per 100 g) berlaku untuk grup dari
+        # kolom alergi MAUPUN pantangan (mis. user menulis 'gula' di kolom alergi).
+        if sug > 15.0:
+            food_cats.add('manis')
+        if fat > 25.0:
+            food_cats.add('gorengan')
         n_alg.append(len(allergy_cats & food_cats))
-        conflict_p = len(pant_cats & food_cats)
-        if 'manis' in pant_cats and sug > 15.0:
-            conflict_p += 1
-        if 'gorengan' in pant_cats and fat > 25.0:
-            conflict_p += 1
-        n_pant.append(conflict_p)
+        n_pant.append(len(pant_cats & food_cats))
         n_free.append(sum(keyword_match(name, p) for p in free_patterns))
         blokir, batasi = detect_hazards(name, kategoriKondisi)
         if kategoriKondisi == 'PASCA_OPERASI' and TEKSTUR_ORDINAL.get(str(tek), 3) > tahap:

@@ -177,6 +177,19 @@ class ParserLLMTest(unittest.TestCase):
             parser_llm.lepas_hasil_tersimpan(token)
         self.assertEqual(post.call_count, 1)
 
+    def test_ambang_gula_lemak_juga_untuk_kolom_alergi(self):
+        df = make_foods(['Ajwa Dates', 'Spinach', 'Sunflower Seeds'])
+        df['sugars'] = [66.0, 0.0, 3.0]
+        df['fat'] = [0.0, 0.0, 51.0]
+        for kolom in ('alergi', 'pantangan'):
+            kw = {'alergi': '', 'pantangan': ''}
+            kw[kolom] = 'gula'
+            aman = model.filter_dataset(df, kw['pantangan'], 'UMUM', kw['alergi'])
+            self.assertEqual(sorted(set(df['name']) - set(aman['name'])), ['Ajwa Dates'], kolom)
+            kw[kolom] = 'gorengan'
+            aman = model.filter_dataset(df, kw['pantangan'], 'UMUM', kw['alergi'])
+            self.assertEqual(sorted(set(df['name']) - set(aman['name'])), ['Sunflower Seeds'], kolom)
+
 
 class HasilTersimpanTest(unittest.TestCase):
     """Hasil parser dari tabel profil_kesehatan (parserAlergiTersimpan) dipakai tanpa memanggil Groq."""
