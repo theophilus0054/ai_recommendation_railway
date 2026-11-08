@@ -1059,10 +1059,11 @@ def _parse_restriction_text(text: Optional[str], use_llm: bool = False) -> tuple
                     chunk_cats.update(_ALIAS_KEYWORDS[close[0]])
         if chunk_cats:
             categories.update(chunk_cats)
-        elif len(chunk) >= 3:
+        elif len(chunk) >= 3 and re.search(r'[a-z]{2}', chunk):   # '123', '???' bukan frasa
             free_phrases.add(chunk)
 
-    if use_llm:
+    # Kosong / '-' / 'tidak ada alergi' / simbol saja -> tidak ada pantangan, Groq tidak dipanggil
+    if use_llm and (categories or free_phrases):
         llm = _ekstrak_llm(teks_asli)
         if llm:
             categories.update(llm['grup'])
@@ -1483,7 +1484,7 @@ def ringkas_parser_alergi(df: Optional[pd.DataFrame], alergi: str, pantangan: st
     tambahan_llm, gagal_llm, sumber_llm, untuk_disimpan = {}, False, {}, {}
     if use_llm_parser:
         for nama, teks in (('alergi', alergi), ('pantangan', pantangan)):
-            if not teks or str(teks).strip().lower() in PANTANGAN_STOPWORDS:
+            if not any(_parse_restriction_text(teks)):   # kosong / '-' / 'tidak ada' -> tanpa Groq
                 continue
             dari_simpanan = ada_hasil_tersimpan(teks)
             hasil = _ekstrak_llm(teks)

@@ -152,6 +152,29 @@ class ParserLLMTest(unittest.TestCase):
         self.assertEqual(info_regex['sumber'], 'regex')
         self.assertEqual(info_regex['frasa_tidak_cocok_produk'], ['ayam'])
 
+    def test_input_kosong_atau_aneh_tanpa_groq(self):
+        for teks in ['', '   ', '-', '--', '???', '123', 'xx', 'tidak ada', 'Tidak ada alergi', 'nihil', 'no allergy']:
+            with mock.patch.object(requests, 'post') as post:
+                self.assertEqual(self.buang(alergi=teks, pantangan=teks), [], teks)
+                info = model.ringkas_parser_alergi(self.df, teks, teks, True)
+                post.assert_not_called()
+            self.assertEqual((info['sumber_llm'], info['frasa_tidak_cocok_produk']), ({}, []), teks)
+
+    def test_teks_tak_dikenal_tidak_membuang_apa_pun(self):
+        isi = kosong(tidak_dikenali=['asdfgh'])
+        with mock.patch.object(requests, 'post', return_value=respon_groq(isi)):
+            self.assertEqual(self.buang(alergi='asdfgh'), [])
+
+    def test_groq_gagal_tidak_dicoba_ulang_dalam_satu_request(self):
+        token = parser_llm.pasang_hasil_tersimpan({})
+        try:
+            with mock.patch.object(requests, 'post', side_effect=requests.Timeout('lambat')) as post:
+                self.buang(alergi='alergi ayam')
+                model.ringkas_parser_alergi(self.df, 'alergi ayam', '', True)
+        finally:
+            parser_llm.lepas_hasil_tersimpan(token)
+        self.assertEqual(post.call_count, 1)
+
 
 class HasilTersimpanTest(unittest.TestCase):
     """Hasil parser dari tabel profil_kesehatan (parserAlergiTersimpan) dipakai tanpa memanggil Groq."""

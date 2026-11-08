@@ -44,6 +44,8 @@ MAX_ENTRI_TERSIMPAN = 4
 
 _CACHE: dict[str, dict] = {}
 _TERSIMPAN: ContextVar[dict] = ContextVar('hasil_parser_tersimpan', default={})
+# Teks yang gagal diproses Groq dalam request ini: tidak dicoba ulang (hindari timeout berlipat)
+_GAGAL: ContextVar[Optional[set]] = ContextVar('parser_gagal', default=None)
 
 
 def normalisasi_teks(teks: Optional[str]) -> str:
@@ -72,11 +74,13 @@ def muat_hasil_tersimpan(data, grup_valid: list[str], frasa_valid: list[str]) ->
 
 def pasang_hasil_tersimpan(hasil: dict[str, dict]):
     """Aktifkan hasil tersimpan untuk request ini. Kembalikan token untuk lepas_hasil_tersimpan."""
-    return _TERSIMPAN.set(hasil)
+    return _TERSIMPAN.set(hasil), _GAGAL.set(set())
 
 
 def lepas_hasil_tersimpan(token) -> None:
-    _TERSIMPAN.reset(token)
+    token_tersimpan, token_gagal = token
+    _GAGAL.reset(token_gagal)
+    _TERSIMPAN.reset(token_tersimpan)
 
 
 def ada_hasil_tersimpan(teks: Optional[str]) -> bool:
@@ -172,6 +176,9 @@ def ekstrak_pantangan_llm(teks: Optional[str], grup_valid: list[str], frasa_vali
     kunci_cache = f'{model}|{teks.lower()}'
     if kunci_cache in _CACHE:
         return _CACHE[kunci_cache]
+    gagal = _GAGAL.get()
+    if gagal is not None and kunci_cache in gagal:
+        return None
 
     try:
         timeout = float(os.environ.get('ALLERGY_LLM_TIMEOUT', '3'))
@@ -198,9 +205,13 @@ def ekstrak_pantangan_llm(teks: Optional[str], grup_valid: list[str], frasa_vali
         hasil = _validasi(json.loads(konten), set(grup_valid), set(frasa_valid))
     except Exception as e:
         print(f"[Parser LLM] Groq gagal, memakai parser regex saja ({type(e).__name__}: {str(e)[:120]}).")
+        if gagal is not None:
+            gagal.add(kunci_cache)
         return None
     if hasil is None:
         print("[Parser LLM] Output Groq tidak wajar (terlalu banyak grup), memakai parser regex saja.")
+        if gagal is not None:
+            gagal.add(kunci_cache)
         return None
     _CACHE[kunci_cache] = hasil
     return hasil
