@@ -111,7 +111,13 @@ ALCOHOL_EXCEPTIONS: list[str] = ['ginger ale', 'root beer', 'birch beer', 'non-a
 
 # Kata yang diabaikan di teks pantangan / alergi user
 PANTANGAN_STOPWORDS = {'tidak ada', 'lainnya', 'none', '-', 'no', 'tidak', 'ada', 'nihil', 'normal', 'aman',
-                       'tdk ada', 'gak ada', 'ga ada', 'no allergies', 'no allergy', 'tidak punya'}
+                       'tdk ada', 'gak ada', 'ga ada', 'no allergies', 'no allergy', 'tidak punya',
+                       # bahasa Inggris
+                       'nothing', 'nil', 'null', 'nope', 'n/a', 'na', 'not applicable', 'none known',
+                       'no known allergies', 'no known allergy', 'no food allergies', 'no food allergy',
+                       'no restriction', 'no restrictions', 'no dietary restriction', 'no dietary restrictions',
+                       'no food restriction', 'no food restrictions', 'not allergic', 'i have no allergies',
+                       'i have none', 'nothing to avoid', 'no preference', 'no preferences', 'other', 'others'}
 
 # Frasa pantangan umum yang bukan grup alergen -> kata kunci nama makanan (batas kata)
 PANTANGAN_PHRASES: dict[str, list[str]] = {

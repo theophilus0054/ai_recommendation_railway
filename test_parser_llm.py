@@ -153,7 +153,9 @@ class ParserLLMTest(unittest.TestCase):
         self.assertEqual(info_regex['frasa_tidak_cocok_produk'], ['ayam'])
 
     def test_input_kosong_atau_aneh_tanpa_groq(self):
-        for teks in ['', '   ', '-', '--', '???', '123', 'xx', 'tidak ada', 'Tidak ada alergi', 'nihil', 'no allergy']:
+        for teks in ['', '   ', '-', '--', '???', '123', 'xx', 'tidak ada', 'Tidak ada alergi', 'nihil', 'no allergy',
+                     'None', 'N/A', 'nothing', 'No known allergies', 'no food allergies', 'No dietary restrictions',
+                     'not allergic', 'nil']:
             with mock.patch.object(requests, 'post') as post:
                 self.assertEqual(self.buang(alergi=teks, pantangan=teks), [], teks)
                 info = model.ringkas_parser_alergi(self.df, teks, teks, True)
