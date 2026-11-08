@@ -143,13 +143,100 @@ class ParserLLMTest(unittest.TestCase):
     def test_meta_parser_alergi(self):
         with mock.patch.object(requests, 'post', return_value=respon_groq(kosong(kata_kunci_en=['chicken']))):
             info = model.ringkas_parser_alergi(self.df, 'alergi ayam', 'diabetes', True)
-        self.assertEqual(info['sumber'], 'regex+groq')
+        self.assertEqual(info['sumber'], 'regex+llm')
+        self.assertEqual(info['sumber_llm']['alergi'], 'groq')
         self.assertIn('chicken', info['tambahan_llm']['alergi']['kata_kunci_en'])
         self.assertIn('ayam', info['frasa_tidak_cocok_produk'])
         self.assertNotIn('chicken', info['frasa_tidak_cocok_produk'])
         info_regex = model.ringkas_parser_alergi(self.df, 'alergi ayam', '', False)
         self.assertEqual(info_regex['sumber'], 'regex')
         self.assertEqual(info_regex['frasa_tidak_cocok_produk'], ['ayam'])
+
+
+class HasilTersimpanTest(unittest.TestCase):
+    """Hasil parser dari tabel profil_kesehatan (parserAlergiTersimpan) dipakai tanpa memanggil Groq."""
+
+    def setUp(self):
+        parser_llm._CACHE.clear()
+        self.df = make_foods(FOODS)
+        self.gv, self.fv = model._grup_frasa_valid()
+
+    def simpanan(self, entri, versi=parser_llm.PARSER_VERSION):
+        return {'versi': versi, 'model': 'openai/gpt-oss-20b', 'entri': entri}
+
+    def dengan_simpanan(self, data):
+        token = parser_llm.pasang_hasil_tersimpan(parser_llm.muat_hasil_tersimpan(data, self.gv, self.fv))
+        self.addCleanup(parser_llm.lepas_hasil_tersimpan, token)
+
+    def buang(self, alergi='', pantangan=''):
+        aman = model.filter_dataset(self.df, pantangan, 'UMUM', alergi, use_llm_parser=True)
+        return sorted(set(self.df['name']) - set(aman['name']))
+
+    def test_teks_sama_tidak_memanggil_groq(self):
+        self.dengan_simpanan(self.simpanan({'Tidak  makan babi': kosong(frasa_khusus=['babi'])}))
+        with mock.patch.dict(os.environ, {'GROQ_API_KEY': 'kunci-uji'}), mock.patch.object(requests, 'post') as post:
+            self.assertEqual(self.buang(pantangan='tidak makan babi'), ['Bacon', 'Pork chop', 'Pork sausage'])
+            info = model.ringkas_parser_alergi(self.df, '', 'tidak makan babi', True)
+            post.assert_not_called()
+        self.assertEqual(info['sumber_llm']['pantangan'], 'tersimpan')
+
+    def test_tersimpan_berlaku_tanpa_api_key(self):
+        self.dengan_simpanan(self.simpanan({'alergi ayam': kosong(kata_kunci_en=['chicken'])}))
+        with mock.patch.dict(os.environ, {'GROQ_API_KEY': ''}):
+            self.assertEqual(self.buang(alergi='alergi ayam'), ['Chicken nuggets', 'Fresh Chicken Breast'])
+
+    def test_teks_berubah_memanggil_groq(self):
+        self.dengan_simpanan(self.simpanan({'alergi ayam': kosong(kata_kunci_en=['chicken'])}))
+        with mock.patch.dict(os.environ, {'GROQ_API_KEY': 'kunci-uji'}), \
+                mock.patch.object(requests, 'post', return_value=respon_groq(kosong(grup=['susu']))) as post:
+            self.assertEqual(self.buang(alergi='alergi laktosa'), ['Cheese', 'Milk'])
+            info = model.ringkas_parser_alergi(self.df, 'alergi laktosa', '', True)
+        self.assertEqual(post.call_count, 1)
+        self.assertEqual(info['sumber_llm']['alergi'], 'groq')
+        self.assertEqual(info['hasil_untuk_disimpan']['entri'], {'alergi laktosa': kosong(grup=['susu'])})
+
+    def test_versi_lain_diabaikan(self):
+        data = self.simpanan({'alergi ayam': kosong(kata_kunci_en=['chicken'])}, versi='parser-llm-v0')
+        self.assertEqual(parser_llm.muat_hasil_tersimpan(data, self.gv, self.fv), {})
+        for rusak in (None, 'teks', {'versi': parser_llm.PARSER_VERSION, 'entri': ['x']}):
+            self.assertEqual(parser_llm.muat_hasil_tersimpan(rusak, self.gv, self.fv), {})
+
+    def test_isi_tersimpan_divalidasi(self):
+        isi = kosong(grup=['susu', 'bukan_grup'], frasa_khusus=['palsu'], kata_kunci_en=['Rice; DROP', 'chicken'])
+        hasil = parser_llm.muat_hasil_tersimpan(self.simpanan({'x y': isi}), self.gv, self.fv)['x y']
+        self.assertEqual((hasil['grup'], hasil['frasa_khusus'], hasil['kata_kunci_en']), (['susu'], [], ['chicken']))
+        semua = sorted(k for k in model.ALLERGEN_KEYWORDS if k != 'seafood')
+        self.assertEqual(parser_llm.muat_hasil_tersimpan(self.simpanan({'abc': kosong(grup=semua)}), self.gv, self.fv), {})
+
+    def test_tidak_bocor_ke_request_lain(self):
+        token = parser_llm.pasang_hasil_tersimpan(parser_llm.muat_hasil_tersimpan(
+            self.simpanan({'alergi ayam': kosong(kata_kunci_en=['chicken'])}), self.gv, self.fv))
+        parser_llm.lepas_hasil_tersimpan(token)
+        with mock.patch.dict(os.environ, {'GROQ_API_KEY': ''}):
+            self.assertEqual(self.buang(alergi='alergi ayam'), [])
+        self.assertEqual(parser_llm._CACHE, {})
+
+    def test_bentuk_untuk_disimpan(self):
+        self.assertIsNone(parser_llm.bentuk_untuk_disimpan({}))
+        bentuk = parser_llm.bentuk_untuk_disimpan({'  Alergi   AYAM ': kosong(kata_kunci_en=['chicken'])})
+        self.assertEqual(bentuk['versi'], parser_llm.PARSER_VERSION)
+        self.assertEqual(list(bentuk['entri']), ['alergi ayam'])
+        # bisa dimuat kembali apa adanya
+        self.assertIn('alergi ayam', parser_llm.muat_hasil_tersimpan(bentuk, self.gv, self.fv))
+
+    def test_pipeline_memakai_parser_tersimpan(self):
+        from test_nutriscale_data import make_macro_result
+        profil = {'umur': 30, 'jenisKelamin': 'LAKI_LAKI', 'beratBadan': 70, 'tinggiBadan': 175,
+                  'kategoriKondisi': 'UMUM', 'nutrisi': make_macro_result(), 'alergi': 'alergi ayam',
+                  'asesmen': {'bmi': 22.86, 'haz': 0.0, 'whz': 0.0, 'statusNutrisi': 'Normal'},
+                  'parserAlergiTersimpan': self.simpanan({'alergi ayam': kosong(kata_kunci_en=['chicken'])})}
+        with mock.patch.dict(os.environ, {'GROQ_API_KEY': ''}), mock.patch.object(requests, 'post') as post:
+            out = model.jalankan_ai_rekomendasi(profil, self.df, {}, use_llm=False)
+            post.assert_not_called()
+        info = out['_meta']['parser_alergi']
+        self.assertEqual(info['sumber_llm'], {'alergi': 'tersimpan'})
+        self.assertEqual(info['hasil_untuk_disimpan']['entri']['alergi ayam']['kata_kunci_en'], ['chicken'])
+        self.assertEqual(parser_llm._TERSIMPAN.get(), {})
 
 
 if __name__ == '__main__':

@@ -27,7 +27,8 @@ from typing import Optional
 from dotenv import load_dotenv, find_dotenv
 
 from shared import KATEGORI_LIST, modul as modul_kategori, model_path as _model_path
-from shared.parser_llm import ekstrak_pantangan_llm, llm_parser_aktif
+from shared.parser_llm import (ekstrak_pantangan_llm, llm_parser_aktif, muat_hasil_tersimpan, pasang_hasil_tersimpan,
+                               lepas_hasil_tersimpan, ada_hasil_tersimpan, bentuk_untuk_disimpan)
 load_dotenv(find_dotenv(usecwd=True))
 
 warnings.filterwarnings('ignore')
@@ -998,10 +999,13 @@ def ambil_data_nutrisi_nutriscale(nutrisi: Optional[dict]) -> dict:
 # TIER 2: HARD SAFETY FILTERING (WAJIB SEBELUM RANKING)
 # ==========================================================================
 
+def _grup_frasa_valid() -> tuple[list[str], list[str]]:
+    return sorted(k for k in ALLERGEN_KEYWORDS if k != 'seafood'), sorted(PANTANGAN_PHRASES)
+
 def _ekstrak_llm(text: Optional[str]) -> Optional[dict]:
-    """Panggil parser LLM (Groq) dengan daftar grup & frasa yang diizinkan. None bila tidak aktif/gagal."""
-    grup_valid = sorted(k for k in ALLERGEN_KEYWORDS if k != 'seafood')
-    return ekstrak_pantangan_llm(text, grup_valid, sorted(PANTANGAN_PHRASES))
+    """Hasil parser LLM: dari hasil tersimpan (bila teks sama) atau Groq. None bila tidak aktif/gagal."""
+    grup_valid, frasa_valid = _grup_frasa_valid()
+    return ekstrak_pantangan_llm(text, grup_valid, frasa_valid)
 
 def _parse_restriction_text(text: Optional[str], use_llm: bool = False) -> tuple[set[str], set[str]]:
     """
@@ -1476,24 +1480,30 @@ def ringkas_parser_alergi(df: Optional[pd.DataFrame], alergi: str, pantangan: st
     Transparansi parser untuk _meta: sumber parser, tambahan dari LLM, dan frasa bebas yang
     TIDAK cocok dengan nama produk mana pun di katalog (artinya tidak memfilter apa pun).
     """
-    tambahan_llm, gagal_llm = {}, False
+    tambahan_llm, gagal_llm, sumber_llm, untuk_disimpan = {}, False, {}, {}
     if use_llm_parser:
         for nama, teks in (('alergi', alergi), ('pantangan', pantangan)):
             if not teks or str(teks).strip().lower() in PANTANGAN_STOPWORDS:
                 continue
+            dari_simpanan = ada_hasil_tersimpan(teks)
             hasil = _ekstrak_llm(teks)
             if hasil is None:
                 gagal_llm = True
+                sumber_llm[nama] = 'gagal (regex saja)'
             else:
                 tambahan_llm[nama] = hasil
+                untuk_disimpan[teks] = hasil
+                sumber_llm[nama] = 'tersimpan' if dari_simpanan else 'groq'
     names = df['name'].astype(str).str.lower().tolist() if df is not None and 'name' in df.columns else []
     _, free_a = _parse_restriction_text(alergi, use_llm_parser)
     _, free_p = _parse_restriction_text(pantangan, use_llm_parser)
     tidak_cocok = sorted(p for p in free_a | free_p
                          if not any(keyword_match(n, _kw_pattern(PANTANGAN_PHRASES.get(p, [p]))) for n in names))
-    sumber = 'regex+groq' if tambahan_llm else 'regex'
+    sumber = 'regex+llm' if tambahan_llm else 'regex'
     return {'sumber': sumber, 'llm_aktif': bool(use_llm_parser), 'llm_gagal': gagal_llm,
-            'tambahan_llm': tambahan_llm, 'frasa_tidak_cocok_produk': tidak_cocok}
+            'sumber_llm': sumber_llm, 'tambahan_llm': tambahan_llm, 'frasa_tidak_cocok_produk': tidak_cocok,
+            # Simpan ini di NutriScale (profil_kesehatan) lalu kirim balik sebagai `parserAlergiTersimpan`
+            'hasil_untuk_disimpan': bentuk_untuk_disimpan(untuk_disimpan)}
 
 def jalankan_ai_rekomendasi(
     profil_kesehatan_dict: dict,
@@ -1504,10 +1514,28 @@ def jalankan_ai_rekomendasi(
 ) -> dict:
     """
     use_llm        : narasi Gemini (Tier 3).
-    use_llm_parser : parser alergi/pantangan Groq (pembantu regex). None = aktif bila GROQ_API_KEY ada.
+    use_llm_parser : parser alergi/pantangan LLM (pembantu regex). None = aktif bila GROQ_API_KEY ada
+                     atau bila request membawa `parserAlergiTersimpan` yang valid.
+    Alur preprocessing sebelum LR: hasil tersimpan (bila teks sama) -> Groq (bila teks baru/berubah)
+    -> digabung dengan regex -> filter_dataset (buang produk konflik) -> ranking LR.
     """
+    grup_valid, frasa_valid = _grup_frasa_valid()
+    tersimpan = muat_hasil_tersimpan(profil_kesehatan_dict.get('parserAlergiTersimpan'), grup_valid, frasa_valid)
     if use_llm_parser is None:
-        use_llm_parser = llm_parser_aktif()
+        use_llm_parser = llm_parser_aktif() or bool(tersimpan)
+    token = pasang_hasil_tersimpan(tersimpan if use_llm_parser else {})
+    try:
+        return _jalankan_ai_rekomendasi_inti(profil_kesehatan_dict, dataset_dataframe, scaler_dict, use_llm, use_llm_parser)
+    finally:
+        lepas_hasil_tersimpan(token)
+
+def _jalankan_ai_rekomendasi_inti(
+    profil_kesehatan_dict: dict,
+    dataset_dataframe: pd.DataFrame,
+    scaler_dict: dict,
+    use_llm: bool,
+    use_llm_parser: bool,
+) -> dict:
     kategori = profil_kesehatan_dict.get('kategoriKondisi', 'UMUM')
 
     # Sanitasi pantangan medis & alergi (tanpa pemotongan panjang agar daftar alergi tidak hilang)

@@ -14,6 +14,12 @@
    GROQ_ALLERGY_MODEL      default 'openai/gpt-oss-20b'
    ALLERGY_LLM_TIMEOUT     detik, default 3
    ALLERGY_LLM_REASONING   reasoning_effort gpt-oss: low / medium / high, default 'medium'
+ Hasil tersimpan (tanpa memanggil Groq lagi):
+   AI engine mengembalikan `_meta.parser_alergi.hasil_untuk_disimpan`; NutriScale menyimpannya di
+   tabel profil_kesehatan dan mengirimnya kembali sebagai `parserAlergiTersimpan`. Bila teks alergi/
+   pantangan masih sama (dinormalisasi) dan versinya cocok, hasil itu dipakai langsung. Teks berubah
+   -> Groq dipanggil lagi. Hasil tersimpan hanya berlaku untuk request itu (ContextVar), tidak masuk
+   cache global, sehingga data satu user tidak memengaruhi user lain.
 ==========================================================================
 """
 
@@ -21,6 +27,8 @@ import os
 import re
 import json
 from typing import Optional
+
+from contextvars import ContextVar
 
 import requests
 
@@ -31,7 +39,56 @@ MAX_ITEMS = 30
 MAX_GRUP_WAJAR = 10   # lebih dari ini = output tidak wajar (mis. prompt injection "kembalikan semua grup") -> regex saja
 _KATA_KUNCI_VALID = re.compile(r"^[a-z][a-z \-']{1,38}[a-z]$")
 
+PARSER_VERSION = 'parser-llm-v1'   # naikkan bila prompt/daftar grup berubah agar hasil tersimpan lama diabaikan
+MAX_ENTRI_TERSIMPAN = 4
+
 _CACHE: dict[str, dict] = {}
+_TERSIMPAN: ContextVar[dict] = ContextVar('hasil_parser_tersimpan', default={})
+
+
+def normalisasi_teks(teks: Optional[str]) -> str:
+    """Kunci pembanding teks alergi/pantangan (huruf kecil, spasi dirapikan)."""
+    return re.sub(r'\s+', ' ', str(teks or '')).strip()[:MAX_INPUT_CHARS].lower()
+
+
+def muat_hasil_tersimpan(data, grup_valid: list[str], frasa_valid: list[str]) -> dict[str, dict]:
+    """
+    Validasi `parserAlergiTersimpan` dari NutriScale -> {teks_normal: hasil}. Data dengan versi berbeda,
+    bentuk salah, atau isi di luar daftar grup/frasa yang diizinkan diabaikan (dianggap tidak ada).
+    """
+    if not isinstance(data, dict) or data.get('versi') != PARSER_VERSION:
+        return {}
+    entri = data.get('entri')
+    if not isinstance(entri, dict):
+        return {}
+    hasil = {}
+    for teks, isi in list(entri.items())[:MAX_ENTRI_TERSIMPAN]:
+        kunci = normalisasi_teks(teks)
+        valid = _validasi(isi, set(grup_valid), set(frasa_valid)) if kunci else None
+        if valid is not None:
+            hasil[kunci] = valid
+    return hasil
+
+
+def pasang_hasil_tersimpan(hasil: dict[str, dict]):
+    """Aktifkan hasil tersimpan untuk request ini. Kembalikan token untuk lepas_hasil_tersimpan."""
+    return _TERSIMPAN.set(hasil)
+
+
+def lepas_hasil_tersimpan(token) -> None:
+    _TERSIMPAN.reset(token)
+
+
+def ada_hasil_tersimpan(teks: Optional[str]) -> bool:
+    return normalisasi_teks(teks) in _TERSIMPAN.get()
+
+
+def bentuk_untuk_disimpan(entri: dict[str, dict]) -> Optional[dict]:
+    """Bentuk JSON yang disimpan NutriScale (kolom profil_kesehatan) lalu dikirim balik di request berikutnya."""
+    if not entri:
+        return None
+    return {'versi': PARSER_VERSION, 'model': os.environ.get('GROQ_ALLERGY_MODEL', DEFAULT_MODEL),
+            'entri': {normalisasi_teks(t): h for t, h in entri.items()}}
 
 
 def llm_parser_aktif() -> bool:
@@ -103,7 +160,12 @@ def ekstrak_pantangan_llm(teks: Optional[str], grup_valid: list[str], frasa_vali
     Teks alergi/pantangan user -> {'grup', 'frasa_khusus', 'kata_kunci_en', 'tidak_dikenali'}.
     Mengembalikan None bila parser LLM tidak aktif atau gagal (pemanggil memakai regex saja).
     """
-    if not teks or not str(teks).strip() or not llm_parser_aktif():
+    if not teks or not str(teks).strip():
+        return None
+    tersimpan = _TERSIMPAN.get().get(normalisasi_teks(teks))
+    if tersimpan is not None:
+        return tersimpan
+    if not llm_parser_aktif():
         return None
     teks = re.sub(r'\s+', ' ', str(teks)).strip()[:MAX_INPUT_CHARS]
     model = os.environ.get('GROQ_ALLERGY_MODEL', DEFAULT_MODEL)

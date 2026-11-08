@@ -138,6 +138,9 @@ class ProfilKesehatanInput(BaseModel):
     pantanganMedis: Optional[str] = Field(default="")
     # Isian alergi dari form web (dipisah dari pantangan agar tidak hilang)
     alergi: Optional[str] = Field(default="")
+    # Hasil parser alergi LLM yang disimpan NutriScale dari `_meta.parser_alergi.hasil_untuk_disimpan`
+    # sebelumnya. Bila teks alergi/pantangan tidak berubah, Groq tidak dipanggil lagi.
+    parserAlergiTersimpan: Optional[dict] = Field(default=None)
     # Khusus PASCA_OPERASI: tahap diet dari dokter/ahli gizi & jenis operasi
     tahapDiet: Optional[str] = Field(default=None, pattern="^(cair|saring|lunak|biasa)$")
     jenisOperasi: Optional[str] = Field(default=None, pattern="^(saluran_cerna|ortopedi|caesar|umum)$")
