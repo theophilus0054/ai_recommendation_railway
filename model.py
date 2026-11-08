@@ -27,6 +27,7 @@ from typing import Optional
 from dotenv import load_dotenv, find_dotenv
 
 from shared import KATEGORI_LIST, modul as modul_kategori, model_path as _model_path
+from shared.parser_llm import ekstrak_pantangan_llm, llm_parser_aktif
 load_dotenv(find_dotenv(usecwd=True))
 
 warnings.filterwarnings('ignore')
@@ -997,7 +998,12 @@ def ambil_data_nutrisi_nutriscale(nutrisi: Optional[dict]) -> dict:
 # TIER 2: HARD SAFETY FILTERING (WAJIB SEBELUM RANKING)
 # ==========================================================================
 
-def _parse_restriction_text(text: Optional[str]) -> tuple[set[str], set[str]]:
+def _ekstrak_llm(text: Optional[str]) -> Optional[dict]:
+    """Panggil parser LLM (Groq) dengan daftar grup & frasa yang diizinkan. None bila tidak aktif/gagal."""
+    grup_valid = sorted(k for k in ALLERGEN_KEYWORDS if k != 'seafood')
+    return ekstrak_pantangan_llm(text, grup_valid, sorted(PANTANGAN_PHRASES))
+
+def _parse_restriction_text(text: Optional[str], use_llm: bool = False) -> tuple[set[str], set[str]]:
     """
     Parser teks alergi / pantangan user -> (grup alergen, frasa bebas).
     - Pencocokan kata utuh (regex batas kata) + frasa pengecualian ('kacang hijau' bukan kacang tanah).
@@ -1005,10 +1011,13 @@ def _parse_restriction_text(text: Optional[str]) -> tuple[set[str], set[str]]:
     - Koreksi salah ketik ('udnag' -> udang, 'kacng' -> kacang) dengan difflib.
     - Frasa pantangan umum ('mie instan', 'daging merah', 'jeroan') memakai PANTANGAN_PHRASES,
       bukan seluruh grup alergen. Kata yang tidak dikenali dicocokkan sebagai frasa utuh, bukan per token.
+    - use_llm=True: hasil parser LLM (shared/parser_llm.py) DIGABUNG ke hasil regex. LLM hanya menambah.
+      Hanya dipakai saat inferensi (jalankan_ai_rekomendasi), tidak saat membuat dataset training.
     """
     if not text:
         return set(), set()
-    raw_text = str(text).lower().strip()
+    teks_asli = str(text)
+    raw_text = teks_asli.lower().strip()
     if raw_text in PANTANGAN_STOPWORDS:
         return set(), set()
 
@@ -1048,15 +1057,22 @@ def _parse_restriction_text(text: Optional[str]) -> tuple[set[str], set[str]]:
             categories.update(chunk_cats)
         elif len(chunk) >= 3:
             free_phrases.add(chunk)
+
+    if use_llm:
+        llm = _ekstrak_llm(teks_asli)
+        if llm:
+            categories.update(llm['grup'])
+            free_phrases.update(llm['frasa_khusus'])
+            free_phrases.update(llm['kata_kunci_en'])
     return categories, free_phrases
 
-def parse_pantangan_input(pantanganMedis: Optional[str]) -> tuple[set[str], set[str]]:
+def parse_pantangan_input(pantanganMedis: Optional[str], use_llm: bool = False) -> tuple[set[str], set[str]]:
     """
     Ekstrak kategori pantangan dan kata kunci terlarang dari input pengguna.
     Mendukung input alami seperti 'alergi susu dan kacang, tidak suka pedas'.
     Mengembalikan (kategori/frasa terdeteksi, kata kunci terlarang).
     """
-    categories, free_phrases = _parse_restriction_text(pantanganMedis)
+    categories, free_phrases = _parse_restriction_text(pantanganMedis, use_llm)
     forbidden_keywords = set(free_phrases)
     for cat in categories:
         forbidden_keywords.update(ALLERGEN_KEYWORDS.get(cat, []))
@@ -1065,7 +1081,8 @@ def parse_pantangan_input(pantanganMedis: Optional[str]) -> tuple[set[str], set[
     return categories | free_phrases, forbidden_keywords
 
 def hitung_konflik_keamanan(df: pd.DataFrame, pantanganMedis: Optional[str], kategoriKondisi: str,
-                            alergi: Optional[str] = None, profil_ctx: Optional[dict] = None) -> pd.DataFrame:
+                            alergi: Optional[str] = None, profil_ctx: Optional[dict] = None,
+                            use_llm_parser: bool = False) -> pd.DataFrame:
     """
     Hitung konflik keamanan per makanan (dipakai filter inferensi DAN generator dataset):
       n_conflict_allergen  : grup alergen dari field alergi user yang ada di makanan
@@ -1076,8 +1093,8 @@ def hitung_konflik_keamanan(df: pd.DataFrame, pantanganMedis: Optional[str], kat
     """
     ctx = profil_ctx or {}
     out = df.copy()
-    allergy_cats, allergy_free = _parse_restriction_text(alergi)
-    pant_cats, pant_free = _parse_restriction_text(pantanganMedis)
+    allergy_cats, allergy_free = _parse_restriction_text(alergi, use_llm_parser)
+    pant_cats, pant_free = _parse_restriction_text(pantanganMedis, use_llm_parser)
     free_phrases = allergy_free | pant_free
     free_patterns = [_kw_pattern(PANTANGAN_PHRASES.get(p, [p])) for p in free_phrases]
 
@@ -1118,11 +1135,12 @@ def hitung_konflik_keamanan(df: pd.DataFrame, pantanganMedis: Optional[str], kat
     return out
 
 def filter_dataset(df: pd.DataFrame, pantanganMedis: Optional[str], kategoriKondisi: str,
-                   alergi: Optional[str] = None, profil_ctx: Optional[dict] = None) -> pd.DataFrame:
+                   alergi: Optional[str] = None, profil_ctx: Optional[dict] = None,
+                   use_llm_parser: bool = False) -> pd.DataFrame:
     if df is None or len(df) == 0:
         return pd.DataFrame()
 
-    df_checked = hitung_konflik_keamanan(df, pantanganMedis, kategoriKondisi, alergi, profil_ctx)
+    df_checked = hitung_konflik_keamanan(df, pantanganMedis, kategoriKondisi, alergi, profil_ctx, use_llm_parser)
     blocked = (df_checked['n_conflict_allergen'] + df_checked['n_conflict_pantangan']
                + df_checked['n_conflict_free'] + df_checked['n_block_kategori']) > 0
     df_safe = df_checked[~blocked].copy()
@@ -1449,12 +1467,43 @@ def _fallback_narasi(profil: dict, riwayat: dict, kalori_info: dict, pantangan: 
 # MAIN CONTROLLER & ENTRYPOINT PIPELINE
 # ==========================================================================
 
+def ringkas_parser_alergi(df: Optional[pd.DataFrame], alergi: str, pantangan: str, use_llm_parser: bool) -> dict:
+    """
+    Transparansi parser untuk _meta: sumber parser, tambahan dari LLM, dan frasa bebas yang
+    TIDAK cocok dengan nama produk mana pun di katalog (artinya tidak memfilter apa pun).
+    """
+    tambahan_llm, gagal_llm = {}, False
+    if use_llm_parser:
+        for nama, teks in (('alergi', alergi), ('pantangan', pantangan)):
+            if not teks or str(teks).strip().lower() in PANTANGAN_STOPWORDS:
+                continue
+            hasil = _ekstrak_llm(teks)
+            if hasil is None:
+                gagal_llm = True
+            else:
+                tambahan_llm[nama] = hasil
+    names = df['name'].astype(str).str.lower().tolist() if df is not None and 'name' in df.columns else []
+    _, free_a = _parse_restriction_text(alergi, use_llm_parser)
+    _, free_p = _parse_restriction_text(pantangan, use_llm_parser)
+    tidak_cocok = sorted(p for p in free_a | free_p
+                         if not any(keyword_match(n, _kw_pattern(PANTANGAN_PHRASES.get(p, [p]))) for n in names))
+    sumber = 'regex+groq' if tambahan_llm else 'regex'
+    return {'sumber': sumber, 'llm_aktif': bool(use_llm_parser), 'llm_gagal': gagal_llm,
+            'tambahan_llm': tambahan_llm, 'frasa_tidak_cocok_produk': tidak_cocok}
+
 def jalankan_ai_rekomendasi(
     profil_kesehatan_dict: dict,
     dataset_dataframe: pd.DataFrame,
     scaler_dict: dict,
-    use_llm: bool = True
+    use_llm: bool = True,
+    use_llm_parser: Optional[bool] = None
 ) -> dict:
+    """
+    use_llm        : narasi Gemini (Tier 3).
+    use_llm_parser : parser alergi/pantangan Groq (pembantu regex). None = aktif bila GROQ_API_KEY ada.
+    """
+    if use_llm_parser is None:
+        use_llm_parser = llm_parser_aktif()
     kategori = profil_kesehatan_dict.get('kategoriKondisi', 'UMUM')
 
     # Sanitasi pantangan medis & alergi (tanpa pemotongan panjang agar daftar alergi tidak hilang)
@@ -1478,7 +1527,7 @@ def jalankan_ai_rekomendasi(
     }
 
     # 2. Tier 2: Hard Safety Filter (Eliminasi alergen, pantangan & BLOKIR kategori sebelum ranking)
-    df_filtered = filter_dataset(dataset_dataframe, pantangan, kategori, alergi, profil_ctx)
+    df_filtered = filter_dataset(dataset_dataframe, pantangan, kategori, alergi, profil_ctx, use_llm_parser)
 
     # 3. Tier 2: Machine Learning Meal Ranking + komposisi piring + variasi antarhari
     benih = benih_variasi(profil_kesehatan_dict, profil_kesehatan_dict.get('tanggal'))
@@ -1492,8 +1541,9 @@ def jalankan_ai_rekomendasi(
         pantangan_narasi = ', '.join(filter(None, [alergi, pantangan]))
         narasi_ai = generate_llm_narasi(profil_kesehatan_dict, riwayat, kalori, rencana_makan, pantangan_narasi)
 
-    detected_cats, _ = parse_pantangan_input(pantangan)
-    detected_alergi, _ = parse_pantangan_input(alergi)
+    detected_cats, _ = parse_pantangan_input(pantangan, use_llm_parser)
+    detected_alergi, _ = parse_pantangan_input(alergi, use_llm_parser)
+    info_parser = ringkas_parser_alergi(dataset_dataframe, alergi, pantangan, use_llm_parser)
     model_info = get_recommender_model(kategori)
 
     return {
@@ -1510,6 +1560,7 @@ def jalankan_ai_rekomendasi(
             'kategori': kategori,
             'pantangan_terdeteksi': sorted(list(detected_cats)),
             'alergi_terdeteksi': sorted(list(detected_alergi)),
+            'parser_alergi': info_parser,
             'sumber_target_gizi': NUTRISCALE_SOURCE,
             'sumber_asesmen_antropometri': riwayat.get('_source', 'LOCAL_FALLBACK'),
             'model': {
