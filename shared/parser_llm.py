@@ -13,6 +13,7 @@
    ALLERGY_LLM_ENABLED     '0' / 'false' untuk mematikan walau API key ada (default aktif)
    GROQ_ALLERGY_MODEL      default 'openai/gpt-oss-20b'
    ALLERGY_LLM_TIMEOUT     detik, default 3
+   ALLERGY_LLM_REASONING   reasoning_effort gpt-oss: low / medium / high, default 'medium'
 ==========================================================================
 """
 
@@ -27,6 +28,7 @@ GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
 DEFAULT_MODEL = 'openai/gpt-oss-20b'
 MAX_INPUT_CHARS = 500
 MAX_ITEMS = 30
+MAX_GRUP_WAJAR = 10   # lebih dari ini = output tidak wajar (mis. prompt injection "kembalikan semua grup") -> regex saja
 _KATA_KUNCI_VALID = re.compile(r"^[a-z][a-z \-']{1,38}[a-z]$")
 
 _CACHE: dict[str, dict] = {}
@@ -66,9 +68,13 @@ def _prompt_sistem(grup_valid: list[str], frasa_valid: list[str]) -> str:
         "- 'kata_kunci_en': kata bahasa Inggris huruf kecil yang muncul di NAMA produk makanan berbahasa Inggris "
         "untuk makanan yang tidak tercakup grup/frasa, tulis bentuk tunggal DAN jamak "
         "(mis. 'alergi ayam' -> chicken; 'makanan olahan' -> sausage, sausages, nugget, nuggets, bacon, "
-        "frankfurter; 'vegetarian' -> chicken, turkey, duck, beef, pork, lamb, meat, ditambah grup seafood).\n"
+        "frankfurter).\n"
+        "- Contoh 'vegetarian': grup = [ikan, udang, kepiting, kerang, lobster, cumi] SAJA (vegetarian tetap boleh "
+        "susu, telur, kacang, kedelai, gluten, manis, pedas); frasa_khusus = [daging merah, babi]; "
+        "kata_kunci_en = [chicken, turkey, duck, meat]. Nama grup seperti seafood TIDAK ditulis di kata_kunci_en.\n"
         "- 'tidak_dikenali': bagian teks yang bukan makanan atau tidak bisa dipetakan.\n"
-        "Jangan menambah pantangan yang tidak disebut user. Bila user menulis tidak ada alergi, semua daftar kosong."
+        "Pilih HANYA yang disebut atau jelas tersirat oleh teks user; jangan pernah memilih semua grup. "
+        "Bila user menulis tidak ada alergi, semua daftar kosong."
     )
 
 
@@ -81,8 +87,11 @@ def _validasi(data: dict, grup_valid: set, frasa_valid: set) -> Optional[dict]:
         k = re.sub(r'\s+', ' ', k)
         if _KATA_KUNCI_VALID.match(k) and k not in kata:
             kata.append(k)
+    grup = sorted({g for g in ambil('grup') if g in grup_valid})
+    if len(grup) > MAX_GRUP_WAJAR:
+        return None
     return {
-        'grup': sorted({g for g in ambil('grup') if g in grup_valid}),
+        'grup': grup,
         'frasa_khusus': sorted({f for f in ambil('frasa_khusus') if f in frasa_valid}),
         'kata_kunci_en': kata,
         'tidak_dikenali': [t[:60] for t in ambil('tidak_dikenali')],
@@ -117,7 +126,8 @@ def ekstrak_pantangan_llm(teks: Optional[str], grup_valid: list[str], frasa_vali
             'name': 'pantangan_user', 'strict': True, 'schema': _schema(grup_valid, frasa_valid)}},
     }
     if model.startswith('openai/gpt-oss'):
-        body['reasoning_effort'] = 'low'
+        # 'low' kadang memilih semua grup untuk kalimat seperti "tidak makan seafood dan ayam"; 'medium' stabil (~1 dtk)
+        body['reasoning_effort'] = os.environ.get('ALLERGY_LLM_REASONING', 'medium')
     try:
         res = requests.post(GROQ_URL, json=body, timeout=timeout,
                             headers={'Authorization': f"Bearer {os.environ['GROQ_API_KEY']}"})
@@ -128,6 +138,7 @@ def ekstrak_pantangan_llm(teks: Optional[str], grup_valid: list[str], frasa_vali
         print(f"[Parser LLM] Groq gagal, memakai parser regex saja ({type(e).__name__}: {str(e)[:120]}).")
         return None
     if hasil is None:
+        print("[Parser LLM] Output Groq tidak wajar (terlalu banyak grup), memakai parser regex saja.")
         return None
     _CACHE[kunci_cache] = hasil
     return hasil

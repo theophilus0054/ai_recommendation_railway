@@ -1063,7 +1063,11 @@ def _parse_restriction_text(text: Optional[str], use_llm: bool = False) -> tuple
         if llm:
             categories.update(llm['grup'])
             free_phrases.update(llm['frasa_khusus'])
-            free_phrases.update(llm['kata_kunci_en'])
+            for kata in llm['kata_kunci_en']:
+                if kata in ALLERGEN_UMBRELLA:          # 'seafood' / 'shellfish' -> grup bakunya
+                    categories.update(ALLERGEN_UMBRELLA[kata])
+                else:
+                    free_phrases.add(kata)
     return categories, free_phrases
 
 def parse_pantangan_input(pantanganMedis: Optional[str], use_llm: bool = False) -> tuple[set[str], set[str]]:
