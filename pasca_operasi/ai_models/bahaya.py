@@ -7,7 +7,8 @@ BAHAYA = {
     },
     'batasi': {
         'GORENGAN': ['fried', 'deep-fried', 'battered', 'breaded', 'crispy', 'goreng'],
-        'OLAHAN':   ['fast foods', 'frankfurter', 'sausage', 'bacon', 'hot dog', 'instant', 'luncheon meat'],
+        'OLAHAN':   ['fast foods', 'frankfurter', 'sausage', 'bacon', 'hot dog', 'instant', 'luncheon meat',
+                    'chips', 'crisps', 'keripik'],
         'KAFEIN':   ['coffee', 'espresso', 'energy drink', 'kopi'],
     },
 }
