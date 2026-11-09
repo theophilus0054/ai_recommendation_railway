@@ -15,6 +15,7 @@ import os
 import unittest
 from unittest import mock
 
+import pandas as pd
 import requests
 
 import model
@@ -209,6 +210,25 @@ class ParserLLMTest(unittest.TestCase):
         # makanan manis tertentu hanya membuang produk bernama itu, bukan semua yang bergula tinggi
         self.assertEqual(buang('tidak makan cokelat'), ['Dark Chocolate'])
         self.assertEqual(buang('rendah gula'), ['Ajwa Dates', 'Dark Chocolate', 'Honey'])
+
+    def test_rendah_karbo_preferensi_dan_kategori(self):
+        self.assertEqual(model._parse_restriction_text('diet rendah karbohidrat'), ({'rendah_karbo'}, set()))
+        df = pd.DataFrame({'name': ['Organic Brown Rice', 'Honey', 'Shirataki Noodles', 'Broccoli'],
+                           'food_type': ['carb', 'sweetener', 'carb', 'vegetable']})
+        aman = set(model.filter_dataset(df, 'low carb', 'UMUM', '')['name'])
+        self.assertEqual(aman, {'Shirataki Noodles', 'Broccoli'})
+        for kat in ('IBU_HAMIL', 'ANAK_BALITA'):
+            self.assertIn('Organic Brown Rice', set(model.filter_dataset(df, 'keto', kat, '')['name']))
+        self.assertIn('bukan anjuran medis', model.catatan_pantangan({'rendah_karbo'}, 'UMUM')[0])
+        self.assertIn('tidak diterapkan', model.catatan_pantangan({'rendah_karbo'}, 'IBU_HAMIL')[0])
+        self.assertEqual(model.catatan_pantangan({'susu'}, 'UMUM'), [])
+
+    def test_catatan_selalu_ada_di_narasi(self):
+        with mock.patch.dict(os.environ, {}, clear=False):
+            os.environ.pop('GEMINI_API_KEY', None)
+            narasi = model.generate_llm_narasi({'kategoriKondisi': 'UMUM'}, {}, {}, {}, 'low carb', catatan=['CATATAN-X'])
+        self.assertTrue(narasi.endswith('CATATAN-X'))
+        self.assertEqual(model._tempel_catatan('a CATATAN-X b', ['CATATAN-X']), 'a CATATAN-X b')
 
     def test_sinonim_medis_tanpa_llm(self):
         self.assertEqual(model._parse_restriction_text('diabetes'), ({'manis'}, set()))

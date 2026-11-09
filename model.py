@@ -169,7 +169,26 @@ ATURAN_GIZI: dict[str, tuple[str, float]] = {
     'rendah_lemak': ('fat', 17.5),
     'kolesterol':   ('fat', 17.5),   # sementara: lemak jenuh belum ada di data produk (NHS: jenuh > 5 g)
 }
-GRUP_GIZI = ['rendah_garam', 'rendah_lemak', 'kolesterol']   # grup tanpa kata kunci nama produk
+GRUP_GIZI = ['rendah_garam', 'rendah_lemak', 'kolesterol', 'rendah_karbo']   # grup tanpa kata kunci nama produk
+
+# Rendah karbo: tidak ada ambang resmi per produk, dan nilai_gizi katalog bercampur per 100 g / per sajian,
+# jadi dipakai foodType. Ini PREFERENSI user (definisi diet rendah karbo di literatur, < 130 g/hari),
+# bukan anjuran medis, dan belum divalidasi ahli gizi.
+ATURAN_FOODTYPE: dict[str, set[str]] = {'rendah_karbo': {'carb', 'sweetener'}}
+PENGECUALIAN_FOODTYPE: dict[str, list[str]] = {'rendah_karbo': ['shirataki', 'konjac', 'konnyaku']}
+# Preferensi diet yang TIDAK diterapkan untuk kategori ini (tidak dianjurkan tanpa pengawasan).
+PREFERENSI_TANPA_PENGAWASAN = {'rendah_karbo'}
+KATEGORI_TANPA_PREFERENSI_DIET = {'IBU_HAMIL', 'ANAK_BALITA'}
+CATATAN_PREFERENSI = {
+    'rendah_karbo': ('Rendah karbohidrat diperlakukan sebagai preferensi Anda, bukan anjuran medis: '
+                     'makanan pokok berkarbohidrat (nasi, roti, oat, quinoa) dan pemanis tidak direkomendasikan. '
+                     'Aturan ini mengikuti definisi diet rendah karbohidrat di literatur dan belum divalidasi '
+                     'ahli gizi. Konsultasikan dengan dokter atau ahli gizi, terutama bila Anda memakai obat diabetes.'),
+}
+CATATAN_PREFERENSI_DIABAIKAN = ('Pantangan rendah karbohidrat tidak diterapkan untuk kategori {kategori}, karena diet '
+                                'rendah karbohidrat tidak dianjurkan tanpa pengawasan untuk {siapa}. Konsultasikan '
+                                'kebutuhan karbohidrat dengan dokter atau ahli gizi.')
+_SIAPA_KATEGORI = {'IBU_HAMIL': 'ibu hamil', 'ANAK_BALITA': 'anak balita'}
 
 # Kata di teks user (kata utuh) -> grup gizi ('grup') atau frasa khusus ('frasa')
 KATA_KONDISI: dict[str, tuple[str, str, list[str]]] = {
@@ -182,6 +201,8 @@ KATA_KONDISI: dict[str, tuple[str, str, list[str]]] = {
     'diabetes':     ('grup', 'manis', ['diabetes', 'diabetes melitus', 'diabetes mellitus', 'kencing manis',
                                        'gula darah', 'diabetic', 'blood sugar']),
     'laktosa':      ('grup', 'susu', ['laktosa', 'intoleransi laktosa', 'lactose', 'lactose intolerance']),
+    'rendah_karbo': ('grup', 'rendah_karbo', ['karbo', 'karbohidrat', 'rendah karbo', 'low carb', 'low-carb',
+                                              'carb', 'carbs', 'carbohydrate', 'keto', 'ketogenic', 'ketogenik']),
     'celiac':       ('grup', 'gluten', ['celiac', 'coeliac', 'seliak', 'penyakit celiac', 'celiac disease']),
 }
 
@@ -1188,6 +1209,9 @@ def hitung_konflik_keamanan(df: pd.DataFrame, pantanganMedis: Optional[str], kat
     out = df.copy()
     allergy_cats, allergy_free = _parse_restriction_text(alergi, use_llm_parser)
     pant_cats, pant_free = _parse_restriction_text(pantanganMedis, use_llm_parser)
+    if kategoriKondisi in KATEGORI_TANPA_PREFERENSI_DIET:
+        allergy_cats = allergy_cats - PREFERENSI_TANPA_PENGAWASAN
+        pant_cats = pant_cats - PREFERENSI_TANPA_PENGAWASAN
     free_phrases = allergy_free | pant_free
     free_patterns = [_kw_pattern(PANTANGAN_PHRASES.get(p, [p])) for p in free_phrases]
 
@@ -1196,6 +1220,8 @@ def hitung_konflik_keamanan(df: pd.DataFrame, pantanganMedis: Optional[str], kat
     gizi = {kol: (out[kol].astype(float).tolist() if kol in out.columns else [0.0] * len(out))
             for kol in {kol for kol, _ in ATURAN_GIZI.values()}}
     tekstur = out['tekstur'].tolist() if 'tekstur' in out.columns else ['biasa'] * len(out)
+    food_types = out['food_type'].tolist() if 'food_type' in out.columns else [''] * len(out)
+    pola_kecuali = {g: _kw_pattern(kws) for g, kws in PENGECUALIAN_FOODTYPE.items()}
     tahap = TEKSTUR_ORDINAL.get(str(ctx.get('tahapDiet') or 'biasa').lower(), 3)
 
     n_alg, n_pant, n_free, n_blk, n_lim, blk_codes, lim_codes = [], [], [], [], [], [], []
@@ -1205,6 +1231,9 @@ def hitung_konflik_keamanan(df: pd.DataFrame, pantanganMedis: Optional[str], kat
         # pantangan (mis. user menulis 'gula' di kolom alergi).
         for grup, (kol, ambang) in ATURAN_GIZI.items():
             if gizi[kol][i] > ambang:
+                food_cats.add(grup)
+        for grup, tipe in ATURAN_FOODTYPE.items():
+            if food_types[i] in tipe and not (grup in pola_kecuali and keyword_match(name, pola_kecuali[grup])):
                 food_cats.add(grup)
         n_alg.append(len(allergy_cats & food_cats))
         n_pant.append(len(pant_cats & food_cats))
@@ -1471,12 +1500,31 @@ def _get_gemini_client():
     except ImportError:
         raise ImportError("google-genai belum terinstall. Jalankan: pip install google-genai")
 
+def catatan_pantangan(kategori_terdeteksi: set, kategoriKondisi: str) -> list[str]:
+    """Keterangan wajib untuk pantangan yang berupa preferensi diet (mis. rendah karbo)."""
+    catatan = []
+    for grup in sorted(PREFERENSI_TANPA_PENGAWASAN & set(kategori_terdeteksi)):
+        if kategoriKondisi in KATEGORI_TANPA_PREFERENSI_DIET:
+            catatan.append(CATATAN_PREFERENSI_DIABAIKAN.format(
+                kategori=kategoriKondisi, siapa=_SIAPA_KATEGORI.get(kategoriKondisi, kategoriKondisi)))
+        else:
+            catatan.append(CATATAN_PREFERENSI[grup])
+    return catatan
+
+def _tempel_catatan(narasi: str, catatan: Optional[list]) -> str:
+    """Pastikan setiap catatan wajib muncul utuh di narasi (Gemini bisa saja melewatkannya)."""
+    for c in catatan or []:
+        if c not in narasi:
+            narasi = f"{narasi.rstrip()}\n\n{c}"
+    return narasi
+
 def generate_llm_narasi(
     profil: dict,
     riwayat_analisis: dict,
     kalori_info: dict,
     meal_plan_summary: dict,
-    pantangan: str
+    pantangan: str,
+    catatan: Optional[list] = None,
 ) -> str:
     kategori = profil.get('kategoriKondisi', 'UMUM')
     status   = riwayat_analisis.get('statusNutrisi', 'Normal')
@@ -1516,6 +1564,7 @@ SUSUN DALAM 3 PARAGRAF RINGKAS (~150 KATA):
 1. Ringkasan status gizi dan target energi harian pengguna.
 2. Penjelasan makanan terpilih serta alternatif masakan pasar tradisional Nusantara yang setara gizinya.
 3. Tips praktis pola makan sehat spesifik kondisi {kategori} dan anjuran konsultasi dokter/ahli gizi untuk pemantauan lebih lanjut.
+{("" if not catatan else chr(10) + "CATATAN WAJIB: tutup paragraf 3 dengan kalimat berikut PERSIS seperti tertulis, tanpa diubah:" + chr(10) + chr(10).join(catatan))}
 """.strip()
 
     try:
@@ -1533,10 +1582,10 @@ SUSUN DALAM 3 PARAGRAF RINGKAS (~150 KATA):
             contents=prompt,
             config=config
         )
-        return resp.text.strip()
+        return _tempel_catatan(resp.text.strip(), catatan)
     except Exception as e:
         print(f"[Tier 3 Gemini] Narasi LLM beralih ke fallback template ({e}).")
-        return _fallback_narasi(profil, riwayat_analisis, kalori_info, pantangan)
+        return _tempel_catatan(_fallback_narasi(profil, riwayat_analisis, kalori_info, pantangan), catatan)
 
 def _fallback_narasi(profil: dict, riwayat: dict, kalori_info: dict, pantangan: str) -> str:
     status  = riwayat.get('statusNutrisi', 'Normal')
@@ -1652,14 +1701,16 @@ def _jalankan_ai_rekomendasi_inti(
     rencana_makan = build_meal_plan(kalori, df_filtered, kategori, scaler_dict, profil_ctx,
                                     rng=np.random.default_rng(benih), riwayat_makanan=riwayat_makanan)
 
+    detected_cats, _ = parse_pantangan_input(pantangan, use_llm_parser)
+    detected_alergi, _ = parse_pantangan_input(alergi, use_llm_parser)
+    catatan = catatan_pantangan(detected_cats | detected_alergi, kategori)
+
     # 4. Tier 3: Gemini LLM Narasi (penjelasan tanpa mengubah angka)
     narasi_ai = ""
     if use_llm:
         pantangan_narasi = ', '.join(filter(None, [alergi, pantangan]))
-        narasi_ai = generate_llm_narasi(profil_kesehatan_dict, riwayat, kalori, rencana_makan, pantangan_narasi)
-
-    detected_cats, _ = parse_pantangan_input(pantangan, use_llm_parser)
-    detected_alergi, _ = parse_pantangan_input(alergi, use_llm_parser)
+        narasi_ai = generate_llm_narasi(profil_kesehatan_dict, riwayat, kalori, rencana_makan, pantangan_narasi,
+                                        catatan=catatan)
     info_parser = ringkas_parser_alergi(dataset_dataframe, alergi, pantangan, use_llm_parser)
     model_info = get_recommender_model(kategori)
 
@@ -1678,6 +1729,7 @@ def _jalankan_ai_rekomendasi_inti(
             'pantangan_terdeteksi': sorted(list(detected_cats)),
             'alergi_terdeteksi': sorted(list(detected_alergi)),
             'parser_alergi': info_parser,
+            'catatan_pantangan': catatan,
             'sumber_target_gizi': NUTRISCALE_SOURCE,
             'sumber_asesmen_antropometri': riwayat.get('_source', 'LOCAL_FALLBACK'),
             'model': {
