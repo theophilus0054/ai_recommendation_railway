@@ -56,10 +56,10 @@ class ParserLLMTest(unittest.TestCase):
             self.assertEqual(self.buang(pantangan='tidak makan babi'), ['Bacon', 'Pork chop', 'Pork sausage'])
         # sejak parser-llm-v2 regex juga mengenali 'tidak makan babi' (kata pengantar 'tidak makan' dibuang)
         self.assertEqual(self.buang(pantangan='tidak makan babi', use_llm=False), ['Bacon', 'Pork chop', 'Pork sausage'])
-        # bahan yang hanya bisa dipahami LLM: regex saja tidak membuang apa pun
+        # ejaan daerah yang hanya bisa dipahami LLM ('apokat'): regex saja tidak membuang apa pun
         with mock.patch.object(requests, 'post', return_value=respon_groq(kosong(kata_kunci_en=['avocado']))):
-            self.assertEqual(self.buang(alergi='alergi alpukat'), ['Avocado'])
-        self.assertEqual(self.buang(alergi='alergi alpukat', use_llm=False), [])
+            self.assertEqual(self.buang(alergi='alergi apokat'), ['Avocado'])
+        self.assertEqual(self.buang(alergi='alergi apokat', use_llm=False), [])
 
     def test_alergi_ayam_jadi_chicken(self):
         with mock.patch.object(requests, 'post', return_value=respon_groq(kosong(kata_kunci_en=['chicken']))):
@@ -148,15 +148,15 @@ class ParserLLMTest(unittest.TestCase):
 
     def test_meta_parser_alergi(self):
         with mock.patch.object(requests, 'post', return_value=respon_groq(kosong(kata_kunci_en=['avocado']))):
-            info = model.ringkas_parser_alergi(self.df, 'alergi alpukat', 'diabetes', True)
+            info = model.ringkas_parser_alergi(self.df, 'alergi apokat', 'diabetes', True)
         self.assertEqual(info['sumber'], 'regex+llm')
         self.assertEqual(info['sumber_llm']['alergi'], 'groq')
         self.assertIn('avocado', info['tambahan_llm']['alergi']['kata_kunci_en'])
-        self.assertIn('alpukat', info['frasa_tidak_cocok_produk'])
+        self.assertIn('apokat', info['frasa_tidak_cocok_produk'])
         self.assertNotIn('avocado', info['frasa_tidak_cocok_produk'])
-        info_regex = model.ringkas_parser_alergi(self.df, 'alergi alpukat', '', False)
+        info_regex = model.ringkas_parser_alergi(self.df, 'alergi apokat', '', False)
         self.assertEqual(info_regex['sumber'], 'regex')
-        self.assertEqual(info_regex['frasa_tidak_cocok_produk'], ['alpukat'])
+        self.assertEqual(info_regex['frasa_tidak_cocok_produk'], ['apokat'])
 
     def test_input_kosong_atau_aneh_tanpa_groq(self):
         for teks in ['', '   ', '-', '--', '???', '123', 'xx', 'tidak ada', 'Tidak ada alergi', 'nihil', 'no allergy',
@@ -229,6 +229,41 @@ class ParserLLMTest(unittest.TestCase):
             narasi = model.generate_llm_narasi({'kategoriKondisi': 'UMUM'}, {}, {}, {}, 'low carb', catatan=['CATATAN-X'])
         self.assertTrue(narasi.endswith('CATATAN-X'))
         self.assertEqual(model._tempel_catatan('a CATATAN-X b', ['CATATAN-X']), 'a CATATAN-X b')
+
+    def test_nama_bahan_indonesia_tanpa_llm(self):
+        # katalog berbahasa Inggris: 'nasi' harus cocok dengan 'Rice' walau Groq mati
+        df = pd.DataFrame({'name': ['Organic Brown Rice', 'Sweet Potato', 'Baked Potato Chips', 'Mung Beans',
+                                    'Kidney Beans', 'Avocado', 'Fresh Chicken Breast', 'Broccoli']})
+        def buang(teks):
+            return sorted(set(df['name']) - set(model.filter_dataset(df, '', 'UMUM', teks)['name']))
+        self.assertEqual(buang('nasi'), ['Organic Brown Rice'])
+        self.assertEqual(buang('tidak makan nasi'), ['Organic Brown Rice'])
+        self.assertEqual(buang('beras'), ['Organic Brown Rice'])
+        self.assertEqual(buang('kentang'), ['Baked Potato Chips'])      # bukan Sweet Potato
+        self.assertEqual(buang('ubi jalar'), ['Sweet Potato'])
+        self.assertEqual(buang('kacang hijau'), ['Mung Beans'])
+        self.assertEqual(buang('kacang merah'), ['Kidney Beans'])
+        self.assertEqual(buang('alpukat'), ['Avocado'])
+        self.assertEqual(buang('dada ayam'), ['Fresh Chicken Breast'])
+
+    def test_nama_produk_inggris_tanpa_salah_tebak(self):
+        df = pd.DataFrame({'name': ['Mustard Greens', 'Eggs', 'Lentils', 'Shirataki Noodles', 'Whole Wheat Bread']})
+        def buang(teks):
+            return sorted(set(df['name']) - set(model.filter_dataset(df, '', 'UMUM', teks)['name']))
+        self.assertEqual(buang('mustard greens'), ['Mustard Greens'])   # bukan 'custard' (telur)
+        self.assertEqual(buang('lentil'), ['Lentils'])                  # bentuk jamak
+        self.assertEqual(buang('gluten'), ['Whole Wheat Bread'])        # shirataki bebas gluten
+        self.assertEqual(buang('telor'), ['Eggs'])                      # koreksi salah ketik tetap jalan
+
+    def test_kacang_polos_ikut_membuang_polong(self):
+        self.assertEqual(model._parse_restriction_text('alergi kacang'), ({'kacang'}, {'polong'}))
+        self.assertEqual(model._parse_restriction_text('kacang-kacangan'), ({'kacang'}, {'polong'}))
+        self.assertEqual(model._parse_restriction_text('kacang tanah'), ({'kacang'}, set()))
+        self.assertEqual(model._parse_restriction_text('peanut allergy'), ({'kacang'}, set()))
+        self.assertEqual(model._parse_restriction_text('alergi kacang tapi boleh kacang hijau'), ({'kacang'}, set()))
+        df = pd.DataFrame({'name': ['Mung Beans', 'Lentils', 'Peanut Butter', 'Tofu', 'Peas', 'Broccoli']})
+        aman = set(model.filter_dataset(df, '', 'UMUM', 'kacang')['name'])
+        self.assertEqual(aman, {'Tofu', 'Broccoli'})
 
     def test_sinonim_medis_tanpa_llm(self):
         self.assertEqual(model._parse_restriction_text('diabetes'), ({'manis'}, set()))
@@ -312,10 +347,10 @@ class HasilTersimpanTest(unittest.TestCase):
 
     def test_tidak_bocor_ke_request_lain(self):
         token = parser_llm.pasang_hasil_tersimpan(parser_llm.muat_hasil_tersimpan(
-            self.simpanan({'alergi alpukat': kosong(kata_kunci_en=['avocado'])}), self.gv, self.fv))
+            self.simpanan({'alergi apokat': kosong(kata_kunci_en=['avocado'])}), self.gv, self.fv))
         parser_llm.lepas_hasil_tersimpan(token)
         with mock.patch.dict(os.environ, {'GROQ_API_KEY': ''}):
-            self.assertEqual(self.buang(alergi='alergi alpukat'), [])
+            self.assertEqual(self.buang(alergi='alergi apokat'), [])
         self.assertEqual(parser_llm._CACHE, {})
 
     def test_bentuk_untuk_disimpan(self):

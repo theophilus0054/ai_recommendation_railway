@@ -3,7 +3,8 @@
 - Pemilik: **Muz**
 - Metode: Logistic Regression multinomial (label 0/1/2), metode dan konfigurasi sama dengan 3 kategori lain (config hash `7ec1c77b29e130d2`)
 - Data: 560 profil latih (33586 pasangan), 140 profil uji baru (8396 pasangan); split per profil
-- Tanggal laporan: 2026-10-28
+- Evaluasi: validasi silang GroupKFold 5 lipatan pada data latih + test set profil baru (dipakai sekali untuk model final)
+- Tanggal laporan: 2026-11-09
 
 ## 1. Metrik test set (profil baru)
 
@@ -13,12 +14,13 @@
 
 ## 2. Validasi silang GroupKFold (5 lipatan, data latih)
 
-| Metrik | Rata-rata | Simpangan baku |
+| Metrik (validasi) | Rata-rata | Simpangan baku |
 |---|---|---|
-| accuracy | 0.8681 | 0.0057 |
-| macro_f1 | 0.7970 | 0.0070 |
-| weighted_kappa | 0.8612 | 0.0048 |
-| ndcg@5 | 0.9579 | 0.0044 |
+| accuracy | 0.8683 | 0.0071 |
+| macro_f1 | 0.7976 | 0.0095 |
+| weighted_kappa | 0.8613 | 0.0042 |
+| log_loss | 0.2864 | 0.0104 |
+| ndcg@5 | 0.9582 | 0.0031 |
 
 ## 3. Per kelas
 
@@ -48,7 +50,43 @@ Confusion matrix (baris = label asli 0/1/2, kolom = prediksi 0/1/2):
 - Subset makanan baru (tidak ada di data latih): macro-F1 0.7822, kappa 0.8444
 - Pasangan konflik yang tetap diberi label > 0 oleh model saja: 0.00% (di produksi dibuang dulu oleh filter keamanan)
 
-## 5. Koefisien teratas (arah sangat cocok vs tidak cocok)
+## 5. Analisis overfitting
+
+Overfitting = skor data latih jauh lebih tinggi daripada data yang belum pernah dilihat. Batas selisih macro-F1: <= 0.02 tidak overfitting, <= 0.05 overfitting ringan, di atasnya overfitting.
+
+| Model | Data | Accuracy | F1 (macro) | Kappa | Log loss |
+|---|---|---|---|---|---|
+| Logistic Regression | Latih (model final) | 0.8706 | 0.8013 | 0.8645 | 0.2795 |
+| Logistic Regression | Test (profil baru) | 0.8634 | 0.7918 | 0.8552 | 0.2881 |
+| Gradient boosting | Latih | 0.9781 | 0.9647 | 0.9772 | 0.0980 |
+| Gradient boosting | Test (profil baru) | 0.9204 | 0.8766 | 0.9142 | 0.1960 |
+
+- Macro-F1 GroupKFold: latih 0.8017 vs validasi 0.7976 (selisih +0.0040)
+- Macro-F1 model final: latih 0.8013 vs test 0.7918 (selisih +0.0095)
+- **Kesimpulan Logistic Regression: tidak overfitting**; gradient boosting: overfitting (selisih +0.0881)
+
+Per lipatan GroupKFold:
+
+| Lipatan | F1 latih | F1 validasi | Selisih | Log loss latih | Log loss validasi |
+|---|---|---|---|---|---|
+| 1 | 0.8015 | 0.8026 | -0.0011 | 0.2779 | 0.2907 |
+| 2 | 0.7999 | 0.7994 | +0.0005 | 0.2782 | 0.2884 |
+| 3 | 0.8007 | 0.8068 | -0.0061 | 0.2809 | 0.2780 |
+| 4 | 0.8014 | 0.7975 | +0.0039 | 0.2817 | 0.2744 |
+| 5 | 0.8048 | 0.7818 | +0.0230 | 0.2757 | 0.3004 |
+
+Kurva belajar (macro-F1, rata-rata 5 lipatan GroupKFold):
+
+| Porsi data latih | Profil | F1 latih | F1 validasi | Selisih |
+|---|---|---|---|---|
+| 10% | 45 | 0.8152 | 0.7796 | +0.0356 |
+| 20% | 90 | 0.8130 | 0.7900 | +0.0230 |
+| 40% | 179 | 0.8061 | 0.7960 | +0.0101 |
+| 60% | 269 | 0.8037 | 0.7962 | +0.0075 |
+| 80% | 358 | 0.8027 | 0.7971 | +0.0056 |
+| 100% | 448 | 0.8017 | 0.7976 | +0.0041 |
+
+## 6. Koefisien teratas (arah sangat cocok vs tidak cocok)
 
 | Fitur | Bobot |
 |---|---|
@@ -63,17 +101,17 @@ Confusion matrix (baris = label asli 0/1/2, kolom = prediksi 0/1/2):
 | ft_protein__snack | -2.1208 |
 | n_conflict_allergen | -2.04 |
 
-## 6. Uji end-to-end (filter keamanan + model + penyusun menu, katalog Supabase)
+## 7. Uji end-to-end (filter keamanan + model + penyusun menu, katalog Supabase)
 
 | Skenario | Item | Kandidat lolos | Alergen | BLOKIR | Tekstur | Skor rata-rata | Latensi (ms) |
 |---|---|---|---|---|---|---|---|
-| Ibu Hamil T3 | 11 | 43 | 0 | 0 | 0 | 71.1 | 57.1 |
-| Ibu Hamil T1 Alergi Susu | 11 | 41 | 0 | 0 | 0 | 75.6 | 45.4 |
+| Ibu Hamil T3 | 11 | 43 | 0 | 0 | 0 | 68.8 | 57.7 |
+| Ibu Hamil T1 Alergi Susu | 11 | 41 | 0 | 0 | 0 | 73.3 | 64.7 |
 
-**Ibu Hamil T3**: pagi: karbo: Oatmeal, lauk: Mung Beans, buah/sayur: Banana; snack_pagi: selingan: Baked Potato Chips; siang: karbo: Whole Wheat Bread, lauk: Fresh Chicken Breast, sayur: Sweet Potato; snack_sore: selingan: Ajwa Dates; malam: karbo: Quinoa, lauk: Lentils, sayur: Red Chili
+**Ibu Hamil T3**: pagi: karbo: Oatmeal, lauk: Kidney Beans, buah/sayur: Banana; snack_pagi: selingan: Baked Potato Chips; siang: karbo: Whole Wheat Bread, lauk: Fresh Chicken Breast, sayur: Sweet Potato; snack_sore: selingan: Ajwa Dates; malam: karbo: Quinoa, lauk: Lentils, sayur: Broccoli
 
-**Ibu Hamil T1 Alergi Susu**: pagi: karbo: Oatmeal, lauk: Tilapia Fish, buah/sayur: Banana; snack_pagi: selingan: Baked Potato Chips; siang: karbo: Quinoa, lauk: Fresh Chicken Breast, sayur: Sweet Potato; snack_sore: selingan: Ajwa Dates; malam: karbo: Whole Wheat Bread, lauk: Mung Beans, sayur: Red Chili
+**Ibu Hamil T1 Alergi Susu**: pagi: karbo: Oatmeal, lauk: Tilapia Fish, buah/sayur: Banana; snack_pagi: selingan: Ajwa Dates; siang: karbo: Quinoa, lauk: Fresh Chicken Breast, sayur: Sweet Potato; snack_sore: selingan: Baked Potato Chips; malam: karbo: Whole Wheat Bread, lauk: Mung Beans, sayur: Broccoli
 
-## 7. Catatan
+## 8. Catatan
 
-Data sintetis dan label dari rubrik kategori (ibu_hamil/ai_models/rubrik.py). Angka di atas mengukur seberapa baik model meniru rubrik, bukan hasil uji klinis. Diperlukan gold set ahli gizi (minimal 300 pasangan) sebelum klaim klinis.
+Data sintetis dan label dari rubrik kategori (ibu_hamil/ai_models/rubrik.py). Angka di atas mengukur seberapa baik model meniru rubrik, bukan hasil uji klinis. Karena data latih dan test dibuat dari rubrik yang sama, selisih latih-test yang kecil membuktikan model tidak menghafal profil/makanan tertentu, tetapi belum membuktikan kecocokan dengan pengguna nyata. Diperlukan gold set ahli gizi (minimal 300 pasangan) sebelum klaim klinis.

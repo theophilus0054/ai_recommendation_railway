@@ -39,7 +39,7 @@ MAX_ITEMS = 30
 MAX_GRUP_WAJAR = 10   # lebih dari ini = output tidak wajar (mis. prompt injection "kembalikan semua grup") -> regex saja
 _KATA_KUNCI_VALID = re.compile(r"^[a-z][a-z \-']{1,38}[a-z]$")
 
-PARSER_VERSION = 'parser-llm-v2'   # naikkan bila prompt/daftar grup berubah agar hasil tersimpan lama diabaikan
+PARSER_VERSION = 'parser-llm-v3'   # naikkan bila prompt/daftar grup berubah agar hasil tersimpan lama diabaikan
 MAX_ENTRI_TERSIMPAN = 4
 
 _CACHE: dict[str, dict] = {}

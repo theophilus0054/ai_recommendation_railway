@@ -22,8 +22,7 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 | `ai_models/bahaya.py` | Tabel BLOKIR dan BATASI, batas harian gula, garam, lemak |
 | `ai_models/skenario.py` | Kasus uji end-to-end |
 | `ai_models/input_uji.py` | Kasus input user untuk `/api/recommend` (valid dan invalid) |
-| `ai_models/latih_ibu_hamil.py` | Buat dataset (opsional) dan latih model |
-| `ai_models/validasi_ibu_hamil.py` | Validasi dan tulis laporan |
+| `latih_validasi_ibu_hamil.ipynb` | Notebook: buat dataset (opsional), latih, cek overfitting, validasi, laporan |
 | `data/` | `profiles.csv`, `train_data.csv`, `test_data.csv` (dataset sintetis) |
 | `model/` | `recommender_IBU_HAMIL.joblib` |
 | `outputs/` | `hasil_latih.json`, `hasil_validasi.json`, `laporan_validasi_ibu_hamil.md` |
@@ -32,8 +31,7 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 ## Cara menjalankan (dari root repo)
 
 ```bash
-python ibu_hamil/ai_models/latih_ibu_hamil.py --buat-data   # buat ibu_hamil/data/ lalu latih ibu_hamil/model/recommender_IBU_HAMIL.joblib
-python ibu_hamil/ai_models/validasi_ibu_hamil.py            # laporan: ibu_hamil/outputs/laporan_validasi_ibu_hamil.md
+jupyter lab ibu_hamil/latih_validasi_ibu_hamil.ipynb   # Run All; set BUAT_DATA = True untuk membuat ulang ibu_hamil/data/
 python -m unittest ibu_hamil.tests.test_ibu_hamil
 python -m unittest ibu_hamil.tests.test_input_ibu_hamil      # uji input user via API
 ```

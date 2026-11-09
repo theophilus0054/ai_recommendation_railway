@@ -50,7 +50,7 @@ Setiap kategori: 700 profil sintetis × 5 sesi × 12 kandidat (≈42.000 pasanga
 
 - Model utama Logistic Regression (koefisien dapat dijelaskan). Gradient boosting hanya pembanding: lebih akurat meniru rubrik, tetapi kotak hitam. Fitur ambang (`porsi_ideal`, `natrium_lewat_jauh`, `gula_lewat_jauh`, dan lain-lain) membuat efek ambang terbaca oleh model linear.
 - Umur kategori `ANAK_BALITA` dalam **bulan** (0 sampai 60); kategori lain dalam tahun.
-- Uji end-to-end (`<kategori>/ai_models/validasi_<kategori>.py`, 2 skenario per kategori): 0 pelanggaran alergen, BLOKIR, dan tekstur.
+- Uji end-to-end (bagian 8 notebook `<kategori>/latih_validasi_<kategori>.ipynb`, 2 skenario per kategori): 0 pelanggaran alergen, BLOKIR, dan tekstur.
 - **Catatan jujur**: angka di atas mengukur seberapa baik model meniru rubrik pada data sintetis, bukan uji klinis. Rubrik & tabel bahaya perlu ditinjau ahli gizi (gold set) sebelum klaim klinis.
 
 ---
@@ -68,7 +68,8 @@ Struktur tiap folder kategori (contoh `umum/`):
 
 ```
 umum/
-  ai_models/   profil.py, rubrik.py, bahaya.py, skenario.py, input_uji.py, latih_umum.py, validasi_umum.py
+  latih_validasi_umum.ipynb   notebook: dataset, latih, cek overfitting, validasi, laporan
+  ai_models/   profil.py, rubrik.py, bahaya.py, skenario.py, input_uji.py
   data/        profiles.csv, train_data.csv, test_data.csv
   model/       recommender_UMUM.joblib
   outputs/     hasil_latih.json, hasil_validasi.json, laporan_validasi_umum.md
@@ -76,11 +77,11 @@ umum/
   README.md
 ```
 
-Kode bersama (fitur, safety filter, generator dataset, training, split, evaluasi) ada di `model.py` dan `shared/` (`dataset.py`, `training.py`, `pipeline.py`, `uji_input.py`, `bersama.py`), sehingga keempat model memakai metode dan konfigurasi yang sama (`config_hash` tercatat di metadata model). Katalog makanan bersama dan snapshot produk ada di `data/` (`nutrition.csv`, `supabase_products.json`).
+Kode bersama (fitur, safety filter, generator dataset, training, split, evaluasi) ada di `model.py` dan `shared/` (`dataset.py`, `training.py`, `pipeline.py`, `grafik.py`, `uji_input.py`, `bersama.py`), sehingga keempat model memakai metode dan konfigurasi yang sama (`config_hash` tercatat di metadata model). Katalog makanan bersama dan snapshot produk ada di `data/` (`nutrition.csv`, `supabase_products.json`).
 
 ```bash
-python ibu_hamil/ai_models/latih_ibu_hamil.py --buat-data
-python ibu_hamil/ai_models/validasi_ibu_hamil.py
+pip install -r requirements-notebook.txt
+jupyter lab ibu_hamil/latih_validasi_ibu_hamil.ipynb
 python -m unittest discover -s . -t . -p "test_*.py"
 ```
 
@@ -88,10 +89,13 @@ python -m unittest discover -s . -t . -p "test_*.py"
 
 ## 🚀 Perintah Operasional
 
-1. **Buat Data, Latih, dan Validasi per Kategori** (dijalankan pemilik masing-masing; contoh UMUM):
+1. **Buat Data, Latih, dan Validasi per Kategori** (dijalankan pemilik masing-masing; contoh UMUM): buka
+   `umum/latih_validasi_umum.ipynb` di VS Code / JupyterLab / Colab lalu *Run All* (`BUAT_DATA = True` untuk membuat
+   ulang `umum/data/*.csv`). Hasil: `umum/model/recommender_UMUM.joblib` dan `umum/outputs/laporan_validasi_umum.md`.
+   Notebook tidak dijalankan oleh Hugging Face Space; Space tetap menjalankan `app.py`.
    ```bash
-   python umum/ai_models/latih_umum.py --buat-data   # umum/data/*.csv lalu umum/model/recommender_UMUM.joblib
-   python umum/ai_models/validasi_umum.py            # umum/outputs/laporan_validasi_umum.md
+   pip install -r requirements-notebook.txt
+   jupyter lab umum/latih_validasi_umum.ipynb
    ```
 2. **Jalankan Unit Test** (kode bersama + semua kategori):
    ```bash

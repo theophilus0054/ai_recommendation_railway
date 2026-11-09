@@ -10,3 +10,7 @@ env/
 venv/
 .idea/
 .vscode/
+
+# Notebook latih/validasi tidak dibutuhkan API
+*.ipynb
+requirements-notebook.txt

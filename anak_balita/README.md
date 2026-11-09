@@ -22,8 +22,7 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 | `ai_models/bahaya.py` | Tabel BLOKIR dan BATASI, batas harian gula, garam, lemak |
 | `ai_models/skenario.py` | Kasus uji end-to-end |
 | `ai_models/input_uji.py` | Kasus input user untuk `/api/recommend` (valid dan invalid) |
-| `ai_models/latih_anak_balita.py` | Buat dataset (opsional) dan latih model |
-| `ai_models/validasi_anak_balita.py` | Validasi dan tulis laporan |
+| `latih_validasi_anak_balita.ipynb` | Notebook: buat dataset (opsional), latih, cek overfitting, validasi, laporan |
 | `data/` | `profiles.csv`, `train_data.csv`, `test_data.csv` (dataset sintetis) |
 | `model/` | `recommender_ANAK_BALITA.joblib` |
 | `outputs/` | `hasil_latih.json`, `hasil_validasi.json`, `laporan_validasi_anak_balita.md` |
@@ -32,8 +31,7 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 ## Cara menjalankan (dari root repo)
 
 ```bash
-python anak_balita/ai_models/latih_anak_balita.py --buat-data   # buat anak_balita/data/ lalu latih anak_balita/model/recommender_ANAK_BALITA.joblib
-python anak_balita/ai_models/validasi_anak_balita.py            # laporan: anak_balita/outputs/laporan_validasi_anak_balita.md
+jupyter lab anak_balita/latih_validasi_anak_balita.ipynb   # Run All; set BUAT_DATA = True untuk membuat ulang anak_balita/data/
 python -m unittest anak_balita.tests.test_anak_balita
 python -m unittest anak_balita.tests.test_input_anak_balita      # uji input user via API
 ```
