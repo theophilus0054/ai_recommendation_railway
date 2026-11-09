@@ -210,6 +210,12 @@ class ParserLLMTest(unittest.TestCase):
         self.assertEqual(buang('tidak makan cokelat'), ['Dark Chocolate'])
         self.assertEqual(buang('rendah gula'), ['Ajwa Dates', 'Dark Chocolate', 'Honey'])
 
+    def test_sinonim_medis_tanpa_llm(self):
+        self.assertEqual(model._parse_restriction_text('diabetes'), ({'manis'}, set()))
+        self.assertEqual(model._parse_restriction_text('kencing manis'), ({'manis'}, set()))
+        self.assertEqual(model._parse_restriction_text('intoleransi laktosa'), ({'susu'}, set()))
+        self.assertEqual(model._parse_restriction_text('celiac'), ({'gluten'}, set()))
+
     def test_vegan_vegetarian_tanpa_llm(self):
         with mock.patch.object(requests, 'post') as post:
             self.assertEqual(self.buang(pantangan='vegetarian', use_llm=False),

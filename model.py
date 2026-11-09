@@ -178,6 +178,11 @@ KATA_KONDISI: dict[str, tuple[str, str, list[str]]] = {
     'rendah_lemak': ('grup', 'rendah_lemak', ['lemak', 'fat', 'low fat']),
     'kolesterol':   ('grup', 'kolesterol', ['kolesterol', 'cholesterol', 'lemak jenuh', 'saturated fat']),
     'purin':        ('frasa', 'purin', ['asam urat', 'gout', 'purin', 'purine', 'uric acid']),
+    # Sinonim medis umum: tidak bergantung pada Groq (Groq kadang menaruhnya di tidak_dikenali)
+    'diabetes':     ('grup', 'manis', ['diabetes', 'diabetes melitus', 'diabetes mellitus', 'kencing manis',
+                                       'gula darah', 'diabetic', 'blood sugar']),
+    'laktosa':      ('grup', 'susu', ['laktosa', 'intoleransi laktosa', 'lactose', 'lactose intolerance']),
+    'celiac':       ('grup', 'gluten', ['celiac', 'coeliac', 'seliak', 'penyakit celiac', 'celiac disease']),
 }
 
 # Gaya hidup -> (grup, frasa). Ditangani regex agar tidak bergantung pada LLM.
