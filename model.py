@@ -145,6 +145,10 @@ PANTANGAN_PHRASES: dict[str, list[str]] = {
     'sapi':         ['beef', 'sapi', 'daging sapi'],
     'kalengan':     ['canned', 'kaleng', 'kalengan'],
     'cokelat':      ['chocolate', 'cokelat', 'coklat'],
+    # 'kacang' polos (tanpa 'tanah'/'peanut'/nama kacang tertentu) ambigu: juga dipakai untuk polong-polongan.
+    # Demi aman, polong ikut dibuang. Kedelai tetap grup sendiri (alergen BPOM terpisah).
+    'polong':   ['bean', 'beans', 'lentil', 'lentils', 'chickpea', 'chickpeas', 'pea', 'peas',
+                 'kacang hijau', 'kacang merah', 'kacang tolo', 'kacang polong', 'kacang arab'],
     'madu':         ['honey', 'madu'],
     'permen':       ['candy', 'candies', 'permen'],
     'sirup':        ['syrup', 'syrups', 'sirup'],
@@ -1097,6 +1101,8 @@ def _ekstrak_llm(text: Optional[str]) -> Optional[dict]:
     grup_valid, frasa_valid = _grup_frasa_valid()
     return ekstrak_pantangan_llm(text, grup_valid, frasa_valid)
 
+KACANG_POLOS = {'kacang', 'kacang-kacangan', 'kacang kacangan', 'kacang2'}
+
 def _parse_restriction_text(text: Optional[str], use_llm: bool = False) -> tuple[set[str], set[str]]:
     """
     Parser teks alergi / pantangan user -> (grup alergen, frasa bebas).
@@ -1160,6 +1166,8 @@ def _parse_restriction_text(text: Optional[str], use_llm: bool = False) -> tuple
                 close = difflib.get_close_matches(token, _ALIAS_KEYWORDS.keys(), n=1, cutoff=0.8)
                 if close:
                     chunk_cats.update(_ALIAS_KEYWORDS[close[0]])
+        if chunk in KACANG_POLOS:
+            free_phrases.add('polong')
         if chunk_cats:
             categories.update(chunk_cats)
         elif kondisi_dikenali:

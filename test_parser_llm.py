@@ -230,6 +230,16 @@ class ParserLLMTest(unittest.TestCase):
         self.assertTrue(narasi.endswith('CATATAN-X'))
         self.assertEqual(model._tempel_catatan('a CATATAN-X b', ['CATATAN-X']), 'a CATATAN-X b')
 
+    def test_kacang_polos_ikut_membuang_polong(self):
+        self.assertEqual(model._parse_restriction_text('alergi kacang'), ({'kacang'}, {'polong'}))
+        self.assertEqual(model._parse_restriction_text('kacang-kacangan'), ({'kacang'}, {'polong'}))
+        self.assertEqual(model._parse_restriction_text('kacang tanah'), ({'kacang'}, set()))
+        self.assertEqual(model._parse_restriction_text('peanut allergy'), ({'kacang'}, set()))
+        self.assertEqual(model._parse_restriction_text('alergi kacang tapi boleh kacang hijau'), ({'kacang'}, set()))
+        df = pd.DataFrame({'name': ['Mung Beans', 'Lentils', 'Peanut Butter', 'Tofu', 'Peas', 'Broccoli']})
+        aman = set(model.filter_dataset(df, '', 'UMUM', 'kacang')['name'])
+        self.assertEqual(aman, {'Tofu', 'Broccoli'})
+
     def test_sinonim_medis_tanpa_llm(self):
         self.assertEqual(model._parse_restriction_text('diabetes'), ({'manis'}, set()))
         self.assertEqual(model._parse_restriction_text('kencing manis'), ({'manis'}, set()))
