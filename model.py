@@ -149,6 +149,51 @@ PANTANGAN_PHRASES: dict[str, list[str]] = {
     # Demi aman, polong ikut dibuang. Kedelai tetap grup sendiri (alergen BPOM terpisah).
     'polong':   ['bean', 'beans', 'lentil', 'lentils', 'chickpea', 'chickpeas', 'pea', 'peas',
                  'kacang hijau', 'kacang merah', 'kacang tolo', 'kacang polong', 'kacang arab'],
+    # Nama bahan berbahasa Indonesia -> nama produk di katalog (berbahasa Inggris). Tanpa ini, 'nasi' hanya
+    # dicari sebagai kata 'nasi' dan tidak pernah cocok dengan 'Organic Brown Rice' bila Groq tidak aktif.
+    'nasi':         ['rice', 'nasi', 'beras'],
+    'kentang':      ['potato', 'potatoes', 'kentang'],
+    'ubi':          ['sweet potato', 'sweet potatoes', 'ubi', 'ubi jalar'],
+    'singkong':     ['cassava', 'singkong'],
+    'jagung':       ['corn', 'maize', 'jagung'],
+    'oat':          ['oat', 'oats', 'oatmeal'],
+    'kinoa':        ['quinoa', 'kinoa'],
+    'alpukat':      ['avocado', 'avocados', 'alpukat'],
+    'pisang':       ['banana', 'bananas', 'pisang'],
+    'apel':         ['apple', 'apples', 'apel'],
+    'jeruk':        ['orange', 'oranges', 'tangerine', 'tangerines', 'jeruk'],
+    'buah naga':    ['dragon fruit', 'buah naga'],
+    'kurma':        ['dates', 'kurma'],
+    'stroberi':     ['strawberry', 'strawberries', 'stroberi'],
+    'mangga':       ['mango', 'mangoes', 'mangga'],
+    'pepaya':       ['papaya', 'pepaya'],
+    'semangka':     ['watermelon', 'semangka'],
+    'nanas':        ['pineapple', 'nanas'],
+    'anggur':       ['grape', 'grapes', 'anggur'],
+    'kelapa':       ['coconut', 'kelapa'],
+    'bayam':        ['spinach', 'bayam'],
+    'brokoli':      ['broccoli', 'brokoli'],
+    'wortel':       ['carrot', 'carrots', 'wortel'],
+    'tomat':        ['tomato', 'tomatoes', 'tomat'],
+    'paprika':      ['bell pepper', 'bell peppers', 'paprika'],
+    'sawi':         ['mustard greens', 'bok choy', 'pak choy', 'sawi'],
+    'kangkung':     ['water spinach', 'kangkung'],
+    'kubis':        ['cabbage', 'kubis', 'kol'],
+    'timun':        ['cucumber', 'cucumbers', 'timun', 'mentimun'],
+    'labu':         ['pumpkin', 'squash', 'labu'],
+    'jamur':        ['mushroom', 'mushrooms', 'jamur'],
+    'bawang':       ['garlic', 'onion', 'onions', 'shallot', 'shallots', 'bawang'],
+    'bawang putih': ['garlic', 'bawang putih'],
+    'bawang merah': ['shallot', 'shallots', 'red onion', 'red onions', 'bawang merah'],
+    'bawang bombay': ['onion', 'onions', 'bawang bombay'],
+    'teh':          ['tea', 'teh'],
+    'teh hijau':    ['green tea', 'teh hijau'],
+    'keripik':      ['chips', 'crisps', 'keripik'],
+    'kerupuk':      ['crackers', 'kerupuk'],
+    'biji bunga matahari': ['sunflower seed', 'sunflower seeds', 'biji bunga matahari'],
+    'biji chia':    ['chia', 'chia seed', 'chia seeds', 'biji chia'],
+    'kacang hijau': ['mung bean', 'mung beans', 'kacang hijau'],
+    'kacang merah': ['kidney bean', 'kidney beans', 'red bean', 'red beans', 'kacang merah'],
     'madu':         ['honey', 'madu'],
     'permen':       ['candy', 'candies', 'permen'],
     'sirup':        ['syrup', 'syrups', 'sirup'],
@@ -162,6 +207,9 @@ FRASA_ALIAS: dict[str, str] = {
     'caffeine': 'kafein', 'coffee': 'kopi', 'offal': 'jeroan', 'coconut milk': 'santan',
     'chicken': 'ayam', 'daging ayam': 'ayam', 'beef': 'sapi', 'daging sapi': 'sapi', 'canned': 'kalengan',
     'canned food': 'kalengan', 'makanan kaleng': 'kalengan', 'kaleng': 'kalengan',
+    'beras': 'nasi', 'nasi putih': 'nasi', 'ubi jalar': 'ubi', 'quinoa': 'kinoa', 'oatmeal': 'oat',
+    'gandum oat': 'oat', 'kol': 'kubis', 'mentimun': 'timun', 'chia': 'biji chia', 'dada ayam': 'ayam',
+    'cabbage': 'kubis', 'rice': 'nasi', 'potato': 'kentang', 'potatoes': 'kentang',
 }
 
 # Pantangan berbasis nilai gizi per 100 g. grup -> (kolom nilai_gizi, ambang). Di atas ambang = konflik.
@@ -1101,6 +1149,10 @@ def _ekstrak_llm(text: Optional[str]) -> Optional[dict]:
     grup_valid, frasa_valid = _grup_frasa_valid()
     return ekstrak_pantangan_llm(text, grup_valid, frasa_valid)
 
+# Frasa yang namanya beririsan dengan produk lain: 'kentang' (potato) tidak boleh membuang 'Sweet Potato'.
+PENGECUALIAN_FRASA: dict[str, list[str]] = {
+    'kentang': ['sweet potato', 'sweet potatoes'],
+}
 KACANG_POLOS = {'kacang', 'kacang-kacangan', 'kacang kacangan', 'kacang2'}
 
 def _parse_restriction_text(text: Optional[str], use_llm: bool = False) -> tuple[set[str], set[str]]:
@@ -1221,7 +1273,8 @@ def hitung_konflik_keamanan(df: pd.DataFrame, pantanganMedis: Optional[str], kat
         allergy_cats = allergy_cats - PREFERENSI_TANPA_PENGAWASAN
         pant_cats = pant_cats - PREFERENSI_TANPA_PENGAWASAN
     free_phrases = allergy_free | pant_free
-    free_patterns = [_kw_pattern(PANTANGAN_PHRASES.get(p, [p])) for p in free_phrases]
+    free_patterns = [(_kw_pattern(PANTANGAN_PHRASES.get(p, [p])), _kw_pattern(PENGECUALIAN_FRASA.get(p, [])))
+                     for p in free_phrases]
 
     names = out['name'].astype(str).str.lower().tolist()
     labels = out['label_risiko'].tolist() if 'label_risiko' in out.columns else [''] * len(out)
@@ -1245,7 +1298,7 @@ def hitung_konflik_keamanan(df: pd.DataFrame, pantanganMedis: Optional[str], kat
                 food_cats.add(grup)
         n_alg.append(len(allergy_cats & food_cats))
         n_pant.append(len(pant_cats & food_cats))
-        n_free.append(sum(keyword_match(name, p) for p in free_patterns))
+        n_free.append(sum(keyword_match(name, p, exc) for p, exc in free_patterns))
         blokir, batasi = detect_hazards(name, kategoriKondisi)
         if kategoriKondisi == 'PASCA_OPERASI' and TEKSTUR_ORDINAL.get(str(tek), 3) > tahap:
             blokir = blokir + ['TEKSTUR_TAHAP_DIET']
@@ -1640,7 +1693,8 @@ def ringkas_parser_alergi(df: Optional[pd.DataFrame], alergi: str, pantangan: st
     _, free_a = _parse_restriction_text(alergi, use_llm_parser)
     _, free_p = _parse_restriction_text(pantangan, use_llm_parser)
     tidak_cocok = sorted(p for p in free_a | free_p
-                         if not any(keyword_match(n, _kw_pattern(PANTANGAN_PHRASES.get(p, [p]))) for n in names))
+                         if not any(keyword_match(n, _kw_pattern(PANTANGAN_PHRASES.get(p, [p])),
+                                              _kw_pattern(PENGECUALIAN_FRASA.get(p, []))) for n in names))
     sumber = 'regex+llm' if tambahan_llm else 'regex'
     return {'sumber': sumber, 'llm_aktif': bool(use_llm_parser), 'llm_gagal': gagal_llm,
             'sumber_llm': sumber_llm, 'tambahan_llm': tambahan_llm, 'frasa_tidak_cocok_produk': tidak_cocok,
