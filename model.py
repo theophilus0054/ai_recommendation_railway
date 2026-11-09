@@ -1639,8 +1639,8 @@ SUSUN DALAM 3 PARAGRAF RINGKAS (~150 KATA):
     try:
         client = _get_gemini_client()
         from google.genai import types
-        # Menggunakan model aktif Google GenAI (gemini-2.5-flash sebagai penerus resmi gemini-2.0-flash yang di-sunset)
-        model_name = os.environ.get('GEMINI_MODEL', 'gemini-2.5-flash')
+        # gemini-2.5-flash tidak lagi tersedia untuk user baru (404 NOT_FOUND, Nov 2026); bisa diganti lewat env GEMINI_MODEL
+        model_name = os.environ.get('GEMINI_MODEL', 'gemini-3.8-flash')
         config = types.GenerateContentConfig(
             temperature=0.5,
             max_output_tokens=1024,
