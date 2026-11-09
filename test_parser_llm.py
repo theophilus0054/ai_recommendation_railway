@@ -22,7 +22,7 @@ from shared import parser_llm
 from test_safety_filter import make_foods
 
 FOODS = ['Pork chop', 'Bacon', 'Fresh Chicken Breast', 'Chicken nuggets', 'Beef steak', 'Milk', 'Cheese',
-         'Pork sausage', 'Salmon', 'Shrimp', 'Tofu', 'Brown rice', 'Spinach']
+         'Pork sausage', 'Salmon', 'Shrimp', 'Tofu', 'Brown rice', 'Spinach', 'Avocado']
 
 
 def respon_groq(isi: dict):
@@ -53,7 +53,12 @@ class ParserLLMTest(unittest.TestCase):
     def test_tidak_makan_babi(self):
         with mock.patch.object(requests, 'post', return_value=respon_groq(kosong(frasa_khusus=['babi']))):
             self.assertEqual(self.buang(pantangan='tidak makan babi'), ['Bacon', 'Pork chop', 'Pork sausage'])
-        self.assertEqual(self.buang(pantangan='tidak makan babi', use_llm=False), [])
+        # sejak parser-llm-v2 regex juga mengenali 'tidak makan babi' (kata pengantar 'tidak makan' dibuang)
+        self.assertEqual(self.buang(pantangan='tidak makan babi', use_llm=False), ['Bacon', 'Pork chop', 'Pork sausage'])
+        # bahan yang hanya bisa dipahami LLM: regex saja tidak membuang apa pun
+        with mock.patch.object(requests, 'post', return_value=respon_groq(kosong(kata_kunci_en=['avocado']))):
+            self.assertEqual(self.buang(alergi='alergi alpukat'), ['Avocado'])
+        self.assertEqual(self.buang(alergi='alergi alpukat', use_llm=False), [])
 
     def test_alergi_ayam_jadi_chicken(self):
         with mock.patch.object(requests, 'post', return_value=respon_groq(kosong(kata_kunci_en=['chicken']))):
@@ -141,16 +146,16 @@ class ParserLLMTest(unittest.TestCase):
             post.assert_not_called()
 
     def test_meta_parser_alergi(self):
-        with mock.patch.object(requests, 'post', return_value=respon_groq(kosong(kata_kunci_en=['chicken']))):
-            info = model.ringkas_parser_alergi(self.df, 'alergi ayam', 'diabetes', True)
+        with mock.patch.object(requests, 'post', return_value=respon_groq(kosong(kata_kunci_en=['avocado']))):
+            info = model.ringkas_parser_alergi(self.df, 'alergi alpukat', 'diabetes', True)
         self.assertEqual(info['sumber'], 'regex+llm')
         self.assertEqual(info['sumber_llm']['alergi'], 'groq')
-        self.assertIn('chicken', info['tambahan_llm']['alergi']['kata_kunci_en'])
-        self.assertIn('ayam', info['frasa_tidak_cocok_produk'])
-        self.assertNotIn('chicken', info['frasa_tidak_cocok_produk'])
-        info_regex = model.ringkas_parser_alergi(self.df, 'alergi ayam', '', False)
+        self.assertIn('avocado', info['tambahan_llm']['alergi']['kata_kunci_en'])
+        self.assertIn('alpukat', info['frasa_tidak_cocok_produk'])
+        self.assertNotIn('avocado', info['frasa_tidak_cocok_produk'])
+        info_regex = model.ringkas_parser_alergi(self.df, 'alergi alpukat', '', False)
         self.assertEqual(info_regex['sumber'], 'regex')
-        self.assertEqual(info_regex['frasa_tidak_cocok_produk'], ['ayam'])
+        self.assertEqual(info_regex['frasa_tidak_cocok_produk'], ['alpukat'])
 
     def test_input_kosong_atau_aneh_tanpa_groq(self):
         for teks in ['', '   ', '-', '--', '???', '123', 'xx', 'tidak ada', 'Tidak ada alergi', 'nihil', 'no allergy',
@@ -189,6 +194,39 @@ class ParserLLMTest(unittest.TestCase):
             kw[kolom] = 'gorengan'
             aman = model.filter_dataset(df, kw['pantangan'], 'UMUM', kw['alergi'])
             self.assertEqual(sorted(set(df['name']) - set(aman['name'])), ['Sunflower Seeds'], kolom)
+
+    def test_aturan_gizi_dan_kondisi(self):
+        df = make_foods(['Cheddar Cheese', 'Baked Potato Chips', 'Spinach', 'Lean Beef Mince', 'Beef liver',
+                         'Sardines in oil', 'Dark Chocolate', 'Ajwa Dates', 'Honey', 'Tofu'])
+        df['sodium'] = [621.0, 400.0, 79.0, 66.0, 70.0, 300.0, 20.0, 1.0, 1.0, 7.0]
+        df['fat'] = [33.0, 14.0, 0.0, 15.0, 4.0, 11.0, 43.0, 0.0, 0.0, 5.0]
+        df['sugars'] = [0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 24.0, 66.0, 82.0, 0.0]
+        buang = lambda pant: sorted(set(df['name']) - set(model.filter_dataset(df, pant, 'UMUM', '')['name']))
+        self.assertEqual(buang('rendah garam'), ['Cheddar Cheese'])            # natrium > 600 mg/100 g
+        self.assertEqual(buang('hipertensi'), ['Cheddar Cheese'])
+        self.assertEqual(buang('rendah lemak'), ['Cheddar Cheese', 'Dark Chocolate'])   # lemak > 17,5 g
+        self.assertEqual(buang('asam urat'), ['Beef liver', 'Lean Beef Mince', 'Sardines in oil'])  # bayam tetap
+        # makanan manis tertentu hanya membuang produk bernama itu, bukan semua yang bergula tinggi
+        self.assertEqual(buang('tidak makan cokelat'), ['Dark Chocolate'])
+        self.assertEqual(buang('rendah gula'), ['Ajwa Dates', 'Dark Chocolate', 'Honey'])
+
+    def test_vegan_vegetarian_tanpa_llm(self):
+        with mock.patch.object(requests, 'post') as post:
+            self.assertEqual(self.buang(pantangan='vegetarian', use_llm=False),
+                             ['Bacon', 'Beef steak', 'Chicken nuggets', 'Fresh Chicken Breast', 'Pork chop',
+                              'Pork sausage', 'Salmon', 'Shrimp'])
+            self.assertEqual(self.buang(pantangan='vegan', use_llm=False),
+                             ['Bacon', 'Beef steak', 'Cheese', 'Chicken nuggets', 'Fresh Chicken Breast', 'Milk',
+                              'Pork chop', 'Pork sausage', 'Salmon', 'Shrimp'])
+            post.assert_not_called()
+
+    def test_groq_400_json_validate_dicoba_sekali_lagi(self):
+        gagal = mock.Mock(status_code=400, text='{"error":{"code":"json_validate_failed"}}')
+        ok = respon_groq(kosong(grup=['susu']))
+        ok.status_code = 200
+        with mock.patch.object(requests, 'post', side_effect=[gagal, ok]) as post:
+            self.assertEqual(model._ekstrak_llm('intoleransi laktosa')['grup'], ['susu'])
+        self.assertEqual(post.call_count, 2)
 
 
 class HasilTersimpanTest(unittest.TestCase):
@@ -248,10 +286,10 @@ class HasilTersimpanTest(unittest.TestCase):
 
     def test_tidak_bocor_ke_request_lain(self):
         token = parser_llm.pasang_hasil_tersimpan(parser_llm.muat_hasil_tersimpan(
-            self.simpanan({'alergi ayam': kosong(kata_kunci_en=['chicken'])}), self.gv, self.fv))
+            self.simpanan({'alergi alpukat': kosong(kata_kunci_en=['avocado'])}), self.gv, self.fv))
         parser_llm.lepas_hasil_tersimpan(token)
         with mock.patch.dict(os.environ, {'GROQ_API_KEY': ''}):
-            self.assertEqual(self.buang(alergi='alergi ayam'), [])
+            self.assertEqual(self.buang(alergi='alergi alpukat'), [])
         self.assertEqual(parser_llm._CACHE, {})
 
     def test_bentuk_untuk_disimpan(self):

@@ -39,7 +39,7 @@ warnings.filterwarnings('ignore')
 
 ALLERGEN_KEYWORDS: dict[str, list[str]] = {
     'ikan':     ['fish', 'salmon', 'tuna', 'cod', 'trout', 'tilapia', 'mackerel', 'sardine', 'sardines', 'anchovy',
-                 'anchovies', 'catfish', 'herring', 'halibut', 'snapper', 'pollock', 'haddock', 'ikan', 'bandeng',
+                 'anchovies', 'catfish', 'herring', 'halibut', 'snapper', 'pollock', 'haddock', 'ikan', 'sarden', 'bandeng',
                  'lele', 'gurame', 'bawal', 'tongkol', 'kembung', 'teri', 'nila', 'patin', 'tenggiri'],
     'udang':    ['shrimp', 'shrimps', 'prawn', 'prawns', 'udang', 'ebi', 'terasi', 'rebon'],
     'kepiting': ['crab', 'crabs', 'kepiting', 'rajungan'],
@@ -117,18 +117,74 @@ PANTANGAN_STOPWORDS = {'tidak ada', 'lainnya', 'none', '-', 'no', 'tidak', 'ada'
                        'no known allergies', 'no known allergy', 'no food allergies', 'no food allergy',
                        'no restriction', 'no restrictions', 'no dietary restriction', 'no dietary restrictions',
                        'no food restriction', 'no food restrictions', 'not allergic', 'i have no allergies',
-                       'i have none', 'nothing to avoid', 'no preference', 'no preferences', 'other', 'others'}
+                       'i have none', 'nothing to avoid', 'no preference', 'no preferences', 'other', 'others',
+                       'allergies', 'known allergies', 'restrictions', 'dietary restrictions'}
 
 # Frasa pantangan umum yang bukan grup alergen -> kata kunci nama makanan (batas kata)
 PANTANGAN_PHRASES: dict[str, list[str]] = {
     'daging merah': ['beef', 'pork', 'lamb', 'veal', 'mutton', 'daging sapi', 'daging kambing', 'sapi', 'kambing'],
-    'jeroan':       ['liver', 'giblets', 'kidney', 'tripe', 'heart', 'jeroan', 'hati', 'ati', 'usus', 'babat'],
+    # 'kidney' sengaja tidak dipakai: 'Kidney Beans' (kacang merah) ikut terbuang. Ginjal sapi/kambing tetap
+    # terbuang lewat kata 'beef'/'lamb' di namanya.
+    'jeroan':       ['liver', 'giblets', 'tripe', 'heart', 'jeroan', 'hati', 'ati', 'usus', 'babat'],
     'mie instan':   ['instant noodles', 'ramen', 'mie instan', 'mi instan'],
     'babi':         ['pork', 'bacon', 'ham', 'lard', 'babi'],
     'kafein':       ['coffee', 'espresso', 'caffeine', 'energy drink', 'cola', 'kopi'],
     'kopi':         ['coffee', 'espresso', 'kopi'],
     'santan':       ['coconut milk', 'coconut cream', 'santan'],
     'makanan olahan': ['sausage', 'frankfurter', 'bacon', 'luncheon meat', 'nugget', 'sosis', 'kornet', 'hot dog'],
+    'daging':       ['meat', 'beef', 'pork', 'lamb', 'veal', 'mutton', 'chicken', 'turkey', 'duck', 'bacon', 'ham',
+                     'sausage', 'daging', 'ayam', 'sapi', 'kambing', 'babi', 'bebek'],
+    # Asam urat (Mayo Clinic, gout diet): jeroan, daging merah, teri, sarden, kerang, cod, bir.
+    # Sayur tinggi purin (bayam, kacang polong, asparagus) TIDAK dibatasi.
+    'purin':        ['liver', 'sweetbread', 'sweetbreads', 'giblets', 'jeroan', 'hati', 'ati', 'ampela',
+                     'beef', 'pork', 'lamb', 'veal', 'mutton', 'sapi', 'kambing', 'babi', 'anchovy', 'anchovies',
+                     'teri', 'sardine', 'sardines', 'sarden', 'shellfish', 'mussel', 'mussels', 'clam', 'clams',
+                     'scallop', 'scallops', 'oyster', 'oysters', 'kerang', 'tiram', 'cod', 'codfish', 'beer', 'bir'],
+    # Makanan manis tertentu: cukup buang produk bernama itu (tidak memicu ambang gula grup 'manis')
+    'ayam':         ['chicken', 'ayam'],
+    'sapi':         ['beef', 'sapi', 'daging sapi'],
+    'kalengan':     ['canned', 'kaleng', 'kalengan'],
+    'cokelat':      ['chocolate', 'cokelat', 'coklat'],
+    'madu':         ['honey', 'madu'],
+    'permen':       ['candy', 'candies', 'permen'],
+    'sirup':        ['syrup', 'syrups', 'sirup'],
+}
+
+# Sinonim frasa (bagian teks user persis sama) -> kunci PANTANGAN_PHRASES
+FRASA_ALIAS: dict[str, str] = {
+    'chocolate': 'cokelat', 'coklat': 'cokelat', 'honey': 'madu', 'candy': 'permen', 'candies': 'permen',
+    'syrup': 'sirup', 'meat': 'daging', 'pork': 'babi', 'daging babi': 'babi', 'red meat': 'daging merah',
+    'processed food': 'makanan olahan', 'processed foods': 'makanan olahan', 'olahan': 'makanan olahan',
+    'caffeine': 'kafein', 'coffee': 'kopi', 'offal': 'jeroan', 'coconut milk': 'santan',
+    'chicken': 'ayam', 'daging ayam': 'ayam', 'beef': 'sapi', 'daging sapi': 'sapi', 'canned': 'kalengan',
+    'canned food': 'kalengan', 'makanan kaleng': 'kalengan', 'kaleng': 'kalengan',
+}
+
+# Pantangan berbasis nilai gizi per 100 g. grup -> (kolom nilai_gizi, ambang). Di atas ambang = konflik.
+# Ambang 'tinggi' NHS: lemak > 17,5 g, natrium > 600 mg (0,6 g), gula > 22,5 g (di sini 15 g, lebih ketat).
+ATURAN_GIZI: dict[str, tuple[str, float]] = {
+    'manis':        ('sugars', 15.0),
+    'gorengan':     ('fat', 25.0),
+    'rendah_garam': ('sodium', 600.0),
+    'rendah_lemak': ('fat', 17.5),
+    'kolesterol':   ('fat', 17.5),   # sementara: lemak jenuh belum ada di data produk (NHS: jenuh > 5 g)
+}
+GRUP_GIZI = ['rendah_garam', 'rendah_lemak', 'kolesterol']   # grup tanpa kata kunci nama produk
+
+# Kata di teks user (kata utuh) -> grup gizi ('grup') atau frasa khusus ('frasa')
+KATA_KONDISI: dict[str, tuple[str, str, list[str]]] = {
+    'rendah_garam': ('grup', 'rendah_garam', ['garam', 'asin', 'natrium', 'sodium', 'salt', 'salty', 'hipertensi',
+                                              'darah tinggi', 'hypertension', 'high blood pressure']),
+    'rendah_lemak': ('grup', 'rendah_lemak', ['lemak', 'fat', 'low fat']),
+    'kolesterol':   ('grup', 'kolesterol', ['kolesterol', 'cholesterol', 'lemak jenuh', 'saturated fat']),
+    'purin':        ('frasa', 'purin', ['asam urat', 'gout', 'purin', 'purine', 'uric acid']),
+}
+
+# Gaya hidup -> (grup, frasa). Ditangani regex agar tidak bergantung pada LLM.
+_SEAFOOD6 = ['ikan', 'udang', 'kepiting', 'kerang', 'lobster', 'cumi']
+GAYA_HIDUP: dict[str, tuple[list[str], list[str]]] = {
+    'vegan':      (_SEAFOOD6 + ['susu', 'telur'], ['daging', 'madu']),
+    'vegetarian': (_SEAFOOD6, ['daging']),
 }
 
 NUTRISCALE_SOURCE = 'NUTRISCALE_NUTRI_CALC'
@@ -253,6 +309,8 @@ def _kw_pattern(keywords) -> Optional[re.Pattern]:
 
 _ALLERGEN_PATTERNS = {cat: _kw_pattern(kws) for cat, kws in ALLERGEN_KEYWORDS.items()}
 _EXCEPTION_PATTERNS = {cat: _kw_pattern(kws) for cat, kws in ALLERGEN_EXCEPTIONS.items()}
+_KONDISI_PATTERNS = {k: (jenis, nilai, _kw_pattern(kws)) for k, (jenis, nilai, kws) in KATA_KONDISI.items()}
+_GAYA_HIDUP_PATTERNS = {k: _kw_pattern([k]) for k in GAYA_HIDUP}
 _ALCOHOL_PATTERN = _kw_pattern(ALCOHOL_KEYWORDS)
 _ALCOHOL_EXCEPTION_PATTERN = _kw_pattern(ALCOHOL_EXCEPTIONS)
 _HAZARD_PATTERNS = {
@@ -1006,7 +1064,7 @@ def ambil_data_nutrisi_nutriscale(nutrisi: Optional[dict]) -> dict:
 # ==========================================================================
 
 def _grup_frasa_valid() -> tuple[list[str], list[str]]:
-    return sorted(k for k in ALLERGEN_KEYWORDS if k != 'seafood'), sorted(PANTANGAN_PHRASES)
+    return sorted([k for k in ALLERGEN_KEYWORDS if k != 'seafood'] + GRUP_GIZI), sorted(PANTANGAN_PHRASES)
 
 def _ekstrak_llm(text: Optional[str]) -> Optional[dict]:
     """Hasil parser LLM: dari hasil tersimpan (bila teks sama) atau Groq. None bila tidak aktif/gagal."""
@@ -1036,15 +1094,28 @@ def _parse_restriction_text(text: Optional[str], use_llm: bool = False) -> tuple
     text = re.sub(r'(\bdan\b|\bserta\b|\batau\b|\bdengan\b|\band\b|&|/|;|\+|\n)', ',', raw_text)
     # 2. Hilangkan kata pengantar non-pantangan
     text = re.sub(r'\b(alergi|alergy|allergy|allergic to|allergic|pantangan|hindari|tidak bisa makan|tidak boleh|'
+                  r'tidak makan|tidak minum|tanpa|avoid|no|'
                   r'tidak suka|tdk suka|gak suka|riwayat|makanan|terhadap|to)\b', ' ', text)
 
     categories, free_phrases = set(), set()
     for chunk in [re.sub(r'\s+', ' ', t).strip(' .-') for t in text.split(',')]:
         if not chunk or chunk in PANTANGAN_STOPWORDS:
             continue
+        chunk = FRASA_ALIAS.get(chunk, chunk)
         if chunk in PANTANGAN_PHRASES:
             free_phrases.add(chunk)
             continue
+        gaya = [k for k, pat in _GAYA_HIDUP_PATTERNS.items() if keyword_match(chunk, pat)]
+        if gaya:                                   # 'vegan' mencakup 'vegetarian'
+            grup, frasa = GAYA_HIDUP['vegan' if 'vegan' in gaya else gaya[0]]
+            categories.update(grup)
+            free_phrases.update(frasa)
+            continue
+        kondisi_dikenali = False
+        for jenis, nilai, pat in _KONDISI_PATTERNS.values():
+            if keyword_match(chunk, pat):
+                kondisi_dikenali = True
+                (categories if jenis == 'grup' else free_phrases).add(nilai)
         chunk_cats = set()
         for word, cats in ALLERGEN_UMBRELLA.items():
             if keyword_match(chunk, _kw_pattern([word])):
@@ -1055,7 +1126,7 @@ def _parse_restriction_text(text: Optional[str], use_llm: bool = False) -> tuple
             if keyword_match(chunk, pattern, _EXCEPTION_PATTERNS.get(category)) or chunk == category:
                 chunk_cats.add(category)
         # 3. Koreksi typo kata per kata bila belum dikenali
-        if not chunk_cats:
+        if not chunk_cats and not kondisi_dikenali:
             for token in chunk.split():
                 # kata kunci persis (mis. 'kacang' di 'kacang hijau') sudah dikecualikan dengan sengaja
                 if len(token) < 4 or token in _ALIAS_KEYWORDS:
@@ -1065,6 +1136,8 @@ def _parse_restriction_text(text: Optional[str], use_llm: bool = False) -> tuple
                     chunk_cats.update(_ALIAS_KEYWORDS[close[0]])
         if chunk_cats:
             categories.update(chunk_cats)
+        elif kondisi_dikenali:
+            pass
         elif len(chunk) >= 3 and re.search(r'[a-z]{2}', chunk):   # '123', '???' bukan frasa
             free_phrases.add(chunk)
 
@@ -1115,20 +1188,19 @@ def hitung_konflik_keamanan(df: pd.DataFrame, pantanganMedis: Optional[str], kat
 
     names = out['name'].astype(str).str.lower().tolist()
     labels = out['label_risiko'].tolist() if 'label_risiko' in out.columns else [''] * len(out)
-    sugars = out['sugars'].astype(float).tolist() if 'sugars' in out.columns else [0.0] * len(out)
-    fats = out['fat'].astype(float).tolist() if 'fat' in out.columns else [0.0] * len(out)
+    gizi = {kol: (out[kol].astype(float).tolist() if kol in out.columns else [0.0] * len(out))
+            for kol in {kol for kol, _ in ATURAN_GIZI.values()}}
     tekstur = out['tekstur'].tolist() if 'tekstur' in out.columns else ['biasa'] * len(out)
     tahap = TEKSTUR_ORDINAL.get(str(ctx.get('tahapDiet') or 'biasa').lower(), 3)
 
     n_alg, n_pant, n_free, n_blk, n_lim, blk_codes, lim_codes = [], [], [], [], [], [], []
-    for name, label, sug, fat, tek in zip(names, labels, sugars, fats, tekstur):
+    for i, (name, label, tek) in enumerate(zip(names, labels, tekstur)):
         food_cats = set(detect_allergens(name)) | _split_label(label)
-        # Batas klinis berbasis nilai gizi (gula > 15 g, lemak > 25 g per 100 g) berlaku untuk grup dari
-        # kolom alergi MAUPUN pantangan (mis. user menulis 'gula' di kolom alergi).
-        if sug > 15.0:
-            food_cats.add('manis')
-        if fat > 25.0:
-            food_cats.add('gorengan')
+        # Batas berbasis nilai gizi per 100 g (ATURAN_GIZI) berlaku untuk grup dari kolom alergi MAUPUN
+        # pantangan (mis. user menulis 'gula' di kolom alergi).
+        for grup, (kol, ambang) in ATURAN_GIZI.items():
+            if gizi[kol][i] > ambang:
+                food_cats.add(grup)
         n_alg.append(len(allergy_cats & food_cats))
         n_pant.append(len(pant_cats & food_cats))
         n_free.append(sum(keyword_match(name, p) for p in free_patterns))
