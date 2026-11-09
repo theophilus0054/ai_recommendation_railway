@@ -4,7 +4,8 @@ BAHAYA = {
     'blokir': {'ALKOHOL': None, 'MENTAH': []},  # MENTAH: hanya 'raw' + produk hewani
     'batasi': {
         'KAFEIN':  ['coffee', 'espresso', 'energy drink', 'cola', 'kopi'],
-        'OLAHAN':  ['fast foods', 'frankfurter', 'sausage', 'bacon', 'hot dog', 'instant', 'luncheon meat', 'sosis', 'nugget'],
+        'OLAHAN':  ['fast foods', 'frankfurter', 'sausage', 'bacon', 'hot dog', 'instant', 'luncheon meat', 'sosis', 'nugget',
+                    'chips', 'crisps', 'keripik'],
     },
 }
 

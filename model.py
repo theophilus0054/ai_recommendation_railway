@@ -304,6 +304,18 @@ FOOD_TYPE_KEYWORDS: list[tuple[str, list[str]]] = [
                    'restaurant', 'nasi', 'roti', 'mie', 'kentang', 'singkong', 'ubi']),
 ]
 
+# Bumbu yang di data produk sering bertipe 'vegetable' (cabai, bawang, jahe). Dipakai sebagai pelengkap
+# (foodType 'spice'), bukan pengisi slot sayur. Hanya dicek pada nama utama (sebelum koma).
+BUMBU_KEYWORDS = ['chili', 'chilli', 'chile', 'chilies', 'chillies', 'cayenne', 'jalapeno', 'cabai', 'cabe',
+                  'onion', 'onions', 'shallot', 'shallots', 'garlic', 'bawang', 'ginger', 'jahe', 'lemongrass',
+                  'serai', 'sereh', 'galangal', 'lengkuas', 'turmeric', 'kunyit']
+
+# Pengecualian kata kunci tabel bahaya: frasa yang mengandung kata kunci tapi bukan bahayanya.
+# 'kidney' (ginjal, jeroan) tidak berlaku untuk kacang merah (kidney beans).
+HAZARD_EXCEPTIONS: dict[str, list[str]] = {
+    'JEROAN': ['kidney bean', 'kidney beans', 'beans, kidney'],
+}
+
 # Fitur ML: SATU daftar & SATU fungsi untuk training (shared/dataset.py) dan inferensi (recommend_meal)
 FEATURE_COLS: list[str] = (
     ['log_kcal_ratio', 'abs_log_kcal_ratio', 'portion_clipped',
@@ -352,6 +364,8 @@ _ANIMAL_PATTERN = _kw_pattern(
        'roe', 'caviar', 'game meat', 'ayam', 'daging', 'sapi'])
 _TEXTURE_PATTERNS = {tek: _kw_pattern(kws) for tek, kws in TEXTURE_KEYWORDS.items()}
 _FOOD_TYPE_PATTERNS = [(ft, _kw_pattern(kws)) for ft, kws in FOOD_TYPE_KEYWORDS]
+_BUMBU_PATTERN = _kw_pattern(BUMBU_KEYWORDS)
+_HAZARD_EXCEPTION_PATTERNS = {code: _kw_pattern(kws) for code, kws in HAZARD_EXCEPTIONS.items()}
 _FRIED_PATTERN = _kw_pattern(['fried', 'deep-fried', 'battered', 'breaded', 'crispy', 'goreng', 'gorengan', 'tempura'])
 _PROCESSED_PATTERN = _kw_pattern(['fast foods', 'frankfurter', 'sausage', 'bacon', 'hot dog', 'luncheon meat',
                                   'instant', 'chips', 'nugget', 'sosis', 'kornet', 'canned', 'processed'])
@@ -372,10 +386,14 @@ def is_alcoholic(name: str) -> bool:
 
 
 def classify_food_type(name: str, food_type: Optional[str] = None) -> str:
-    """foodType memakai kosakata produk Supabase. Kolom foodType asli diutamakan bila ada."""
-    if isinstance(food_type, str) and food_type.strip().lower() in FOOD_TYPES:
-        return food_type.strip().lower()
+    """foodType memakai kosakata produk Supabase. Kolom foodType asli diutamakan bila ada,
+    kecuali bumbu (cabai, bawang, jahe) bertipe sayur yang dijadikan 'spice'."""
     head = str(name).lower().split(',')[0]
+    asli = food_type.strip().lower() if isinstance(food_type, str) else ''
+    if asli in ('', 'vegetable', 'spice') and keyword_match(head, _BUMBU_PATTERN):
+        return 'spice'
+    if asli in FOOD_TYPES:
+        return asli
     for text in (head, str(name).lower()):
         for ft, pat in _FOOD_TYPE_PATTERNS:
             if keyword_match(text, pat):
@@ -406,13 +424,13 @@ def detect_hazards(name: str, kategori: str) -> tuple[list[str], list[str]]:
     table = _HAZARD_PATTERNS.get(kategori, _HAZARD_PATTERNS['UMUM'])
     blokir, batasi = [], []
     for code, pat in table.get('blokir', {}).items():
-        exc = _ALCOHOL_EXCEPTION_PATTERN if code == 'ALKOHOL' else None
+        exc = _ALCOHOL_EXCEPTION_PATTERN if code == 'ALKOHOL' else _HAZARD_EXCEPTION_PATTERNS.get(code)
         if keyword_match(name, pat, exc):
             blokir.append(code)
         elif code == 'MENTAH' and keyword_match(name, _RAW_PATTERN) and keyword_match(name, _ANIMAL_PATTERN):
             blokir.append(code)
     for code, pat in table.get('batasi', {}).items():
-        if keyword_match(name, pat):
+        if keyword_match(name, pat, _HAZARD_EXCEPTION_PATTERNS.get(code)):
             batasi.append(code)
     return blokir, batasi
 

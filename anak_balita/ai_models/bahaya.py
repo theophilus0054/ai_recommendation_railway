@@ -7,6 +7,8 @@ BAHAYA = {
         'RISIKO_TERSEDAK': ['whole nuts', 'popcorn', 'hard candy', 'hard candies', 'lollipop', 'gum', 'chewing gum',
                             'peanuts', 'almonds', 'cashews', 'pistachios', 'seeds', 'grapes'],
         'MENTAH':          ['sushi', 'sashimi', 'undercooked', 'setengah matang'],
+        'PEDAS':           ['chili', 'chilli', 'chile', 'cayenne', 'jalapeno', 'cabai', 'cabe', 'sambal', 'hot sauce',
+                            'spicy', 'pedas'],
     },
     'batasi': {
         'GULA_TAMBAHAN': ['candy', 'candies', 'soda', 'carbonated', 'frosted', 'cookies', 'cake', 'syrup', 'sweetened'],

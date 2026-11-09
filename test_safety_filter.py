@@ -202,5 +202,33 @@ class TestDailyVariety(unittest.TestCase):
         self.assertGreater(len(picks), 1)
 
 
+class TestTemuanLaporanPM(unittest.TestCase):
+    """Temuan laporan PM 9 Nov 2026: cabai sebagai sayur, keripik untuk ibu hamil, kidney beans = jeroan."""
+
+    def test_bumbu_bertipe_sayur_menjadi_spice(self):
+        from model import classify_food_type
+        self.assertEqual(classify_food_type('Red Chili', 'vegetable'), 'spice')
+        self.assertEqual(classify_food_type('Red Onion', 'vegetable'), 'spice')
+        self.assertEqual(classify_food_type('Cabai Rawit'), 'spice')
+        # paprika dan sayur biasa tetap sayur; tipe lain dari Supabase tidak diubah
+        self.assertEqual(classify_food_type('Red Bell Pepper', 'vegetable'), 'vegetable')
+        self.assertEqual(classify_food_type('Broccoli', 'vegetable'), 'vegetable')
+        self.assertEqual(classify_food_type('Garlic Bread', 'carb'), 'carb')
+
+    def test_cabai_diblokir_untuk_balita(self):
+        self.assertIn('PEDAS', detect_hazards('Red Chili', 'ANAK_BALITA')[0])
+        self.assertEqual(detect_hazards('Red Bell Pepper', 'ANAK_BALITA')[0], [])
+
+    def test_keripik_dibatasi_untuk_ibu_hamil(self):
+        self.assertIn('OLAHAN', detect_hazards('Baked Potato Chips', 'IBU_HAMIL')[1])
+        self.assertIn('OLAHAN', detect_hazards('Baked Potato Chips', 'UMUM')[1])
+
+    def test_kidney_beans_bukan_jeroan(self):
+        self.assertNotIn('JEROAN', detect_hazards('Kidney Beans', 'IBU_HAMIL')[1])
+        self.assertNotIn('JEROAN', detect_hazards('Beans, kidney, red, mature seeds', 'IBU_HAMIL')[1])
+        self.assertIn('JEROAN', detect_hazards('Beef kidney', 'IBU_HAMIL')[1])
+        self.assertIn('JEROAN', detect_hazards('Chicken liver', 'IBU_HAMIL')[1])
+
+
 if __name__ == '__main__':
     unittest.main()
