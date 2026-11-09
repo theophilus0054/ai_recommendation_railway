@@ -172,7 +172,7 @@ class TestMenuComposition(unittest.TestCase):
         self.kalori = {'target_kalori_harian': 2000.0, 'distribusi': {'protein_g': 100.0, 'fat_g': 67.0, 'carbs_g': 250.0}}
 
     def test_plate_roles_and_side_items(self):
-        plan = build_meal_plan(self.kalori, self.df, 'UMUM', {}, {}, rng=np.random.default_rng(1))
+        plan = build_meal_plan(self.kalori, self.df, 'UMUM', {}, rng=np.random.default_rng(1))
         siang = plan['rekomendasi_siang']
         self.assertEqual([m['peran'] for m in siang], ['karbo', 'lauk', 'sayur'])
         self.assertEqual([m['jenis_bahan'] for m in siang], ['carb', 'protein', 'vegetable'])
@@ -183,7 +183,7 @@ class TestMenuComposition(unittest.TestCase):
         self.assertEqual(pelengkap, {'Salt, table', 'Oil, olive'})
 
     def test_no_repeat_within_day(self):
-        plan = build_meal_plan(self.kalori, self.df, 'UMUM', {}, {}, rng=np.random.default_rng(2))
+        plan = build_meal_plan(self.kalori, self.df, 'UMUM', {}, rng=np.random.default_rng(2))
         utama = [m['nama_makanan'] for k, v in plan.items() if k.startswith('rekomendasi_') for m in v]
         self.assertEqual(len(utama), len(set(utama)))
 

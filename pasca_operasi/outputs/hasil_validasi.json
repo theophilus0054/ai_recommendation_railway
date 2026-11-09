@@ -5,6 +5,8 @@
   "test": {
     "accuracy": 0.9332,
     "macro_f1": 0.8972,
+    "weighted_kappa": 0.932,
+    "log_loss": 0.1436,
     "macro_precision": 0.9036,
     "macro_recall": 0.8917,
     "per_class": {
@@ -27,7 +29,6 @@
         "support": 1066
       }
     },
-    "weighted_kappa": 0.932,
     "confusion_matrix": [
       [
         5601,
@@ -48,20 +49,63 @@
   },
   "cv_groupkfold": {
     "accuracy": {
-      "mean": 0.9326,
-      "std": 0.0038
+      "mean": 0.9324,
+      "std": 0.0014
     },
     "macro_f1": {
-      "mean": 0.8987,
-      "std": 0.0036
+      "mean": 0.8986,
+      "std": 0.0026
     },
     "weighted_kappa": {
-      "mean": 0.9353,
-      "std": 0.0034
+      "mean": 0.9351,
+      "std": 0.0014
+    },
+    "log_loss": {
+      "mean": 0.1474,
+      "std": 0.0029
     },
     "ndcg@5": {
-      "mean": 0.9872,
-      "std": 0.0026
+      "mean": 0.9873,
+      "std": 0.0017
+    }
+  },
+  "overfitting": {
+    "train_final": {
+      "accuracy": 0.9356,
+      "macro_f1": 0.9035,
+      "weighted_kappa": 0.9385,
+      "log_loss": 0.1416
+    },
+    "test": {
+      "accuracy": 0.9332,
+      "macro_f1": 0.8972,
+      "weighted_kappa": 0.932,
+      "log_loss": 0.1436
+    },
+    "cv_train_macro_f1": 0.9036,
+    "cv_val_macro_f1": 0.8986,
+    "selisih_f1_train_vs_cv": 0.0049,
+    "selisih_f1_train_vs_test": 0.0063,
+    "kesimpulan": "tidak overfitting",
+    "pembanding_gradient_boosting": {
+      "train": {
+        "accuracy": 0.9929,
+        "macro_f1": 0.9889,
+        "weighted_kappa": 0.9931,
+        "log_loss": 0.0472
+      },
+      "test": {
+        "accuracy": 0.9614,
+        "macro_f1": 0.9385,
+        "weighted_kappa": 0.9608,
+        "log_loss": 0.1038
+      },
+      "selisih_f1_train_vs_test": 0.0504,
+      "kesimpulan": "overfitting"
+    },
+    "batas": {
+      "tidak overfitting": 0.02,
+      "overfitting ringan": 0.05
     }
   },
   "end_to_end": [
@@ -73,7 +117,7 @@
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
       "rata_skor_kesesuaian": 75.7,
-      "latensi_ms": 59.9,
+      "latensi_ms": 66.1,
       "menu": {
         "pagi": [
           "karbo: Organic Brown Rice",
@@ -106,7 +150,7 @@
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
       "rata_skor_kesesuaian": 3.5,
-      "latensi_ms": 54.4,
+      "latensi_ms": 61.3,
       "menu": {
         "pagi": [
           "susu/olahan: Low Fat Milk"

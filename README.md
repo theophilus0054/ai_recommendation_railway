@@ -3,9 +3,8 @@ title: NutriScale AI Recommendation Engine
 emoji: 🥗
 colorFrom: green
 colorTo: blue
-sdk: gradio
-sdk_version: 4.44.0
-app_file: app.py
+sdk: docker
+app_port: 8000
 pinned: false
 license: mit
 ---
@@ -41,16 +40,17 @@ Sesuai dengan spesifikasi arsitektur **Histori Chat AI NutriScale (20 Oktober 20
 
 Setiap kategori: 700 profil sintetis × 5 sesi × 12 kandidat (≈42.000 pasangan). Split berdasarkan profil (profil test tidak pernah ada di train) dan 15% makanan hanya muncul di test. Label berasal dari rubrik bersama di `shared/dataset.py` ditambah rubrik khusus di `<kategori>/ai_models/rubrik.py` (memakai kolom yang tidak masuk fitur model, mis. serat, folat, zat besi, kalsium, kafein), tanpa noise acak.
 
-| Kategori | Accuracy | Precision (macro) | Recall (macro) | Macro-F1 | Weighted Kappa | CV Kappa (GroupKFold) | NDCG@5 | Pembanding GB (Acc / F1) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| UMUM | 0.9127 | 0.8755 | 0.8589 | 0.8665 | 0.8939 | 0.8936 ± 0.0068 | 0.9799 | 0.9550 / 0.9284 |
-| IBU_HAMIL | 0.8634 | 0.7983 | 0.7871 | 0.7918 | 0.8552 | 0.8612 ± 0.0048 | 0.9560 | 0.9204 / 0.8766 |
-| ANAK_BALITA | 0.9374 | 0.8933 | 0.8968 | 0.8950 | 0.9234 | 0.9154 ± 0.0042 | 0.9873 | 0.9615 / 0.9325 |
-| PASCA_OPERASI | 0.9332 | 0.9036 | 0.8917 | 0.8972 | 0.9320 | 0.9353 ± 0.0034 | 0.9899 | 0.9614 / 0.9385 |
+| Kategori | Accuracy | Precision (macro) | Recall (macro) | Macro-F1 | Weighted Kappa | CV Kappa (GroupKFold) | NDCG@5 | F1 latih / validasi CV / test | Pembanding GB (Acc / F1) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| UMUM | 0.9125 | 0.8747 | 0.8588 | 0.8662 | 0.8937 | 0.8923 ± 0.0029 | 0.9801 | 0.8626 / 0.8576 / 0.8662 (tidak overfitting) | 0.9550 / 0.9284 |
+| IBU_HAMIL | 0.8634 | 0.7983 | 0.7871 | 0.7918 | 0.8552 | 0.8613 ± 0.0042 | 0.9560 | 0.8013 / 0.7976 / 0.7918 (tidak overfitting) | 0.9204 / 0.8766 |
+| ANAK_BALITA | 0.9374 | 0.8933 | 0.8968 | 0.8950 | 0.9234 | 0.9158 ± 0.0024 | 0.9873 | 0.8906 / 0.8874 / 0.8950 (tidak overfitting) | 0.9615 / 0.9325 |
+| PASCA_OPERASI | 0.9332 | 0.9036 | 0.8917 | 0.8972 | 0.9320 | 0.9351 ± 0.0014 | 0.9899 | 0.9035 / 0.8986 / 0.8972 (tidak overfitting) | 0.9614 / 0.9385 |
 
-- Model utama Logistic Regression (koefisien dapat dijelaskan). Gradient boosting hanya pembanding: lebih akurat meniru rubrik, tetapi kotak hitam. Fitur ambang (`porsi_ideal`, `natrium_lewat_jauh`, `gula_lewat_jauh`, dan lain-lain) membuat efek ambang terbaca oleh model linear.
+- **Cek overfitting** (`shared/training.py`, bagian 3-4 notebook): selisih macro-F1 latih vs validasi GroupKFold dan vs test <= 0,01 di keempat kategori, kurva belajar latih & validasi bertemu -> tidak overfitting. Batas: <= 0,02 tidak overfitting, <= 0,05 ringan, > 0,05 overfitting.
+- Model utama Logistic Regression (koefisien dapat dijelaskan). Gradient boosting hanya pembanding: lebih akurat meniru rubrik, tetapi kotak hitam. Gradient boosting juga overfitting (selisih latih-test 0,05-0,09), sedangkan Logistic Regression tidak. Fitur ambang (`porsi_ideal`, `natrium_lewat_jauh`, `gula_lewat_jauh`, dan lain-lain) membuat efek ambang terbaca oleh model linear.
 - Umur kategori `ANAK_BALITA` dalam **bulan** (0 sampai 60); kategori lain dalam tahun.
-- Uji end-to-end (`<kategori>/ai_models/validasi_<kategori>.py`, 2 skenario per kategori): 0 pelanggaran alergen, BLOKIR, dan tekstur.
+- Uji end-to-end (bagian 8 notebook `<kategori>/latih_validasi_<kategori>.ipynb`, 2 skenario per kategori): 0 pelanggaran alergen, BLOKIR, dan tekstur.
 - **Catatan jujur**: angka di atas mengukur seberapa baik model meniru rubrik pada data sintetis, bukan uji klinis. Rubrik & tabel bahaya perlu ditinjau ahli gizi (gold set) sebelum klaim klinis.
 
 ---
@@ -68,7 +68,8 @@ Struktur tiap folder kategori (contoh `umum/`):
 
 ```
 umum/
-  ai_models/   profil.py, rubrik.py, bahaya.py, skenario.py, input_uji.py, latih_umum.py, validasi_umum.py
+  latih_validasi_umum.ipynb   notebook: dataset, latih, cek overfitting, validasi, laporan
+  ai_models/   profil.py, rubrik.py, bahaya.py, skenario.py, input_uji.py
   data/        profiles.csv, train_data.csv, test_data.csv
   model/       recommender_UMUM.joblib
   outputs/     hasil_latih.json, hasil_validasi.json, laporan_validasi_umum.md
@@ -76,11 +77,11 @@ umum/
   README.md
 ```
 
-Kode bersama (fitur, safety filter, generator dataset, training, split, evaluasi) ada di `model.py` dan `shared/` (`dataset.py`, `training.py`, `pipeline.py`, `uji_input.py`, `bersama.py`), sehingga keempat model memakai metode dan konfigurasi yang sama (`config_hash` tercatat di metadata model). Katalog makanan bersama dan snapshot produk ada di `data/` (`nutrition.csv`, `supabase_products.json`).
+Kode bersama (fitur, safety filter, generator dataset, training, split, evaluasi) ada di `model.py` dan `shared/` (`dataset.py`, `training.py`, `pipeline.py`, `grafik.py`, `uji_input.py`, `bersama.py`), sehingga keempat model memakai metode dan konfigurasi yang sama (`config_hash` tercatat di metadata model). Katalog makanan bersama dan snapshot produk ada di `data/` (`nutrition.csv`, `supabase_products.json`).
 
 ```bash
-python ibu_hamil/ai_models/latih_ibu_hamil.py --buat-data
-python ibu_hamil/ai_models/validasi_ibu_hamil.py
+pip install -r requirements-notebook.txt
+jupyter lab ibu_hamil/latih_validasi_ibu_hamil.ipynb
 python -m unittest discover -s . -t . -p "test_*.py"
 ```
 
@@ -88,10 +89,13 @@ python -m unittest discover -s . -t . -p "test_*.py"
 
 ## 🚀 Perintah Operasional
 
-1. **Buat Data, Latih, dan Validasi per Kategori** (dijalankan pemilik masing-masing; contoh UMUM):
+1. **Buat Data, Latih, dan Validasi per Kategori** (dijalankan pemilik masing-masing; contoh UMUM): buka
+   `umum/latih_validasi_umum.ipynb` di VS Code / JupyterLab / Colab lalu *Run All* (`BUAT_DATA = True` untuk membuat
+   ulang `umum/data/*.csv`). Hasil: `umum/model/recommender_UMUM.joblib` dan `umum/outputs/laporan_validasi_umum.md`.
+   Notebook tidak dijalankan oleh Hugging Face Space; Space tetap menjalankan `app.py`.
    ```bash
-   python umum/ai_models/latih_umum.py --buat-data   # umum/data/*.csv lalu umum/model/recommender_UMUM.joblib
-   python umum/ai_models/validasi_umum.py            # umum/outputs/laporan_validasi_umum.md
+   pip install -r requirements-notebook.txt
+   jupyter lab umum/latih_validasi_umum.ipynb
    ```
 2. **Jalankan Unit Test** (kode bersama + semua kategori):
    ```bash

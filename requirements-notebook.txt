@@ -1,0 +1,6 @@
+# Dependensi tambahan untuk notebook latih/validasi (<kategori>/latih_validasi_<kategori>.ipynb).
+# Tidak dipakai API / Hugging Face Space (yang memakai requirements.txt).
+-r requirements.txt
+matplotlib>=3.8
+jupyterlab>=4.0
+ipykernel>=6.0

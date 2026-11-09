@@ -15,12 +15,12 @@ from slowapi.errors import RateLimitExceeded
 
 from model import load_and_preprocess_api_data, jalankan_ai_rekomendasi, get_recommender_model, NutriScaleDataError
 from prometheus_fastapi_instrumentator import Instrumentator
+from shared import KATEGORI_LIST
 
 # ==========================================================
-# GLOABAL STATE: PRE-LOAD DATASET & SCALER KE MEMORY RAM
-# ==========================================
-# Load .env (Local fallback)
-load_dotenv(find_dotenv(usecwd=True))
+# GLOBAL STATE: KATALOG PRODUK DIMUAT SEKALI KE MEMORI
+# ==========================================================
+load_dotenv(find_dotenv(usecwd=True))   # .env lokal (fallback)
 
 df_dataset = None
 scaler_dict = None
@@ -38,22 +38,22 @@ async def verify_api_key(api_key: str = Security(api_key_header)):
 
 limiter = Limiter(key_func=get_remote_address)
 
+
+def url_produk() -> str:
+    return os.environ.get("NEXT_PUBLIC_APP_URL", "http://localhost:3000").rstrip("/") + "/api/products"
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global df_dataset, scaler_dict
-    
-    api_url = os.environ.get("NEXT_PUBLIC_APP_URL", "http://localhost:3000").rstrip("/") + "/api/products"
+    api_url = url_produk()
     print(f"\n[API Startup] Memuat Dataset Makanan dari {api_url}...")
-    
     df_dataset, scaler_dict = load_and_preprocess_api_data(api_url)
-    
     if df_dataset is None or len(df_dataset) == 0:
         print(f"[API Startup WARNING] Gagal memuat dataset dari {api_url}! API berjalan fallback (Offline).")
     else:
         print(f"[API Startup] Dataset dimuat: {len(df_dataset)} Makanan Tersedia beserta Scaler.")
-    
-    yield  
-    
+    yield
     print("\n[API Shutdown] Membersihkan Memory Dataset...")
     df_dataset = None
     scaler_dict = None
@@ -193,7 +193,7 @@ def root():
 def list_models():
     """Model Logistic Regression yang aktif per kategori kondisi."""
     out = {}
-    for kategori in ["UMUM", "IBU_HAMIL", "ANAK_BALITA", "PASCA_OPERASI"]:
+    for kategori in KATEGORI_LIST:
         info = get_recommender_model(kategori)
         out[kategori] = {
             "loaded": info.get("pipeline") is not None,
@@ -210,22 +210,14 @@ async def sync_dataset(request: Request, api_key: str = Security(verify_api_key)
     Endpoint untuk me-refresh dataset dari Next.js API secara manual (saat ada proses CRUD produk).
     """
     global df_dataset, scaler_dict
-    
-    api_url = os.environ.get("NEXT_PUBLIC_APP_URL", "http://localhost:3000").rstrip("/") + "/api/products"
+    api_url = url_produk()
     print(f"\n[API Sync] Memuat ulang Dataset Makanan dari {api_url}...")
-    
     try:
         new_df, new_scaler = load_and_preprocess_api_data(api_url)
         if new_df is None or len(new_df) == 0:
             raise ValueError("Dataset kosong atau gagal dimuat")
-            
-        df_dataset = new_df
-        scaler_dict = new_scaler
-        
-        return {
-            "success": True,
-            "message": f"Dataset berhasil disinkronisasi. Total: {len(df_dataset)} makanan."
-        }
+        df_dataset, scaler_dict = new_df, new_scaler
+        return {"success": True, "message": f"Dataset berhasil disinkronisasi. Total: {len(df_dataset)} makanan."}
     except Exception as e:
         print(f"[API Sync Error] {e}")
         raise HTTPException(status_code=500, detail="Gagal melakukan sinkronisasi dataset.")
@@ -248,24 +240,10 @@ async def get_dietary_recommendation(
     try:
         if df_dataset is None or scaler_dict is None:
             raise HTTPException(status_code=500, detail="Sistem rekomendasi AI offline (Dataset missing).")
-            
-        profil_dict = profil.model_dump()
-        
-        output = jalankan_ai_rekomendasi(
-            profil_kesehatan_dict=profil_dict,
-            dataset_dataframe=df_dataset,
-            scaler_dict=scaler_dict,
-            use_llm=use_llm,
-            use_llm_parser=use_llm_parser
-        )
-        
-        return {
-            "success": True,
-            "data": output
-        }
-        
+        output = jalankan_ai_rekomendasi(profil_kesehatan_dict=profil.model_dump(), dataset_dataframe=df_dataset,
+                                         scaler_dict=scaler_dict, use_llm=use_llm, use_llm_parser=use_llm_parser)
+        return {"success": True, "data": output}
     except HTTPException:
-        # Re-raise explicit HTTP Exception
         raise
     except NutriScaleDataError as e:
         # Data gizi dari NutriScale tidak valid — aman ditampilkan (tidak ada traceback)

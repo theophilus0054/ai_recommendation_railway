@@ -7,14 +7,15 @@
    ibu_hamil/     -> Muz      (Model IBU_HAMIL)
    pasca_operasi/ -> Raymond  (Model PASCA_OPERASI)
  Isi tiap folder kategori:
-   ai_models/  kode kategori: profil.py, rubrik.py, bahaya.py, skenario.py, input_uji.py,
-               latih_<kategori>.py, validasi_<kategori>.py
+   latih_validasi_<kategori>.ipynb  notebook latih + cek overfitting + validasi + laporan
+   ai_models/  kode kategori: profil.py, rubrik.py, bahaya.py, skenario.py, input_uji.py
    data/       profiles.csv, train_data.csv, test_data.csv (dataset sintetis)
    model/      recommender_<KATEGORI>.joblib
    outputs/    hasil_latih.json, hasil_validasi.json, laporan_validasi_<kategori>.md
    tests/      test_<kategori>.py, test_input_<kategori>.py
  Kode training, daftar fitur, hyperparameter, seed, dan aturan split SAMA untuk keempat
  kategori (shared/dataset.py, shared/training.py, shared/pipeline.py, model.compute_ml_features).
+ Grafik notebook: shared/grafik.py (matplotlib, tidak diimpor API).
 ==========================================================================
 """
 

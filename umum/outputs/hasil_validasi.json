@@ -3,31 +3,32 @@
   "pemilik": "Muel",
   "config_hash": "7ec1c77b29e130d2",
   "test": {
-    "accuracy": 0.9127,
-    "macro_f1": 0.8665,
-    "macro_precision": 0.8755,
-    "macro_recall": 0.8589,
+    "accuracy": 0.9125,
+    "macro_f1": 0.8662,
+    "weighted_kappa": 0.8937,
+    "log_loss": 0.1983,
+    "macro_precision": 0.8747,
+    "macro_recall": 0.8588,
     "per_class": {
       "0": {
-        "precision": 0.9576,
+        "precision": 0.9574,
         "recall": 0.9586,
-        "f1": 0.9581,
+        "f1": 0.958,
         "support": 5584
       },
       "1": {
-        "precision": 0.8123,
-        "recall": 0.8369,
-        "f1": 0.8244,
+        "precision": 0.8124,
+        "recall": 0.8355,
+        "f1": 0.8238,
         "support": 2042
       },
       "2": {
-        "precision": 0.8565,
-        "recall": 0.7811,
-        "f1": 0.8171,
+        "precision": 0.8543,
+        "recall": 0.7824,
+        "f1": 0.8168,
         "support": 772
       }
     },
-    "weighted_kappa": 0.8939,
     "confusion_matrix": [
       [
         5353,
@@ -35,49 +36,92 @@
         5
       ],
       [
-        237,
-        1709,
-        96
+        238,
+        1706,
+        98
       ],
       [
         0,
-        169,
-        603
+        168,
+        604
       ]
     ]
   },
   "cv_groupkfold": {
     "accuracy": {
-      "mean": 0.9126,
-      "std": 0.0054
+      "mean": 0.9118,
+      "std": 0.0034
     },
     "macro_f1": {
-      "mean": 0.8598,
-      "std": 0.0079
+      "mean": 0.8576,
+      "std": 0.005
     },
     "weighted_kappa": {
-      "mean": 0.8936,
-      "std": 0.0068
+      "mean": 0.8923,
+      "std": 0.0029
+    },
+    "log_loss": {
+      "mean": 0.1939,
+      "std": 0.0047
     },
     "ndcg@5": {
-      "mean": 0.9795,
-      "std": 0.0022
+      "mean": 0.9797,
+      "std": 0.002
+    }
+  },
+  "overfitting": {
+    "train_final": {
+      "accuracy": 0.9141,
+      "macro_f1": 0.8626,
+      "weighted_kappa": 0.8955,
+      "log_loss": 0.1887
+    },
+    "test": {
+      "accuracy": 0.9125,
+      "macro_f1": 0.8662,
+      "weighted_kappa": 0.8937,
+      "log_loss": 0.1983
+    },
+    "cv_train_macro_f1": 0.8633,
+    "cv_val_macro_f1": 0.8576,
+    "selisih_f1_train_vs_cv": 0.0056,
+    "selisih_f1_train_vs_test": -0.0036,
+    "kesimpulan": "tidak overfitting",
+    "pembanding_gradient_boosting": {
+      "train": {
+        "accuracy": 0.9905,
+        "macro_f1": 0.9833,
+        "weighted_kappa": 0.9887,
+        "log_loss": 0.0522
+      },
+      "test": {
+        "accuracy": 0.955,
+        "macro_f1": 0.9284,
+        "weighted_kappa": 0.9461,
+        "log_loss": 0.1156
+      },
+      "selisih_f1_train_vs_test": 0.0549,
+      "kesimpulan": "overfitting"
+    },
+    "batas": {
+      "tidak overfitting": 0.02,
+      "overfitting ringan": 0.05
     }
   },
   "end_to_end": [
     {
       "skenario": "Dewasa Umum Obesitas",
       "jumlah_item": 11,
-      "kandidat_lolos_filter": 41,
+      "kandidat_lolos_filter": 38,
       "pelanggaran_alergen": 0,
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
-      "rata_skor_kesesuaian": 74.9,
-      "latensi_ms": 51.4,
+      "rata_skor_kesesuaian": 66.5,
+      "latensi_ms": 70.2,
       "menu": {
         "pagi": [
           "karbo: Whole Wheat Bread",
-          "lauk: Lentils",
+          "lauk: Tilapia Fish",
           "buah/sayur: Banana"
         ],
         "snack_pagi": [
@@ -93,8 +137,8 @@
         ],
         "malam": [
           "karbo: Organic Brown Rice",
-          "lauk: Tilapia Fish",
-          "sayur: Red Chili"
+          "lauk: Salmon Fillet",
+          "sayur: Broccoli"
         ]
       }
     },
@@ -105,8 +149,8 @@
       "pelanggaran_alergen": 0,
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
-      "rata_skor_kesesuaian": 73.4,
-      "latensi_ms": 47.3,
+      "rata_skor_kesesuaian": 71.8,
+      "latensi_ms": 72.8,
       "menu": {
         "pagi": [
           "karbo: Organic Brown Rice",
@@ -127,7 +171,7 @@
         "malam": [
           "karbo: Oatmeal",
           "lauk: Fresh Chicken Breast",
-          "sayur: Red Chili"
+          "sayur: Red Bell Pepper"
         ]
       }
     }

@@ -22,8 +22,7 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 | `ai_models/bahaya.py` | Tabel BLOKIR dan BATASI, batas harian gula, garam, lemak |
 | `ai_models/skenario.py` | Kasus uji end-to-end |
 | `ai_models/input_uji.py` | Kasus input user untuk `/api/recommend` (valid dan invalid) |
-| `ai_models/latih_umum.py` | Buat dataset (opsional) dan latih model |
-| `ai_models/validasi_umum.py` | Validasi dan tulis laporan |
+| `latih_validasi_umum.ipynb` | Notebook: buat dataset (opsional), latih, cek overfitting, validasi, laporan |
 | `data/` | `profiles.csv`, `train_data.csv`, `test_data.csv` (dataset sintetis) |
 | `model/` | `recommender_UMUM.joblib` |
 | `outputs/` | `hasil_latih.json`, `hasil_validasi.json`, `laporan_validasi_umum.md` |
@@ -32,8 +31,7 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 ## Cara menjalankan (dari root repo)
 
 ```bash
-python umum/ai_models/latih_umum.py --buat-data   # buat umum/data/ lalu latih umum/model/recommender_UMUM.joblib
-python umum/ai_models/validasi_umum.py            # laporan: umum/outputs/laporan_validasi_umum.md
+jupyter lab umum/latih_validasi_umum.ipynb   # Run All; set BUAT_DATA = True untuk membuat ulang umum/data/
 python -m unittest umum.tests.test_umum
 python -m unittest umum.tests.test_input_umum      # uji input user via API
 ```

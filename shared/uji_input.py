@@ -11,7 +11,6 @@
 """
 
 import os
-import unittest
 
 os.environ.setdefault("AI_ALLOW_SNAPSHOT_FALLBACK", "1")
 os.environ.setdefault("AI_ENGINE_API_KEY", "kunci-uji")
@@ -19,7 +18,7 @@ os.environ.setdefault("AI_ENGINE_API_KEY", "kunci-uji")
 from fastapi.testclient import TestClient
 
 import api
-from shared import KATEGORI_LIST, modul
+from shared import modul
 from model import TEKSTUR_ORDINAL, detect_allergens, detect_hazards, parse_pantangan_input
 
 SESI = ['rekomendasi_pagi', 'rekomendasi_snack_pagi', 'rekomendasi_siang', 'rekomendasi_snack_sore', 'rekomendasi_malam']
@@ -80,7 +79,3 @@ class UjiInputKategori:
     def test_tanpa_api_key_ditolak(self):
         res = self.client.post("/api/recommend?use_llm=false", json=self.kasus[0]['body'])
         self.assertIn(res.status_code, (401, 403))
-
-
-def semua_kasus() -> int:
-    return sum(len(modul(k, 'input_uji').KASUS) for k in KATEGORI_LIST)

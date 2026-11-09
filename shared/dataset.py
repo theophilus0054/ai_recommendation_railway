@@ -23,7 +23,7 @@ import pandas as pd
 from sklearn.model_selection import GroupShuffleSplit
 
 from model import (
-    FEATURE_COLS, SESSION_RATIOS, DAILY_LIMITS, compute_ml_features, hitung_konflik_keamanan,
+    FEATURE_COLS, SESSION_RATIOS, DAILY_LIMITS, ada_konflik, compute_ml_features, hitung_konflik_keamanan,
     classify_food_type, detect_texture, detect_allergens, detect_hazards, is_alcoholic, status_flags,
     session_group, TEKSTUR_ORDINAL,
 )
@@ -280,8 +280,7 @@ def generate_category_dataset(df_food: pd.DataFrame, kategori: str,
         # Kandidat konflik: makanan yang memicu alergi/pantangan user atau BLOKIR kategori
         checked_all = hitung_konflik_keamanan(foods.sample(400, random_state=int(rng.integers(1e9))),
                                               prof['pantanganMedis'], kategori, prof['alergi'], ctx)
-        conflict_pool = checked_all[(checked_all['n_conflict_allergen'] + checked_all['n_conflict_pantangan']
-                                     + checked_all['n_conflict_free'] + checked_all['n_block_kategori']) > 0]
+        conflict_pool = checked_all[ada_konflik(checked_all)]
         if len(conflict_pool) == 0:
             conflict_pool = foods[foods[f'blokir_{kategori}']]
 
@@ -297,9 +296,7 @@ def generate_category_dataset(df_food: pd.DataFrame, kategori: str,
             meal_type = 'snack' if 'snack' in session else session
             feats = compute_ml_features(cand, target_kcal, target_macros, meal_type, kategori, ctx)
 
-            for (i, row), (_, frow) in zip(cand.iterrows(), feats.iterrows()):
-                conflict = (row['n_conflict_allergen'] + row['n_conflict_pantangan'] + row['n_conflict_free']
-                            + row['n_block_kategori']) > 0
+            for (_, row), (_, frow), conflict in zip(cand.iterrows(), feats.iterrows(), ada_konflik(cand)):
                 pts = rubric_points(row, prof, kategori, target_kcal, session)
                 label = 0 if conflict else grade_from_points(pts)
                 samples.append({
@@ -339,7 +336,7 @@ def generate_category_dataset(df_food: pd.DataFrame, kategori: str,
     df_test.to_csv(test_path, index=False)
     df_prof.to_csv(os.path.join(out_dir, 'profiles.csv'), index=False)
 
-    print(f"[Dataset Generator] Berhasil disimpan:")
+    print("[Dataset Generator] Berhasil disimpan:")
     print(f"  - Training Data: {train_path} ({len(df_train)} baris)")
     print(f"  - Testing Data : {test_path} ({len(df_test)} baris)")
     return train_path, test_path
