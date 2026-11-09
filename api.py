@@ -138,6 +138,9 @@ class ProfilKesehatanInput(BaseModel):
     pantanganMedis: Optional[str] = Field(default="")
     # Isian alergi dari form web (dipisah dari pantangan agar tidak hilang)
     alergi: Optional[str] = Field(default="")
+    # Hasil parser alergi LLM yang disimpan NutriScale dari `_meta.parser_alergi.hasil_untuk_disimpan`
+    # sebelumnya. Bila teks alergi/pantangan tidak berubah, Groq tidak dipanggil lagi.
+    parserAlergiTersimpan: Optional[dict] = Field(default=None)
     # Khusus PASCA_OPERASI: tahap diet dari dokter/ahli gizi & jenis operasi
     tahapDiet: Optional[str] = Field(default=None, pattern="^(cair|saring|lunak|biasa)$")
     jenisOperasi: Optional[str] = Field(default=None, pattern="^(saluran_cerna|ortopedi|caesar|umum)$")
@@ -233,11 +236,14 @@ async def get_dietary_recommendation(
     request: Request,
     profil: ProfilKesehatanInput, 
     use_llm: bool = True,
+    use_llm_parser: Optional[bool] = None,
     api_key: str = Security(verify_api_key)
 ):
     """
     Endpoint utama Rekomendasi Gizi ML + LLM. 
     Wajib mengirimkan header `X-API-Key`.
+    - use_llm        : narasi Gemini (default aktif).
+    - use_llm_parser : parser alergi/pantangan Groq; kosong = aktif bila GROQ_API_KEY ada.
     """
     try:
         if df_dataset is None or scaler_dict is None:
@@ -249,7 +255,8 @@ async def get_dietary_recommendation(
             profil_kesehatan_dict=profil_dict,
             dataset_dataframe=df_dataset,
             scaler_dict=scaler_dict,
-            use_llm=use_llm
+            use_llm=use_llm,
+            use_llm_parser=use_llm_parser
         )
         
         return {
