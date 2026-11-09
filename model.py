@@ -79,7 +79,8 @@ ALLERGEN_EXCEPTIONS: dict[str, list[str]] = {
     'kacang': ['kacang hijau', 'kacang merah', 'kacang panjang', 'kacang polong', 'kacang tolo', 'kacang kedelai',
                'coconut', 'nutmeg', 'butternut', 'water chestnut', 'chestnut', 'chestnuts', 'doughnut', 'donut'],
     'telur':  ['eggplant', 'egg plant'],
-    'gluten': ['buckwheat', 'rice noodle', 'rice noodles', 'shirataki', 'bihun', 'kwetiau', 'gluten-free', 'gluten free'],
+    'gluten': ['buckwheat', 'rice noodle', 'rice noodles', 'shirataki noodles', 'shirataki noodle', 'shirataki',
+               'konjac noodles', 'bihun', 'kwetiau', 'gluten-free', 'gluten free'],
     'manis':  ['sweet potato', 'sweet potatoes', 'potatoes, sweet', 'sweet corn', 'corn, sweet', 'ubi manis',
                'sweet pepper', 'sweet peppers', 'peppers, sweet', 'pepper, sweet', 'cherries, sweet', 'sweet cherries'],
 }
@@ -1153,6 +1154,12 @@ def _ekstrak_llm(text: Optional[str]) -> Optional[dict]:
 PENGECUALIAN_FRASA: dict[str, list[str]] = {
     'kentang': ['sweet potato', 'sweet potatoes'],
 }
+def _kata_frasa(frasa: str) -> list[str]:
+    """Kata kunci untuk frasa bebas: dari kamus, atau frasa itu sendiri plus bentuk jamak ('lentil' -> 'lentils')."""
+    if frasa in PANTANGAN_PHRASES:
+        return PANTANGAN_PHRASES[frasa]
+    return [frasa, frasa + 's', frasa + 'es']
+
 KACANG_POLOS = {'kacang', 'kacang-kacangan', 'kacang kacangan', 'kacang2'}
 
 def _parse_restriction_text(text: Optional[str], use_llm: bool = False) -> tuple[set[str], set[str]]:
@@ -1216,7 +1223,8 @@ def _parse_restriction_text(text: Optional[str], use_llm: bool = False) -> tuple
                 if len(token) < 4 or token in _ALIAS_KEYWORDS:
                     continue
                 close = difflib.get_close_matches(token, _ALIAS_KEYWORDS.keys(), n=1, cutoff=0.8)
-                if close:
+                # huruf awal harus sama: 'mustard' bukan salah ketik 'custard' (telur)
+                if close and close[0][0] == token[0]:
                     chunk_cats.update(_ALIAS_KEYWORDS[close[0]])
         if chunk in KACANG_POLOS:
             free_phrases.add('polong')
@@ -1273,7 +1281,7 @@ def hitung_konflik_keamanan(df: pd.DataFrame, pantanganMedis: Optional[str], kat
         allergy_cats = allergy_cats - PREFERENSI_TANPA_PENGAWASAN
         pant_cats = pant_cats - PREFERENSI_TANPA_PENGAWASAN
     free_phrases = allergy_free | pant_free
-    free_patterns = [(_kw_pattern(PANTANGAN_PHRASES.get(p, [p])), _kw_pattern(PENGECUALIAN_FRASA.get(p, [])))
+    free_patterns = [(_kw_pattern(_kata_frasa(p)), _kw_pattern(PENGECUALIAN_FRASA.get(p, [])))
                      for p in free_phrases]
 
     names = out['name'].astype(str).str.lower().tolist()
@@ -1693,7 +1701,7 @@ def ringkas_parser_alergi(df: Optional[pd.DataFrame], alergi: str, pantangan: st
     _, free_a = _parse_restriction_text(alergi, use_llm_parser)
     _, free_p = _parse_restriction_text(pantangan, use_llm_parser)
     tidak_cocok = sorted(p for p in free_a | free_p
-                         if not any(keyword_match(n, _kw_pattern(PANTANGAN_PHRASES.get(p, [p])),
+                         if not any(keyword_match(n, _kw_pattern(_kata_frasa(p)),
                                               _kw_pattern(PENGECUALIAN_FRASA.get(p, []))) for n in names))
     sumber = 'regex+llm' if tambahan_llm else 'regex'
     return {'sumber': sumber, 'llm_aktif': bool(use_llm_parser), 'llm_gagal': gagal_llm,

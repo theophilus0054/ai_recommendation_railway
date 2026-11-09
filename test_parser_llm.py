@@ -246,6 +246,15 @@ class ParserLLMTest(unittest.TestCase):
         self.assertEqual(buang('alpukat'), ['Avocado'])
         self.assertEqual(buang('dada ayam'), ['Fresh Chicken Breast'])
 
+    def test_nama_produk_inggris_tanpa_salah_tebak(self):
+        df = pd.DataFrame({'name': ['Mustard Greens', 'Eggs', 'Lentils', 'Shirataki Noodles', 'Whole Wheat Bread']})
+        def buang(teks):
+            return sorted(set(df['name']) - set(model.filter_dataset(df, '', 'UMUM', teks)['name']))
+        self.assertEqual(buang('mustard greens'), ['Mustard Greens'])   # bukan 'custard' (telur)
+        self.assertEqual(buang('lentil'), ['Lentils'])                  # bentuk jamak
+        self.assertEqual(buang('gluten'), ['Whole Wheat Bread'])        # shirataki bebas gluten
+        self.assertEqual(buang('telor'), ['Eggs'])                      # koreksi salah ketik tetap jalan
+
     def test_kacang_polos_ikut_membuang_polong(self):
         self.assertEqual(model._parse_restriction_text('alergi kacang'), ({'kacang'}, {'polong'}))
         self.assertEqual(model._parse_restriction_text('kacang-kacangan'), ({'kacang'}, {'polong'}))
