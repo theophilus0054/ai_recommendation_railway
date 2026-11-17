@@ -174,7 +174,7 @@ def tulis_laporan(kategori: str, h: dict, e2e: list[dict]) -> str:
                 ['Urutan acak', '-', '-', '-', f4(nd['baseline_acak']['ndcg@5'])]]),
         "",
         f"- Subset makanan baru (tidak ada di data latih): macro-F1 {f4(h['test_new_food'].get('macro_f1', 0))}, kappa {f4(h['test_new_food'].get('weighted_kappa', 0))}",
-        f"- Pasangan konflik yang tetap diberi label > 0 oleh model saja: {h['conflict_pairs_predicted_nonzero']:.2%} (di produksi dibuang dulu oleh filter keamanan)",
+        f"- Baris konflik (alergi/pantangan/BLOKIR) tidak dipakai melatih maupun menilai model, karena di produksi dibuang filter keamanan sebelum ranking. Bila dinilai model saja, {h['conflict_pairs_predicted_nonzero']:.2%} diberi label > 0: keamanan dijamin filter, bukan model.",
         "",
         *_bagian_overfitting(h),
         "## 6. Koefisien teratas (arah sangat cocok vs tidak cocok)",

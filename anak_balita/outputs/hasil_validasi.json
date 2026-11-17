@@ -1,106 +1,106 @@
 {
   "kategori": "ANAK_BALITA",
   "pemilik": "Arya",
-  "config_hash": "7ec1c77b29e130d2",
+  "config_hash": "ab9c7f415787085a",
   "test": {
-    "accuracy": 0.9374,
-    "macro_f1": 0.895,
-    "weighted_kappa": 0.9234,
-    "log_loss": 0.1489,
-    "macro_precision": 0.8933,
-    "macro_recall": 0.8968,
+    "accuracy": 0.9107,
+    "macro_f1": 0.8826,
+    "weighted_kappa": 0.9075,
+    "log_loss": 0.2122,
+    "macro_precision": 0.8857,
+    "macro_recall": 0.8797,
     "per_class": {
       "0": {
-        "precision": 0.9729,
-        "recall": 0.9706,
-        "f1": 0.9718,
-        "support": 6030
+        "precision": 0.9533,
+        "recall": 0.9562,
+        "f1": 0.9548,
+        "support": 3289
       },
       "1": {
-        "precision": 0.838,
-        "recall": 0.8411,
-        "f1": 0.8395,
-        "support": 1636
+        "precision": 0.8426,
+        "recall": 0.8479,
+        "f1": 0.8452,
+        "support": 1591
       },
       "2": {
-        "precision": 0.8691,
-        "recall": 0.8786,
-        "f1": 0.8738,
-        "support": 733
+        "precision": 0.8612,
+        "recall": 0.8349,
+        "f1": 0.8478,
+        "support": 654
       }
     },
     "confusion_matrix": [
       [
-        5853,
-        177,
+        3145,
+        144,
         0
       ],
       [
-        163,
-        1376,
-        97
+        154,
+        1349,
+        88
       ],
       [
         0,
-        89,
-        644
+        108,
+        546
       ]
     ]
   },
   "cv_groupkfold": {
     "accuracy": {
-      "mean": 0.9321,
-      "std": 0.0022
+      "mean": 0.9114,
+      "std": 0.0039
     },
     "macro_f1": {
-      "mean": 0.8874,
-      "std": 0.0015
+      "mean": 0.8833,
+      "std": 0.0073
     },
     "weighted_kappa": {
-      "mean": 0.9158,
-      "std": 0.0024
+      "mean": 0.907,
+      "std": 0.0041
     },
     "log_loss": {
-      "mean": 0.1582,
-      "std": 0.0033
+      "mean": 0.2155,
+      "std": 0.0073
     },
     "ndcg@5": {
-      "mean": 0.9857,
-      "std": 0.0026
+      "mean": 0.9851,
+      "std": 0.0017
     }
   },
   "overfitting": {
     "train_final": {
-      "accuracy": 0.9341,
-      "macro_f1": 0.8906,
-      "weighted_kappa": 0.9184,
-      "log_loss": 0.152
+      "accuracy": 0.9142,
+      "macro_f1": 0.8877,
+      "weighted_kappa": 0.91,
+      "log_loss": 0.2048
     },
     "test": {
-      "accuracy": 0.9374,
-      "macro_f1": 0.895,
-      "weighted_kappa": 0.9234,
-      "log_loss": 0.1489
+      "accuracy": 0.9107,
+      "macro_f1": 0.8826,
+      "weighted_kappa": 0.9075,
+      "log_loss": 0.2122
     },
-    "cv_train_macro_f1": 0.8919,
-    "cv_val_macro_f1": 0.8874,
-    "selisih_f1_train_vs_cv": 0.0044,
-    "selisih_f1_train_vs_test": -0.0044,
+    "cv_train_macro_f1": 0.8879,
+    "cv_val_macro_f1": 0.8833,
+    "selisih_f1_train_vs_cv": 0.0046,
+    "selisih_f1_train_vs_test": 0.0051,
     "kesimpulan": "tidak overfitting",
     "pembanding_gradient_boosting": {
       "train": {
-        "accuracy": 0.9927,
-        "macro_f1": 0.9872,
-        "weighted_kappa": 0.991,
-        "log_loss": 0.0429
+        "accuracy": 0.9928,
+        "macro_f1": 0.99,
+        "weighted_kappa": 0.9926,
+        "log_loss": 0.0506
       },
       "test": {
-        "accuracy": 0.9615,
-        "macro_f1": 0.9325,
-        "weighted_kappa": 0.953,
-        "log_loss": 0.1012
+        "accuracy": 0.9469,
+        "macro_f1": 0.9288,
+        "weighted_kappa": 0.9448,
+        "log_loss": 0.1393
       },
-      "selisih_f1_train_vs_test": 0.0547,
+      "selisih_f1_train_vs_test": 0.0612,
       "kesimpulan": "overfitting"
     },
     "batas": {
@@ -116,13 +116,13 @@
       "pelanggaran_alergen": 0,
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
-      "rata_skor_kesesuaian": 75.0,
-      "latensi_ms": 54.9,
+      "rata_skor_kesesuaian": 73.0,
+      "latensi_ms": 32.7,
       "menu": {
         "pagi": [
           "karbo: Quinoa",
           "lauk: Lentils",
-          "buah/sayur: Oranges"
+          "buah/sayur: Red Bell Pepper"
         ],
         "snack_pagi": [
           "selingan: Strawberry Yogurt"
@@ -133,7 +133,7 @@
           "sayur: Sweet Potato"
         ],
         "snack_sore": [
-          "selingan: Dragon Fruit"
+          "selingan: Oranges"
         ],
         "malam": [
           "karbo: Oatmeal",
@@ -145,12 +145,12 @@
     {
       "skenario": "Balita 18 Bulan Tanpa HAZ/WHZ",
       "jumlah_item": 11,
-      "kandidat_lolos_filter": 41,
+      "kandidat_lolos_filter": 39,
       "pelanggaran_alergen": 0,
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
-      "rata_skor_kesesuaian": 75.8,
-      "latensi_ms": 51.8,
+      "rata_skor_kesesuaian": 77.9,
+      "latensi_ms": 30.8,
       "menu": {
         "pagi": [
           "karbo: Quinoa",
@@ -161,7 +161,7 @@
           "selingan: Greek Yogurt"
         ],
         "siang": [
-          "karbo: Whole Wheat Bread",
+          "karbo: Organic Brown Rice",
           "lauk: Tilapia Fish",
           "sayur: Sweet Potato"
         ],
@@ -169,9 +169,9 @@
           "selingan: Strawberry Yogurt"
         ],
         "malam": [
-          "karbo: Organic Brown Rice",
+          "karbo: Whole Wheat Bread",
           "lauk: Tofu",
-          "sayur: Spinach"
+          "sayur: Red Bell Pepper"
         ]
       }
     }

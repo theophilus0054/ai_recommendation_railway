@@ -43,6 +43,7 @@ PARSER_VERSION = 'parser-llm-v3'   # naikkan bila prompt/daftar grup berubah aga
 MAX_ENTRI_TERSIMPAN = 4
 
 _CACHE: dict[str, dict] = {}
+MAX_CACHE = 512   # batasi memori: teks pantangan unik tak terbatas jumlahnya
 _TERSIMPAN: ContextVar[dict] = ContextVar('hasil_parser_tersimpan', default={})
 # Teks yang gagal diproses Groq dalam request ini: tidak dicoba ulang (hindari timeout berlipat)
 _GAGAL: ContextVar[Optional[set]] = ContextVar('parser_gagal', default=None)
@@ -222,5 +223,7 @@ def ekstrak_pantangan_llm(teks: Optional[str], grup_valid: list[str], frasa_vali
         if gagal is not None:
             gagal.add(kunci_cache)
         return None
+    if len(_CACHE) >= MAX_CACHE:
+        _CACHE.pop(next(iter(_CACHE)), None)   # buang entri tertua
     _CACHE[kunci_cache] = hasil
     return hasil

@@ -5,12 +5,23 @@ __pycache__/
 .git/
 .gitignore
 .env
+.env.*
+!.env.example
 .venv/
-env/
 venv/
+env/
 .idea/
 .vscode/
+.pytest_cache/
 
 # Notebook latih/validasi tidak dibutuhkan API
 *.ipynb
 requirements-notebook.txt
+deploy_lama/
+
+# Dataset sintetis & katalog training (+-110 MB) hanya untuk melatih model, tidak dipakai API
+*/data/train_data.csv
+*/data/test_data.csv
+*/data/profiles.csv
+data/nutrition.csv
+*/outputs/*.png

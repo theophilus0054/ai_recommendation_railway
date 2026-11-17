@@ -34,7 +34,7 @@ from sklearn.metrics import (accuracy_score, f1_score, cohen_kappa_score, confus
 from model import FEATURE_COLS, ada_konflik, score_from_proba
 from shared import PEMILIK, data_dir, model_path
 
-MODEL_VERSION = 'lr-v2'
+MODEL_VERSION = 'lr-v3'   # v3: tanpa fitur & baris konflik (17 Nov 2026)
 LABELS = [0, 1, 2]
 N_FOLD = 5
 FRAKSI_KURVA = [0.1, 0.2, 0.4, 0.6, 0.8, 1.0]
@@ -42,12 +42,20 @@ FRAKSI_KURVA = [0.1, 0.2, 0.4, 0.6, 0.8, 1.0]
 BATAS_OVERFIT = [(0.02, 'tidak overfitting'), (0.05, 'overfitting ringan')]
 
 
-def load_data(kategori: str) -> tuple[pd.DataFrame, pd.DataFrame]:
+def load_data(kategori: str, dengan_konflik: bool = False) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    Data latih & test. Default: TANPA baris konflik (alergi/pantangan/BLOKIR), karena di produksi baris itu sudah
+    dibuang filter keamanan sebelum model meranking. Melatih & menilai model pada baris itu hanya mengajari
+    aturan 'konflik = label 0' yang sudah dijamin filter, dan menggelembungkan akurasi.
+    """
     paths = [os.path.join(data_dir(kategori), f) for f in ('train_data.csv', 'test_data.csv')]
     if not all(os.path.exists(p) for p in paths):
         raise FileNotFoundError(f"Dataset train/test {kategori} tidak ditemukan di {data_dir(kategori)}. "
                                 f"Jalankan notebook kategori dengan BUAT_DATA = True terlebih dahulu.")
-    return tuple(pd.read_csv(p) for p in paths)
+    dfs = tuple(pd.read_csv(p) for p in paths)
+    if dengan_konflik:
+        return dfs
+    return tuple(d[~ada_konflik(d)].reset_index(drop=True) for d in dfs)
 
 
 def make_model() -> Pipeline:
@@ -186,7 +194,8 @@ def analisis_overfitting(cv_rows: list[dict], train_final: dict, test: dict, gb_
 
 def train_category(kategori: str) -> dict:
     df_train, df_test = load_data(kategori)
-    print(f"\n[{kategori}] Memuat Dataset:")
+    _, df_test_semua = load_data(kategori, dengan_konflik=True)
+    print(f"\n[{kategori}] Memuat Dataset (tanpa baris konflik; konflik ditangani filter keamanan):")
     print(f"  - Training samples : {len(df_train)} baris ({df_train['profile_id'].nunique()} profil)")
     print(f"  - Testing samples  : {len(df_test)} baris ({df_test['profile_id'].nunique()} profil baru, Held-Out)")
     print(f"  - Distribusi label : {df_train['label'].value_counts(normalize=True).round(3).sort_index().to_dict()}")
@@ -214,8 +223,11 @@ def train_category(kategori: str) -> dict:
                for nama, s in [('model_lr', scores), ('baseline_lama', legacy_score(df_test)), ('baseline_acak', acak)]}
     new_mask = df_test['is_new_food'].to_numpy(dtype=bool)
     new_food = classification_metrics(y_test[new_mask], proba[new_mask]) if new_mask.any() else {}
-    conflict = ada_konflik(df_test)
-    conflict_nonzero = float(np.mean(proba[conflict].argmax(axis=1) > 0)) if conflict.any() else 0.0
+    # Baris konflik test (tidak dipakai melatih): seberapa sering model SAJA memberi label > 0. Angka tinggi wajar,
+    # karena model tidak lagi melihat fitur konflik; keamanan dijamin filter, bukan model.
+    df_konflik = df_test_semua[ada_konflik(df_test_semua)]
+    conflict_nonzero = (float(np.mean(model.predict(df_konflik[FEATURE_COLS].to_numpy()) > 0))
+                        if len(df_konflik) else 0.0)
 
     # 3. Pembanding gradient boosting pada split yang sama
     gb = make_baseline_gb().fit(X_train, y_train)
@@ -243,8 +255,8 @@ def train_category(kategori: str) -> dict:
     if new_food:
         print(f"  Subset makanan baru ({int(new_mask.sum())} baris): macro-F1 {new_food['macro_f1']:.4f} | "
               f"kappa {new_food['weighted_kappa']:.4f}")
-    print(f"  Pasangan konflik yang tetap diberi label > 0 oleh model saja: {conflict_nonzero:.2%} "
-          f"(di produksi dibuang dulu oleh safety filter)")
+    print(f"  Baris konflik ({len(df_konflik)}, tidak dipakai melatih) yang diberi label > 0 oleh model saja: "
+          f"{conflict_nonzero:.2%} -> keamanan dijamin filter keamanan, bukan model")
     print(f"  Pembanding gradient boosting: Acc {baseline_gb['accuracy']:.4f} | macro-F1 {baseline_gb['macro_f1']:.4f} | "
           f"kappa {baseline_gb['weighted_kappa']:.4f} | NDCG@5 {baseline_gb['ndcg@5']:.4f}")
     print(f"  Overfitting: macro-F1 latih {train_final['macro_f1']:.4f} | validasi CV {overfit['cv_val_macro_f1']:.4f} | "
@@ -254,6 +266,8 @@ def train_category(kategori: str) -> dict:
 
     results = {
         'train_rows': len(df_train), 'test_rows': len(df_test), 'config_hash': config_hash(),
+        'catatan_data': 'tanpa baris konflik (dibuang filter keamanan di produksi)',
+        'test_rows_konflik_dikeluarkan': int(len(df_konflik)),
         'train_profiles': int(df_train['profile_id'].nunique()), 'test_profiles': int(df_test['profile_id'].nunique()),
         'label_distribution_train': {str(k): round(float(v), 4) for k, v in df_train['label'].value_counts(normalize=True).sort_index().items()},
         'cv_groupkfold': cv_summary,

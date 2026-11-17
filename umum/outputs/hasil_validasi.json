@@ -1,106 +1,106 @@
 {
   "kategori": "UMUM",
   "pemilik": "Muel",
-  "config_hash": "7ec1c77b29e130d2",
+  "config_hash": "ab9c7f415787085a",
   "test": {
-    "accuracy": 0.9125,
-    "macro_f1": 0.8662,
-    "weighted_kappa": 0.8937,
-    "log_loss": 0.1983,
-    "macro_precision": 0.8747,
-    "macro_recall": 0.8588,
+    "accuracy": 0.891,
+    "macro_f1": 0.8634,
+    "weighted_kappa": 0.8861,
+    "log_loss": 0.2543,
+    "macro_precision": 0.8739,
+    "macro_recall": 0.8545,
     "per_class": {
       "0": {
-        "precision": 0.9574,
-        "recall": 0.9586,
-        "f1": 0.958,
-        "support": 5584
+        "precision": 0.9374,
+        "recall": 0.9448,
+        "f1": 0.9411,
+        "support": 3025
       },
       "1": {
-        "precision": 0.8124,
-        "recall": 0.8355,
-        "f1": 0.8238,
-        "support": 2042
+        "precision": 0.8329,
+        "recall": 0.8535,
+        "f1": 0.8431,
+        "support": 1945
       },
       "2": {
-        "precision": 0.8543,
-        "recall": 0.7824,
-        "f1": 0.8168,
-        "support": 772
+        "precision": 0.8513,
+        "recall": 0.7651,
+        "f1": 0.8059,
+        "support": 711
       }
     },
     "confusion_matrix": [
       [
-        5353,
-        226,
-        5
+        2858,
+        166,
+        1
       ],
       [
-        238,
-        1706,
-        98
+        191,
+        1660,
+        94
       ],
       [
         0,
-        168,
-        604
+        167,
+        544
       ]
     ]
   },
   "cv_groupkfold": {
     "accuracy": {
-      "mean": 0.9118,
-      "std": 0.0034
+      "mean": 0.8894,
+      "std": 0.003
     },
     "macro_f1": {
-      "mean": 0.8576,
+      "mean": 0.8633,
       "std": 0.005
     },
     "weighted_kappa": {
-      "mean": 0.8923,
-      "std": 0.0029
+      "mean": 0.8833,
+      "std": 0.0026
     },
     "log_loss": {
-      "mean": 0.1939,
-      "std": 0.0047
+      "mean": 0.2512,
+      "std": 0.0071
     },
     "ndcg@5": {
-      "mean": 0.9797,
-      "std": 0.002
+      "mean": 0.9829,
+      "std": 0.0024
     }
   },
   "overfitting": {
     "train_final": {
-      "accuracy": 0.9141,
-      "macro_f1": 0.8626,
-      "weighted_kappa": 0.8955,
-      "log_loss": 0.1887
+      "accuracy": 0.8916,
+      "macro_f1": 0.8663,
+      "weighted_kappa": 0.886,
+      "log_loss": 0.2433
     },
     "test": {
-      "accuracy": 0.9125,
-      "macro_f1": 0.8662,
-      "weighted_kappa": 0.8937,
-      "log_loss": 0.1983
+      "accuracy": 0.891,
+      "macro_f1": 0.8634,
+      "weighted_kappa": 0.8861,
+      "log_loss": 0.2543
     },
-    "cv_train_macro_f1": 0.8633,
-    "cv_val_macro_f1": 0.8576,
-    "selisih_f1_train_vs_cv": 0.0056,
-    "selisih_f1_train_vs_test": -0.0036,
+    "cv_train_macro_f1": 0.8667,
+    "cv_val_macro_f1": 0.8633,
+    "selisih_f1_train_vs_cv": 0.0034,
+    "selisih_f1_train_vs_test": 0.0029,
     "kesimpulan": "tidak overfitting",
     "pembanding_gradient_boosting": {
       "train": {
-        "accuracy": 0.9905,
-        "macro_f1": 0.9833,
-        "weighted_kappa": 0.9887,
-        "log_loss": 0.0522
+        "accuracy": 0.9904,
+        "macro_f1": 0.9877,
+        "weighted_kappa": 0.9901,
+        "log_loss": 0.063
       },
       "test": {
-        "accuracy": 0.955,
-        "macro_f1": 0.9284,
-        "weighted_kappa": 0.9461,
-        "log_loss": 0.1156
+        "accuracy": 0.9424,
+        "macro_f1": 0.9267,
+        "weighted_kappa": 0.94,
+        "log_loss": 0.1537
       },
-      "selisih_f1_train_vs_test": 0.0549,
+      "selisih_f1_train_vs_test": 0.061,
       "kesimpulan": "overfitting"
     },
     "batas": {
@@ -116,12 +116,12 @@
       "pelanggaran_alergen": 0,
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
-      "rata_skor_kesesuaian": 66.5,
-      "latensi_ms": 70.2,
+      "rata_skor_kesesuaian": 67.6,
+      "latensi_ms": 33.7,
       "menu": {
         "pagi": [
           "karbo: Whole Wheat Bread",
-          "lauk: Tilapia Fish",
+          "lauk: Fresh Chicken Breast",
           "buah/sayur: Banana"
         ],
         "snack_pagi": [
@@ -129,7 +129,7 @@
         ],
         "siang": [
           "karbo: Oatmeal",
-          "lauk: Fresh Chicken Breast",
+          "lauk: Salmon Fillet",
           "sayur: Sweet Potato"
         ],
         "snack_sore": [
@@ -137,8 +137,8 @@
         ],
         "malam": [
           "karbo: Organic Brown Rice",
-          "lauk: Salmon Fillet",
-          "sayur: Broccoli"
+          "lauk: Tilapia Fish",
+          "sayur: Red Bell Pepper"
         ]
       }
     },
@@ -149,16 +149,16 @@
       "pelanggaran_alergen": 0,
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
-      "rata_skor_kesesuaian": 71.8,
-      "latensi_ms": 72.8,
+      "rata_skor_kesesuaian": 72.3,
+      "latensi_ms": 29.8,
       "menu": {
         "pagi": [
-          "karbo: Organic Brown Rice",
+          "karbo: Oatmeal",
           "lauk: Lentils",
           "buah/sayur: Sweet Potato"
         ],
         "snack_pagi": [
-          "selingan: Baked Potato Chips"
+          "selingan: Ajwa Dates"
         ],
         "siang": [
           "karbo: Quinoa",
@@ -166,10 +166,10 @@
           "sayur: Mustard Greens"
         ],
         "snack_sore": [
-          "selingan: Ajwa Dates"
+          "selingan: Baked Potato Chips"
         ],
         "malam": [
-          "karbo: Oatmeal",
+          "karbo: Organic Brown Rice",
           "lauk: Fresh Chicken Breast",
           "sayur: Red Bell Pepper"
         ]
