@@ -3,16 +3,15 @@ title: NutriScale AI Recommendation Engine
 emoji: 🥗
 colorFrom: green
 colorTo: blue
-sdk: gradio
-sdk_version: 4.44.0
-app_file: app.py
+sdk: docker
+app_port: 8000
 pinned: false
 license: mit
 ---
 
 # NutriScale AI Recommendation Engine v3
 
-FastAPI Supervised Machine Learning + Gemini LLM Microservice running on Railway / Hugging Face Spaces.
+FastAPI Supervised Machine Learning + Gemini LLM Microservice running on Railway (Docker).
 Sesuai dengan spesifikasi arsitektur **Histori Chat AI NutriScale (20 Oktober 2026)**.
 
 ---
@@ -25,7 +24,7 @@ Sesuai dengan spesifikasi arsitektur **Histori Chat AI NutriScale (20 Oktober 20
    - AI Engine **HANYA MEMBACA** data ini — tidak menghitung ulang target gizi.
 
 2. **Tier 2 — Recommendation Engine (Supervised ML + Hard Safety Filter)**:
-   - **Hard Safety Filtering**: Mengeliminasi produk yang mengandung alergen (`alergi`), pantangan (`pantanganMedis`), alkohol, dan aturan **BLOKIR** per kategori (mis. makanan mentah hewani & ikan tinggi merkuri untuk ibu hamil, kafein & risiko tersedak untuk balita, tekstur di atas `tahapDiet` untuk pasca operasi) **SEBELUM** ranking. Pencocokan memakai regex batas kata (`kale` tidak dianggap `ale`, `eggplant` tidak dianggap telur), koreksi salah ketik (`udnag` → udang), kata payung (`seafood`), dan field `allergens` Supabase (`peanuts`, `wheat`, ...). Aturan **BATASI** tidak membuang makanan, tetapi menurunkan skor.
+   - **Hard Safety Filtering**: Mengeliminasi produk yang mengandung alergen (`alergi`), pantangan (`pantanganMedis`), alkohol, dan aturan **BLOKIR** per kategori (mis. makanan mentah hewani & ikan tinggi merkuri untuk ibu hamil, kafein & risiko tersedak untuk balita, tekstur di atas `tahapDiet` untuk pasca operasi) **SEBELUM** ranking. Pencocokan memakai regex batas kata (`kale` tidak dianggap `ale`, `eggplant` tidak dianggap telur), koreksi salah ketik (`udnag` → udang), kata payung (`seafood`), dan field `allergens` Supabase (`peanuts`, `wheat`, ...). **Parser LLM (Groq, opsional)**: bila `GROQ_API_KEY` ada, teks alergi/pantangan juga diterjemahkan oleh `openai/gpt-oss-20b` (`shared/parser_llm.py`, JSON schema strict) menjadi grup baku + kata kunci nama produk (mis. `tidak makan babi` → babi, `alergi ayam` → chicken, `laktosa` → susu). Hasilnya **digabung** dengan regex (LLM hanya menambah pantangan); timeout/error/output tidak valid → regex saja. `_meta.parser_alergi` menampilkan sumber parser, tambahan LLM, dan frasa yang tidak cocok dengan produk mana pun. Aturan **BATASI** tidak membuang makanan, tetapi menurunkan skor.
    - **Machine Learning Ranking**: 4 model **Logistic Regression multinomial** terpisah (gradient boosting hanya sebagai pembanding di laporan) (`models/recommender_<KATEGORI>.joblib`) untuk `UMUM`, `IBU_HAMIL`, `ANAK_BALITA`, `PASCA_OPERASI`. Label ordinal 0 (tidak sesuai), 1 (cukup sesuai), 2 (sangat sesuai). Fitur dihitung oleh `compute_ml_features` (fungsi yang sama untuk training & inferensi):
      $$\text{Skor} = \frac{P(1) + 2 \cdot P(2)}{2}$$
    - **Komposisi Piring**: tiap sesi disusun per peran bahan (`model.PIRING_SESI`): pagi = karbo + lauk + buah/sayur, siang & malam = karbo + lauk + sayur, snack = satu selingan. Peran tanpa kandidat dilonggarkan ke bahan utama lain. Minyak, bumbu, dan gula tidak menjadi menu utama, tetapi muncul di `bahan_pelengkap_opsional` (tidak dihitung ke target kalori). Tiap item membawa `peran` dan `jenis_bahan`.
@@ -39,18 +38,19 @@ Sesuai dengan spesifikasi arsitektur **Histori Chat AI NutriScale (20 Oktober 20
 
 ## 📊 Hasil Evaluasi Model (Test Set Profil Baru, Data Sintetis)
 
-Setiap kategori: 700 profil sintetis × 5 sesi × 12 kandidat (≈42.000 pasangan). Split berdasarkan profil (profil test tidak pernah ada di train) dan 15% makanan hanya muncul di test. Label berasal dari rubrik bersama di `shared/dataset.py` ditambah rubrik khusus di `<kategori>/ai_models/rubrik.py` (memakai kolom yang tidak masuk fitur model, mis. serat, folat, zat besi, kalsium, kafein), tanpa noise acak.
+Setiap kategori: 700 profil sintetis × 5 sesi × 12 kandidat (≈42.000 pasangan); model `lr-v3` dilatih dan dinilai TANPA pasangan konflik (alergi/pantangan/BLOKIR), karena pasangan itu dibuang filter keamanan sebelum ranking (lihat `catatan/CATATAN_PERUBAHAN_PPT.md` bagian 3). Katalog latih: 7.668 makanan USDA (katalog-v2). Split berdasarkan profil (profil test tidak pernah ada di train) dan 15% makanan hanya muncul di test. Label berasal dari rubrik bersama di `shared/dataset.py` ditambah rubrik khusus di `<kategori>/ai_models/rubrik.py` (memakai kolom yang tidak masuk fitur model, mis. serat, folat, zat besi, kalsium, kafein), tanpa noise acak.
 
-| Kategori | Accuracy | Precision (macro) | Recall (macro) | Macro-F1 | Weighted Kappa | CV Kappa (GroupKFold) | NDCG@5 | Pembanding GB (Acc / F1) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| UMUM | 0.9127 | 0.8755 | 0.8589 | 0.8665 | 0.8939 | 0.8936 ± 0.0068 | 0.9799 | 0.9550 / 0.9284 |
-| IBU_HAMIL | 0.8634 | 0.7983 | 0.7871 | 0.7918 | 0.8552 | 0.8612 ± 0.0048 | 0.9560 | 0.9204 / 0.8766 |
-| ANAK_BALITA | 0.9374 | 0.8933 | 0.8968 | 0.8950 | 0.9234 | 0.9154 ± 0.0042 | 0.9873 | 0.9615 / 0.9325 |
-| PASCA_OPERASI | 0.9332 | 0.9036 | 0.8917 | 0.8972 | 0.9320 | 0.9353 ± 0.0034 | 0.9899 | 0.9614 / 0.9385 |
+| Kategori | Accuracy | Precision (macro) | Recall (macro) | Macro-F1 | Weighted Kappa | CV Kappa (GroupKFold) | NDCG@5 | F1 latih / validasi CV / test | Pembanding GB (Acc / F1) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| UMUM | 0.8910 | 0.8739 | 0.8545 | 0.8634 | 0.8861 | 0.8833 ± 0.0026 | 0.9814 | 0.8663 / 0.8633 / 0.8634 (tidak overfitting) | 0.9424 / 0.9267 |
+| IBU_HAMIL | 0.8062 | 0.7856 | 0.7770 | 0.7810 | 0.8232 | 0.8241 ± 0.0047 | 0.9594 | 0.7879 / 0.7825 / 0.7810 (tidak overfitting) | 0.8825 / 0.8622 |
+| ANAK_BALITA | 0.9107 | 0.8857 | 0.8797 | 0.8826 | 0.9075 | 0.9070 ± 0.0041 | 0.9865 | 0.8877 / 0.8833 / 0.8826 (tidak overfitting) | 0.9469 / 0.9288 |
+| PASCA_OPERASI | 0.8854 | 0.8862 | 0.8784 | 0.8821 | 0.9055 | 0.9104 ± 0.0039 | 0.9851 | 0.8909 / 0.8851 / 0.8821 (tidak overfitting) | 0.9411 / 0.9391 |
 
-- Model utama Logistic Regression (koefisien dapat dijelaskan). Gradient boosting hanya pembanding: lebih akurat meniru rubrik, tetapi kotak hitam. Fitur ambang (`porsi_ideal`, `natrium_lewat_jauh`, `gula_lewat_jauh`, dan lain-lain) membuat efek ambang terbaca oleh model linear.
+- **Cek overfitting** (`shared/training.py`, bagian 3-4 notebook): selisih macro-F1 latih vs validasi GroupKFold dan vs test <= 0,01 di keempat kategori, kurva belajar latih & validasi bertemu -> tidak overfitting. Batas: <= 0,02 tidak overfitting, <= 0,05 ringan, > 0,05 overfitting.
+- Model utama Logistic Regression (koefisien dapat dijelaskan). Gradient boosting hanya pembanding: lebih akurat meniru rubrik, tetapi kotak hitam. Gradient boosting juga overfitting (selisih latih-test 0,05-0,09), sedangkan Logistic Regression tidak. Fitur ambang (`porsi_ideal`, `natrium_lewat_jauh`, `gula_lewat_jauh`, dan lain-lain) membuat efek ambang terbaca oleh model linear.
 - Umur kategori `ANAK_BALITA` dalam **bulan** (0 sampai 60); kategori lain dalam tahun.
-- Uji end-to-end (`<kategori>/ai_models/validasi_<kategori>.py`, 2 skenario per kategori): 0 pelanggaran alergen, BLOKIR, dan tekstur.
+- Uji end-to-end (bagian 8 notebook `<kategori>/latih_validasi_<kategori>.ipynb`, 2 skenario per kategori): 0 pelanggaran alergen, BLOKIR, dan tekstur.
 - **Catatan jujur**: angka di atas mengukur seberapa baik model meniru rubrik pada data sintetis, bukan uji klinis. Rubrik & tabel bahaya perlu ditinjau ahli gizi (gold set) sebelum klaim klinis.
 
 ---
@@ -68,7 +68,8 @@ Struktur tiap folder kategori (contoh `umum/`):
 
 ```
 umum/
-  ai_models/   profil.py, rubrik.py, bahaya.py, skenario.py, input_uji.py, latih_umum.py, validasi_umum.py
+  latih_validasi_umum.ipynb   notebook: dataset, latih, cek overfitting, validasi, laporan
+  ai_models/   profil.py, rubrik.py, bahaya.py, skenario.py, input_uji.py
   data/        profiles.csv, train_data.csv, test_data.csv
   model/       recommender_UMUM.joblib
   outputs/     hasil_latih.json, hasil_validasi.json, laporan_validasi_umum.md
@@ -76,11 +77,11 @@ umum/
   README.md
 ```
 
-Kode bersama (fitur, safety filter, generator dataset, training, split, evaluasi) ada di `model.py` dan `shared/` (`dataset.py`, `training.py`, `pipeline.py`, `uji_input.py`, `bersama.py`), sehingga keempat model memakai metode dan konfigurasi yang sama (`config_hash` tercatat di metadata model). Katalog makanan bersama dan snapshot produk ada di `data/` (`nutrition.csv`, `supabase_products.json`).
+Kode bersama (fitur, safety filter, generator dataset, training, split, evaluasi) ada di `model.py` dan `shared/` (`dataset.py`, `training.py`, `pipeline.py`, `grafik.py`, `uji_input.py`, `bersama.py`), sehingga keempat model memakai metode dan konfigurasi yang sama (`config_hash` tercatat di metadata model). Katalog makanan bersama dan snapshot produk ada di `data/` (`nutrition.csv`, `supabase_products.json`).
 
 ```bash
-python ibu_hamil/ai_models/latih_ibu_hamil.py --buat-data
-python ibu_hamil/ai_models/validasi_ibu_hamil.py
+pip install -r requirements-notebook.txt
+jupyter lab ibu_hamil/latih_validasi_ibu_hamil.ipynb
 python -m unittest discover -s . -t . -p "test_*.py"
 ```
 
@@ -88,12 +89,23 @@ python -m unittest discover -s . -t . -p "test_*.py"
 
 ## 🚀 Perintah Operasional
 
-1. **Buat Data, Latih, dan Validasi per Kategori** (dijalankan pemilik masing-masing; contoh UMUM):
+1. **Buat Data, Latih, dan Validasi per Kategori** (dijalankan pemilik masing-masing; contoh UMUM): buka
+   `umum/latih_validasi_umum.ipynb` di VS Code / JupyterLab / Colab lalu *Run All* (`BUAT_DATA = True` untuk membuat
+   ulang `umum/data/*.csv`). Hasil: `umum/model/recommender_UMUM.joblib` dan `umum/outputs/laporan_validasi_umum.md`.
+   Notebook tidak dijalankan oleh API di Railway.
    ```bash
-   python umum/ai_models/latih_umum.py --buat-data   # umum/data/*.csv lalu umum/model/recommender_UMUM.joblib
-   python umum/ai_models/validasi_umum.py            # umum/outputs/laporan_validasi_umum.md
+   pip install -r requirements-notebook.txt
+   jupyter lab umum/latih_validasi_umum.ipynb
    ```
-2. **Jalankan Unit Test** (kode bersama + semua kategori):
+2. **Jalankan semua pengujian sekaligus** (tanpa API key dan tanpa Supabase, +-15 detik; panduan tester eksternal ada di [`TESTING.md`](TESTING.md)):
+   ```bash
+   pip install -r requirements.txt
+   python jalankan_semua_uji.py            # filter alergi (58), end-to-end (30), input realistis (59), unit test
+   python jalankan_semua_uji.py --detail   # tampilkan setiap kasus
+   ```
+   `requirements.txt` hanya untuk API/Railway dan pengujian (versi dikunci). File Hugging Face/Render lama ada di `deploy_lama/`.
+
+   **Unit test saja** (kode bersama + semua kategori):
    ```bash
    python -m unittest test_nutriscale_data.py test_safety_filter.py
    python -m unittest discover -s . -t . -p "test_*.py"
@@ -103,10 +115,15 @@ python -m unittest discover -s . -t . -p "test_*.py"
    python -m unittest discover -s . -t . -p "test_input_*.py"
    python -m unittest ibu_hamil.tests.test_input_ibu_hamil   # satu kategori
    ```
-   Kasus ada di `<kategori>/ai_models/input_uji.py`; pemeriksanya bersama di `shared/uji_input.py`.
+   Kasus ada di `<kategori>/ai_models/input_uji.py`; pemeriksanya bersama di `shared/uji_input.py`. Selain keamanan
+   (alergen, BLOKIR, tekstur), pemeriksa juga mengecek kecukupan: total kalori menu 70-130% target dan tidak ada sesi
+   kosong, kecuali engine memberi `_meta.peringatan`; bayi < 6 bulan tidak diberi makanan padat; madu tidak untuk < 12 bulan.
+   Input user realistis (isian kosong, salah satuan, salah ketik, umur ekstrem, JSON aneh) ada di
+   `shared/kasus_input_realistis.py` dan diuji oleh `test_input_realistis.py`.
 4. **Jalankan API Server** (wajib set `AI_ENGINE_API_KEY`, tidak ada nilai default):
    ```bash
    AI_ENGINE_API_KEY=<kunci-rahasia> python api.py
    ```
    Rekomendasi real-time **hanya** memakai produk marketplace dari Supabase (`produk_makanan`, lewat Next.js `/api/products`, `DIRECT_URL`/`DATABASE_URL`, atau Supabase REST). Produk tanpa `produk_id` atau dengan stok habis tidak direkomendasikan. CSV hanya untuk training & testing. Snapshot `data/supabase_products.json` hanya dipakai bila `AI_ALLOW_SNAPSHOT_FALLBACK=1` (dev/test offline); di produksi, kalau Supabase offline, API melapor offline, bukan memakai data lama.
+   Parser alergi LLM (opsional): `GROQ_API_KEY=<kunci>`; atur juga `GROQ_ALLERGY_MODEL` (default `openai/gpt-oss-20b`), `ALLERGY_LLM_TIMEOUT` (detik, default 3), `ALLERGY_LLM_REASONING` (default `medium`), `ALLERGY_LLM_ENABLED=0` untuk mematikan. Query `use_llm_parser=false` mematikannya per request. Tes: `python -m unittest test_parser_llm.py` (API di-mock).
    Field baru di `/api/recommend`: `alergi`, `tahapDiet` (`cair|saring|lunak|biasa`), `jenisOperasi` (`saluran_cerna|ortopedi|caesar|umum`). `GET /api/models` menampilkan model aktif per kategori.

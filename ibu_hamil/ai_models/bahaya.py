@@ -11,7 +11,8 @@ BAHAYA = {
         'KAFEIN':  ['coffee', 'espresso', 'energy drink', 'cola', 'kopi', 'caffeine'],
         'JEROAN':  ['liver', 'giblets', 'kidney', 'hati', 'ati', 'jeroan'],
         'TUNA':    ['tuna', 'tongkol'],
-        'OLAHAN':  ['fast foods', 'frankfurter', 'sausage', 'hot dog', 'deli', 'luncheon meat', 'pate'],
+        'OLAHAN':  ['fast foods', 'frankfurter', 'sausage', 'hot dog', 'deli', 'luncheon meat', 'pate',
+                    'chips', 'crisps', 'keripik'],
     },
 }
 

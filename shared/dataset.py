@@ -23,13 +23,14 @@ import pandas as pd
 from sklearn.model_selection import GroupShuffleSplit
 
 from model import (
-    FEATURE_COLS, SESSION_RATIOS, DAILY_LIMITS, compute_ml_features, hitung_konflik_keamanan,
+    FEATURE_COLS, KOLOM_KONFLIK, SESSION_RATIOS, DAILY_LIMITS, ada_konflik, compute_ml_features, hitung_konflik_keamanan,
     classify_food_type, detect_texture, detect_allergens, detect_hazards, is_alcoholic, status_flags,
-    session_group, TEKSTUR_ORDINAL,
+    session_group, TEKSTUR_ORDINAL, keyword_match, _FOOD_TYPE_PATTERNS, _BUMBU_PATTERN,
 )
 from shared import KATEGORI_LIST, data_dir, modul as modul_kategori
 
 RUBRIC_VERSION = 'rubric-v1'
+KATALOG_VERSION = 'katalog-v2'   # v2: tanpa jenis tidak dikenali, makanan eksotis, susu formula (17 Nov 2026)
 
 # Pecahan target item per sesi (sama dengan model.PIRING_SESI yang dipakai get_paket di build_meal_plan)
 SESSION_ITEM_FRACTIONS = {
@@ -71,6 +72,18 @@ def extract_numeric(val) -> float:
     return float(match.group(1)) if match else 0.0
 
 
+POLA_TIDAK_RELEVAN = (r'Alaska Native|\bwhale\b|sea lion|\bseal\b|walrus|caribou|\bmoose\b|beaver|muskrat|'
+                      r'infant formula')
+
+
+def jenis_dikenali(nama: str) -> bool:
+    """True bila jenis makanan dikenali kata kunci (bukan jatuh ke default 'snack' di classify_food_type)."""
+    head, full = str(nama).split(',')[0].lower(), str(nama).lower()
+    if keyword_match(head, _BUMBU_PATTERN):
+        return True
+    return any(keyword_match(t, pat) for t in (head, full) for _, pat in _FOOD_TYPE_PATTERNS)
+
+
 def load_food_catalog(csv_path: str) -> pd.DataFrame:
     df = pd.read_csv(csv_path)
     df = df.dropna(subset=['name']).copy()
@@ -94,6 +107,17 @@ def load_food_catalog(csv_path: str) -> pd.DataFrame:
     df = df.drop_duplicates(subset=['name']).reset_index(drop=True)
 
     df['food_type'] = [classify_food_type(n) for n in df['name']]
+
+    # Kebersihan katalog (17 Nov 2026) agar data latih mendekati makanan nyata yang dijual NutriScale:
+    # 1) buang makanan yang jenisnya TIDAK dikenali (classify_food_type jatuh ke 'snack' default, mis. artichoke,
+    #    kielbasa, meatballs): jenis yang salah membuat rubrik sesi x jenis makanan memberi label keliru;
+    # 2) buang makanan eksotis/adat Alaska (mata paus, lemak singa laut, karibu) dan susu formula bayi.
+    n_awal = len(df)
+    dikenali = df['name'].apply(jenis_dikenali)
+    eksotis = df['name'].str.contains(POLA_TIDAK_RELEVAN, case=False, regex=True)
+    df = df[dikenali & ~eksotis].reset_index(drop=True)
+    print(f"[Katalog] {n_awal} -> {len(df)} makanan (dibuang {int((~dikenali).sum())} jenis tidak dikenali, "
+          f"{int((eksotis & dikenali).sum())} eksotis/susu formula)")
     df['tekstur'] = [detect_texture(n, t) for n, t in zip(df['name'], df['food_type'])]
     df['label_risiko'] = df['name'].apply(lambda x: ', '.join(detect_allergens(x)))
     for kat in KATEGORI_LIST:
@@ -280,8 +304,7 @@ def generate_category_dataset(df_food: pd.DataFrame, kategori: str,
         # Kandidat konflik: makanan yang memicu alergi/pantangan user atau BLOKIR kategori
         checked_all = hitung_konflik_keamanan(foods.sample(400, random_state=int(rng.integers(1e9))),
                                               prof['pantanganMedis'], kategori, prof['alergi'], ctx)
-        conflict_pool = checked_all[(checked_all['n_conflict_allergen'] + checked_all['n_conflict_pantangan']
-                                     + checked_all['n_conflict_free'] + checked_all['n_block_kategori']) > 0]
+        conflict_pool = checked_all[ada_konflik(checked_all)]
         if len(conflict_pool) == 0:
             conflict_pool = foods[foods[f'blokir_{kategori}']]
 
@@ -297,9 +320,7 @@ def generate_category_dataset(df_food: pd.DataFrame, kategori: str,
             meal_type = 'snack' if 'snack' in session else session
             feats = compute_ml_features(cand, target_kcal, target_macros, meal_type, kategori, ctx)
 
-            for (i, row), (_, frow) in zip(cand.iterrows(), feats.iterrows()):
-                conflict = (row['n_conflict_allergen'] + row['n_conflict_pantangan'] + row['n_conflict_free']
-                            + row['n_block_kategori']) > 0
+            for (_, row), (_, frow), conflict in zip(cand.iterrows(), feats.iterrows(), ada_konflik(cand)):
                 pts = rubric_points(row, prof, kategori, target_kcal, session)
                 label = 0 if conflict else grade_from_points(pts)
                 samples.append({
@@ -321,6 +342,8 @@ def generate_category_dataset(df_food: pd.DataFrame, kategori: str,
                     'blokir_kategori': row['blokir_kategori'],
                     'batasi_kategori': row['batasi_kategori'],
                     **{c: round(float(frow[c]), 5) for c in FEATURE_COLS},
+                    # kolom konflik disimpan terpisah (bukan fitur) untuk memisahkan baris konflik saat training
+                    **{c: int(row[c]) for c in KOLOM_KONFLIK},
                     'rubric_points': pts,
                     'label': label,
                 })
@@ -339,7 +362,7 @@ def generate_category_dataset(df_food: pd.DataFrame, kategori: str,
     df_test.to_csv(test_path, index=False)
     df_prof.to_csv(os.path.join(out_dir, 'profiles.csv'), index=False)
 
-    print(f"[Dataset Generator] Berhasil disimpan:")
+    print("[Dataset Generator] Berhasil disimpan:")
     print(f"  - Training Data: {train_path} ({len(df_train)} baris)")
     print(f"  - Testing Data : {test_path} ({len(df_test)} baris)")
     return train_path, test_path

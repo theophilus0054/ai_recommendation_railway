@@ -1,67 +1,111 @@
 {
   "kategori": "PASCA_OPERASI",
   "pemilik": "Raymond",
-  "config_hash": "7ec1c77b29e130d2",
+  "config_hash": "ab9c7f415787085a",
   "test": {
-    "accuracy": 0.9332,
-    "macro_f1": 0.8972,
-    "macro_precision": 0.9036,
-    "macro_recall": 0.8917,
+    "accuracy": 0.8854,
+    "macro_f1": 0.8821,
+    "weighted_kappa": 0.9055,
+    "log_loss": 0.2478,
+    "macro_precision": 0.8862,
+    "macro_recall": 0.8784,
     "per_class": {
       "0": {
-        "precision": 0.967,
-        "recall": 0.9721,
-        "f1": 0.9695,
-        "support": 5762
+        "precision": 0.9097,
+        "recall": 0.9331,
+        "f1": 0.9213,
+        "support": 2288
       },
       "1": {
-        "precision": 0.813,
-        "recall": 0.8343,
-        "f1": 0.8235,
-        "support": 1569
+        "precision": 0.8276,
+        "recall": 0.8205,
+        "f1": 0.824,
+        "support": 1621
       },
       "2": {
-        "precision": 0.9307,
-        "recall": 0.8687,
-        "f1": 0.8986,
-        "support": 1066
+        "precision": 0.9212,
+        "recall": 0.8817,
+        "f1": 0.901,
+        "support": 1048
       }
     },
-    "weighted_kappa": 0.932,
     "confusion_matrix": [
       [
-        5601,
-        161,
+        2135,
+        153,
         0
       ],
       [
-        191,
-        1309,
-        69
+        212,
+        1330,
+        79
       ],
       [
         0,
-        140,
-        926
+        124,
+        924
       ]
     ]
   },
   "cv_groupkfold": {
     "accuracy": {
-      "mean": 0.9326,
-      "std": 0.0038
+      "mean": 0.8893,
+      "std": 0.0044
     },
     "macro_f1": {
-      "mean": 0.8987,
-      "std": 0.0036
+      "mean": 0.8851,
+      "std": 0.0041
     },
     "weighted_kappa": {
-      "mean": 0.9353,
-      "std": 0.0034
+      "mean": 0.9104,
+      "std": 0.0039
+    },
+    "log_loss": {
+      "mean": 0.2464,
+      "std": 0.006
     },
     "ndcg@5": {
-      "mean": 0.9872,
-      "std": 0.0026
+      "mean": 0.9879,
+      "std": 0.0019
+    }
+  },
+  "overfitting": {
+    "train_final": {
+      "accuracy": 0.8945,
+      "macro_f1": 0.8909,
+      "weighted_kappa": 0.9149,
+      "log_loss": 0.2353
+    },
+    "test": {
+      "accuracy": 0.8854,
+      "macro_f1": 0.8821,
+      "weighted_kappa": 0.9055,
+      "log_loss": 0.2478
+    },
+    "cv_train_macro_f1": 0.8911,
+    "cv_val_macro_f1": 0.8851,
+    "selisih_f1_train_vs_cv": 0.006,
+    "selisih_f1_train_vs_test": 0.0088,
+    "kesimpulan": "tidak overfitting",
+    "pembanding_gradient_boosting": {
+      "train": {
+        "accuracy": 0.9924,
+        "macro_f1": 0.9918,
+        "weighted_kappa": 0.9938,
+        "log_loss": 0.0585
+      },
+      "test": {
+        "accuracy": 0.9411,
+        "macro_f1": 0.9391,
+        "weighted_kappa": 0.9513,
+        "log_loss": 0.1595
+      },
+      "selisih_f1_train_vs_test": 0.0527,
+      "kesimpulan": "overfitting"
+    },
+    "batas": {
+      "tidak overfitting": 0.02,
+      "overfitting ringan": 0.05
     }
   },
   "end_to_end": [
@@ -72,8 +116,8 @@
       "pelanggaran_alergen": 0,
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
-      "rata_skor_kesesuaian": 75.7,
-      "latensi_ms": 59.9,
+      "rata_skor_kesesuaian": 75.3,
+      "latensi_ms": 37.0,
       "menu": {
         "pagi": [
           "karbo: Organic Brown Rice",
@@ -84,7 +128,7 @@
           "sayur: Mustard Greens"
         ],
         "siang": [
-          "karbo: Oatmeal",
+          "karbo: Quinoa",
           "lauk: Tilapia Fish",
           "sayur: Sweet Potato"
         ],
@@ -92,7 +136,7 @@
           "sayur: Broccoli"
         ],
         "malam": [
-          "karbo: Quinoa",
+          "karbo: Oatmeal",
           "lauk: Tofu",
           "lauk: Lentils"
         ]
@@ -105,8 +149,8 @@
       "pelanggaran_alergen": 0,
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
-      "rata_skor_kesesuaian": 3.5,
-      "latensi_ms": 54.4,
+      "rata_skor_kesesuaian": 4.3,
+      "latensi_ms": 34.8,
       "menu": {
         "pagi": [
           "susu/olahan: Low Fat Milk"

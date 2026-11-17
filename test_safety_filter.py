@@ -172,7 +172,7 @@ class TestMenuComposition(unittest.TestCase):
         self.kalori = {'target_kalori_harian': 2000.0, 'distribusi': {'protein_g': 100.0, 'fat_g': 67.0, 'carbs_g': 250.0}}
 
     def test_plate_roles_and_side_items(self):
-        plan = build_meal_plan(self.kalori, self.df, 'UMUM', {}, {}, rng=np.random.default_rng(1))
+        plan = build_meal_plan(self.kalori, self.df, 'UMUM', {}, rng=np.random.default_rng(1))
         siang = plan['rekomendasi_siang']
         self.assertEqual([m['peran'] for m in siang], ['karbo', 'lauk', 'sayur'])
         self.assertEqual([m['jenis_bahan'] for m in siang], ['carb', 'protein', 'vegetable'])
@@ -183,7 +183,7 @@ class TestMenuComposition(unittest.TestCase):
         self.assertEqual(pelengkap, {'Salt, table', 'Oil, olive'})
 
     def test_no_repeat_within_day(self):
-        plan = build_meal_plan(self.kalori, self.df, 'UMUM', {}, {}, rng=np.random.default_rng(2))
+        plan = build_meal_plan(self.kalori, self.df, 'UMUM', {}, rng=np.random.default_rng(2))
         utama = [m['nama_makanan'] for k, v in plan.items() if k.startswith('rekomendasi_') for m in v]
         self.assertEqual(len(utama), len(set(utama)))
 
@@ -200,6 +200,34 @@ class TestDailyVariety(unittest.TestCase):
         picks = {_undi_kandidat(scores, 1, np.random.default_rng(s))[0] for s in range(200)}
         self.assertTrue(picks <= {0, 1, 2, 4})
         self.assertGreater(len(picks), 1)
+
+
+class TestTemuanLaporanPM(unittest.TestCase):
+    """Temuan laporan PM 9 Nov 2026: cabai sebagai sayur, keripik untuk ibu hamil, kidney beans = jeroan."""
+
+    def test_bumbu_bertipe_sayur_menjadi_spice(self):
+        from model import classify_food_type
+        self.assertEqual(classify_food_type('Red Chili', 'vegetable'), 'spice')
+        self.assertEqual(classify_food_type('Red Onion', 'vegetable'), 'spice')
+        self.assertEqual(classify_food_type('Cabai Rawit'), 'spice')
+        # paprika dan sayur biasa tetap sayur; tipe lain dari Supabase tidak diubah
+        self.assertEqual(classify_food_type('Red Bell Pepper', 'vegetable'), 'vegetable')
+        self.assertEqual(classify_food_type('Broccoli', 'vegetable'), 'vegetable')
+        self.assertEqual(classify_food_type('Garlic Bread', 'carb'), 'carb')
+
+    def test_cabai_diblokir_untuk_balita(self):
+        self.assertIn('PEDAS', detect_hazards('Red Chili', 'ANAK_BALITA')[0])
+        self.assertEqual(detect_hazards('Red Bell Pepper', 'ANAK_BALITA')[0], [])
+
+    def test_keripik_dibatasi_untuk_ibu_hamil(self):
+        self.assertIn('OLAHAN', detect_hazards('Baked Potato Chips', 'IBU_HAMIL')[1])
+        self.assertIn('OLAHAN', detect_hazards('Baked Potato Chips', 'UMUM')[1])
+
+    def test_kidney_beans_bukan_jeroan(self):
+        self.assertNotIn('JEROAN', detect_hazards('Kidney Beans', 'IBU_HAMIL')[1])
+        self.assertNotIn('JEROAN', detect_hazards('Beans, kidney, red, mature seeds', 'IBU_HAMIL')[1])
+        self.assertIn('JEROAN', detect_hazards('Beef kidney', 'IBU_HAMIL')[1])
+        self.assertIn('JEROAN', detect_hazards('Chicken liver', 'IBU_HAMIL')[1])
 
 
 if __name__ == '__main__':

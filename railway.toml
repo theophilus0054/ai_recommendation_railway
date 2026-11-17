@@ -1,6 +1,14 @@
+# Konfigurasi deploy Railway (config as code). Railway membaca file ini otomatis dari root repo.
+# Langkah di dashboard Railway: lihat DEPLOY_RAILWAY.md.
+
 [build]
-builder = "nixpacks"
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
 
 [deploy]
 startCommand = "python api.py"
-restartPolicyType = "on_failure"
+# /health = 200 bila katalog produk dan 4 model siap; 503 bila belum (deploy gagal, deploy lama tetap jalan)
+healthcheckPath = "/health"
+healthcheckTimeout = 120
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5

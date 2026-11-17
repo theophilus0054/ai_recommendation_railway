@@ -22,8 +22,7 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 | `ai_models/bahaya.py` | Tabel BLOKIR dan BATASI, batas harian gula, garam, lemak |
 | `ai_models/skenario.py` | Kasus uji end-to-end |
 | `ai_models/input_uji.py` | Kasus input user untuk `/api/recommend` (valid dan invalid) |
-| `ai_models/latih_pasca_operasi.py` | Buat dataset (opsional) dan latih model |
-| `ai_models/validasi_pasca_operasi.py` | Validasi dan tulis laporan |
+| `latih_validasi_pasca_operasi.ipynb` | Notebook: buat dataset (opsional), latih, cek overfitting, validasi, laporan |
 | `data/` | `profiles.csv`, `train_data.csv`, `test_data.csv` (dataset sintetis) |
 | `model/` | `recommender_PASCA_OPERASI.joblib` |
 | `outputs/` | `hasil_latih.json`, `hasil_validasi.json`, `laporan_validasi_pasca_operasi.md` |
@@ -32,8 +31,7 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 ## Cara menjalankan (dari root repo)
 
 ```bash
-python pasca_operasi/ai_models/latih_pasca_operasi.py --buat-data   # buat pasca_operasi/data/ lalu latih pasca_operasi/model/recommender_PASCA_OPERASI.joblib
-python pasca_operasi/ai_models/validasi_pasca_operasi.py            # laporan: pasca_operasi/outputs/laporan_validasi_pasca_operasi.md
+jupyter lab pasca_operasi/latih_validasi_pasca_operasi.ipynb   # Run All; set BUAT_DATA = True untuk membuat ulang pasca_operasi/data/
 python -m unittest pasca_operasi.tests.test_pasca_operasi
 python -m unittest pasca_operasi.tests.test_input_pasca_operasi      # uji input user via API
 ```
