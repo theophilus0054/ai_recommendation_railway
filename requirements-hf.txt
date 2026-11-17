@@ -1,0 +1,4 @@
+# Hanya untuk Hugging Face Space (app.py: Gradio + FastAPI). Railway/lokal cukup requirements.txt.
+-r requirements.txt
+gradio==5.50.0
+spaces

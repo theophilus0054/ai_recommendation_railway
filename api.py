@@ -1,10 +1,13 @@
 import os
+import datetime
 import uvicorn
 from typing import Optional
 from fastapi import FastAPI, HTTPException, Security, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 from fastapi.security.api_key import APIKeyHeader
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 from contextlib import asynccontextmanager
 from dotenv import load_dotenv, find_dotenv
 
@@ -37,6 +40,22 @@ async def verify_api_key(api_key: str = Security(api_key_header)):
     return api_key
 
 limiter = Limiter(key_func=get_remote_address)
+
+
+def _versi_engine() -> str:
+    """Commit yang sedang berjalan, agar tester tahu versi mana yang diuji (Railway mengisi RAILWAY_GIT_COMMIT_SHA)."""
+    for k in ('RAILWAY_GIT_COMMIT_SHA', 'GIT_COMMIT', 'SOURCE_COMMIT'):
+        if os.environ.get(k):
+            return os.environ[k][:7]
+    try:
+        import subprocess
+        return subprocess.run(['git', 'rev-parse', '--short', 'HEAD'], capture_output=True, text=True, timeout=3,
+                              cwd=os.path.dirname(os.path.abspath(__file__))).stdout.strip() or 'tidak diketahui'
+    except Exception:
+        return 'tidak diketahui'
+
+
+VERSI_ENGINE = _versi_engine()
 
 
 def url_produk() -> str:
@@ -79,6 +98,14 @@ app = FastAPI(
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
+
+@app.exception_handler(RequestValidationError)
+async def _input_tidak_valid(request: Request, exc: RequestValidationError):
+    """422 yang selalu bisa di-serialisasi: tanpa nilai input mentah (NaN/Infinity dulu membuat 500)."""
+    detail = [{"loc": list(e.get("loc", [])), "msg": str(e.get("msg", "")), "type": e.get("type", "")}
+              for e in exc.errors()]
+    return JSONResponse(status_code=422, content={"detail": detail})
+
 # Mengizinkan request dari frontend (CORS)
 app.add_middleware(
     CORSMiddleware,
@@ -94,19 +121,37 @@ Instrumentator().instrument(app).expose(app, include_in_schema=False, should_gzi
 # ==========================================================
 # SCHEMAS (Strict dengan Prisma DB)
 # ==========================================================
+# Batas nilai yang masuk akal. Nilai di luar batas ditolak 422 (bukan diam-diam diproses),
+# agar salah satuan (tinggi 1.70 m, umur balita dalam tahun) atau salah ketik terlihat oleh pengirim.
+# Rentang umur mengikuti form web (balita 0-60 bulan, lainnya 5-110 tahun) dengan sedikit kelonggaran.
+BATAS_UMUR_TAHUN = (5, 120)      # UMUM & PASCA_OPERASI
+BATAS_UMUR_HAMIL = (10, 60)
+BATAS_BERAT_KG = (1, 400)
+BATAS_TINGGI_CM = (30, 250)
+BATAS_KALORI = (100, 6000)
+ALIAS_PILIHAN = {
+    'jenisKelamin': {'L': 'LAKI_LAKI', 'LAKI': 'LAKI_LAKI', 'LAKILAKI': 'LAKI_LAKI', 'PRIA': 'LAKI_LAKI',
+                     'M': 'LAKI_LAKI', 'MALE': 'LAKI_LAKI', 'P': 'PEREMPUAN', 'WANITA': 'PEREMPUAN',
+                     'F': 'PEREMPUAN', 'FEMALE': 'PEREMPUAN'},
+    'kategoriKondisi': {'BALITA': 'ANAK_BALITA', 'ANAK': 'ANAK_BALITA', 'HAMIL': 'IBU_HAMIL',
+                        'PASCA': 'PASCA_OPERASI', 'PASCAOPERASI': 'PASCA_OPERASI', 'PASCA_OP': 'PASCA_OPERASI'},
+}
+
 class MakroNutriScaleInput(BaseModel):
     """Satu makronutrien dari MacroResult nutri-calc.ts."""
+    model_config = ConfigDict(allow_inf_nan=False)
     percent: float = Field(..., ge=0, le=100)
     grams: float = Field(..., ge=0)
 
 
 class NutrisiNutriScaleInput(BaseModel):
+    model_config = ConfigDict(allow_inf_nan=False)
     """
     Hasil perhitungan gizi NutriScale (output `calculateMacros` di nutri-calc.ts).
     AI hanya MEMBACA data ini — tidak menghitung kalori/makro sendiri.
     """
     lifeStage: Optional[str] = None
-    calories: float = Field(..., gt=0, description="Target kalori harian (kkal)")
+    calories: float = Field(..., ge=BATAS_KALORI[0], le=BATAS_KALORI[1], description="Target kalori harian (kkal)")
     carbohydrates: MakroNutriScaleInput
     protein: MakroNutriScaleInput
     fat: MakroNutriScaleInput
@@ -115,6 +160,7 @@ class NutrisiNutriScaleInput(BaseModel):
 
 
 class AsesmenNutriScaleInput(BaseModel):
+    model_config = ConfigDict(allow_inf_nan=False)
     """
     Hasil asesmen antropometri resmi dari NutriScale (nutritional-assessment.ts).
     AI hanya membaca data ini (BMI, HAZ, WHZ, status gizi) tanpa menghitung ulang.
@@ -128,8 +174,8 @@ class AsesmenNutriScaleInput(BaseModel):
 class ProfilKesehatanInput(BaseModel):
     umur: int = Field(..., ge=0, description="Umur pasien: dalam BULAN (0-60) untuk kategori ANAK_BALITA, dalam TAHUN untuk kategori lain")
     jenisKelamin: str = Field(..., pattern="^(LAKI_LAKI|PEREMPUAN)$")
-    beratBadan: float = Field(..., gt=0)
-    tinggiBadan: float = Field(..., gt=0)
+    beratBadan: float = Field(..., ge=BATAS_BERAT_KG[0], le=BATAS_BERAT_KG[1], description="kg")
+    tinggiBadan: float = Field(..., ge=BATAS_TINGGI_CM[0], le=BATAS_TINGGI_CM[1], description="cm (bukan meter)")
     kategoriKondisi: str = Field(
         default="UMUM", 
         pattern="^(UMUM|ANAK_BALITA|IBU_HAMIL|PASCA_OPERASI)$"
@@ -153,14 +199,52 @@ class ProfilKesehatanInput(BaseModel):
     # Asesmen antropometri resmi NutriScale (BMI, HAZ, WHZ, status gizi)
     asesmen: Optional[AsesmenNutriScaleInput] = None
 
+    @field_validator('jenisKelamin', 'kategoriKondisi', 'tahapDiet', 'jenisOperasi', mode='before')
+    @classmethod
+    def _seragamkan_pilihan(cls, v, info):
+        """Terima variasi tulisan yang wajar ('laki-laki', 'L', 'umum', 'Lunak', 'saluran cerna')."""
+        if v is None:
+            return 'UMUM' if info.field_name == 'kategoriKondisi' else None
+        if not isinstance(v, str):
+            return v
+        kunci = '_'.join(v.strip().replace('-', ' ').split()).upper()
+        if info.field_name in ('tahapDiet', 'jenisOperasi'):
+            return kunci.lower() or None
+        return ALIAS_PILIHAN[info.field_name].get(kunci, kunci)
+
+    @field_validator('tinggiBadan', mode='before')
+    @classmethod
+    def _cek_satuan_tinggi(cls, v):
+        if isinstance(v, (int, float)) and 0 < v < 3:
+            raise ValueError('tinggiBadan dalam cm (mis. 170), bukan meter')
+        return v
+
+    @field_validator('tanggal', mode='before')
+    @classmethod
+    def _cek_tanggal(cls, v):
+        if v is None or (isinstance(v, str) and not v.strip()):
+            return None
+        try:
+            datetime.date.fromisoformat(str(v).strip())
+        except ValueError:
+            raise ValueError('tanggal harus tanggal yang ada, format YYYY-MM-DD')
+        return str(v).strip()
+
     @model_validator(mode='after')
     def _cek_umur_balita(self):
         if self.kategoriKondisi == 'ANAK_BALITA' and self.umur > 60:
             raise ValueError('Untuk ANAK_BALITA, umur dalam BULAN dan maksimal 60')
+        if self.kategoriKondisi in ('UMUM', 'PASCA_OPERASI') and not (BATAS_UMUR_TAHUN[0] <= self.umur <= BATAS_UMUR_TAHUN[1]):
+            raise ValueError(f'Untuk {self.kategoriKondisi}, umur dalam TAHUN antara {BATAS_UMUR_TAHUN[0]} dan '
+                             f'{BATAS_UMUR_TAHUN[1]}. Anak di bawah 5 tahun memakai kategori ANAK_BALITA (umur dalam bulan).')
+        if self.kategoriKondisi == 'IBU_HAMIL':
+            if self.jenisKelamin != 'PEREMPUAN':
+                raise ValueError('Kategori IBU_HAMIL hanya untuk jenisKelamin PEREMPUAN')
+            if not (BATAS_UMUR_HAMIL[0] <= self.umur <= BATAS_UMUR_HAMIL[1]):
+                raise ValueError(f'Untuk IBU_HAMIL, umur dalam TAHUN antara {BATAS_UMUR_HAMIL[0]} dan {BATAS_UMUR_HAMIL[1]}')
         return self
 
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(allow_inf_nan=False, json_schema_extra={
             "example": {
                 "umur": 28,
                 "jenisKelamin": "PEREMPUAN",
@@ -180,14 +264,15 @@ class ProfilKesehatanInput(BaseModel):
                     "energyMethod": "DRI 2023 EER kehamilan trimester 3"
                 }
             }
-        }
+        })
 
 # ==========================================================
 # ROUTES
 # ==========================================================
 @app.get("/")
 def root():
-    return {"status": "ok", "message": "NutriScale AI Engine is running", "models_loaded": df_dataset is not None}
+    return {"status": "ok", "message": "NutriScale AI Engine is running", "models_loaded": df_dataset is not None,
+            "versi_engine": VERSI_ENGINE, "jumlah_produk": 0 if df_dataset is None else len(df_dataset)}
 
 @app.get("/api/models")
 def list_models():
@@ -242,6 +327,7 @@ async def get_dietary_recommendation(
             raise HTTPException(status_code=500, detail="Sistem rekomendasi AI offline (Dataset missing).")
         output = jalankan_ai_rekomendasi(profil_kesehatan_dict=profil.model_dump(), dataset_dataframe=df_dataset,
                                          scaler_dict=scaler_dict, use_llm=use_llm, use_llm_parser=use_llm_parser)
+        output.setdefault('_meta', {})['versi_engine'] = VERSI_ENGINE
         return {"success": True, "data": output}
     except HTTPException:
         raise

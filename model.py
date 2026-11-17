@@ -112,7 +112,8 @@ ALCOHOL_EXCEPTIONS: list[str] = ['ginger ale', 'root beer', 'birch beer', 'non-a
 
 # Kata yang diabaikan di teks pantangan / alergi user
 PANTANGAN_STOPWORDS = {'tidak ada', 'lainnya', 'none', '-', 'no', 'tidak', 'ada', 'nihil', 'normal', 'aman',
-                       'tdk ada', 'gak ada', 'ga ada', 'no allergies', 'no allergy', 'tidak punya',
+                       'tdk ada', 'gak ada', 'ga ada', 'nggak ada', 'ngga ada', 'enggak ada', 'engga ada', 'gk ada',
+                       'g ada', 'ndak ada', 'belum ada', 'kosong', 'no allergies', 'no allergy', 'tidak punya',
                        # bahasa Inggris
                        'nothing', 'nil', 'null', 'nope', 'n/a', 'na', 'not applicable', 'none known',
                        'no known allergies', 'no known allergy', 'no food allergies', 'no food allergy',
@@ -1175,6 +1176,27 @@ def hitung_konflik_keamanan(df: pd.DataFrame, pantanganMedis: Optional[str], kat
     out['batasi_kategori'] = lim_codes
     return out
 
+def aturan_usia_aktif(kategori: str, umur) -> list[tuple]:
+    """Aturan BLOKIR menurut umur (bulan) yang berlaku untuk balita ini (lihat anak_balita bahaya.py)."""
+    if kategori != 'ANAK_BALITA' or umur is None:
+        return []
+    return [a for a in modul_kategori('ANAK_BALITA', 'bahaya').BLOKIR_MENURUT_USIA if float(umur) < a[0]]
+
+
+def blokir_menurut_usia(df: pd.DataFrame, kategori: str, umur) -> np.ndarray:
+    """True per baris bila produk dilarang untuk umur balita ini (mis. madu < 12 bulan)."""
+    kena = np.zeros(len(df), dtype=bool)
+    if not len(df):
+        return kena
+    nama = df['name'].astype(str).str.lower()
+    for _, _, kata, jenis in aturan_usia_aktif(kategori, umur):
+        if kata:
+            kena |= nama.str.contains(r'\b(?:' + '|'.join(map(re.escape, kata)) + r')\b', regex=True).to_numpy()
+        if jenis and 'food_type' in df.columns:
+            kena |= df['food_type'].isin(jenis).to_numpy()
+    return kena
+
+
 def filter_dataset(df: pd.DataFrame, pantanganMedis: Optional[str], kategoriKondisi: str,
                    alergi: Optional[str] = None, profil_ctx: Optional[dict] = None,
                    use_llm_parser: bool = False) -> pd.DataFrame:
@@ -1183,6 +1205,7 @@ def filter_dataset(df: pd.DataFrame, pantanganMedis: Optional[str], kategoriKond
 
     df_checked = hitung_konflik_keamanan(df, pantanganMedis, kategoriKondisi, alergi, profil_ctx, use_llm_parser)
     df_safe = df_checked[~ada_konflik(df_checked)].copy()
+    df_safe = df_safe[~blokir_menurut_usia(df_safe, kategoriKondisi, (profil_ctx or {}).get('umur'))]
 
     # Tidak ada fallback diam-diam ke kategori lain: aturan BLOKIR kategori selalu berlaku.
     if len(df_safe) < 8:
@@ -1359,6 +1382,37 @@ def pilih_bahan_pelengkap(df_filtered: pd.DataFrame, n: int = 3) -> list[dict]:
     return [{'produk_id': r.get('id', ''), 'nama_makanan': str(r['name']), 'jenis_bahan': r['food_type'],
              'harga': float(r.get('price', 0) or 0), 'catatan': 'Pelengkap opsional secukupnya, tidak dihitung ke target kalori'}
             for _, r in d.head(n).iterrows()]
+
+BATAS_CAKUPAN_KALORI = (0.70, 1.30)   # total kalori menu / target harian yang dianggap memadai
+
+
+def cakupan_kalori(rencana: dict) -> dict:
+    """Total kalori (kalori x porsi) 5 sesi dibanding target harian; pelengkap opsional tidak dihitung."""
+    total = sum((m.get('calories') or 0) * (m.get('recommended_quantity') or 1)
+                for sesi in SESSION_RATIOS for m in rencana.get(f'rekomendasi_{sesi}', []))
+    target = float(rencana.get('target_kalori_harian') or 0)
+    return {'total_kkal': round(total, 1), 'target_kkal': round(target, 1),
+            'persen': round(100 * total / target, 1) if target else None}
+
+
+def peringatan_kecukupan(rencana: dict, cakupan: dict, n_kandidat: int, profil_ctx: dict) -> list[str]:
+    """Pesan jujur bila menu tidak memenuhi target energi atau ada sesi kosong (mis. katalog cair terbatas)."""
+    pesan = []
+    kosong = [s.replace('_', ' ') for s in SESSION_RATIOS if not rencana.get(f'rekomendasi_{s}')]
+    persen = cakupan.get('persen')
+    tahap = profil_ctx.get('tahapDiet')
+    kurang = persen is not None and persen < 100 * BATAS_CAKUPAN_KALORI[0]
+    if kosong or kurang:
+        sebab = (f"hanya {n_kandidat} produk di katalog yang sesuai tekstur diet {tahap}" if tahap in ('cair', 'saring')
+                 else f"hanya {n_kandidat} produk di katalog yang lolos aturan alergi, pantangan, dan kategori")
+        pesan.append(f"Menu ini baru memenuhi sekitar {persen:.0f}% target energi harian"
+                     + (f" dan sesi {', '.join(kosong)} belum terisi" if kosong else '')
+                     + f", karena {sebab}. Lengkapi asupan sesuai arahan dokter atau ahli gizi.")
+    elif persen is not None and persen > 100 * BATAS_CAKUPAN_KALORI[1]:
+        pesan.append(f"Total kalori menu sekitar {persen:.0f}% dari target harian karena porsi terkecil beberapa "
+                     f"produk lebih besar dari kebutuhan. Kurangi porsi agar sesuai target.")
+    return pesan
+
 
 def build_meal_plan(kalori_info: dict, df_filtered: pd.DataFrame, kategori: str,
                     profil_ctx: Optional[dict] = None, rng: Optional[np.random.Generator] = None,
@@ -1573,7 +1627,8 @@ def _jalankan_ai_rekomendasi_inti(
     kategori = profil_kesehatan_dict.get('kategoriKondisi', 'UMUM')
 
     # Sanitasi pantangan medis & alergi (maks 1000 karakter agar daftar alergi panjang tidak hilang)
-    bersihkan = lambda k: re.sub(r'[^\w\s\,-]', '', str(profil_kesehatan_dict.get(k, '') or ''))[:1000].strip()
+    # tag HTML dibuang dulu agar '<script>' tidak terbaca sebagai frasa pantangan
+    bersihkan = lambda k: re.sub(r'[^\w\s\,-]', '', re.sub(r'<[^>]*>', ' ', str(profil_kesehatan_dict.get(k, '') or '')))[:1000].strip()
     pantangan, alergi = bersihkan('pantanganMedis'), bersihkan('alergi')
 
     # 1. Tier 1: Ambil target gizi & asesmen antropometri resmi NutriScale
@@ -1596,8 +1651,17 @@ def _jalankan_ai_rekomendasi_inti(
     # 3. Tier 2: Machine Learning Meal Ranking + komposisi piring + variasi antarhari
     benih = benih_variasi(profil_kesehatan_dict, profil_kesehatan_dict.get('tanggal'))
     riwayat_makanan = set(profil_kesehatan_dict.get('riwayatMakanan') or [])
-    rencana_makan = build_meal_plan(kalori, df_filtered, kategori, profil_ctx,
-                                    rng=np.random.default_rng(benih), riwayat_makanan=riwayat_makanan)
+    bahaya_balita = modul_kategori('ANAK_BALITA', 'bahaya')
+    bayi_asi = kategori == 'ANAK_BALITA' and float(profil_ctx.get('umur') or 0) < bahaya_balita.USIA_MPASI_BULAN
+    if bayi_asi:   # bayi < 6 bulan: ASI eksklusif, tidak ada menu makanan padat
+        rencana_makan = {'target_kalori_harian': kalori['target_kalori_harian'], 'distribusi': kalori['distribusi'],
+                         **{f'rekomendasi_{sesi}': [] for sesi in SESSION_RATIOS}, 'bahan_pelengkap_opsional': []}
+    else:
+        rencana_makan = build_meal_plan(kalori, df_filtered, kategori, profil_ctx,
+                                        rng=np.random.default_rng(benih), riwayat_makanan=riwayat_makanan)
+    cakupan = cakupan_kalori(rencana_makan)
+    peringatan = [bahaya_balita.PESAN_ASI_EKSKLUSIF] if bayi_asi else \
+        peringatan_kecukupan(rencana_makan, cakupan, len(df_filtered), profil_ctx)
 
     detected_cats, _ = parse_pantangan_input(pantangan, use_llm_parser)
     detected_alergi, _ = parse_pantangan_input(alergi, use_llm_parser)
@@ -1605,10 +1669,13 @@ def _jalankan_ai_rekomendasi_inti(
 
     # 4. Tier 3: Gemini LLM Narasi (penjelasan tanpa mengubah angka)
     narasi_ai = ""
-    if use_llm:
+    if use_llm and bayi_asi:
+        narasi_ai = peringatan[0]
+    elif use_llm:
         pantangan_narasi = ', '.join(filter(None, [alergi, pantangan]))
         narasi_ai = generate_llm_narasi(profil_kesehatan_dict, riwayat, kalori, rencana_makan, pantangan_narasi,
                                         catatan=catatan)
+        narasi_ai = _tempel_catatan(narasi_ai, peringatan)
     info_parser = ringkas_parser_alergi(dataset_dataframe, alergi, pantangan, use_llm_parser)
     model_info = get_recommender_model(kategori)
 
@@ -1628,6 +1695,10 @@ def _jalankan_ai_rekomendasi_inti(
             'alergi_terdeteksi': sorted(list(detected_alergi)),
             'parser_alergi': info_parser,
             'catatan_pantangan': catatan,
+            'status_menu': 'ASI_EKSKLUSIF' if bayi_asi else 'MENU_HARIAN',
+            'cakupan_kalori': cakupan,
+            'peringatan': peringatan,
+            'aturan_usia': [a[1] for a in aturan_usia_aktif(kategori, profil_ctx.get('umur'))],
             'sumber_target_gizi': NUTRISCALE_SOURCE,
             'sumber_asesmen_antropometri': riwayat.get('_source', 'LOCAL_FALLBACK'),
             'model': {

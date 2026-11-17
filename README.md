@@ -97,7 +97,15 @@ python -m unittest discover -s . -t . -p "test_*.py"
    pip install -r requirements-notebook.txt
    jupyter lab umum/latih_validasi_umum.ipynb
    ```
-2. **Jalankan Unit Test** (kode bersama + semua kategori):
+2. **Jalankan semua pengujian sekaligus** (tanpa API key dan tanpa Supabase, +-15 detik; panduan tester eksternal ada di [`TESTING.md`](TESTING.md)):
+   ```bash
+   pip install -r requirements.txt
+   python jalankan_semua_uji.py            # filter alergi (58), end-to-end (30), input realistis (59), unit test
+   python jalankan_semua_uji.py --detail   # tampilkan setiap kasus
+   ```
+   `requirements.txt` hanya untuk API/Railway dan pengujian. Space Hugging Face (`app.py`, Gradio) memakai `requirements-hf.txt`.
+
+   **Unit test saja** (kode bersama + semua kategori):
    ```bash
    python -m unittest test_nutriscale_data.py test_safety_filter.py
    python -m unittest discover -s . -t . -p "test_*.py"
@@ -107,7 +115,11 @@ python -m unittest discover -s . -t . -p "test_*.py"
    python -m unittest discover -s . -t . -p "test_input_*.py"
    python -m unittest ibu_hamil.tests.test_input_ibu_hamil   # satu kategori
    ```
-   Kasus ada di `<kategori>/ai_models/input_uji.py`; pemeriksanya bersama di `shared/uji_input.py`.
+   Kasus ada di `<kategori>/ai_models/input_uji.py`; pemeriksanya bersama di `shared/uji_input.py`. Selain keamanan
+   (alergen, BLOKIR, tekstur), pemeriksa juga mengecek kecukupan: total kalori menu 70-130% target dan tidak ada sesi
+   kosong, kecuali engine memberi `_meta.peringatan`; bayi < 6 bulan tidak diberi makanan padat; madu tidak untuk < 12 bulan.
+   Input user realistis (isian kosong, salah satuan, salah ketik, umur ekstrem, JSON aneh) ada di
+   `shared/kasus_input_realistis.py` dan diuji oleh `test_input_realistis.py`.
 4. **Jalankan API Server** (wajib set `AI_ENGINE_API_KEY`, tidak ada nilai default):
    ```bash
    AI_ENGINE_API_KEY=<kunci-rahasia> python api.py
