@@ -218,7 +218,6 @@ FRASA_ALIAS: dict[str, str] = {
 # Ambang 'tinggi' NHS: lemak > 17,5 g, natrium > 600 mg (0,6 g), gula > 22,5 g (di sini 15 g, lebih ketat).
 ATURAN_GIZI: dict[str, tuple[str, float]] = {
     'manis':        ('sugars', 15.0),
-    'gorengan':     ('fat', 25.0),
     'rendah_garam': ('sodium', 600.0),
     'rendah_lemak': ('fat', 17.5),
     'kolesterol':   ('fat', 17.5),   # sementara: lemak jenuh belum ada di data produk (NHS: jenuh > 5 g)
@@ -257,14 +256,6 @@ KATA_KONDISI: dict[str, tuple[str, str, list[str]]] = {
     'laktosa':      ('grup', 'susu', ['laktosa', 'intoleransi laktosa', 'lactose', 'lactose intolerance']),
     'rendah_karbo': ('grup', 'rendah_karbo', ['karbo', 'karbohidrat', 'rendah karbo', 'low carb', 'low-carb',
                                               'carb', 'carbs', 'carbohydrate', 'keto', 'ketogenic', 'ketogenik']),
-    'celiac':       ('grup', 'gluten', ['celiac', 'coeliac', 'seliak', 'penyakit celiac', 'celiac disease']),
-}
-
-# Gaya hidup -> (grup, frasa). Ditangani regex agar tidak bergantung pada LLM.
-_SEAFOOD6 = ['ikan', 'udang', 'kepiting', 'kerang', 'lobster', 'cumi']
-GAYA_HIDUP: dict[str, tuple[list[str], list[str]]] = {
-    'vegan':      (_SEAFOOD6 + ['susu', 'telur'], ['daging', 'madu']),
-    'vegetarian': (_SEAFOOD6, ['daging']),
 }
 
 NUTRISCALE_SOURCE = 'NUTRISCALE_NUTRI_CALC'
@@ -403,7 +394,6 @@ def _kw_pattern(keywords) -> Optional[re.Pattern]:
 _ALLERGEN_PATTERNS = {cat: _kw_pattern(kws) for cat, kws in ALLERGEN_KEYWORDS.items()}
 _EXCEPTION_PATTERNS = {cat: _kw_pattern(kws) for cat, kws in ALLERGEN_EXCEPTIONS.items()}
 _KONDISI_PATTERNS = {k: (jenis, nilai, _kw_pattern(kws)) for k, (jenis, nilai, kws) in KATA_KONDISI.items()}
-_GAYA_HIDUP_PATTERNS = {k: _kw_pattern([k]) for k in GAYA_HIDUP}
 _ALCOHOL_PATTERN = _kw_pattern(ALCOHOL_KEYWORDS)
 _ALCOHOL_EXCEPTION_PATTERN = _kw_pattern(ALCOHOL_EXCEPTIONS)
 _HAZARD_PATTERNS = {
@@ -1062,12 +1052,6 @@ def _parse_restriction_text(text: Optional[str], use_llm: bool = False) -> tuple
         if chunk in PANTANGAN_PHRASES:
             free_phrases.add(chunk)
             continue
-        gaya = [k for k, pat in _GAYA_HIDUP_PATTERNS.items() if keyword_match(chunk, pat)]
-        if gaya:                                   # 'vegan' mencakup 'vegetarian'
-            grup, frasa = GAYA_HIDUP['vegan' if 'vegan' in gaya else gaya[0]]
-            categories.update(grup)
-            free_phrases.update(frasa)
-            continue
         kondisi_dikenali = False
         for jenis, nilai, pat in _KONDISI_PATTERNS.values():
             if keyword_match(chunk, pat):
@@ -1127,7 +1111,7 @@ def hitung_konflik_keamanan(df: pd.DataFrame, pantanganMedis: Optional[str], kat
     """
     Hitung konflik keamanan per makanan (dipakai filter inferensi DAN generator dataset):
       n_conflict_allergen  : grup alergen dari field alergi user yang ada di makanan
-      n_conflict_pantangan : grup pantangan (pantanganMedis) yang ada di makanan (+ batas klinis manis/gorengan)
+      n_conflict_pantangan : grup pantangan (pantanganMedis) yang ada di makanan (+ ambang gizi ATURAN_GIZI)
       n_conflict_free      : frasa bebas user (kata utuh) yang muncul di nama makanan
       n_block_kategori     : kode BLOKIR tabel bahaya kategori (+ tekstur melebihi tahap diet pasca operasi)
       n_limit_kategori     : kode BATASI tabel bahaya kategori (tidak dibuang, diturunkan peringkatnya)
@@ -1390,7 +1374,7 @@ def pilih_bahan_pelengkap(df_filtered: pd.DataFrame, n: int = 3) -> list[dict]:
              'harga': float(r.get('price', 0) or 0), 'catatan': 'Pelengkap opsional secukupnya, tidak dihitung ke target kalori'}
             for _, r in d.head(n).iterrows()]
 
-BATAS_CAKUPAN_KALORI = (0.70, 1.30)   # total kalori menu / target harian yang dianggap memadai
+BATAS_CAKUPAN_KALORI = (0.70, 1.30)   # total kalori menu / target harian (peringatan hanya untuk < 70%)
 
 
 def cakupan_kalori(rencana: dict) -> dict:
@@ -1415,9 +1399,6 @@ def peringatan_kecukupan(rencana: dict, cakupan: dict, n_kandidat: int, profil_c
         pesan.append(f"Menu ini baru memenuhi sekitar {persen:.0f}% target energi harian"
                      + (f" dan sesi {', '.join(kosong)} belum terisi" if kosong else '')
                      + f", karena {sebab}. Lengkapi asupan sesuai arahan dokter atau ahli gizi.")
-    elif persen is not None and persen > 100 * BATAS_CAKUPAN_KALORI[1]:
-        pesan.append(f"Total kalori menu sekitar {persen:.0f}% dari target harian karena porsi terkecil beberapa "
-                     f"produk lebih besar dari kebutuhan. Kurangi porsi agar sesuai target.")
     return pesan
 
 

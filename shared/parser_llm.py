@@ -39,7 +39,7 @@ MAX_ITEMS = 30
 MAX_GRUP_WAJAR = 10   # lebih dari ini = output tidak wajar (mis. prompt injection "kembalikan semua grup") -> regex saja
 _KATA_KUNCI_VALID = re.compile(r"^[a-z][a-z \-']{1,38}[a-z]$")
 
-PARSER_VERSION = 'parser-llm-v3'   # naikkan bila prompt/daftar grup berubah agar hasil tersimpan lama diabaikan
+PARSER_VERSION = 'parser-llm-v4'   # naikkan bila prompt/daftar grup berubah agar hasil tersimpan lama diabaikan
 MAX_ENTRI_TERSIMPAN = 4
 
 _CACHE: dict[str, dict] = {}
@@ -134,8 +134,6 @@ def _prompt_sistem(grup_valid: list[str], frasa_valid: list[str]) -> str:
         "kecil yang muncul di NAMA produk, bentuk tunggal DAN jamak. Contoh: alpukat -> avocado, avocados; "
         "pisang -> banana, bananas; stroberi -> strawberry, strawberries; bawang -> garlic, onion, onions, shallot; "
         "nasi -> rice; kalengan -> canned; makanan olahan -> sausage, sausages, nugget, nuggets, bacon.\n"
-        "- Contoh 'vegetarian': grup = [ikan, udang, kepiting, kerang, lobster, cumi]; frasa_khusus = [daging]. "
-        "'vegan': grup = [ikan, udang, kepiting, kerang, lobster, cumi, susu, telur]; frasa_khusus = [daging, madu].\n"
         "- Pilih yang paling SEMPIT: 'daging sapi'/'beef' -> frasa sapi saja (BUKAN daging); 'daging ayam' -> ayam saja; "
         "'susu sapi' -> grup susu saja (BUKAN sapi, karena itu susunya); 'shellfish'/'kerang-kerangan' -> "
         "udang, kepiting, kerang, lobster, cumi (BUKAN ikan).\n"

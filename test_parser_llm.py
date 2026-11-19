@@ -192,9 +192,10 @@ class ParserLLMTest(unittest.TestCase):
             kw[kolom] = 'gula'
             aman = model.filter_dataset(df, kw['pantangan'], 'UMUM', kw['alergi'])
             self.assertEqual(sorted(set(df['name']) - set(aman['name'])), ['Ajwa Dates'], kolom)
+            # ambang lemak 'gorengan' dihapus 19 Nov 2026: gorengan hanya lewat kata (fried, goreng, ...)
             kw[kolom] = 'gorengan'
             aman = model.filter_dataset(df, kw['pantangan'], 'UMUM', kw['alergi'])
-            self.assertEqual(sorted(set(df['name']) - set(aman['name'])), ['Sunflower Seeds'], kolom)
+            self.assertEqual(sorted(set(df['name']) - set(aman['name'])), [], kolom)
 
     def test_aturan_gizi_dan_kondisi(self):
         df = make_foods(['Cheddar Cheese', 'Baked Potato Chips', 'Spinach', 'Lean Beef Mince', 'Beef liver',
@@ -269,17 +270,6 @@ class ParserLLMTest(unittest.TestCase):
         self.assertEqual(model._parse_restriction_text('diabetes'), ({'manis'}, set()))
         self.assertEqual(model._parse_restriction_text('kencing manis'), ({'manis'}, set()))
         self.assertEqual(model._parse_restriction_text('intoleransi laktosa'), ({'susu'}, set()))
-        self.assertEqual(model._parse_restriction_text('celiac'), ({'gluten'}, set()))
-
-    def test_vegan_vegetarian_tanpa_llm(self):
-        with mock.patch.object(requests, 'post') as post:
-            self.assertEqual(self.buang(pantangan='vegetarian', use_llm=False),
-                             ['Bacon', 'Beef steak', 'Chicken nuggets', 'Fresh Chicken Breast', 'Pork chop',
-                              'Pork sausage', 'Salmon', 'Shrimp'])
-            self.assertEqual(self.buang(pantangan='vegan', use_llm=False),
-                             ['Bacon', 'Beef steak', 'Cheese', 'Chicken nuggets', 'Fresh Chicken Breast', 'Milk',
-                              'Pork chop', 'Pork sausage', 'Salmon', 'Shrimp'])
-            post.assert_not_called()
 
     def test_groq_400_json_validate_dicoba_sekali_lagi(self):
         gagal = mock.Mock(status_code=400, text='{"error":{"code":"json_validate_failed"}}')

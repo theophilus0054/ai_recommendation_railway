@@ -1,4 +1,4 @@
-"""Tabel bahaya ANAK_BALITA: risiko tersedak, kafein, makanan mentah, gula tambahan."""
+"""Tabel bahaya ANAK_BALITA: risiko tersedak, kafein, pedas, gula tambahan. MENTAH dihapus 19 Nov 2026 (asumsi tanpa rujukan)."""
 
 BAHAYA = {
     'blokir': {
@@ -6,7 +6,6 @@ BAHAYA = {
         'KAFEIN':          ['coffee', 'espresso', 'energy drink', 'cola', 'kopi', 'caffeine'],
         'RISIKO_TERSEDAK': ['whole nuts', 'popcorn', 'hard candy', 'hard candies', 'lollipop', 'gum', 'chewing gum',
                             'peanuts', 'almonds', 'cashews', 'pistachios', 'seeds', 'grapes'],
-        'MENTAH':          ['sushi', 'sashimi', 'undercooked', 'setengah matang'],
         'PEDAS':           ['chili', 'chilli', 'chile', 'cayenne', 'jalapeno', 'cabai', 'cabe', 'sambal', 'hot sauce',
                             'spicy', 'pedas'],
     },

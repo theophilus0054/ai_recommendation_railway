@@ -24,7 +24,8 @@ class TestUmum(unittest.TestCase):
 
     def test_bahaya_alkohol_diblokir_kafein_dibatasi(self):
         self.assertIn('ALKOHOL', detect_hazards('Beer, light', 'UMUM')[0])
-        self.assertIn('KAFEIN', detect_hazards('Coffee, brewed', 'UMUM')[1])
+        # KAFEIN, OLAHAN, MENTAH untuk UMUM dihapus 19 Nov 2026 (asumsi tanpa rujukan)
+        self.assertEqual(detect_hazards('Coffee, brewed', 'UMUM'), ([], []))
         self.assertEqual(detect_hazards('Apples, raw', 'UMUM'), ([], []))
 
     def test_rubrik_serat_dan_batasi(self):

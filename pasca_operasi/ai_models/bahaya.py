@@ -1,16 +1,12 @@
-"""Tabel bahaya PASCA_OPERASI. Tekstur di atas tahapDiet diblokir di safety layer (model.filter_dataset)."""
+"""Tabel bahaya PASCA_OPERASI. Tekstur di atas tahapDiet diblokir di safety layer (model.filter_dataset).
+MENTAH, GORENGAN, OLAHAN, dan KAFEIN dihapus 19 Nov 2026: asumsi Claude tanpa rujukan
+(rekap/RUJUKAN_SETIAP_ATURAN_AI.md)."""
 
 BAHAYA = {
     'blokir': {
         'ALKOHOL': None,
-        'MENTAH':  ['sushi', 'sashimi', 'undercooked'],
     },
-    'batasi': {
-        'GORENGAN': ['fried', 'deep-fried', 'battered', 'breaded', 'crispy', 'goreng'],
-        'OLAHAN':   ['fast foods', 'frankfurter', 'sausage', 'bacon', 'hot dog', 'instant', 'luncheon meat',
-                    'chips', 'crisps', 'keripik'],
-        'KAFEIN':   ['coffee', 'espresso', 'energy drink', 'kopi'],
-    },
+    'batasi': {},
 }
 
 # Batas harian GGL (lemak None = pakai target lemak Tier 1)

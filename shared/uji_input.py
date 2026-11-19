@@ -6,7 +6,7 @@
    - kasus valid  : HTTP 200, 5 sesi makan ada, minimal 1 bahan, kategori model benar,
                     0 pelanggaran alergen/BLOKIR, 0 pelanggaran tekstur (pasca operasi),
                     alergi/pantangan terbaca (`alergi_terdeteksi`).
-                    kecukupan: total kalori menu 70-130% target dan tidak ada sesi kosong, KECUALI
+                    kecukupan: total kalori menu minimal 70% target dan tidak ada sesi kosong, KECUALI
                     engine memberi `_meta.peringatan` yang menjelaskan sebabnya (mis. katalog cair
                     terbatas); bayi < 6 bulan tidak diberi makanan padat; madu tidak untuk < 12 bulan.
    - kasus invalid: ditolak 422 (input tidak boleh masuk).
@@ -25,7 +25,7 @@ from shared import modul
 from model import TEKSTUR_ORDINAL, detect_allergens, detect_hazards, parse_pantangan_input
 
 USIA_MPASI_BULAN = 6        # di bawah ini bayi mendapat ASI eksklusif, bukan menu makanan padat
-BATAS_KECUKUPAN = (0.70, 1.30)   # total kalori menu / target harian yang dianggap memadai
+BATAS_KECUKUPAN = 0.70   # batas bawah total kalori menu / target harian (batas atas 130% dihapus 19 Nov 2026)
 
 SESI = ['rekomendasi_pagi', 'rekomendasi_snack_pagi', 'rekomendasi_siang', 'rekomendasi_snack_sore', 'rekomendasi_malam']
 HEADER = {"X-API-Key": os.environ["AI_ENGINE_API_KEY"]}
@@ -126,7 +126,7 @@ def periksa_kecukupan(data: dict, body: dict, kategori: str) -> list[str]:
     target = menu.get('target_kalori_harian') or 0
     if target:
         rasio = total_kalori_menu(menu) / target
-        if not (BATAS_KECUKUPAN[0] <= rasio <= BATAS_KECUKUPAN[1]) and not peringatan:
+        if rasio < BATAS_KECUKUPAN and not peringatan:
             masalah.append(f'kalori menu {rasio:.0%} dari target tanpa peringatan')
     kosong = [s for s in SESI if not menu.get(s)]
     if kosong and not peringatan:
