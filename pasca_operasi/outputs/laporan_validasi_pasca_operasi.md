@@ -1,54 +1,54 @@
 # Laporan Validasi Model PASCA_OPERASI
 
 - Pemilik: **Raymond**
-- Metode: Logistic Regression multinomial (label 0/1/2), metode dan konfigurasi sama dengan 3 kategori lain (config hash `ab9c7f415787085a`)
-- Data: 560 profil latih (19751 pasangan), 140 profil uji baru (4957 pasangan); split per profil
+- Metode: Logistic Regression multinomial (label 0/1/2), metode dan konfigurasi sama dengan 3 kategori lain (config hash `e77fd536ac0904a8`)
+- Data: 560 profil latih (21517 pasangan), 140 profil uji baru (5279 pasangan); split per profil
 - Evaluasi: validasi silang GroupKFold 5 lipatan pada data latih + test set profil baru (dipakai sekali untuk model final)
-- Tanggal laporan: 2026-11-17
+- Tanggal laporan: 2026-11-19
 
 ## 1. Metrik test set (profil baru)
 
 | Accuracy | Precision (macro) | Recall (macro) | F1 (macro) | Weighted kappa | NDCG@5 | NDCG@10 |
 |---|---|---|---|---|---|---|
-| 0.8854 | 0.8862 | 0.8784 | 0.8821 | 0.9055 | 0.9851 | 0.9879 |
+| 0.9919 | 0.9929 | 0.9900 | 0.9914 | 0.9924 | 0.9997 | 0.9997 |
 
 ## 2. Validasi silang GroupKFold (5 lipatan, data latih)
 
 | Metrik (validasi) | Rata-rata | Simpangan baku |
 |---|---|---|
-| accuracy | 0.8893 | 0.0044 |
-| macro_f1 | 0.8851 | 0.0041 |
-| weighted_kappa | 0.9104 | 0.0039 |
-| log_loss | 0.2464 | 0.0060 |
-| ndcg@5 | 0.9879 | 0.0019 |
+| accuracy | 0.9934 | 0.0007 |
+| macro_f1 | 0.9934 | 0.0006 |
+| weighted_kappa | 0.9936 | 0.0011 |
+| log_loss | 0.0225 | 0.0022 |
+| ndcg@5 | 0.9995 | 0.0005 |
 
 ## 3. Per kelas
 
 | Kelas | Precision | Recall | F1 | Jumlah |
 |---|---|---|---|---|
-| 0 tidak cocok | 0.9097 | 0.9331 | 0.9213 | 2288 |
-| 1 cukup | 0.8276 | 0.8205 | 0.8240 | 1621 |
-| 2 sangat cocok | 0.9212 | 0.8817 | 0.9010 | 1048 |
+| 0 tidak cocok | 0.9914 | 0.9979 | 0.9947 | 2428 |
+| 1 cukup | 0.9892 | 0.9881 | 0.9887 | 1855 |
+| 2 sangat cocok | 0.9980 | 0.9839 | 0.9909 | 996 |
 
 Confusion matrix (baris = label asli 0/1/2, kolom = prediksi 0/1/2):
 
 | Asli \ Prediksi | 0 | 1 | 2 |
 |---|---|---|---|
-| 0 | 2135 | 153 | 0 |
-| 1 | 212 | 1330 | 79 |
-| 2 | 0 | 124 | 924 |
+| 0 | 2423 | 4 | 1 |
+| 1 | 21 | 1833 | 1 |
+| 2 | 0 | 16 | 980 |
 
 ## 4. Pembanding
 
 | Metode | Accuracy | F1 (macro) | Kappa | NDCG@5 |
 |---|---|---|---|---|
-| Logistic Regression (model) | 0.8854 | 0.8821 | 0.9055 | 0.9851 |
-| Gradient boosting (pembanding) | 0.9411 | 0.9391 | 0.9513 | 0.9959 |
-| Formula lama | - | - | - | 0.7330 |
-| Urutan acak | - | - | - | 0.6074 |
+| Logistic Regression (model) | 0.9919 | 0.9914 | 0.9924 | 0.9997 |
+| Gradient boosting (pembanding) | 0.9915 | 0.9913 | 0.9926 | 0.9999 |
+| Formula lama | - | - | - | 0.7408 |
+| Urutan acak | - | - | - | 0.5905 |
 
-- Subset makanan baru (tidak ada di data latih): macro-F1 0.8788, kappa 0.8975
-- Baris konflik (alergi/pantangan/BLOKIR) tidak dipakai melatih maupun menilai model, karena di produksi dibuang filter keamanan sebelum ranking. Bila dinilai model saja, 52.91% diberi label > 0: keamanan dijamin filter, bukan model.
+- Subset makanan baru (tidak ada di data latih): macro-F1 0.9901, kappa 0.9913
+- Baris konflik (alergi/pantangan/BLOKIR) tidak dipakai melatih maupun menilai model, karena di produksi dibuang filter keamanan sebelum ranking. Bila dinilai model saja, 42.80% diberi label > 0: keamanan dijamin filter, bukan model.
 
 ## 5. Analisis overfitting
 
@@ -56,59 +56,59 @@ Overfitting = skor data latih jauh lebih tinggi daripada data yang belum pernah 
 
 | Model | Data | Accuracy | F1 (macro) | Kappa | Log loss |
 |---|---|---|---|---|---|
-| Logistic Regression | Latih (model final) | 0.8945 | 0.8909 | 0.9149 | 0.2353 |
-| Logistic Regression | Test (profil baru) | 0.8854 | 0.8821 | 0.9055 | 0.2478 |
-| Gradient boosting | Latih | 0.9924 | 0.9918 | 0.9938 | 0.0585 |
-| Gradient boosting | Test (profil baru) | 0.9411 | 0.9391 | 0.9513 | 0.1595 |
+| Logistic Regression | Latih (model final) | 0.9943 | 0.9943 | 0.9949 | 0.0171 |
+| Logistic Regression | Test (profil baru) | 0.9919 | 0.9914 | 0.9924 | 0.0214 |
+| Gradient boosting | Latih | 0.9994 | 0.9995 | 0.9994 | 0.0045 |
+| Gradient boosting | Test (profil baru) | 0.9915 | 0.9913 | 0.9926 | 0.0253 |
 
-- Macro-F1 GroupKFold: latih 0.8911 vs validasi 0.8851 (selisih +0.0060)
-- Macro-F1 model final: latih 0.8909 vs test 0.8821 (selisih +0.0088)
-- **Kesimpulan Logistic Regression: tidak overfitting**; gradient boosting: overfitting (selisih +0.0527)
+- Macro-F1 GroupKFold: latih 0.9942 vs validasi 0.9934 (selisih +0.0008)
+- Macro-F1 model final: latih 0.9943 vs test 0.9914 (selisih +0.0029)
+- **Kesimpulan Logistic Regression: tidak overfitting**; gradient boosting: tidak overfitting (selisih +0.0082)
 
 Per lipatan GroupKFold:
 
 | Lipatan | F1 latih | F1 validasi | Selisih | Log loss latih | Log loss validasi |
 |---|---|---|---|---|---|
-| 1 | 0.8909 | 0.8888 | +0.0021 | 0.2345 | 0.2490 |
-| 2 | 0.8905 | 0.8865 | +0.0040 | 0.2346 | 0.2455 |
-| 3 | 0.8919 | 0.8799 | +0.0120 | 0.2316 | 0.2552 |
-| 4 | 0.8896 | 0.8887 | +0.0009 | 0.2353 | 0.2401 |
-| 5 | 0.8926 | 0.8818 | +0.0108 | 0.2353 | 0.2420 |
+| 1 | 0.9941 | 0.9938 | +0.0003 | 0.0185 | 0.0220 |
+| 2 | 0.9942 | 0.9935 | +0.0007 | 0.0182 | 0.0247 |
+| 3 | 0.9940 | 0.9936 | +0.0004 | 0.0185 | 0.0248 |
+| 4 | 0.9941 | 0.9938 | +0.0003 | 0.0184 | 0.0195 |
+| 5 | 0.9944 | 0.9923 | +0.0021 | 0.0177 | 0.0217 |
 
 Kurva belajar (macro-F1, rata-rata 5 lipatan GroupKFold):
 
 | Porsi data latih | Profil | F1 latih | F1 validasi | Selisih |
 |---|---|---|---|---|
-| 10% | 45 | 0.9228 | 0.8622 | +0.0606 |
-| 20% | 90 | 0.9067 | 0.8783 | +0.0284 |
-| 40% | 179 | 0.8980 | 0.8828 | +0.0152 |
-| 60% | 269 | 0.8956 | 0.8852 | +0.0104 |
-| 80% | 358 | 0.8926 | 0.8856 | +0.0070 |
-| 100% | 448 | 0.8911 | 0.8852 | +0.0059 |
+| 10% | 45 | 0.9945 | 0.9797 | +0.0148 |
+| 20% | 90 | 0.9954 | 0.9879 | +0.0075 |
+| 40% | 179 | 0.9949 | 0.9916 | +0.0033 |
+| 60% | 269 | 0.9945 | 0.9931 | +0.0014 |
+| 80% | 358 | 0.9944 | 0.9933 | +0.0011 |
+| 100% | 448 | 0.9942 | 0.9934 | +0.0008 |
 
 ## 6. Koefisien teratas (arah sangat cocok vs tidak cocok)
 
 | Fitur | Bobot |
 |---|---|
-| natrium_lewat_jauh | -8.3286 |
-| gula_lewat_jauh | -7.3624 |
-| porsi_wajar | 4.7952 |
-| lemak10_x_saluran_cerna | -4.0256 |
-| protein_15 | 3.9213 |
-| porsi_ideal | 3.8869 |
-| protein_pct_sesuai | 3.6033 |
-| ft_protein__snack | -2.6053 |
-| ed_tinggi_x_lebih | -2.3572 |
-| n_limit_kategori | -2.3219 |
+| natrium_lewat_jauh | -18.71 |
+| gula_lewat_jauh | -16.2866 |
+| porsi_ideal | 10.7007 |
+| porsi_wajar | 8.2299 |
+| protein_pct_sesuai | 8.1097 |
+| ft_protein__snack | -6.2343 |
+| protein_kurang_lauk_karbo | -4.0339 |
+| ft_carb__snack | -3.2366 |
+| ft_protein__siang | 3.0686 |
+| ft_protein__malam | 2.9997 |
 
 ## 7. Uji end-to-end (filter keamanan + model + penyusun menu, katalog Supabase)
 
 | Skenario | Item | Kandidat lolos | Alergen | BLOKIR | Tekstur | Skor rata-rata | Latensi (ms) |
 |---|---|---|---|---|---|---|---|
-| Pasca Operasi Saluran Cerna (Lunak) | 11 | 14 | 0 | 0 | 0 | 75.3 | 37.0 |
-| Pasca Operasi Ortopedi (Cair) | 1 | 1 | 0 | 0 | 0 | 4.3 | 34.8 |
+| Pasca Operasi Saluran Cerna (Lunak) | 11 | 14 | 0 | 0 | 0 | 68.0 | 67.5 |
+| Pasca Operasi Ortopedi (Cair) | 1 | 1 | 0 | 0 | 0 | 0.0 | 61.1 |
 
-**Pasca Operasi Saluran Cerna (Lunak)**: pagi: karbo: Organic Brown Rice, lauk: Edamame, buah/sayur: Banana; snack_pagi: sayur: Mustard Greens; siang: karbo: Quinoa, lauk: Tilapia Fish, sayur: Sweet Potato; snack_sore: sayur: Broccoli; malam: karbo: Oatmeal, lauk: Tofu, lauk: Lentils
+**Pasca Operasi Saluran Cerna (Lunak)**: pagi: karbo: Organic Brown Rice, lauk: Tilapia Fish, buah/sayur: Banana; snack_pagi: sayur: Sweet Potato; siang: karbo: Quinoa, lauk: Edamame, sayur: Mustard Greens; snack_sore: sayur: Broccoli; malam: karbo: Oatmeal, lauk: Lentils, lauk: Tofu
 
 **Pasca Operasi Ortopedi (Cair)**: pagi: susu/olahan: Low Fat Milk; snack_pagi: -; siang: -; snack_sore: -; malam: -
 

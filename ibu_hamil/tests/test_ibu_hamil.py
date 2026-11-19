@@ -32,8 +32,9 @@ class TestIbuHamil(unittest.TestCase):
     def test_rubrik_folat_zat_besi_kafein(self):
         baik = {'folate': 80, 'iron': 3.0, 'vitamin_c': 20, 'caffeine': 0, 'n_limit_kategori': 0}
         kopi = {'folate': 0, 'iron': 0, 'vitamin_c': 0, 'caffeine': 95, 'n_limit_kategori': 1}
-        self.assertEqual(rubrik.poin_kategori(baik, {}, 1.0, 0.2), 2.5)
-        self.assertEqual(rubrik.poin_kategori(kopi, {}, 1.0, 0.0), -3.0)
+        # rubric-v2 (19 Nov 2026): hanya kafein (NHS 200 mg/hari); folat/besi/vit C dan BATASI dibuang
+        self.assertEqual(rubrik.poin_kategori(baik, {}, 1.0, 0.2), 0.0)
+        self.assertEqual(rubrik.poin_kategori(kopi, {}, 1.0, 0.0), -2.0)
 
 
 if __name__ == '__main__':

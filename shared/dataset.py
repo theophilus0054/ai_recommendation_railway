@@ -29,7 +29,7 @@ from model import (
 )
 from shared import KATEGORI_LIST, data_dir, modul as modul_kategori
 
-RUBRIC_VERSION = 'rubric-v1'
+RUBRIC_VERSION = 'rubric-v2'   # v2: poin tanpa rujukan (asumsi Claude) dibuang, 19 Nov 2026
 KATALOG_VERSION = 'katalog-v2'   # v2: tanpa jenis tidak dikenali, makanan eksotis, susu formula (17 Nov 2026)
 
 # Pecahan target item per sesi (sama dengan model.PIRING_SESI yang dipakai get_paket di build_meal_plan)
@@ -211,12 +211,10 @@ def rubric_points(row: pd.Series, prof: dict, kategori: str, target_kcal: float,
     elif ft not in SESSION_FIT_RULES[sg]['ok']:
         pts -= 1.0
 
-    # 4. Kualitas gizi (kolom label-only)
+    # 4. Kualitas gizi (kolom label-only). Serat >= 3 g/100 g = "source of fibre" (Regulasi EC 1924/2006).
+    #    Lemak jenuh > 10% energi dibuang 19 Nov 2026 (sumber belum dibuka).
     if row['fiber'] >= 3.0:
         pts += 0.5
-    sat_pct = 9 * float(row['saturated_fat']) / kcal
-    if sat_pct > 0.10:
-        pts -= 1.0
 
     # 5. Gula-Garam-Lemak terhadap jatah item dari batas harian kategori
     lim = DAILY_LIMITS[kategori]
@@ -226,15 +224,7 @@ def rubric_points(row: pd.Series, prof: dict, kategori: str, target_kcal: float,
     if float(row['sugars']) * m_eff > 1.5 * lim['sugars'] * share:
         pts -= 2.0
 
-    # 6. Status gizi (arah rekomendasi)
-    flags = status_flags(prof['statusNutrisi'], prof.get('haz'), prof.get('whz'))
-    ed = kcal / 100.0
-    if (flags['status_lebih'] or flags['status_obes']) and ed > 3.0:
-        pts -= 1.0
-    if (flags['status_kurang'] or flags['stunting']) and ed < 1.0 and ft not in ('vegetable', 'fruit'):
-        pts -= 0.5
-    if (flags['status_kurang'] or flags['stunting']) and p_pct >= 0.15:
-        pts += 0.5
+    # 6. Poin status gizi (gemuk/kurus) dibuang 19 Nov 2026: asumsi Claude tanpa rujukan.
 
     # 7. Penekanan per kategori (<kategori>/ai_models/rubrik.py, milik anggota tim kategori tsb.)
     pts += modul_kategori(kategori, 'rubrik').poin_kategori(row, prof, m_eff, p_pct)

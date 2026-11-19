@@ -269,3 +269,48 @@ saat itu sistem otomatis memakai regex saja.
 **File**: `api.py`, `model.py`, `shared/parser_llm.py`, `requirements.txt`, `.env.example`, `DEPLOY_RAILWAY.md`,
 `README.md`, `.dockerignore`, `deploy_lama/`, `test_parser_llm.py` (+6 tes), `test_narasi_llm.py` (+3 tes).
 
+
+---
+
+## 7. Aturan "asumsi Claude" dibuang (19 Nov 2026)
+
+**Masalah**
+- Banyak aturan, peringatan dan poin rubrik ditambahkan Claude tanpa rujukan dan tanpa diminta pembuat
+  (lihat `rekap/RUJUKAN_SETIAP_ATURAN_AI.md` dan `rekap/PERBEDAAN_4_MODEL_DAN_RUJUKAN.md`, label ASUMSI CLAUDE).
+  Akibatnya model terlalu ketat dan pembuat tidak bisa menjelaskan atau menguji sendiri lewat website.
+
+**Perubahan (keputusan Samuel: "Bagian 1 + 2, kerangka tetap")**
+- Bagian 1, filter dan peringatan:
+  - Peringatan kalori > 130% dibuang (peringatan < 70% tetap).
+  - BATASI KAFEIN/OLAHAN untuk UMUM dan PASCA_OPERASI, serta MENTAH untuk UMUM, PASCA_OPERASI dan ANAK_BALITA, dibuang.
+  - Ambang lemak pantangan "gorengan" dibuang.
+  - Regex celiac (ke gluten) dan vegan/vegetarian dibuang, termasuk contoh vegan/vegetarian di prompt Groq (`parser-llm-v4`).
+- Bagian 2, poin rubrik dan profil:
+  - Poin lemak jenuh > 10% energi dan poin status gizi (gemuk/kurus/stunting) dibuang (`rubric-v2`).
+  - Poin khusus kategori: UMUM tinggal serat/vit C +0,5. IBU_HAMIL tinggal kafein > 50 mg −2. ANAK_BALITA dan PASCA_OPERASI menjadi 0.
+  - Penyesuaian energi UMUM −400 kkal (gemuk/obes) dan +300 kkal (kurus) dibuang.
+- Kerangka tetap sebagai "aturan desain tim": rubrik dasar (porsi, protein, kecocokan sesi, natrium/gula), pembagian sesi,
+  komposisi piring, faktor aktivitas/stres.
+- Tetap dipertahankan karena keputusan Samuel sendiri atau ada rujukan: alkohol diblokir di semua kategori, PEDAS balita,
+  pemanis < 24 bulan, KAFEIN balita, MENTAH/IKAN_MERKURI/KAFEIN ibu hamil, rendah karbo, "kacang" ikut polong.
+- Dataset dibuat ulang, 4 model dilatih ulang (`lr-v4`), laporan validasi diperbarui.
+
+**Bukti (test set, sebelum `lr-v3` → sesudah `lr-v4`)**
+
+| Kategori | Akurasi | Macro-F1 | Kappa | NDCG@5 |
+|---|---|---|---|---|
+| UMUM | 0,891 → 0,951 | 0,863 → 0,951 | 0,886 → 0,960 | 0,981 → 0,995 |
+| ANAK_BALITA | 0,911 → 1,000 | 0,883 → 1,000 | 0,908 → 1,000 | 0,987 → 1,000 |
+| IBU_HAMIL | 0,806 → 0,990 | 0,781 → 0,991 | 0,823 → 0,991 | 0,959 → 0,998 |
+| PASCA_OPERASI | 0,885 → 0,992 | 0,882 → 0,991 | 0,906 → 0,992 | 0,985 → 1,000 |
+
+Catatan jujur: angka yang hampir sempurna **bukan** berarti model lebih baik. Rubrik yang lebih sederhana hampir
+seluruhnya bisa ditebak dari fitur ambang (porsi_ideal, porsi_wajar, protein_pct_sesuai, natrium/gula lewat jauh).
+ANAK_BALITA dan PASCA_OPERASI kini memakai rubrik bersama saja, jadi perbedaan 4 model terutama ada di profil latih,
+batas harian dan filter.
+
+Hasil uji: filter regex 54/58 (sebelumnya 57/58; T13 celiac, T28 vegetarian, T29 vegan kini hanya ditangani Groq,
+T41 maag memang belum punya aturan), end-to-end 30/30, input realistis 59/59, unit test 119/119 (1 tes vegan dihapus).
+
+**File**: `model.py`, `shared/parser_llm.py`, `shared/dataset.py`, `shared/training.py`, `shared/uji_input.py`,
+`*/ai_models/bahaya.py`, `*/ai_models/rubrik.py`, `umum/ai_models/profil.py`, tes terkait, `*/data/`, `*/model/`, `*/outputs/`.

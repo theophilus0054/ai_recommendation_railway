@@ -1,11 +1,8 @@
-"""Poin rubrik khusus ANAK_BALITA: kalsium/zat besi, gula tambahan rendah, aturan BATASI."""
+"""Poin rubrik khusus ANAK_BALITA.
+Poin kalsium/zat besi, gula > 10 g, dan pengurangan per BATASI dibuang 19 Nov 2026 (asumsi Claude tanpa
+rujukan). Balita kini memakai rubrik bersama saja; perbedaannya ada di profil latih, batas harian
+gula-garam (bahaya.BATAS_HARIAN), dan tabel BLOKIR."""
 
 
 def poin_kategori(row, prof: dict, m_eff: float, p_pct: float) -> float:
-    pts = 0.0
-    if row['calcium'] >= 120 or row['iron'] >= 2.0:
-        pts += 1.0
-    if row['sugars'] > 10:
-        pts -= 1.0
-    pts -= 1.0 * int(row['n_limit_kategori'])
-    return pts
+    return 0.0

@@ -29,8 +29,9 @@ class TestUmum(unittest.TestCase):
         self.assertEqual(detect_hazards('Apples, raw', 'UMUM'), ([], []))
 
     def test_rubrik_serat_dan_batasi(self):
+        # BATASI tidak lagi mengurangi poin (rubric-v2, 19 Nov 2026)
         row = {'fiber': 4.0, 'vitamin_c': 0.0, 'n_limit_kategori': 1}
-        self.assertEqual(rubrik.poin_kategori(row, {}, 1.0, 0.2), 0.0)
+        self.assertEqual(rubrik.poin_kategori(row, {}, 1.0, 0.2), 0.5)
 
 
 if __name__ == '__main__':

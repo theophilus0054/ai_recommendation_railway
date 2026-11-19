@@ -27,7 +27,8 @@ class TestPascaOperasi(unittest.TestCase):
     def test_rubrik_lemak_saluran_cerna(self):
         row = {'vitamin_c': 0, 'zinc': 0, 'fat': 15.0, 'fiber': 1.0, 'n_limit_kategori': 0}
         prof = {'jenisOperasi': 'saluran_cerna', 'tahapDiet': 'biasa'}
-        self.assertEqual(rubrik.poin_kategori(row, prof, 1.0, 0.10), -2.0)
+        # rubric-v2 (19 Nov 2026): poin lemak saluran cerna dibuang (asumsi tanpa rujukan)
+        self.assertEqual(rubrik.poin_kategori(row, prof, 1.0, 0.10), 0.0)
 
 
 if __name__ == '__main__':

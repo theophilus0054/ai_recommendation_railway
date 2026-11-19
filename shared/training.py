@@ -34,7 +34,7 @@ from sklearn.metrics import (accuracy_score, f1_score, cohen_kappa_score, confus
 from model import FEATURE_COLS, ada_konflik, score_from_proba
 from shared import PEMILIK, data_dir, model_path
 
-MODEL_VERSION = 'lr-v3'   # v3: tanpa fitur & baris konflik (17 Nov 2026)
+MODEL_VERSION = 'lr-v4'   # v4: rubric-v2 tanpa poin asumsi (19 Nov 2026); v3: tanpa fitur & baris konflik (17 Nov)
 LABELS = [0, 1, 2]
 N_FOLD = 5
 FRAKSI_KURVA = [0.1, 0.2, 0.4, 0.6, 0.8, 1.0]
