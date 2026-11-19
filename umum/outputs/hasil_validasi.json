@@ -3,29 +3,29 @@
   "pemilik": "Muel",
   "config_hash": "e77fd536ac0904a8",
   "test": {
-    "accuracy": 0.9508,
-    "macro_f1": 0.9512,
-    "weighted_kappa": 0.96,
-    "log_loss": 0.1134,
-    "macro_precision": 0.9531,
-    "macro_recall": 0.9498,
+    "accuracy": 0.9516,
+    "macro_f1": 0.952,
+    "weighted_kappa": 0.9606,
+    "log_loss": 0.1133,
+    "macro_precision": 0.9537,
+    "macro_recall": 0.9507,
     "per_class": {
       "0": {
-        "precision": 0.9495,
+        "precision": 0.9499,
         "recall": 0.98,
-        "f1": 0.9645,
+        "f1": 0.9647,
         "support": 2399
       },
       "1": {
-        "precision": 0.937,
+        "precision": 0.939,
         "recall": 0.9291,
-        "f1": 0.9331,
+        "f1": 0.934,
         "support": 2385
       },
       "2": {
-        "precision": 0.9727,
-        "recall": 0.9401,
-        "f1": 0.9561,
+        "precision": 0.9722,
+        "recall": 0.9431,
+        "f1": 0.9574,
         "support": 1704
       }
     },
@@ -36,71 +36,71 @@
         1
       ],
       [
-        125,
+        124,
         2216,
-        44
+        45
       ],
       [
         0,
-        102,
-        1602
+        97,
+        1607
       ]
     ]
   },
   "cv_groupkfold": {
     "accuracy": {
-      "mean": 0.9502,
-      "std": 0.0031
+      "mean": 0.9516,
+      "std": 0.003
     },
     "macro_f1": {
-      "mean": 0.9503,
-      "std": 0.0035
+      "mean": 0.9518,
+      "std": 0.0033
     },
     "weighted_kappa": {
-      "mean": 0.9591,
-      "std": 0.002
+      "mean": 0.9602,
+      "std": 0.0019
     },
     "log_loss": {
-      "mean": 0.1158,
-      "std": 0.0054
+      "mean": 0.1152,
+      "std": 0.0051
     },
     "ndcg@5": {
-      "mean": 0.9958,
+      "mean": 0.9956,
       "std": 0.0004
     }
   },
   "overfitting": {
     "train_final": {
-      "accuracy": 0.953,
-      "macro_f1": 0.953,
-      "weighted_kappa": 0.9615,
-      "log_loss": 0.1064
+      "accuracy": 0.9539,
+      "macro_f1": 0.9542,
+      "weighted_kappa": 0.9624,
+      "log_loss": 0.1059
     },
     "test": {
-      "accuracy": 0.9508,
-      "macro_f1": 0.9512,
-      "weighted_kappa": 0.96,
-      "log_loss": 0.1134
+      "accuracy": 0.9516,
+      "macro_f1": 0.952,
+      "weighted_kappa": 0.9606,
+      "log_loss": 0.1133
     },
-    "cv_train_macro_f1": 0.9537,
-    "cv_val_macro_f1": 0.9503,
-    "selisih_f1_train_vs_cv": 0.0035,
-    "selisih_f1_train_vs_test": 0.0018,
+    "cv_train_macro_f1": 0.9546,
+    "cv_val_macro_f1": 0.9518,
+    "selisih_f1_train_vs_cv": 0.0028,
+    "selisih_f1_train_vs_test": 0.0022,
     "kesimpulan": "tidak overfitting",
     "pembanding_gradient_boosting": {
       "train": {
         "accuracy": 0.9958,
-        "macro_f1": 0.996,
-        "weighted_kappa": 0.9965,
+        "macro_f1": 0.9959,
+        "weighted_kappa": 0.9962,
         "log_loss": 0.0313
       },
       "test": {
-        "accuracy": 0.9686,
-        "macro_f1": 0.9692,
-        "weighted_kappa": 0.9743,
-        "log_loss": 0.0864
+        "accuracy": 0.9689,
+        "macro_f1": 0.9695,
+        "weighted_kappa": 0.9745,
+        "log_loss": 0.086
       },
-      "selisih_f1_train_vs_test": 0.0268,
+      "selisih_f1_train_vs_test": 0.0264,
       "kesimpulan": "overfitting ringan"
     },
     "batas": {
@@ -117,7 +117,7 @@
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
       "rata_skor_kesesuaian": 71.6,
-      "latensi_ms": 49.1,
+      "latensi_ms": 51.3,
       "menu": {
         "pagi": [
           "karbo: Whole Wheat Bread",
@@ -149,8 +149,8 @@
       "pelanggaran_alergen": 0,
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
-      "rata_skor_kesesuaian": 80.6,
-      "latensi_ms": 43.5,
+      "rata_skor_kesesuaian": 79.9,
+      "latensi_ms": 41.7,
       "menu": {
         "pagi": [
           "karbo: Whole Wheat Bread",
@@ -158,7 +158,7 @@
           "buah/sayur: Dragon Fruit"
         ],
         "snack_pagi": [
-          "selingan: Baked Potato Chips"
+          "selingan: Ajwa Dates"
         ],
         "siang": [
           "karbo: Oatmeal",
@@ -166,7 +166,7 @@
           "sayur: Sweet Potato"
         ],
         "snack_sore": [
-          "selingan: Ajwa Dates"
+          "selingan: Baked Potato Chips"
         ],
         "malam": [
           "karbo: Organic Brown Rice",

@@ -314,3 +314,7 @@ T41 maag memang belum punya aturan), end-to-end 30/30, input realistis 59/59, un
 
 **File**: `model.py`, `shared/parser_llm.py`, `shared/dataset.py`, `shared/training.py`, `shared/uji_input.py`,
 `*/ai_models/bahaya.py`, `*/ai_models/rubrik.py`, `umum/ai_models/profil.py`, tes terkait, `*/data/`, `*/model/`, `*/outputs/`.
+
+**Tambahan 19 Nov (malam)**: atas permintaan Samuel, BATASI OLAHAN (termasuk keripik) untuk UMUM dan PASCA_OPERASI
+dikembalikan seperti semula. Dataset UMUM dan PASCA_OPERASI dibuat ulang dan modelnya dilatih ulang
+(UMUM akurasi 0,951 → 0,952; PASCA_OPERASI 0,992 → 0,992). Semua uji tetap sama.

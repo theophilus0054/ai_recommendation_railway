@@ -3,23 +3,23 @@
   "pemilik": "Raymond",
   "config_hash": "e77fd536ac0904a8",
   "test": {
-    "accuracy": 0.9919,
-    "macro_f1": 0.9914,
-    "weighted_kappa": 0.9924,
-    "log_loss": 0.0214,
-    "macro_precision": 0.9929,
-    "macro_recall": 0.99,
+    "accuracy": 0.992,
+    "macro_f1": 0.9916,
+    "weighted_kappa": 0.9926,
+    "log_loss": 0.0212,
+    "macro_precision": 0.993,
+    "macro_recall": 0.9902,
     "per_class": {
       "0": {
-        "precision": 0.9914,
+        "precision": 0.9918,
         "recall": 0.9979,
-        "f1": 0.9947,
+        "f1": 0.9949,
         "support": 2428
       },
       "1": {
         "precision": 0.9892,
-        "recall": 0.9881,
-        "f1": 0.9887,
+        "recall": 0.9887,
+        "f1": 0.9889,
         "support": 1855
       },
       "2": {
@@ -36,8 +36,8 @@
         1
       ],
       [
-        21,
-        1833,
+        20,
+        1834,
         1
       ],
       [
@@ -49,20 +49,20 @@
   },
   "cv_groupkfold": {
     "accuracy": {
-      "mean": 0.9934,
-      "std": 0.0007
+      "mean": 0.9933,
+      "std": 0.0009
     },
     "macro_f1": {
-      "mean": 0.9934,
-      "std": 0.0006
+      "mean": 0.9933,
+      "std": 0.0007
     },
     "weighted_kappa": {
-      "mean": 0.9936,
-      "std": 0.0011
+      "mean": 0.9935,
+      "std": 0.0012
     },
     "log_loss": {
       "mean": 0.0225,
-      "std": 0.0022
+      "std": 0.002
     },
     "ndcg@5": {
       "mean": 0.9995,
@@ -71,36 +71,36 @@
   },
   "overfitting": {
     "train_final": {
-      "accuracy": 0.9943,
+      "accuracy": 0.9942,
       "macro_f1": 0.9943,
       "weighted_kappa": 0.9949,
-      "log_loss": 0.0171
+      "log_loss": 0.0169
     },
     "test": {
-      "accuracy": 0.9919,
-      "macro_f1": 0.9914,
-      "weighted_kappa": 0.9924,
-      "log_loss": 0.0214
+      "accuracy": 0.992,
+      "macro_f1": 0.9916,
+      "weighted_kappa": 0.9926,
+      "log_loss": 0.0212
     },
     "cv_train_macro_f1": 0.9942,
-    "cv_val_macro_f1": 0.9934,
-    "selisih_f1_train_vs_cv": 0.0008,
-    "selisih_f1_train_vs_test": 0.0029,
+    "cv_val_macro_f1": 0.9933,
+    "selisih_f1_train_vs_cv": 0.0009,
+    "selisih_f1_train_vs_test": 0.0027,
     "kesimpulan": "tidak overfitting",
     "pembanding_gradient_boosting": {
       "train": {
         "accuracy": 0.9994,
         "macro_f1": 0.9995,
-        "weighted_kappa": 0.9994,
-        "log_loss": 0.0045
+        "weighted_kappa": 0.9993,
+        "log_loss": 0.0047
       },
       "test": {
-        "accuracy": 0.9915,
-        "macro_f1": 0.9913,
-        "weighted_kappa": 0.9926,
+        "accuracy": 0.9911,
+        "macro_f1": 0.9909,
+        "weighted_kappa": 0.9923,
         "log_loss": 0.0253
       },
-      "selisih_f1_train_vs_test": 0.0082,
+      "selisih_f1_train_vs_test": 0.0086,
       "kesimpulan": "tidak overfitting"
     },
     "batas": {
@@ -117,7 +117,7 @@
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
       "rata_skor_kesesuaian": 68.0,
-      "latensi_ms": 67.5,
+      "latensi_ms": 56.4,
       "menu": {
         "pagi": [
           "karbo: Organic Brown Rice",
@@ -150,7 +150,7 @@
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
       "rata_skor_kesesuaian": 0.0,
-      "latensi_ms": 61.1,
+      "latensi_ms": 51.6,
       "menu": {
         "pagi": [
           "susu/olahan: Low Fat Milk"
