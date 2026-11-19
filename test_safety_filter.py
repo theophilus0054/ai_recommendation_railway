@@ -221,8 +221,8 @@ class TestTemuanLaporanPM(unittest.TestCase):
 
     def test_keripik_dibatasi_untuk_ibu_hamil(self):
         self.assertIn('OLAHAN', detect_hazards('Baked Potato Chips', 'IBU_HAMIL')[1])
-        # OLAHAN untuk UMUM dihapus 19 Nov 2026 (asumsi tanpa rujukan)
-        self.assertEqual(detect_hazards('Baked Potato Chips', 'UMUM'), ([], []))
+        # OLAHAN (keripik) untuk UMUM dikembalikan 19 Nov 2026 atas permintaan Samuel
+        self.assertIn('OLAHAN', detect_hazards('Baked Potato Chips', 'UMUM')[1])
 
     def test_kidney_beans_bukan_jeroan(self):
         self.assertNotIn('JEROAN', detect_hazards('Kidney Beans', 'IBU_HAMIL')[1])
