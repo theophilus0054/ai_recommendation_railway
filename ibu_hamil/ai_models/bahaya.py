@@ -3,6 +3,7 @@
 BAHAYA = {
     'blokir': {
         'ALKOHOL':         None,
+        'ALKOHOL_BAHAN':   ['alcohol', 'ethanol', 'mirin'],   # penulisan alkohol di field ingredients
         'MENTAH':          ['sushi', 'sashimi', 'ceviche', 'tartare', 'undercooked', 'setengah matang'],
         'TIDAK_PASTEUR':   ['unpasteurized', 'raw milk', 'brie', 'camembert', 'roquefort', 'feta', 'queso fresco'],
         'IKAN_MERKURI':    ['shark', 'swordfish', 'king mackerel', 'marlin', 'tilefish', 'bigeye tuna', 'hiu', 'todak'],

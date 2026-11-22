@@ -10,7 +10,7 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 
 - Generator profil perempuan 19 sampai 42 tahun dan usia kehamilan (`ai_models/profil.py`)
 - Rubrik: folat, zat besi, vitamin C, kafein, aturan BATASI (`ai_models/rubrik.py`)
-- Tabel bahaya: mentah, tidak dipasteurisasi, ikan merkuri tinggi, alkohol; batasi kafein, jeroan, tuna (`ai_models/bahaya.py`)
+- Tabel bahaya (nama produk dan `ingredients`): mentah, tidak dipasteurisasi, ikan merkuri tinggi, alkohol; batasi kafein, jeroan, tuna (`ai_models/bahaya.py`)
 - Tanggung jawab bersama: safety layer, parser regex alergi dan pantangan, test suite keselamatan (`model.py`, `test_safety_filter.py`)
 
 ## Struktur folder
@@ -25,7 +25,7 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 | `latih_validasi_ibu_hamil.ipynb` | Notebook: buat dataset (opsional), latih, cek overfitting, validasi, laporan |
 | `data/` | `profiles.csv`, `train_data.csv`, `test_data.csv` (dataset sintetis) |
 | `model/` | `recommender_IBU_HAMIL.joblib` |
-| `outputs/` | `hasil_latih.json`, `hasil_validasi.json`, `laporan_validasi_ibu_hamil.md` |
+| `outputs/` | `hasil_latih.json`, `hasil_validasi.json`, `laporan_validasi_ibu_hamil.md`, `audit_katalog_ibu_hamil.md` |
 | `tests/` | `test_ibu_hamil.py` (uji unit), `test_input_ibu_hamil.py` (uji input via API) |
 
 ## Cara menjalankan (dari root repo)

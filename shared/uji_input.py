@@ -22,7 +22,7 @@ from fastapi.testclient import TestClient
 
 import api
 from shared import modul
-from model import TEKSTUR_ORDINAL, detect_allergens, detect_hazards, parse_pantangan_input
+from model import TEKSTUR_ORDINAL, bahaya_produk, detect_allergens, parse_pantangan_input
 
 USIA_MPASI_BULAN = 6        # di bawah ini bayi mendapat ASI eksklusif, bukan menu makanan padat
 BATAS_KECUKUPAN = (0.70, 1.30)   # total kalori menu / target harian yang dianggap memadai
@@ -86,12 +86,13 @@ def periksa_kasus(client, kategori: str, k: dict, tekstur: dict) -> list[str]:
     if k.get('alergi_terbaca') and not set(k['alergi_terbaca']) <= terbaca:
         masalah.append(f"alergi tidak terbaca: {sorted(set(k['alergi_terbaca']) - terbaca)}")
     masalah += periksa_kecukupan(data, body, kategori)
+    bahan = dict(zip(api.df_dataset['name'], api.df_dataset['ingredients']))
     for m in items:
         nama = m['nama_makanan']
         grup = set(detect_allergens(nama)) | {a.strip() for a in str(m.get('allergen_info', '')).split(',') if a.strip()}
         if groups & grup:
             masalah.append(f'alergen/pantangan lolos: {nama} {sorted(groups & grup)}')
-        if detect_hazards(nama, kategori)[0]:
+        if bahaya_produk(nama, bahan.get(nama, []), kategori)[0]:
             masalah.append(f'BLOKIR lolos: {nama}')
         tahap = str(body.get('tahapDiet') or '').strip().lower()   # API menerima 'Lunak' juga
         if tahap and TEKSTUR_ORDINAL.get(tekstur.get(nama, 'biasa'), 3) > TEKSTUR_ORDINAL[tahap]:
