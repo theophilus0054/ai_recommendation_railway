@@ -4,6 +4,8 @@ BAHAYA = {
     'blokir': {
         'ALKOHOL': None,
         'MENTAH':  ['sushi', 'sashimi', 'undercooked'],
+        'PEDAS':   ['chili', 'chilli', 'chile', 'cayenne', 'jalapeno', 'cabai', 'cabe', 'sambal', 'hot sauce',
+                    'spicy', 'pedas', 'lada', 'pepper', 'black pepper'],
     },
     'batasi': {
         'GORENGAN': ['fried', 'deep-fried', 'battered', 'breaded', 'crispy', 'goreng'],
@@ -15,3 +17,9 @@ BAHAYA = {
 
 # Batas harian GGL (lemak None = pakai target lemak Tier 1)
 BATAS_HARIAN = {'sodium': 2000.0, 'sugars': 50.0, 'fat': None}
+
+# Pelengkap yang tidak dianjurkan untuk operasi saluran cerna (pedas, asam iritatif, dan lemak jenuh tinggi)
+PELENGKAP_IRITATIF_SALURAN_CERNA = [
+    'chili', 'chilli', 'chile', 'cabai', 'cabe', 'sambal', 'spicy', 'pedas', 'pepper', 'lada', 'vinegar', 'cuka'
+]
+BATAS_LEMAK_PELENGKAP_SALURAN_CERNA = 5.0

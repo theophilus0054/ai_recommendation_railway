@@ -49,24 +49,24 @@
   },
   "cv_groupkfold": {
     "accuracy": {
-      "mean": 0.8085,
-      "std": 0.0042
+      "mean": 0.8081,
+      "std": 0.0084
     },
     "macro_f1": {
-      "mean": 0.7825,
-      "std": 0.0059
+      "mean": 0.7823,
+      "std": 0.0105
     },
     "weighted_kappa": {
-      "mean": 0.8241,
-      "std": 0.0047
+      "mean": 0.8238,
+      "std": 0.0084
     },
     "log_loss": {
       "mean": 0.4064,
-      "std": 0.0042
+      "std": 0.0134
     },
     "ndcg@5": {
-      "mean": 0.9571,
-      "std": 0.0041
+      "mean": 0.9569,
+      "std": 0.0047
     }
   },
   "overfitting": {
@@ -82,9 +82,9 @@
       "weighted_kappa": 0.8232,
       "log_loss": 0.4149
     },
-    "cv_train_macro_f1": 0.7888,
-    "cv_val_macro_f1": 0.7825,
-    "selisih_f1_train_vs_cv": 0.0063,
+    "cv_train_macro_f1": 0.7887,
+    "cv_val_macro_f1": 0.7823,
+    "selisih_f1_train_vs_cv": 0.0064,
     "selisih_f1_train_vs_test": 0.0069,
     "kesimpulan": "tidak overfitting",
     "pembanding_gradient_boosting": {
@@ -117,7 +117,7 @@
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
       "rata_skor_kesesuaian": 68.9,
-      "latensi_ms": 31.7,
+      "latensi_ms": 20.7,
       "menu": {
         "pagi": [
           "karbo: Oatmeal",
@@ -150,7 +150,7 @@
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
       "rata_skor_kesesuaian": 73.5,
-      "latensi_ms": 30.5,
+      "latensi_ms": 19.6,
       "menu": {
         "pagi": [
           "karbo: Oatmeal",
