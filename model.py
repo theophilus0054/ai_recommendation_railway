@@ -368,6 +368,8 @@ BUMBU_KEYWORDS = ['chili', 'chilli', 'chile', 'chilies', 'chillies', 'cayenne', 
 # 'kidney' (ginjal, jeroan) tidak berlaku untuk kacang merah (kidney beans).
 HAZARD_EXCEPTIONS: dict[str, list[str]] = {
     'JEROAN': ['kidney bean', 'kidney beans', 'beans, kidney'],
+    'ALKOHOL_BAHAN': ['no alcohol', 'non alcohol', 'non-alcohol', 'alcohol free', 'alcohol-free', 'sugar alcohol',
+                      'sugar alcohols', 'alcohol extraction'],
 }
 
 # Fitur ML: SATU daftar & SATU fungsi untuk training (shared/dataset.py) dan inferensi (recommend_meal)
@@ -491,6 +493,16 @@ def detect_hazards(name: str, kategori: str) -> tuple[list[str], list[str]]:
     for code, pat in table.get('batasi', {}).items():
         if keyword_match(name, pat, _HAZARD_EXCEPTION_PATTERNS.get(code)):
             batasi.append(code)
+    return blokir, batasi
+
+
+def bahaya_produk(name: str, bahan: list[str], kategori: str) -> tuple[list[str], list[str]]:
+    """Kode BLOKIR dan BATASI dari nama produk, ditambah bahannya untuk IBU_HAMIL."""
+    # Dicek per bahan agar kata dari dua bahan tidak tergabung ('raw oats' + 'milk'). Hanya ibu hamil:
+    # risiko tersedak balita ditentukan bentuk produk, bukan bahannya (selai dari 'peanuts').
+    temuan = [detect_hazards(t, kategori) for t in ([name, *bahan] if kategori == 'IBU_HAMIL' else [name])]
+    blokir = list(dict.fromkeys(k for b, _ in temuan for k in b))
+    batasi = list(dict.fromkeys(k for _, l in temuan for k in l))
     return blokir, batasi
 
 
@@ -681,17 +693,18 @@ def detect_allergens(food_name: str) -> list[str]:
             detected.append(allergen)
     return detected
 
+def _daftar_teks(nilai) -> list[str]:
+    """Field daftar produk Supabase (list, teks dipisah koma/titik koma, atau kosong) -> daftar teks huruf kecil."""
+    if isinstance(nilai, str):
+        nilai = re.split(r'[,;]', nilai)
+    if not isinstance(nilai, (list, tuple)):
+        return []
+    return [t for t in (str(x).strip().lower() for x in nilai if x is not None) if t]
+
 def map_supabase_allergens(allergens) -> list[str]:
     """Field 'allergens' produk Supabase (Inggris, mis. 'peanuts', 'tree nuts', 'wheat') -> grup alergen baku."""
-    if allergens is None or (isinstance(allergens, float) and pd.isna(allergens)):
-        return []
-    if isinstance(allergens, str):
-        allergens = [a for a in re.split(r'[,;]', allergens)]
     out = set()
-    for a in allergens:
-        key = str(a).strip().lower()
-        if not key:
-            continue
+    for key in _daftar_teks(allergens):
         if key in SUPABASE_ALLERGEN_MAP:
             out.update(SUPABASE_ALLERGEN_MAP[key])
         elif key in ALLERGEN_KEYWORDS:
@@ -731,6 +744,7 @@ def _produk_supabase_ke_record(pid, nama, harga, gizi, risiko, kat, img, stok=No
         'price': float(harga) if harga is not None else 0.0, 'stok': stok,
         **{k: angka(k) for k in ['calories', 'protein', 'fat', 'carbs', 'sodium', 'cholesterol', 'sugars']},
         'image': img or '', 'label_risiko': risiko or '', 'allergens': gizi.get('allergens', []),
+        'ingredients': gizi.get('ingredients', []),
         'foodType': gizi.get('foodType'), 'cookingMethod': gizi.get('cookingMethod'), 'category': kat or '',
     }
 
@@ -887,12 +901,14 @@ def load_and_preprocess_api_data(api_url: str) -> tuple[pd.DataFrame, dict]:
     # Filter dasar: minimum kalori & bebas alkohol
     df = df[(df['calories'] > 10) & ~df['name'].apply(is_alcoholic)].copy()
     df['name_lower'] = df['name'].str.lower()
+    df['ingredients'] = df['ingredients'].apply(_daftar_teks) if 'ingredients' in df.columns else [[] for _ in range(len(df))]
 
-    # Deteksi alergen: nama makanan + field allergens Supabase (Inggris) + label_risiko produk.
+    # Deteksi alergen: nama makanan + field allergens & ingredients Supabase (Inggris) + label_risiko produk.
     # Urutan tetap (bukan set) agar allergen_info sama di setiap proses.
     alergen = df['name'].apply(lambda x: detect_allergens(str(x)))
     if 'allergens' in df.columns:
         alergen = alergen + df['allergens'].apply(map_supabase_allergens)
+    alergen = alergen + df['ingredients'].apply(lambda b: [g for x in b for g in detect_allergens(x)])
     label = df['label_risiko'].fillna('').astype(str) if 'label_risiko' in df.columns else pd.Series('', index=df.index)
     df['label_risiko'] = [', '.join(dict.fromkeys(a.strip() for a in lbl.split(',') + grup if a.strip()))
                           for lbl, grup in zip(label, alergen)]
@@ -1128,8 +1144,9 @@ def hitung_konflik_keamanan(df: pd.DataFrame, pantanganMedis: Optional[str], kat
     Hitung konflik keamanan per makanan (dipakai filter inferensi DAN generator dataset):
       n_conflict_allergen  : grup alergen dari field alergi user yang ada di makanan
       n_conflict_pantangan : grup pantangan (pantanganMedis) yang ada di makanan (+ batas klinis manis/gorengan)
-      n_conflict_free      : frasa bebas user (kata utuh) yang muncul di nama makanan
-      n_block_kategori     : kode BLOKIR tabel bahaya kategori (+ tekstur melebihi tahap diet pasca operasi)
+      n_conflict_free      : frasa bebas user (kata utuh) yang muncul di nama makanan atau bahannya
+      n_block_kategori     : kode BLOKIR tabel bahaya kategori (+ bahan komposit untuk ibu hamil,
+                             + tekstur melebihi tahap diet pasca operasi)
       n_limit_kategori     : kode BATASI tabel bahaya kategori (tidak dibuang, diturunkan peringkatnya)
     """
     ctx = profil_ctx or {}
@@ -1143,6 +1160,7 @@ def hitung_konflik_keamanan(df: pd.DataFrame, pantanganMedis: Optional[str], kat
     free_patterns = [_pola_frasa(p) for p in free_phrases]
 
     names = out['name'].astype(str).str.lower().tolist()
+    bahan = out['ingredients'].tolist() if 'ingredients' in out.columns else [[]] * len(out)   # data latih: tanpa bahan
     labels = out['label_risiko'].tolist() if 'label_risiko' in out.columns else [''] * len(out)
     gizi = {kol: (out[kol].astype(float).tolist() if kol in out.columns else [0.0] * len(out))
             for kol in {kol for kol, _ in ATURAN_GIZI.values()}}
@@ -1164,8 +1182,8 @@ def hitung_konflik_keamanan(df: pd.DataFrame, pantanganMedis: Optional[str], kat
                 food_cats.add(grup)
         n_alg.append(len(allergy_cats & food_cats))
         n_pant.append(len(pant_cats & food_cats))
-        n_free.append(sum(keyword_match(name, p, exc) for p, exc in free_patterns))
-        blokir, batasi = detect_hazards(name, kategoriKondisi)
+        n_free.append(sum(any(keyword_match(t, p, exc) for t in [name, *bahan[i]]) for p, exc in free_patterns))
+        blokir, batasi = bahaya_produk(name, bahan[i], kategoriKondisi)
         if kategoriKondisi == 'PASCA_OPERASI' and TEKSTUR_ORDINAL.get(str(tek), 3) > tahap:
             blokir = blokir + ['TEKSTUR_TAHAP_DIET']
         n_blk.append(len(blokir))
@@ -1668,7 +1686,7 @@ def _fallback_narasi(profil: dict, riwayat: dict, kalori_info: dict, pantangan: 
 def ringkas_parser_alergi(df: Optional[pd.DataFrame], alergi: str, pantangan: str, use_llm_parser: bool) -> dict:
     """
     Transparansi parser untuk _meta: sumber parser, tambahan dari LLM, dan frasa bebas yang
-    TIDAK cocok dengan nama produk mana pun di katalog (artinya tidak memfilter apa pun).
+    TIDAK cocok dengan nama atau bahan produk mana pun di katalog (artinya tidak memfilter apa pun).
     """
     tambahan_llm, gagal_llm, sumber_llm, untuk_disimpan = {}, False, {}, {}
     if use_llm_parser:
@@ -1685,6 +1703,8 @@ def ringkas_parser_alergi(df: Optional[pd.DataFrame], alergi: str, pantangan: st
                 untuk_disimpan[teks] = hasil
                 sumber_llm[nama] = 'tersimpan' if dari_simpanan else 'groq'
     names = df['name'].astype(str).str.lower().tolist() if df is not None and 'name' in df.columns else []
+    if df is not None and 'ingredients' in df.columns:
+        names += [b for daftar in df['ingredients'] for b in daftar]
     _, free_a = _parse_restriction_text(alergi, use_llm_parser)
     _, free_p = _parse_restriction_text(pantangan, use_llm_parser)
     pola = {p: _pola_frasa(p) for p in free_a | free_p}
