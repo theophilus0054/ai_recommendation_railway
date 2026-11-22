@@ -1190,17 +1190,51 @@ def aturan_usia_aktif(kategori: str, umur) -> list[tuple]:
     return [a for a in modul_kategori('ANAK_BALITA', 'bahaya').BLOKIR_MENURUT_USIA if float(umur) < a[0]]
 
 
+def tekstur_maks_usia(kategori: str, umur) -> Optional[tuple[str, str]]:
+    """(kode, tekstur maksimum) MPASI untuk umur balita ini, atau None bila tidak dibatasi (>= 12 bulan)."""
+    if kategori != 'ANAK_BALITA' or umur is None:
+        return None
+    for batas, kode, tekstur in modul_kategori('ANAK_BALITA', 'bahaya').TEKSTUR_MAKS_MENURUT_USIA:
+        if float(umur) < batas:
+            return kode, tekstur
+    return None
+
+
+def batas_gizi_usia_aktif(kategori: str, umur) -> list[tuple]:
+    """Batas gula/natrium per 100 g menurut umur yang berlaku untuk balita ini (lihat anak_balita bahaya.py)."""
+    if kategori != 'ANAK_BALITA' or umur is None:
+        return []
+    return [a for a in modul_kategori('ANAK_BALITA', 'bahaya').BATAS_GIZI_MENURUT_USIA if float(umur) < a[0]]
+
+
+def kode_aturan_usia(kategori: str, umur) -> list[str]:
+    """Semua kode aturan umur yang aktif (untuk _meta.aturan_usia)."""
+    tekstur = tekstur_maks_usia(kategori, umur)
+    return ([a[1] for a in aturan_usia_aktif(kategori, umur)] + ([tekstur[0]] if tekstur else [])
+            + [a[1] for a in batas_gizi_usia_aktif(kategori, umur)])
+
+
 def blokir_menurut_usia(df: pd.DataFrame, kategori: str, umur) -> np.ndarray:
-    """True per baris bila produk dilarang untuk umur balita ini (mis. madu < 12 bulan)."""
+    """True per baris bila produk dilarang untuk umur balita ini (madu < 12 bulan, tekstur & GGL MPASI)."""
     kena = np.zeros(len(df), dtype=bool)
     if not len(df):
         return kena
     nama = df['name'].astype(str).str.lower()
+    food_type = df['food_type'] if 'food_type' in df.columns else pd.Series([''] * len(df), index=df.index)
     for _, _, kata, jenis in aturan_usia_aktif(kategori, umur):
         if kata:
             kena |= nama.str.contains(r'\b(?:' + '|'.join(map(re.escape, kata)) + r')\b', regex=True).to_numpy()
-        if jenis and 'food_type' in df.columns:
-            kena |= df['food_type'].isin(jenis).to_numpy()
+        if jenis:
+            kena |= food_type.isin(jenis).to_numpy()
+    tekstur = tekstur_maks_usia(kategori, umur)
+    if tekstur and 'tekstur' in df.columns:
+        kecuali = modul_kategori('ANAK_BALITA', 'bahaya').TEKSTUR_PENGECUALIAN_FOODTYPE
+        terlalu_keras = df['tekstur'].map(TEKSTUR_ORDINAL).fillna(3) > TEKSTUR_ORDINAL[tekstur[1]]
+        kena |= (terlalu_keras & ~food_type.isin(kecuali)).to_numpy()
+    for _, _, kolom, ambang, kecuali in batas_gizi_usia_aktif(kategori, umur):
+        if kolom in df.columns:
+            lewat = pd.to_numeric(df[kolom], errors='coerce').fillna(0) > ambang
+            kena |= (lewat & ~food_type.isin(kecuali or [])).to_numpy()
     return kena
 
 
@@ -1832,7 +1866,7 @@ def _jalankan_ai_rekomendasi_inti(
             'status_menu': 'ASI_EKSKLUSIF' if bayi_asi else 'MENU_HARIAN',
             'cakupan_kalori': cakupan,
             'peringatan': peringatan,
-            'aturan_usia': [a[1] for a in aturan_usia_aktif(kategori, profil_ctx.get('umur'))],
+            'aturan_usia': kode_aturan_usia(kategori, profil_ctx.get('umur')),
             'sumber_target_gizi': NUTRISCALE_SOURCE,
             'sumber_asesmen_antropometri': riwayat.get('_source', 'LOCAL_FALLBACK'),
             'model': {
