@@ -7,7 +7,7 @@ import pandas as pd
 
 from pasca_operasi.ai_models import profil, rubrik
 from model import filter_dataset, pilih_bahan_pelengkap
-from test_safety_filter import make_foods
+from tests.test_safety_filter import make_foods
 
 
 class TestPascaOperasi(unittest.TestCase):

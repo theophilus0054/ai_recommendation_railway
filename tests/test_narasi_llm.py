@@ -71,6 +71,17 @@ class TestNarasiGemini(unittest.TestCase):
         self.assertEqual(out['_meta']['narasi']['alasan'], 'ditolak_cek_keamanan')
         self.assertNotIn('tempe', out['riwayat_analisis']['narasiAI'].lower())
 
+    def test_narasi_menyarankan_cabai_untuk_maag_ditolak(self):
+        klien = KlienPalsu(NARASI_AMAN + " Tambahkan sambal atau cabai agar lebih berselera.")
+        out = self.jalankan(klien, pantanganMedis='maag')
+        self.assertEqual(out['_meta']['narasi']['sumber'], 'template')
+        self.assertEqual(out['_meta']['narasi']['alasan'], 'ditolak_cek_keamanan')
+        narasi = out['riwayat_analisis']['narasiAI'].lower()
+        self.assertNotIn('sambal', narasi)
+        self.assertNotIn('maag', klien.panggilan[0]['contents'].lower())   # teks pantangan tidak dikirim ke Gemini
+        # narasi aman untuk penderita maag tetap diterima
+        self.assertEqual(self.jalankan(KlienPalsu(), pantanganMedis='maag')['_meta']['narasi']['sumber'], 'gemini')
+
     def test_narasi_alkohol_dan_blokir_hamil_ditolak(self):
         self.assertIn('menyebut alkohol', model.cek_narasi(NARASI_AMAN + ' Segelas wine boleh.', 'UMUM', set()))
         self.assertTrue(model.cek_narasi(NARASI_AMAN + ' Sushi salmon juga baik.', 'IBU_HAMIL', set()))

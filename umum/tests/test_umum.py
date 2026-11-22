@@ -3,9 +3,10 @@
 import unittest
 
 import numpy as np
+import pandas as pd
 
 from umum.ai_models import profil, rubrik
-from model import detect_hazards
+from model import detect_hazards, filter_dataset
 
 
 class TestUmum(unittest.TestCase):
@@ -26,6 +27,25 @@ class TestUmum(unittest.TestCase):
         self.assertIn('ALKOHOL', detect_hazards('Beer, light', 'UMUM')[0])
         self.assertIn('KAFEIN', detect_hazards('Coffee, brewed', 'UMUM')[1])
         self.assertEqual(detect_hazards('Apples, raw', 'UMUM'), ([], []))
+
+    def test_maag_membuang_pemicu_lambung(self):
+        nama = ['Red Chili', 'Black Coffee', 'Tomatoes', 'Oranges', 'Garlic', 'Red Onion', 'Dark Chocolate (70%)',
+                'Organic Brown Rice', 'Fresh Chicken Breast', 'Tofu', 'Banana', 'Broccoli']
+        df = pd.DataFrame({'name': nama})
+        for teks in ('maag', 'GERD', 'asam lambung', 'sakit maag kronis', 'gastritis', 'acid reflux'):
+            with self.subTest(teks=teks):
+                aman = set(filter_dataset(df, teks, 'UMUM', '', use_llm_parser=False)['name'])
+                self.assertEqual(aman, {'Organic Brown Rice', 'Fresh Chicken Breast', 'Tofu', 'Banana', 'Broccoli'})
+
+    def test_kolesterol_tidak_membuang_lemak_nabati(self):
+        df = pd.DataFrame({'name': ['Unsalted Butter', 'Eggs', 'Cheddar Cheese', 'Avocado', 'Almonds',
+                                    'Extra Virgin Olive Oil', 'Fresh Chicken Breast'],
+                           'fat': [81.0, 5.0, 33.0, 15.0, 50.0, 100.0, 4.0],
+                           'cholesterol': [215.0, 186.0, 105.0, 0.0, 0.0, 0.0, 85.0]})
+        for teks in ('kolesterol', 'kolesterol tinggi', 'high cholesterol'):
+            with self.subTest(teks=teks):
+                aman = set(filter_dataset(df, teks, 'UMUM', '', use_llm_parser=False)['name'])
+                self.assertEqual(aman, {'Avocado', 'Almonds', 'Extra Virgin Olive Oil', 'Fresh Chicken Breast'})
 
     def test_rubrik_serat_dan_batasi(self):
         row = {'fiber': 4.0, 'vitamin_c': 0.0, 'n_limit_kategori': 1}

@@ -230,5 +230,73 @@ class TestTemuanLaporanPM(unittest.TestCase):
         self.assertIn('JEROAN', detect_hazards('Chicken liver', 'IBU_HAMIL')[1])
 
 
+class TestMaagDanKolesterol(unittest.TestCase):
+    """Task #2 (UMUM): aturan deterministik maag/GERD dan kolesterol berbasis kolom 'cholesterol'."""
+
+    MAAG_BUANG = ['Red Chili', 'Black Coffee', 'Dark Chocolate (70%)', 'Tomatoes', 'Oranges', 'Garlic', 'Red Onion',
+                  'Baked Potato Chips', 'Sambal Oelek']
+    MAAG_AMAN = ['Organic Brown Rice', 'Fresh Chicken Breast', 'Tofu', 'Banana', 'Broccoli', 'Red Bell Pepper',
+                 'Oatmeal', 'Spinach']
+    # (fat g, cholesterol mg) per 100 g dari katalog snapshot Supabase (data/supabase_products.json)
+    GIZI = {'Unsalted Butter': (81.0, 215.0), 'Eggs': (5.0, 186.0), 'Cheddar Cheese': (33.0, 105.0),
+            'Fresh Chicken Breast': (4.0, 85.0), 'Lean Beef Mince': (15.0, 82.0), 'Salmon Fillet': (13.0, 55.0),
+            'Avocado': (15.0, 0.0), 'Almonds': (50.0, 0.0), 'Extra Virgin Olive Oil': (100.0, 0.0),
+            'Chia Seeds': (31.0, 0.0), 'Peanut Butter (Unsweetened)': (50.0, 0.0), 'Sunflower Seeds': (51.0, 0.0)}
+
+    def setUp(self):
+        self.df_maag = make_foods(self.MAAG_BUANG + self.MAAG_AMAN)
+        self.df_kol = make_foods(list(self.GIZI))
+        self.df_kol['fat'] = [f for f, _ in self.GIZI.values()]
+        self.df_kol['cholesterol'] = [c for _, c in self.GIZI.values()]
+
+    def buang(self, df, pantangan='', alergi=''):
+        aman = filter_dataset(df, pantangan, 'UMUM', alergi, use_llm_parser=False)
+        return sorted(set(df['name']) - set(aman['name']))
+
+    def test_variasi_maag_tanpa_llm(self):
+        for teks in ('maag', 'GERD', 'asam lambung', 'sakit maag kronis', 'gastritis', 'acid reflux', 'heartburn',
+                     'tukak lambung', 'dispepsia', 'dyspepsia', 'Maag, asam lambung'):
+            with self.subTest(teks=teks):
+                self.assertEqual(self.buang(self.df_maag, pantangan=teks), sorted(self.MAAG_BUANG))
+
+    def test_maag_di_kolom_alergi_juga_berlaku(self):
+        self.assertEqual(self.buang(self.df_maag, alergi='GERD'), sorted(self.MAAG_BUANG))
+
+    def test_maag_dikenali_parser(self):
+        kat, kata = parse_pantangan_input('sakit maag kronis')
+        self.assertEqual(kat, {'maag', 'pedas'})
+        for k in ('chili', 'cabai', 'sambal', 'coffee', 'kopi', 'chocolate', 'tomato', 'orange', 'garlic'):
+            self.assertIn(k, kata)
+        self.assertNotIn('pepper', kata)          # paprika (bell pepper) tetap aman
+        self.assertEqual(parse_pantangan_input('asam urat')[0], {'purin'})   # 'asam' tidak tertukar
+
+    def test_kolesterol_pakai_kolom_cholesterol(self):
+        self.assertEqual(model.ATURAN_GIZI['kolesterol'], ('cholesterol', 100.0))
+        for teks in ('kolesterol', 'kolesterol tinggi', 'high cholesterol'):
+            with self.subTest(teks=teks):
+                self.assertEqual(self.buang(self.df_kol, pantangan=teks), ['Cheddar Cheese', 'Eggs', 'Unsalted Butter'])
+
+    def test_lemak_nabati_sehat_tidak_dibuang_kolesterol(self):
+        aman = set(filter_dataset(self.df_kol, 'kolesterol tinggi', 'UMUM', '')['name'])
+        for nama in ('Avocado', 'Almonds', 'Extra Virgin Olive Oil', 'Chia Seeds', 'Peanut Butter (Unsweetened)',
+                     'Sunflower Seeds', 'Fresh Chicken Breast', 'Salmon Fillet'):
+            self.assertIn(nama, aman)
+
+    def test_rendah_lemak_tetap_pakai_kolom_fat(self):
+        # 'rendah lemak' tidak berubah: tetap ambang lemak > 17,5 g
+        self.assertEqual(self.buang(self.df_kol, pantangan='rendah lemak'),
+                         ['Almonds', 'Cheddar Cheese', 'Chia Seeds', 'Extra Virgin Olive Oil',
+                          'Peanut Butter (Unsweetened)', 'Sunflower Seeds', 'Unsalted Butter'])
+
+    def test_cek_narasi_menolak_cabai_untuk_maag(self):
+        _, kata = parse_pantangan_input('maag')
+        narasi = ('Status gizi Anda normal dengan target energi 2000 kkal per hari. Menu hari ini memadukan Oatmeal, '
+                  'Fresh Chicken Breast, dan Broccoli.')
+        self.assertEqual(model.cek_narasi(narasi, 'UMUM', kata), [])
+        for tambahan in (' Tambahkan sambal agar lebih segar.', ' Taburi cabai secukupnya.', ' Minum kopi pagi hari.'):
+            with self.subTest(tambahan=tambahan):
+                self.assertTrue(model.cek_narasi(narasi + tambahan, 'UMUM', kata))
+
+
 if __name__ == '__main__':
     unittest.main()

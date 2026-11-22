@@ -39,7 +39,7 @@ MAX_ITEMS = 30
 MAX_GRUP_WAJAR = 10   # lebih dari ini = output tidak wajar (mis. prompt injection "kembalikan semua grup") -> regex saja
 _KATA_KUNCI_VALID = re.compile(r"^[a-z][a-z \-']{1,38}[a-z]$")
 
-PARSER_VERSION = 'parser-llm-v3'   # naikkan bila prompt/daftar grup berubah agar hasil tersimpan lama diabaikan
+PARSER_VERSION = 'parser-llm-v4'   # naikkan bila prompt/daftar grup berubah agar hasil tersimpan lama diabaikan
 MAX_ENTRI_TERSIMPAN = 4
 
 _CACHE: dict[str, dict] = {}
@@ -126,9 +126,9 @@ def _prompt_sistem(grup_valid: list[str], frasa_valid: list[str]) -> str:
         "Tugas: petakan semua makanan yang harus DIHINDARI user.\n"
         "- 'grup': grup yang relevan. 'laktosa' -> susu; 'seafood' -> ikan, udang, kepiting, kerang, lobster, cumi; "
         "'manis' HANYA untuk gula/manis/diabetes; 'rendah_garam' untuk garam/natrium/hipertensi; "
-        "'rendah_lemak' untuk rendah lemak/obesitas; 'kolesterol' untuk kolesterol/jantung; "
+        "'rendah_lemak' untuk rendah lemak/obesitas; 'kolesterol' untuk kolesterol/jantung; 'pedas' untuk maag/GERD/asam lambung (bersama frasa maag); "
         "'rendah_karbo' untuk diet rendah karbohidrat/low carb/keto.\n"
-        "- 'frasa_khusus': frasa yang relevan, mis. 'tidak makan babi'/'halal' -> babi; 'asam urat' -> purin; "
+        "- 'frasa_khusus': frasa yang relevan, mis. 'tidak makan babi'/'halal' -> babi; 'asam urat' -> purin; 'maag'/'GERD'/'asam lambung'/'gastritis' -> maag; "
         "'tidak makan daging' -> daging; makanan manis tertentu -> cokelat/madu/permen/sirup (BUKAN grup manis).\n"
         "- 'kata_kunci_en': SETIAP bahan/makanan lain yang disebut WAJIB diterjemahkan ke kata bahasa Inggris huruf "
         "kecil yang muncul di NAMA produk, bentuk tunggal DAN jamak. Contoh: alpukat -> avocado, avocados; "
@@ -140,7 +140,7 @@ def _prompt_sistem(grup_valid: list[str], frasa_valid: list[str]) -> str:
         "'susu sapi' -> grup susu saja (BUKAN sapi, karena itu susunya); 'shellfish'/'kerang-kerangan' -> "
         "udang, kepiting, kerang, lobster, cumi (BUKAN ikan).\n"
         "- 'tidak_dikenali': HANYA teks yang bukan makanan, atau kondisi yang tidak bisa dipetakan ke grup/frasa "
-        "(mis. maag, MSG). Jangan taruh nama bahan makanan di sini.\n"
+        "(mis. MSG). Jangan taruh nama bahan makanan di sini.\n"
         "Pilih HANYA yang disebut atau jelas tersirat; jangan pernah memilih semua grup. "
         "Bila user menulis tidak ada alergi, semua daftar kosong."
     )

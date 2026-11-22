@@ -26,4 +26,8 @@ KASUS = [
      "body": {"umur": 30, "jenisKelamin": "LAKI_LAKI", "beratBadan": 70, "tinggiBadan": 170, "kategoriKondisi": "UMUM"}},
     {"nama": "UMUM 08 ditolak: kategori tidak dikenal", "harapan": "tolak",
      "body": {**_b(30, "LAKI_LAKI", 70, 170, N19(2000), 24.2, "Normal"), "kategoriKondisi": "DEWASA"}},
+    {"nama": "UMUM 09 pantangan maag dan asam lambung", "harapan": "terima", "alergi_terbaca": ["maag", "pedas"],
+     "body": _b(38, "PEREMPUAN", 57, 159, N19(1900), 22.5, "Normal", pantanganMedis="maag, asam lambung")},
+    {"nama": "UMUM 10 pantangan kolesterol tinggi", "harapan": "terima", "alergi_terbaca": ["kolesterol"],
+     "body": _b(55, "LAKI_LAKI", 78, 170, N19(2000), 27.0, "Overweight", pantanganMedis="kolesterol tinggi")},
 ]
