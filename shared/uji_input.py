@@ -22,7 +22,7 @@ from fastapi.testclient import TestClient
 
 import api
 from shared import modul
-from model import TEKSTUR_ORDINAL, bahaya_produk, detect_allergens, parse_pantangan_input
+from model import TEKSTUR_ORDINAL, bahaya_produk, detect_allergens, parse_pantangan_input, tekstur_maks_usia
 
 USIA_MPASI_BULAN = 6        # di bawah ini bayi mendapat ASI eksklusif, bukan menu makanan padat
 BATAS_KECUKUPAN = (0.70, 1.30)   # total kalori menu / target harian yang dianggap memadai
@@ -97,6 +97,9 @@ def periksa_kasus(client, kategori: str, k: dict, tekstur: dict) -> list[str]:
         tahap = str(body.get('tahapDiet') or '').strip().lower()   # API menerima 'Lunak' juga
         if tahap and TEKSTUR_ORDINAL.get(tekstur.get(nama, 'biasa'), 3) > TEKSTUR_ORDINAL[tahap]:
             masalah.append(f'tekstur melebihi tahap diet: {nama}')
+        mpasi = tekstur_maks_usia(kategori, body.get('umur'))
+        if mpasi and TEKSTUR_ORDINAL.get(tekstur.get(nama, 'biasa'), 3) > TEKSTUR_ORDINAL[mpasi[1]]:
+            masalah.append(f'tekstur terlalu keras untuk bayi {body.get("umur")} bulan: {nama}')
     return masalah
 
 

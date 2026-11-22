@@ -10,7 +10,7 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 
 - Generator profil umur dalam bulan, HAZ, WHZ, energi per umur (`ai_models/profil.py`)
 - Rubrik: kalsium atau zat besi, gula tambahan, aturan BATASI (`ai_models/rubrik.py`)
-- Tabel bahaya: risiko tersedak, kafein, mentah; batasi gula tambahan dan olahan; batas GGL anak (`ai_models/bahaya.py`)
+- Tabel bahaya: risiko tersedak, kafein, mentah; batasi gula tambahan dan olahan; batas GGL anak; tekstur MPASI 6 sampai 11 bulan dan batas gula/natrium bayi < 12 bulan (`ai_models/bahaya.py`)
 - Tanggung jawab bersama: evaluation harness, utilitas split, pipeline training bersama (`shared/pipeline.py`, `shared/dataset.py`, `shared/training.py`)
 
 ## Struktur folder
