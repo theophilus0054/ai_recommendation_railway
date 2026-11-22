@@ -4,7 +4,7 @@
 - Metode: Logistic Regression multinomial (label 0/1/2), metode dan konfigurasi sama dengan 3 kategori lain (config hash `ab9c7f415787085a`)
 - Data: 560 profil latih (19751 pasangan), 140 profil uji baru (4957 pasangan); split per profil
 - Evaluasi: validasi silang GroupKFold 5 lipatan pada data latih + test set profil baru (dipakai sekali untuk model final)
-- Tanggal laporan: 2026-11-17
+- Tanggal laporan: 2026-11-22
 
 ## 1. Metrik test set (profil baru)
 
@@ -16,11 +16,11 @@
 
 | Metrik (validasi) | Rata-rata | Simpangan baku |
 |---|---|---|
-| accuracy | 0.8893 | 0.0044 |
-| macro_f1 | 0.8851 | 0.0041 |
-| weighted_kappa | 0.9104 | 0.0039 |
-| log_loss | 0.2464 | 0.0060 |
-| ndcg@5 | 0.9879 | 0.0019 |
+| accuracy | 0.8896 | 0.0047 |
+| macro_f1 | 0.8855 | 0.0052 |
+| weighted_kappa | 0.9108 | 0.0039 |
+| log_loss | 0.2447 | 0.0089 |
+| ndcg@5 | 0.9877 | 0.0019 |
 
 ## 3. Per kelas
 
@@ -61,7 +61,7 @@ Overfitting = skor data latih jauh lebih tinggi daripada data yang belum pernah 
 | Gradient boosting | Latih | 0.9924 | 0.9918 | 0.9938 | 0.0585 |
 | Gradient boosting | Test (profil baru) | 0.9411 | 0.9391 | 0.9513 | 0.1595 |
 
-- Macro-F1 GroupKFold: latih 0.8911 vs validasi 0.8851 (selisih +0.0060)
+- Macro-F1 GroupKFold: latih 0.8905 vs validasi 0.8855 (selisih +0.0050)
 - Macro-F1 model final: latih 0.8909 vs test 0.8821 (selisih +0.0088)
 - **Kesimpulan Logistic Regression: tidak overfitting**; gradient boosting: overfitting (selisih +0.0527)
 
@@ -69,22 +69,22 @@ Per lipatan GroupKFold:
 
 | Lipatan | F1 latih | F1 validasi | Selisih | Log loss latih | Log loss validasi |
 |---|---|---|---|---|---|
-| 1 | 0.8909 | 0.8888 | +0.0021 | 0.2345 | 0.2490 |
-| 2 | 0.8905 | 0.8865 | +0.0040 | 0.2346 | 0.2455 |
-| 3 | 0.8919 | 0.8799 | +0.0120 | 0.2316 | 0.2552 |
-| 4 | 0.8896 | 0.8887 | +0.0009 | 0.2353 | 0.2401 |
-| 5 | 0.8926 | 0.8818 | +0.0108 | 0.2353 | 0.2420 |
+| 1 | 0.8914 | 0.8857 | +0.0057 | 0.2334 | 0.2471 |
+| 2 | 0.8904 | 0.8879 | +0.0025 | 0.2342 | 0.2447 |
+| 3 | 0.8900 | 0.8876 | +0.0024 | 0.2360 | 0.2384 |
+| 4 | 0.8881 | 0.8899 | -0.0018 | 0.2370 | 0.2351 |
+| 5 | 0.8926 | 0.8766 | +0.0160 | 0.2313 | 0.2580 |
 
 Kurva belajar (macro-F1, rata-rata 5 lipatan GroupKFold):
 
 | Porsi data latih | Profil | F1 latih | F1 validasi | Selisih |
 |---|---|---|---|---|
-| 10% | 45 | 0.9228 | 0.8622 | +0.0606 |
-| 20% | 90 | 0.9067 | 0.8783 | +0.0284 |
-| 40% | 179 | 0.8980 | 0.8828 | +0.0152 |
-| 60% | 269 | 0.8956 | 0.8852 | +0.0104 |
-| 80% | 358 | 0.8926 | 0.8856 | +0.0070 |
-| 100% | 448 | 0.8911 | 0.8852 | +0.0059 |
+| 10% | 45 | 0.9153 | 0.8623 | +0.0530 |
+| 20% | 90 | 0.9002 | 0.8743 | +0.0259 |
+| 40% | 179 | 0.8957 | 0.8803 | +0.0154 |
+| 60% | 269 | 0.8930 | 0.8843 | +0.0087 |
+| 80% | 358 | 0.8905 | 0.8842 | +0.0063 |
+| 100% | 448 | 0.8905 | 0.8855 | +0.0050 |
 
 ## 6. Koefisien teratas (arah sangat cocok vs tidak cocok)
 
@@ -105,12 +105,12 @@ Kurva belajar (macro-F1, rata-rata 5 lipatan GroupKFold):
 
 | Skenario | Item | Kandidat lolos | Alergen | BLOKIR | Tekstur | Skor rata-rata | Latensi (ms) |
 |---|---|---|---|---|---|---|---|
-| Pasca Operasi Saluran Cerna (Lunak) | 11 | 14 | 0 | 0 | 0 | 75.3 | 37.0 |
-| Pasca Operasi Ortopedi (Cair) | 1 | 1 | 0 | 0 | 0 | 4.3 | 34.8 |
+| Pasca Operasi Saluran Cerna (Lunak) | 11 | 28 | 0 | 0 | 0 | 73.3 | 125.3 |
+| Pasca Operasi Ortopedi (Cair) | 8 | 8 | 0 | 0 | 0 | 24.0 | 163.0 |
 
-**Pasca Operasi Saluran Cerna (Lunak)**: pagi: karbo: Organic Brown Rice, lauk: Edamame, buah/sayur: Banana; snack_pagi: sayur: Mustard Greens; siang: karbo: Quinoa, lauk: Tilapia Fish, sayur: Sweet Potato; snack_sore: sayur: Broccoli; malam: karbo: Oatmeal, lauk: Tofu, lauk: Lentils
+**Pasca Operasi Saluran Cerna (Lunak)**: pagi: karbo: Strained Rice Porridge, lauk: Edamame, buah/sayur: Applesauce; snack_pagi: selingan: Banana; siang: karbo: Quinoa, lauk: Tilapia Fish, sayur: Pureed Spinach Soup; snack_sore: selingan: Fresh Apple Juice; malam: karbo: Oatmeal, lauk: Tofu, sayur: Strained Tomato Juice
 
-**Pasca Operasi Ortopedi (Cair)**: pagi: susu/olahan: Low Fat Milk; snack_pagi: -; siang: -; snack_sore: -; malam: -
+**Pasca Operasi Ortopedi (Cair)**: pagi: karbo: Air Tajin Broth, lauk: Soy Milk, buah/sayur: Fresh Apple Juice; snack_pagi: selingan: Low Fat Milk; siang: sayur: Strained Tomato Juice, lauk: Chicken Broth, sayur: Clear Vegetable Broth; snack_sore: -; malam: lauk: Beef Bone Broth
 
 ## 8. Catatan
 

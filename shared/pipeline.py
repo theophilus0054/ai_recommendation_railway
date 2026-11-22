@@ -59,11 +59,12 @@ def profil_skenario(kategori: str, sc: dict) -> dict:
 def uji_end_to_end(kategori: str) -> list[dict]:
     """Skenario <kategori>/ai_models/skenario.py lewat pipeline produksi (filter keamanan + model + menu)."""
     from model import (load_and_preprocess_api_data, jalankan_ai_rekomendasi, parse_pantangan_input,
-                       detect_allergens, detect_hazards, TEKSTUR_ORDINAL)
+                       bahaya_produk, detect_allergens, TEKSTUR_ORDINAL)
 
     api_url = os.environ.get("NEXT_PUBLIC_APP_URL", "http://localhost:3000") + "/api/products"
     df_food, scaler = load_and_preprocess_api_data(api_url)
     tekstur_map = dict(zip(df_food['name'], df_food.get('tekstur', pd.Series(['biasa'] * len(df_food)))))
+    bahan_map = dict(zip(df_food['name'], df_food['ingredients']))
     hasil = []
     for sc in modul(kategori, 'skenario').SKENARIO:
         t0 = time.time()
@@ -77,7 +78,7 @@ def uji_end_to_end(kategori: str) -> list[dict]:
             grup = set(detect_allergens(m['nama_makanan']))
             grup |= {a.strip() for a in str(m.get('allergen_info', '')).split(',') if a.strip()}
             v_alergi += bool(alergen & grup)
-            v_blokir += bool(detect_hazards(m['nama_makanan'], kategori)[0])
+            v_blokir += bool(bahaya_produk(m['nama_makanan'], bahan_map.get(m['nama_makanan'], []), kategori)[0])
             if sc.get('tahapDiet'):
                 v_tekstur += TEKSTUR_ORDINAL.get(tekstur_map.get(m['nama_makanan'], 'biasa'), 3) > TEKSTUR_ORDINAL[sc['tahapDiet']]
         hasil.append({

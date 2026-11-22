@@ -4,7 +4,7 @@
 - Metode: Logistic Regression multinomial (label 0/1/2), metode dan konfigurasi sama dengan 3 kategori lain (config hash `ab9c7f415787085a`)
 - Data: 560 profil latih (22561 pasangan), 140 profil uji baru (5651 pasangan); split per profil
 - Evaluasi: validasi silang GroupKFold 5 lipatan pada data latih + test set profil baru (dipakai sekali untuk model final)
-- Tanggal laporan: 2026-11-17
+- Tanggal laporan: 2026-11-22
 
 ## 1. Metrik test set (profil baru)
 
@@ -16,11 +16,11 @@
 
 | Metrik (validasi) | Rata-rata | Simpangan baku |
 |---|---|---|
-| accuracy | 0.8085 | 0.0042 |
-| macro_f1 | 0.7825 | 0.0059 |
-| weighted_kappa | 0.8241 | 0.0047 |
-| log_loss | 0.4064 | 0.0042 |
-| ndcg@5 | 0.9571 | 0.0041 |
+| accuracy | 0.8081 | 0.0084 |
+| macro_f1 | 0.7823 | 0.0105 |
+| weighted_kappa | 0.8238 | 0.0084 |
+| log_loss | 0.4064 | 0.0134 |
+| ndcg@5 | 0.9569 | 0.0047 |
 
 ## 3. Per kelas
 
@@ -61,7 +61,7 @@ Overfitting = skor data latih jauh lebih tinggi daripada data yang belum pernah 
 | Gradient boosting | Latih | 0.9661 | 0.9589 | 0.9690 | 0.1392 |
 | Gradient boosting | Test (profil baru) | 0.8825 | 0.8622 | 0.8909 | 0.2825 |
 
-- Macro-F1 GroupKFold: latih 0.7888 vs validasi 0.7825 (selisih +0.0063)
+- Macro-F1 GroupKFold: latih 0.7887 vs validasi 0.7823 (selisih +0.0064)
 - Macro-F1 model final: latih 0.7879 vs test 0.7810 (selisih +0.0069)
 - **Kesimpulan Logistic Regression: tidak overfitting**; gradient boosting: overfitting (selisih +0.0967)
 
@@ -69,22 +69,22 @@ Per lipatan GroupKFold:
 
 | Lipatan | F1 latih | F1 validasi | Selisih | Log loss latih | Log loss validasi |
 |---|---|---|---|---|---|
-| 1 | 0.7890 | 0.7856 | +0.0034 | 0.3959 | 0.4057 |
-| 2 | 0.7896 | 0.7793 | +0.0103 | 0.3943 | 0.4133 |
-| 3 | 0.7904 | 0.7745 | +0.0159 | 0.3964 | 0.4041 |
-| 4 | 0.7872 | 0.7831 | +0.0041 | 0.3963 | 0.4068 |
-| 5 | 0.7877 | 0.7900 | -0.0023 | 0.3971 | 0.4021 |
+| 1 | 0.7897 | 0.7792 | +0.0105 | 0.3963 | 0.4039 |
+| 2 | 0.7904 | 0.7781 | +0.0123 | 0.3936 | 0.4202 |
+| 3 | 0.7937 | 0.7689 | +0.0248 | 0.3924 | 0.4197 |
+| 4 | 0.7846 | 0.7952 | -0.0106 | 0.3997 | 0.3895 |
+| 5 | 0.7853 | 0.7903 | -0.0050 | 0.3978 | 0.3989 |
 
 Kurva belajar (macro-F1, rata-rata 5 lipatan GroupKFold):
 
 | Porsi data latih | Profil | F1 latih | F1 validasi | Selisih |
 |---|---|---|---|---|
-| 10% | 45 | 0.8114 | 0.7641 | +0.0473 |
-| 20% | 90 | 0.7985 | 0.7729 | +0.0256 |
-| 40% | 179 | 0.7917 | 0.7789 | +0.0128 |
-| 60% | 269 | 0.7900 | 0.7814 | +0.0086 |
-| 80% | 358 | 0.7879 | 0.7824 | +0.0055 |
-| 100% | 448 | 0.7888 | 0.7825 | +0.0063 |
+| 10% | 45 | 0.8128 | 0.7658 | +0.0470 |
+| 20% | 90 | 0.7990 | 0.7755 | +0.0235 |
+| 40% | 179 | 0.7934 | 0.7811 | +0.0123 |
+| 60% | 269 | 0.7888 | 0.7818 | +0.0070 |
+| 80% | 358 | 0.7889 | 0.7817 | +0.0072 |
+| 100% | 448 | 0.7887 | 0.7824 | +0.0063 |
 
 ## 6. Koefisien teratas (arah sangat cocok vs tidak cocok)
 
@@ -105,8 +105,8 @@ Kurva belajar (macro-F1, rata-rata 5 lipatan GroupKFold):
 
 | Skenario | Item | Kandidat lolos | Alergen | BLOKIR | Tekstur | Skor rata-rata | Latensi (ms) |
 |---|---|---|---|---|---|---|---|
-| Ibu Hamil T3 | 11 | 43 | 0 | 0 | 0 | 68.9 | 31.7 |
-| Ibu Hamil T1 Alergi Susu | 11 | 41 | 0 | 0 | 0 | 73.5 | 30.5 |
+| Ibu Hamil T3 | 11 | 43 | 0 | 0 | 0 | 68.9 | 20.7 |
+| Ibu Hamil T1 Alergi Susu | 11 | 41 | 0 | 0 | 0 | 73.5 | 19.6 |
 
 **Ibu Hamil T3**: pagi: karbo: Oatmeal, lauk: Fresh Chicken Breast, buah/sayur: Banana; snack_pagi: selingan: Ajwa Dates; siang: karbo: Quinoa, lauk: Kidney Beans, sayur: Sweet Potato; snack_sore: selingan: Baked Potato Chips; malam: karbo: Organic Brown Rice, lauk: Mung Beans, sayur: Broccoli
 

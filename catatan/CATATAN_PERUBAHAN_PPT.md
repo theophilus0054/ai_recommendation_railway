@@ -10,7 +10,7 @@ slide: **Masalah, Perubahan, Bukti, File**. Tambahkan bagian baru di bawah untuk
 | No | Perubahan | Status |
 |---|---|---|
 | 1 | Narasi Gemini diperketat (tanpa teks user, cek output, timeout) | selesai, 9 unit test baru |
-| 2 | Aturan MPASI 6 sampai 11 bulan | **belum diterapkan**, alasan & sumber dicatat |
+| 2 | Aturan MPASI 6 sampai 11 bulan | selesai 22 Nov (lihat bagian 7), 5 unit test baru |
 | 3 | Kebocoran fitur konflik dibuang + katalog latih dirapikan + 4 model dilatih ulang | selesai |
 | 4 | Gold set ahli gizi | rencana + lembar blind 300 pasangan siap, belum ada label |
 | 5 | Siap deploy Railway (Dockerfile, health check, keamanan API) | selesai, diuji dengan Docker lokal |
@@ -51,7 +51,7 @@ deterministik dan model ML; output LLM diperiksa ulang sebelum sampai ke penggun
 
 ---
 
-## 2. Kenapa bayi 6 sampai 11 bulan perlu aturan sendiri (belum diterapkan)
+## 2. Kenapa bayi 6 sampai 11 bulan perlu aturan sendiri (diterapkan di bagian 7)
 
 **Masalah yang ditemukan** (uji 17 Nov, katalog snapshot 46 produk): bayi 7 bulan mendapat Whole Wheat
 Bread, Quinoa, Oranges utuh, Strawberry Yogurt; bayi 10 bulan mendapat Organic Brown Rice dan Low Fat Milk.
@@ -357,3 +357,36 @@ porsi lemak -4,7, porsi wajar +3,7, porsi ideal +2,5, % protein sesuai +2,4.
 **Kalimat untuk slide**: "Saat ini model meniru rubrik yang disusun dari pedoman (AKG 2019, Permenkes 30/2013, WHO,
 IDAI). Validasi ilmiah dilakukan melalui tinjauan ahli gizi atas aturan, label buta 300 pasangan (target weighted
 kappa >= 0,61), dan penilaian menu utuh." Jangan menulis "sudah tervalidasi ahli" sebelum langkah 1 sampai 3 selesai.
+---
+
+## 8. Tanya jawab sebelum PPT
+
+**Masalah**: bayi 7 bulan masih bisa mendapat Whole Wheat Bread, Organic Brown Rice, dan Strawberry Yogurt
+(lihat bagian 2). Filter tekstur hanya berlaku untuk PASCA_OPERASI.
+
+**Perubahan** (desain mengikuti usulan bagian 2)
+- Tekstur maksimum menurut umur memakai `TEKSTUR_ORDINAL` yang sama dengan pasca operasi:
+  6 sampai 8 bulan **saring**, 9 sampai 11 bulan **lunak**, 12 bulan ke atas tanpa batas.
+  Minyak/mentega (`fat`) dan bumbu (`spice`) dikecualikan karena dicampur ke dalam MPASI.
+- Bayi < 12 bulan: produk dengan gula > 10 g/100 g diblokir (buah dan sayur dikecualikan, gula alami;
+  ambang sama dengan penalti rubrik) dan natrium > 200 mg/100 g diblokir (~ setengah AKG 2019 bayi
+  7 sampai 11 bulan, 370 mg/hari).
+- Susu sapi **tidak** diblokir (WHO 2023, lihat bagian 2 poin 4).
+- Kode aturan baru tampil di `_meta.aturan_usia`: `TEKSTUR_MPASI_6_8_BULAN` / `TEKSTUR_MPASI_9_11_BULAN`,
+  `GULA_BAWAH_12_BULAN`, `NATRIUM_BAWAH_12_BULAN`.
+- Uji end-to-end (`shared/uji_input.py`) kini juga gagal bila menu bayi berisi tekstur di atas batas umurnya.
+
+**Bukti** (katalog snapshot 46 produk)
+- 10 bulan: menu 5 sesi lengkap dari bahan lunak (Oatmeal, Tilapia, Sweet Potato, Tofu, Banana, ...);
+  Whole Wheat Bread dan Strawberry Yogurt tidak muncul.
+- 7 sampai 8 bulan: hanya Greek Yogurt dan Low Fat Milk yang lolos, cakupan kalori 14% dengan peringatan
+  jujur di `_meta.peringatan` (keamanan di atas kelengkapan). **Perlu produk MPASI bertekstur saring di
+  katalog** (berkaitan dengan tugas penambahan produk cair/saring PASCA_OPERASI).
+- Hasil uji: filter regex 57/58 (T41 maag, milik UMUM), end-to-end 30/30, input realistis 59/59,
+  unit test 125/125 (sebelumnya 120).
+
+**Masih terbuka**: ambang gula/natrium dan tebakan tekstur dari nama produk (`detect_texture`) perlu ditinjau
+ahli gizi; batas atas kecukupan kalori bayi (bagian 2) belum diubah.
+
+**File**: `anak_balita/ai_models/bahaya.py`, `model.py` (`tekstur_maks_usia`, `batas_gizi_usia_aktif`,
+`kode_aturan_usia`, `blokir_menurut_usia`), `shared/uji_input.py`, `anak_balita/tests/test_anak_balita.py` (+5 tes).

@@ -1,4 +1,4 @@
-"""Tabel bahaya ANAK_BALITA: risiko tersedak, kafein, makanan mentah, gula tambahan."""
+"""Tabel bahaya ANAK_BALITA: risiko tersedak, kafein, makanan mentah, gula tambahan, tekstur & GGL MPASI."""
 
 BAHAYA = {
     'blokir': {
@@ -28,6 +28,23 @@ BLOKIR_MENURUT_USIA = [
     # (berlaku bila umur < bulan, kode, kata kunci nama produk, foodType)
     (12, 'MADU_BAWAH_12_BULAN', ['honey', 'madu'], None),
     (24, 'GULA_TAMBAHAN_BAWAH_2_TAHUN', None, ['sweetener']),
+]
+# Tekstur MPASI bertahap (WHO 2023 & IDAI): 6-8 bulan lumat/saring, 9-11 bulan lunak (cincang halus, nasi tim),
+# >= 12 bulan makanan keluarga. Produk yang teksturnya lebih keras dari batas umur dibuang.
+# (berlaku bila umur < bulan, kode, tekstur maksimum; urutan cair < saring < lunak < biasa)
+TEKSTUR_MAKS_MENURUT_USIA = [
+    (9, 'TEKSTUR_MPASI_6_8_BULAN', 'saring'),
+    (12, 'TEKSTUR_MPASI_9_11_BULAN', 'lunak'),
+]
+# Minyak, mentega, dan bumbu dicampur ke dalam MPASI, jadi teksturnya sendiri tidak dinilai.
+TEKSTUR_PENGECUALIAN_FOODTYPE = ['fat', 'spice']
+# Tanpa gula & garam tambahan pada MPASI: batas per 100 g untuk bayi < 12 bulan. Gula alami buah dan sayur
+# dikecualikan. Ambang gula = penalti gula di rubrik; ambang natrium ~ setengah AKG 2019 bayi 7-11 bulan
+# (370 mg/hari) dalam 100 g.
+# (berlaku bila umur < bulan, kode, kolom gizi, ambang per 100 g, foodType yang dikecualikan)
+BATAS_GIZI_MENURUT_USIA = [
+    (12, 'GULA_BAWAH_12_BULAN', 'sugars', 10.0, ['fruit', 'vegetable']),
+    (12, 'NATRIUM_BAWAH_12_BULAN', 'sodium', 200.0, None),
 ]
 PESAN_ASI_EKSKLUSIF = ('Bayi di bawah 6 bulan dianjurkan mendapat ASI eksklusif (atau susu formula sesuai anjuran '
                        'tenaga kesehatan), sehingga NutriScale tidak merekomendasikan makanan padat. '
