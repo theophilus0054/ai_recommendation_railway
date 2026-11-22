@@ -269,3 +269,91 @@ saat itu sistem otomatis memakai regex saja.
 **File**: `api.py`, `model.py`, `shared/parser_llm.py`, `requirements.txt`, `.env.example`, `DEPLOY_RAILWAY.md`,
 `README.md`, `.dockerignore`, `deploy_lama/`, `test_parser_llm.py` (+6 tes), `test_narasi_llm.py` (+3 tes).
 
+
+---
+
+## 7. Tanya jawab sebelum PPT (18 Nov 2026)
+
+### 7a. "Single value" pada Logistic Regression
+
+- LR biner menghasilkan **satu nilai** per data: peluang 0 sampai 1 dari fungsi sigmoid atas kombinasi linear fitur.
+- Project ini memakai **LR multinomial 3 kelas** (label 0 = tidak sesuai, 1 = cukup sesuai, 2 = sangat sesuai).
+  Keluarannya bukan satu nilai tetapi **tiga peluang** (P0, P1, P2) yang jumlahnya 1. Bobotnya juga tiga set
+  (satu per kelas, masing-masing 94 koefisien), bukan satu.
+- Ketiga peluang itu **diringkas menjadi satu skor** untuk perangkingan: skor = (P1 + 2*P2) / 2. Ini nilai harapan
+  label (0, 1 atau 2) dibagi 2, sehingga skor selalu 0 sampai 1. Skor ini yang tampil sebagai `match_score` (%).
+- Targetnya juga **single-output**: satu label per pasangan (profil, sesi, makanan), bukan beberapa target sekaligus.
+- Jadi: ya, project menerapkan "satu nilai" di akhir (skor kecocokan), tetapi modelnya sendiri multikelas.
+  (Bila yang dimaksud penanya adalah *singular value decomposition*, itu tidak dipakai.)
+
+### 7b. Metode perangkingan, langkah demi langkah
+
+1. **Target gizi (Tier 1)** datang dari web NutriScale: kalori harian dan gram protein/lemak/karbo. Engine tidak menghitung ulang.
+2. **Bagi ke 5 sesi**: pagi 25%, selingan pagi 10%, siang 35%, selingan sore 10%, malam 20%.
+3. **Komposisi piring** per sesi: pagi karbo 45% + lauk 35% + buah/sayur 20%; siang karbo 45% + lauk 35% + sayur 20%;
+   malam karbo 40% + lauk 40% + sayur 20%; selingan 1 item buah/susu/snack. Setiap peran mendapat target kalori sendiri.
+4. **Filter keamanan sebelum ranking** (makanan dibuang, bukan sekadar diturunkan):
+   alergi + pantangan (regex, ditambah Groq bila aktif), frasa bebas, kode BLOKIR kategori (mis. alkohol, ikan
+   bermerkuri tinggi untuk ibu hamil), aturan usia (madu < 12 bulan, gula tambahan < 24 bulan, bayi < 6 bulan
+   tidak diberi makanan padat), dan tekstur di atas tahap diet pasca operasi. Kode BATASI tidak dibuang tetapi menjadi fitur.
+5. **94 fitur** per kandidat terhadap target peran itu: rasio porsi (log kalori target/kalori makanan), selisih % protein/
+   lemak/karbo, porsi gula/natrium/lemak terhadap batas harian kategori, kepadatan energi dan protein, status gizi
+   dan interaksinya, umur/trimester/tekstur/tahap diet, flag gorengan/olahan/manis/pedas, jumlah kode BATASI, dan
+   one-hot jenis makanan x sesi.
+6. **LR kategori itu** (`predict_proba`) memberi P0, P1, P2, lalu skor = (P1 + 2*P2) / 2.
+7. **Penyesuaian**: bahan yang sudah dipakai hari itu dikeluarkan; bahan yang muncul di hari sebelumnya skornya x 0,7.
+8. **Pemilihan**: dari 5 kandidat teratas, yang skornya >= 85% skor terbaik diundi dengan bobot softmax
+   (suhu 0,05). Benih acak = userId + tanggal, jadi menu sama sepanjang hari dan berganti esok hari. Bila seri persis,
+   urutan stabil (urutan katalog). Peran tanpa kandidat diisi jenis makanan cadangan.
+9. **Porsi** = bulat(target kalori peran / kalori produk), minimal 1. Total 5 sesi dicek: < 70% atau > 130% target
+   memberi peringatan di `_meta.peringatan`.
+
+**Contoh nyata** (ibu hamil, 2.200 kkal, alergi udang; makan siang, peran lauk = 2.200 x 35% x 35% = 269,5 kkal,
+model IBU_HAMIL lr-v3, katalog snapshot 46 produk):
+
+| Kandidat (protein) | kkal | P0 | P1 | P2 | Skor | Porsi |
+|---|---|---|---|---|---|---|
+| Mung Beans | 347 | 0,000 | 0,005 | 0,995 | 0,997 | 1 |
+| Kidney Beans | 333 | 0,000 | 0,006 | 0,994 | 0,997 | 1 |
+| Fresh Chicken Breast | 165 | 0,000 | 0,119 | 0,881 | 0,940 | 2 |
+| Lentils | 116 | 0,002 | 0,370 | 0,628 | 0,813 | 2 |
+| Tempeh | 193 | 0,003 | 0,513 | 0,484 | 0,741 | 1 |
+
+Hitungan skor Chicken Breast: (0,119 + 2 x 0,881) / 2 = 0,940. Ambang undian 85% x 0,997 = 0,847, jadi yang ikut
+diundi: Mung Beans (peluang 43%), Kidney Beans (43%), Chicken Breast (14%). Lentils (0,813) tidak ikut.
+Koefisien terbesar model ini (kelas 2 dibanding 0): gula jauh lewat batas -5,2, natrium jauh lewat -4,7,
+porsi lemak -4,7, porsi wajar +3,7, porsi ideal +2,5, % protein sesuai +2,4.
+
+### 7c. Yang perlu dipastikan ahli gizi, dan cara membuktikannya
+
+**Yang harus ditinjau** (semua ada di kode, tinggal dibuat tabel untuk ahli):
+1. **Rubrik label** (`shared/dataset.py::rubric_points` + `<kategori>/ai_models/rubrik.py`), karena model belajar dari sini:
+   porsi wajar 0,67 sampai 2 kali, selisih % energi protein <= 7 poin, serat >= 3 g, lemak jenuh > 10% energi,
+   gula/natrium > 1,5 kali jatah item, kepadatan energi > 3 kkal/g untuk gizi lebih, ambang nilai (>= 3 jadi label 2,
+   >= 1 jadi label 1); ibu hamil folat >= 60 ug, besi >= 2,5 mg, kafein > 50 mg per item; balita kalsium >= 120 mg
+   atau besi >= 2 mg, gula > 10 g; pasca operasi protein >= 15% energi, lemak > 10 g untuk saluran cerna, serat > 4 g
+   untuk diet cair/saring/lunak.
+2. **Daftar BLOKIR dan BATASI** per kategori (`bahaya.py`) beserta kata kuncinya, dan **aturan usia** balita.
+3. **Batas harian GGL**: dewasa natrium 2.000 mg, gula 50 g, lemak 67 g (Permenkes 30/2013); balita natrium 900 mg, gula 25 g.
+4. **Pembagian sesi (25/10/35/10/20) dan komposisi piring.**
+5. **Rumus target kalori dan makro** di web NutriScale (Tier 1), karena semua porsi mengikuti angka itu.
+6. **Aturan MPASI 6 sampai 11 bulan** (tekstur bertahap, gula/garam minimal) yang belum diterapkan (bagian 2).
+7. **Peta tekstur** untuk tahap diet pasca operasi dan peta alergen (mis. "kacang" juga membuang polong-polongan).
+8. **Data produk**: sebagian nilai gizi di katalog per sajian, bukan per 100 g (contoh madu 64 kkal), perlu dicek admin/ahli.
+
+**Protokol validasi yang disarankan**
+1. **Tinjauan aturan**: setiap ambang di atas ditulis dalam satu tabel (nilai, sumber, alasan). Ahli memberi tanda
+   setuju / ubah / hapus. Hasilnya dicatat sebagai lembar persetujuan (nama, profesi, STR, tanggal).
+2. **Gold set blind** (alat sudah ada: `gold_set/gold_set.py`, 300 pasangan, 75 per kategori): 2 ahli gizi memberi
+   label 0/1/2 secara terpisah tanpa melihat label sistem.
+   - Kesepakatan antarahli: weighted kappa >= 0,61 (substansial). Bila lebih rendah, pedoman pelabelan diperjelas dulu.
+   - Model vs ahli: weighted kappa >= 0,61 dan tidak jauh di bawah kesepakatan antarahli.
+   - Rubrik vs ahli: menunjukkan bagian rubrik mana yang perlu diperbaiki.
+3. **Uji skenario menu utuh**: ahli menilai menu harian untuk 15 sampai 20 profil sulit (bayi 7 bulan, ibu hamil
+   trimester 3 anemia, pasca operasi tahap cair, lansia hipertensi, dll.). Target: 0 bahan tidak aman, dan alasan
+   setiap penolakan dicatat lalu dijadikan kasus uji otomatis.
+4. **Setelah itu**: perbaiki rubrik, buat ulang dataset, latih ulang, dan laporkan metrik sebelum/sesudah.
+
+**Kalimat untuk slide**: "Saat ini model meniru rubrik yang disusun dari pedoman (AKG 2019, Permenkes 30/2013, WHO,
+IDAI). Validasi ilmiah dilakukan melalui tinjauan ahli gizi atas aturan, label buta 300 pasangan (target weighted
+kappa >= 0,61), dan penilaian menu utuh." Jangan menulis "sudah tervalidasi ahli" sebelum langkah 1 sampai 3 selesai.

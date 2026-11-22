@@ -122,6 +122,11 @@ KASUS = [
     K("pantangan diabetes", "terima", "UMUM", _body(pantanganMedis="diabetes")),
     K("pantangan darah tinggi", "terima", "UMUM", _body(pantanganMedis="darah tinggi")),
     K("vegetarian", "terima", "UMUM", _body(pantanganMedis="vegetarian")),
+    K("pantangan maag / GERD", "terima", "UMUM", _body(pantanganMedis="maag / GERD")),
+    K("pantangan 'sakit maag kronis, gak kuat pedes'", "terima", "UMUM",
+      _body(pantanganMedis="sakit maag kronis, gak kuat pedes")),
+    K("pantangan kolesterol tinggi", "terima", "UMUM", _body(pantanganMedis="kolesterol tinggi")),
+    K("pantangan 'High Cholesterol' bahasa Inggris", "terima", "UMUM", _body(pantanganMedis="High Cholesterol")),
     K("alergi banyak sekaligus", "terima", "UMUM",
       _body(alergi="susu, telur, kacang, gandum, ikan, udang, kedelai, ayam, sapi")),
 ]

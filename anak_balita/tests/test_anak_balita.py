@@ -6,7 +6,7 @@ import numpy as np
 
 from anak_balita.ai_models import profil, rubrik
 from model import compute_ml_features, detect_hazards, filter_dataset
-from test_safety_filter import make_foods
+from tests.test_safety_filter import make_foods
 
 
 class TestAnakBalita(unittest.TestCase):

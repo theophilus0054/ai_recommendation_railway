@@ -199,6 +199,16 @@ PANTANGAN_PHRASES: dict[str, list[str]] = {
     'madu':         ['honey', 'madu'],
     'permen':       ['candy', 'candies', 'permen'],
     'sirup':        ['syrup', 'syrups', 'sirup'],
+    # Maag / GERD / asam lambung: pemicu umum gejala refluks & dispepsia (NIDDK, ACG 2022 GERD guideline):
+    # makanan pedas, kopi/kafein, minuman bersoda, cokelat, tomat, jeruk/citrus, bawang mentah, mint,
+    # makanan berlemak/gorengan. Kata kunci pedas ikut di sini karena chunk yang persis 'maag' langsung
+    # dipetakan ke frasa ini (tidak lewat KATA_KONDISI). 'pepper' polos sengaja tidak dipakai (paprika aman).
+    'maag':         ALLERGEN_KEYWORDS['pedas'] + [
+                     'coffee', 'espresso', 'kopi', 'caffeine', 'kafein', 'cola', 'soda', 'energy drink',
+                     'chocolate', 'cokelat', 'coklat', 'tomato', 'tomatoes', 'tomat', 'orange', 'oranges', 'jeruk',
+                     'lemon', 'lemons', 'lime', 'limes', 'grapefruit', 'citrus', 'garlic', 'bawang putih',
+                     'onion', 'onions', 'bawang merah', 'bawang bombay', 'peppermint', 'spearmint', 'mint',
+                     'chips', 'crisps', 'keripik', 'fried', 'deep-fried', 'gorengan', 'goreng', 'vinegar', 'cuka'],
 }
 
 # Sinonim frasa (bagian teks user persis sama) -> kunci PANTANGAN_PHRASES
@@ -221,7 +231,9 @@ ATURAN_GIZI: dict[str, tuple[str, float]] = {
     'gorengan':     ('fat', 25.0),
     'rendah_garam': ('sodium', 600.0),
     'rendah_lemak': ('fat', 17.5),
-    'kolesterol':   ('fat', 17.5),   # sementara: lemak jenuh belum ada di data produk (NHS: jenuh > 5 g)
+    # Kolesterol makanan per 100 g. > 100 mg membuang mentega (215), telur (186), keju cheddar (105);
+    # lemak nabati tak jenuh (alpukat, almond, minyak zaitun, chia) = 0 mg sehingga tetap boleh.
+    'kolesterol':   ('cholesterol', 100.0),
 }
 GRUP_GIZI = ['rendah_garam', 'rendah_lemak', 'kolesterol', 'rendah_karbo']   # grup tanpa kata kunci nama produk
 
@@ -244,6 +256,9 @@ CATATAN_PREFERENSI_DIABAIKAN = ('Pantangan rendah karbohidrat tidak diterapkan u
                                 'kebutuhan karbohidrat dengan dokter atau ahli gizi.')
 _SIAPA_KATEGORI = {'IBU_HAMIL': 'ibu hamil', 'ANAK_BALITA': 'anak balita'}
 
+_KATA_MAAG = ['maag', 'mag', 'sakit maag', 'gerd', 'asam lambung', 'gastritis', 'radang lambung', 'tukak lambung',
+              'luka lambung', 'dispepsia', 'dyspepsia', 'acid reflux', 'reflux', 'refluks', 'heartburn',
+              'peptic ulcer', 'tukak peptik']
 # Kata di teks user (kata utuh) -> grup gizi ('grup') atau frasa khusus ('frasa')
 KATA_KONDISI: dict[str, tuple[str, str, list[str]]] = {
     'rendah_garam': ('grup', 'rendah_garam', ['garam', 'asin', 'natrium', 'sodium', 'salt', 'salty', 'hipertensi',
@@ -258,6 +273,10 @@ KATA_KONDISI: dict[str, tuple[str, str, list[str]]] = {
     'rendah_karbo': ('grup', 'rendah_karbo', ['karbo', 'karbohidrat', 'rendah karbo', 'low carb', 'low-carb',
                                               'carb', 'carbs', 'carbohydrate', 'keto', 'ketogenic', 'ketogenik']),
     'celiac':       ('grup', 'gluten', ['celiac', 'coeliac', 'seliak', 'penyakit celiac', 'celiac disease']),
+    # Maag / GERD: frasa 'maag' (kopi, cokelat, tomat, citrus, bawang, ...) DAN grup 'pedas' (kata kunci
+    # pedas + label risiko produk). Dua entri dengan kata pemicu yang sama, keduanya diterapkan.
+    'maag':         ('frasa', 'maag', _KATA_MAAG),
+    'maag_pedas':   ('grup', 'pedas', _KATA_MAAG),
 }
 
 # Gaya hidup -> (grup, frasa). Ditangani regex agar tidak bergantung pada LLM.
@@ -1046,7 +1065,11 @@ def _parse_restriction_text(text: Optional[str], use_llm: bool = False) -> tuple
     if raw_text in PANTANGAN_STOPWORDS:
         return set(), set()
 
-    # 1. Normalisasi pemisah (dan, serta, atau, &, /, ;, + diubah jadi koma), buang tanda baca lain
+    # 1. Normalisasi pemisah (dan, serta, atau, &, /, ;, + diubah jadi koma), buang tanda baca lain.
+    #    Tanda akhir kalimat (. : ! ?) juga pemisah: 'alpukat. kalau makan gatal' harus tetap membuang alpukat,
+    #    bukan dibaca satu frasa 'alpukat kalau makan gatal' yang tidak cocok dengan produk mana pun.
+    #    Titik desimal di antara angka ('1.5') dibiarkan.
+    raw_text = re.sub(r'(?<!\d)[.:!?]|[.:!?](?!\d)', ',', raw_text)
     raw_text = re.sub(r'[^\w\s,&/;+\-]', ' ', raw_text)
     text = re.sub(r'(\bdan\b|\bserta\b|\batau\b|\bdengan\b|\band\b|&|/|;|\+|\n)', ',', raw_text)
     # 2. Hilangkan kata pengantar non-pantangan
