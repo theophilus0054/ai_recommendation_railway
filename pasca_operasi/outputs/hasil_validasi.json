@@ -49,23 +49,23 @@
   },
   "cv_groupkfold": {
     "accuracy": {
-      "mean": 0.8893,
-      "std": 0.0044
+      "mean": 0.8896,
+      "std": 0.0047
     },
     "macro_f1": {
-      "mean": 0.8851,
-      "std": 0.0041
+      "mean": 0.8855,
+      "std": 0.0052
     },
     "weighted_kappa": {
-      "mean": 0.9104,
+      "mean": 0.9108,
       "std": 0.0039
     },
     "log_loss": {
-      "mean": 0.2464,
-      "std": 0.006
+      "mean": 0.2447,
+      "std": 0.0089
     },
     "ndcg@5": {
-      "mean": 0.9879,
+      "mean": 0.9877,
       "std": 0.0019
     }
   },
@@ -82,9 +82,9 @@
       "weighted_kappa": 0.9055,
       "log_loss": 0.2478
     },
-    "cv_train_macro_f1": 0.8911,
-    "cv_val_macro_f1": 0.8851,
-    "selisih_f1_train_vs_cv": 0.006,
+    "cv_train_macro_f1": 0.8905,
+    "cv_val_macro_f1": 0.8855,
+    "selisih_f1_train_vs_cv": 0.005,
     "selisih_f1_train_vs_test": 0.0088,
     "kesimpulan": "tidak overfitting",
     "pembanding_gradient_boosting": {
@@ -112,53 +112,63 @@
     {
       "skenario": "Pasca Operasi Saluran Cerna (Lunak)",
       "jumlah_item": 11,
-      "kandidat_lolos_filter": 14,
+      "kandidat_lolos_filter": 28,
       "pelanggaran_alergen": 0,
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
-      "rata_skor_kesesuaian": 75.3,
-      "latensi_ms": 37.0,
+      "rata_skor_kesesuaian": 73.3,
+      "latensi_ms": 125.3,
       "menu": {
         "pagi": [
-          "karbo: Organic Brown Rice",
+          "karbo: Strained Rice Porridge",
           "lauk: Edamame",
-          "buah/sayur: Banana"
+          "buah/sayur: Applesauce"
         ],
         "snack_pagi": [
-          "sayur: Mustard Greens"
+          "selingan: Banana"
         ],
         "siang": [
           "karbo: Quinoa",
           "lauk: Tilapia Fish",
-          "sayur: Sweet Potato"
+          "sayur: Pureed Spinach Soup"
         ],
         "snack_sore": [
-          "sayur: Broccoli"
+          "selingan: Fresh Apple Juice"
         ],
         "malam": [
           "karbo: Oatmeal",
           "lauk: Tofu",
-          "lauk: Lentils"
+          "sayur: Strained Tomato Juice"
         ]
       }
     },
     {
       "skenario": "Pasca Operasi Ortopedi (Cair)",
-      "jumlah_item": 1,
-      "kandidat_lolos_filter": 1,
+      "jumlah_item": 8,
+      "kandidat_lolos_filter": 8,
       "pelanggaran_alergen": 0,
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
-      "rata_skor_kesesuaian": 4.3,
-      "latensi_ms": 34.8,
+      "rata_skor_kesesuaian": 24.0,
+      "latensi_ms": 163.0,
       "menu": {
         "pagi": [
-          "susu/olahan: Low Fat Milk"
+          "karbo: Air Tajin Broth",
+          "lauk: Soy Milk",
+          "buah/sayur: Fresh Apple Juice"
         ],
-        "snack_pagi": [],
-        "siang": [],
+        "snack_pagi": [
+          "selingan: Low Fat Milk"
+        ],
+        "siang": [
+          "sayur: Strained Tomato Juice",
+          "lauk: Chicken Broth",
+          "sayur: Clear Vegetable Broth"
+        ],
         "snack_sore": [],
-        "malam": []
+        "malam": [
+          "lauk: Beef Bone Broth"
+        ]
       }
     }
   ]

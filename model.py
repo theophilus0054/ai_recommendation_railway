@@ -1397,11 +1397,21 @@ def recommend_meal(
 
     return records
 
-def pilih_bahan_pelengkap(df_filtered: pd.DataFrame, n: int = 3) -> list[dict]:
+def pilih_bahan_pelengkap(df_filtered: pd.DataFrame, n: int = 3, profil_ctx: Optional[dict] = None) -> list[dict]:
     """Minyak, bumbu, dan gula yang lolos filter: pelengkap opsional, tidak dihitung ke target kalori."""
     if 'food_type' not in df_filtered.columns:
         return []
     d = df_filtered[df_filtered['food_type'].isin(BAHAN_PELENGKAP)]
+    ctx = profil_ctx or {}
+    if str(ctx.get('jenisOperasi') or '').lower() == 'saluran_cerna':
+        # Pasien operasi saluran cerna: saring pelengkap dari bahan pedas/iritatif dan minyak/lemak tinggi
+        pola_iritatif = _kw_pattern([
+            'chili', 'chilli', 'chile', 'cabai', 'cabe', 'sambal', 'spicy', 'pedas',
+            'pepper', 'lada', 'vinegar', 'cuka'
+        ])
+        d = d[~d['name'].astype(str).str.lower().apply(lambda x: keyword_match(x, pola_iritatif))]
+        if 'fat' in d.columns:
+            d = d[d['fat'] <= 5.0]
     if 'sodium' in d.columns:
         d = d.sort_values('sodium', kind='stable')
     return [{'produk_id': r.get('id', ''), 'nama_makanan': str(r['name']), 'jenis_bahan': r['food_type'],
@@ -1470,7 +1480,7 @@ def build_meal_plan(kalori_info: dict, df_filtered: pd.DataFrame, kategori: str,
         'target_kalori_harian': target,
         'distribusi':           dist,
         **{f'rekomendasi_{sesi}': get_paket(sesi) for sesi in SESSION_RATIOS},
-        'bahan_pelengkap_opsional': pilih_bahan_pelengkap(df_filtered),
+        'bahan_pelengkap_opsional': pilih_bahan_pelengkap(df_filtered, profil_ctx=profil_ctx),
     }
 
 # ==========================================================================
