@@ -6,9 +6,12 @@
 
 IKAN = ['Salmon Fillet', 'Canned Tuna (Water)', 'Tilapia Fish']
 SUSU = ['Greek Yogurt', 'Low Fat Milk', 'Cheddar Cheese', 'Unsalted Butter', 'Strawberry Yogurt']
-KEDELAI = ['Tofu', 'Tempeh', 'Edamame']
+KEDELAI = ['Tofu', 'Tempeh', 'Edamame', 'Pureed Tofu Soup', 'Soy Milk']
 KACANG = ['Almonds', 'Peanut Butter (Unsweetened)']
-DAGING = ['Fresh Chicken Breast', 'Lean Beef Mince']
+AYAM = ['Fresh Chicken Breast', 'Chicken Broth', 'Pureed Chicken Soup']
+SAPI = ['Lean Beef Mince', 'Beef Bone Broth']
+DAGING = AYAM + SAPI
+NASI = ['Organic Brown Rice', 'Air Tajin Broth', 'Strained Rice Porridge']
 GULA_TINGGI = ['Honey', 'Dark Chocolate (70%)', 'Ajwa Dates', 'Palm Sugar']   # sugars > 15 g/100 g
 LEMAK_TINGGI = ['Almonds', 'Extra Virgin Olive Oil', 'Dark Chocolate (70%)', 'Chia Seeds', 'Cheddar Cheese',
                 'Peanut Butter (Unsweetened)', 'Unsalted Butter', 'Sunflower Seeds']  # fat > 25 g/100 g
@@ -53,7 +56,8 @@ kasus('Nutrisi', pantangan='kolesterol tinggi', wajib=['Unsalted Butter', 'Chedd
 kasus('Nutrisi', pantangan='rendah garam', wajib=NATRIUM_TINGGI, boleh=['Canned Tuna (Water)', 'Baked Potato Chips'])
 kasus('Nutrisi', pantangan='hipertensi', wajib=NATRIUM_TINGGI, boleh=['Canned Tuna (Water)', 'Baked Potato Chips'])
 kasus('Nutrisi', pantangan='diet rendah karbohidrat', wajib=['Organic Brown Rice', 'Whole Wheat Bread', 'Oatmeal'],
-      boleh=['Quinoa', 'Ajwa Dates', 'Palm Sugar', 'Mung Beans', 'Kidney Beans', 'Baked Potato Chips', 'Sweet Potato',
+      boleh=['Air Tajin Broth', 'Strained Rice Porridge', 'Quinoa', 'Ajwa Dates', 'Palm Sugar', 'Mung Beans',
+             'Kidney Beans', 'Baked Potato Chips', 'Sweet Potato',
              'Banana', 'Lentils', 'Dark Chocolate (70%)', 'Honey', 'Chia Seeds'])
 # D. Agama / gaya hidup
 kasus('Gaya hidup', pantangan='halal', catatan='tidak ada produk babi; tidak boleh ada yang terbuang')
@@ -63,26 +67,27 @@ kasus('Gaya hidup', pantangan='vegetarian', wajib=DAGING + IKAN)
 kasus('Gaya hidup', pantangan='vegan', wajib=DAGING + IKAN + SUSU + ['Eggs', 'Honey'])
 kasus('Gaya hidup', pantangan='tidak makan makanan kalengan', wajib=['Canned Tuna (Water)'])
 # E. Bahan spesifik (nama Indonesia, katalog Inggris)
-kasus('Bahan', alergi='alergi ayam', wajib=['Fresh Chicken Breast'])
-kasus('Bahan', pantangan='tidak makan daging sapi', wajib=['Lean Beef Mince'])
+kasus('Bahan', alergi='alergi ayam', wajib=AYAM)
+kasus('Bahan', pantangan='tidak makan daging sapi', wajib=SAPI)
 kasus('Bahan', alergi='alergi alpukat', wajib=['Avocado'])
 kasus('Bahan', alergi='alergi stroberi', wajib=['Strawberry Yogurt'])
 kasus('Bahan', alergi='alergi pisang', wajib=['Banana'])
-kasus('Bahan', pantangan='tidak bisa makan bawang', wajib=['Garlic', 'Red Onion'])
+kasus('Bahan', pantangan='tidak bisa makan bawang', wajib=['Garlic', 'Red Onion', 'Clear Vegetable Broth'])
 kasus('Bahan', pantangan='tidak suka pedas', wajib=['Red Chili'])
 kasus('Bahan', pantangan='tidak makan cokelat', wajib=['Dark Chocolate (70%)'])
-kasus('Bahan', pantangan='tidak makan nasi', wajib=['Organic Brown Rice'])
+kasus('Bahan', pantangan='tidak makan nasi', wajib=NASI)
 # F. Kondisi medis lain
-kasus('Medis', pantangan='asam urat', wajib=['Lean Beef Mince'],
+kasus('Medis', pantangan='asam urat', wajib=SAPI,
       boleh=['Salmon Fillet', 'Canned Tuna (Water)', 'Tilapia Fish'],
       catatan='v2: sesuai daftar Mayo Clinic (daging merah, jeroan, teri, sarden, kerang); ikan lain boleh sedikit')
-kasus('Medis', pantangan='maag', wajib=['Red Chili'], boleh=['Dark Chocolate (70%)', 'Tomatoes', 'Oranges', 'Garlic',
-                                                             'Red Onion', 'Baked Potato Chips'])
+kasus('Medis', pantangan='maag',
+      wajib=['Red Chili', 'Dark Chocolate (70%)', 'Tomatoes', 'Oranges', 'Garlic', 'Red Onion', 'Baked Potato Chips'],
+      boleh=['Clear Vegetable Broth', 'Strained Tomato Juice'])
 # G. Bahasa Inggris
 kasus('Inggris', alergi='peanut allergy', wajib=['Peanut Butter (Unsweetened)'], boleh=['Almonds'])
 kasus('Inggris', alergi='lactose intolerant', wajib=SUSU)
 kasus('Inggris', alergi='allergic to dairy and eggs', wajib=SUSU + ['Eggs'])
-kasus('Inggris', pantangan='no beef', wajib=['Lean Beef Mince'])
+kasus('Inggris', pantangan='no beef', wajib=SAPI)
 kasus('Inggris', alergi='shellfish allergy', catatan='tidak ada kerang/udang di katalog; ikan tidak boleh terbuang')
 kasus('Inggris', pantangan='low sugar diet', wajib=GULA_TINGGI, boleh=['Strawberry Yogurt', 'Banana'])
 # H. Salah ketik
@@ -92,7 +97,7 @@ kasus('Typo', alergi='alergi kedele', wajib=KEDELAI)
 # I. Gabungan
 kasus('Gabungan', alergi='susu, udang', pantangan='pedas, makanan gula tinggi', wajib=SUSU + ['Red Chili'] + GULA_TINGGI,
       boleh=['Banana'])
-kasus('Gabungan', alergi='kacang dan ikan', pantangan='tidak makan daging merah', wajib=KACANG + IKAN + ['Lean Beef Mince'],
+kasus('Gabungan', alergi='kacang dan ikan', pantangan='tidak makan daging merah', wajib=KACANG + IKAN + SAPI,
       boleh=POLONG)
 # J. Kosong / tidak jelas / berbahaya
 kasus('Kosong', alergi='', pantangan='')

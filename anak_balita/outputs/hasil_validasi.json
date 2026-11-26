@@ -3,105 +3,105 @@
   "pemilik": "Arya",
   "config_hash": "ab9c7f415787085a",
   "test": {
-    "accuracy": 0.9107,
-    "macro_f1": 0.8826,
-    "weighted_kappa": 0.9075,
-    "log_loss": 0.2122,
-    "macro_precision": 0.8857,
-    "macro_recall": 0.8797,
+    "accuracy": 0.9215,
+    "macro_f1": 0.8931,
+    "weighted_kappa": 0.9153,
+    "log_loss": 0.194,
+    "macro_precision": 0.8955,
+    "macro_recall": 0.8908,
     "per_class": {
       "0": {
-        "precision": 0.9533,
-        "recall": 0.9562,
-        "f1": 0.9548,
-        "support": 3289
+        "precision": 0.957,
+        "recall": 0.9636,
+        "f1": 0.9603,
+        "support": 3878
       },
       "1": {
-        "precision": 0.8426,
-        "recall": 0.8479,
-        "f1": 0.8452,
-        "support": 1591
+        "precision": 0.8603,
+        "recall": 0.8512,
+        "f1": 0.8557,
+        "support": 1714
       },
       "2": {
-        "precision": 0.8612,
-        "recall": 0.8349,
-        "f1": 0.8478,
-        "support": 654
+        "precision": 0.8692,
+        "recall": 0.8576,
+        "f1": 0.8633,
+        "support": 674
       }
     },
     "confusion_matrix": [
       [
-        3145,
-        144,
+        3737,
+        141,
         0
       ],
       [
-        154,
-        1349,
-        88
+        168,
+        1459,
+        87
       ],
       [
         0,
-        108,
-        546
+        96,
+        578
       ]
     ]
   },
   "cv_groupkfold": {
     "accuracy": {
-      "mean": 0.9114,
-      "std": 0.0039
+      "mean": 0.9176,
+      "std": 0.003
     },
     "macro_f1": {
-      "mean": 0.8833,
-      "std": 0.0073
+      "mean": 0.8918,
+      "std": 0.0047
     },
     "weighted_kappa": {
-      "mean": 0.907,
+      "mean": 0.911,
       "std": 0.0041
     },
     "log_loss": {
-      "mean": 0.2155,
-      "std": 0.0073
+      "mean": 0.2054,
+      "std": 0.0056
     },
     "ndcg@5": {
-      "mean": 0.9851,
-      "std": 0.0017
+      "mean": 0.9834,
+      "std": 0.0015
     }
   },
   "overfitting": {
     "train_final": {
-      "accuracy": 0.9142,
-      "macro_f1": 0.8877,
-      "weighted_kappa": 0.91,
-      "log_loss": 0.2048
+      "accuracy": 0.9197,
+      "macro_f1": 0.8949,
+      "weighted_kappa": 0.9136,
+      "log_loss": 0.197
     },
     "test": {
-      "accuracy": 0.9107,
-      "macro_f1": 0.8826,
-      "weighted_kappa": 0.9075,
-      "log_loss": 0.2122
+      "accuracy": 0.9215,
+      "macro_f1": 0.8931,
+      "weighted_kappa": 0.9153,
+      "log_loss": 0.194
     },
-    "cv_train_macro_f1": 0.8879,
-    "cv_val_macro_f1": 0.8833,
-    "selisih_f1_train_vs_cv": 0.0046,
-    "selisih_f1_train_vs_test": 0.0051,
+    "cv_train_macro_f1": 0.8963,
+    "cv_val_macro_f1": 0.8918,
+    "selisih_f1_train_vs_cv": 0.0045,
+    "selisih_f1_train_vs_test": 0.0018,
     "kesimpulan": "tidak overfitting",
     "pembanding_gradient_boosting": {
       "train": {
-        "accuracy": 0.9928,
-        "macro_f1": 0.99,
-        "weighted_kappa": 0.9926,
-        "log_loss": 0.0506
+        "accuracy": 0.9929,
+        "macro_f1": 0.9896,
+        "weighted_kappa": 0.9923,
+        "log_loss": 0.048
       },
       "test": {
-        "accuracy": 0.9469,
-        "macro_f1": 0.9288,
-        "weighted_kappa": 0.9448,
-        "log_loss": 0.1393
+        "accuracy": 0.9595,
+        "macro_f1": 0.9426,
+        "weighted_kappa": 0.955,
+        "log_loss": 0.1129
       },
-      "selisih_f1_train_vs_test": 0.0612,
-      "kesimpulan": "overfitting"
+      "selisih_f1_train_vs_test": 0.047,
+      "kesimpulan": "overfitting ringan"
     },
     "batas": {
       "tidak overfitting": 0.02,
@@ -112,32 +112,32 @@
     {
       "skenario": "Anak Balita Underweight",
       "jumlah_item": 11,
-      "kandidat_lolos_filter": 39,
+      "kandidat_lolos_filter": 53,
       "pelanggaran_alergen": 0,
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
-      "rata_skor_kesesuaian": 73.0,
-      "latensi_ms": 32.7,
+      "rata_skor_kesesuaian": 71.4,
+      "latensi_ms": 1301.4,
       "menu": {
         "pagi": [
           "karbo: Quinoa",
           "lauk: Lentils",
-          "buah/sayur: Red Bell Pepper"
+          "buah/sayur: Oranges"
         ],
         "snack_pagi": [
           "selingan: Strawberry Yogurt"
         ],
         "siang": [
-          "karbo: Organic Brown Rice",
-          "lauk: Fresh Chicken Breast",
+          "karbo: Strained Rice Porridge",
+          "lauk: Edamame",
           "sayur: Sweet Potato"
         ],
         "snack_sore": [
-          "selingan: Oranges"
+          "selingan: Dragon Fruit"
         ],
         "malam": [
-          "karbo: Oatmeal",
-          "lauk: Edamame",
+          "karbo: Organic Brown Rice",
+          "lauk: Fresh Chicken Breast",
           "sayur: Broccoli"
         ]
       }
@@ -145,12 +145,12 @@
     {
       "skenario": "Balita 18 Bulan Tanpa HAZ/WHZ",
       "jumlah_item": 11,
-      "kandidat_lolos_filter": 39,
+      "kandidat_lolos_filter": 53,
       "pelanggaran_alergen": 0,
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
-      "rata_skor_kesesuaian": 77.9,
-      "latensi_ms": 30.8,
+      "rata_skor_kesesuaian": 76.8,
+      "latensi_ms": 1475.4,
       "menu": {
         "pagi": [
           "karbo: Quinoa",
@@ -161,7 +161,7 @@
           "selingan: Greek Yogurt"
         ],
         "siang": [
-          "karbo: Organic Brown Rice",
+          "karbo: Strained Rice Porridge",
           "lauk: Tilapia Fish",
           "sayur: Sweet Potato"
         ],

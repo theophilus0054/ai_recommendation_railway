@@ -10,7 +10,7 @@ Cara pakai (dari folder ai_recommendation_railway):
     python jalankan_semua_uji.py --groq              # + filter regex + Groq sungguhan (butuh GROQ_API_KEY)
     python jalankan_semua_uji.py --detail            # tampilkan rincian setiap kasus dan unit test
 
-Semua uji memakai snapshot katalog data/supabase_products.json (46 produk), jadi tidak butuh koneksi ke Supabase.
+Semua uji memakai snapshot katalog data/supabase_products.json (60 produk), jadi tidak butuh koneksi ke Supabase.
 Kode keluar 0 bila tidak ada pengujian yang gagal.
 """
 import argparse
@@ -32,12 +32,12 @@ GARIS = '=' * 72
 
 GRUP_INFO = {
     'filter':        'Uji 58 kasus filter alergi & pantangan (regex; tambah --groq untuk Groq sungguhan)',
-    'e2e':           'Uji end-to-end 30 kasus input asesmen -> /api/recommend -> meal plan',
+    'e2e':           'Uji end-to-end 32 kasus input asesmen -> /api/recommend -> meal plan',
     'realistis':     'Uji input user realistis (kosong, salah satuan, salah ketik, umur ekstrem)',
     'unit':          'Semua unit test di tests/ dan 4 kategori (<kategori>/tests/)',
     'safety':        'Unit test filter keamanan, alergen, maag, kolesterol (tests/test_safety_filter.py)',
     'maag':          'Semua unit test khusus fitur maag/GERD & kolesterol lintas modul',
-    'llm':           'Unit test parser alergi Groq & pengaman narasi Gemini (tests/test_parser_llm.py, test_narasi_llm.py)',
+    'llm':           'Unit test parser alergi Groq & pengaman narasi Gemini (tests/test_parser_llm.py, tests/test_narasi_llm.py)',
     'kontrak':       'Unit test kontrak data kalori/makro/asesmen NutriScale (tests/test_nutriscale_data.py)',
     'umum':          'Unit test khusus kategori UMUM (umum/tests/)',
     'ibu_hamil':     'Unit test khusus kategori IBU_HAMIL (ibu_hamil/tests/)',
@@ -119,7 +119,7 @@ def jalankan_suite_unit(targets=None, kata_kunci=None, detail=False):
 
 
 def uji_end_to_end():
-    """30 kasus input asesmen -> /api/recommend -> meal plan, per kasus."""
+    """32 kasus input asesmen -> /api/recommend -> meal plan, per kasus."""
     from fastapi.testclient import TestClient
     import api
     from shared import KATEGORI_LIST, modul
@@ -244,7 +244,7 @@ def main():
                 baris_ringkasan.append(('Filter alergi & pantangan (regex + Groq)', None, 58))
 
         if 'e2e' in grup_dipilih:
-            judul('End-to-end: input asesmen sampai meal plan (30 kasus)')
+            judul('End-to-end: input asesmen sampai meal plan (32 kasus)')
             e2e_lulus, e2e_total = uji_end_to_end()
             baris_ringkasan.append(('End-to-end (asesmen sampai menu)', e2e_lulus, e2e_total))
             if e2e_lulus != e2e_total:

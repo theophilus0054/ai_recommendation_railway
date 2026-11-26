@@ -4,8 +4,9 @@ BAHAYA = {
     'blokir': {
         'ALKOHOL': None,
         'MENTAH':  ['sushi', 'sashimi', 'undercooked'],
-        'PEDAS':   ['chili', 'chilli', 'chile', 'cayenne', 'jalapeno', 'cabai', 'cabe', 'sambal', 'hot sauce',
-                    'spicy', 'pedas', 'lada', 'pepper', 'black pepper'],
+        'PEDAS':   ['chili', 'chilli', 'chile', 'cayenne', 'jalapeno', 'habanero', 'serrano', 'poblano', 'chipotle',
+                    'hot pepper', 'hot peppers', 'cabai', 'cabe', 'sambal', 'hot sauce', 'spicy', 'pedas', 'lada',
+                    'pepper'],
     },
     'batasi': {
         'GORENGAN': ['fried', 'deep-fried', 'battered', 'breaded', 'crispy', 'goreng'],

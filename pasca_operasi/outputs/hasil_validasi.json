@@ -3,104 +3,104 @@
   "pemilik": "Raymond",
   "config_hash": "ab9c7f415787085a",
   "test": {
-    "accuracy": 0.8854,
-    "macro_f1": 0.8821,
-    "weighted_kappa": 0.9055,
-    "log_loss": 0.2478,
-    "macro_precision": 0.8862,
-    "macro_recall": 0.8784,
+    "accuracy": 0.9082,
+    "macro_f1": 0.9058,
+    "weighted_kappa": 0.924,
+    "log_loss": 0.2301,
+    "macro_precision": 0.9064,
+    "macro_recall": 0.9054,
     "per_class": {
       "0": {
-        "precision": 0.9097,
-        "recall": 0.9331,
-        "f1": 0.9213,
-        "support": 2288
+        "precision": 0.9461,
+        "recall": 0.9294,
+        "f1": 0.9377,
+        "support": 2436
       },
       "1": {
-        "precision": 0.8276,
-        "recall": 0.8205,
-        "f1": 0.824,
-        "support": 1621
+        "precision": 0.8478,
+        "recall": 0.8792,
+        "f1": 0.8632,
+        "support": 1755
       },
       "2": {
-        "precision": 0.9212,
-        "recall": 0.8817,
-        "f1": 0.901,
-        "support": 1048
+        "precision": 0.9253,
+        "recall": 0.9076,
+        "f1": 0.9164,
+        "support": 1147
       }
     },
     "confusion_matrix": [
       [
-        2135,
-        153,
-        0
+        2264,
+        171,
+        1
       ],
       [
-        212,
-        1330,
-        79
+        129,
+        1543,
+        83
       ],
       [
         0,
-        124,
-        924
+        106,
+        1041
       ]
     ]
   },
   "cv_groupkfold": {
     "accuracy": {
-      "mean": 0.8896,
-      "std": 0.0047
+      "mean": 0.9048,
+      "std": 0.007
     },
     "macro_f1": {
-      "mean": 0.8855,
-      "std": 0.0052
+      "mean": 0.9038,
+      "std": 0.0066
     },
     "weighted_kappa": {
-      "mean": 0.9108,
-      "std": 0.0039
+      "mean": 0.9232,
+      "std": 0.0058
     },
     "log_loss": {
-      "mean": 0.2447,
-      "std": 0.0089
+      "mean": 0.2235,
+      "std": 0.0125
     },
     "ndcg@5": {
-      "mean": 0.9877,
-      "std": 0.0019
+      "mean": 0.9868,
+      "std": 0.0024
     }
   },
   "overfitting": {
     "train_final": {
-      "accuracy": 0.8945,
-      "macro_f1": 0.8909,
-      "weighted_kappa": 0.9149,
-      "log_loss": 0.2353
+      "accuracy": 0.9086,
+      "macro_f1": 0.9078,
+      "weighted_kappa": 0.9265,
+      "log_loss": 0.2148
     },
     "test": {
-      "accuracy": 0.8854,
-      "macro_f1": 0.8821,
-      "weighted_kappa": 0.9055,
-      "log_loss": 0.2478
+      "accuracy": 0.9082,
+      "macro_f1": 0.9058,
+      "weighted_kappa": 0.924,
+      "log_loss": 0.2301
     },
-    "cv_train_macro_f1": 0.8905,
-    "cv_val_macro_f1": 0.8855,
-    "selisih_f1_train_vs_cv": 0.005,
-    "selisih_f1_train_vs_test": 0.0088,
+    "cv_train_macro_f1": 0.9083,
+    "cv_val_macro_f1": 0.9038,
+    "selisih_f1_train_vs_cv": 0.0045,
+    "selisih_f1_train_vs_test": 0.002,
     "kesimpulan": "tidak overfitting",
     "pembanding_gradient_boosting": {
       "train": {
-        "accuracy": 0.9924,
-        "macro_f1": 0.9918,
-        "weighted_kappa": 0.9938,
-        "log_loss": 0.0585
+        "accuracy": 0.9936,
+        "macro_f1": 0.9932,
+        "weighted_kappa": 0.9946,
+        "log_loss": 0.0492
       },
       "test": {
-        "accuracy": 0.9411,
-        "macro_f1": 0.9391,
-        "weighted_kappa": 0.9513,
-        "log_loss": 0.1595
+        "accuracy": 0.941,
+        "macro_f1": 0.9387,
+        "weighted_kappa": 0.9512,
+        "log_loss": 0.156
       },
-      "selisih_f1_train_vs_test": 0.0527,
+      "selisih_f1_train_vs_test": 0.0545,
       "kesimpulan": "overfitting"
     },
     "batas": {
@@ -116,8 +116,8 @@
       "pelanggaran_alergen": 0,
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
-      "rata_skor_kesesuaian": 73.3,
-      "latensi_ms": 125.3,
+      "rata_skor_kesesuaian": 74.0,
+      "latensi_ms": 1214.6,
       "menu": {
         "pagi": [
           "karbo: Strained Rice Porridge",
@@ -128,17 +128,17 @@
           "selingan: Banana"
         ],
         "siang": [
-          "karbo: Quinoa",
-          "lauk: Tilapia Fish",
-          "sayur: Pureed Spinach Soup"
+          "karbo: Oatmeal",
+          "lauk: Mung Beans",
+          "sayur: Mustard Greens"
         ],
         "snack_sore": [
           "selingan: Fresh Apple Juice"
         ],
         "malam": [
-          "karbo: Oatmeal",
-          "lauk: Tofu",
-          "sayur: Strained Tomato Juice"
+          "karbo: Quinoa",
+          "lauk: Lentils",
+          "sayur: Pureed Spinach Soup"
         ]
       }
     },
@@ -149,8 +149,8 @@
       "pelanggaran_alergen": 0,
       "pelanggaran_blokir": 0,
       "pelanggaran_tekstur": 0,
-      "rata_skor_kesesuaian": 24.0,
-      "latensi_ms": 163.0,
+      "rata_skor_kesesuaian": 22.7,
+      "latensi_ms": 84.0,
       "menu": {
         "pagi": [
           "karbo: Air Tajin Broth",

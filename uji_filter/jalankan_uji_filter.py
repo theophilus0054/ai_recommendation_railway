@@ -1,5 +1,5 @@
 """
-Uji 58 kasus filter alergi & pantangan pada katalog snapshot Supabase (data/supabase_products.json, 46 produk).
+Uji 58 kasus filter alergi & pantangan pada katalog snapshot Supabase (data/supabase_products.json, 60 produk).
 
 Cara pakai (dari folder ai_recommendation_railway):
     python uji_filter/jalankan_uji_filter.py           # regex saja (tanpa API key, hasil selalu sama)

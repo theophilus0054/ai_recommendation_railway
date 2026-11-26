@@ -1,7 +1,7 @@
 """
 ==========================================================================
  NutriScale AI — Uji Input User lewat endpoint /api/recommend (dipakai 4 kategori)
- Tiap kategori punya daftar kasus di <kategori>/ai_models/input_uji.py (total 30 kasus).
+ Tiap kategori punya daftar kasus di <kategori>/ai_models/input_uji.py (total 32 kasus).
  Setiap kasus mengirim JSON seperti dari web marketplace (form kesehatan), lalu diperiksa:
    - kasus valid  : HTTP 200, 5 sesi makan ada, minimal 1 bahan, kategori model benar,
                     0 pelanggaran alergen/BLOKIR, 0 pelanggaran tekstur (pasca operasi),

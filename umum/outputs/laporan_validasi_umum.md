@@ -2,53 +2,53 @@
 
 - Pemilik: **Muel**
 - Metode: Logistic Regression multinomial (label 0/1/2), metode dan konfigurasi sama dengan 3 kategori lain (config hash `ab9c7f415787085a`)
-- Data: 560 profil latih (22766 pasangan), 140 profil uji baru (5681 pasangan); split per profil
+- Data: 560 profil latih (25863 pasangan), 140 profil uji baru (6441 pasangan); split per profil
 - Evaluasi: validasi silang GroupKFold 5 lipatan pada data latih + test set profil baru (dipakai sekali untuk model final)
-- Tanggal laporan: 2026-11-17
+- Tanggal laporan: 2026-11-23
 
 ## 1. Metrik test set (profil baru)
 
 | Accuracy | Precision (macro) | Recall (macro) | F1 (macro) | Weighted kappa | NDCG@5 | NDCG@10 |
 |---|---|---|---|---|---|---|
-| 0.8910 | 0.8739 | 0.8545 | 0.8634 | 0.8861 | 0.9814 | 0.9857 |
+| 0.8950 | 0.8760 | 0.8477 | 0.8602 | 0.8834 | 0.9810 | 0.9854 |
 
 ## 2. Validasi silang GroupKFold (5 lipatan, data latih)
 
 | Metrik (validasi) | Rata-rata | Simpangan baku |
 |---|---|---|
-| accuracy | 0.8894 | 0.0030 |
-| macro_f1 | 0.8633 | 0.0050 |
-| weighted_kappa | 0.8833 | 0.0026 |
-| log_loss | 0.2512 | 0.0071 |
-| ndcg@5 | 0.9829 | 0.0024 |
+| accuracy | 0.8987 | 0.0049 |
+| macro_f1 | 0.8693 | 0.0053 |
+| weighted_kappa | 0.8885 | 0.0049 |
+| log_loss | 0.2390 | 0.0063 |
+| ndcg@5 | 0.9811 | 0.0016 |
 
 ## 3. Per kelas
 
 | Kelas | Precision | Recall | F1 | Jumlah |
 |---|---|---|---|---|
-| 0 tidak cocok | 0.9374 | 0.9448 | 0.9411 | 3025 |
-| 1 cukup | 0.8329 | 0.8535 | 0.8431 | 1945 |
-| 2 sangat cocok | 0.8513 | 0.7651 | 0.8059 | 711 |
+| 0 tidak cocok | 0.9421 | 0.9459 | 0.9440 | 3420 |
+| 1 cukup | 0.8402 | 0.8727 | 0.8562 | 2302 |
+| 2 sangat cocok | 0.8458 | 0.7246 | 0.7805 | 719 |
 
 Confusion matrix (baris = label asli 0/1/2, kolom = prediksi 0/1/2):
 
 | Asli \ Prediksi | 0 | 1 | 2 |
 |---|---|---|---|
-| 0 | 2858 | 166 | 1 |
-| 1 | 191 | 1660 | 94 |
-| 2 | 0 | 167 | 544 |
+| 0 | 3235 | 184 | 1 |
+| 1 | 199 | 2009 | 94 |
+| 2 | 0 | 198 | 521 |
 
 ## 4. Pembanding
 
 | Metode | Accuracy | F1 (macro) | Kappa | NDCG@5 |
 |---|---|---|---|---|
-| Logistic Regression (model) | 0.8910 | 0.8634 | 0.8861 | 0.9814 |
-| Gradient boosting (pembanding) | 0.9424 | 0.9267 | 0.9400 | 0.9922 |
-| Formula lama | - | - | - | 0.7010 |
-| Urutan acak | - | - | - | 0.5178 |
+| Logistic Regression (model) | 0.8950 | 0.8602 | 0.8834 | 0.9810 |
+| Gradient boosting (pembanding) | 0.9472 | 0.9333 | 0.9419 | 0.9937 |
+| Formula lama | - | - | - | 0.6716 |
+| Urutan acak | - | - | - | 0.4947 |
 
-- Subset makanan baru (tidak ada di data latih): macro-F1 0.8662, kappa 0.8859
-- Baris konflik (alergi/pantangan/BLOKIR) tidak dipakai melatih maupun menilai model, karena di produksi dibuang filter keamanan sebelum ranking. Bila dinilai model saja, 55.49% diberi label > 0: keamanan dijamin filter, bukan model.
+- Subset makanan baru (tidak ada di data latih): macro-F1 0.8571, kappa 0.8847
+- Baris konflik (alergi/pantangan/BLOKIR) tidak dipakai melatih maupun menilai model, karena di produksi dibuang filter keamanan sebelum ranking. Bila dinilai model saja, 41.82% diberi label > 0: keamanan dijamin filter, bukan model.
 
 ## 5. Analisis overfitting
 
@@ -56,61 +56,61 @@ Overfitting = skor data latih jauh lebih tinggi daripada data yang belum pernah 
 
 | Model | Data | Accuracy | F1 (macro) | Kappa | Log loss |
 |---|---|---|---|---|---|
-| Logistic Regression | Latih (model final) | 0.8916 | 0.8663 | 0.8860 | 0.2433 |
-| Logistic Regression | Test (profil baru) | 0.8910 | 0.8634 | 0.8861 | 0.2543 |
-| Gradient boosting | Latih | 0.9904 | 0.9877 | 0.9901 | 0.0630 |
-| Gradient boosting | Test (profil baru) | 0.9424 | 0.9267 | 0.9400 | 0.1537 |
+| Logistic Regression | Latih (model final) | 0.9014 | 0.8725 | 0.8915 | 0.2307 |
+| Logistic Regression | Test (profil baru) | 0.8950 | 0.8602 | 0.8834 | 0.2458 |
+| Gradient boosting | Latih | 0.9889 | 0.9845 | 0.9881 | 0.0607 |
+| Gradient boosting | Test (profil baru) | 0.9472 | 0.9333 | 0.9419 | 0.1385 |
 
-- Macro-F1 GroupKFold: latih 0.8667 vs validasi 0.8633 (selisih +0.0034)
-- Macro-F1 model final: latih 0.8663 vs test 0.8634 (selisih +0.0029)
-- **Kesimpulan Logistic Regression: tidak overfitting**; gradient boosting: overfitting (selisih +0.0610)
+- Macro-F1 GroupKFold: latih 0.8736 vs validasi 0.8693 (selisih +0.0043)
+- Macro-F1 model final: latih 0.8725 vs test 0.8602 (selisih +0.0123)
+- **Kesimpulan Logistic Regression: tidak overfitting**; gradient boosting: overfitting (selisih +0.0512)
 
 Per lipatan GroupKFold:
 
 | Lipatan | F1 latih | F1 validasi | Selisih | Log loss latih | Log loss validasi |
 |---|---|---|---|---|---|
-| 1 | 0.8658 | 0.8663 | -0.0005 | 0.2434 | 0.2491 |
-| 2 | 0.8652 | 0.8699 | -0.0047 | 0.2428 | 0.2513 |
-| 3 | 0.8666 | 0.8570 | +0.0096 | 0.2448 | 0.2409 |
-| 4 | 0.8668 | 0.8625 | +0.0043 | 0.2415 | 0.2547 |
-| 5 | 0.8692 | 0.8609 | +0.0083 | 0.2405 | 0.2600 |
+| 1 | 0.8723 | 0.8635 | +0.0088 | 0.2289 | 0.2421 |
+| 2 | 0.8738 | 0.8657 | +0.0081 | 0.2287 | 0.2461 |
+| 3 | 0.8725 | 0.8737 | -0.0012 | 0.2319 | 0.2299 |
+| 4 | 0.8745 | 0.8677 | +0.0068 | 0.2304 | 0.2356 |
+| 5 | 0.8751 | 0.8760 | -0.0009 | 0.2301 | 0.2411 |
 
 Kurva belajar (macro-F1, rata-rata 5 lipatan GroupKFold):
 
 | Porsi data latih | Profil | F1 latih | F1 validasi | Selisih |
 |---|---|---|---|---|
-| 10% | 45 | 0.8850 | 0.8397 | +0.0453 |
-| 20% | 90 | 0.8753 | 0.8507 | +0.0246 |
-| 40% | 179 | 0.8681 | 0.8565 | +0.0116 |
-| 60% | 269 | 0.8676 | 0.8590 | +0.0086 |
-| 80% | 358 | 0.8664 | 0.8600 | +0.0064 |
-| 100% | 448 | 0.8667 | 0.8633 | +0.0034 |
+| 10% | 45 | 0.8953 | 0.8481 | +0.0472 |
+| 20% | 90 | 0.8884 | 0.8635 | +0.0249 |
+| 40% | 179 | 0.8783 | 0.8663 | +0.0120 |
+| 60% | 269 | 0.8758 | 0.8682 | +0.0076 |
+| 80% | 358 | 0.8748 | 0.8692 | +0.0056 |
+| 100% | 448 | 0.8737 | 0.8693 | +0.0044 |
 
 ## 6. Koefisien teratas (arah sangat cocok vs tidak cocok)
 
 | Fitur | Bobot |
 |---|---|
-| natrium_lewat_jauh | -8.6583 |
-| gula_lewat_jauh | -7.4288 |
-| fat_share | -6.2331 |
-| porsi_wajar | 6.087 |
-| protein_pct_sesuai | 4.5247 |
-| porsi_ideal | 4.3598 |
-| n_limit_kategori | -2.8265 |
-| ft_protein__snack | -2.6935 |
-| ed_tinggi_x_lebih | -2.0337 |
-| energy_density | 1.9799 |
+| natrium_lewat_jauh | -8.9764 |
+| gula_lewat_jauh | -8.0422 |
+| fat_share | -6.4755 |
+| porsi_wajar | 5.9113 |
+| protein_pct_sesuai | 4.8503 |
+| porsi_ideal | 4.5834 |
+| ft_protein__snack | -2.8929 |
+| n_limit_kategori | -2.848 |
+| energy_density | 2.3823 |
+| ed_tinggi_x_lebih | -2.0335 |
 
 ## 7. Uji end-to-end (filter keamanan + model + penyusun menu, katalog Supabase)
 
 | Skenario | Item | Kandidat lolos | Alergen | BLOKIR | Tekstur | Skor rata-rata | Latensi (ms) |
 |---|---|---|---|---|---|---|---|
-| Dewasa Umum Obesitas | 11 | 38 | 0 | 0 | 0 | 67.6 | 33.7 |
-| Dewasa Umum Underweight | 11 | 46 | 0 | 0 | 0 | 72.3 | 29.8 |
+| Dewasa Umum Obesitas | 11 | 50 | 0 | 0 | 0 | 70.8 | 1332.9 |
+| Dewasa Umum Underweight | 11 | 60 | 0 | 0 | 0 | 72.4 | 85.0 |
 
-**Dewasa Umum Obesitas**: pagi: karbo: Whole Wheat Bread, lauk: Fresh Chicken Breast, buah/sayur: Banana; snack_pagi: selingan: Strawberry Yogurt; siang: karbo: Oatmeal, lauk: Salmon Fillet, sayur: Sweet Potato; snack_sore: selingan: Ajwa Dates; malam: karbo: Organic Brown Rice, lauk: Tilapia Fish, sayur: Red Bell Pepper
+**Dewasa Umum Obesitas**: pagi: karbo: Strained Rice Porridge, lauk: Tilapia Fish, buah/sayur: Fuji Apples; snack_pagi: selingan: Strawberry Yogurt; siang: karbo: Oatmeal, lauk: Fresh Chicken Breast, sayur: Sweet Potato; snack_sore: selingan: Ajwa Dates; malam: karbo: Organic Brown Rice, lauk: Salmon Fillet, sayur: Pureed Spinach Soup
 
-**Dewasa Umum Underweight**: pagi: karbo: Oatmeal, lauk: Lentils, buah/sayur: Sweet Potato; snack_pagi: selingan: Ajwa Dates; siang: karbo: Quinoa, lauk: Kidney Beans, sayur: Mustard Greens; snack_sore: selingan: Baked Potato Chips; malam: karbo: Organic Brown Rice, lauk: Fresh Chicken Breast, sayur: Red Bell Pepper
+**Dewasa Umum Underweight**: pagi: karbo: Whole Wheat Bread, lauk: Lentils, buah/sayur: Sweet Potato; snack_pagi: selingan: Ajwa Dates; siang: karbo: Strained Rice Porridge, lauk: Kidney Beans, sayur: Mustard Greens; snack_sore: selingan: Baked Potato Chips; malam: karbo: Oatmeal, lauk: Tilapia Fish, sayur: Red Bell Pepper
 
 ## 8. Catatan
 

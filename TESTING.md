@@ -33,7 +33,7 @@ Ringkasan yang diharapkan:
 Satu kasus filter yang belum lulus (T41, maag) memang belum didukung karena aturannya belum disetujui ahli gizi.
 Kode keluar `0` bila tidak ada unit test, end-to-end, atau input realistis yang gagal.
 
-Uji otomatis memakai snapshot katalog `data/supabase_products.json` (46 produk), jadi hasil lokal bisa sedikit
+Uji otomatis memakai snapshot katalog `data/supabase_products.json` (60 produk), jadi hasil lokal bisa sedikit
 berbeda dari server yang membaca katalog Supabase terbaru.
 
 ## 3. Menjalankan server sendiri
@@ -151,5 +151,5 @@ diharapkan beserta alasannya.
 - `GET /metrics` sekarang wajib header `X-API-Key`.
 - Setiap respons `/api/recommend` membawa `_meta.narasi` = `{"sumber": "gemini" | "template", "alasan": ...}`,
   sehingga tester tahu apakah narasi berasal dari Gemini atau template (dan kenapa).
-- Unit test baru `test_narasi_llm.py` (9 test, tanpa API key) menguji pengaman narasi Gemini.
+- Unit test baru `tests/test_narasi_llm.py` (9 test, tanpa API key) menguji pengaman narasi Gemini.
 - Cara deploy: `DEPLOY_RAILWAY.md`.

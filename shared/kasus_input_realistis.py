@@ -1,6 +1,6 @@
 """
 Kasus input user "seperti umumnya" untuk /api/recommend: isian kosong, salah satuan, salah ketik,
-huruf besar/kecil, umur & kondisi ekstrem, dan JSON aneh. Dipakai test_input_realistis.py dan
+huruf besar/kecil, umur & kondisi ekstrem, dan JSON aneh. Dipakai tests/test_input_realistis.py dan
 jalankan_semua_uji.py. Tiap kasus: nama, harapan ('terima' = HTTP 200 dan lolos cek keamanan +
 kecukupan di shared/uji_input.py, 'tolak' = HTTP 422 dengan pesan yang jelas), kategori, dan body
 (dict) atau raw (teks JSON mentah, untuk NaN/Infinity/bukan JSON).

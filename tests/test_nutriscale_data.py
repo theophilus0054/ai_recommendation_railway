@@ -4,7 +4,7 @@
  Memastikan AI hanya MENGAMBIL target gizi hasil nutri-calc.ts NutriScale
  (kalori, karbohidrat, protein, lemak) tanpa menghitung ulang.
 ==========================================================================
-Usage: python -m unittest test_nutriscale_data.py
+Usage: python -m unittest tests.test_nutriscale_data
 """
 
 import unittest

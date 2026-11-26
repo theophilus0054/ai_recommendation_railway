@@ -4,7 +4,7 @@
  Memastikan filter alergi/pantangan memakai batas kata (bukan substring),
  tabel BLOKIR per kategori berlaku, dan model per kategori dipakai saat inferensi.
 ==========================================================================
-Usage: python -m unittest test_safety_filter.py
+Usage: python -m unittest tests.test_safety_filter
 """
 
 import os
@@ -104,7 +104,17 @@ class TestCategoryHazards(unittest.TestCase):
         from model import detect_texture
         self.assertNotEqual(detect_texture('Canned Tuna (Water)'), 'cair')
         self.assertNotEqual(detect_texture('Fish, tuna, light, canned in water, drained solids'), 'cair')
+        self.assertNotEqual(detect_texture('Peas, rinsed in tap water, drained solids, canned, green'), 'cair')
+        self.assertNotEqual(detect_texture('Chicken, with broth, meat only, canned'), 'cair')
+        self.assertNotEqual(detect_texture('Pork, roasted, heated, ham and water product, cured'), 'cair')
+        self.assertNotEqual(detect_texture('Beverages, Classic Malt powder, OVALTINE', 'beverage'), 'cair')
+        self.assertEqual(detect_texture("CAMPBELL'S CHUNKY, Chicken Noodle Soup"), 'lunak')
         self.assertEqual(detect_texture('Broth, chicken'), 'cair')
+
+    def test_raw_exotic_and_serrano_hazards(self):
+        self.assertIn('MENTAH', detect_hazards('Ostrich, raw, inside strip', 'UMUM')[0])
+        self.assertIn('MENTAH', detect_hazards('Pork, unheated, ham, cured', 'IBU_HAMIL')[0])
+        self.assertIn('PEDAS', detect_hazards('Peppers, raw, serrano', 'ANAK_BALITA')[0])
 
     def test_no_silent_fallback_to_other_category(self):
         df = make_foods(['Coffee, brewed'])

@@ -49,6 +49,11 @@ class TestPascaOperasi(unittest.TestCase):
         self.assertIn('Garlic', nama_hasil)
         self.assertIn('Himalayan Pink Salt', nama_hasil)
 
+    def test_paprika_tidak_diblokir(self):
+        df = make_foods(['Red Bell Pepper', 'Black Pepper', 'Red Chili', 'Sup bening'])
+        out = filter_dataset(df, '', 'PASCA_OPERASI', profil_ctx={'jenisOperasi': 'ortopedi', 'tahapDiet': 'biasa'})
+        self.assertEqual(sorted(out['name']), ['Red Bell Pepper', 'Sup bening'])
+
 
 if __name__ == '__main__':
     unittest.main()

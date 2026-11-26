@@ -65,7 +65,8 @@ ALLERGEN_KEYWORDS: dict[str, list[str]] = {
     'manis':    ['manis', 'sweet', 'sweetened', 'gula', 'sugar', 'candy', 'candies', 'chocolate', 'coklat', 'cokelat',
                  'sirup', 'syrup', 'madu', 'honey', 'permen', 'kue', 'dessert'],
     'pedas':    ['pedas', 'spicy', 'chili', 'chilli', 'chile', 'cabai', 'cabe', 'sambal', 'hot pepper',
-                 'chili pepper', 'cayenne', 'jalapeno', 'jalapeño', 'habanero', 'balado'],
+                 'chili pepper', 'cayenne', 'jalapeno', 'jalapeño', 'habanero', 'serrano', 'poblano', 'chipotle',
+                 'balado'],
     'gorengan': ['gorengan', 'goreng', 'fried', 'deep-fried', 'crispy', 'battered', 'breaded', 'berminyak',
                  'berlemak', 'fatty', 'oily', 'santan'],
 }
@@ -387,6 +388,8 @@ BUMBU_KEYWORDS = ['chili', 'chilli', 'chile', 'chilies', 'chillies', 'cayenne', 
 # 'kidney' (ginjal, jeroan) tidak berlaku untuk kacang merah (kidney beans).
 HAZARD_EXCEPTIONS: dict[str, list[str]] = {
     'JEROAN': ['kidney bean', 'kidney beans', 'beans, kidney'],
+    'PEDAS': ['bell pepper', 'bell peppers', 'sweet pepper', 'sweet peppers',
+              'peppers, sweet', 'pepper, sweet', 'paprika'],
     'ALKOHOL_BAHAN': ['no alcohol', 'non alcohol', 'non-alcohol', 'alcohol free', 'alcohol-free', 'sugar alcohol',
                       'sugar alcohols', 'alcohol extraction'],
 }
@@ -431,13 +434,14 @@ _HAZARD_PATTERNS = {
     kat: {kind: {code: _kw_pattern(kws) for code, kws in rules.items()} for kind, rules in table.items()}
     for kat, table in CATEGORY_HAZARDS.items()
 }
-# MENTAH juga = kata 'raw'/'mentah' + produk hewani (buah/sayur mentah TIDAK diblokir)
-_RAW_PATTERN = _kw_pattern(['raw', 'mentah', 'rare'])
+# MENTAH juga = kata 'raw'/'mentah'/'unheated' + produk hewani (buah/sayur mentah TIDAK diblokir)
+_RAW_PATTERN = _kw_pattern(['raw', 'mentah', 'rare', 'unheated', 'uncooked'])
 _ANIMAL_PATTERN = _kw_pattern(
     ALLERGEN_KEYWORDS['ikan'] + ALLERGEN_KEYWORDS['udang'] + ALLERGEN_KEYWORDS['kepiting'] + ALLERGEN_KEYWORDS['kerang']
     + ALLERGEN_KEYWORDS['lobster'] + ALLERGEN_KEYWORDS['cumi'] + ['egg', 'eggs', 'telur', 'milk', 'susu']
-    + ['beef', 'pork', 'lamb', 'veal', 'chicken', 'turkey', 'duck', 'meat', 'liver', 'mollusks', 'crustaceans',
-       'roe', 'caviar', 'game meat', 'ayam', 'daging', 'sapi'])
+    + ['beef', 'pork', 'lamb', 'veal', 'chicken', 'turkey', 'duck', 'goose', 'meat', 'liver', 'mollusks', 'crustaceans',
+       'roe', 'caviar', 'game meat', 'ostrich', 'emu', 'bison', 'venison', 'quail', 'rabbit', 'ham', 'bacon',
+       'ayam', 'daging', 'sapi'])
 _TEXTURE_PATTERNS = {tek: _kw_pattern(kws) for tek, kws in TEXTURE_KEYWORDS.items()}
 _FOOD_TYPE_PATTERNS = [(ft, _kw_pattern(kws)) for ft, kws in FOOD_TYPE_KEYWORDS]
 _BUMBU_PATTERN = _kw_pattern(BUMBU_KEYWORDS)
@@ -446,9 +450,26 @@ _FRIED_PATTERN = _kw_pattern(['fried', 'deep-fried', 'battered', 'breaded', 'cri
 _PROCESSED_PATTERN = _kw_pattern(['fast foods', 'frankfurter', 'sausage', 'bacon', 'hot dog', 'luncheon meat',
                                   'instant', 'chips', 'nugget', 'sosis', 'kornet', 'canned', 'processed'])
 _UMBRELLA_PATTERNS = {word: _kw_pattern([word]) for word in ALLERGEN_UMBRELLA}
-_BUKAN_CAIR_PATTERN = _kw_pattern(['powder', 'dry', 'mix', 'bar'])
-# Media kemasan ('canned in water', '(water)') bukan berarti makanannya cair
-_MEDIA_KEMASAN_PATTERN = re.compile(r'\(\s*water\s*\)|\b(?:packed|canned)?\s*in\s+(?:water|oil|brine|syrup)\b|\bwater[- ]packed\b')
+_BUKAN_CAIR_PATTERN = _kw_pattern([
+    'powder', 'dry', 'mix', 'bar', 'drained', 'solids', 'bread', 'cake', 'cookies', 'crackers', 'waffles',
+    'pancakes', 'muffins', 'bagels', 'biscuits', 'tortillas', 'pasta', 'noodles', 'rice', 'cheese', 'pizza',
+    'sandwich', 'burger', 'peas', 'beans', 'potatoes', 'soup', 'meat only', 'ham', 'roasted', 'broiled',
+    'pan-broil', 'baked', 'fried', 'grilled', 'frozen yogurt', 'frozen yogurts', 'ice cream', 'ice creams',
+])
+# Sup kasar/berpotongan (chunky, noodle, stew, gumbo) bertekstur lunak, bukan saring
+_BUKAN_SARING_PATTERN = _kw_pattern([
+    'chunky', 'noodle', 'noodles', 'macaroni', 'pasta', 'dumplings', 'gumbo', 'minestrone', 'chowder', 'stew',
+    'chili', 'tortilla', 'vegetables and beef', 'with beef', 'with chicken', 'with meat', 'with rice', 'with barley',
+])
+_TETAP_SARING_PATTERN = _kw_pattern(['strained', 'puree', 'pureed', 'babyfood', 'cream of'])
+# Media kemasan & cairan pengolah ('canned in water', 'rinsed in tap water', 'made with milk', 'with broth') bukan berarti cair
+_MEDIA_KEMASAN_PATTERN = re.compile(
+    r'\(\s*water\s*\)'
+    r'|\b(?:packed|canned|rinsed)?\s*in\s+(?:tap\s+)?(?:water|oil|brine|syrup)\b'
+    r'|\bwater[- ]packed\b'
+    r'|\b(?:made|prepared|cooked)\s+with\b[^,]*?\b(?:water|milk)\b'
+    r'|\bwith\s+broth\b|\bwater\s+added\b|\band\s+water\s+product\b'
+)
 # Kolom konflik yang membuat makanan DIBUANG (BATASI tidak termasuk)
 KOLOM_KONFLIK = ['n_conflict_allergen', 'n_conflict_pantangan', 'n_conflict_free', 'n_block_kategori']
 
@@ -495,8 +516,10 @@ def detect_texture(name: str, food_type: str = '') -> str:
         if keyword_match(name, _TEXTURE_PATTERNS[tek]):
             if tek == 'cair' and keyword_match(name, _BUKAN_CAIR_PATTERN):
                 continue
+            if tek == 'saring' and keyword_match(name, _BUKAN_SARING_PATTERN) and not keyword_match(name, _TETAP_SARING_PATTERN):
+                return 'lunak'
             return tek
-    return 'cair' if food_type == 'beverage' else 'biasa'
+    return 'cair' if food_type == 'beverage' and not keyword_match(name, _BUKAN_CAIR_PATTERN) else 'biasa'
 
 
 def detect_hazards(name: str, kategori: str) -> tuple[list[str], list[str]]:
@@ -1462,13 +1485,12 @@ def pilih_bahan_pelengkap(df_filtered: pd.DataFrame, n: int = 3, profil_ctx: Opt
     ctx = profil_ctx or {}
     if str(ctx.get('jenisOperasi') or '').lower() == 'saluran_cerna':
         # Pasien operasi saluran cerna: saring pelengkap dari bahan pedas/iritatif dan minyak/lemak tinggi
-        pola_iritatif = _kw_pattern([
-            'chili', 'chilli', 'chile', 'cabai', 'cabe', 'sambal', 'spicy', 'pedas',
-            'pepper', 'lada', 'vinegar', 'cuka'
-        ])
-        d = d[~d['name'].astype(str).str.lower().apply(lambda x: keyword_match(x, pola_iritatif))]
+        bahaya = modul_kategori('PASCA_OPERASI', 'bahaya')
+        pola_iritatif = _kw_pattern(bahaya.PELENGKAP_IRITATIF_SALURAN_CERNA)
+        pengecualian = _HAZARD_EXCEPTION_PATTERNS.get('PEDAS')
+        d = d[~d['name'].astype(str).str.lower().apply(lambda x: keyword_match(x, pola_iritatif, pengecualian))]
         if 'fat' in d.columns:
-            d = d[d['fat'] <= 5.0]
+            d = d[d['fat'] <= bahaya.BATAS_LEMAK_PELENGKAP_SALURAN_CERNA]
     if 'sodium' in d.columns:
         d = d.sort_values('sodium', kind='stable')
     return [{'produk_id': r.get('id', ''), 'nama_makanan': str(r['name']), 'jenis_bahan': r['food_type'],

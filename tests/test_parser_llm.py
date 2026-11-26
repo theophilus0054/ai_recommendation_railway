@@ -6,7 +6,7 @@
    - output LLM yang tidak valid / di luar daftar dibuang,
    - timeout / error / tanpa API key -> fallback ke regex,
    - hasil berhasil di-cache, dan _meta.parser_alergi transparan.
-Usage: python -m unittest test_parser_llm.py
+Usage: python -m unittest tests.test_parser_llm
 ==========================================================================
 """
 

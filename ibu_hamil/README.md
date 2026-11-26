@@ -11,7 +11,7 @@ Metode sama dengan tiga kategori lain: dataset sintetis 700 profil x 5 sesi x 12
 - Generator profil perempuan 19 sampai 42 tahun dan usia kehamilan (`ai_models/profil.py`)
 - Rubrik: folat, zat besi, vitamin C, kafein, aturan BATASI (`ai_models/rubrik.py`)
 - Tabel bahaya (nama produk dan `ingredients`): mentah, tidak dipasteurisasi, ikan merkuri tinggi, alkohol; batasi kafein, jeroan, tuna (`ai_models/bahaya.py`)
-- Tanggung jawab bersama: safety layer, parser regex alergi dan pantangan, test suite keselamatan (`model.py`, `test_safety_filter.py`)
+- Tanggung jawab bersama: safety layer, parser regex alergi dan pantangan, test suite keselamatan (`model.py`, `tests/test_safety_filter.py`)
 
 ## Struktur folder
 

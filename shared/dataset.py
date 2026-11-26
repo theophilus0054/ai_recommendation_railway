@@ -30,7 +30,7 @@ from model import (
 from shared import KATEGORI_LIST, data_dir, modul as modul_kategori
 
 RUBRIC_VERSION = 'rubric-v1'
-KATALOG_VERSION = 'katalog-v2'   # v2: tanpa jenis tidak dikenali, makanan eksotis, susu formula (17 Nov 2026)
+KATALOG_VERSION = 'katalog-v3'   # v3: tanpa bahan mentah/kering/tepung/unprepared, eksotis AS, & babyfood non-balita
 
 # Pecahan target item per sesi (sama dengan model.PIRING_SESI yang dipakai get_paket di build_meal_plan)
 SESSION_ITEM_FRACTIONS = {
@@ -72,8 +72,55 @@ def extract_numeric(val) -> float:
     return float(match.group(1)) if match else 0.0
 
 
-POLA_TIDAK_RELEVAN = (r'Alaska Native|\bwhale\b|sea lion|\bseal\b|walrus|caribou|\bmoose\b|beaver|muskrat|'
-                      r'infant formula')
+POLA_TIDAK_RELEVAN = (
+    r'Alaska Native|Northern Plains Indians|\bApache\b|\bNavajo\b|\bHopi\b|\bShoshone\b|\(Southwest\)|'
+    r'\bwhale\b|sea lion|\bseal\b|walrus|caribou|\bmoose\b|beaver|muskrat|'
+    r'\bostrich\b|\bemu\b|\bbison\b|\bvenison\b|\belk\b|\bantelope\b|\bbear\b|\bdeer\b|\brabbit\b|'
+    r'\bsquirrel\b|\bopossum\b|\braccoon\b|\bfrog\b|\bturtle\b|\balligator\b|\bpheasant\b|\bquail\b|'
+    r'\bsquab\b|\bconch\b|horned melon|\bkiwano\b|prickly pears|\bmonkfish\b|'
+    r'variety meats|\bears\b|\bfeet\b|\bbrains\b|\blungs\b|\bspleen\b|\bpancreas\b|\bthymus\b|'
+    r'\btripe\b|\bchitterlings\b|\bheadcheese\b|blood sausage|\bscrapple\b|infant formula'
+)
+
+# Bahan mentah/kering/tepung/belum dimasak (bukan makanan siap santap).
+# Pengecualian: yang sudah eksplisit matang/siap makan (mis. 'Fish, dry heat, cooked', 'Pasta, cooked, ... flour',
+# 'Puddings, prepared with 2% milk, ..., dry mix') dan buah/sayur segar yang lazim dimakan mentah.
+_POLA_BAHAN_BAKU = re.compile(
+    r'\bflour\b|\bdry mix\b|\bunprepared\b|\bas purchased\b|\bunheated\b|\buncooked\b|,\s*dry\b|\bdry,',
+    re.IGNORECASE,
+)
+_POLA_SUDAH_MATANG = re.compile(
+    r'\bcooked\b|\bbaked\b|\broasted\b|\bboiled\b|\bsteamed\b|\bbraised\b|\bbroiled\b|\bgrilled\b|'
+    r'\bfried\b|\bstir-fried\b|\bsimmered\b|\bstewed\b|\bpoached\b|\btoasted\b|\bready-to-eat\b|'
+    r'\bprepared\b|\bready-to-serve\b|\bready-to-drink\b',
+    re.IGNORECASE,
+)
+_POLA_RAW = re.compile(r'\braw\b', re.IGNORECASE)
+_POLA_MENTAH_TIDAK_LALAP = re.compile(
+    r'\bpotato|\byam\b|\bcassava\b|\btaro\b|\bplantain|\brice\b|\bbean|\blentil|\bchickpea|'
+    r'\bpea\b|\bpeas\b|\bcorn\b|\bwheat\b|\boat|\bsoybean|\bbarley\b|\bquinoa\b|\bmillet\b|'
+    r'\bteff\b|\bsorghum\b|\brye\b|\bbuckwheat\b|\bsquash\b|\beggplant\b|\bpumpkin\b|\bokra\b|'
+    r'turnip greens|mustard greens|\bcollards\b|broccoli raab|brussels sprouts|\basparagus\b|'
+    r'\bbeets\b|\bartichoke\b|\brhubarb\b|\bmushroom|\bshallot|\bleek\b|\bgarlic\b|\bginger\b|'
+    r'\bonion|\bchives\b|\bginkgo\b|\bpepper.*serrano|\bserrano\b|\bjalapeno\b|\bhabanero\b',
+    re.IGNORECASE,
+)
+
+
+def adalah_bahan_mentah_baku(nama: str, food_type: str) -> bool:
+    """True bila item masih berupa bahan mentah/kering/tepung/belum dimasak (bukan buah/sayur lalap)."""
+    teks = str(nama)
+    # 'unprepared' selalu mentah/belum diolah
+    if re.search(r'\bunprepared\b|\bas purchased\b|\bunheated\b|\buncooked\b', teks, re.IGNORECASE):
+        return True
+    if _POLA_BAHAN_BAKU.search(teks) and not _POLA_SUDAH_MATANG.search(teks):
+        return True
+    if _POLA_RAW.search(teks):
+        if food_type not in ('fruit', 'vegetable'):
+            return True
+        if _POLA_MENTAH_TIDAK_LALAP.search(teks):
+            return True
+    return False
 
 
 def jenis_dikenali(nama: str) -> bool:
@@ -108,16 +155,18 @@ def load_food_catalog(csv_path: str) -> pd.DataFrame:
 
     df['food_type'] = [classify_food_type(n) for n in df['name']]
 
-    # Kebersihan katalog (17 Nov 2026) agar data latih mendekati makanan nyata yang dijual NutriScale:
-    # 1) buang makanan yang jenisnya TIDAK dikenali (classify_food_type jatuh ke 'snack' default, mis. artichoke,
-    #    kielbasa, meatballs): jenis yang salah membuat rubrik sesi x jenis makanan memberi label keliru;
-    # 2) buang makanan eksotis/adat Alaska (mata paus, lemak singa laut, karibu) dan susu formula bayi.
+    # Kebersihan katalog (katalog-v3) agar data latih mendekati makanan siap santap nyata:
+    # 1) buang makanan yang jenisnya TIDAK dikenali (classify_food_type jatuh ke 'snack' default);
+    # 2) buang makanan eksotis/adat AS (paus, singa laut, burung unta, jeroan tak lazim) dan susu formula;
+    # 3) buang bahan mentah/kering/tepung/belum dimasak (kecuali buah/sayur segar yang lazim dimakan mentah).
     n_awal = len(df)
     dikenali = df['name'].apply(jenis_dikenali)
     eksotis = df['name'].str.contains(POLA_TIDAK_RELEVAN, case=False, regex=True)
-    df = df[dikenali & ~eksotis].reset_index(drop=True)
+    mentah_baku = pd.Series([adalah_bahan_mentah_baku(n, t) for n, t in zip(df['name'], df['food_type'])])
+    df = df[dikenali & ~eksotis & ~mentah_baku].reset_index(drop=True)
     print(f"[Katalog] {n_awal} -> {len(df)} makanan (dibuang {int((~dikenali).sum())} jenis tidak dikenali, "
-          f"{int((eksotis & dikenali).sum())} eksotis/susu formula)")
+          f"{int((eksotis & dikenali).sum())} eksotis/susu formula, "
+          f"{int((mentah_baku & dikenali & ~eksotis).sum())} bahan mentah/kering/tepung)")
     df['tekstur'] = [detect_texture(n, t) for n, t in zip(df['name'], df['food_type'])]
     df['label_risiko'] = df['name'].apply(lambda x: ', '.join(detect_allergens(x)))
     for kat in KATEGORI_LIST:
@@ -276,12 +325,16 @@ def generate_category_dataset(df_food: pd.DataFrame, kategori: str,
     out_dir = data_dir(kategori)
     os.makedirs(out_dir, exist_ok=True)
 
+    df_food = df_food.copy()
+    # Babyfood hanya relevan untuk kategori ANAK_BALITA (tidak masuk kandidat dewasa/ibu hamil/pasca operasi)
+    if kategori != 'ANAK_BALITA':
+        df_food = df_food[~df_food['name'].str.contains(r'\bbabyfood\b', case=False, regex=True)].reset_index(drop=True)
+
     # 15% makanan hanya muncul di test (uji "makanan baru")
     food_ids = np.arange(len(df_food))
     rng.shuffle(food_ids)
     n_new = int(len(food_ids) * 0.15)
     new_food_names = set(df_food.iloc[food_ids[:n_new]]['name'])
-    df_food = df_food.copy()
     df_food['is_new_food'] = df_food['name'].isin(new_food_names)
 
     profiles = [generate_profile(rng, kategori, i) for i in range(num_profiles)]
