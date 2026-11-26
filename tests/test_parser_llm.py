@@ -479,6 +479,37 @@ class HasilTersimpanTest(unittest.TestCase):
         self.assertEqual(info['hasil_untuk_disimpan']['entri']['alergi ayam']['kata_kunci_en'], ['chicken'])
         self.assertEqual(parser_llm._TERSIMPAN.get(), {})
 
+    def test_typo_regex_disinkronkan_ke_hasil_disimpan(self):
+        # Groq gagal mengenali typo tunggal 'udnag' -> menaruhnya di tidak_dikenali.
+        # hasil_untuk_disimpan (yang disimpan ke Supabase) tetap mencatat grup=['udang'] dan tidak_dikenali=[].
+        with mock.patch.dict(os.environ, {'GROQ_API_KEY': 'kunci-uji', 'ALLERGY_LLM_ENABLED': '1'}), \
+                mock.patch.object(requests, 'post', return_value=respon_groq(kosong(tidak_dikenali=['udnag']))):
+            info = model.ringkas_parser_alergi(self.df, 'udnag', '', True)
+        disimpan = info['hasil_untuk_disimpan']
+        self.assertEqual(disimpan['entri']['udnag'], kosong(grup=['udang']))
+        self.assertEqual(model.peringatan_teks_tidak_dikenali(info, 'udnag', ''), [])
+        # Pastikan hasil yang disimpan valid untuk dimuat ulang sebagai parserAlergiTersimpan
+        self.assertEqual(parser_llm.muat_hasil_tersimpan(disimpan, self.gv, self.fv)['udnag'], kosong(grup=['udang']))
+
+    def test_typo_campur_kata_asing_tetap_peringatkan_asing(self):
+        # 'udnag' dibersihkan dari tidak_dikenali (karena dikenali difflib), 'asdkjh' tetap disimpan & diperingatkan
+        with mock.patch.dict(os.environ, {'GROQ_API_KEY': 'kunci-uji', 'ALLERGY_LLM_ENABLED': '1'}), \
+                mock.patch.object(requests, 'post',
+                                  return_value=respon_groq(kosong(tidak_dikenali=['udnag', 'asdkjh']))):
+            info = model.ringkas_parser_alergi(self.df, 'udnag, asdkjh', '', True)
+        disimpan = info['hasil_untuk_disimpan']
+        self.assertEqual(disimpan['entri']['udnag, asdkjh'], kosong(grup=['udang'], tidak_dikenali=['asdkjh']))
+        pesan_1 = model.peringatan_teks_tidak_dikenali(info, 'udnag, asdkjh', '')
+        self.assertEqual(len(pesan_1), 1)
+        self.assertIn("'asdkjh'", pesan_1[0])
+        # Request berikutnya memakai hasil tersimpan dari DB: peringatan untuk 'asdkjh' tetap muncul
+        self.dengan_simpanan(disimpan)
+        with mock.patch.dict(os.environ, {'GROQ_API_KEY': ''}):
+            info_2 = model.ringkas_parser_alergi(self.df, 'udnag, asdkjh', '', True)
+        pesan_2 = model.peringatan_teks_tidak_dikenali(info_2, 'udnag, asdkjh', '')
+        self.assertEqual(len(pesan_2), 1)
+        self.assertIn("'asdkjh'", pesan_2[0])
+
 
 if __name__ == '__main__':
     unittest.main()

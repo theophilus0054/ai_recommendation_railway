@@ -28,7 +28,7 @@ from dotenv import load_dotenv, find_dotenv
 
 from shared import KATEGORI_LIST, modul as modul_kategori, model_path as _model_path
 from shared.parser_llm import (ekstrak_pantangan_llm, llm_parser_aktif, muat_hasil_tersimpan, pasang_hasil_tersimpan,
-                               lepas_hasil_tersimpan, ada_hasil_tersimpan, bentuk_untuk_disimpan)
+                               lepas_hasil_tersimpan, ada_hasil_tersimpan, bentuk_untuk_disimpan, MAX_GRUP_WAJAR)
 load_dotenv(find_dotenv(usecwd=True))
 
 warnings.filterwarnings('ignore')
@@ -1772,6 +1772,37 @@ def _fallback_narasi(profil: dict, riwayat: dict, kalori_info: dict, pantangan: 
 # MAIN CONTROLLER & ENTRYPOINT PIPELINE
 # ==========================================================================
 
+def _dikenali_regex(teks: str) -> bool:
+    """True bila seluruh teks sudah dikenali parser regex + difflib (grup baku atau frasa kamus)."""
+    grup, frasa = _parse_restriction_text(teks, use_llm=False)
+    frasa_asing = frasa - set(PANTANGAN_PHRASES)
+    return bool(grup or (frasa & set(PANTANGAN_PHRASES))) and not frasa_asing
+
+
+def _gabung_hasil_untuk_disimpan(teks: str, hasil_llm: dict) -> dict:
+    """
+    Sinkronkan hasil Groq dengan parser regex + difflib sebelum disimpan ke DB (hasil_untuk_disimpan):
+    - grup/frasa yang sudah dikenali regex + difflib (mis. typo 'udnag' -> 'udang') ikut tercatat,
+    - item di 'tidak_dikenali' yang sebenarnya sudah dikenali regex + difflib dibersihkan.
+    """
+    grup_valid, frasa_valid = _grup_frasa_valid()
+    grup_valid_set, frasa_valid_set = set(grup_valid), set(frasa_valid)
+    grup_regex, frasa_regex = _parse_restriction_text(teks, use_llm=False)
+
+    grup = sorted((set(hasil_llm.get('grup') or []) | grup_regex) & grup_valid_set)
+    if len(grup) > MAX_GRUP_WAJAR:
+        grup = list(hasil_llm.get('grup') or [])
+    frasa = sorted((set(hasil_llm.get('frasa_khusus') or []) | frasa_regex) & frasa_valid_set)
+    tidak_dikenali = [t for t in (hasil_llm.get('tidak_dikenali') or []) if not _dikenali_regex(t)]
+
+    return {
+        'grup': grup,
+        'frasa_khusus': frasa,
+        'kata_kunci_en': list(hasil_llm.get('kata_kunci_en') or []),
+        'tidak_dikenali': tidak_dikenali,
+    }
+
+
 def ringkas_parser_alergi(df: Optional[pd.DataFrame], alergi: str, pantangan: str, use_llm_parser: bool) -> dict:
     """
     Transparansi parser untuk _meta: sumber parser, tambahan dari LLM, dan frasa bebas yang
@@ -1789,7 +1820,7 @@ def ringkas_parser_alergi(df: Optional[pd.DataFrame], alergi: str, pantangan: st
                 sumber_llm[nama] = 'gagal (regex saja)'
             else:
                 tambahan_llm[nama] = hasil
-                untuk_disimpan[teks] = hasil
+                untuk_disimpan[teks] = _gabung_hasil_untuk_disimpan(teks, hasil)
                 sumber_llm[nama] = 'tersimpan' if dari_simpanan else 'groq'
     names = df['name'].astype(str).str.lower().tolist() if df is not None and 'name' in df.columns else []
     if df is not None and 'ingredients' in df.columns:
@@ -1808,13 +1839,13 @@ def peringatan_teks_tidak_dikenali(info_parser: dict, alergi: str, pantangan: st
     """
     Input di luar dugaan ('alergi semua makanan', 'asdkjh', bahasa daerah tanpa Groq) menjadi frasa bebas yang
     tidak cocok dengan produk mana pun, artinya TIDAK menyaring apa pun. Beri tahu user agar menulis nama bahan.
-    Teks yang sudah dipahami Groq (ada grup/frasa) tidak diberi peringatan.
+    Teks yang sudah dipahami Groq (ada grup/frasa tanpa sisa tidak_dikenali) tidak diberi peringatan.
     """
     tidak_cocok = set(info_parser.get('frasa_tidak_cocok_produk') or [])
     asing, emoji_saja = [], False
     for nama, teks in (('alergi', alergi), ('pantangan', pantangan)):
         llm = (info_parser.get('tambahan_llm') or {}).get(nama)
-        if llm and (llm.get('grup') or llm.get('frasa_khusus')):
+        if llm and (llm.get('grup') or llm.get('frasa_khusus')) and not llm.get('tidak_dikenali'):
             continue
         grup, frasa = _parse_restriction_text(teks)
         asing += sorted(f for f in frasa if f in tidak_cocok and f not in PANTANGAN_PHRASES and f not in asing)
